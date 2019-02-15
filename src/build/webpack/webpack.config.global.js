@@ -1,10 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-//const ExtractTextPlugin = require('extract-text-webpack-plugin');
-//const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-//const GitRevisionPlugin = require('git-revision-webpack-plugin');
-//const gitRevisionPlugin = new GitRevisionPlugin();
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const webpackConfig = {
     entry: {
@@ -43,54 +40,24 @@ const webpackConfig = {
                 test: /\.js$/,
                 use: [{ loader: 'babel-loader' }],
                 exclude: /node_modules/
-            }
-            //{
-            //    test: /\.less$/,
-            //    use: ExtractTextPlugin.extract({
-            //        fallback: 'style-loader',
-            //        use: [
-            //            {
-            //                loader: 'css-loader',
-            //                options: { minimize: true }
-            //            },
-            //            {
-            //                loader: 'postcss-loader'
-            //            },
-            //            {
-            //                loader: 'less-loader',
-            //                options: {
-            //                    globalVars: {
-            //                        coreModulePath: '"~"',
-            //                        nodeModulesPath: '"~"'
-            //                    }
-            //                }
-            //            }
-            //        ]
-            //    })
-            //},
-            //{
-            //    test: /\.svg$/,
-            //    use: 'svg-sprite-loader'
-            //}
+            },
+            {
+                test: /\.less$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
+            },
         ]
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
-        //new ExtractTextPlugin({
-        //    filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
-        //    disable: false,
-        //    allChunks: true
-        //}),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
+            disable: false,
+            allChunks: true
+        }),
         //new SpriteLoaderPlugin({
         //    plainSprite: true
         //}),
-
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb|nn|en/),
-        //new webpack.DefinePlugin({
-        //BUILD: {
-        //    VERSION: JSON.stringify(gitRevisionPlugin.version())
-        //    }
-        //})
     ]
 };
 
