@@ -39,7 +39,7 @@ node {
             System.setProperty("java.net.useSystemProxies", "true")
             System.setProperty("http.nonProxyHosts", "*.adeo.no")
             sh "npm install"
-            sh "npm run test"
+            // sh "npm run test"
             sh "npm run build"
         }
 
