@@ -42,6 +42,7 @@
         "mustache-express": "^1.2.8",
         "postcss-loader": "^3.0.0",
         "react-test-renderer": "^16.7.0",
+        "terser-webpack-plugin": "^1.2.2",
         "tslint": "^5.12.1",
         "tslint-loader": "^3.5.4",
         "typescript": "^3.2.4",
