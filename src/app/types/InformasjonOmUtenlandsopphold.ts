@@ -1,15 +1,16 @@
-import { Tidsperiode } from '.';
+import { Tidsperiode } from './Tidsperiode';
 
 export interface Utenlandsopphold {
     land: string;
-    tidsperiode: Tidsperiode;
+    periode: Tidsperiode;
 }
 
 interface InformasjonOmUtenlandsopphold {
-    jobbetINorgeSiste12Mnd: boolean;
     iNorgePåHendelsestidspunktet: boolean;
     iNorgeSiste12Mnd: boolean;
     iNorgeNeste12Mnd: boolean;
+
+    jobbetINorgeSiste12Mnd: boolean;
     tidligereOpphold: Utenlandsopphold[];
     senereOpphold: Utenlandsopphold[];
 }

@@ -1,16 +1,17 @@
-import Attachment from './Attachment';
+import Arbeidsforhold from './Arbeidsforhold';
 
 export enum Tilretteleggingstype {
+    'HEL_TILRETTELEGGING' = 'helTilrettelegging',
+    'DELVIS_TILRETTELEGGING' = 'delvisTilrettelegging',
     'INGEN_TILRETTELEGGING' = 'ingenTilrettelegging',
-    'REDUSERT_STILLINGSPROSENT' = 'redusertStillingsprosent',
-    'SAMME_STILLINGSPROSENT' = 'sammeStillingsprosent',
 }
 
 interface Tilrettelegging {
     type: Tilretteleggingstype;
-    fraDato: Date;
+    behovForTilretteleggingFom: Date;
+    tilrettelagtArbeidFom: Date;
     stillingsprosent?: number;
-    vedlegg?: Attachment[];
+    arbeidsforhold: Arbeidsforhold;
 }
 
 export default Tilrettelegging;

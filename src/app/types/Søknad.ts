@@ -1,20 +1,35 @@
-import Arbeidsforhold from './Arbeidsforhold';
-import Barn from './Barn';
 import InformasjonOmUtenlandsopphold from './InformasjonOmUtenlandsopphold';
-import Tilrettelegging from './Tilrettelegging';
+import Barn from './Barn';
+import Attachment from './Attachment';
+
+export enum Søknadstype {
+    'SVANGERSKAPSPENGER' = 'svangerskapspenger',
+}
 
 interface Søknad {
-    saksnummer: string;
-    barn: Barn;
-    harGodkjentVilkår: boolean;
-    harGodkjentOppsummering: boolean;
-    arbeidsforhold: Arbeidsforhold;
-    førsteUtbetalingsdag: Date;
-    tilrettelegging: Tilrettelegging;
+    type: Søknadstype;
+    erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
+    barn: Barn;
+    annenForelder?: Object;
+    vedlegg?: Attachment[];
 
+    // tilrettelegging?: Partial<Tilrettelegging>;
+    // arbeidsforhold?: Partial<Arbeidsforhold>;
     // selvstendigNæringsdrivendeInformasjon?: Næring[];
     // frilansInformasjon?: FrilansInformasjon;
+}
+
+export interface UferdigSøknad {
+    harGodkjentVilkår: boolean;
+    harGodkjentOppsummering: boolean;
+    erEndringssøknad: boolean;
+    informasjonOmUtenlandsopphold?: Partial<InformasjonOmUtenlandsopphold>;
+    barn?: Partial<Barn>;
+    vedlegg: Attachment[];
+
+    // tilrettelegging?: Partial<Tilrettelegging>;
+    // arbeidsforhold?: Partial<Arbeidsforhold>;
 }
 
 export default Søknad;

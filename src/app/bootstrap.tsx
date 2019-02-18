@@ -1,5 +1,14 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import Svangerskapspengesøknad from './Svangerskapspengesøknad';
+import { Provider } from 'react-redux';
+import Svangerskapspengesøknad from './connected-components/Svangerskapspengesøknad';
+import store from './redux/store';
 
-render(<Svangerskapspengesøknad />, document.getElementById('app'));
+const rootElement = document.getElementById('app');
+
+render(
+    <Provider store={store}>
+        <Svangerskapspengesøknad />
+    </Provider>,
+    rootElement
+);
