@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Environment from 'app/Environment';
-// import Søknad from 'app/types/Søknad';
 
 const apiBaseUrl = Environment.REST_API_URL;
 const sendSøknadUrl = `${apiBaseUrl}/soknad`;

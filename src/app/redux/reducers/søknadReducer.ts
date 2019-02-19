@@ -1,5 +1,23 @@
-import { UferdigSøknad } from 'app/types/Søknad';
-import { SøknadAction, SøknadActionTypes } from '../types/Action';
+import Søknad, { UferdigSøknad, Søknadstype } from 'app/types/Søknad';
+import SøknadAction, { SøknadActionTypes } from '../types/SøknadAction';
+
+export const mockedSøknad: Søknad = {
+    type: Søknadstype.SVANGERSKAPSPENGER,
+    vedlegg: [],
+    erEndringssøknad: false,
+    barn: {
+        erBarnetFødt: false,
+        termindato: '2019-02-02T11:00:00.000Z',
+    },
+    informasjonOmUtenlandsopphold: {
+        jobbetINorgeSiste12Mnd: true,
+        iNorgePåHendelsestidspunktet: true,
+        iNorgeSiste12Mnd: true,
+        iNorgeNeste12Mnd: true,
+        tidligereOpphold: [],
+        senereOpphold: [],
+    },
+};
 
 const getDefaultState = (): UferdigSøknad => ({
     harGodkjentVilkår: false,

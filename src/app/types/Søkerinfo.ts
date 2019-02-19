@@ -20,12 +20,13 @@ export interface PersonBase {
 }
 
 export interface Person extends PersonBase {
+    land: string;
     ikkeNordiskEøsLand: boolean;
     erMyndig: boolean;
     bankkonto?: Bankkonto;
 }
 
 export interface Søkerinfo {
-    person: Person;
+    søker: Person;
     arbeidsforhold: Arbeidsforhold[];
 }

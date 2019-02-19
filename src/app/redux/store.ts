@@ -1,7 +1,9 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { UferdigSøknad } from 'app/types/Søknad';
 import søknad from './reducers/søknadReducer';
 import api, { ApiState } from './reducers/apiReducer';
+import rootSaga from './sagas';
 
 export interface State {
     søknad: UferdigSøknad;
@@ -13,11 +15,23 @@ const rootReducer = combineReducers({
     api,
 });
 
-const store = createStore(
-    rootReducer,
-    // tslint:disable-next-line no-any
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-    // middleware
-);
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
+    }
+}
+
+export const sagaMiddleware = createSagaMiddleware();
+
+const composeEnhancers = (window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
+const configureStore = (initialState?: State) => {
+    const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
+    return createStore(rootReducer, initialState, enhancer);
+};
+
+const store = configureStore();
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
