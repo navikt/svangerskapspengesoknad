@@ -65,7 +65,7 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
 
     const søker = getData(søkerinfo, {}).søker;
     const isLoading =
-        søkerinfo.status === FetchStatus.IN_PROGRESS ||
+        søkerinfo.status !== FetchStatus.SUCCESS ||
         kvittering.status === FetchStatus.IN_PROGRESS ||
         getErrorCode(søkerinfo) === 401;
 

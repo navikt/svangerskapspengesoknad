@@ -6,6 +6,10 @@ export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger',
 }
 
+export enum Skjemanummer {
+    ANNET = 'I000060',
+}
+
 interface Søknad {
     type: Søknadstype;
     erEndringssøknad: boolean;

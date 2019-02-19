@@ -4,14 +4,19 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
 import { BrowserRouter as Router } from 'react-router-dom';
+import IntlProvider from './intl/IntlProvider';
+
+import './styles/global.less';
 
 const rootElement = document.getElementById('app');
 
 render(
     <Provider store={store}>
-        <Router>
-            <Svangerskapspengesøknad />
-        </Router>
+        <IntlProvider>
+            <Router>
+                <Svangerskapspengesøknad />
+            </Router>
+        </IntlProvider>
     </Provider>,
     rootElement
 );
