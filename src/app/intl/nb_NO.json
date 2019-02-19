@@ -1,1 +1,8 @@
-{}
+{
+    "intro.bobletittel": "Hei, {name}!",
+    "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
+    "intro.tittel": "Velkommen til søknad om svangerskapspenger",
+    "intro.ingress": "Svangerskapspenger er en ytelse for deg som ikke kan jobbe fordi du er gravid.",
+    "intro.begynnSøknad.knapp": "Begynn med søknad",
+    "komponent.språkvelger.endreMålform": "Endre målform til nynorsk"
+}
