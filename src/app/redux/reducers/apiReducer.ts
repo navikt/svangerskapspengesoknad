@@ -62,6 +62,15 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 },
             };
 
+        case ApiActionTypes.SEND_SØKNAD_FAILURE:
+            return {
+                ...state,
+                kvittering: {
+                    status: FetchStatus.FAILURE,
+                    error: action.payload.error,
+                },
+            };
+
         default: {
             return state;
         }

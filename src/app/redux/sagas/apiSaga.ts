@@ -17,6 +17,7 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
 
 function* sendSøknadSaga(action: SendSøknadRequest) {
     try {
+        // Todo: Process UferdigSøknad -> Søknad
         const response = yield call(sendSøknad, action.payload.søknad);
         const kvittering: Kvittering = response.data;
 
