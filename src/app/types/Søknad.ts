@@ -1,6 +1,7 @@
-import InformasjonOmUtenlandsopphold from './InformasjonOmUtenlandsopphold';
+import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn from './Barn';
 import Attachment from './Attachment';
+import Tilrettelegging from './Tilrettelegging';
 
 export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger',
@@ -15,10 +16,9 @@ interface Søknad {
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: Barn;
-    annenForelder?: Object;
     vedlegg?: Attachment[];
+    tilrettelegging: Tilrettelegging[];
 
-    // tilrettelegging?: Partial<Tilrettelegging>;
     // arbeidsforhold?: Partial<Arbeidsforhold>;
     // selvstendigNæringsdrivendeInformasjon?: Næring[];
     // frilansInformasjon?: FrilansInformasjon;
@@ -27,13 +27,17 @@ interface Søknad {
 export interface UferdigSøknad {
     harGodkjentVilkår: boolean;
     harGodkjentOppsummering: boolean;
-    erEndringssøknad: boolean;
-    informasjonOmUtenlandsopphold?: Partial<InformasjonOmUtenlandsopphold>;
-    barn?: Partial<Barn>;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdPartial;
+    barn: Barn;
     vedlegg: Attachment[];
+    tilrettelegging: Tilrettelegging[];
 
     // tilrettelegging?: Partial<Tilrettelegging>;
     // arbeidsforhold?: Partial<Arbeidsforhold>;
+}
+
+export interface Søknadfeil {
+    [s: string]: string | Søknadfeil;
 }
 
 export default Søknad;

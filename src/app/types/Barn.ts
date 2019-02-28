@@ -1,6 +1,6 @@
 interface Barn {
     erBarnetFødt?: boolean;
-    termindato?: string | undefined;
+    termindato?: Date;
 }
 
 export default Barn;

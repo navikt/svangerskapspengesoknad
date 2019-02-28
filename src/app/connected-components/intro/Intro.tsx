@@ -1,38 +1,37 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-
-import { ApiActionTypes } from 'app/redux/types/ApiAction';
-import { getData } from 'app/utils/fromFetchState';
+import { connect as formConnect } from 'formik';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import { mockedSøknad } from 'app/redux/reducers/søknadReducer';
+
+import { FormikProps } from 'app/types/Formik';
+import { getData } from 'app/utils/fromFetchState';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
-import Action from 'app/redux/types/Action';
+import Applikasjonsside from 'app/connected-components/applikasjonsside/Applikasjonsside';
+import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import BEMHelper from 'app/utils/bem';
 import FetchState from 'app/types/FetchState';
-import Søknad from 'app/types/Søknad';
-import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
-import './intro.less';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
+import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
+import { HistoryProps } from 'app/redux/types/common';
+import './intro.less';
 
 const cls = BEMHelper('intro');
 
 interface OwnProps {
     søkerinfo: FetchState<Søkerinfo>;
-    requestSendSøknad: (søknad: Søknad) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps & InjectedIntlProps & FormikProps & HistoryProps;
 
-const Intro: FunctionComponent<Props> = ({ søkerinfo, requestSendSøknad, intl }) => {
-    const onClick = () => {
-        requestSendSøknad(mockedSøknad);
-    };
-
+const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) => {
     const søker = getData(søkerinfo, {}).søker;
+    const disableNextButton = !formik.values.harGodkjentVilkår;
+    const startSøknad = () => {
+        history.push('/soknad');
+    };
 
     return (
         <Applikasjonsside visSpråkvelger={true}>
@@ -51,7 +50,13 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, requestSendSøknad, intl 
                 <Ingress className="blokk-l">
                     <FormattedMessage id="intro.ingress" />
                 </Ingress>
-                <Hovedknapp onClick={onClick}>
+                <BekreftCheckboksPanel
+                    className="blokk-m"
+                    name="harGodkjentVilkår"
+                    label={getMessage(intl, 'intro.godkjennVilkår.bekreft')}>
+                    <FormattedMessage id="intro.godkjennVilkår.label" />
+                </BekreftCheckboksPanel>
+                <Hovedknapp onClick={startSøknad} htmlType="button" disabled={disableNextButton}>
                     <FormattedMessage id="intro.begynnSøknad.knapp" />
                 </Hovedknapp>
             </main>
@@ -63,13 +68,4 @@ const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo,
 });
 
-const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
-    requestSendSøknad: () => {
-        dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad: mockedSøknad } });
-    },
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(injectIntl(Intro));
+export default connect(mapStateToProps)(formConnect(injectIntl(Intro)));

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { Provider } from 'react-redux';
+import { render } from 'react-dom';
 import store from './redux/store';
-import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
-import { BrowserRouter as Router } from 'react-router-dom';
+
 import IntlProvider from './intl/IntlProvider';
+import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
 
 import './styles/global.less';
 
@@ -13,9 +14,9 @@ const rootElement = document.getElementById('app');
 render(
     <Provider store={store}>
         <IntlProvider>
-            <Router>
+            <Normaltekst tag="div">
                 <Svangerskapspengesøknad />
-            </Router>
+            </Normaltekst>
         </IntlProvider>
     </Provider>,
     rootElement
