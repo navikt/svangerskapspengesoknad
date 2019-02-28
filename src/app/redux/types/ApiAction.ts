@@ -1,5 +1,5 @@
 import { Søkerinfo } from 'app/types/Søkerinfo';
-import { UferdigSøknad } from 'app/types/Søknad';
+import Søknad from 'app/types/Søknad';
 import Kvittering from 'app/types/Kvittering';
 import { FetchError } from 'app/types/FetchState';
 
@@ -33,7 +33,7 @@ export interface GetSøkerinfoFailure {
 export interface SendSøknadRequest {
     type: ApiActionTypes.SEND_SØKNAD_REQUEST;
     payload: {
-        søknad: UferdigSøknad;
+        søknad: Søknad;
     };
 }
 

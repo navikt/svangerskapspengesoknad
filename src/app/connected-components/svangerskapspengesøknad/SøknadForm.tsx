@@ -1,23 +1,23 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import { Formik } from 'formik';
 import validerSøknad from 'app/utils/validering/validerSøknad';
-import { UferdigSøknad } from 'app/types/Søknad';
+import Søknad, { UferdigSøknad } from 'app/types/Søknad';
 import Action from 'app/redux/types/Action';
 import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { connect } from 'react-redux';
+import processUtfyltSøknad from 'app/utils/processUtfyltSøknad';
 
 interface Props {
     children: ReactNode;
 }
 
 interface DispatchProps {
-    requestSendSøknad: (søknad: UferdigSøknad) => void;
+    requestSendSøknad: (søknad: Søknad) => void;
 }
 
 const initialSøknad: UferdigSøknad = {
     harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
-    erEndringssøknad: false,
     vedlegg: [],
     barn: {
         erBarnetFødt: false,
@@ -26,33 +26,8 @@ const initialSøknad: UferdigSøknad = {
         tidligereOpphold: [],
         senereOpphold: [],
     },
+    tilrettelegging: [],
 };
-
-/*
-export const mockedSøknad: any = {
-    type: Søknadstype.SVANGERSKAPSPENGER,
-    vedlegg: [],
-    erEndringssøknad: false,
-    barn: {
-        erBarnetFødt: false,
-        termindato: new Date('2019-09-01'),
-    },
-    informasjonOmUtenlandsopphold: {
-        jobbetINorgeSiste12Mnd: true,
-        iNorgePåHendelsestidspunktet: true,
-        iNorgeSiste12Mnd: true,
-        iNorgeNeste12Mnd: true,
-        tidligereOpphold: [],
-        senereOpphold: [],
-    },
-    tilrettelegging: [
-        {
-            behovForTilretteleggingFom: new Date('2019-03-01'),
-            arbeidsgiverId: '973135678',
-        }
-    ],
-}
-*/
 
 const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøknad, children }) => {
     return (
@@ -60,7 +35,12 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
             initialValues={initialSøknad}
             onSubmit={(søknad: UferdigSøknad) => {
                 console.warn('Sending søknad!');
-                requestSendSøknad(søknad);
+
+                const ferdigSøknad = processUtfyltSøknad(søknad);
+
+                if (ferdigSøknad) {
+                    requestSendSøknad(ferdigSøknad);
+                }
             }}
             validate={validerSøknad}>
             {({ handleSubmit }) => children}
@@ -69,7 +49,7 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
 };
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
-    requestSendSøknad: (søknad: UferdigSøknad) => {
+    requestSendSøknad: (søknad: Søknad) => {
         dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
     },
 });

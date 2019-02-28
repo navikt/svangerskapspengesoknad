@@ -1,9 +1,3 @@
-export enum Tilretteleggingstype {
-    'HEL_TILRETTELEGGING' = 'helTilrettelegging',
-    'DELVIS_TILRETTELEGGING' = 'delvisTilrettelegging',
-    'INGEN_TILRETTELEGGING' = 'ingenTilrettelegging',
-}
-
 interface Tilretteleggingsbase {
     behovForTilretteleggingFom: Date;
     arbeidsgiverId: string;

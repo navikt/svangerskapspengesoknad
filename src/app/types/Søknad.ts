@@ -1,4 +1,4 @@
-import InformasjonOmUtenlandsopphold from './InformasjonOmUtenlandsopphold';
+import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn from './Barn';
 import Attachment from './Attachment';
 import Tilrettelegging from './Tilrettelegging';
@@ -17,7 +17,7 @@ interface Søknad {
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: Barn;
     vedlegg?: Attachment[];
-    tilrettelegging: Tilrettelegging;
+    tilrettelegging: Tilrettelegging[];
 
     // arbeidsforhold?: Partial<Arbeidsforhold>;
     // selvstendigNæringsdrivendeInformasjon?: Næring[];
@@ -27,11 +27,10 @@ interface Søknad {
 export interface UferdigSøknad {
     harGodkjentVilkår: boolean;
     harGodkjentOppsummering: boolean;
-    erEndringssøknad: boolean;
-    informasjonOmUtenlandsopphold: Partial<InformasjonOmUtenlandsopphold>;
-    barn: Partial<Barn>;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdPartial;
+    barn: Barn;
     vedlegg: Attachment[];
-    tilrettelegging?: Partial<Tilrettelegging>;
+    tilrettelegging: Tilrettelegging[];
 
     // tilrettelegging?: Partial<Tilrettelegging>;
     // arbeidsforhold?: Partial<Arbeidsforhold>;

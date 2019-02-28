@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import store from './redux/store';
-import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
-import IntlProvider from './intl/IntlProvider';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { Provider } from 'react-redux';
+import { render } from 'react-dom';
+import store from './redux/store';
+
+import IntlProvider from './intl/IntlProvider';
+import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
 
 import './styles/global.less';
 
