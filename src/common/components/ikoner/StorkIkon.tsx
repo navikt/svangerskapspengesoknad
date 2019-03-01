@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 const StorkIkon = (props: any) => (
     <svg width={123} height={103} {...props}>

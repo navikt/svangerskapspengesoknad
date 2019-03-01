@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp, { LukknappProps } from 'nav-frontend-lukknapp';

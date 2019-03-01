@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import { Redirect, Route, Switch } from 'react-router';
+
 import Intro from '../intro/Intro';
-import SøknadSendt from '../søknadSendt/SøknadSendt';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Route, Switch, Redirect } from 'react-router';
 import StegRoutes from './StegRoutes';
+import SøknadSendt from '../søknadSendt/SøknadSendt';
 
 interface Props {
     harSendtSøknad: boolean;

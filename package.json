@@ -7,7 +7,7 @@
     "scripts": {
         "build": "node src/build/scripts/production-build.js",
         "start": "node ./src/build/scripts/start-dev.js",
-        "develop": "npm run start-no-decorator",
+        "develop": "parcel --port 8080 src/app/index-parcel.html",
         "start-no-decorator": "node ./src/build/scripts/start-dev-nodecorator.js",
         "start-express": "node ./server.js",
         "test": "jest"
@@ -51,6 +51,7 @@
         "mini-css-extract-plugin": "^0.5.0",
         "mustache-express": "^1.2.8",
         "nav-frontend-skjema-style": "^1.0.37",
+        "parcel-bundler": "^1.11.0",
         "postcss-loader": "^3.0.0",
         "react-test-renderer": "^16.7.0",
         "terser-webpack-plugin": "^1.2.2",
@@ -68,10 +69,12 @@
         "@types/bytes": "^3.0.0",
         "@types/react-collapse": "^4.0.2",
         "@types/react-intl": "^2.3.17",
+        "app": "^0.1.0",
         "axios": "^0.18.0",
         "babel-polyfill": "^6.26.0",
         "bytes": "^3.1.0",
         "classnames": "^2.2.6",
+        "common": "^0.2.5",
         "date-holidays": "^1.3.7",
         "express": "^4.16.4",
         "formik": "^1.5.1",
@@ -115,6 +118,11 @@
         "react-scroll": "^1.7.11",
         "react-transition-group": "^2.5.3",
         "redux": "^4.0.1",
-        "redux-saga": "^1.0.1"
+        "redux-saga": "^1.0.1",
+        "src": "^1.1.2"
+    },
+    "alias": {
+        "app": "./src/app",
+        "common": "./src/common"
     }
 }

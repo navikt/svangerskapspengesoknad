@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 
 import './feltoppsummering.less';

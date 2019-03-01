@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 const PlussIkon = (props: any) => (
     <svg width={20} height={20} viewBox="0 0 20 20" {...props}>

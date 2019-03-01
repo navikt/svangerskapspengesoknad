@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 // tslint:disable-next-line:no-var-requires
 const Icon = require('nav-frontend-ikoner-assets').default;
 import { KnappProps } from 'nav-frontend-knapper/lib/knapp';

@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import StegID from 'app/types/Steg';
-import Søknad from 'app/types/Søknad';
+import { connect } from 'react-redux';
 import { Form } from 'formik';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { connect } from 'react-redux';
-import Action from 'app/redux/types/Action';
-import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { Link } from 'react-router-dom';
-import { søknadStegPath } from '../svangerskapspengesøknad/StegRoutes';
+
+import { ApiActionTypes } from 'app/redux/types/ApiAction';
+import { søknadStegPath } from 'app/utils/steg';
+import Action from 'app/redux/types/Action';
+import Søknad from 'app/types/Søknad';
+import StegID from 'app/types/Steg';
 
 export interface StegProps {
     id: StegID;
@@ -30,9 +31,9 @@ const Steg: FunctionComponent<StegProps> = (props) => {
     } = props;
 
     return (
-        <Form>
+        <Form className="steg">
             {forrigeStegID && <Link to={søknadStegPath(forrigeStegID)}>Tilbake</Link>}
-            <h1>Søknad: {id}</h1>
+            <h1>{id}</h1>
             {children}
             {nesteStegID && renderNesteknapp && (
                 <Hovedknapp htmlType="button" onClick={onRequestNavigateToNextStep}>

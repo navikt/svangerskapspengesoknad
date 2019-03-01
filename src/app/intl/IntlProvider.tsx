@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import * as nb from 'react-intl/locale-data/nb';
-import * as nn from 'react-intl/locale-data/nn';
+import nb from 'react-intl/locale-data/nb';
+import nn from 'react-intl/locale-data/nn';
 
-import nnMessages from './nn_NO.json';
-import nbMessages from './nb_NO.json';
-import nnMessagesCommon from '../../common/intl/nn_NO.json';
-import nbMessagesCommon from '../../common/intl/nb_NO.json';
 import { Språkkode } from 'common/intl/types';
 import { State } from 'app/redux/store.js';
+import nbMessages from './nb_NO.json';
+import nbMessagesCommon from '../../common/intl/nb_NO.json';
+import nnMessages from './nn_NO.json';
+import nnMessagesCommon from '../../common/intl/nn_NO.json';
 
 interface StateProps {
     språkkode: Språkkode;

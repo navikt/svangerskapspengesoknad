@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AriaText from './AriaText';
 
 export interface AriaAlternativeTextProps {

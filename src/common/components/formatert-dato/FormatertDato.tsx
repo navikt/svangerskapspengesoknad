@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { år, mnd, dagIMåned, ukedag } from '../../util/datoUtils';
 
 import './formatertDato.less';
