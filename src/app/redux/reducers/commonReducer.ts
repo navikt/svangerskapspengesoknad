@@ -1,7 +1,7 @@
 import { Språkkode } from 'common/intl/types';
 import { CommonActionTypes } from '../types/CommonAction';
 import CommonAction from '../types/CommonAction';
-import Steg from 'app/types/Steg';
+import Steg from 'app/types/StegID';
 
 export const getDefaultCommonState = (): CommonState => ({
     språkkode: 'nb',

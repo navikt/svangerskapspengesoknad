@@ -1,17 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { Form } from 'formik';
+import { FormattedMessage } from 'react-intl';
+import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Link } from 'react-router-dom';
 
-import { søknadStegPath } from 'app/utils/steg';
+import { søknadStegPath } from 'app/utils/stegUtils';
+import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
-import StegID from 'app/types/Steg';
+import StegID from 'app/types/StegID';
 import './steg.less';
 
 const cls = BEMHelper('steg');
 
 export interface StegProps {
     id: StegID;
+    history: History;
     nesteStegID?: StegID;
     forrigeStegID?: StegID;
     renderNesteknapp?: boolean;
@@ -27,20 +30,37 @@ const Steg: FunctionComponent<StegProps> = (props) => {
         renderNesteknapp,
         renderSendeknapp,
         onRequestNavigateToNextStep,
+        history,
         children,
     } = props;
 
+    const navigateToPreviousStep = () => {
+        if (forrigeStegID) {
+            history.push(søknadStegPath(forrigeStegID));
+        }
+    };
+
     return (
-        <Form className={cls.className}>
-            {forrigeStegID && <Link to={søknadStegPath(forrigeStegID)}>Tilbake</Link>}
-            <h1>{id}</h1>
-            {children}
-            {nesteStegID && renderNesteknapp && (
-                <Hovedknapp htmlType="button" onClick={onRequestNavigateToNextStep}>
-                    Neste
-                </Hovedknapp>
-            )}
-            {renderSendeknapp && <Hovedknapp htmlType="submit">Send søknad</Hovedknapp>}
+        <Form className={cls.block}>
+            <h1 className={cls.classNames(cls.element('header'), 'blokk-s')}>{id}</h1>
+            <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
+                <BackButton hidden={!forrigeStegID} onClick={navigateToPreviousStep} />
+            </div>
+            <div className={cls.classNames(cls.element('steginnhold'), 'blokk-l')}>{children}</div>
+            <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
+                {nesteStegID && renderNesteknapp && (
+                    <Hovedknapp htmlType="button" onClick={onRequestNavigateToNextStep}>
+                        Neste
+                    </Hovedknapp>
+                )}
+                {renderSendeknapp && <Hovedknapp htmlType="submit">Send søknad</Hovedknapp>}
+            </div>
+            <hr className="blokk-m" />
+            <div className={cls.element('avbrytSøknadContainer')}>
+                <button type="button" className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}>
+                    <FormattedMessage id="steg.avbrytSøknad" />
+                </button>
+            </div>
         </Form>
     );
 };
