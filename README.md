@@ -5,10 +5,12 @@ svangerskapspenger.
 
 # Komme i gang
 
-For å kjøre opp app-en i dev:
+For å kjøre opp app-en i dev (med parcel):
 
 1.  `npm install`.
-2.  `npm run start`.
+2.  `npm run develop`.
+
+Bruk `npm run start-no-decorator` for å bygge med Webpack (evt. `npm run start` for å inkludere dekoratøren).
 
 # Henvendelser
 
