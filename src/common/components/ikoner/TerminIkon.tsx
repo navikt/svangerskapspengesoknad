@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 const TerminIkon = (props: any) => (
     <svg width={14} height={14} {...props}>

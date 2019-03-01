@@ -2,21 +2,20 @@ import React from 'react';
 import { FunctionComponent } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { connect } from 'react-redux';
-
-import { State } from 'app/redux/store';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import { History } from 'history';
-import StegID from 'app/types/Steg';
-import FørsteSteg from '../steg/FørsteSteg';
+
+import { søknadStegPath } from 'app/utils/steg';
+import { State } from 'app/redux/store';
 import AndreSteg from '../steg/AndreSteg';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import FørsteSteg from '../steg/FørsteSteg';
 import Oppsummering from '../steg/Oppsummering';
+import StegID from 'app/types/Steg';
 
 interface Props {
     steg: StegID;
     history: History;
 }
-
-export const søknadStegPath = (steg: StegID) => `/soknad/${steg}`;
 
 const StegRoutes: FunctionComponent<Props> = ({ steg, history }) => {
     const requestNavigateToNextStep = (id: StegID) => () => {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { EtikettLiten, Element } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 

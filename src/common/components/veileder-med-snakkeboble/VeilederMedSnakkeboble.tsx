@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Veileder, { VeilederProps } from '../veileder/Veileder';
 import PersonMedSnakkeboble from 'common/components/person-med-snakkeboble/PersonMedSnakkeboble';
 

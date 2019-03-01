@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import BEMHelper from 'common/util/bem';
 import Infoboks from 'common/components/infoboks/Infoboks';

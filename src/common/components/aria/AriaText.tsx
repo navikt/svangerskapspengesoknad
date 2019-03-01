@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 /**
  *  Skjuler tekst slik at den ikke er synlig på skjerm, men leses av skjermleser

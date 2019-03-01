@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Element, EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 

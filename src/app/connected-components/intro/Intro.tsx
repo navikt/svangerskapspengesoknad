@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { connect as formConnect } from 'formik';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 
 import { FormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
+import { HistoryProps } from 'app/redux/types/common';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import Applikasjonsside from 'app/connected-components/applikasjonsside/Applikasjonsside';
@@ -15,7 +16,6 @@ import BEMHelper from 'app/utils/bem';
 import FetchState from 'app/types/FetchState';
 import getMessage from 'common/util/i18nUtils';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
-import { HistoryProps } from 'app/redux/types/common';
 import './intro.less';
 
 const cls = BEMHelper('intro');

@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
-import Spinner from 'nav-frontend-spinner';
 import { connect } from 'react-redux';
+import { Kjønn, Søkerinfo } from 'app/types/Søkerinfo';
+import FetchState, { FetchStatus } from 'app/types/FetchState';
+
+import { ApiActionTypes } from 'app/redux/types/ApiAction';
+import { getData, getErrorCode } from 'app/utils/fromFetchState';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
-import { Søkerinfo, Kjønn } from 'app/types/Søkerinfo';
 import Feil from 'app/components/Feil';
-import { ApiActionTypes } from 'app/redux/types/ApiAction';
-import FetchState, { FetchStatus } from 'app/types/FetchState';
-import { getErrorCode, getData } from 'app/utils/fromFetchState';
 import Kvittering from 'app/types/Kvittering';
-import SøknadRoutes from './SøknadRoutes';
 import SøknadForm from './SøknadForm';
+import SøknadRoutes from './SøknadRoutes';
+import Spinner from 'nav-frontend-spinner';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;

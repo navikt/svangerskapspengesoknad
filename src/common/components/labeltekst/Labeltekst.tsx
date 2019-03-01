@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { injectIntl, InjectedIntlProps, MessageValue } from 'react-intl';
 
 import './labeltekst.less';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import InnholdMedLedetekst from 'common/components/innhold-med-ledetekst/InnholdMedLedetekst';
 
 interface Props {

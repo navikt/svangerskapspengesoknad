@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 const { VenstreChevron } = require('nav-frontend-chevron');
 const { Knapp } = require('nav-frontend-knapper');
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { VeilederProps } from '../veileder/Veileder';

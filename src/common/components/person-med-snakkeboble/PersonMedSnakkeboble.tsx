@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import Snakkeboble from '../snakkeboble/Snakkeboble';
 import BEMHelper from 'common/util/bem';

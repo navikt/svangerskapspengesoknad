@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 const InfoIkon = (props: any) => (
     <svg width={7} height={14} viewBox="0 0 7 14" {...props}>
