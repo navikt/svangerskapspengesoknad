@@ -37,7 +37,7 @@ const StegRoutes: FunctionComponent<Props> = ({ steg, history }) => {
     };
 
     return (
-        <Applikasjonsside visSpråkvelger={true}>
+        <Applikasjonsside visSpråkvelger={true} visTittel={true}>
             <Switch>
                 <Route
                     path={søknadStegPath(StegID.FØRSTE_STEG)}

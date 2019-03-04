@@ -1,4 +1,5 @@
 {
+    "app.banner": "Søknad om svangerskapspenger",
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
