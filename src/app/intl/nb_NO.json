@@ -1,4 +1,5 @@
 {
+    "app.banner": "Søknad om svangerskapspenger",
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
@@ -6,5 +7,6 @@
     "intro.godkjennVilkår.label": "For å gå videre med søknaden må du bekrefte at du har lest og forstått dine plikter.",
     "intro.godkjennVilkår.bekreft": "Jeg bekrefter at jeg har lest og forstått",
     "intro.begynnSøknad.knapp": "Begynn med søknad",
-    "komponent.språkvelger.endreMålform": "Endre målform til nynorsk"
+    "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
+    "steg.avbrytSøknad": "Avbryt søknad"
 }

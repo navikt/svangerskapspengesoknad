@@ -1,5 +1,5 @@
 import { Språkkode } from 'common/types';
-import Steg from 'app/types/Steg';
+import Steg from 'app/types/StegID';
 
 export enum CommonActionTypes {
     'SET_SPRÅK' = 'setSpråk',

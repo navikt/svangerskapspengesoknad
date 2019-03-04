@@ -34,8 +34,6 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
         <Formik
             initialValues={initialSøknad}
             onSubmit={(søknad: UferdigSøknad) => {
-                console.warn('Sending søknad!');
-
                 const ferdigSøknad = processUtfyltSøknad(søknad);
 
                 if (ferdigSøknad) {

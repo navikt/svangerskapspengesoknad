@@ -1,0 +1,59 @@
+@import '../../styles/variabler.less';
+
+.steg {
+    max-width: @app-max-width;
+    padding: 0 1rem;
+    margin: 0 auto;
+
+    &__header {
+        margin-top: 2.5rem;
+        text-align: center;
+    }
+
+    &__navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__stegkontroller {
+        display: flex;
+        justify-content: center;
+    }
+
+    .backButton__chevron {
+        line-height: 0;
+    }
+
+    hr {
+        height: 2px;
+        border: none;
+        background-color: lightgray;
+        width: 100%;
+    }
+
+    &__avbrytSøknadContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__avbrytSøknad {
+        margin: 0 auto;
+        background: none;
+        border: none;
+
+        color: @navBla;
+        border-bottom: 1px solid lightgray;
+        padding: 0;
+
+        &:focus {
+            outline: none;
+            background-color: @orangeFocus;
+        }
+
+        &:hover {
+            cursor: pointer;
+            border-bottom-color: #0067c5;
+        }
+    }
+}

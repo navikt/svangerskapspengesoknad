@@ -43,7 +43,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                     text: getMessage(intl, 'intro.bobletekst'),
                 }}
             />
-            <main className={cls.className}>
+            <main className={cls.block}>
                 <Innholdstittel className="blokk-xs">
                     <FormattedMessage id="intro.tittel" />
                 </Innholdstittel>

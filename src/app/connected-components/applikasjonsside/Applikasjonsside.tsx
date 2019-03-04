@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Språkkode } from 'common/types';
-import { connect } from 'react-redux';
-import Språkvelger from 'common/components/språkvelger/Språkvelger';
-import Action from 'app/redux/types/Action';
 import { CommonActionTypes } from 'app/redux/types/CommonAction';
+import { connect } from 'react-redux';
+import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { Språkkode } from 'common/types';
 import { State } from 'app/redux/store';
+import Action from 'app/redux/types/Action';
+import Søknadstittel from 'app/components/søknadstittel/Søknadstittel';
+import Språkvelger from 'common/components/språkvelger/Språkvelger';
 
 interface OwnProps {
     visSpråkvelger?: boolean;
+    visTittel?: boolean;
 }
 
 interface StateProps {
@@ -21,10 +23,15 @@ interface DispatchProps {
 
 type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
 
-const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, språkkode, setSpråk, children }) => {
+const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel, språkkode, setSpråk, children }) => {
     return (
         <React.Fragment>
             {visSpråkvelger && <Språkvelger kode={språkkode} setSpråkkode={setSpråk} />}
+            {visTittel && (
+                <Søknadstittel>
+                    <FormattedMessage id="app.banner" />
+                </Søknadstittel>
+            )}
             {children}
         </React.Fragment>
     );

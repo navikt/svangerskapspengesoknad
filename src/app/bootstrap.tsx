@@ -14,7 +14,7 @@ const rootElement = document.getElementById('app');
 render(
     <Provider store={store}>
         <IntlProvider>
-            <Normaltekst tag="div">
+            <Normaltekst tag="main">
                 <Svangerskapspengesøknad />
             </Normaltekst>
         </IntlProvider>
