@@ -1,5 +1,8 @@
 {
     "app.banner": "Søknad om svangerskapspenger",
+    "stegindikator.label.forste-steg": "Første steg",
+    "stegindikator.label.andre-steg": "Andre steg",
+    "stegindikator.label.oppsummering": "Oppsummering",
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
@@ -8,5 +11,6 @@
     "intro.godkjennVilkår.bekreft": "Jeg bekrefter at jeg har lest og forstått",
     "intro.begynnSøknad.knapp": "Begynn med søknad",
     "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
-    "steg.avbrytSøknad": "Avbryt søknad"
+    "steg.avbrytSøknad": "Avbryt søknad",
+    "oppsummering.sendSøknad": "Send søknad"
 }

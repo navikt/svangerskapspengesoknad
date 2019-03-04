@@ -11,14 +11,17 @@ import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import FørsteSteg from '../steg/FørsteSteg';
 import Oppsummering from '../steg/Oppsummering';
 import StegID from 'app/types/StegID';
+import Action from 'app/redux/types/Action';
+import { CommonActionTypes } from 'app/redux/types/CommonAction';
 
 interface Props {
-    steg: StegID;
     history: History;
+    navigateToStep: (steg: StegID) => void;
 }
 
-const StegRoutes: FunctionComponent<Props> = ({ steg, history }) => {
-    const requestNavigateToNextStep = (id: StegID) => () => {
+const StegRoutes: FunctionComponent<Props> = ({ navigateToStep, history }) => {
+    const onNavigateToStep = (id: StegID) => () => {
+        navigateToStep(id);
         history.push(søknadStegPath(id));
     };
 
@@ -27,11 +30,10 @@ const StegRoutes: FunctionComponent<Props> = ({ steg, history }) => {
 
         return {
             id: stegID,
-            nesteStegID,
-            forrigeStegID,
             renderNesteknapp: !!nesteStegID,
             renderSendeknapp: !nesteStegID,
-            onRequestNavigateToNextStep: nesteStegID ? requestNavigateToNextStep(nesteStegID) : undefined,
+            onRequestNavigateToNextStep: nesteStegID ? onNavigateToStep(nesteStegID) : undefined,
+            onRequestNavigateToPreviousStep: forrigeStegID ? onNavigateToStep(forrigeStegID) : undefined,
             history,
         };
     };
@@ -60,8 +62,11 @@ const StegRoutes: FunctionComponent<Props> = ({ steg, history }) => {
     );
 };
 
-const mapStateToProps = (state: State) => ({
-    steg: state.common.steg,
+const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
+    navigateToStep: (steg: StegID) => dispatch({ type: CommonActionTypes.SET_STEG, payload: { steg } }),
 });
 
-export default connect(mapStateToProps)(StegRoutes);
+export default connect(
+    () => ({}),
+    mapDispatchToProps
+)(StegRoutes);
