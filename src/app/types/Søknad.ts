@@ -37,7 +37,7 @@ export interface UferdigSøknad {
 }
 
 export interface Søknadfeil {
-    [s: string]: string | Søknadfeil;
+    [s: string]: string | Søknadfeil | undefined;
 }
 
 export default Søknad;

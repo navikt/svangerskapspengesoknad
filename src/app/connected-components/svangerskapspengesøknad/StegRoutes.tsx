@@ -4,15 +4,14 @@ import { Switch, Route, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { History } from 'history';
 
+import { CommonActionTypes } from 'app/redux/types/CommonAction';
 import { søknadStegPath, getAdjacentSteps } from 'app/utils/stegUtils';
-import { State } from 'app/redux/store';
-import AndreSteg from '../steg/AndreSteg';
+import Action from 'app/redux/types/Action';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import FørsteSteg from '../steg/FørsteSteg';
 import Oppsummering from '../steg/Oppsummering';
 import StegID from 'app/types/StegID';
-import Action from 'app/redux/types/Action';
-import { CommonActionTypes } from 'app/redux/types/CommonAction';
+import Termin from '../steg/Termin';
+import Arbeidsforhold from '../steg/Arbeidsforhold';
 
 interface Props {
     history: History;
@@ -42,21 +41,21 @@ const StegRoutes: FunctionComponent<Props> = ({ navigateToStep, history }) => {
         <Applikasjonsside visSpråkvelger={true} visTittel={true}>
             <Switch>
                 <Route
-                    path={søknadStegPath(StegID.FØRSTE_STEG)}
-                    key={StegID.FØRSTE_STEG}
-                    component={() => <FørsteSteg {...getPropsForStep(StegID.FØRSTE_STEG)} />}
+                    path={søknadStegPath(StegID.TERMIN)}
+                    key={StegID.TERMIN}
+                    component={() => <Termin {...getPropsForStep(StegID.TERMIN)} />}
                 />
                 <Route
-                    path={søknadStegPath(StegID.ANDRE_STEG)}
-                    key={StegID.ANDRE_STEG}
-                    component={() => <AndreSteg {...getPropsForStep(StegID.ANDRE_STEG)} />}
+                    path={søknadStegPath(StegID.ARBEIDSFORHOLD)}
+                    key={StegID.ARBEIDSFORHOLD}
+                    component={() => <Arbeidsforhold {...getPropsForStep(StegID.ARBEIDSFORHOLD)} />}
                 />
                 <Route
                     path={søknadStegPath(StegID.OPPSUMMERING)}
                     key={StegID.OPPSUMMERING}
                     component={() => <Oppsummering {...getPropsForStep(StegID.OPPSUMMERING)} />}
                 />
-                <Redirect to={søknadStegPath(StegID.FØRSTE_STEG)} />
+                <Redirect to={søknadStegPath(StegID.TERMIN)} />
             </Switch>
         </Applikasjonsside>
     );

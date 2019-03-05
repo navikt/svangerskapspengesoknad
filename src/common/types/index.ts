@@ -4,7 +4,7 @@ export type Dekningsgrad = '80' | '100';
 
 export enum Forelder {
     'MOR' = 'mor',
-    'FARMEDMOR' = 'farMedmor'
+    'FARMEDMOR' = 'farMedmor',
 }
 
 export interface NavnPåForeldre {
@@ -15,6 +15,13 @@ export interface NavnPåForeldre {
 export interface Tidsperiode {
     fom: Date;
     tom: Date;
+}
+
+export interface Avgrensninger {
+    minDato?: Date;
+    maksDato?: Date;
+    ugyldigeTidsperioder?: Tidsperiode[];
+    helgedagerIkkeTillatt?: boolean;
 }
 
 export interface TidsperiodeMedValgfriSluttdato {

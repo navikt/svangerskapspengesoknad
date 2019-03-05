@@ -5,7 +5,7 @@ import Steg from 'app/types/StegID';
 
 export const getDefaultCommonState = (): CommonState => ({
     språkkode: 'nb',
-    steg: Steg.FØRSTE_STEG,
+    steg: Steg.TERMIN,
 });
 
 export interface CommonState {

@@ -1,0 +1,60 @@
+import React from 'react';
+import classnames from 'classnames';
+import { SkjemaGruppe, Fieldset, RadioPanel, RadioPanelGruppeProps } from 'nav-frontend-skjema';
+import './radioPanelGruppeResponsive.less';
+import 'nav-frontend-skjema-style';
+import Infoboks from 'common/components/infoboks/Infoboks';
+
+interface ResponsiveProps {
+    twoColumns?: boolean;
+    fieldsetClassname?: string;
+    infoboksTekst?: string | React.ReactNode;
+}
+
+export type RadioPanelGruppeResponsiveProps = ResponsiveProps & RadioPanelGruppeProps;
+
+class RadioPanelGruppeResponsive extends React.Component<RadioPanelGruppeResponsiveProps> {
+    render() {
+        const {
+            feil,
+            twoColumns = false,
+            infoboksTekst,
+            fieldsetClassname,
+            legend,
+            checked,
+            name,
+            radios,
+            onChange,
+        } = this.props;
+
+        const cls = classnames('radioPanelWrapper', {
+            'radioPanelWrapper--twoColumns': twoColumns === true,
+        });
+
+        return (
+            <div className="radioPanelGruppe">
+                <SkjemaGruppe feil={feil}>
+                    <Fieldset className={fieldsetClassname} legend={legend}>
+                        {infoboksTekst && <Infoboks fieldsetClsName={fieldsetClassname} tekst={infoboksTekst} />}
+                        <div className="radioPanelGruppe--responsive">
+                            {radios.map((radio) => {
+                                return (
+                                    <div className={cls} key={radio.value}>
+                                        <RadioPanel
+                                            checked={checked === radio.value}
+                                            name={name}
+                                            onChange={(event) => onChange(event, radio.value)}
+                                            {...radio}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </Fieldset>
+                </SkjemaGruppe>
+            </div>
+        );
+    }
+}
+
+export default RadioPanelGruppeResponsive;

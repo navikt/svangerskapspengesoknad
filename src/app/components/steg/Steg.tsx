@@ -22,6 +22,7 @@ export interface StegProps {
     history: History;
     renderNesteknapp?: boolean;
     renderSendeknapp?: boolean;
+    disableNesteknapp?: boolean;
     onRequestNavigateToNextStep?: () => void;
     onRequestNavigateToPreviousStep?: () => void;
 }
@@ -38,6 +39,7 @@ const Steg: FunctionComponent<Props> = (props) => {
         currentSteg,
         renderNesteknapp,
         renderSendeknapp,
+        disableNesteknapp,
         onRequestNavigateToNextStep,
         onRequestNavigateToPreviousStep,
         intl,
@@ -46,13 +48,15 @@ const Steg: FunctionComponent<Props> = (props) => {
 
     const stegForStegIndikator: StegindikatorStegProps[] = SØKNADSSTEG.map((steg, index) => ({
         index,
-        label: getMessage(intl, `stegindikator.label.${steg}`),
+        label: getMessage(intl, `stegtittel.${steg}`),
         aktiv: steg === currentSteg,
     }));
 
     return (
         <Form className={cls.block}>
-            <h1 className={cls.classNames(cls.element('header'), 'blokk-s')}>{id}</h1>
+            <h1 className={cls.classNames(cls.element('header'), 'blokk-s')}>
+                <FormattedMessage id={`stegtittel.${id}`} />
+            </h1>
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
                     {onRequestNavigateToPreviousStep && (
@@ -62,10 +66,10 @@ const Steg: FunctionComponent<Props> = (props) => {
                 <StegIndikator kompakt steg={stegForStegIndikator} visLabel={false} />
                 <div />
             </div>
-            <div className={cls.classNames(cls.element('steginnhold'), 'blokk-l')}>{children}</div>
+            <div className={cls.classNames(cls.element('steginnhold'))}>{children}</div>
             <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
                 {renderNesteknapp && (
-                    <Hovedknapp htmlType="button" onClick={onRequestNavigateToNextStep}>
+                    <Hovedknapp disabled={disableNesteknapp} htmlType="button" onClick={onRequestNavigateToNextStep}>
                         Neste
                     </Hovedknapp>
                 )}

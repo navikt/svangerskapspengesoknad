@@ -1,6 +1,9 @@
 enum StegID {
-    'FØRSTE_STEG' = 'forste-steg',
-    'ANDRE_STEG' = 'andre-steg',
+    'TERMIN' = 'termin',
+    'ARBEIDSFORHOLD' = 'arbeidsforhold',
+    // 'ANDRE_INNTEKTER' = 'andre-inntekter',
+    // 'TILRETTELEGGING' = 'tilrettelegging',
+    // 'UTENLANDSOPPHOLD' = 'utenlandsopphold',
     'OPPSUMMERING' = 'oppsummering',
 }
 

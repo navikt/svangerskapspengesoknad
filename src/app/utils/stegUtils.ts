@@ -1,6 +1,6 @@
 import StegID from 'app/types/StegID';
 
-export const SØKNADSSTEG = [StegID.FØRSTE_STEG, StegID.ANDRE_STEG, StegID.OPPSUMMERING];
+export const SØKNADSSTEG = [StegID.TERMIN, StegID.ARBEIDSFORHOLD, StegID.OPPSUMMERING];
 
 export const søknadStegPath = (steg: StegID) => `/soknad/${steg}`;
 

@@ -19,9 +19,7 @@ const initialSøknad: UferdigSøknad = {
     harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
     vedlegg: [],
-    barn: {
-        erBarnetFødt: false,
-    },
+    barn: {},
     informasjonOmUtenlandsopphold: {
         tidligereOpphold: [],
         senereOpphold: [],
