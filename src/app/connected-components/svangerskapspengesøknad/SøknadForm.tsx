@@ -25,6 +25,7 @@ const initialSøknad: UferdigSøknad = {
         senereOpphold: [],
     },
     tilrettelegging: [],
+    tilretteleggingsgrunnlag: [],
 };
 
 const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøknad, children }) => {

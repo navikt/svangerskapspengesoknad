@@ -21,5 +21,9 @@
     "termin.erBarnetFødt": "Er barnet født?",
     "termin.fødselsdato": "Når ble barnet født?",
 
+    "arbeidsforhold.dineArbeidsforhold.label": "Dine arbeidsforhold",
+    "arbeidsforhold.dineArbeidsforhold.infotekst": "Hvis du mangler informasjon om et eller flere arbeidsforhold, eller mener at informasjonen ikke stemmer så må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
+    "arbeidsforhold.grunnlag.label": "Hvilke av disse gjelder svangerskapspengesøknaden for?",
+
     "oppsummering.sendSøknad": "Send søknad"
 }

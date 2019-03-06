@@ -31,6 +31,7 @@ export interface UferdigSøknad {
     barn: Barn;
     vedlegg: Attachment[];
     tilrettelegging: Tilrettelegging[];
+    tilretteleggingsgrunnlag: string[];
 
     // tilrettelegging?: Partial<Tilrettelegging>;
     // arbeidsforhold?: Partial<Arbeidsforhold>;

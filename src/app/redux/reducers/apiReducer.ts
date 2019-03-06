@@ -32,7 +32,17 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 søkerinfo: {
                     status: FetchStatus.SUCCESS,
-                    data: action.payload.søkerinfo,
+                    data: {
+                        ...action.payload.søkerinfo,
+                        arbeidsforhold: [
+                            {
+                                ...action.payload.søkerinfo.arbeidsforhold[0],
+                                arbeidsgiverId: '98765432',
+                                arbeidsgiverNavn: 'navnestad',
+                            },
+                            ...action.payload.søkerinfo.arbeidsforhold,
+                        ],
+                    },
                 },
             };
 
