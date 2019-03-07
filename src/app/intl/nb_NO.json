@@ -3,11 +3,14 @@
     "jaNeiSpørsmål.nei": "Nei",
     "app.banner": "Søknad om svangerskapspenger",
     "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
+
     "steg.avbrytSøknad": "Avbryt søknad",
+    "steg.nesteknapp": "Neste",
 
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold",
     "stegtittel.oppsummering": "Oppsummering",
+    "stegtittel.tilrettelegging": "Tilrettelegging, {arbeidsgiverLabel}",
 
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
@@ -20,6 +23,10 @@
     "termin.termindato": "Når er termindato?",
     "termin.erBarnetFødt": "Er barnet født?",
     "termin.fødselsdato": "Når ble barnet født?",
+
+    "arbeidsforhold.dineArbeidsforhold.label": "Dine arbeidsforhold",
+    "arbeidsforhold.dineArbeidsforhold.infotekst": "Hvis du mangler informasjon om et eller flere arbeidsforhold, eller mener at informasjonen ikke stemmer så må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
+    "arbeidsforhold.grunnlag.label": "Hvilke av disse gjelder svangerskapspengesøknaden for?",
 
     "oppsummering.sendSøknad": "Send søknad"
 }

@@ -13,8 +13,9 @@
         "jsdoc-format": true,
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
+        "jsx-boolean-value": false,
         "label-position": true,
-        "max-line-length": [true, 120],
+        "max-line-length": [false, 120],
         "member-ordering": [
             true,
             {
@@ -49,7 +50,7 @@
         "one-line": [true, "check-catch", "check-else", "check-open-brace", "check-whitespace"],
         "quotemark": [true, "single", "jsx-double"],
         "radix": true,
-        "semicolon": [true, "always"],
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
         "quotes": [2, "single"],
         "trailing-comma": [true, "es5"],
         "triple-equals": [true, "allow-null-check"],

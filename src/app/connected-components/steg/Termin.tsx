@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { connect as formConnect } from 'formik';
 
 import Block from 'common/components/block/Block';
@@ -8,10 +7,19 @@ import getMessage from 'common/util/i18nUtils';
 import Steg, { StegProps } from '../../components/steg/Steg';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import { FormikProps } from 'app/types/Formik';
+import { UferdigSøknad } from 'app/types/Søknad';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
-const Termin: FunctionComponent<StegProps & InjectedIntlProps & FormikProps> = ({ formik, intl, ...stegProps }) => {
+type OuterProps = StegProps & InjectedIntlProps;
+type Props = OuterProps & FormikProps;
+
+const Termin: FunctionComponent<Props> = ({ formik, intl, ...stegProps }) => {
     return (
-        <Steg {...stegProps} renderNesteknapp={formik.values.barn.fødselsdato !== undefined}>
+        <Steg
+            {...stegProps}
+            renderNesteknapp={
+                formik.values.barn.erBarnetFødt === false || formik.values.barn.fødselsdato !== undefined
+            }>
             <Block margin="xs">
                 <DatoInput name="barn.termindato" label={getMessage(intl, 'termin.termindato')} />
             </Block>
@@ -25,4 +33,4 @@ const Termin: FunctionComponent<StegProps & InjectedIntlProps & FormikProps> = (
     );
 };
 
-export default formConnect(injectIntl(Termin));
+export default injectIntl(formConnect<OuterProps, UferdigSøknad>(Termin));
