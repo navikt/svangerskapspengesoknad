@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import { connect as formConnect } from 'formik';
 import { History } from 'history';
 
-import { getSøknadStepPath, getAdjacentMainSteps } from 'app/utils/stepUtils';
+import { getSøknadStepPath, getAdjacentSteps, getAllSteps } from 'app/utils/stepUtils';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Oppsummering from '../steg/Oppsummering';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
@@ -13,6 +13,7 @@ import Arbeidsforhold from '../steg/Arbeidsforhold';
 import { UferdigSøknad } from 'app/types/Søknad';
 import { FormikProps } from 'app/types/Formik';
 import Tilrettelegging from '../steg/Tilrettelegging';
+import { StegProps } from 'app/components/steg/Steg';
 
 interface Props {
     history: History;
@@ -20,78 +21,43 @@ interface Props {
 
 const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history }) => {
     const { søknadsgrunnlag } = formik.values;
+    const allSøknadSteps = getAllSteps(søknadsgrunnlag);
 
     const onNavigateToStep = (step: SøknadStep) => () => {
-        history.push(getSøknadStepPath(step));
+        if (step.step !== StepID.INGEN) {
+            history.push(getSøknadStepPath(step));
+        }
     };
 
-    const getPropsForStep = (stepID: StepID) => {
-        const [forrigeStegID, nesteStegID] = getAdjacentMainSteps(stepID);
+    const getPropsForStep = (step: SøknadStep): StegProps => {
+        const [previousStep, nextStep] = getAdjacentSteps(step, allSøknadSteps);
 
         return {
-            id: stepID,
-            renderNesteknapp: !!nesteStegID,
-            renderSendeknapp: !nesteStegID,
-            onRequestNavigateToNextStep: nesteStegID
-                ? onNavigateToStep({
-                      step: nesteStegID,
-                      subStep: nesteStegID === StepID.TILRETTELEGGING ? søknadsgrunnlag[0] : undefined,
-                  })
-                : undefined,
-            onRequestNavigateToPreviousStep: forrigeStegID
-                ? onNavigateToStep({
-                      step: forrigeStegID,
-                      subStep:
-                          forrigeStegID === StepID.TILRETTELEGGING
-                              ? søknadsgrunnlag[søknadsgrunnlag.length - 1]
-                              : undefined,
-                  })
-                : undefined,
+            id: step.step,
+            renderNesteknapp: nextStep.step !== StepID.INGEN,
+            renderSendeknapp: nextStep.step === StepID.INGEN,
+            onRequestNavigateToNextStep: onNavigateToStep(nextStep),
+            onRequestNavigateToPreviousStep: onNavigateToStep(previousStep),
+            allSøknadSteps,
             history,
         };
     };
 
-    const getPropsForTilretteleggingStep = (arbeidsgiverId: string) => {
-        const [forrigeStegID, nesteStegID] = getAdjacentMainSteps(StepID.TILRETTELEGGING);
-        const indexInOrder = søknadsgrunnlag.indexOf(arbeidsgiverId);
-
-        let onRequestNavigateToPreviousStep = undefined;
-        if (forrigeStegID) {
-            onRequestNavigateToPreviousStep =
-                indexInOrder === 0
-                    ? onNavigateToStep({ step: forrigeStegID })
-                    : onNavigateToStep({ step: StepID.TILRETTELEGGING, subStep: søknadsgrunnlag[indexInOrder - 1] });
-        }
-
-        let onRequestNavigateToNextStep = undefined;
-        if (nesteStegID) {
-            onRequestNavigateToNextStep =
-                indexInOrder === søknadsgrunnlag.length - 1
-                    ? onNavigateToStep({ step: nesteStegID })
-                    : onNavigateToStep({ step: StepID.TILRETTELEGGING, subStep: søknadsgrunnlag[indexInOrder + 1] });
-        }
-
-        return {
-            id: StepID.TILRETTELEGGING,
-            renderNesteknapp: true,
-            renderSendeknapp: false,
-            onRequestNavigateToPreviousStep,
-            onRequestNavigateToNextStep,
-            history,
+    const tilretteleggingRoutes = søknadsgrunnlag.map((arbeidsgiverId: string) => {
+        const tilrettelegginStep = {
+            step: StepID.TILRETTELEGGING,
+            subStep: arbeidsgiverId,
         };
-    };
 
-    const tilretteleggingRoutes = søknadsgrunnlag.map((arbeidsgiverId: string) => (
-        <Route
-            path={getSøknadStepPath({
-                step: StepID.TILRETTELEGGING,
-                subStep: arbeidsgiverId,
-            })}
-            exact={false}
-            key={`${StepID.TILRETTELEGGING}.${arbeidsgiverId}`}
-            component={() => <Tilrettelegging {...getPropsForTilretteleggingStep(arbeidsgiverId)} />}
-        />
-    ));
+        return (
+            <Route
+                path={getSøknadStepPath(tilrettelegginStep)}
+                exact={false}
+                key={`${StepID.TILRETTELEGGING}.${arbeidsgiverId}`}
+                component={() => <Tilrettelegging {...getPropsForStep(tilrettelegginStep)} />}
+            />
+        );
+    });
 
     return (
         <Applikasjonsside visSpråkvelger={true} visTittel={true}>
@@ -99,18 +65,18 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
                 <Route
                     path={getSøknadStepPath({ step: StepID.TERMIN })}
                     key={StepID.TERMIN}
-                    component={() => <Termin {...getPropsForStep(StepID.TERMIN)} />}
+                    component={() => <Termin {...getPropsForStep({ step: StepID.TERMIN })} />}
                 />
                 <Route
                     path={getSøknadStepPath({ step: StepID.ARBEIDSFORHOLD })}
                     key={StepID.ARBEIDSFORHOLD}
-                    component={() => <Arbeidsforhold {...getPropsForStep(StepID.ARBEIDSFORHOLD)} />}
+                    component={() => <Arbeidsforhold {...getPropsForStep({ step: StepID.ARBEIDSFORHOLD })} />}
                 />
                 {søknadsgrunnlag.length > 0 && [tilretteleggingRoutes]}
                 <Route
                     path={getSøknadStepPath({ step: StepID.OPPSUMMERING })}
                     key={StepID.OPPSUMMERING}
-                    component={() => <Oppsummering {...getPropsForStep(StepID.OPPSUMMERING)} />}
+                    component={() => <Oppsummering {...getPropsForStep({ step: StepID.OPPSUMMERING })} />}
                 />
                 <Redirect to={getSøknadStepPath({ step: StepID.TERMIN })} />
             </Switch>

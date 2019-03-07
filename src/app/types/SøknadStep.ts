@@ -3,6 +3,7 @@ export enum StepID {
     'ARBEIDSFORHOLD' = 'arbeidsforhold',
     'TILRETTELEGGING' = 'tilrettelegging',
     'OPPSUMMERING' = 'oppsummering',
+    'INGEN' = 'ingen',
 }
 
 interface SøknadStep {

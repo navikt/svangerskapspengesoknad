@@ -1,17 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { connect as formConnect } from 'formik';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import StegIndikator from 'nav-frontend-stegindikator';
 
 import { FetchStatus } from 'app/types/FetchState';
-import { FormikProps } from 'app/types/Formik';
 import { parseStepFromHistory, finnArbeidsgiversNavn } from 'app/utils/stepUtils';
 import { State } from 'app/redux/store';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import { UferdigSøknad } from 'app/types/Søknad';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
@@ -28,86 +25,58 @@ export interface StegProps {
     disableNesteknapp?: boolean;
     onRequestNavigateToNextStep?: () => void;
     onRequestNavigateToPreviousStep?: () => void;
+    allSøknadSteps: SøknadStep[];
 }
 
 interface StateProps {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-type OuterProps = StegProps & StateProps & InjectedIntlProps;
-type Props = OuterProps & FormikProps;
+type Props = StegProps & StateProps & InjectedIntlProps;
 
 const Steg: FunctionComponent<Props> = (props) => {
-    const {
-        id,
-        renderNesteknapp,
-        renderSendeknapp,
-        disableNesteknapp,
-        onRequestNavigateToNextStep,
-        onRequestNavigateToPreviousStep,
-        intl,
-        formik,
-        history,
-        children,
-        arbeidsforhold,
-    } = props;
-
-    const currentStep = parseStepFromHistory(history);
-    const translateStatiskSteg = (stepID: StepID) => getMessage(intl, `stegtittel.${stepID}`);
-
-    const fromArbeidsgiverIdToStepAndLabel = (arbeidsgiverId: string) => {
-        const arbeidsgiverLabel = finnArbeidsgiversNavn(arbeidsgiverId, arbeidsforhold);
+    const currentStep = parseStepFromHistory(props.history);
+    const stegForStegIndikator = props.allSøknadSteps.map((step, index) => {
         return {
-            steg: {
-                step: StepID.TILRETTELEGGING,
-                subStep: arbeidsgiverId,
-            },
-            label: getMessage(intl, 'stegtittel.tilrettelegging', {
-                arbeidsgiverLabel,
-            }),
+            index,
+            aktiv: step.step === currentStep.step && step.subStep === currentStep.subStep,
+            label:
+                step.step === StepID.TILRETTELEGGING && step.subStep
+                    ? finnArbeidsgiversNavn(step.subStep, props.arbeidsforhold)
+                    : getMessage(props.intl, `stegtittel.${step.step}`),
         };
-    };
-
-    const createPropsForStegIndikator = ({ steg, label }: { steg: SøknadStep; label: string }, index: number) => ({
-        index,
-        label,
-        aktiv: steg.step === currentStep.step && steg.subStep === currentStep.subStep,
     });
-
-    const stegForStegIndikator = [
-        { steg: { step: StepID.TERMIN }, label: translateStatiskSteg(StepID.TERMIN) },
-        { steg: { step: StepID.ARBEIDSFORHOLD }, label: translateStatiskSteg(StepID.ARBEIDSFORHOLD) },
-        ...formik.values.søknadsgrunnlag.map(fromArbeidsgiverIdToStepAndLabel),
-        { steg: { step: StepID.OPPSUMMERING }, label: translateStatiskSteg(StepID.OPPSUMMERING) },
-    ].map(createPropsForStegIndikator);
 
     return (
         <div className={cls.block}>
             <h1 className={cls.classNames(cls.element('header'), 'blokk-s')}>
                 <FormattedMessage
-                    id={`stegtittel.${id}`}
+                    id={`stegtittel.${props.id}`}
                     values={{
-                        arbeidsgiverLabel: finnArbeidsgiversNavn(currentStep.subStep, arbeidsforhold),
+                        arbeidsgiverLabel: finnArbeidsgiversNavn(currentStep.subStep, props.arbeidsforhold),
                     }}
                 />
             </h1>
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
-                    {onRequestNavigateToPreviousStep && (
-                        <BackButton hidden={false} onClick={onRequestNavigateToPreviousStep} />
+                    {props.onRequestNavigateToPreviousStep && (
+                        <BackButton hidden={false} onClick={props.onRequestNavigateToPreviousStep} />
                     )}
                 </div>
                 <StegIndikator kompakt steg={stegForStegIndikator} visLabel={false} />
                 <div />
             </div>
-            <div className={cls.classNames(cls.element('steginnhold'))}>{children}</div>
+            <div className={cls.classNames(cls.element('steginnhold'))}>{props.children}</div>
             <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
-                {renderNesteknapp && (
-                    <Hovedknapp disabled={disableNesteknapp} htmlType="button" onClick={onRequestNavigateToNextStep}>
+                {props.renderNesteknapp && (
+                    <Hovedknapp
+                        disabled={props.disableNesteknapp}
+                        htmlType="button"
+                        onClick={props.onRequestNavigateToNextStep}>
                         <FormattedMessage id="steg.nesteknapp" />
                     </Hovedknapp>
                 )}
-                {renderSendeknapp && (
+                {props.renderSendeknapp && (
                     <Hovedknapp htmlType="submit">
                         <FormattedMessage id="oppsummering.sendSøknad" />
                     </Hovedknapp>
@@ -123,9 +92,9 @@ const Steg: FunctionComponent<Props> = (props) => {
     );
 };
 
-const mapStateToProps = (state: State) => ({
-    arbeidsforhold:
-        state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : undefined,
-});
+const mapStateToProps = (state: State) => {
+    const søkerinfo = state.api.søkerinfo;
+    return { arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined };
+};
 
-export default connect(mapStateToProps)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Steg)));
+export default connect(mapStateToProps)(injectIntl(Steg));

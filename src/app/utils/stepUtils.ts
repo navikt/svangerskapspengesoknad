@@ -27,12 +27,52 @@ export const getSøknadStepPath = (step: SøknadStep) => {
     return step.subStep ? path + `/${step.subStep}` : path;
 };
 
+function pureSplice<T>(array: Array<T>, start: number, deleteCount: number, ...substitutes: Array<T>): Array<T> {
+    const newArray = [...array];
+    newArray.splice(start, deleteCount, ...substitutes);
+
+    return newArray;
+}
+
 const mainSteps = [StepID.TERMIN, StepID.ARBEIDSFORHOLD, StepID.TILRETTELEGGING, StepID.OPPSUMMERING];
 
-export const getAdjacentMainSteps = (stepID: StepID) => {
-    const stegIndex = mainSteps.indexOf(stepID);
-    const previousStep = stegIndex === 0 ? undefined : mainSteps[stegIndex - 1];
-    const nextStep = stegIndex === mainSteps.length - 1 ? undefined : mainSteps[stegIndex + 1];
+export const getAllSteps = (søknadsgrunnlag: string[]): SøknadStep[] => {
+    const tilretteleggingSteps = søknadsgrunnlag.map((tilrettelegging) => ({
+        step: StepID.TILRETTELEGGING,
+        subStep: tilrettelegging,
+    }));
+
+    return pureSplice(
+        mainSteps.map((step) => ({ step })),
+        mainSteps.indexOf(StepID.TILRETTELEGGING),
+        1,
+        ...tilretteleggingSteps
+    );
+};
+
+export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep[]): [SøknadStep, SøknadStep] => {
+    const invalidStep = { step: StepID.INGEN };
+    const indexOfCurrentStep = allSteps.findIndex(
+        ({ step, subStep }) => step === currentStep.step && subStep === currentStep.subStep
+    );
+
+    if (indexOfCurrentStep === -1) {
+        return [invalidStep, invalidStep];
+    }
+
+    const isFirstStep = indexOfCurrentStep === 0;
+    const isLastStep = indexOfCurrentStep === allSteps.length - 1;
+
+    let previousStep = invalidStep;
+    let nextStep = invalidStep;
+
+    if (!isFirstStep) {
+        previousStep = allSteps[indexOfCurrentStep - 1];
+    }
+
+    if (!isLastStep) {
+        nextStep = allSteps[indexOfCurrentStep + 1];
+    }
 
     return [previousStep, nextStep];
 };

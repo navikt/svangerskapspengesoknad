@@ -1,4 +1,5 @@
 import Søknad, { Søknadstype } from 'app/types/Søknad';
+import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
 
 const mockedSøknad: Søknad = {
     type: Søknadstype.SVANGERSKAPSPENGER,
@@ -18,6 +19,7 @@ const mockedSøknad: Søknad = {
     },
     tilrettelegging: [
         {
+            type: Tilretteleggingstype.HEL,
             behovForTilretteleggingFom: new Date('2019-03-01'),
             tilrettelagtArbeidFom: new Date('2019-10-01'),
             arbeidsgiverId: '973135678',
