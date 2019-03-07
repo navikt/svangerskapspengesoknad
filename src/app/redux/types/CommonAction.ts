@@ -1,9 +1,7 @@
 import { Språkkode } from 'common/types';
-import Steg from 'app/types/StegID';
 
 export enum CommonActionTypes {
     'SET_SPRÅK' = 'setSpråk',
-    'SET_STEG' = 'setSteg',
 }
 
 interface SetSpråk {
@@ -13,13 +11,6 @@ interface SetSpråk {
     };
 }
 
-interface SetSteg {
-    type: CommonActionTypes.SET_STEG;
-    payload: {
-        steg: Steg;
-    };
-}
-
-type CommonAction = SetSpråk | SetSteg;
+type CommonAction = SetSpråk;
 
 export default CommonAction;

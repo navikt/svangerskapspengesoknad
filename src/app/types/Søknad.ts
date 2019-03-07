@@ -19,7 +19,6 @@ interface Søknad {
     vedlegg?: Attachment[];
     tilrettelegging: Tilrettelegging[];
 
-    // arbeidsforhold?: Partial<Arbeidsforhold>;
     // selvstendigNæringsdrivendeInformasjon?: Næring[];
     // frilansInformasjon?: FrilansInformasjon;
 }
@@ -31,10 +30,7 @@ export interface UferdigSøknad {
     barn: Barn;
     vedlegg: Attachment[];
     tilrettelegging: Tilrettelegging[];
-    tilretteleggingsgrunnlag: string[];
-
-    // tilrettelegging?: Partial<Tilrettelegging>;
-    // arbeidsforhold?: Partial<Arbeidsforhold>;
+    søknadsgrunnlag: string[];
 }
 
 export interface Søknadfeil {

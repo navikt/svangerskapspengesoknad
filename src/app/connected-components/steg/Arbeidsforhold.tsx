@@ -22,7 +22,7 @@ type OuterProps = StegProps & ConnectProps & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
 
 const Arbeidsforhold: FunctionComponent<Props> = ({ formik, arbeidsforhold, intl, ...stegProps }) => {
-    const harValgtMinstEttGrunnlag = formik.values.tilretteleggingsgrunnlag.length > 0;
+    const harValgtMinstEttGrunnlag = formik.values.søknadsgrunnlag.length > 0;
 
     return (
         <Steg {...stegProps} renderNesteknapp={harValgtMinstEttGrunnlag}>
@@ -35,7 +35,7 @@ const Arbeidsforhold: FunctionComponent<Props> = ({ formik, arbeidsforhold, intl
             </Block>
             <Block margin="l">
                 <CheckboksPanelGruppe
-                    name="tilretteleggingsgrunnlag"
+                    name="søknadsgrunnlag"
                     label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
                     options={arbeidsforhold.map((forhold) => ({
                         value: forhold.arbeidsgiverId,

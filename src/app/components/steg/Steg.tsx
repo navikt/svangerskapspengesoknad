@@ -1,26 +1,29 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { Form } from 'formik';
+import { connect as formConnect } from 'formik';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import StegIndikator from 'nav-frontend-stegindikator';
 
-import { SØKNADSSTEG } from 'app/utils/stegUtils';
+import { FetchStatus } from 'app/types/FetchState';
+import { FormikProps } from 'app/types/Formik';
+import { parseStepFromHistory, finnArbeidsgiversNavn } from 'app/utils/stepUtils';
 import { State } from 'app/redux/store';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import { UferdigSøknad } from 'app/types/Søknad';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
 import getMessage from 'common/util/i18nUtils';
-import StegID from 'app/types/StegID';
 import './steg.less';
 
 const cls = BEMHelper('steg');
 
 export interface StegProps {
-    id: StegID;
+    id: StepID;
     history: History;
-    renderNesteknapp?: boolean;
+    renderNesteknapp: boolean;
     renderSendeknapp?: boolean;
     disableNesteknapp?: boolean;
     onRequestNavigateToNextStep?: () => void;
@@ -28,34 +31,65 @@ export interface StegProps {
 }
 
 interface StateProps {
-    currentSteg: StegID;
+    arbeidsforhold: Arbeidsforhold[];
 }
 
-type Props = StegProps & StateProps & InjectedIntlProps;
+type OuterProps = StegProps & StateProps & InjectedIntlProps;
+type Props = OuterProps & FormikProps;
 
 const Steg: FunctionComponent<Props> = (props) => {
     const {
         id,
-        currentSteg,
         renderNesteknapp,
         renderSendeknapp,
         disableNesteknapp,
         onRequestNavigateToNextStep,
         onRequestNavigateToPreviousStep,
         intl,
+        formik,
+        history,
         children,
+        arbeidsforhold,
     } = props;
 
-    const stegForStegIndikator: StegindikatorStegProps[] = SØKNADSSTEG.map((steg, index) => ({
+    const currentStep = parseStepFromHistory(history);
+    const translateStatiskSteg = (stepID: StepID) => getMessage(intl, `stegtittel.${stepID}`);
+
+    const fromArbeidsgiverIdToStepAndLabel = (arbeidsgiverId: string) => {
+        const arbeidsgiverLabel = finnArbeidsgiversNavn(arbeidsgiverId, arbeidsforhold);
+        return {
+            steg: {
+                step: StepID.TILRETTELEGGING,
+                subStep: arbeidsgiverId,
+            },
+            label: getMessage(intl, 'stegtittel.tilrettelegging', {
+                arbeidsgiverLabel,
+            }),
+        };
+    };
+
+    const createPropsForStegIndikator = ({ steg, label }: { steg: SøknadStep; label: string }, index: number) => ({
         index,
-        label: getMessage(intl, `stegtittel.${steg}`),
-        aktiv: steg === currentSteg,
-    }));
+        label,
+        aktiv: steg.step === currentStep.step && steg.subStep === currentStep.subStep,
+    });
+
+    const stegForStegIndikator = [
+        { steg: { step: StepID.TERMIN }, label: translateStatiskSteg(StepID.TERMIN) },
+        { steg: { step: StepID.ARBEIDSFORHOLD }, label: translateStatiskSteg(StepID.ARBEIDSFORHOLD) },
+        ...formik.values.søknadsgrunnlag.map(fromArbeidsgiverIdToStepAndLabel),
+        { steg: { step: StepID.OPPSUMMERING }, label: translateStatiskSteg(StepID.OPPSUMMERING) },
+    ].map(createPropsForStegIndikator);
 
     return (
-        <Form className={cls.block}>
+        <div className={cls.block}>
             <h1 className={cls.classNames(cls.element('header'), 'blokk-s')}>
-                <FormattedMessage id={`stegtittel.${id}`} />
+                <FormattedMessage
+                    id={`stegtittel.${id}`}
+                    values={{
+                        arbeidsgiverLabel: finnArbeidsgiversNavn(currentStep.subStep, arbeidsforhold),
+                    }}
+                />
             </h1>
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
@@ -70,7 +104,7 @@ const Steg: FunctionComponent<Props> = (props) => {
             <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
                 {renderNesteknapp && (
                     <Hovedknapp disabled={disableNesteknapp} htmlType="button" onClick={onRequestNavigateToNextStep}>
-                        Neste
+                        <FormattedMessage id="steg.nesteknapp" />
                     </Hovedknapp>
                 )}
                 {renderSendeknapp && (
@@ -85,12 +119,13 @@ const Steg: FunctionComponent<Props> = (props) => {
                     <FormattedMessage id="steg.avbrytSøknad" />
                 </button>
             </div>
-        </Form>
+        </div>
     );
 };
 
 const mapStateToProps = (state: State) => ({
-    currentSteg: state.common.steg,
+    arbeidsforhold:
+        state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : undefined,
 });
 
-export default connect(mapStateToProps)(injectIntl(Steg));
+export default connect(mapStateToProps)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Steg)));

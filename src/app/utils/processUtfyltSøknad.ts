@@ -1,16 +1,13 @@
 import Søknad, { Søknadstype, UferdigSøknad } from 'app/types/Søknad';
 import Tilrettelegging from 'app/types/Tilrettelegging';
 
-const fjernForkastetTilrettelegging = (tilrettelegging: Tilrettelegging[], tilretteleggingsgrunnlag: string[]) =>
-    tilrettelegging.filter(({ arbeidsgiverId }) => tilretteleggingsgrunnlag.includes(arbeidsgiverId));
+const fjernForkastetTilrettelegging = (tilrettelegging: Tilrettelegging[], søknadsgrunnlag: string[]) =>
+    tilrettelegging.filter(({ arbeidsgiverId }) => søknadsgrunnlag.includes(arbeidsgiverId));
 
 const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
 
-    const tilrettelegging = fjernForkastetTilrettelegging(
-        utfyltSøknad.tilrettelegging,
-        utfyltSøknad.tilretteleggingsgrunnlag
-    );
+    const tilrettelegging = fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag);
 
     return {
         type: Søknadstype.SVANGERSKAPSPENGER,

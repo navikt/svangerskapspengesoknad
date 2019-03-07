@@ -3,11 +3,14 @@
     "jaNeiSpørsmål.nei": "Nei",
     "app.banner": "Søknad om svangerskapspenger",
     "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
+
     "steg.avbrytSøknad": "Avbryt søknad",
+    "steg.nesteknapp": "Neste",
 
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold",
     "stegtittel.oppsummering": "Oppsummering",
+    "stegtittel.tilrettelegging": "Tilrettelegging, {arbeidsgiverLabel}",
 
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",

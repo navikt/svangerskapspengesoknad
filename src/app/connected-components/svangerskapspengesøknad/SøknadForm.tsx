@@ -1,11 +1,12 @@
 import React, { ReactNode, FunctionComponent } from 'react';
-import { Formik } from 'formik';
-import validerSøknad from 'app/utils/validering/validerSøknad';
-import Søknad, { UferdigSøknad } from 'app/types/Søknad';
-import Action from 'app/redux/types/Action';
-import { ApiActionTypes } from 'app/redux/types/ApiAction';
+import { Formik, Form } from 'formik';
 import { connect } from 'react-redux';
+
+import { ApiActionTypes } from 'app/redux/types/ApiAction';
+import Action from 'app/redux/types/Action';
 import processUtfyltSøknad from 'app/utils/processUtfyltSøknad';
+import Søknad, { UferdigSøknad } from 'app/types/Søknad';
+import validerSøknad from 'app/utils/validering/validerSøknad';
 
 interface Props {
     children: ReactNode;
@@ -25,7 +26,7 @@ const initialSøknad: UferdigSøknad = {
         senereOpphold: [],
     },
     tilrettelegging: [],
-    tilretteleggingsgrunnlag: [],
+    søknadsgrunnlag: [],
 };
 
 const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøknad, children }) => {
@@ -40,7 +41,7 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
                 }
             }}
             validate={validerSøknad}>
-            {({ handleSubmit }) => children}
+            {({ handleSubmit }) => <Form>{children}</Form>}
         </Formik>
     );
 };

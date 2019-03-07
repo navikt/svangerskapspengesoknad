@@ -3,6 +3,7 @@ const { guid } = require('nav-frontend-js-utils');
 import classnames from 'classnames';
 import SkjemaelementFeilmelding from 'common/lib/validation/errors/SkjemaelementFeilmelding';
 import { SkjemaelementFeil } from 'nav-frontend-skjema/src/skjemaelement-feilmelding';
+import { Element } from 'nav-frontend-typografi';
 
 export interface Props {
     label: string | React.ReactNode;
@@ -21,7 +22,7 @@ const SkjemaInputElement: React.StatelessComponent<Props> = (props: Props) => {
             })}>
             {typeof label === 'string' ? (
                 <label className="skjemaelement__label" htmlFor={inputId}>
-                    {label}
+                    <Element>{label}</Element>
                 </label>
             ) : (
                 label
