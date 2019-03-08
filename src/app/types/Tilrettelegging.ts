@@ -1,5 +1,3 @@
-import { Omit } from 'lodash';
-
 export enum Tilretteleggingstype {
     'HEL' = 'hel',
     'DELVIS' = 'delvis',
@@ -43,9 +41,6 @@ type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrett
 export type UferdigTilrettelegging = Tilrettelegging & {
     id: string;
     type?: Tilretteleggingstype;
-    behovForTilretteleggingFom?: Date;
 };
-
-export type UbestemtTilrettelegging = Omit<Tilretteleggingsbase, 'type' | 'behovForTilretteleggingFom'>;
 
 export default Tilrettelegging;

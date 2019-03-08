@@ -43,7 +43,12 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
         };
     };
 
-    const tilretteleggingRoutes = søknadsgrunnlag.map(({ id }) => {
+    const getPropsForTilrettelegging = (id: string, index: number) => ({
+        tilretteleggingId: id,
+        tilretteleggingIndex: index,
+    });
+
+    const tilretteleggingRoutes = søknadsgrunnlag.map(({ id }, index) => {
         const tilrettelegginStep = {
             step: StepID.TILRETTELEGGING,
             subStep: id,
@@ -54,7 +59,12 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
                 path={getSøknadStepPath(tilrettelegginStep)}
                 exact={false}
                 key={`${StepID.TILRETTELEGGING}.${id}`}
-                component={() => <Tilrettelegging {...getPropsForStep(tilrettelegginStep)} />}
+                component={() => (
+                    <Tilrettelegging
+                        {...getPropsForStep(tilrettelegginStep)}
+                        {...getPropsForTilrettelegging(id, index)}
+                    />
+                )}
             />
         );
     });

@@ -1,7 +1,7 @@
 import { Søknadsgrunnlag } from 'app/types/Søknad';
-import { Arbeidsforholdstype, UbestemtTilrettelegging } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 
-export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag[]): UbestemtTilrettelegging[] => {
+export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag[]) => {
     return søknadsgrunnlag.map(({ id, type }) => {
         const arbeidsgiversId = type === Arbeidsforholdstype.VIRKSOMHET ? { id } : {};
 
