@@ -43,17 +43,17 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
         };
     };
 
-    const tilretteleggingRoutes = søknadsgrunnlag.map((arbeidsgiverId: string) => {
+    const tilretteleggingRoutes = søknadsgrunnlag.map(({ id }) => {
         const tilrettelegginStep = {
             step: StepID.TILRETTELEGGING,
-            subStep: arbeidsgiverId,
+            subStep: id,
         };
 
         return (
             <Route
                 path={getSøknadStepPath(tilrettelegginStep)}
                 exact={false}
-                key={`${StepID.TILRETTELEGGING}.${arbeidsgiverId}`}
+                key={`${StepID.TILRETTELEGGING}.${id}`}
                 component={() => <Tilrettelegging {...getPropsForStep(tilrettelegginStep)} />}
             />
         );

@@ -1,12 +1,25 @@
+import { Omit } from 'lodash';
+
 export enum Tilretteleggingstype {
     'HEL' = 'hel',
     'DELVIS' = 'delvis',
     'INGEN' = 'ingen',
 }
 
+export enum Arbeidsforholdstype {
+    'VIRKSOMHET' = 'virksomhet',
+    'SELVSTENDIG' = 'selvstendig',
+    'FRILANSER' = 'frilanser',
+    'PRIVAT' = 'privat',
+}
+
 interface Tilretteleggingsbase {
+    type: Tilretteleggingstype;
     behovForTilretteleggingFom: Date;
-    arbeidsgiverId: string;
+    arbeidsforhold: {
+        id?: string;
+        type: Arbeidsforholdstype;
+    };
 }
 
 export interface HelTilrettelegging extends Tilretteleggingsbase {
@@ -26,5 +39,13 @@ export interface IngenTilrettelegging extends Tilretteleggingsbase {
 }
 
 type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrettelegging;
+
+export type UferdigTilrettelegging = Tilrettelegging & {
+    id: string;
+    type?: Tilretteleggingstype;
+    behovForTilretteleggingFom?: Date;
+};
+
+export type UbestemtTilrettelegging = Omit<Tilretteleggingsbase, 'type' | 'behovForTilretteleggingFom'>;
 
 export default Tilrettelegging;
