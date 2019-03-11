@@ -12,6 +12,7 @@ import Kvittering from 'app/types/Kvittering';
 import SøknadForm from './SøknadForm';
 import SøknadRoutes from './SøknadRoutes';
 import Spinner from 'nav-frontend-spinner';
+import Environment from 'app/Environment';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;
@@ -34,7 +35,7 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
 
     const redirectToLogin = () => {
         console.warn('Redirecting ...');
-        window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
+        window.location.href = Environment.LOGIN_URL + '?redirect=' + window.location.href;
     };
 
     const søker = getData(søkerinfo, {}).søker;
