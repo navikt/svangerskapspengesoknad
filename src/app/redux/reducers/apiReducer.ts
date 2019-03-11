@@ -39,7 +39,6 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
             };
 
         case ApiActionTypes.GET_SØKERINFO_FAILURE:
-            console.warn('Søkerinfo failure:', action);
             return {
                 ...state,
                 søkerinfo: {

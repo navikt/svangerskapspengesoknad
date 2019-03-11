@@ -1,5 +1,5 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
-import Barn from './Barn';
+import Barn, { UferdigBarn } from './Barn';
 import Attachment from './Attachment';
 import Søker from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
@@ -26,7 +26,7 @@ export interface UferdigSøknad {
     harGodkjentVilkår: boolean;
     harGodkjentOppsummering: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdPartial;
-    barn: Barn;
+    barn: UferdigBarn;
     vedlegg: Attachment[];
     tilrettelegging: UferdigTilrettelegging[];
     søknadsgrunnlag: Søknadsgrunnlag[];

@@ -9,8 +9,15 @@ const removeId = (t: UferdigTilrettelegging) => {
     return other;
 };
 
+const areDefined = (...items: any[]) => items.some((item) => item !== undefined);
+
 const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
+    const { termindato: barnetsTermindato, ...utfyltBarn } = utfyltSøknad.barn;
+
+    if (!areDefined(barnetsTermindato, utfyltBarn.erBarnetFødt, utfyltBarn.fødselsdato)) {
+        return undefined;
+    }
 
     const tilrettelegging = fjernForkastetTilrettelegging(
         utfyltSøknad.tilrettelegging,
@@ -28,7 +35,11 @@ const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefine
             tidligereOpphold: utland.tidligereOpphold,
             senereOpphold: utland.senereOpphold,
         },
-        barn: utfyltSøknad.barn,
+        barn: {
+            ...utfyltBarn,
+            erBarnetFødt: utfyltBarn.erBarnetFødt === undefined ? false : utfyltBarn.erBarnetFødt,
+            termindatoer: [barnetsTermindato as Date],
+        },
         vedlegg: utfyltSøknad.vedlegg,
         søker: utfyltSøknad.søker,
         tilrettelegging,

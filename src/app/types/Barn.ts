@@ -1,6 +1,12 @@
 interface Barn {
-    erBarnetFødt?: boolean;
+    erBarnetFødt: boolean;
+    termindatoer: Date[];
+    fødselsdato?: Date;
+}
+
+export interface UferdigBarn {
     termindato?: Date;
+    erBarnetFødt?: boolean;
     fødselsdato?: Date;
 }
 

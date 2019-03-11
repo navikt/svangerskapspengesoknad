@@ -50,8 +50,6 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
             onSubmit={(søknad: UferdigSøknad) => {
                 const ferdigSøknad = processUtfyltSøknad(søknad);
 
-                console.warn('Ferdig?', ferdigSøknad);
-
                 if (ferdigSøknad) {
                     requestSendSøknad(ferdigSøknad);
                 }
