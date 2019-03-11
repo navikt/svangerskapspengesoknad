@@ -1,6 +1,7 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn from './Barn';
 import Attachment from './Attachment';
+import Søker from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 
 export enum Søknadstype {
@@ -18,9 +19,7 @@ interface Søknad {
     barn: Barn;
     vedlegg?: Attachment[];
     tilrettelegging: Tilrettelegging[];
-
-    // selvstendigNæringsdrivendeInformasjon?: Næring[];
-    // frilansInformasjon?: FrilansInformasjon;
+    søker: Søker;
 }
 
 export interface UferdigSøknad {
@@ -31,6 +30,7 @@ export interface UferdigSøknad {
     vedlegg: Attachment[];
     tilrettelegging: UferdigTilrettelegging[];
     søknadsgrunnlag: Søknadsgrunnlag[];
+    søker: Søker;
 }
 
 export interface Søknadsgrunnlag {

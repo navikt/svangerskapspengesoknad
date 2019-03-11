@@ -45,7 +45,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                     text: getMessage(intl, 'intro.bobletekst'),
                 }}
             />
-            <main className={cls.block}>
+            <div className={cls.block}>
                 <Innholdstittel className="blokk-xs">
                     <FormattedMessage id="intro.tittel" />
                 </Innholdstittel>
@@ -61,7 +61,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                 <Hovedknapp onClick={startSøknad} htmlType="button" disabled={disableNextButton}>
                     <FormattedMessage id="intro.begynnSøknad.knapp" />
                 </Hovedknapp>
-            </main>
+            </div>
         </Applikasjonsside>
     );
 };

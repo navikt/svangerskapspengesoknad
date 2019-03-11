@@ -8,6 +8,7 @@ import IntlProvider from './intl/IntlProvider';
 import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
 
 import './styles/global.less';
+import './styles/app.less';
 
 const rootElement = document.getElementById('app');
 

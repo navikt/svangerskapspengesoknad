@@ -14,6 +14,7 @@ import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
 import getMessage from 'common/util/i18nUtils';
 import './steg.less';
+import { Undertittel } from 'nav-frontend-typografi';
 
 const cls = BEMHelper('steg');
 
@@ -50,14 +51,14 @@ const Steg: FunctionComponent<Props> = (props) => {
 
     return (
         <div className={cls.block}>
-            <h1 className={cls.classNames(cls.element('header'), 'blokk-s')}>
-                <FormattedMessage
-                    id={`stegtittel.${props.id}`}
-                    values={{
-                        arbeidsgiverLabel: finnArbeidsgiversNavn(currentStep.subStep, props.arbeidsforhold),
-                    }}
-                />
+            <h1 className={cls.classNames(cls.element('header'), 'blokk-xs')}>
+                <FormattedMessage id={`stegtittel.${props.id}`} />
             </h1>
+            {currentStep.subStep && (
+                <Undertittel className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
+                    {finnArbeidsgiversNavn(currentStep.subStep, props.arbeidsforhold)}
+                </Undertittel>
+            )}
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
                     {props.renderTilbakeknapp && (

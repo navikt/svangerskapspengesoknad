@@ -4,8 +4,6 @@ import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
 const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
     let errors: any = {};
 
-    errors.tilrettelegging = [];
-
     for (const t of søknad.tilrettelegging) {
         let tErrors: any = {};
 
@@ -15,7 +13,13 @@ const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
             }
         }
 
-        errors.tilrettelegging.push(tErrors);
+        if (Object.keys(tErrors).length > 0) {
+            if (!errors.tilrettelegging) {
+                errors.tilrettelegging = [];
+            }
+
+            errors.tilrettelegging.push(tErrors);
+        }
     }
 
     return errors;

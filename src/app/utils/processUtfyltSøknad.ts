@@ -30,6 +30,7 @@ const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefine
         },
         barn: utfyltSøknad.barn,
         vedlegg: utfyltSøknad.vedlegg,
+        søker: utfyltSøknad.søker,
         tilrettelegging,
     };
 };
