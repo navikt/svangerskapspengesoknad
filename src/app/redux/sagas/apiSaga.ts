@@ -11,7 +11,7 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
 
         yield put({ type: ApiActionTypes.GET_SØKERINFO_SUCCESS, payload: { søkerinfo } });
     } catch (error) {
-        yield put({ type: ApiActionTypes.GET_SØKERINFO_FAILURE, error });
+        yield put({ type: ApiActionTypes.GET_SØKERINFO_FAILURE, payload: { error } });
     }
 }
 

@@ -36,6 +36,7 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
             id: step.step,
             renderNesteknapp: nextStep.step !== StepID.INGEN,
             renderSendeknapp: nextStep.step === StepID.INGEN,
+            renderTilbakeknapp: previousStep.step !== StepID.INGEN,
             onRequestNavigateToNextStep: onNavigateToStep(nextStep),
             onRequestNavigateToPreviousStep: onNavigateToStep(previousStep),
             allSøknadSteps,

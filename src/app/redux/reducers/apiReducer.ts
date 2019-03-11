@@ -34,19 +34,12 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                     status: FetchStatus.SUCCESS,
                     data: {
                         ...action.payload.søkerinfo,
-                        arbeidsforhold: [
-                            {
-                                ...action.payload.søkerinfo.arbeidsforhold[0],
-                                arbeidsgiverId: '98765432',
-                                arbeidsgiverNavn: 'navnestad',
-                            },
-                            ...action.payload.søkerinfo.arbeidsforhold,
-                        ],
                     },
                 },
             };
 
         case ApiActionTypes.GET_SØKERINFO_FAILURE:
+            console.warn('Søkerinfo failure:', action);
             return {
                 ...state,
                 søkerinfo: {

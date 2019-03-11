@@ -1,3 +1,5 @@
+import { get } from 'lodash';
+
 import FetchState, { FetchStatus } from 'app/types/FetchState';
 
 export const getData = <T>(fetchState: FetchState<T>, defaultValue: any): T => {
@@ -6,6 +8,6 @@ export const getData = <T>(fetchState: FetchState<T>, defaultValue: any): T => {
 
 export const getErrorCode = <T>(fetchState: FetchState<T>): number => {
     return fetchState && fetchState.status === FetchStatus.FAILURE && fetchState.error.response
-        ? fetchState.error.response.status
+        ? get(fetchState, 'error.response.status')
         : 0;
 };

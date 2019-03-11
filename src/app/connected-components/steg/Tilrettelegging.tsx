@@ -55,7 +55,6 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <RadioPanelGruppe
                     name={`tilrettelegging.${index}.type`}
                     legend={getMessage(intl, 'tilrettelegging.type.label')}
-                    onChange={() => {}}
                     radios={[
                         {
                             value: Tilretteleggingstype.INGEN,

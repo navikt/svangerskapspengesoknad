@@ -19,11 +19,15 @@ export const containsErrors = (item: any): boolean => {
         return true;
     } else if (Array.isArray(item)) {
         for (const member of item) {
-            if (containsErrors(member)) return true;
+            if (containsErrors(member)) {
+                return true;
+            }
         }
     } else if (typeof item === 'object') {
         for (const property in item) {
-            if (containsErrors(item[property])) return true;
+            if (containsErrors(item[property])) {
+                return true;
+            }
         }
     }
 

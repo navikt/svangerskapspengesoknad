@@ -33,6 +33,7 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
     });
 
     const redirectToLogin = () => {
+        console.warn('Redirecting ...');
         window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
     };
 
