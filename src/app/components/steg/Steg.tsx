@@ -22,9 +22,10 @@ export interface StegProps {
     history: History;
     renderNesteknapp: boolean;
     renderSendeknapp?: boolean;
+    renderTilbakeknapp?: boolean;
     disableNesteknapp?: boolean;
-    onRequestNavigateToNextStep?: () => void;
-    onRequestNavigateToPreviousStep?: () => void;
+    onRequestNavigateToNextStep: () => void;
+    onRequestNavigateToPreviousStep: () => void;
     allSøknadSteps: SøknadStep[];
 }
 
@@ -59,7 +60,7 @@ const Steg: FunctionComponent<Props> = (props) => {
             </h1>
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
-                    {props.onRequestNavigateToPreviousStep && (
+                    {props.renderTilbakeknapp && (
                         <BackButton hidden={false} onClick={props.onRequestNavigateToPreviousStep} />
                     )}
                 </div>

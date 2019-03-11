@@ -36,6 +36,7 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
             id: step.step,
             renderNesteknapp: nextStep.step !== StepID.INGEN,
             renderSendeknapp: nextStep.step === StepID.INGEN,
+            renderTilbakeknapp: previousStep.step !== StepID.INGEN,
             onRequestNavigateToNextStep: onNavigateToStep(nextStep),
             onRequestNavigateToPreviousStep: onNavigateToStep(previousStep),
             allSøknadSteps,
@@ -43,18 +44,28 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
         };
     };
 
-    const tilretteleggingRoutes = søknadsgrunnlag.map((arbeidsgiverId: string) => {
+    const getPropsForTilrettelegging = (id: string, index: number) => ({
+        tilretteleggingId: id,
+        tilretteleggingIndex: index,
+    });
+
+    const tilretteleggingRoutes = søknadsgrunnlag.map(({ id }, index) => {
         const tilrettelegginStep = {
             step: StepID.TILRETTELEGGING,
-            subStep: arbeidsgiverId,
+            subStep: id,
         };
 
         return (
             <Route
                 path={getSøknadStepPath(tilrettelegginStep)}
                 exact={false}
-                key={`${StepID.TILRETTELEGGING}.${arbeidsgiverId}`}
-                component={() => <Tilrettelegging {...getPropsForStep(tilrettelegginStep)} />}
+                key={`${StepID.TILRETTELEGGING}.${id}`}
+                render={() => (
+                    <Tilrettelegging
+                        {...getPropsForStep(tilrettelegginStep)}
+                        {...getPropsForTilrettelegging(id, index)}
+                    />
+                )}
             />
         );
     });
@@ -65,18 +76,18 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
                 <Route
                     path={getSøknadStepPath({ step: StepID.TERMIN })}
                     key={StepID.TERMIN}
-                    component={() => <Termin {...getPropsForStep({ step: StepID.TERMIN })} />}
+                    render={() => <Termin {...getPropsForStep({ step: StepID.TERMIN })} />}
                 />
                 <Route
                     path={getSøknadStepPath({ step: StepID.ARBEIDSFORHOLD })}
                     key={StepID.ARBEIDSFORHOLD}
-                    component={() => <Arbeidsforhold {...getPropsForStep({ step: StepID.ARBEIDSFORHOLD })} />}
+                    render={() => <Arbeidsforhold {...getPropsForStep({ step: StepID.ARBEIDSFORHOLD })} />}
                 />
                 {søknadsgrunnlag.length > 0 && [tilretteleggingRoutes]}
                 <Route
                     path={getSøknadStepPath({ step: StepID.OPPSUMMERING })}
                     key={StepID.OPPSUMMERING}
-                    component={() => <Oppsummering {...getPropsForStep({ step: StepID.OPPSUMMERING })} />}
+                    render={() => <Oppsummering {...getPropsForStep({ step: StepID.OPPSUMMERING })} />}
                 />
                 <Redirect to={getSøknadStepPath({ step: StepID.TERMIN })} />
             </Switch>

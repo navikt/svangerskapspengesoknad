@@ -1,13 +1,21 @@
-import Søknad, { Søknadstype, UferdigSøknad } from 'app/types/Søknad';
-import Tilrettelegging from 'app/types/Tilrettelegging';
+import Søknad, { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
+import { UferdigTilrettelegging } from 'app/types/Tilrettelegging';
 
-const fjernForkastetTilrettelegging = (tilrettelegging: Tilrettelegging[], søknadsgrunnlag: string[]) =>
-    tilrettelegging.filter(({ arbeidsgiverId }) => søknadsgrunnlag.includes(arbeidsgiverId));
+const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
+    tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
+
+const removeId = (t: UferdigTilrettelegging) => {
+    const { id, ...other } = t;
+    return other;
+};
 
 const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
 
-    const tilrettelegging = fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag);
+    const tilrettelegging = fjernForkastetTilrettelegging(
+        utfyltSøknad.tilrettelegging,
+        utfyltSøknad.søknadsgrunnlag
+    ).map(removeId);
 
     return {
         type: Søknadstype.SVANGERSKAPSPENGER,

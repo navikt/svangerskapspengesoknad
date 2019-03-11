@@ -10,7 +10,7 @@
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold",
     "stegtittel.oppsummering": "Oppsummering",
-    "stegtittel.tilrettelegging": "Tilrettelegging, {arbeidsgiverLabel}",
+    "stegtittel.tilrettelegging": "Tilrettelegging hos {arbeidsgiverLabel}",
 
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
@@ -27,6 +27,14 @@
     "arbeidsforhold.dineArbeidsforhold.label": "Dine arbeidsforhold",
     "arbeidsforhold.dineArbeidsforhold.infotekst": "Hvis du mangler informasjon om et eller flere arbeidsforhold, eller mener at informasjonen ikke stemmer så må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
     "arbeidsforhold.grunnlag.label": "Hvilke av disse gjelder svangerskapspengesøknaden for?",
+
+    "tilrettelegging.behovForTilretteleggingFom.label": "Fra hvilken dato trenger du svangerskapspenger?",
+    "tilrettelegging.type.label": "Kan arbeidsgiver tilrettelegge for deg under svangerskapet slik at du allikevel kan jobbe?",
+    "tilrettelegging.type.ingen": "Nei",
+    "tilrettelegging.type.delvis": "Ja, men bare delvis",
+    "tilrettelegging.type.hel": "Ja, hele stillingen",
+    "tilrettelegging.stillingsprosent.label": "Oppgi stillingsprosenten du skal jobbe",
+    "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
 
     "oppsummering.sendSøknad": "Send søknad"
 }

@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { connect as formConnect } from 'formik';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import CheckboksPanelGruppe from 'app/formik/wrappers/CheckboksPanelGruppe';
 
 import { FetchStatus } from 'app/types/FetchState';
 import { State } from 'app/redux/store';
@@ -13,6 +12,9 @@ import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold
 import Steg, { StegProps } from '../../components/steg/Steg';
 import { FormikProps } from 'app/types/Formik';
 import { UferdigSøknad } from 'app/types/Søknad';
+import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
 
 interface ConnectProps {
     arbeidsforhold: Arbeidsforhold[];
@@ -24,8 +26,16 @@ type Props = OuterProps & FormikProps;
 const Arbeidsforhold: FunctionComponent<Props> = ({ formik, arbeidsforhold, intl, ...stegProps }) => {
     const harValgtMinstEttGrunnlag = formik.values.søknadsgrunnlag.length > 0;
 
+    const prepareNextStep = () => {
+        if (stegProps.onRequestNavigateToNextStep) {
+            const tilrettelegging = mapGrunnlagTilTilrettelegging(formik.values.søknadsgrunnlag);
+            formik.setFieldValue('tilrettelegging', tilrettelegging);
+            stegProps.onRequestNavigateToNextStep();
+        }
+    };
+
     return (
-        <Steg {...stegProps} renderNesteknapp={harValgtMinstEttGrunnlag}>
+        <Steg {...stegProps} renderNesteknapp={harValgtMinstEttGrunnlag} onRequestNavigateToNextStep={prepareNextStep}>
             <Block
                 header={{
                     title: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.label'),
@@ -34,12 +44,13 @@ const Arbeidsforhold: FunctionComponent<Props> = ({ formik, arbeidsforhold, intl
                 <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
             </Block>
             <Block margin="l">
-                <CheckboksPanelGruppe
+                <VelgSøknadsgrunnlag
                     name="søknadsgrunnlag"
                     label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
                     options={arbeidsforhold.map((forhold) => ({
                         value: forhold.arbeidsgiverId,
                         label: forhold.arbeidsgiverNavn,
+                        type: Arbeidsforholdstype.VIRKSOMHET,
                     }))}
                 />
             </Block>

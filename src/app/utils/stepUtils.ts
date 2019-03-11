@@ -1,26 +1,7 @@
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import getMessage from 'common/util/i18nUtils';
-import { InjectedIntl } from 'react-intl';
 import { History } from 'history';
-
-export const getStegLabels = (
-    søknadsgrunnlag: string[],
-    arbeidsforhold: Arbeidsforhold[],
-    intl: InjectedIntl
-): string[] => {
-    const tilretteleggingssteg: string[] = søknadsgrunnlag.map((arbeidsgiverId) => {
-        const matchendeArbeidsforhold = arbeidsforhold.find((forhold) => forhold.arbeidsgiverId === arbeidsgiverId);
-        return matchendeArbeidsforhold ? matchendeArbeidsforhold.arbeidsgiverNavn : '';
-    });
-
-    return [
-        getMessage(intl, `stegtittel.${StepID.TERMIN}`),
-        getMessage(intl, `stegtittel.${StepID.ARBEIDSFORHOLD}`),
-        ...tilretteleggingssteg,
-        getMessage(intl, `stegtittel.${StepID.OPPSUMMERING}`),
-    ];
-};
+import { Søknadsgrunnlag } from 'app/types/Søknad';
 
 export const getSøknadStepPath = (step: SøknadStep) => {
     let path = `/soknad/${step.step}`;
@@ -36,10 +17,10 @@ function pureSplice<T>(array: Array<T>, start: number, deleteCount: number, ...s
 
 const mainSteps = [StepID.TERMIN, StepID.ARBEIDSFORHOLD, StepID.TILRETTELEGGING, StepID.OPPSUMMERING];
 
-export const getAllSteps = (søknadsgrunnlag: string[]): SøknadStep[] => {
+export const getAllSteps = (søknadsgrunnlag: Søknadsgrunnlag[]): SøknadStep[] => {
     const tilretteleggingSteps = søknadsgrunnlag.map((tilrettelegging) => ({
         step: StepID.TILRETTELEGGING,
-        subStep: tilrettelegging,
+        subStep: tilrettelegging.id,
     }));
 
     return pureSplice(

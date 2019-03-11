@@ -3,19 +3,22 @@ import { CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
 import { FieldArrayRenderProps, FieldArray } from 'formik';
 import CheckboksPanelGruppeResponsive from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit } from 'lodash';
+import { Søknadsgrunnlag } from 'app/types/Søknad';
+
+interface Option {
+    value: string;
+    type: string;
+}
 
 interface OwnProps {
     name: string;
     label: string;
-    options: Array<{
-        value: string;
-        label: string;
-    }>;
+    options: Array<Option & { label: string }>;
 }
 
 type Props = OwnProps & Omit<CheckboksPanelGruppeProps, 'onChange' | 'checkboxes' | 'legend'>;
 
-const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
+const VelgSøknadsgrunnlag: FunctionComponent<Props> = (props) => {
     const { name, label, options, ...checkboksPanelGruppeProps } = props;
 
     return (
@@ -28,14 +31,21 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
                         legend={label}
                         checkboxes={options.map((option) => ({
                             ...option,
-                            checked: form.values[name].includes(option.value),
+                            checked: form.values[name].some((v: Søknadsgrunnlag) => v.id === option.value),
                         }))}
                         onChange={(_, value) => {
-                            const indexOfGrunnlag = form.values[name].indexOf(value);
-                            if (indexOfGrunnlag === -1) {
-                                push(value);
-                            } else {
-                                remove(indexOfGrunnlag);
+                            const indexOfGrunnlag = form.values[name].findIndex((v: Søknadsgrunnlag) => v.id === value);
+                            const matchingOption = options.find((o) => o.value === value);
+
+                            if (matchingOption) {
+                                if (indexOfGrunnlag === -1) {
+                                    push({
+                                        id: value,
+                                        type: matchingOption.type,
+                                    });
+                                } else {
+                                    remove(indexOfGrunnlag);
+                                }
                             }
                         }}
                     />
@@ -45,4 +55,4 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default CheckboksPanelGruppe;
+export default VelgSøknadsgrunnlag;

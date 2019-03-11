@@ -17,6 +17,7 @@ import FetchState from 'app/types/FetchState';
 import getMessage from 'common/util/i18nUtils';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
+import { UferdigSøknad } from 'app/types/Søknad';
 
 const cls = BEMHelper('intro');
 
@@ -24,7 +25,8 @@ interface OwnProps {
     søkerinfo: FetchState<Søkerinfo>;
 }
 
-type Props = OwnProps & InjectedIntlProps & FormikProps & HistoryProps;
+type OuterProps = OwnProps & InjectedIntlProps & HistoryProps;
+type Props = OuterProps & FormikProps;
 
 const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) => {
     const søker = getData(søkerinfo, {}).søker;
@@ -68,4 +70,4 @@ const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo,
 });
 
-export default connect(mapStateToProps)(formConnect(injectIntl(Intro)));
+export default connect(mapStateToProps)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Intro)));

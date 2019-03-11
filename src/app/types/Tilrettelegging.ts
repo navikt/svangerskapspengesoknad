@@ -4,9 +4,20 @@ export enum Tilretteleggingstype {
     'INGEN' = 'ingen',
 }
 
+export enum Arbeidsforholdstype {
+    'VIRKSOMHET' = 'virksomhet',
+    'SELVSTENDIG' = 'selvstendig',
+    'FRILANSER' = 'frilanser',
+    'PRIVAT' = 'privat',
+}
+
 interface Tilretteleggingsbase {
+    type: Tilretteleggingstype;
     behovForTilretteleggingFom: Date;
-    arbeidsgiverId: string;
+    arbeidsforhold: {
+        id?: string;
+        type: Arbeidsforholdstype;
+    };
 }
 
 export interface HelTilrettelegging extends Tilretteleggingsbase {
@@ -26,5 +37,10 @@ export interface IngenTilrettelegging extends Tilretteleggingsbase {
 }
 
 type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrettelegging;
+
+export type UferdigTilrettelegging = Tilrettelegging & {
+    id: string;
+    type?: Tilretteleggingstype;
+};
 
 export default Tilrettelegging;

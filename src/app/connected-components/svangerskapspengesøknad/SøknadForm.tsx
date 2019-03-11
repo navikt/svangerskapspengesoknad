@@ -1,5 +1,5 @@
 import React, { ReactNode, FunctionComponent } from 'react';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import { connect } from 'react-redux';
 
 import { ApiActionTypes } from 'app/redux/types/ApiAction';
@@ -16,7 +16,7 @@ interface DispatchProps {
     requestSendSøknad: (søknad: Søknad) => void;
 }
 
-const initialSøknad: UferdigSøknad = {
+const initialSøknad: any = {
     harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
     vedlegg: [],
@@ -27,6 +27,7 @@ const initialSøknad: UferdigSøknad = {
     },
     tilrettelegging: [],
     søknadsgrunnlag: [],
+    random: 0,
 };
 
 const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøknad, children }) => {
@@ -41,7 +42,7 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
                 }
             }}
             validate={validerSøknad}>
-            {({ handleSubmit }) => <Form>{children}</Form>}
+            {({ handleSubmit }) => children}
         </Formik>
     );
 };

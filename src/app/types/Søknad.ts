@@ -1,7 +1,7 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn from './Barn';
 import Attachment from './Attachment';
-import Tilrettelegging from './Tilrettelegging';
+import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 
 export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger',
@@ -29,8 +29,13 @@ export interface UferdigSøknad {
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdPartial;
     barn: Barn;
     vedlegg: Attachment[];
-    tilrettelegging: Tilrettelegging[];
-    søknadsgrunnlag: string[];
+    tilrettelegging: UferdigTilrettelegging[];
+    søknadsgrunnlag: Søknadsgrunnlag[];
+}
+
+export interface Søknadsgrunnlag {
+    id: string;
+    type: Arbeidsforholdstype;
 }
 
 export interface Søknadfeil {

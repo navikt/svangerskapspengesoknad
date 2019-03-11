@@ -4,8 +4,11 @@ import { Field, FieldProps } from 'formik';
 import RadioPanelGruppeResponsive, {
     RadioPanelGruppeResponsiveProps,
 } from 'common/components/skjema/elements/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
+import { Omit } from 'lodash';
 
-const RadioPanelGruppe: FunctionComponent<RadioPanelGruppeResponsiveProps> = (radioPanelGruppeProps) => (
+type Props = Omit<RadioPanelGruppeResponsiveProps, 'onChange'>;
+
+const RadioPanelGruppe: FunctionComponent<Props> = (radioPanelGruppeProps) => (
     <Field
         name={radioPanelGruppeProps.name}
         type="string"

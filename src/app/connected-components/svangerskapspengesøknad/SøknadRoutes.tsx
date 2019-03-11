@@ -16,12 +16,12 @@ const SøknadRoutes: FunctionComponent<Props> = ({ harSendtSøknad }) => {
             <Switch>
                 {harSendtSøknad
                     ? [
-                          <Route path="/sendt" component={SøknadSendt} key="sendt" />,
+                          <Route path="/sendt" render={(routeProps) => <SøknadSendt {...routeProps} />} key="sendt" />,
                           <Redirect to="/sendt" key="redirect" />,
                       ]
                     : [
-                          <Route path="/velkommen" component={Intro} key="intro" />,
-                          <Route path="/soknad" component={StegRoutes} key="soknad" />,
+                          <Route path="/velkommen" render={(routeProps) => <Intro {...routeProps} />} key="intro" />,
+                          <Route path="/soknad" render={(routeProps) => <StegRoutes {...routeProps} />} key="soknad" />,
                           <Redirect to="/velkommen" key="redirect" />,
                       ]}
             </Switch>
