@@ -1,20 +1,24 @@
 import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
-import CommonDatoInput from 'common/components/skjema/elements/dato-input/DatoInput';
+import CommonDatoInput, { DatoInputProps } from 'common/components/skjema/elements/dato-input/DatoInput';
 import 'nav-datovelger/dist/datovelger/styles/datovelger.css';
 import get from 'lodash/get';
+import { Omit } from 'lodash';
 
-interface Props {
+interface OwnProps {
     name: string;
     label: string;
 }
 
-const DatoInput: FunctionComponent<Props> = ({ name, label }) => (
+type Props = OwnProps & Omit<DatoInputProps, 'id' | 'onChange'>;
+
+const DatoInput: FunctionComponent<Props> = ({ name, label, ...datoInputProps }) => (
     <Field
         name={name}
         type="date"
         render={({ form }: FieldProps) => (
             <CommonDatoInput
+                {...datoInputProps}
                 id={name}
                 name={name}
                 label={label}

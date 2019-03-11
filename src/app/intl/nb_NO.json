@@ -34,6 +34,7 @@
     "tilrettelegging.type.delvis": "Ja, men bare delvis",
     "tilrettelegging.type.hel": "Ja, hele stillingen",
     "tilrettelegging.stillingsprosent.label": "Oppgi stillingsprosenten du skal jobbe",
+    "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
 
     "oppsummering.sendSøknad": "Send søknad"
 }

@@ -11,6 +11,7 @@ import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
 import Block from 'common/components/block/Block';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
 import InputField from 'app/formik/wrappers/InputField';
+import { containsErrors } from 'app/utils/validering/validerSøknad';
 
 interface OwnProps {
     tilretteleggingId: string;
@@ -26,8 +27,24 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const visTypevelger = tilrettelegging.behovForTilretteleggingFom !== undefined;
     const visStillingsprosent = tilrettelegging.type === Tilretteleggingstype.DELVIS;
 
+    let visFørsteDag = false;
+    if (
+        (tilrettelegging.type === Tilretteleggingstype.DELVIS && tilrettelegging.stillingsprosent !== undefined) ||
+        (tilrettelegging.type === Tilretteleggingstype.DELVIS || tilrettelegging.type === Tilretteleggingstype.HEL)
+    ) {
+        visFørsteDag = true;
+    }
+
+    const visNesteknapp =
+        tilrettelegging.type === Tilretteleggingstype.INGEN || tilrettelegging.tilrettelagtArbeidFom !== undefined;
+
+    const inneholderFeil = containsErrors(formik.errors.tilrettelegging);
+
     return (
-        <Steg {...stegProps}>
+        <Steg
+            {...stegProps}
+            disableNesteknapp={inneholderFeil}
+            renderNesteknapp={props.renderNesteknapp && visNesteknapp}>
             <Block margin="xs">
                 <DatoInput
                     name={`tilrettelegging.${index}.behovForTilretteleggingFom`}
@@ -55,11 +72,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     ]}
                 />
             </Block>
-            <Block visible={visStillingsprosent}>
+            <Block margin="xs" visible={visStillingsprosent}>
                 {tilrettelegging.type === Tilretteleggingstype.DELVIS && (
                     <InputField
-                        value={tilrettelegging.stillingsprosent}
                         type="number"
+                        bredde="M"
                         max={100}
                         min={0}
                         step={10}
@@ -68,6 +85,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
                     />
                 )}
+            </Block>
+            <Block visible={visFørsteDag}>
+                <DatoInput
+                    name={`tilrettelegging.${index}.tilrettelagtArbeidFom`}
+                    label={getMessage(intl, 'tilrettelegging.tilrettelagtArbeidFom.label')}
+                    datoAvgrensinger={{
+                        minDato: tilrettelegging.behovForTilretteleggingFom,
+                        maksDato: formik.values.barn.fødselsdato,
+                    }}
+                />
             </Block>
         </Steg>
     );

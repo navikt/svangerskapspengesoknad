@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
 import { NavFrontendInputProps, Input } from 'nav-frontend-skjema';
+import { get } from 'lodash';
 
 interface Props {
     name: string;
@@ -12,12 +13,19 @@ const InputField: FunctionComponent<Props & NavFrontendInputProps> = ({ name, ..
             name={name}
             type={inputProps.type}
             render={({ field, form }: FieldProps) => {
+                const feilmelding = get(form.errors, name);
+                const feil = feilmelding
+                    ? {
+                          feilmelding,
+                      }
+                    : undefined;
+
                 return (
                     <Input
+                        {...field}
                         {...inputProps}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            form.setFieldValue(name, event.target.value);
-                        }}
+                        value={field.value === undefined ? '' : field.value}
+                        feil={feil}
                     />
                 );
             }}
