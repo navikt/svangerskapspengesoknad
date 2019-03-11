@@ -1,5 +1,6 @@
 import Søknad, { Søknadstype } from 'app/types/Søknad';
 import { Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { Søkerrolle } from 'app/types/Søker';
 
 const mockedSøknad: Søknad = {
     type: Søknadstype.SVANGERSKAPSPENGER,
@@ -28,6 +29,15 @@ const mockedSøknad: Søknad = {
             },
         },
     ],
+    søker: {
+        rolle: Søkerrolle.MOR,
+        harJobbetSomFrilansSiste10Mnd: false,
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: false,
+        selvstendigNæringsdrivendeInformasjon: [],
+        erAleneOmOmsorg: false,
+        harHattAnnenInntektSiste10Mnd: false,
+        andreInntekterSiste10Mnd: [],
+    },
 };
 
 export default mockedSøknad;
