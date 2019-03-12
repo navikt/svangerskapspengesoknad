@@ -53,5 +53,5 @@ app.use('', router);
 
 const port = process.env.PORT || 8888;
 app.listen(port, () => {
-    console.log(`Test-API kjører på port ${port}`);
+    console.log(`Mock-API kjører på port ${port}`);
 });

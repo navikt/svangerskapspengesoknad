@@ -8,7 +8,7 @@
     "steg.nesteknapp": "Neste",
 
     "stegtittel.termin": "Om barnet",
-    "stegtittel.arbeidsforhold": "Arbeidsforhold",
+    "stegtittel.arbeidsforhold": "Arbeidsforhold og inntekt",
     "stegtittel.oppsummering": "Oppsummering",
     "stegtittel.tilrettelegging": "Tilrettelegging",
 
@@ -27,6 +27,9 @@
     "arbeidsforhold.dineArbeidsforhold.label": "Dine arbeidsforhold",
     "arbeidsforhold.dineArbeidsforhold.infotekst": "Hvis du mangler informasjon om et eller flere arbeidsforhold, eller mener at informasjonen ikke stemmer så må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
     "arbeidsforhold.grunnlag.label": "Hvilke av disse gjelder svangerskapspengesøknaden for?",
+    "arbeidsforhold.utbetalingerFraNAV.label": "Utbetalinger fra NAV",
+    "arbeidsforhold.utbetalingerFraNAV.text": "Hvis du får penger fra NAV, trenger du ikke opplyse om det i søknaden din.",
+    "arbeidsforhold.veileder.inntektsmelding": "Husk å be arbeidsgiveren din sende inntektsmelding til NAV. Vi trenger den for å kunne behandle søknaden din. Arbeidsgiver kan sende den tidligst 08.02.2019. Vi vil i noen tilfeller kontakte arbeidsgiver i forbindelse med behandling av søknaden.",
 
     "tilrettelegging.behovForTilretteleggingFom.label": "Fra hvilken dato trenger du svangerskapspenger?",
     "tilrettelegging.type.label": "Kan arbeidsgiver tilrettelegge for deg under svangerskapet slik at du allikevel kan jobbe?",
