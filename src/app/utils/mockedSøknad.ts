@@ -23,6 +23,7 @@ const mockedSøknad: Søknad = {
             type: Tilretteleggingstype.HEL,
             behovForTilretteleggingFom: new Date('2019-03-01'),
             tilrettelagtArbeidFom: new Date('2019-10-01'),
+            vedlegg: [],
             arbeidsforhold: {
                 type: Arbeidsforholdstype.VIRKSOMHET,
                 id: '973135678',

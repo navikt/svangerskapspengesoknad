@@ -1,28 +1,41 @@
 import React, { FunctionComponent } from 'react';
 import { connect as formConnect } from 'formik';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl, FormattedHTMLMessage } from 'react-intl';
 
 import Steg, { StegProps } from 'app/components/steg/Steg';
 import { FormikProps } from 'app/types/Formik';
 import { UferdigSøknad } from 'app/types/Søknad';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import getMessage from 'common/util/i18nUtils';
-import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
+import { Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Block from 'common/components/block/Block';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
 import InputField from 'app/formik/wrappers/InputField';
 import { containsErrors } from 'app/utils/validering/validerSøknad';
+import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
+import { State } from 'app/redux/store';
+import { FetchStatus } from 'app/types/FetchState';
+import { connect } from 'react-redux';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import { finnArbeidsgiversNavn } from 'app/utils/stepUtils';
+import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
+import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
+import { Skjemanummer } from 'app/types/Skjemanummer';
 
 interface OwnProps {
     tilretteleggingId: string;
     tilretteleggingIndex: number;
 }
 
-type OuterProps = OwnProps & StegProps & InjectedIntlProps;
+interface StateProps {
+    arbeidsforhold: Arbeidsforhold[];
+}
+
+type OuterProps = OwnProps & StateProps & StegProps & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
 
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
-    const { formik, tilretteleggingId: id, tilretteleggingIndex: index, intl, ...stegProps } = props;
+    const { formik, tilretteleggingId: id, tilretteleggingIndex: index, arbeidsforhold, intl, ...stegProps } = props;
     const tilrettelegging = formik.values.tilrettelegging[index];
     const visTypevelger = tilrettelegging.behovForTilretteleggingFom !== undefined;
     const visStillingsprosent = tilrettelegging.type === Tilretteleggingstype.DELVIS;
@@ -38,17 +51,33 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const visNesteknapp =
         tilrettelegging.type === Tilretteleggingstype.INGEN || tilrettelegging.tilrettelagtArbeidFom !== undefined;
 
+    const visVedlegg =
+        tilrettelegging.type === Tilretteleggingstype.INGEN || tilrettelegging.tilrettelagtArbeidFom !== undefined;
+
     const inneholderFeil = containsErrors(formik.errors.tilrettelegging);
+    const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
 
     return (
         <Steg
             {...stegProps}
             disableNesteknapp={inneholderFeil}
             renderNesteknapp={props.renderNesteknapp && visNesteknapp}>
+            <Block visible={tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET}>
+                <Veilederinfo stil="kompakt" type="info">
+                    <FormattedHTMLMessage
+                        id="tilrettelegging.veileder.intro"
+                        values={{
+                            arbeidsgiversNavn,
+                        }}
+                    />
+                </Veilederinfo>
+            </Block>
             <Block margin="xs">
                 <DatoInput
                     name={`tilrettelegging.${index}.behovForTilretteleggingFom`}
-                    label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label')}
+                    label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label', {
+                        arbeidsgiversNavn,
+                    })}
                 />
             </Block>
             <Block visible={visTypevelger}>
@@ -95,8 +124,26 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     }}
                 />
             </Block>
+            <Block visible={visVedlegg}>
+                <AttachmentOverview
+                    attachmentType={AttachmentType.TILRETTELEGGING}
+                    skjemanummer={Skjemanummer.ANNET}
+                    attachments={formik.values.vedlegg.filter((v) => tilrettelegging.vedlegg.some((tv) => tv === v.id))}
+                    onFilesSelect={() => {
+                        console.log('Beep, boop!');
+                    }}
+                    onFileDelete={() => {
+                        console.log('Boooop');
+                    }}
+                />
+            </Block>
         </Steg>
     );
 };
 
-export default injectIntl(formConnect<OuterProps, UferdigSøknad>(Tilrettelegging));
+const mapStateToProps = (state: State) => {
+    const søkerinfo = state.api.søkerinfo;
+    return { arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined };
+};
+
+export default connect(mapStateToProps)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Tilrettelegging)));

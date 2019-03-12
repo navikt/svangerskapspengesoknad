@@ -13,6 +13,7 @@ export enum Arbeidsforholdstype {
 
 interface Tilretteleggingsbase {
     type: Tilretteleggingstype;
+    vedlegg: string[];
     behovForTilretteleggingFom: Date;
     arbeidsforhold: {
         id?: string;

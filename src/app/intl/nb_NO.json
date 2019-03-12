@@ -29,15 +29,19 @@
     "arbeidsforhold.grunnlag.label": "Hvilke av disse gjelder svangerskapspengesøknaden for?",
     "arbeidsforhold.utbetalingerFraNAV.label": "Utbetalinger fra NAV",
     "arbeidsforhold.utbetalingerFraNAV.text": "Hvis du får penger fra NAV, trenger du ikke opplyse om det i søknaden din.",
-    "arbeidsforhold.veileder.inntektsmelding": "Husk å be arbeidsgiveren din sende inntektsmelding til NAV. Vi trenger den for å kunne behandle søknaden din. Arbeidsgiver kan sende den tidligst 08.02.2019. Vi vil i noen tilfeller kontakte arbeidsgiver i forbindelse med behandling av søknaden.",
+    "arbeidsforhold.veileder.inntektsmelding": "Husk å be arbeidsgiveren din sende inntektsmelding til NAV. Vi trenger den for å kunne behandle søknaden din. Arbeidsgiver kan sende den tidligst {datoTidligst}. Vi vil i noen tilfeller kontakte arbeidsgiver i forbindelse med behandling av søknaden.",
 
-    "tilrettelegging.behovForTilretteleggingFom.label": "Fra hvilken dato trenger du svangerskapspenger?",
-    "tilrettelegging.type.label": "Kan arbeidsgiver tilrettelegge for deg under svangerskapet slik at du allikevel kan jobbe?",
+    "tilrettelegging.veileder.intro": "Her kan du fortelle oss om hvordan du kan jobbe hos <b>{arbeidsgiversNavn}</b> mens du er gravid.",
+    "tilrettelegging.behovForTilretteleggingFom.label": "Når må du slutte å jobbe som vanlig hos {arbeidsgiversNavn}?",
+    "tilrettelegging.type.label": "Kan du fortsette å jobbe noe etter dette?",
     "tilrettelegging.type.ingen": "Nei",
     "tilrettelegging.type.delvis": "Ja, men bare delvis",
     "tilrettelegging.type.hel": "Ja, hele stillingen",
     "tilrettelegging.stillingsprosent.label": "Oppgi stillingsprosenten du skal jobbe",
     "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
+
+    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
+    "vedlegg.lastoppknapp.tilrettelegging": "Last opp dokumentasjon her",
 
     "oppsummering.sendSøknad": "Send søknad"
 }
