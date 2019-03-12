@@ -1,7 +1,7 @@
 interface Barn {
     erBarnetFødt: boolean;
-    termindatoer: Date[];
-    fødselsdato?: Date;
+    termindato: Date;
+    fødselsdatoer?: Date[];
 }
 
 export interface UferdigBarn {

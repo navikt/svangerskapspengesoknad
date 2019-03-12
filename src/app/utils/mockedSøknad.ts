@@ -8,7 +8,7 @@ const mockedSøknad: Søknad = {
     erEndringssøknad: false,
     barn: {
         erBarnetFødt: false,
-        termindatoer: [new Date('2019-09-01')],
+        termindato: new Date('2019-09-01'),
     },
     informasjonOmUtenlandsopphold: {
         jobbetINorgeSiste12Mnd: true,

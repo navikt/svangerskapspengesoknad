@@ -13,9 +13,17 @@ const areDefined = (...items: any[]) => items.some((item) => item !== undefined)
 
 const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
-    const { termindato: barnetsTermindato, ...utfyltBarn } = utfyltSøknad.barn;
+    const { fødselsdato: barnetsFødselsdato, ...utfyltBarn } = utfyltSøknad.barn;
 
-    if (!areDefined(barnetsTermindato, utfyltBarn.erBarnetFødt, utfyltBarn.fødselsdato)) {
+    if (!areDefined(utfyltBarn.erBarnetFødt, utfyltBarn.termindato)) {
+        return undefined;
+    }
+
+    if (utfyltBarn.erBarnetFødt && !utfyltSøknad.barn.fødselsdato) {
+        return undefined;
+    }
+
+    if (!utfyltBarn.termindato) {
         return undefined;
     }
 
@@ -38,7 +46,8 @@ const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefine
         barn: {
             ...utfyltBarn,
             erBarnetFødt: utfyltBarn.erBarnetFødt === undefined ? false : utfyltBarn.erBarnetFødt,
-            termindatoer: [barnetsTermindato as Date],
+            termindato: utfyltBarn.termindato,
+            fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato as Date] : undefined,
         },
         vedlegg: utfyltSøknad.vedlegg,
         søker: utfyltSøknad.søker,
