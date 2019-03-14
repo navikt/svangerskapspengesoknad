@@ -11,8 +11,10 @@ import Feil from 'app/components/Feil';
 import Kvittering from 'app/types/Kvittering';
 import SøknadForm from './SøknadForm';
 import SøknadRoutes from './SøknadRoutes';
-import Spinner from 'nav-frontend-spinner';
 import Environment from 'app/Environment';
+import Loading from 'app/components/loading/Loading';
+import getMessage from 'common/util/i18nUtils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;
@@ -20,8 +22,8 @@ interface Props {
     requestSøkerinfo: () => void;
 }
 
-const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
-    const { søkerinfo, kvittering, requestSøkerinfo } = props;
+const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProps> = (props) => {
+    const { søkerinfo, kvittering, requestSøkerinfo, intl } = props;
 
     useEffect(() => {
         if (søkerinfo.status === FetchStatus.UNFETCHED) {
@@ -44,9 +46,9 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
         getErrorCode(søkerinfo) === 401;
 
     if (isLoading) {
-        return <Spinner type="XXL" />;
+        return <Loading />;
     } else if (søker && søker.kjønn === Kjønn.MANN) {
-        return <Feil melding="Menn kan ikke søke om svangerskapspenger" />;
+        return <Feil melding={getMessage(intl, 'feilside.mann')} />;
     } else {
         return (
             <SøknadForm>
@@ -70,4 +72,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Svangerskapspengesøknad);
+)(injectIntl(Svangerskapspengesøknad));

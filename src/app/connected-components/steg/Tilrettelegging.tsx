@@ -132,7 +132,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     />
                 )}
             </Block>
-            <Block visible={visFørsteDag}>
+            <Block margin="s" visible={visFørsteDag}>
                 <DatoInput
                     name={`tilrettelegging.${index}.tilrettelagtArbeidFom`}
                     label={getMessage(intl, 'tilrettelegging.tilrettelagtArbeidFom.label')}
@@ -142,7 +142,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     }}
                 />
             </Block>
-            <Block visible={visVedlegg}>
+            <Block
+                visible={visVedlegg}
+                header={{
+                    title: getMessage(intl, 'tilrettelegging.vedlegg.label'),
+                }}>
+                <Block margin="xs">
+                    <Veilederinfo stil="kompakt" type="info">
+                        <FormattedHTMLMessage id="tilrettelegging.veileder.vedlegg" />
+                    </Veilederinfo>
+                </Block>
                 <FieldArray
                     name={`tilrettelegging.${index}.vedlegg`}
                     render={({ form, push, remove }) => (

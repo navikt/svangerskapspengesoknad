@@ -51,8 +51,3 @@ const port = process.env.PORT || 8888;
 app.listen(port, () => {
     console.log(`Mock-api listening on port: ${port}`);
 });
-
-const port = process.env.PORT || 8888;
-app.listen(port, () => {
-    console.log(`Mock-API kjører på port ${port}`);
-});

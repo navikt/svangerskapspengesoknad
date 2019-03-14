@@ -54,7 +54,5 @@ module.exports = {
     updateSoknad,
     getSoknad,
     getSokerInfo,
-    getStønadskontoer,
     getSoknadSendt,
-    getSaker,
 };
