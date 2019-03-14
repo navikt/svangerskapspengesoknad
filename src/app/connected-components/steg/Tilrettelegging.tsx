@@ -183,7 +183,7 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
         uploadAttachment: (attachment: Attachment) =>
             dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
         deleteAttachment: (attachment: Attachment) =>
-            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_SUCCESS, payload: { attachment } }),
+            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } }),
     };
 };
 
