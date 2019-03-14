@@ -15,6 +15,12 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
                 ...forhold,
                 arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn),
             })),
+            søker: {
+                ...response.data.søker,
+                fornavn: normalizeName(response.data.søker.fornavn),
+                mellomnavn: response.data.søker.mellomnavn ? normalizeName(response.data.søker.mellomnavn) : undefined,
+                etternavn: normalizeName(response.data.søker.etternavn),
+            },
         };
 
         yield put({ type: ApiActionTypes.GET_SØKERINFO_SUCCESS, payload: { søkerinfo } });

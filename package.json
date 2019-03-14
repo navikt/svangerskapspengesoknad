@@ -11,6 +11,7 @@
         "mock-api": "node mock-api-server.js",
         "start-no-decorator": "node ./src/build/scripts/start-dev-nodecorator.js",
         "start-express": "node ./server.js",
+        "upgrade": "npm-check --update",
         "test": "jest"
     },
     "author": "",

@@ -42,7 +42,7 @@ export interface NoeTilrettelegging extends Tilretteleggingsbase {
     type: Tilretteleggingstype.NOE;
 }
 
-type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrettelegging;
+type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrettelegging | NoeTilrettelegging;
 
 export type UferdigTilrettelegging = Tilrettelegging & {
     id: string;

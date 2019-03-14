@@ -36,11 +36,15 @@
 
     "tilrettelegging.veileder.intro": "Her kan du fortelle oss om hvordan du kan jobbe hos <b>{arbeidsgiversNavn}</b> mens du er gravid.",
     "tilrettelegging.behovForTilretteleggingFom.label": "Når må du slutte å jobbe som vanlig hos {arbeidsgiversNavn}?",
-    "tilrettelegging.type.label": "Kan du fortsette å jobbe noe etter dette?",
+    "tilrettelegging.slutteArbeidFom.label": "Når er din siste ordinære arbeidsdag?",
+    "tilrettelegging.noeEllerIngen.label": "Kan du fortsette å jobbe noe etter dette?",
+    "tilrettelegging.helEllerDelvis.label": "Hvor mye kan du jobbe når de tilrettelegger for deg?",
+    "tilrettelegging.type.delvis": "Redusert stilling",
+    "tilrettelegging.type.hel": "Min vanlige stilling",
     "tilrettelegging.type.ingen": "Nei",
-    "tilrettelegging.type.delvis": "Ja, men bare delvis",
-    "tilrettelegging.type.hel": "Ja, hele stillingen",
+    "tilrettelegging.type.noe": "Ja",
     "tilrettelegging.stillingsprosent.label": "Oppgi stillingsprosenten du skal jobbe",
+    "tilrettelegging.stillingsprosent.placeholder": "Prosent",
     "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
     "tilrettelegging.vedlegg.label": "Forklaring på hvor mye du kan jobbe",
     "tilrettelegging.veileder.vedlegg": "Vi trenger det ferdig utfylte <a target=\"_blank\" rel=\"noreferrer\" href=\"https://www.arbeidstilsynet.no/tema/graviditet-og-arbeidsmiljo/skjema-for-tilrettelegging-for-gravide/\">skjemaet for tilrettelegging og omplassering ved graviditet</a> fra deg for å kunne vurdere din søknad. Dette forklarer oss om du kan jobbe videre eller ikke i perioden du er gravid. Det må være utfylt av lege eller jordmor, og din arbeidsgiver.",
@@ -50,5 +54,6 @@
     "vedlegg.liste.tittel": "Valgte vedlegg",
     "vedlegg.arialabel.slett": "Slett vedlegg",
 
-    "oppsummering.sendSøknad": "Send søknad"
+    "oppsummering.sendSøknad": "Send søknad",
+    "søknadSendt.tittel": "Takk, {name}!"
 }

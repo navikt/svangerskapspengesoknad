@@ -5,7 +5,7 @@ const preposisjonerNor = ['OM', 'OVENFOR', 'ETTER', 'MOT', 'BLANT', 'RUNDT', 'SO
 const preposisjonerEng = ['ABOUT', 'ABOVE', 'AFTER', 'AGAINST', 'AMONG', 'AROUND', 'AS', 'AT', 'BEFORE', 'BEHIND', 'BELOW', 'BENEATH', 'BETWEEN', 'BEYOND', 'BUT', 'BY', 'DOWN', 'EXCEPT', 'FOR', 'FROM', 'IN', 'INSIDE', 'INTO', 'NEXT', 'OF', 'ON', 'OPPOSITE', 'OUT', 'OUTSIDE', 'OVER', 'PER', 'ROUND', 'SINCE', 'THAN', 'THROUGH', 'TILL', 'TO', 'TOWARD', 'UNDER', 'UNTIL', 'UP', 'VIA', 'WITH', 'WITHIN', 'WITHOUT', 'THIS'];
 
 const preposisjoner = [...preposisjonerNor, ...preposisjonerEng];
-const forkortelser = ['AVD', 'AS', 'ASA'];
+const forkortelser = ['AS', 'ASA'];
 
 const normalizeWord = (isFirstWord: boolean) => (word: string): string => {
     if (forkortelser.includes(word)) {

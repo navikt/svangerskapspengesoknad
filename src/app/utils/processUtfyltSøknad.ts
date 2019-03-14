@@ -1,5 +1,5 @@
 import Søknad, { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
-import { UferdigTilrettelegging } from 'app/types/Tilrettelegging';
+import Tilrettelegging, { UferdigTilrettelegging, Tilretteleggingstype } from 'app/types/Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
@@ -8,6 +8,12 @@ const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[]
 const removeId = (t: UferdigTilrettelegging) => {
     const { id, ...other } = t;
     return other;
+};
+
+const addSlutteArbeidFom = (tilrettelegging: Tilrettelegging): Tilrettelegging => {
+    return tilrettelegging.type === Tilretteleggingstype.INGEN
+        ? { ...tilrettelegging, slutteArbeidFom: tilrettelegging.behovForTilretteleggingFom }
+        : tilrettelegging;
 };
 
 const areDefined = (...items: any[]) => items.some((item) => item !== undefined);
@@ -28,10 +34,9 @@ const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Attachment
         return undefined;
     }
 
-    const tilrettelegging = fjernForkastetTilrettelegging(
-        utfyltSøknad.tilrettelegging,
-        utfyltSøknad.søknadsgrunnlag
-    ).map(removeId);
+    const tilrettelegging = fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag)
+        .map(removeId)
+        .map(addSlutteArbeidFom);
 
     return {
         type: Søknadstype.SVANGERSKAPSPENGER,

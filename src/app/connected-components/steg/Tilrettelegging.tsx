@@ -54,32 +54,29 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     } = props;
 
     const tilrettelegging = formik.values.tilrettelegging[index];
-    const visTypevelger = tilrettelegging.behovForTilretteleggingFom !== undefined;
-    const visStillingsprosent = tilrettelegging.type === Tilretteleggingstype.DELVIS;
-
-    let visFørsteDag = false;
-    if (
-        (tilrettelegging.type === Tilretteleggingstype.DELVIS && tilrettelegging.stillingsprosent !== undefined) ||
-        (tilrettelegging.type === Tilretteleggingstype.DELVIS || tilrettelegging.type === Tilretteleggingstype.HEL)
-    ) {
-        visFørsteDag = true;
-    }
-
-    const visNesteknapp =
-        tilrettelegging.type === Tilretteleggingstype.INGEN || tilrettelegging.tilrettelagtArbeidFom !== undefined;
-
-    const visVedlegg =
-        tilrettelegging.type === Tilretteleggingstype.INGEN || tilrettelegging.tilrettelagtArbeidFom !== undefined;
-
     const inneholderFeil = containsErrors(formik.errors.tilrettelegging);
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v) => tilrettelegging.vedlegg.includes(v.id));
+
+    const visKomponent = {
+        typevelger: !!tilrettelegging.behovForTilretteleggingFom,
+        helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
+        stillingsprosent: tilrettelegging.type === Tilretteleggingstype.DELVIS,
+        fraHvilkenDato:
+            (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.stillingsprosent) ||
+            tilrettelegging.type === Tilretteleggingstype.HEL,
+        vedlegg:
+            (tilrettelegging.type === Tilretteleggingstype.HEL && !!tilrettelegging.tilrettelagtArbeidFom) ||
+            (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
+            tilrettelegging.type === Tilretteleggingstype.INGEN,
+        nesteknapp: attachments.length > 0,
+    };
 
     return (
         <Steg
             {...stegProps}
             disableNesteknapp={inneholderFeil}
-            renderNesteknapp={props.renderNesteknapp && visNesteknapp}>
+            renderNesteknapp={props.renderNesteknapp && visKomponent.nesteknapp}>
             <Block visible={tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET}>
                 <Veilederinfo stil="kompakt" type="info">
                     <FormattedHTMLMessage
@@ -98,41 +95,53 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     })}
                 />
             </Block>
-            <Block visible={visTypevelger}>
+            <Block visible={visKomponent.typevelger}>
                 <RadioPanelGruppe
                     name={`tilrettelegging.${index}.type`}
-                    legend={getMessage(intl, 'tilrettelegging.type.label')}
+                    legend={getMessage(intl, 'tilrettelegging.noeEllerIngen.label')}
                     radios={[
+                        {
+                            value: Tilretteleggingstype.NOE,
+                            label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.NOE}`),
+                        },
                         {
                             value: Tilretteleggingstype.INGEN,
                             label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.INGEN}`),
+                        },
+                    ]}
+                />
+            </Block>
+            <Block visible={visKomponent.helEllerDelvis}>
+                <RadioPanelGruppe
+                    name={`tilrettelegging.${index}.type`}
+                    legend={getMessage(intl, 'tilrettelegging.helEllerDelvis.label')}
+                    radios={[
+                        {
+                            value: Tilretteleggingstype.HEL,
+                            label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.HEL}`),
                         },
                         {
                             value: Tilretteleggingstype.DELVIS,
                             label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.DELVIS}`),
                         },
-                        {
-                            value: Tilretteleggingstype.HEL,
-                            label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.HEL}`),
-                        },
                     ]}
                 />
             </Block>
-            <Block margin="xs" visible={visStillingsprosent}>
+            <Block margin="xs" visible={visKomponent.stillingsprosent}>
                 {tilrettelegging.type === Tilretteleggingstype.DELVIS && (
                     <InputField
                         type="number"
-                        bredde="M"
+                        bredde="XS"
                         max={100}
                         min={0}
                         step={10}
-                        placeholder="Stillingsprosent"
+                        placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
                         name={`tilrettelegging.${index}.stillingsprosent`}
                         label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
                     />
                 )}
             </Block>
-            <Block margin="s" visible={visFørsteDag}>
+            <Block margin="s" visible={visKomponent.fraHvilkenDato}>
                 <DatoInput
                     name={`tilrettelegging.${index}.tilrettelagtArbeidFom`}
                     label={getMessage(intl, 'tilrettelegging.tilrettelagtArbeidFom.label')}
@@ -143,7 +152,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 />
             </Block>
             <Block
-                visible={visVedlegg}
+                visible={visKomponent.vedlegg}
                 header={{
                     title: getMessage(intl, 'tilrettelegging.vedlegg.label'),
                 }}>

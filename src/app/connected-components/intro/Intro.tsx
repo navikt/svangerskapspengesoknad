@@ -40,7 +40,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
             <VeilederMedSnakkeboble
                 dialog={{
                     title: getMessage(intl, 'intro.bobletittel', {
-                        name: søker.fornavn.slice(0, 1).concat(søker.fornavn.slice(1).toLowerCase()),
+                        name: søker.fornavn,
                     }),
                     text: getMessage(intl, 'intro.bobletekst'),
                 }}
