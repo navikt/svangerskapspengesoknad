@@ -1,5 +1,6 @@
 import Søknad, { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
 import { UferdigTilrettelegging } from 'app/types/Tilrettelegging';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
     tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
@@ -11,7 +12,7 @@ const removeId = (t: UferdigTilrettelegging) => {
 
 const areDefined = (...items: any[]) => items.some((item) => item !== undefined);
 
-const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefined => {
+const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Attachment[]): Søknad | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
     const { fødselsdato: barnetsFødselsdato, ...utfyltBarn } = utfyltSøknad.barn;
 
@@ -49,7 +50,7 @@ const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad): Søknad | undefine
             termindato: utfyltBarn.termindato,
             fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato as Date] : undefined,
         },
-        vedlegg: utfyltSøknad.vedlegg,
+        vedlegg,
         søker: utfyltSøknad.søker,
         tilrettelegging,
     };

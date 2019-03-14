@@ -7,6 +7,7 @@ export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag
 
         return {
             id,
+            vedlegg: [],
             arbeidsforhold: {
                 ...arbeidsgiversId,
                 type,

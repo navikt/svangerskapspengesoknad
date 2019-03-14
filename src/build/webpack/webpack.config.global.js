@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
@@ -45,6 +46,10 @@ const webpackConfig = {
                 test: /\.(less|css)$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
             },
+            {
+                test: /\.svg$/,
+                use: 'svg-sprite-loader',
+            },
         ],
     },
     plugins: [
@@ -54,9 +59,9 @@ const webpackConfig = {
             disable: false,
             allChunks: true,
         }),
-        //new SpriteLoaderPlugin({
-        //    plainSprite: true
-        //}),
+        new SpriteLoaderPlugin({
+            plainSprite: true,
+        }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb|nn|en/),
     ],
 };

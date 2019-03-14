@@ -13,20 +13,37 @@ interface Unfetched {
     status: FetchStatus.UNFETCHED;
 }
 
-interface InProgress {
+interface GetInProgress {
     status: FetchStatus.IN_PROGRESS;
 }
 
-interface Success<T> {
+interface GetSuccess<T> {
     status: FetchStatus.SUCCESS;
     data: T;
 }
 
-interface Failure {
+interface GetFailure {
     status: FetchStatus.FAILURE;
     error: FetchError;
 }
 
-type FetchState<T> = Unfetched | InProgress | Success<T> | Failure;
+interface PostInProgress<T> {
+    status: FetchStatus.IN_PROGRESS;
+    data: T;
+}
+
+interface PostSuccess<T> {
+    status: FetchStatus.SUCCESS;
+    data: T;
+}
+
+interface PostFailure<T> {
+    status: FetchStatus.FAILURE;
+    error: FetchError;
+    data: T;
+}
+
+type FetchState<T> = Unfetched | GetInProgress | GetSuccess<T> | GetFailure;
+export type PostState<T> = PostInProgress<T> | PostSuccess<T> | PostFailure<T>;
 
 export default FetchState;

@@ -4,6 +4,7 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import StegIndikator from 'nav-frontend-stegindikator';
+import classnames from 'classnames';
 
 import { FetchStatus } from 'app/types/FetchState';
 import { parseStepFromHistory, finnArbeidsgiversNavn } from 'app/utils/stepUtils';
@@ -13,8 +14,8 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
 import getMessage from 'common/util/i18nUtils';
-import './steg.less';
 import { Undertittel } from 'nav-frontend-typografi';
+import './steg.less';
 
 const cls = BEMHelper('steg');
 
@@ -28,6 +29,7 @@ export interface StegProps {
     onRequestNavigateToNextStep: () => void;
     onRequestNavigateToPreviousStep: () => void;
     allSøknadSteps: SøknadStep[];
+    className?: string;
 }
 
 interface StateProps {
@@ -50,7 +52,7 @@ const Steg: FunctionComponent<Props> = (props) => {
     });
 
     return (
-        <div className={cls.block}>
+        <div className={classnames(cls.block, props.className)}>
             <h1 className={cls.classNames(cls.element('header'), 'blokk-xs')}>
                 <FormattedMessage id={`stegtittel.${props.id}`} />
             </h1>
@@ -84,7 +86,7 @@ const Steg: FunctionComponent<Props> = (props) => {
                     </Hovedknapp>
                 )}
             </div>
-            <hr className="blokk-m" />
+            <hr className="blokk-xs" />
             <div className={cls.element('avbrytSøknadContainer')}>
                 <button type="button" className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}>
                     <FormattedMessage id="steg.avbrytSøknad" />

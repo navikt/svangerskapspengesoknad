@@ -2,6 +2,7 @@ export enum Tilretteleggingstype {
     'HEL' = 'hel',
     'DELVIS' = 'delvis',
     'INGEN' = 'ingen',
+    'NOE' = 'noe',
 }
 
 export enum Arbeidsforholdstype {
@@ -13,6 +14,7 @@ export enum Arbeidsforholdstype {
 
 interface Tilretteleggingsbase {
     type: Tilretteleggingstype;
+    vedlegg: string[];
     behovForTilretteleggingFom: Date;
     arbeidsforhold: {
         id?: string;
@@ -36,11 +38,16 @@ export interface IngenTilrettelegging extends Tilretteleggingsbase {
     slutteArbeidFom: Date;
 }
 
+export interface NoeTilrettelegging extends Tilretteleggingsbase {
+    type: Tilretteleggingstype.NOE;
+}
+
 type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrettelegging;
 
 export type UferdigTilrettelegging = Tilrettelegging & {
     id: string;
     type?: Tilretteleggingstype;
+    behovForTilretteleggingFom?: Date;
 };
 
 export default Tilrettelegging;

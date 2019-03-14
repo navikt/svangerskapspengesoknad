@@ -1,18 +1,22 @@
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
+import { AttachmentState } from './reducers/attachmentReducer';
 import { CommonState } from './reducers/commonReducer';
 import api, { ApiState } from './reducers/apiReducer';
 import common from './reducers/commonReducer';
+import attachment from './reducers/attachmentReducer';
 import rootSaga from './sagas';
 
 export interface State {
     common: CommonState;
+    attachment: AttachmentState;
     api: ApiState;
 }
 
 const rootReducer = combineReducers({
     common,
+    attachment,
     api,
 });
 

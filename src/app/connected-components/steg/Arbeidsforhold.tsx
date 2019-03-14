@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { connect as formConnect } from 'formik';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import moment from 'moment';
 
 import { FetchStatus } from 'app/types/FetchState';
 import { State } from 'app/redux/store';
@@ -15,6 +16,12 @@ import { UferdigSøknad } from 'app/types/Søknad';
 import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
+import { Normaltekst } from 'nav-frontend-typografi';
+import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
+import './arbeidsforhold.less';
+import BEMHelper from 'app/utils/bem';
+
+const cls = BEMHelper('arbeidsforhold');
 
 interface ConnectProps {
     arbeidsforhold: Arbeidsforhold[];
@@ -35,13 +42,31 @@ const Arbeidsforhold: FunctionComponent<Props> = ({ formik, arbeidsforhold, intl
     };
 
     return (
-        <Steg {...stegProps} renderNesteknapp={harValgtMinstEttGrunnlag} onRequestNavigateToNextStep={prepareNextStep}>
+        <Steg
+            {...stegProps}
+            className={cls.block}
+            renderNesteknapp={harValgtMinstEttGrunnlag}
+            onRequestNavigateToNextStep={prepareNextStep}>
+            <Block
+                header={{
+                    title: getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.label'),
+                }}>
+                <Normaltekst>{getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.text')}</Normaltekst>
+            </Block>
             <Block
                 header={{
                     title: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.label'),
                     info: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.infotekst'),
                 }}>
                 <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
+            </Block>
+            <Block margin="s">
+                <Veilederinfo type="info" stil="kompakt">
+                    {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
+                        // TODO: Hva er riktig dato her?
+                        datoTidligst: moment().format('DD.MM.YYYY'),
+                    })}
+                </Veilederinfo>
             </Block>
             <Block margin="l">
                 <VelgSøknadsgrunnlag

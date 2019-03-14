@@ -3,11 +3,19 @@ import { getSøkerinfo, sendSøknad } from '../../api/api';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import Kvittering from 'app/types/Kvittering';
 import { ApiActionTypes, GetSøkerinfoRequest, SendSøknadRequest } from '../types/ApiAction';
+import normalizeName from 'app/utils/normalizeName';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
 
 function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
     try {
         const response = yield call(getSøkerinfo);
-        const søkerinfo: Søkerinfo = response.data;
+        const søkerinfo: Søkerinfo = {
+            ...response.data,
+            arbeidsforhold: response.data.arbeidsforhold.map((forhold: Arbeidsforhold) => ({
+                ...forhold,
+                arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn),
+            })),
+        };
 
         yield put({ type: ApiActionTypes.GET_SØKERINFO_SUCCESS, payload: { søkerinfo } });
     } catch (error) {
@@ -17,7 +25,6 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
 
 function* sendSøknadSaga(action: SendSøknadRequest) {
     try {
-        // Todo: Process UferdigSøknad -> Søknad
         const response = yield call(sendSøknad, action.payload.søknad);
         const kvittering: Kvittering = response.data;
 

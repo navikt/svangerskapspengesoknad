@@ -1,15 +1,11 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
-import Attachment from './Attachment';
 import Søker from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger',
-}
-
-export enum Skjemanummer {
-    ANNET = 'I000060',
 }
 
 interface Søknad {
@@ -27,7 +23,6 @@ export interface UferdigSøknad {
     harGodkjentOppsummering: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdPartial;
     barn: UferdigBarn;
-    vedlegg: Attachment[];
     tilrettelegging: UferdigTilrettelegging[];
     søknadsgrunnlag: Søknadsgrunnlag[];
     søker: Søker;

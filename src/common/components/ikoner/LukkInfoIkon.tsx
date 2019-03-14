@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const LukkInfoIkon = (props: any) => (
     <svg width={11} height={9} viewBox="0 0 11 9" {...props}>

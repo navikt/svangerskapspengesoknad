@@ -4,10 +4,11 @@ import { FieldArrayRenderProps, FieldArray } from 'formik';
 import CheckboksPanelGruppeResponsive from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit } from 'lodash';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 
 interface Option {
     value: string;
-    type: string;
+    type: Arbeidsforholdstype;
 }
 
 interface OwnProps {
