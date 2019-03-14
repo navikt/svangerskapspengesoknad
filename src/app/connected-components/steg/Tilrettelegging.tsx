@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { connect as formConnect } from 'formik';
+import { connect as formConnect, FieldArray } from 'formik';
 import { InjectedIntlProps, injectIntl, FormattedHTMLMessage } from 'react-intl';
 
 import Steg, { StegProps } from 'app/components/steg/Steg';
@@ -21,6 +21,9 @@ import { finnArbeidsgiversNavn } from 'app/utils/stepUtils';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Skjemanummer } from 'app/types/Skjemanummer';
+import Action from 'app/redux/types/Action';
+import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 interface OwnProps {
     tilretteleggingId: string;
@@ -29,13 +32,27 @@ interface OwnProps {
 
 interface StateProps {
     arbeidsforhold: Arbeidsforhold[];
+    vedlegg: Attachment[];
+    uploadAttachment: (attachment: Attachment, id: string) => void;
+    deleteAttachment: (attachment: Attachment, id: string) => void;
 }
 
 type OuterProps = OwnProps & StateProps & StegProps & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
 
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
-    const { formik, tilretteleggingId: id, tilretteleggingIndex: index, arbeidsforhold, intl, ...stegProps } = props;
+    const {
+        formik,
+        tilretteleggingId: id,
+        tilretteleggingIndex: index,
+        arbeidsforhold,
+        vedlegg,
+        uploadAttachment,
+        deleteAttachment,
+        intl,
+        ...stegProps
+    } = props;
+
     const tilrettelegging = formik.values.tilrettelegging[index];
     const visTypevelger = tilrettelegging.behovForTilretteleggingFom !== undefined;
     const visStillingsprosent = tilrettelegging.type === Tilretteleggingstype.DELVIS;
@@ -56,6 +73,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
     const inneholderFeil = containsErrors(formik.errors.tilrettelegging);
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
+    const attachments = vedlegg.filter((v) => tilrettelegging.vedlegg.includes(v.id));
 
     return (
         <Steg
@@ -108,7 +126,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         max={100}
                         min={0}
                         step={10}
-                        placeholder="50"
+                        placeholder="Stillingsprosent"
                         name={`tilrettelegging.${index}.stillingsprosent`}
                         label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
                     />
@@ -125,16 +143,27 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 />
             </Block>
             <Block visible={visVedlegg}>
-                <AttachmentOverview
-                    attachmentType={AttachmentType.TILRETTELEGGING}
-                    skjemanummer={Skjemanummer.ANNET}
-                    attachments={formik.values.vedlegg.filter((v) => tilrettelegging.vedlegg.some((tv) => tv === v.id))}
-                    onFilesSelect={() => {
-                        console.log('Beep, boop!');
-                    }}
-                    onFileDelete={() => {
-                        console.log('Boooop');
-                    }}
+                <FieldArray
+                    name={`tilrettelegging.${index}.vedlegg`}
+                    render={({ form, push, remove }) => (
+                        <AttachmentOverview
+                            attachmentType={AttachmentType.TILRETTELEGGING}
+                            skjemanummer={Skjemanummer.ANNET}
+                            attachments={attachments}
+                            onFilesSelect={(files: Attachment[]) => {
+                                files.forEach((file) => {
+                                    push(file.id);
+                                    uploadAttachment(file, id);
+                                });
+                            }}
+                            onFileDelete={(files: Attachment[]) => {
+                                files.forEach((file) => {
+                                    remove(tilrettelegging.vedlegg.indexOf(file.id));
+                                    deleteAttachment(file, id);
+                                });
+                            }}
+                        />
+                    )}
                 />
             </Block>
         </Steg>
@@ -143,7 +172,22 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
 const mapStateToProps = (state: State) => {
     const søkerinfo = state.api.søkerinfo;
-    return { arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined };
+    return {
+        vedlegg: state.attachment.vedlegg.filter((v) => v.type === AttachmentType.TILRETTELEGGING),
+        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined,
+    };
 };
 
-export default connect(mapStateToProps)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Tilrettelegging)));
+const mapDispatchToProps = (dispatch: (action: Action) => void) => {
+    return {
+        uploadAttachment: (attachment: Attachment) =>
+            dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
+        deleteAttachment: (attachment: Attachment) =>
+            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_SUCCESS, payload: { attachment } }),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Tilrettelegging)));

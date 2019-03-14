@@ -12,7 +12,9 @@ interface Props {
 }
 
 const CustomSVGFromSprite: React.StatelessComponent<Props> = ({ iconRef, size, className, ...other }) => {
-    if (!iconRef) return null;
+    if (!iconRef) {
+        return null;
+    }
 
     const viewBox = { 'view-box': iconRef.viewBox };
     return (

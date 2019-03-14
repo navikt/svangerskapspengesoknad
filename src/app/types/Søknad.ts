@@ -23,7 +23,6 @@ export interface UferdigSøknad {
     harGodkjentOppsummering: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdPartial;
     barn: UferdigBarn;
-    vedlegg: Attachment[];
     tilrettelegging: UferdigTilrettelegging[];
     søknadsgrunnlag: Søknadsgrunnlag[];
     søker: Søker;

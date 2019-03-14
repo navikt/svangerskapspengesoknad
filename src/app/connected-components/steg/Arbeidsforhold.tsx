@@ -63,7 +63,7 @@ const Arbeidsforhold: FunctionComponent<Props> = ({ formik, arbeidsforhold, intl
             <Block margin="s">
                 <Veilederinfo type="info" stil="kompakt">
                     {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
-                        // TODO: Sett inn riktig dato
+                        // TODO: Hva er riktig dato her?
                         datoTidligst: moment().format('DD.MM.YYYY'),
                     })}
                 </Veilederinfo>

@@ -8,19 +8,21 @@ import processUtfyltSøknad from 'app/utils/processUtfyltSøknad';
 import Søknad, { UferdigSøknad } from 'app/types/Søknad';
 import validerSøknad from 'app/utils/validering/validerSøknad';
 import { Søkerrolle } from 'app/types/Søker';
+import { State } from 'app/redux/store';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 interface Props {
     children: ReactNode;
 }
 
-interface DispatchProps {
+interface StateProps {
+    vedlegg: Attachment[];
     requestSendSøknad: (søknad: Søknad) => void;
 }
 
 const initialSøknad: UferdigSøknad = {
     harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
-    vedlegg: [],
     barn: {},
     tilrettelegging: [],
     søknadsgrunnlag: [],
@@ -43,12 +45,14 @@ const initialSøknad: UferdigSøknad = {
     },
 };
 
-const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøknad, children }) => {
+const SøknadForm: FunctionComponent<Props & StateProps> = (props) => {
+    const { requestSendSøknad, vedlegg, children } = props;
+
     return (
         <Formik
             initialValues={initialSøknad}
             onSubmit={(søknad: UferdigSøknad) => {
-                const ferdigSøknad = processUtfyltSøknad(søknad);
+                const ferdigSøknad = processUtfyltSøknad(søknad, vedlegg);
 
                 if (ferdigSøknad) {
                     requestSendSøknad(ferdigSøknad);
@@ -60,6 +64,10 @@ const SøknadForm: FunctionComponent<Props & DispatchProps> = ({ requestSendSøk
     );
 };
 
+const mapStateToProps = (state: State) => ({
+    vedlegg: state.attachment.vedlegg,
+});
+
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
     requestSendSøknad: (søknad: Søknad) => {
         dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
@@ -67,6 +75,6 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
 });
 
 export default connect(
-    () => ({}),
+    mapStateToProps,
     mapDispatchToProps
 )(SøknadForm);

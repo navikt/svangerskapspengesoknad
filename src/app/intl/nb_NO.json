@@ -41,7 +41,9 @@
     "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
 
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
-    "vedlegg.lastoppknapp.tilrettelegging": "Last opp dokumentasjon her",
+    "vedlegg.lastoppknapp.tilrettelegging": "Last opp skjemaet her",
+    "vedlegg.liste.tittel": "Valgte vedlegg",
+    "vedlegg.arialabel.slett": "Slett vedlegg",
 
     "oppsummering.sendSøknad": "Send søknad"
 }
