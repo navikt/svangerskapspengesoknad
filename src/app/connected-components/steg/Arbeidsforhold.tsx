@@ -2,24 +2,24 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { connect as formConnect } from 'formik';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
+import BEMHelper from 'app/utils/bem';
 import moment from 'moment';
 
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import { FetchStatus } from 'app/types/FetchState';
+import { FormikProps } from 'app/types/Formik';
+import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
 import { State } from 'app/redux/store';
+import { UferdigSøknad } from 'app/types/Søknad';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
 import Steg, { StegProps } from '../../components/steg/Steg';
-import { FormikProps } from 'app/types/Formik';
-import { UferdigSøknad } from 'app/types/Søknad';
-import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
-import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
-import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
-import { Normaltekst } from 'nav-frontend-typografi';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
+import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
 import './arbeidsforhold.less';
-import BEMHelper from 'app/utils/bem';
 
 const cls = BEMHelper('arbeidsforhold');
 

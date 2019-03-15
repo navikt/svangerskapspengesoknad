@@ -97,6 +97,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             </Block>
             <Block visible={visKomponent.typevelger}>
                 <RadioPanelGruppe
+                    id="tilrettelegging.noeEllerIngen"
                     name={`tilrettelegging.${index}.type`}
                     legend={getMessage(intl, 'tilrettelegging.noeEllerIngen.label')}
                     radios={[
@@ -113,6 +114,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             </Block>
             <Block visible={visKomponent.helEllerDelvis}>
                 <RadioPanelGruppe
+                    id="tilrettelegging.helEllerDelvis"
                     name={`tilrettelegging.${index}.type`}
                     legend={getMessage(intl, 'tilrettelegging.helEllerDelvis.label')}
                     radios={[
