@@ -11,6 +11,8 @@ const validerSøknad = (søknad: UferdigSøknad): Søknadfeil => {
         ...tilrettelegging,
     };
 
+    console.warn('Søknad er nå', søknad);
+
     return errors;
 };
 

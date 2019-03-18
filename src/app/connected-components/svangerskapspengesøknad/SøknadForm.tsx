@@ -29,8 +29,6 @@ const initialSøknad: UferdigSøknad = {
     informasjonOmUtenlandsopphold: {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
-        iNorgeSiste12Mnd: true,
-        iNorgeNeste12Mnd: true,
         tidligereOpphold: [],
         senereOpphold: [],
     },

@@ -1,4 +1,5 @@
 {
+    "rediger": "Rediger",
     "jaNeiSpørsmål.ja": "Ja",
     "jaNeiSpørsmål.nei": "Nei",
     "app.banner": "Søknad om svangerskapspenger",
@@ -12,6 +13,7 @@
 
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold og inntekt",
+    "stegtittel.utenlandsopphold": "Opphold i utlandet",
     "stegtittel.oppsummering": "Oppsummering",
     "stegtittel.tilrettelegging": "Tilrettelegging",
 
@@ -53,6 +55,21 @@
     "vedlegg.lastoppknapp.tilrettelegging": "Last opp skjemaet her",
     "vedlegg.liste.tittel": "Valgte vedlegg",
     "vedlegg.arialabel.slett": "Slett vedlegg",
+
+    "utenlandsopphold.iNorgeSiste12Mnd.label": "Hvor har du bodd de siste 12 månedene?",
+    "utenlandsopphold.iNorgeSiste12Mnd.ja": "kun bodd i Norge",
+    "utenlandsopphold.iNorgeSiste12Mnd.nei": "bodd i utlandet eller delvis",
+    "utenlandsopphold.iNorgeNeste12Mnd.label": "Hvor skal du bo de neste 12 månedene?",
+    "utenlandsopphold.iNorgeNeste12Mnd.ja": "kun bo i Norge",
+    "utenlandsopphold.iNorgeNeste12Mnd.nei": "bo i utlandet eller delvis",
+    "utenlandsopphold.leggTilLand": "Legg til land",
+    "utenlandsopphold.land.leggTil": "Legg til",
+    "utenlandsopphold.land.avbryt": "Avbryt",
+    "utenlandsopphold.land.slett": "Slett",
+    "utenlandsopphold.modal.ariaLabel": "Landsvelger for utenlandsopphold",
+    "utenlandsopphold.modal.tittel": "Legg til utenlandsopphold",
+    "utenlandsopphold.modal.tittel.endre": "Endre utenlandsopphold",
+    "utenlandsopphold.land.label": "Hvilket land bodde du i?",
 
     "oppsummering.sendSøknad": "Send søknad",
     "søknadSendt.tittel": "Takk, {name}!"

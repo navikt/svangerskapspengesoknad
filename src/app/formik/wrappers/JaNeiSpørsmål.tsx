@@ -8,14 +8,24 @@ import RadioPanelGruppeResponsive, {
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 
-type Props = Omit<RadioPanelGruppeResponsiveProps, 'radios' | 'onChange'>;
+type Props = Omit<RadioPanelGruppeResponsiveProps, 'radios' | 'onChange'> & {
+    labels?: {
+        ja: string;
+        nei: string;
+    };
+};
 
 enum Radios {
     'JA' = 'ja',
     'NEI' = 'nei',
 }
 
-const JaNeiSpørsmål: FunctionComponent<Props & InjectedIntlProps> = ({ intl, name, ...radioPanelGruppeProps }) => (
+const JaNeiSpørsmål: FunctionComponent<Props & InjectedIntlProps> = ({
+    intl,
+    labels,
+    name,
+    ...radioPanelGruppeProps
+}) => (
     <Field
         name={name}
         type="string"
@@ -29,11 +39,11 @@ const JaNeiSpørsmål: FunctionComponent<Props & InjectedIntlProps> = ({ intl, n
 
             const radios = [
                 {
-                    label: getMessage(intl, 'jaNeiSpørsmål.ja'),
+                    label: labels ? labels.ja : getMessage(intl, 'jaNeiSpørsmål.ja'),
                     value: Radios.JA,
                 },
                 {
-                    label: getMessage(intl, 'jaNeiSpørsmål.nei'),
+                    label: labels ? labels.nei : getMessage(intl, 'jaNeiSpørsmål.nei'),
                     value: Radios.NEI,
                 },
             ];

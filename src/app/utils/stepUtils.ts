@@ -15,7 +15,13 @@ function pureSplice<T>(array: Array<T>, start: number, deleteCount: number, ...s
     return newArray;
 }
 
-const mainSteps = [StepID.TERMIN, StepID.ARBEIDSFORHOLD, StepID.TILRETTELEGGING, StepID.OPPSUMMERING];
+const mainSteps = [
+    StepID.TERMIN,
+    StepID.ARBEIDSFORHOLD,
+    StepID.TILRETTELEGGING,
+    StepID.UTENLANDSOPPHOLD,
+    StepID.OPPSUMMERING,
+];
 
 export const getAllSteps = (søknadsgrunnlag: Søknadsgrunnlag[]): SøknadStep[] => {
     const tilretteleggingSteps = søknadsgrunnlag.map((tilrettelegging) => ({
