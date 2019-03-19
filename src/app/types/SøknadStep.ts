@@ -2,6 +2,7 @@ export enum StepID {
     'TERMIN' = 'termin',
     'ARBEIDSFORHOLD' = 'arbeidsforhold',
     'TILRETTELEGGING' = 'tilrettelegging',
+    'UTENLANDSOPPHOLD' = 'utenlandsopphold',
     'OPPSUMMERING' = 'oppsummering',
     'INGEN' = 'ingen',
 }

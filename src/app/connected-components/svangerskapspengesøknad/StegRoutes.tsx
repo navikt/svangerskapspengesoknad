@@ -14,6 +14,7 @@ import { UferdigSøknad } from 'app/types/Søknad';
 import { FormikProps } from 'app/types/Formik';
 import Tilrettelegging from '../steg/Tilrettelegging';
 import { StegProps } from 'app/components/steg/Steg';
+import Utenlandsopphold from '../steg/utenlandsopphold/Utenlandsopphold';
 
 interface Props {
     history: History;
@@ -84,6 +85,11 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
                     render={() => <Arbeidsforhold {...getPropsForStep({ step: StepID.ARBEIDSFORHOLD })} />}
                 />
                 {søknadsgrunnlag.length > 0 && [tilretteleggingRoutes]}
+                <Route
+                    path={getSøknadStepPath({ step: StepID.UTENLANDSOPPHOLD })}
+                    key={StepID.UTENLANDSOPPHOLD}
+                    render={() => <Utenlandsopphold {...getPropsForStep({ step: StepID.UTENLANDSOPPHOLD })} />}
+                />
                 <Route
                     path={getSøknadStepPath({ step: StepID.OPPSUMMERING })}
                     key={StepID.OPPSUMMERING}

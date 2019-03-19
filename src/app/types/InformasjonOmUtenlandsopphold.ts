@@ -5,6 +5,11 @@ export interface Utenlandsopphold {
     periode: Tidsperiode;
 }
 
+export enum Oppholdstype {
+    'TIDLIGERE_OPPHOLD' = 'tidligereOpphold',
+    'SENERE_OPPHOLD' = 'senereOpphold',
+}
+
 interface InformasjonOmUtenlandsopphold {
     iNorgePåHendelsestidspunktet: boolean;
     iNorgeSiste12Mnd: boolean;

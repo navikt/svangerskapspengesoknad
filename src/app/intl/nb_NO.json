@@ -1,17 +1,20 @@
 {
+    "rediger": "Rediger",
+    "avslutt": "Avslutt",
     "jaNeiSpørsmål.ja": "Ja",
     "jaNeiSpørsmål.nei": "Nei",
     "app.banner": "Søknad om svangerskapspenger",
     "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
 
     "steg.avbrytSøknad": "Avbryt søknad",
-    "steg.nesteknapp": "Neste",
+    "steg.nesteknapp": "Fortsett",
 
     "feilside.title": "Det har skjedd en feil!",
     "feilside.mann": "Menn kan ikke søke om svangerskapspenger.",
 
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold og inntekt",
+    "stegtittel.utenlandsopphold": "Opphold i utlandet",
     "stegtittel.oppsummering": "Oppsummering",
     "stegtittel.tilrettelegging": "Tilrettelegging",
 
@@ -54,6 +57,29 @@
     "vedlegg.liste.tittel": "Valgte vedlegg",
     "vedlegg.arialabel.slett": "Slett vedlegg",
 
+    "utenlandsopphold.iNorgeSiste12Mnd.label": "Hvor har du bodd de siste 12 månedene?",
+    "utenlandsopphold.iNorgeSiste12Mnd.ja": "kun bodd i Norge",
+    "utenlandsopphold.iNorgeSiste12Mnd.nei": "bodd i utlandet eller delvis",
+    "utenlandsopphold.iNorgeNeste12Mnd.label": "Hvor skal du bo de neste 12 månedene?",
+    "utenlandsopphold.iNorgeNeste12Mnd.ja": "kun bo i Norge",
+    "utenlandsopphold.iNorgeNeste12Mnd.nei": "bo i utlandet eller delvis",
+    "utenlandsopphold.leggTilLand": "Legg til land",
+    "utenlandsopphold.land.leggTil": "Legg til",
+    "utenlandsopphold.land.endre": "Endre",
+    "utenlandsopphold.land.avbryt": "Avbryt",
+    "utenlandsopphold.land.slett": "Slett",
+    "utenlandsopphold.modal.ariaLabel": "Landsvelger for utenlandsopphold",
+    "utenlandsopphold.modal.tittel": "Legg til utenlandsopphold",
+    "utenlandsopphold.modal.tittel.endre": "Endre utenlandsopphold",
+    "utenlandsopphold.land.label": "Hvilket land bodde du i?",
+    "utenlandsopphold.land.fraOgMed": "Fra og med",
+    "utenlandsopphold.land.tilOgMed": "Til og med",
+
     "oppsummering.sendSøknad": "Send søknad",
-    "søknadSendt.tittel": "Takk, {name}!"
+    "søknadSendt.tittel": "Takk, {name}!",
+
+    "feil.annet.påkrevd": "Påkrevd",
+    "feil.utenlandsopphold.tidligereOpphold.måVæreTilbakeITid": "Må være tilbake i tid",
+    "feil.utenlandsopphold.tidligereOpphold.måVæreFremoverITid": "Må være fremover i tid",
+    "feil.utenlandsopphold.tidsreiserIkkeTillatt": "Må være etter \"fra og med\"."
 }

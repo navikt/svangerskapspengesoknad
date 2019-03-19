@@ -29,8 +29,6 @@ const initialSøknad: UferdigSøknad = {
     informasjonOmUtenlandsopphold: {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
-        iNorgeSiste12Mnd: true,
-        iNorgeNeste12Mnd: true,
         tidligereOpphold: [],
         senereOpphold: [],
     },
@@ -59,7 +57,7 @@ const SøknadForm: FunctionComponent<Props & StateProps> = (props) => {
                 }
             }}
             validate={validerSøknad}>
-            {({ handleSubmit }) => <Form>{children}</Form>}
+            {() => <Form>{children}</Form>}
         </Formik>
     );
 };
