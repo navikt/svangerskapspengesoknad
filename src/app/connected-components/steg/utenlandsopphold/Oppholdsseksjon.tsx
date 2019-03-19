@@ -9,7 +9,7 @@ import Block from 'common/components/block/Block';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import Modal from 'nav-frontend-modal';
 import getMessage from 'common/util/i18nUtils';
-import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
+import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 import List from 'common/components/list/List';
 import OppholdListElement from './OppholdListElement';
 import { UferdigSøknad } from 'app/types/Søknad';
@@ -18,6 +18,7 @@ import Oppholdsvalg from './Oppholdsvalg';
 interface OwnProps {
     name: string;
     land: string;
+    type: Oppholdstype;
     legend: string;
     labels: {
         ja: string;
@@ -29,14 +30,25 @@ type OuterProps = OwnProps & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
 
 const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
-    const { formik, name, land, legend, labels, intl } = props;
+    const { formik, name, land, legend, labels, type, intl } = props;
     const visLandvelger = get(formik.values, name) === false;
 
     const alleOpphold: Utenlandsopphold[] = get(formik.values, land);
 
     const [modalIsOpen, toggleModal] = useState(false);
     const [currentIndex, selectIndex] = useState(alleOpphold.length);
-    const [erNyttLand, setErNyttLand] = useState(true);
+    const [endreLand, toggleEndring] = useState(false);
+
+    const openModalForAdding = () => {
+        toggleEndring(false);
+        toggleModal(true);
+    };
+
+    const openModalForEditing = (index: number) => () => {
+        selectIndex(index);
+        toggleEndring(true);
+        toggleModal(true);
+    };
 
     return (
         <>
@@ -44,12 +56,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                 <JaNeiSpørsmål twoColumns name={name} legend={legend} labels={labels} />
             </Block>
             <Block visible={visLandvelger} margin="xs">
-                <Knapp
-                    onClick={() => {
-                        setErNyttLand(true);
-                        toggleModal(true);
-                    }}
-                    htmlType="button">
+                <Knapp onClick={openModalForAdding} htmlType="button">
                     <FormattedMessage id="utenlandsopphold.leggTilLand" />
                 </Knapp>
             </Block>
@@ -66,11 +73,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                         <OppholdListElement
                                             key={oppholdToRender.land + index}
                                             opphold={oppholdToRender}
-                                            onEdit={() => {
-                                                selectIndex(index);
-                                                setErNyttLand(false);
-                                                toggleModal(true);
-                                            }}
+                                            onEdit={openModalForEditing(index)}
                                             onDelete={() => {
                                                 remove(index);
                                             }}
@@ -84,14 +87,12 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>
                                 <Oppholdsvalg
-                                    title={getMessage(
-                                        intl,
-                                        `utenlandsopphold.modal.tittel${!erNyttLand ? '.endre' : ''}`
-                                    )}
-                                    opphold={alleOpphold[currentIndex]}
+                                    type={type}
+                                    endre={endreLand}
+                                    opphold={endreLand ? alleOpphold[currentIndex] : undefined}
                                     onCancel={() => toggleModal(false)}
                                     onAdd={(opphold) => {
-                                        erNyttLand ? push(opphold) : replace(currentIndex, opphold);
+                                        endreLand ? replace(currentIndex, opphold) : push(opphold);
                                         toggleModal(false);
                                     }}
                                 />

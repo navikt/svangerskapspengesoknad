@@ -1,56 +1,28 @@
 import { InjectedIntl } from 'react-intl';
 import * as countries from 'i18n-iso-countries';
 
-const filteredListEØSCountries = (countryOptionValue: string, shouldFilter?: boolean) => {
-    if (shouldFilter) {
-        switch (countryOptionValue) {
-            case 'BE':
-            case 'BG':
-            case 'DK':
-            case 'EE':
-            case 'FI':
-            case 'FR':
-            case 'GR':
-            case 'IE':
-            case 'IS':
-            case 'IT':
-            case 'HR':
-            case 'CY':
-            case 'LV':
-            case 'LI':
-            case 'LT':
-            case 'LU':
-            case 'MT':
-            case 'NL':
-            case 'PL':
-            case 'PT':
-            case 'RO':
-            case 'SK':
-            case 'SI':
-            case 'ES':
-            case 'GB':
-            case 'SE':
-            case 'CZ':
-            case 'DE':
-            case 'HU':
-            case 'AT':
-            case 'CH':
-                return true;
-            default:
-                return false;
-        }
-    } else {
-        return true;
-    }
-};
+// prettier-ignore
+const countriesInEøs = [
+    'BE', 'BG', 'DK', 'EE', 'FI', 'FR', 'GR', 'IE', 'IS', 'IT', 'HR', 'CY', 'LV', 'LI', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'GB', 'SE', 'CZ', 'DE', 'HU', 'AT', 'CH'];
 
-export const getCountries = (filter: boolean, intl: InjectedIntl): React.ReactNode[] => {
-    const språk = intl.locale;
-    const isoCodeIndex = 0;
+const isCountryInEøs = (countryCode: string) => countriesInEøs.includes(countryCode);
+const isCountryNorge = (countryCode: string) => countryCode === 'NO';
 
-    return Object.entries(countries.getNames(språk))
-        .sort((a: string[], b: string[]) => a[1].localeCompare(b[1], språk))
-        .filter((countryOptionValue: string[]) => filteredListEØSCountries(countryOptionValue[isoCodeIndex], filter));
+export const getCountries = (
+    visLandUtenforEøs: boolean,
+    visNorge: boolean,
+    { locale }: InjectedIntl
+): React.ReactNode[] => {
+    const countryNames: Array<[string, string]> = Object.entries(countries.getNames(locale));
+    const namesDescending = (a: string[], b: string[]) => a[1].localeCompare(b[1], locale);
+    const applyFilters = ([countryCode]: string[]) => {
+        const keepNorway = visNorge || !isCountryNorge(countryCode);
+        const keepEøsCountry = visLandUtenforEøs || isCountryInEøs(countryCode);
+
+        return keepNorway && keepEøsCountry;
+    };
+
+    return countryNames.sort(namesDescending).filter(applyFilters);
 };
 
 export default getCountries;

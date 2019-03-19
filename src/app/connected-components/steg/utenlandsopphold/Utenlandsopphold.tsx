@@ -8,6 +8,7 @@ import Steg, { StegProps } from 'app/components/steg/Steg';
 import getMessage from 'common/util/i18nUtils';
 import Block from 'common/components/block/Block';
 import Oppholdsseksjon from './Oppholdsseksjon';
+import { Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 
 type OuterProps = StegProps & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
@@ -24,17 +25,19 @@ const Utenlandsopphold: FunctionComponent<Props> = ({ formik, intl, ...stegProps
         <Steg {...stegProps} renderNesteknapp={visKomponent.nesteknapp}>
             <Block>
                 <Oppholdsseksjon
+                    type={Oppholdstype.TIDLIGERE_OPPHOLD}
                     name="informasjonOmUtenlandsopphold.iNorgeSiste12Mnd"
                     land="informasjonOmUtenlandsopphold.tidligereOpphold"
-                    legend={getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.label')}
+                    legend={getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.label')}
                     labels={{
-                        ja: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.ja'),
-                        nei: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.nei'),
+                        ja: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.ja'),
+                        nei: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.nei'),
                     }}
                 />
             </Block>
             <Block visible={visKomponent.iNorgeNeste12Mnd}>
                 <Oppholdsseksjon
+                    type={Oppholdstype.SENERE_OPPHOLD}
                     name="informasjonOmUtenlandsopphold.iNorgeNeste12Mnd"
                     land="informasjonOmUtenlandsopphold.senereOpphold"
                     legend={getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.label')}

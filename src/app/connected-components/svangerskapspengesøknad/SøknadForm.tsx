@@ -57,7 +57,7 @@ const SøknadForm: FunctionComponent<Props & StateProps> = (props) => {
                 }
             }}
             validate={validerSøknad}>
-            {({ handleSubmit }) => <Form>{children}</Form>}
+            {() => <Form>{children}</Form>}
         </Formik>
     );
 };
