@@ -70,6 +70,7 @@ const Steg: FunctionComponent<Props> = (props) => {
                 <StegIndikator kompakt steg={stegForStegIndikator} visLabel={false} />
                 <div />
             </div>
+
             <div className={cls.classNames(cls.element('steginnhold'))}>{props.children}</div>
             <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
                 {props.renderNesteknapp && (

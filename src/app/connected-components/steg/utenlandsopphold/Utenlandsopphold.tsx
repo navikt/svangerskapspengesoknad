@@ -17,8 +17,10 @@ const Utenlandsopphold: FunctionComponent<Props> = ({ formik, intl, ...stegProps
     const { informasjonOmUtenlandsopphold: opphold } = formik.values;
 
     const visKomponent = {
-        iNorgeNeste12Mnd: opphold.iNorgeSiste12Mnd !== undefined,
-        nesteknapp: opphold.iNorgeSiste12Mnd !== undefined && opphold.iNorgeNeste12Mnd !== undefined,
+        senereOpphold:
+            opphold.iNorgeSiste12Mnd || (opphold.iNorgeSiste12Mnd === false && opphold.tidligereOpphold.length > 0),
+        nesteknapp:
+            opphold.iNorgeSiste12Mnd || (opphold.iNorgeNeste12Mnd === false && opphold.senereOpphold.length > 0),
     };
 
     return (
@@ -35,7 +37,7 @@ const Utenlandsopphold: FunctionComponent<Props> = ({ formik, intl, ...stegProps
                     }}
                 />
             </Block>
-            <Block visible={visKomponent.iNorgeNeste12Mnd}>
+            <Block visible={visKomponent.senereOpphold}>
                 <Oppholdsseksjon
                     type={Oppholdstype.SENERE_OPPHOLD}
                     name="informasjonOmUtenlandsopphold.iNorgeNeste12Mnd"

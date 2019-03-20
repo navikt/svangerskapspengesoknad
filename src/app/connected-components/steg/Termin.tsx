@@ -27,7 +27,13 @@ const Termin: FunctionComponent<Props> = ({ formik, intl, ...stegProps }) => {
                 <JaNeiSpørsmål name="barn.erBarnetFødt" legend={getMessage(intl, 'termin.erBarnetFødt')} />
             </Block>
             <Block margin="xs" visible={formik.values.barn.erBarnetFødt === true}>
-                <DatoInput name="barn.fødselsdato" label={getMessage(intl, 'termin.fødselsdato')} />
+                <DatoInput
+                    name="barn.fødselsdato"
+                    label={getMessage(intl, 'termin.fødselsdato')}
+                    datoAvgrensinger={{
+                        maksDato: new Date(),
+                    }}
+                />
             </Block>
         </Steg>
     );
