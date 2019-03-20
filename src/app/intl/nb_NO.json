@@ -79,7 +79,7 @@
     "søknadSendt.tittel": "Takk, {name}!",
 
     "feil.annet.påkrevd": "Påkrevd",
-    "feil.utenlandsopphold.tidligereOpphold.måVæreTilbakeITid": "Må være tilbake i tid",
+    "feil.utenlandsopphold.tidligereOpphold.måVæreTilbakeITid": "Må være før i dag",
     "feil.utenlandsopphold.tidligereOpphold.måVæreFremoverITid": "Må være fremover i tid",
-    "feil.utenlandsopphold.tidsreiserIkkeTillatt": "Må være etter \"fra og med\"."
+    "feil.utenlandsopphold.tidsreiserIkkeTillatt": "Må være etter den første datoen"
 }

@@ -9,36 +9,31 @@ interface OwnProps {
     name: string;
     label: string;
     fullskjermKalender?: boolean;
+    visFeil?: boolean;
 }
 
 type Props = OwnProps & Omit<DatoInputProps, 'id' | 'onChange'>;
 
-const DatoInput: FunctionComponent<Props> = ({ name, label, fullskjermKalender, ...datoInputProps }) => (
+const DatoInput: FunctionComponent<Props> = ({ name, label, visFeil, fullskjermKalender, ...datoInputProps }) => (
     <Field
         name={name}
         type="date"
         render={({ form }: FieldProps) => {
-            const fieldError = get(form.errors, name) as string;
+            const feilmelding = get(form.errors, name) as string;
 
             return (
                 <CommonDatoInput
                     {...datoInputProps}
-                    feil={
-                        fieldError
-                            ? {
-                                  feilmelding: fieldError,
-                              }
-                            : undefined
-                    }
-                    kalender={{
-                        plassering: fullskjermKalender ? 'fullskjerm' : 'under',
-                    }}
-                    id={name}
                     name={name}
+                    id={name}
                     label={label}
                     dato={get(form.values, name)}
+                    feil={feilmelding && visFeil ? { feilmelding } : undefined}
                     onChange={(dato?: Date) => {
                         form.setFieldValue(name, dato);
+                    }}
+                    kalender={{
+                        plassering: fullskjermKalender ? 'fullskjerm' : 'under',
                     }}
                 />
             );
