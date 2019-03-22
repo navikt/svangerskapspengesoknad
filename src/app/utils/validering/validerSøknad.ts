@@ -1,6 +1,8 @@
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import validerIntro from './validerIntro';
 import validerTilrettelegging from './validerTilrettelegging';
+import { FormikErrors } from 'formik';
+import { SummaryError } from 'common/lib/validation/types';
 
 const validerSøknad = (søknad: UferdigSøknad): Søknadfeil => {
     const intro: Søknadfeil = validerIntro(søknad);
@@ -33,5 +35,24 @@ export const containsErrors = (item: any): boolean => {
 
     return false;
 };
+
+export const flattenErrors = (errors: FormikErrors<UferdigSøknad>, pathPrefix = ''): SummaryError[] => {
+    let flattened: SummaryError[] = [];
+    
+    for (const key in errors) {
+        const prefix = pathPrefix ? `${pathPrefix}.${key}` : key;
+
+        if (typeof errors[key] === 'string') {
+            flattened.push({
+                name: prefix,
+                text: errors[key],
+            });
+        } else if (typeof errors[key] === 'object') {
+            flattened = flattened.concat(flattenErrors(errors[key], prefix);
+        }
+    }
+
+    return flattened;
+}
 
 export default validerSøknad;

@@ -9,12 +9,13 @@ import classnames from 'classnames';
 import { FetchStatus } from 'app/types/FetchState';
 import { parseStepFromHistory, finnArbeidsgiversNavn } from 'app/utils/stepUtils';
 import { State } from 'app/redux/store';
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import { Undertittel } from 'nav-frontend-typografi';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
 import getMessage from 'common/util/i18nUtils';
-import { Undertittel } from 'nav-frontend-typografi';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import ValidationErrorSummary from '../validationErrorSummary/ValidationErrorSummary';
 import './steg.less';
 
 const cls = BEMHelper('steg');
@@ -71,6 +72,7 @@ const Steg: FunctionComponent<Props> = (props) => {
                 <div />
             </div>
 
+            <ValidationErrorSummary />
             <div className={cls.classNames(cls.element('steginnhold'))}>{props.children}</div>
             <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
                 {props.renderNesteknapp && (
