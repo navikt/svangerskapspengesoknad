@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
 import { connect as formConnect } from 'formik';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 
 import { FormikProps } from 'app/types/Formik';
@@ -18,6 +18,9 @@ import getMessage from 'common/util/i18nUtils';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
 import { UferdigSøknad } from 'app/types/Søknad';
+import DinePlikterModal from '../../components/dine-plikter-modal/DinePlikterModal';
+import DinePersonopplysningerModal from '../../components/dine-personopplysninger-modal/DinePersonopplysningerModal';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 
 const cls = BEMHelper('intro');
 
@@ -34,6 +37,9 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
     const startSøknad = () => {
         history.push('/soknad');
     };
+
+    const [dinePlikterIsOpen, toggleDinePlikter] = useState(false);
+    const [dinePersonopplysningerIsOpen, toggleDinePersonopplysninger] = useState(false);
 
     return (
         <Applikasjonsside visSpråkvelger={true}>
@@ -56,12 +62,47 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                     className="blokk-m"
                     name="harGodkjentVilkår"
                     label={getMessage(intl, 'intro.godkjennVilkår.bekreft')}>
-                    <FormattedMessage id="intro.godkjennVilkår.label" />
+                    <FormattedMessage
+                        id="intro.godkjennVilkår.label"
+                        values={{
+                            link: (
+                                <a
+                                    className="lenke"
+                                    href="#"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        toggleDinePlikter(true);
+                                    }}>
+                                    <FormattedHTMLMessage id="intro.dinePlikter" />
+                                </a>
+                            )
+                        }}
+                    />
                 </BekreftCheckboksPanel>
-                <Hovedknapp onClick={startSøknad} htmlType="button" disabled={disableNextButton}>
+                <Hovedknapp onClick={startSøknad} htmlType="button" disabled={disableNextButton} className="blokk-m">
                     <FormattedMessage id="intro.begynnSøknad.knapp" />
                 </Hovedknapp>
+                <Normaltekst className="velkommen__personopplysningerLink">
+                    <a
+                        className="lenke"
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            toggleDinePersonopplysninger(true);
+                        }}>
+                        <FormattedMessage id="intro.lesMerOmPersonopplysninger" />
+                    </a>
+                </Normaltekst>
             </div>
+
+            <DinePlikterModal
+                isOpen={dinePlikterIsOpen}
+                onRequestClose={() => toggleDinePlikter(false)}
+            />
+            <DinePersonopplysningerModal
+                isOpen={dinePersonopplysningerIsOpen}
+                onRequestClose={() => toggleDinePersonopplysninger(false)}
+            />
         </Applikasjonsside>
     );
 };
