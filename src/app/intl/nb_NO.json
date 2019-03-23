@@ -10,7 +10,7 @@
     "steg.nesteknapp": "Fortsett",
 
     "feilside.title": "Det har skjedd en feil!",
-    "feilside.mann": "Menn kan ikke søke om svangerskapspenger.",
+    "feilside.mann": "Svangerskapspenger er noe som friske gravide kvinner som ikke kan fortsette å jobbe under svangerskapet fordi det kan medføre risiko for skade på det ufødte barnet kan søke om. Du kan dessverre ikke søke om å få svangerskapspenger.",
 
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold og inntekt",
@@ -21,7 +21,7 @@
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
-    "intro.ingress": "Svangerskapspenger er en ytelse for deg som ikke kan jobbe fordi du er gravid.",
+    "intro.ingress": "Svangerskapspenger kan du søke om når du ikke kan fortsette å jobbe som vanlig under svangerskapet fordi det kan medføre risiko for skade på det ufødte barnet.",
     "intro.godkjennVilkår.label": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link } Vi lagrer søknaden din for deg i 24 timer. Hvis du ikke fortsetter eller du avbryter søknaden, blir opplysningene du har lagt inn slettet.",
     "intro.godkjennVilkår.bekreft": "Jeg bekrefter at jeg har lest og forstått",
     "intro.begynnSøknad.knapp": "Begynn med søknad",
@@ -50,10 +50,10 @@
 
     "arbeidsforhold.dineArbeidsforhold.label": "Dine arbeidsforhold",
     "arbeidsforhold.dineArbeidsforhold.infotekst": "Hvis du mangler informasjon om et eller flere arbeidsforhold, eller mener at informasjonen ikke stemmer så må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
-    "arbeidsforhold.grunnlag.label": "Hvilke av disse gjelder svangerskapspengesøknaden for?",
+    "arbeidsforhold.grunnlag.label": "Hvor skal du søke om svangerskapspenger fra?",
     "arbeidsforhold.utbetalingerFraNAV.label": "Utbetalinger fra NAV",
     "arbeidsforhold.utbetalingerFraNAV.text": "Hvis du får penger fra NAV, trenger du ikke opplyse om det i søknaden din.",
-    "arbeidsforhold.veileder.inntektsmelding": "Husk å be arbeidsgiveren din sende inntektsmelding til NAV. Vi trenger den for å kunne behandle søknaden din. Arbeidsgiver kan sende den tidligst {datoTidligst}. Vi vil i noen tilfeller kontakte arbeidsgiver i forbindelse med behandling av søknaden.",
+    "arbeidsforhold.veileder.inntektsmelding": "Husk å be arbeidsgiveren din sende inntektsmelding til NAV. Vi trenger den for å kunne behandle søknaden din. Vi vil i noen tilfeller kontakte arbeidsgiver i forbindelse med behandling av søknaden.",
 
     "tilrettelegging.veileder.intro": "Her kan du fortelle oss om hvordan du kan jobbe hos <b>{arbeidsgiversNavn}</b> mens du er gravid.",
     "tilrettelegging.behovForTilretteleggingFom.label": "Når må du slutte å jobbe som vanlig hos {arbeidsgiversNavn}?",
