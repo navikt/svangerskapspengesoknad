@@ -7,30 +7,26 @@ import StegIndikator from 'nav-frontend-stegindikator';
 import classnames from 'classnames';
 
 import { FetchStatus } from 'app/types/FetchState';
-import { parseStepFromHistory, finnArbeidsgiversNavn } from 'app/utils/stepUtils';
+import { parseStepFromHistory, finnArbeidsgiversNavn, getAllSteps, getAdjacentSteps } from 'app/utils/stepUtils';
 import { State } from 'app/redux/store';
 import { Undertittel } from 'nav-frontend-typografi';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
-import getMessage from 'common/util/i18nUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import ValidationErrorSummary from '../validationErrorSummary/ValidationErrorSummary';
 import './steg.less';
+import { CustomFormikProps } from 'app/types/Formik';
+import getMessage from 'common/util/i18nUtils';
 
 const cls = BEMHelper('steg');
 
 export interface StegProps {
-    id: StepID;
+    step: SøknadStep;
     history: History;
-    renderNesteknapp: boolean;
-    renderSendeknapp?: boolean;
-    renderTilbakeknapp?: boolean;
-    disableNesteknapp?: boolean;
-    onRequestNavigateToNextStep: () => void;
-    onRequestNavigateToPreviousStep: () => void;
-    allSøknadSteps: SøknadStep[];
+    formikProps: CustomFormikProps;
     className?: string;
+    showNesteknapp?: boolean;
 }
 
 interface StateProps {
@@ -40,32 +36,45 @@ interface StateProps {
 type Props = StegProps & StateProps & InjectedIntlProps;
 
 const Steg: FunctionComponent<Props> = (props) => {
-    const currentStep = parseStepFromHistory(props.history);
-    const stegForStegIndikator = props.allSøknadSteps.map((step, index) => {
+    const { step, formikProps, history, className, showNesteknapp, arbeidsforhold, intl } = props;
+
+    const allSøknadSteps = getAllSteps(formikProps.values.søknadsgrunnlag);
+    const [previousStep, nextStep] = getAdjacentSteps(step, allSøknadSteps);
+
+    const config = {
+        step,
+        renderNesteknapp: showNesteknapp && nextStep.step !== StepID.INGEN,
+        renderSendeknapp: nextStep.step === StepID.INGEN,
+        renderTilbakeknapp: previousStep.step !== StepID.INGEN,
+        onRequestNavigateToPreviousStep: () => {}, // onNavigateToPreviousStep(previousStep),
+    };
+
+    const currentStep = parseStepFromHistory(history);
+    const stegForStegIndikator = allSøknadSteps.map((step, index) => {
         return {
             index,
             aktiv: step.step === currentStep.step && step.subStep === currentStep.subStep,
             label:
                 step.step === StepID.TILRETTELEGGING && step.subStep
-                    ? finnArbeidsgiversNavn(step.subStep, props.arbeidsforhold)
-                    : getMessage(props.intl, `stegtittel.${step.step}`),
+                    ? finnArbeidsgiversNavn(step.subStep, arbeidsforhold)
+                    : getMessage(intl, `stegtittel.${step.step}`),
         };
     });
 
     return (
-        <div className={classnames(cls.block, props.className)}>
+        <div className={classnames(cls.block, className)}>
             <h1 className={cls.classNames(cls.element('header'), 'blokk-xs')}>
-                <FormattedMessage id={`stegtittel.${props.id}`} />
+                <FormattedMessage id={`stegtittel.${step.step}`} />
             </h1>
             {currentStep.subStep && (
                 <Undertittel className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
-                    {finnArbeidsgiversNavn(currentStep.subStep, props.arbeidsforhold)}
+                    {finnArbeidsgiversNavn(currentStep.subStep, arbeidsforhold)}
                 </Undertittel>
             )}
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
-                    {props.renderTilbakeknapp && (
-                        <BackButton hidden={false} onClick={props.onRequestNavigateToPreviousStep} />
+                    {config.renderTilbakeknapp && (
+                        <BackButton hidden={false} onClick={config.onRequestNavigateToPreviousStep} />
                     )}
                 </div>
                 <StegIndikator kompakt steg={stegForStegIndikator} visLabel={false} />
@@ -73,22 +82,21 @@ const Steg: FunctionComponent<Props> = (props) => {
             </div>
 
             <ValidationErrorSummary />
-            <div className={cls.classNames(cls.element('steginnhold'))}>{props.children}</div>
-            <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
-                {props.renderNesteknapp && (
-                    <Hovedknapp
-                        disabled={props.disableNesteknapp}
-                        htmlType="button"
-                        onClick={props.onRequestNavigateToNextStep}>
-                        <FormattedMessage id="steg.nesteknapp" />
-                    </Hovedknapp>
-                )}
-                {props.renderSendeknapp && (
-                    <Hovedknapp htmlType="submit">
-                        <FormattedMessage id="oppsummering.sendSøknad" />
-                    </Hovedknapp>
-                )}
-            </div>
+            <form onSubmit={formikProps.handleSubmit}>
+                <div className={cls.classNames(cls.element('steginnhold'))}>{props.children}</div>
+                <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
+                    {config.renderNesteknapp && (
+                        <Hovedknapp htmlType="submit">
+                            <FormattedMessage id="steg.nesteknapp" />
+                        </Hovedknapp>
+                    )}
+                    {config.renderSendeknapp && (
+                        <Hovedknapp htmlType="submit">
+                            <FormattedMessage id="oppsummering.sendSøknad" />
+                        </Hovedknapp>
+                    )}
+                </div>
+            </form>
             <hr className="blokk-xs" />
             <div className={cls.element('avbrytSøknadContainer')}>
                 <button type="button" className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}>

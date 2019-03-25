@@ -8,6 +8,13 @@ import Block from 'common/components/block/Block';
 
 type Props = StegProps & FormikProps;
 
+/*
+interface StateProps {
+    vedlegg: Attachment[];
+    requestSendSøknad: (søknad: Søknad) => void;
+}
+*/
+
 const Oppsummering: FunctionComponent<Props> = ({ formik, ...stegProps }) => {
     return (
         <Steg {...stegProps}>
@@ -23,5 +30,17 @@ const Oppsummering: FunctionComponent<Props> = ({ formik, ...stegProps }) => {
         </Steg>
     );
 };
+
+/*
+const mapStateToProps = (state: State) => ({
+    vedlegg: state.attachment.vedlegg,
+});
+
+const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
+    requestSendSøknad: (søknad: Søknad) => {
+        dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
+    },
+});
+*/
 
 export default formConnect<StegProps, UferdigSøknad>(Oppsummering);

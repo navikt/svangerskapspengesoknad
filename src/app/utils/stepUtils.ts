@@ -1,7 +1,10 @@
+import { History } from 'history';
+import { isEmpty } from 'lodash';
+
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import { History } from 'history';
-import { Søknadsgrunnlag } from 'app/types/Søknad';
+import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
+import validerIntro from './validering/validerIntro';
 
 export const getSøknadStepPath = (step: SøknadStep) => {
     let path = `/soknad/${step.step}`;
@@ -82,4 +85,20 @@ export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Ar
     }
 
     return arbeidsgiverLabel;
+};
+
+const terminAvailable = (values: UferdigSøknad) => {
+    return isEmpty(validerIntro(values));
+};
+
+export const isAvailable = (path: StepID | string, values: UferdigSøknad): boolean => {
+    switch (path) {
+        case StepID.TERMIN:
+            return terminAvailable(values);
+
+        case 'SENDT':
+            return values.harGodkjentOppsummering;
+    }
+
+    return true;
 };

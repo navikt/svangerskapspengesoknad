@@ -1,42 +1,44 @@
 import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
-import { connect as formConnect } from 'formik';
 import { FormattedMessage, FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 
-import { FormikProps } from 'app/types/Formik';
+import { CustomFormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
 import { HistoryProps } from 'app/redux/types/common';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { navigateTo } from 'app/utils/navigationUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import Applikasjonsside from 'app/connected-components/applikasjonsside/Applikasjonsside';
 import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import BEMHelper from 'app/utils/bem';
+import DinePersonopplysningerModal from '../../components/dine-personopplysninger-modal/DinePersonopplysningerModal';
+import DinePlikterModal from '../../components/dine-plikter-modal/DinePlikterModal';
 import FetchState from 'app/types/FetchState';
 import getMessage from 'common/util/i18nUtils';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
+import useFormikSubmit from 'app/hooks/useFormikSubmit';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
-import { UferdigSøknad } from 'app/types/Søknad';
-import DinePlikterModal from '../../components/dine-plikter-modal/DinePlikterModal';
-import DinePersonopplysningerModal from '../../components/dine-personopplysninger-modal/DinePersonopplysningerModal';
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 
 const cls = BEMHelper('intro');
 
 interface OwnProps {
     søkerinfo: FetchState<Søkerinfo>;
+    formik: CustomFormikProps;
 }
 
-type OuterProps = OwnProps & InjectedIntlProps & HistoryProps;
-type Props = OuterProps & FormikProps;
+type Props = OwnProps & InjectedIntlProps & HistoryProps;
 
-const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) => {
+const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) => {
     const søker = getData(søkerinfo, {}).søker;
-    const disableNextButton = !formik.values.harGodkjentVilkår;
-    const startSøknad = () => {
-        history.push('/soknad');
-    };
+    const { values, isSubmitting, isValid } = formik;
+    const disableNextButton = !values.harGodkjentVilkår;
+
+    useFormikSubmit(isSubmitting, isValid, () => {
+        navigateTo('/soknad/termin', history);
+    });
 
     const [dinePlikterIsOpen, toggleDinePlikter] = useState(false);
     const [dinePersonopplysningerIsOpen, toggleDinePersonopplysninger] = useState(false);
@@ -51,7 +53,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                     text: getMessage(intl, 'intro.bobletekst'),
                 }}
             />
-            <div className={cls.block}>
+            <form className={cls.block} onSubmit={formik.handleSubmit}>
                 <Innholdstittel className="blokk-xs">
                     <FormattedMessage id="intro.tittel" />
                 </Innholdstittel>
@@ -75,11 +77,11 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                                     }}>
                                     <FormattedHTMLMessage id="intro.dinePlikter" />
                                 </a>
-                            )
+                            ),
                         }}
                     />
                 </BekreftCheckboksPanel>
-                <Hovedknapp onClick={startSøknad} htmlType="button" disabled={disableNextButton} className="blokk-m">
+                <Hovedknapp htmlType="submit" disabled={disableNextButton} className="blokk-m">
                     <FormattedMessage id="intro.begynnSøknad.knapp" />
                 </Hovedknapp>
                 <Normaltekst className="velkommen__personopplysningerLink">
@@ -93,16 +95,12 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, intl, formik, history }) 
                         <FormattedMessage id="intro.lesMerOmPersonopplysninger" />
                     </a>
                 </Normaltekst>
-            </div>
-
-            <DinePlikterModal
-                isOpen={dinePlikterIsOpen}
-                onRequestClose={() => toggleDinePlikter(false)}
-            />
-            <DinePersonopplysningerModal
-                isOpen={dinePersonopplysningerIsOpen}
-                onRequestClose={() => toggleDinePersonopplysninger(false)}
-            />
+                <DinePlikterModal isOpen={dinePlikterIsOpen} onRequestClose={() => toggleDinePlikter(false)} />
+                <DinePersonopplysningerModal
+                    isOpen={dinePersonopplysningerIsOpen}
+                    onRequestClose={() => toggleDinePersonopplysninger(false)}
+                />
+            </form>
         </Applikasjonsside>
     );
 };
@@ -111,4 +109,4 @@ const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo,
 });
 
-export default connect(mapStateToProps)(injectIntl(formConnect<OuterProps, UferdigSøknad>(Intro)));
+export default injectIntl(connect(mapStateToProps)(Intro));

@@ -1,31 +1,29 @@
-import React from 'react';
+/*import React from 'react';
 import { FunctionComponent } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-import { connect as formConnect } from 'formik';
 import { History } from 'history';
 
 import { getSøknadStepPath, getAdjacentSteps, getAllSteps } from 'app/utils/stepUtils';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import Oppsummering from '../steg/Oppsummering';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Termin from '../steg/Termin';
 import Arbeidsforhold from '../steg/Arbeidsforhold';
-import { UferdigSøknad } from 'app/types/Søknad';
-import { FormikProps } from 'app/types/Formik';
+import { FormikProps, CustomFormikProps } from 'app/types/Formik';
 import Tilrettelegging from '../steg/Tilrettelegging';
 import { StegProps } from 'app/components/steg/Steg';
-import Utenlandsopphold from '../steg/utenlandsopphold/Utenlandsopphold';
 
 interface Props {
     history: History;
+    formik: CustomFormikProps;
 }
 
 const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history }) => {
     const { søknadsgrunnlag } = formik.values;
     const allSøknadSteps = getAllSteps(søknadsgrunnlag);
 
-    const onNavigateToStep = (step: SøknadStep) => () => {
+    const onNavigateToPreviousStep = (step: SøknadStep) => () => {
         if (step.step !== StepID.INGEN) {
+            formik.setFormikState({ submitCount: 0 });
             history.push(getSøknadStepPath(step));
         }
     };
@@ -38,10 +36,12 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
             renderNesteknapp: nextStep.step !== StepID.INGEN,
             renderSendeknapp: nextStep.step === StepID.INGEN,
             renderTilbakeknapp: previousStep.step !== StepID.INGEN,
-            onRequestNavigateToNextStep: onNavigateToStep(nextStep),
-            onRequestNavigateToPreviousStep: onNavigateToStep(previousStep),
+            onRequestNavigateToPreviousStep: onNavigateToPreviousStep(previousStep),
+            nextStep: nextStep.step,
             allSøknadSteps,
+            handleSubmit: formik.handleSubmit,
             history,
+            formik,
         };
     };
 
@@ -79,11 +79,14 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
                     key={StepID.TERMIN}
                     render={() => <Termin {...getPropsForStep({ step: StepID.TERMIN })} />}
                 />
+
                 <Route
                     path={getSøknadStepPath({ step: StepID.ARBEIDSFORHOLD })}
                     key={StepID.ARBEIDSFORHOLD}
                     render={() => <Arbeidsforhold {...getPropsForStep({ step: StepID.ARBEIDSFORHOLD })} />}
                 />
+
+                
                 {søknadsgrunnlag.length > 0 && [tilretteleggingRoutes]}
                 <Route
                     path={getSøknadStepPath({ step: StepID.UTENLANDSOPPHOLD })}
@@ -95,10 +98,12 @@ const StegRoutes: FunctionComponent<Props & FormikProps> = ({ formik, history })
                     key={StepID.OPPSUMMERING}
                     render={() => <Oppsummering {...getPropsForStep({ step: StepID.OPPSUMMERING })} />}
                 />
+                
                 <Redirect to={getSøknadStepPath({ step: StepID.TERMIN })} />
             </Switch>
         </Applikasjonsside>
     );
 };
 
-export default formConnect<Props, UferdigSøknad>(StegRoutes);
+export default StegRoutes;
+*/
