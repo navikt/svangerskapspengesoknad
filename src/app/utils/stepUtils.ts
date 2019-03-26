@@ -68,12 +68,28 @@ export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep
 };
 
 export const parseStepFromHistory = (history: History) => {
-    const [, , step, subStep] = history.location.pathname.split('/');
+    console.warn('Parsed step from history:', history.location);
 
-    return {
-        step,
-        subStep,
+    let parsed: {
+        path: string;
+        step?: string;
+        subStep?: string;
+    } = {
+        path: '',
+        step: undefined,
+        subStep: undefined,
     };
+
+    if (history.location) {
+        const [, path, step, subStep] = history.location.pathname.split('/');
+        parsed = {
+            path,
+            step,
+            subStep,
+        };
+    }
+
+    return parsed;
 };
 
 export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]) => {

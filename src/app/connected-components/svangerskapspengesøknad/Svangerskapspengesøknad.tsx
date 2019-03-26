@@ -50,7 +50,12 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
     } else if (søker && søker.kjønn === Kjønn.MANN) {
         return <Feil melding={getMessage(intl, 'feilside.mann')} />;
     } else {
-        return <SøknadForm contentRenderer={(formikProps) => <SøknadRoutes formikProps={formikProps} />} />;
+        return (
+            <SøknadForm
+                history={history}
+                contentRenderer={(formikProps) => <SøknadRoutes formikProps={formikProps} />}
+            />
+        );
     }
 };
 

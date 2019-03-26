@@ -5,12 +5,21 @@ import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import validerIntro from './validerIntro';
 import validerTilrettelegging from './validerTilrettelegging';
 import validerTermin from './validerTermin';
-import { StepID } from 'app/types/SøknadStep';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
 
-const validerSøknad = (step: StepID) => (søknad: UferdigSøknad): Søknadfeil => {
-    switch (step) {
-        case StepID.TERMIN:
-            return validerIntro(søknad);
+const validerSøknad = ({ path, step, subStep }: { path: string; step?: string; subStep?: string }) => (
+    søknad: UferdigSøknad
+): Søknadfeil => {
+    if (path === '') {
+        return validerIntro(søknad);
+    } else if (step) {
+        switch (step) {
+            case StepID.TERMIN:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                };
+        }
     }
 
     /*

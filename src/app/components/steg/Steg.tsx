@@ -48,7 +48,7 @@ const Steg: FunctionComponent<Props> = (props) => {
         renderSendeknapp: nextStep.step === StepID.INGEN,
         renderTilbakeknapp: previousStep.step !== StepID.INGEN,
         onRequestNavigateToPreviousStep: () => {
-            console.warn('Go to previous step.');
+            navigateTo(previousStep.step, history);
         }, // onNavigateToPreviousStep(previousStep),
     };
 

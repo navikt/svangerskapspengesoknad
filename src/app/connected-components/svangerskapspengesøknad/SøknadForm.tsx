@@ -1,22 +1,25 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import { Formik } from 'formik';
+import { History } from 'history';
 
 import { CustomFormikProps } from 'app/types/Formik';
 import { FormikBag } from 'app/types/FormikBag';
 import { UferdigSøknad, initialSøknad } from 'app/types/Søknad';
 import validerSøknad from 'app/utils/validering/validerSøknad';
-import { StepID } from 'app/types/SøknadStep';
+import { parseStepFromHistory } from 'app/utils/stepUtils';
 
 interface Props {
     contentRenderer: (formikProps: CustomFormikProps) => ReactNode;
+    history: History;
 }
 
-const SøknadForm: FunctionComponent<Props> = ({ contentRenderer }) => (
+const SøknadForm: FunctionComponent<Props> = ({ contentRenderer, history }) => (
     <Formik
         initialValues={initialSøknad}
         validate={(values: UferdigSøknad) => {
-            const errors = validerSøknad(StepID.TERMIN)(values);
-            console.log('Errors:', errors);
+            const step = parseStepFromHistory(history);
+            const errors = validerSøknad(step)(values);
+            console.log('Errors for', step, ':', errors);
             return errors;
         }}
         onSubmit={(søknad: UferdigSøknad, { setSubmitting, setFormikState, setTouched }: FormikBag) => {
