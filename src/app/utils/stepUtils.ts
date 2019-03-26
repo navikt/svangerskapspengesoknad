@@ -91,7 +91,7 @@ const terminAvailable = (values: UferdigSøknad) => {
     return isEmpty(validerIntro(values));
 };
 
-export const isAvailable = (path: StepID | string, values: UferdigSøknad): boolean => {
+export const isAvailable = (path: StepID | string) => (values: UferdigSøknad): boolean => {
     switch (path) {
         case StepID.TERMIN:
             return terminAvailable(values);

@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 
-import Intro from '../intro/Intro';
 import { BrowserRouter as Router } from 'react-router-dom';
-import SøknadSendt from '../søknadSendt/SøknadSendt';
-import { StepID } from 'app/types/SøknadStep';
 import { CustomFormikProps } from 'app/types/Formik';
 import { isAvailable, getSøknadStepPath } from 'app/utils/stepUtils';
+import { StepID } from 'app/types/SøknadStep';
+import Intro from '../intro/Intro';
+import SøknadSendt from '../søknadSendt/SøknadSendt';
 import Termin from '../steg/Termin';
+import Arbeidsforhold from '../steg/Arbeidsforhold';
 
 interface Props {
     formikProps: CustomFormikProps;
@@ -22,9 +23,19 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps }) => {
                 <Route path="/velkommen" render={(routeProps) => <Intro formik={formikProps} {...routeProps} />} />
 
                 <Route
-                    path={getSøknadStepPath({ step: StepID.TERMIN })}
+                    path="/soknad/termin"
+                    //path={getSøknadStepPath({ step: StepID.TERMIN })}
                     key={StepID.TERMIN}
                     render={(props) => <Termin step={{ step: StepID.TERMIN }} formikProps={formikProps} {...props} />}
+                />
+
+                <Route
+                    path="/soknad/arbeidsforhold"
+                    //path={getSøknadStepPath({ step: StepID.ARBEIDSFORHOLD })}
+                    key={StepID.ARBEIDSFORHOLD}
+                    render={(props) => (
+                        <Arbeidsforhold step={{ step: StepID.ARBEIDSFORHOLD }} formikProps={formikProps} {...props} />
+                    )}
                 />
 
                 {/*
@@ -55,7 +66,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps }) => {
                     />
                 )*/}
 
-                {isAvailable('SENDT', values) && (
+                {isAvailable('SENDT') && (
                     <Route path="/sendt" render={(routeProps) => <SøknadSendt {...routeProps} />} key="sendt" />
                 )}
 

@@ -18,6 +18,7 @@ import ValidationErrorSummary from '../validationErrorSummary/ValidationErrorSum
 import './steg.less';
 import { CustomFormikProps } from 'app/types/Formik';
 import getMessage from 'common/util/i18nUtils';
+import { navigateTo } from 'app/utils/navigationUtils';
 
 const cls = BEMHelper('steg');
 
@@ -46,18 +47,20 @@ const Steg: FunctionComponent<Props> = (props) => {
         renderNesteknapp: showNesteknapp && nextStep.step !== StepID.INGEN,
         renderSendeknapp: nextStep.step === StepID.INGEN,
         renderTilbakeknapp: previousStep.step !== StepID.INGEN,
-        onRequestNavigateToPreviousStep: () => {}, // onNavigateToPreviousStep(previousStep),
+        onRequestNavigateToPreviousStep: () => {
+            console.warn('Go to previous step.');
+        }, // onNavigateToPreviousStep(previousStep),
     };
 
     const currentStep = parseStepFromHistory(history);
-    const stegForStegIndikator = allSøknadSteps.map((step, index) => {
+    const stegForStegIndikator = allSøknadSteps.map((otherStep, index) => {
         return {
             index,
-            aktiv: step.step === currentStep.step && step.subStep === currentStep.subStep,
+            aktiv: otherStep.step === currentStep.step && otherStep.subStep === currentStep.subStep,
             label:
-                step.step === StepID.TILRETTELEGGING && step.subStep
-                    ? finnArbeidsgiversNavn(step.subStep, arbeidsforhold)
-                    : getMessage(intl, `stegtittel.${step.step}`),
+                otherStep.step === StepID.TILRETTELEGGING && otherStep.subStep
+                    ? finnArbeidsgiversNavn(otherStep.subStep, arbeidsforhold)
+                    : getMessage(intl, `stegtittel.${otherStep.step}`),
         };
     });
 
@@ -99,7 +102,13 @@ const Steg: FunctionComponent<Props> = (props) => {
             </form>
             <hr className="blokk-xs" />
             <div className={cls.element('avbrytSøknadContainer')}>
-                <button type="button" className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}>
+                <button
+                    type="button"
+                    className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}
+                    onClick={() => {
+                        formikProps.handleReset();
+                        navigateTo('/velkommen', history);
+                    }}>
                     <FormattedMessage id="steg.avbrytSøknad" />
                 </button>
             </div>

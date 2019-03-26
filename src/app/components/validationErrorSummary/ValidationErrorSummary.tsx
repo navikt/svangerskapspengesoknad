@@ -10,12 +10,12 @@ import Block from 'common/components/block/Block';
 
 type Props = InjectedIntlProps & FormikProps;
 
-const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors }, intl }) => {
+const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors, submitCount }, intl }) => {
     if (errors) {
         const errorMessages = flattenErrors(errors);
 
         return (
-            <Block visible={errorMessages.length > 0}>
+            <Block visible={errorMessages.length > 0 && submitCount > 0}>
                 <Feiloppsummering show title={getMessage(intl, 'feiloppsummering.tittel')} errors={errorMessages} />
             </Block>
         );

@@ -37,6 +37,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
     const disableNextButton = !values.harGodkjentVilkår;
 
     useFormikSubmit(isSubmitting, isValid, () => {
+        console.warn('Yo yo');
         navigateTo('/soknad/termin', history);
     });
 

@@ -21,8 +21,8 @@ import './arbeidsforhold.less';
 import { navigateTo } from 'app/utils/navigationUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import FormikStep from 'app/components/formikstep/FormikStep';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import FormikStep from 'app/components/formikstep/FormikStep';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -45,7 +45,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props) => {
     const navigate = () => {
         const tilrettelegging = mapGrunnlagTilTilrettelegging(values.søknadsgrunnlag);
         setFieldValue('tilrettelegging', tilrettelegging);
-        navigateTo(getSøknadStepPath({ step: StepID.TILRETTELEGGING }), history);
+        // navigateTo(getSøknadStepPath({ step: StepID.TILRETTELEGGING }), history);
     };
 
     return (

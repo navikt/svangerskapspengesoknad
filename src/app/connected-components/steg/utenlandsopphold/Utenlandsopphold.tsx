@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+/*import React, { FunctionComponent } from 'react';
 import { connect as formConnect } from 'formik';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
@@ -54,3 +54,4 @@ const Utenlandsopphold: FunctionComponent<Props> = ({ formik, intl, ...stegProps
 };
 
 export default injectIntl(formConnect<OuterProps, UferdigSøknad>(Utenlandsopphold));
+*/

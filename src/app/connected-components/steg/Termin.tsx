@@ -9,7 +9,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { HistoryProps } from 'app/redux/types/common';
 import { navigateTo } from 'app/utils/navigationUtils';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import FormikStep from 'app/components/formikstep/FormikStep';
+import FormikStep from 'app/components/formikStep/FormikStep';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 
@@ -25,7 +25,7 @@ const Termin: FunctionComponent<Props> = (props) => {
     const { values } = formikProps;
 
     const navigate = () => {
-        navigateTo(getSøknadStepPath({ step: StepID.ARBEIDSFORHOLD }), history);
+        navigateTo('/soknad/arbeidsforhold', history);
     };
 
     const showNesteknapp = values.barn.erBarnetFødt === false || values.barn.fødselsdato !== undefined;

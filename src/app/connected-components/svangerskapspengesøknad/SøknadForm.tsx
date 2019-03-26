@@ -5,6 +5,7 @@ import { CustomFormikProps } from 'app/types/Formik';
 import { FormikBag } from 'app/types/FormikBag';
 import { UferdigSøknad, initialSøknad } from 'app/types/Søknad';
 import validerSøknad from 'app/utils/validering/validerSøknad';
+import { StepID } from 'app/types/SøknadStep';
 
 interface Props {
     contentRenderer: (formikProps: CustomFormikProps) => ReactNode;
@@ -13,9 +14,12 @@ interface Props {
 const SøknadForm: FunctionComponent<Props> = ({ contentRenderer }) => (
     <Formik
         initialValues={initialSøknad}
-        validate={validerSøknad}
+        validate={(values: UferdigSøknad) => {
+            const errors = validerSøknad(StepID.TERMIN)(values);
+            console.log('Errors:', errors);
+            return errors;
+        }}
         onSubmit={(søknad: UferdigSøknad, { setSubmitting, setFormikState, setTouched }: FormikBag) => {
-            console.warn('Submitting?', søknad);
             setSubmitting(false);
             setFormikState({ submitCount: 0 });
             setTouched({});

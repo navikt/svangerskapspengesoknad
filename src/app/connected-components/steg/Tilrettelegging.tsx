@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+/*import React, { FunctionComponent } from 'react';
 import { connect as formConnect, FieldArray } from 'formik';
 import { InjectedIntlProps, injectIntl, FormattedHTMLMessage } from 'react-intl';
 
@@ -211,3 +211,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(injectIntl(formConnect<OuterProps, UferdigSøknad>(Tilrettelegging)));
+*/
