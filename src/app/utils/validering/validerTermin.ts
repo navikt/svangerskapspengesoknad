@@ -16,7 +16,7 @@ const validerTermin = (søknad: UferdigSøknad): Søknadfeil => {
 
     if (søknad.barn.termindato === undefined) {
         barn = {
-            termindato: 'Påkrevd',
+            termindato: 'Termindato er påkrevd',
         };
     }
 

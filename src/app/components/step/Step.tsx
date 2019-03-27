@@ -3,26 +3,33 @@ import { connect } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import StegIndikator from 'nav-frontend-stegindikator';
-import classnames from 'classnames';
-
-import { FetchStatus } from 'app/types/FetchState';
-import { parseStepFromHistory, finnArbeidsgiversNavn, getAllSteps, getAdjacentSteps } from 'app/utils/stepUtils';
-import { State } from 'app/redux/store';
 import { Undertittel } from 'nav-frontend-typografi';
+import classnames from 'classnames';
+import StegIndikator from 'nav-frontend-stegindikator';
+
+import { CustomFormikProps } from 'app/types/Formik';
+import { FetchStatus } from 'app/types/FetchState';
+import { navigateTo } from 'app/utils/navigationUtils';
+import {
+    parsePathFromLocation,
+    finnArbeidsgiversNavn,
+    getAllSteps,
+    getAdjacentSteps,
+    getSøknadStepPath,
+} from 'app/utils/stepUtils';
+import { State } from 'app/redux/store';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
+import getMessage from 'common/util/i18nUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import ValidationErrorSummary from '../validationErrorSummary/ValidationErrorSummary';
-import './steg.less';
-import { CustomFormikProps } from 'app/types/Formik';
-import getMessage from 'common/util/i18nUtils';
-import { navigateTo } from 'app/utils/navigationUtils';
+import { AppRoute } from 'app/types/Routes';
+import './step.less';
 
-const cls = BEMHelper('steg');
+const cls = BEMHelper('step');
 
-export interface StegProps {
+export interface StepProps {
     step: SøknadStep;
     history: History;
     formikProps: CustomFormikProps;
@@ -34,9 +41,9 @@ interface StateProps {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-type Props = StegProps & StateProps & InjectedIntlProps;
+type Props = StepProps & StateProps & InjectedIntlProps;
 
-const Steg: FunctionComponent<Props> = (props) => {
+const Step: FunctionComponent<Props> = (props) => {
     const { step, formikProps, history, className, showNesteknapp, arbeidsforhold, intl } = props;
 
     const allSøknadSteps = getAllSteps(formikProps.values.søknadsgrunnlag);
@@ -48,11 +55,11 @@ const Steg: FunctionComponent<Props> = (props) => {
         renderSendeknapp: nextStep.step === StepID.INGEN,
         renderTilbakeknapp: previousStep.step !== StepID.INGEN,
         onRequestNavigateToPreviousStep: () => {
-            navigateTo(previousStep.step, history);
-        }, // onNavigateToPreviousStep(previousStep),
+            navigateTo(getSøknadStepPath(previousStep.step, previousStep.subStep), history);
+        },
     };
 
-    const currentStep = parseStepFromHistory(history);
+    const currentStep = parsePathFromLocation(history.location);
     const stegForStegIndikator = allSøknadSteps.map((otherStep, index) => {
         return {
             index,
@@ -107,7 +114,7 @@ const Steg: FunctionComponent<Props> = (props) => {
                     className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}
                     onClick={() => {
                         formikProps.handleReset();
-                        navigateTo('/velkommen', history);
+                        navigateTo(AppRoute.INTRO, history);
                     }}>
                     <FormattedMessage id="steg.avbrytSøknad" />
                 </button>
@@ -121,4 +128,4 @@ const mapStateToProps = (state: State) => {
     return { arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined };
 };
 
-export default connect(mapStateToProps)(injectIntl(Steg));
+export default connect(mapStateToProps)(injectIntl(Step));

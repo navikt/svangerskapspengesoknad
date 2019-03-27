@@ -1,30 +1,46 @@
-/*import React, { FunctionComponent } from 'react';
-import { connect as formConnect } from 'formik';
+import React, { FunctionComponent } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
-import { FormikProps } from 'app/types/Formik';
-import { UferdigSøknad } from 'app/types/Søknad';
-import Steg, { StegProps } from 'app/components/steg/Steg';
+import { CustomFormikProps } from 'app/types/Formik';
 import getMessage from 'common/util/i18nUtils';
 import Block from 'common/components/block/Block';
 import Oppholdsseksjon from './Oppholdsseksjon';
 import { Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
+import FormikStep from 'app/components/formikStep/FormikStep';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import { StepProps } from 'app/components/step/Step';
+import { navigateTo } from 'app/utils/navigationUtils';
+import { getSøknadStepPath } from 'app/utils/stepUtils';
 
-type OuterProps = StegProps & InjectedIntlProps;
-type Props = OuterProps & FormikProps;
+interface OwnProps {
+    step: SøknadStep;
+    formikProps: CustomFormikProps;
+}
 
-const Utenlandsopphold: FunctionComponent<Props> = ({ formik, intl, ...stegProps }) => {
-    const { informasjonOmUtenlandsopphold: opphold } = formik.values;
+type Props = OwnProps & StepProps & InjectedIntlProps;
+
+const Utenlandsopphold: FunctionComponent<Props> = (props) => {
+    const { step, formikProps, intl, history } = props;
+    const { informasjonOmUtenlandsopphold: opphold } = formikProps.values;
 
     const visKomponent = {
         senereOpphold:
             opphold.iNorgeSiste12Mnd || (opphold.iNorgeSiste12Mnd === false && opphold.tidligereOpphold.length > 0),
         nesteknapp:
-            opphold.iNorgeSiste12Mnd || (opphold.iNorgeNeste12Mnd === false && opphold.senereOpphold.length > 0),
+            opphold.iNorgeNeste12Mnd || (opphold.iNorgeNeste12Mnd === false && opphold.senereOpphold.length > 0),
+    };
+
+    const navigate = () => {
+        navigateTo(getSøknadStepPath(StepID.OPPSUMMERING), history);
     };
 
     return (
-        <Steg {...stegProps} renderNesteknapp={visKomponent.nesteknapp}>
+        <FormikStep
+            step={step}
+            formikProps={formikProps}
+            showNesteknapp={visKomponent.nesteknapp}
+            onValidFormSubmit={navigate}
+            history={history}>
             <Block>
                 <Oppholdsseksjon
                     type={Oppholdstype.TIDLIGERE_OPPHOLD}
@@ -49,9 +65,8 @@ const Utenlandsopphold: FunctionComponent<Props> = ({ formik, intl, ...stegProps
                     }}
                 />
             </Block>
-        </Steg>
+        </FormikStep>
     );
 };
 
-export default injectIntl(formConnect<OuterProps, UferdigSøknad>(Utenlandsopphold));
-*/
+export default injectIntl(Utenlandsopphold);

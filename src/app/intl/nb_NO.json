@@ -65,7 +65,7 @@
     "tilrettelegging.type.ingen": "Nei",
     "tilrettelegging.type.noe": "Ja",
     "tilrettelegging.stillingsprosent.label": "Oppgi stillingsprosenten du skal jobbe",
-    "tilrettelegging.stillingsprosent.placeholder": "Prosent",
+    "tilrettelegging.stillingsprosent.placeholder": "0",
     "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
     "tilrettelegging.vedlegg.label": "Forklaring på hvor mye du kan jobbe",
     "tilrettelegging.veileder.vedlegg": "Vi trenger det ferdig utfylte <a target=\"_blank\" rel=\"noreferrer\" href=\"https://www.arbeidstilsynet.no/tema/graviditet-og-arbeidsmiljo/skjema-for-tilrettelegging-for-gravide/\">skjemaet for tilrettelegging og omplassering ved graviditet</a> fra deg for å kunne vurdere din søknad. Dette forklarer oss om du kan jobbe videre eller ikke i perioden du er gravid. Det må være utfylt av lege eller jordmor, og din arbeidsgiver.",

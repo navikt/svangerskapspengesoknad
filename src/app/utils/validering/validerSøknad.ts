@@ -3,15 +3,16 @@ import { FormikErrors } from 'formik';
 import { SummaryError } from 'common/lib/validation/types';
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import validerIntro from './validerIntro';
-import validerTilrettelegging from './validerTilrettelegging';
 import validerTermin from './validerTermin';
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import { StepID } from 'app/types/SøknadStep';
+import validerTilrettelegging from './validerTilrettelegging';
+import { SøknadRoute, AppRoute } from 'app/types/Routes';
 
-const validerSøknad = ({ path, step, subStep }: { path: string; step?: string; subStep?: string }) => (
-    søknad: UferdigSøknad
-): Søknadfeil => {
-    if (path === '') {
-        return validerIntro(søknad);
+const validerSøknad = ({ path, step, subStep }: SøknadRoute) => (søknad: UferdigSøknad): Søknadfeil => {
+    if (path === AppRoute.INTRO) {
+        return {
+            ...validerIntro(søknad),
+        };
     } else if (step) {
         switch (step) {
             case StepID.TERMIN:
@@ -19,20 +20,26 @@ const validerSøknad = ({ path, step, subStep }: { path: string; step?: string; 
                     ...validerIntro(søknad),
                     ...validerTermin(søknad),
                 };
+
+            case StepID.ARBEIDSFORHOLD:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                };
+
+            case StepID.TILRETTELEGGING:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                    ...validerTilrettelegging(søknad),
+                };
+
+            case StepID.OPPSUMMERING:
+                return {
+                    // ...validerOppsummering(søknad),
+                };
         }
     }
-
-    /*
-    const intro: Søknadfeil = validerIntro(søknad);
-    const termin: Søknadfeil = validerTermin(søknad);
-    const tilrettelegging: Søknadfeil = validerTilrettelegging(søknad);
-
-    const errors = {
-        ...intro,
-        ...termin,
-        ...tilrettelegging,
-    };
-    */
 
     return {};
 };

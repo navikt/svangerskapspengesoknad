@@ -25,7 +25,7 @@ const Termin: FunctionComponent<Props> = (props) => {
     const { values } = formikProps;
 
     const navigate = () => {
-        navigateTo('/soknad/arbeidsforhold', history);
+        navigateTo(getSøknadStepPath(StepID.ARBEIDSFORHOLD), history);
     };
 
     const showNesteknapp = values.barn.erBarnetFødt === false || values.barn.fødselsdato !== undefined;

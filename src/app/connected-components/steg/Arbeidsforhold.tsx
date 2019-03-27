@@ -14,15 +14,15 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
-import { StegProps } from '../../components/steg/Steg';
+import { StepProps } from '../../components/step/Step';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
 import './arbeidsforhold.less';
-import { navigateTo } from 'app/utils/navigationUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import { getSøknadStepPath } from 'app/utils/stepUtils';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import FormikStep from 'app/components/formikstep/FormikStep';
+import FormikStep from 'app/components/formikStep/FormikStep';
+import { getSøknadStepPath } from 'app/utils/stepUtils';
+import { navigateTo } from 'app/utils/navigationUtils';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -35,7 +35,7 @@ interface ConnectProps {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-type Props = OwnProps & StegProps & ConnectProps & InjectedIntlProps;
+type Props = OwnProps & StepProps & ConnectProps & InjectedIntlProps;
 
 const Arbeidsforhold: FunctionComponent<Props> = (props) => {
     const { step, formikProps, arbeidsforhold, intl, history } = props;
@@ -45,7 +45,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props) => {
     const navigate = () => {
         const tilrettelegging = mapGrunnlagTilTilrettelegging(values.søknadsgrunnlag);
         setFieldValue('tilrettelegging', tilrettelegging);
-        // navigateTo(getSøknadStepPath({ step: StepID.TILRETTELEGGING }), history);
+        navigateTo(getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id), history);
     };
 
     return (

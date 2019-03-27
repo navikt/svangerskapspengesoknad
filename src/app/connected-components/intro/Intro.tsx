@@ -21,6 +21,8 @@ import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
+import { getSøknadStepPath } from 'app/utils/stepUtils';
+import { StepID } from 'app/types/SøknadStep';
 
 const cls = BEMHelper('intro');
 
@@ -37,8 +39,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
     const disableNextButton = !values.harGodkjentVilkår;
 
     useFormikSubmit(isSubmitting, isValid, () => {
-        console.warn('Yo yo');
-        navigateTo('/soknad/termin', history);
+        navigateTo(getSøknadStepPath(StepID.TERMIN), history);
     });
 
     const [dinePlikterIsOpen, toggleDinePlikter] = useState(false);

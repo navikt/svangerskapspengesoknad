@@ -52,8 +52,12 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
     } else {
         return (
             <SøknadForm
-                history={history}
-                contentRenderer={(formikProps) => <SøknadRoutes formikProps={formikProps} />}
+                contentRenderer={(formikProps) => (
+                    <SøknadRoutes
+                        formikProps={formikProps}
+                        harSendtSøknad={kvittering.status !== FetchStatus.UNFETCHED}
+                    />
+                )}
             />
         );
     }

@@ -8,9 +8,10 @@ import { Omit } from 'lodash';
 
 type Props = Omit<RadioPanelGruppeResponsiveProps, 'onChange'> & {
     id?: string;
+    value?: string;
 };
 
-const RadioPanelGruppe: FunctionComponent<Props> = ({ id, ...radioPanelGruppeProps }) => (
+const RadioPanelGruppe: FunctionComponent<Props> = ({ id, value, ...radioPanelGruppeProps }) => (
     <Field
         name={radioPanelGruppeProps.name}
         type="string"
@@ -18,9 +19,9 @@ const RadioPanelGruppe: FunctionComponent<Props> = ({ id, ...radioPanelGruppePro
             <RadioPanelGruppeResponsive
                 {...radioPanelGruppeProps}
                 name={id || radioPanelGruppeProps.name}
-                checked={field.value}
-                onChange={(_, value) => {
-                    form.setFieldValue(radioPanelGruppeProps.name, value);
+                checked={value || field.value}
+                onChange={(_, newValue) => {
+                    form.setFieldValue(radioPanelGruppeProps.name, newValue);
                 }}
             />
         )}

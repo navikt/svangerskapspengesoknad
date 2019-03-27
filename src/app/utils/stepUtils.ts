@@ -1,14 +1,15 @@
-import { History } from 'history';
+import { Location } from 'history';
 import { isEmpty } from 'lodash';
 
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
 import validerIntro from './validering/validerIntro';
+import { SøknadRoute, AppRoute } from 'app/types/Routes';
 
-export const getSøknadStepPath = (step: SøknadStep) => {
-    let path = `/soknad/${step.step}`;
-    return step.subStep ? path + `/${step.subStep}` : path;
+export const getSøknadStepPath = (step: StepID, subStep?: string) => {
+    let path = `${AppRoute.SØKNAD}/${step}`;
+    return subStep ? path + `/${subStep}` : path;
 };
 
 function pureSplice<T>(array: Array<T>, start: number, deleteCount: number, ...substitutes: Array<T>): Array<T> {
@@ -67,29 +68,15 @@ export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep
     return [previousStep, nextStep];
 };
 
-export const parseStepFromHistory = (history: History) => {
-    console.warn('Parsed step from history:', history.location);
-
-    let parsed: {
-        path: string;
-        step?: string;
-        subStep?: string;
-    } = {
-        path: '',
-        step: undefined,
-        subStep: undefined,
-    };
-
-    if (history.location) {
-        const [, path, step, subStep] = history.location.pathname.split('/');
-        parsed = {
-            path,
-            step,
-            subStep,
+export const parsePathFromLocation = (location: Location): SøknadRoute => {
+    if (!location) {
+        return {
+            path: AppRoute.INTRO,
         };
     }
 
-    return parsed;
+    const [, path, step, subStep] = location.pathname.split('/');
+    return { path: `/${path}`, step, subStep };
 };
 
 export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]) => {
