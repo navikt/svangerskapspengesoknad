@@ -7,11 +7,10 @@ import get from 'lodash/get';
 interface Props {
     name: string;
     label: string;
-    visFeil?: boolean;
 }
 
 const Select: FunctionComponent<Props> = (props) => {
-    const { name, label, visFeil, children } = props;
+    const { name, label, children } = props;
     return (
         <Field
             name={name}
@@ -23,7 +22,7 @@ const Select: FunctionComponent<Props> = (props) => {
                         form.setFieldValue(field.name, e.target.value);
                     }}
                     feil={
-                        visFeil && get(form.errors, name)
+                        form.submitCount > 0 && get(form.errors, name)
                             ? {
                                   feilmelding: get(form.errors, name),
                               }
