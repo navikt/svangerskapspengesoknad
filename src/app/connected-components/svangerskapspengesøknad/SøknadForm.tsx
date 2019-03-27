@@ -22,7 +22,10 @@ const SøknadForm: FunctionComponent<Props> = ({ contentRenderer }) => {
         setPath(parsePathFromLocation(location));
     };
 
-    useEffect(() => history.listen(onRouteChange));
+    useEffect(() => {
+        setPath(parsePathFromLocation(history.location));
+        return history.listen(onRouteChange);
+    }, []);
 
     return (
         <Formik
