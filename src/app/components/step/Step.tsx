@@ -7,6 +7,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import classnames from 'classnames';
 import StegIndikator from 'nav-frontend-stegindikator';
 
+import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
 import { navigateTo } from 'app/utils/navigationUtils';
@@ -24,7 +25,6 @@ import BEMHelper from 'app/utils/bem';
 import getMessage from 'common/util/i18nUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import ValidationErrorSummary from '../validationErrorSummary/ValidationErrorSummary';
-import { AppRoute } from 'app/types/Routes';
 import './step.less';
 
 const cls = BEMHelper('step');

@@ -7,8 +7,10 @@ const validerTermin = (søknad: UferdigSøknad): Søknadfeil => {
     let errors: any = {};
     let barn = {};
 
-    const today = moment().startOf('day');
-    if (søknad.barn.fødselsdato && moment(søknad.barn.fødselsdato).isAfter(today)) {
+    const tomorrow = moment()
+        .startOf('day')
+        .add(1, 'day');
+    if (søknad.barn.fødselsdato && !moment(søknad.barn.fødselsdato).isBefore(tomorrow)) {
         barn = {
             fødselsdato: 'Fødselsdato må være tilbake i tid',
         };

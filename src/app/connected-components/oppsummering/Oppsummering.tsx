@@ -1,17 +1,17 @@
 import React, { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
+import { History } from 'history';
 
+import { ApiActionTypes } from 'app/redux/types/ApiAction';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { CustomFormikProps } from 'app/types/Formik';
-import Søknad from 'app/types/Søknad';
+import { State } from 'app/redux/store';
+import Action from 'app/redux/types/Action';
 import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formikStep/FormikStep';
-import Action from 'app/redux/types/Action';
-import { ApiActionTypes } from 'app/redux/types/ApiAction';
-import { connect } from 'react-redux';
-import SøknadStep from 'app/types/SøknadStep';
-import { History } from 'history';
 import processUtfyltSøknad from 'app/utils/processUtfyltSøknad';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
-import { State } from 'app/redux/store';
+import Søknad from 'app/types/Søknad';
+import SøknadStep from 'app/types/SøknadStep';
 
 interface OwnProps {
     step: SøknadStep;

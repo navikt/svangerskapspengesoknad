@@ -2,27 +2,27 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import BEMHelper from 'app/utils/bem';
 import moment from 'moment';
 
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
-import { FetchStatus } from 'app/types/FetchState';
 import { CustomFormikProps } from 'app/types/Formik';
+import { FetchStatus } from 'app/types/FetchState';
+import { getSøknadStepPath } from 'app/utils/stepUtils';
 import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
+import { navigateTo } from 'app/utils/navigationUtils';
 import { State } from 'app/redux/store';
+import { StepProps } from '../../components/step/Step';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import BEMHelper from 'app/utils/bem';
 import Block from 'common/components/block/Block';
+import FormikStep from 'app/components/formikStep/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
-import { StepProps } from '../../components/step/Step';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
 import './arbeidsforhold.less';
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import FormikStep from 'app/components/formikStep/FormikStep';
-import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { navigateTo } from 'app/utils/navigationUtils';
 
 const cls = BEMHelper('arbeidsforhold');
 

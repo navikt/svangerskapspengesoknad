@@ -1,19 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { State } from 'app/redux/store';
-import FetchState from 'app/types/FetchState';
-import Kvittering from 'app/types/Kvittering';
-import { getData } from 'app/utils/fromFetchState';
-import { dateToHours } from 'app/utils/formatDate';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import Block from 'common/components/block/Block';
-import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
-import BEMHelper from 'app/utils/bem';
-import './søknadSendt.less';
-import { Søkerinfo } from 'app/types/Søkerinfo';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
+
+import { dateToHours } from 'app/utils/formatDate';
+import { getData } from 'app/utils/fromFetchState';
+import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import { Søkerinfo } from 'app/types/Søkerinfo';
+import { State } from 'app/redux/store';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import BEMHelper from 'app/utils/bem';
+import Block from 'common/components/block/Block';
+import FetchState from 'app/types/FetchState';
+import Kvittering from 'app/types/Kvittering';
+import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
+import './søknadSendt.less';
 
 const cls = BEMHelper('søknadSendt');
 

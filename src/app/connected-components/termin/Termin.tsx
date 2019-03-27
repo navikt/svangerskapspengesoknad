@@ -1,17 +1,17 @@
 import React, { FunctionComponent } from 'react';
 
+import { CustomFormikProps } from 'app/types/Formik';
+import { getSøknadStepPath } from 'app/utils/stepUtils';
+import { HistoryProps } from 'app/redux/types/common';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { navigateTo } from 'app/utils/navigationUtils';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Block from 'common/components/block/Block';
 import DatoInput from 'app/formik/wrappers/DatoInput';
+import FormikStep from 'app/components/formikStep/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
-import { CustomFormikProps } from 'app/types/Formik';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { HistoryProps } from 'app/redux/types/common';
-import { navigateTo } from 'app/utils/navigationUtils';
-import { getSøknadStepPath } from 'app/utils/stepUtils';
-import FormikStep from 'app/components/formikStep/FormikStep';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 
 interface OwnProps {
     step: SøknadStep;

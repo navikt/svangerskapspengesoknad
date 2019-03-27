@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
 
@@ -10,6 +12,12 @@ const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
         if (t.type === Tilretteleggingstype.DELVIS) {
             if (t.stillingsprosent < 0 || t.stillingsprosent > 100) {
                 tErrors.stillingsprosent = 'Må være mellom 0 og 100';
+            }
+        }
+
+        if (t.type === Tilretteleggingstype.DELVIS || t.type === Tilretteleggingstype.HEL) {
+            if (t.tilrettelagtArbeidFom && moment(t.tilrettelagtArbeidFom).isBefore(t.behovForTilretteleggingFom)) {
+                tErrors.tilrettelagtArbeidFom = 'Må være etter dato for å slutte å jobbe som vanlig';
             }
         }
 

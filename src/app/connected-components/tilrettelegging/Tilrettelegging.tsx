@@ -1,32 +1,31 @@
 import React, { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
 import { FieldArray } from 'formik';
 import { InjectedIntlProps, injectIntl, FormattedHTMLMessage } from 'react-intl';
 
-import { StepProps } from 'app/components/step/Step';
-import { CustomFormikProps } from 'app/types/Formik';
-import DatoInput from 'app/formik/wrappers/DatoInput';
-import getMessage from 'common/util/i18nUtils';
-import { Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
-import Block from 'common/components/block/Block';
-import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
-import InputField from 'app/formik/wrappers/InputField';
-// import { containsErrors } from 'app/utils/validering/validerSøknad';
-import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
-import { State } from 'app/redux/store';
-import { FetchStatus } from 'app/types/FetchState';
-import { connect } from 'react-redux';
-import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import { finnArbeidsgiversNavn, getSøknadStepPath } from 'app/utils/stepUtils';
-import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
-import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
-import { Skjemanummer } from 'app/types/Skjemanummer';
-import Action from 'app/redux/types/Action';
-import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import FormikStep from 'app/components/formikStep/FormikStep';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
+import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
+import { CustomFormikProps } from 'app/types/Formik';
+import { FetchStatus } from 'app/types/FetchState';
+import { finnArbeidsgiversNavn, getSøknadStepPath } from 'app/utils/stepUtils';
 import { navigateTo } from 'app/utils/navigationUtils';
+import { Skjemanummer } from 'app/types/Skjemanummer';
+import { State } from 'app/redux/store';
+import { StepProps } from 'app/components/step/Step';
+import { Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import Action from 'app/redux/types/Action';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
+import Block from 'common/components/block/Block';
+import DatoInput from 'app/formik/wrappers/DatoInput';
+import FormikStep from 'app/components/formikStep/FormikStep';
+import getMessage from 'common/util/i18nUtils';
+import InputField from 'app/formik/wrappers/InputField';
+import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 
 interface OwnProps {
     step: SøknadStep;
@@ -58,10 +57,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         history,
     } = props;
 
-    const { values /*errors*/ } = formikProps;
+    const { values } = formikProps;
 
     const tilrettelegging = values.tilrettelegging[index];
-    // const inneholderFeil = containsErrors(errors.tilrettelegging);
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 

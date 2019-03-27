@@ -1,18 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
+import { Router } from 'react-router-dom';
 
-import { BrowserRouter as Router } from 'react-router-dom';
+import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
 import { StepID } from 'app/types/SøknadStep';
+import Arbeidsforhold from '../arbeidsforhold/Arbeidsforhold';
+import history from 'app/utils/history';
 import Intro from '../intro/Intro';
+import Oppsummering from '../oppsummering/Oppsummering';
 import SøknadSendt from '../søknadSendt/SøknadSendt';
-import Termin from '../steg/Termin';
-import Arbeidsforhold from '../steg/Arbeidsforhold';
-import Tilrettelegging from '../steg/Tilrettelegging';
-import Utenlandsopphold from '../steg/utenlandsopphold/Utenlandsopphold';
-import Oppsummering from '../steg/Oppsummering';
-import { AppRoute } from 'app/types/Routes';
+import Termin from '../termin/Termin';
+import Tilrettelegging from '../tilrettelegging/Tilrettelegging';
+import Utenlandsopphold from '../utenlandsopphold/Utenlandsopphold';
 
 interface Props {
     harSendtSøknad: boolean;
@@ -98,7 +99,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
         </Switch>
     );
 
-    return <Router>{harSendtSøknad ? kvitteringRoute : søknadRoutes}</Router>;
+    return <Router history={history}>{harSendtSøknad ? kvitteringRoute : søknadRoutes}</Router>;
 };
 
 export default SøknadRoutes;

@@ -5,11 +5,13 @@ import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 
 import { CustomFormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
+import { getSøknadStepPath } from 'app/utils/stepUtils';
 import { HistoryProps } from 'app/redux/types/common';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { navigateTo } from 'app/utils/navigationUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
+import { StepID } from 'app/types/SøknadStep';
 import Applikasjonsside from 'app/connected-components/applikasjonsside/Applikasjonsside';
 import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import BEMHelper from 'app/utils/bem';
@@ -21,8 +23,6 @@ import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
-import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { StepID } from 'app/types/SøknadStep';
 
 const cls = BEMHelper('intro');
 

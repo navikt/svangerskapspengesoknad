@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { CommonActionTypes } from 'app/redux/types/CommonAction';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+
+import { CommonActionTypes } from 'app/redux/types/CommonAction';
 import { Språkkode } from 'common/types';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';

@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { CustomFormikProps } from 'app/types/Formik';
-import Step from '../step/Step';
 import { History } from 'history';
+import Step from '../step/Step';
+
 import SøknadStep from 'app/types/SøknadStep';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
 
@@ -15,13 +16,7 @@ interface Props {
 }
 
 const FormikStep: FunctionComponent<Props> = (props) => {
-    const { formikProps, onValidFormSubmit, history } = props;
-
-    useEffect(() => {
-        history.listen(() => {
-            formikProps.setFormikState({ submitCount: 0 });
-        });
-    });
+    const { formikProps, onValidFormSubmit } = props;
 
     useFormikSubmit(formikProps.isSubmitting, formikProps.isValid, () => {
         if (onValidFormSubmit) {
