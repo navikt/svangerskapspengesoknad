@@ -1,10 +1,11 @@
 import { Location } from 'history';
 import { isEmpty } from 'lodash';
 
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
+import { appIsRunningInDevEnvironment } from './envUtils';
 import { SøknadRoute, AppRoute } from 'app/types/Routes';
+import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import validateSøknad from './validation/validateSøknad';
 
 export const getSøknadStepPath = (step: StepID, subStep?: string) => {
@@ -85,6 +86,5 @@ export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Ar
     return arbeidsgiverLabel;
 };
 
-export const isAvailable = (route: SøknadRoute) => (values: UferdigSøknad): boolean => {
-    return isEmpty(validateSøknad(route));
-};
+export const isNextStepAvailable = (route: SøknadRoute, values: UferdigSøknad): boolean =>
+    appIsRunningInDevEnvironment() || isEmpty(validateSøknad(route)(values));

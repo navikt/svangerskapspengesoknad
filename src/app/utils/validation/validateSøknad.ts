@@ -46,44 +46,4 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad):
     }
 };
 
-/*
-const untilTermin = (values: UferdigSøknad) => ({
-    ...validateIntro(values),
-    ...validateTermin(values),
-});
-
-const untilArbeidsforhold = (values: UferdigSøknad) => untilTermin(values);
-
-const untilTilrettelegging = (values: UferdigSøknad) => ({
-    ...untilArbeidsforhold(values),
-    ...validateTilrettelegging(values),
-});
-
-const untilUtenlandsopphold = (values: UferdigSøknad) => untilTilrettelegging(values);
-
-const untilOppsummering = (values: UferdigSøknad) => untilUtenlandsopphold(values);
-
-const validateSteps = (values: UferdigSøknad, step: StepID): Søknadfeil => {
-    switch (step) {
-        case StepID.TERMIN:
-            return untilTermin(values);
-
-        case StepID.ARBEIDSFORHOLD:
-            return untilArbeidsforhold(values);
-
-        case StepID.TILRETTELEGGING:
-            return untilTilrettelegging(values);
-
-        case StepID.UTENLANDSOPPHOLD:
-            return untilUtenlandsopphold(values);
-
-        case StepID.OPPSUMMERING:
-            return untilOppsummering(values);
-
-        default:
-            return {};
-    }
-};
-*/
-
 export default validateSøknad;
