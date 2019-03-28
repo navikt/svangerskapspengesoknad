@@ -18,7 +18,7 @@ const addSlutteArbeidFom = (tilrettelegging: Tilrettelegging): Tilrettelegging =
 
 const areDefined = (...items: any[]) => items.some((item) => item !== undefined);
 
-const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Attachment[]): Søknad | undefined => {
+export const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Attachment[]): Søknad | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
     const { fødselsdato: barnetsFødselsdato, ...utfyltBarn } = utfyltSøknad.barn;
 
@@ -60,5 +60,3 @@ const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Attachment
         tilrettelegging,
     };
 };
-
-export default processUtfyltSøknad;

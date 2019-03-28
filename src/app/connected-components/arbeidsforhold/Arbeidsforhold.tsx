@@ -8,9 +8,8 @@ import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
+import { mergeSøknadsgrunnlagIntoTilrettelegging } from 'app/utils/tilretteleggingUtils';
 import { navigateTo } from 'app/utils/navigationUtils';
-import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { State } from 'app/redux/store';
 import { StepProps } from '../../components/step/Step';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
@@ -43,13 +42,15 @@ const Arbeidsforhold: FunctionComponent<Props> = (props) => {
     const { values, setFieldValue } = formikProps;
     const harValgtMinstEttGrunnlag = values.søknadsgrunnlag.length > 0;
 
-    const navigate = () => {
-        const fjernEksisterende = (grunnlag: Søknadsgrunnlag) =>
-            !values.tilrettelegging.find((t) => t.id === grunnlag.id);
-        const nyeTilrettelegginger = mapGrunnlagTilTilrettelegging(values.søknadsgrunnlag.filter(fjernEksisterende));
-        const alleTilrettelgginger = [...nyeTilrettelegginger, ...values.tilrettelegging];
+    const prepareTilrettelegging = () => {
+        setFieldValue(
+            'tilrettelegging',
+            mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging)
+        );
+    };
 
-        setFieldValue('tilrettelegging', alleTilrettelgginger);
+    const navigate = () => {
+        prepareTilrettelegging();
 
         const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id);
         navigateTo(pathToFirstTilrettelegging, history);
