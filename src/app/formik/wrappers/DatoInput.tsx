@@ -4,17 +4,24 @@ import CommonDatoInput, { DatoInputProps } from 'common/components/skjema/elemen
 import 'nav-datovelger/dist/datovelger/styles/datovelger.css';
 import get from 'lodash/get';
 import { Omit } from 'lodash';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { translateError } from 'app/utils/errorUtils';
 
 interface OwnProps {
     name: string;
     label: string;
     fullskjermKalender?: boolean;
-    visFeil?: boolean;
 }
 
 type Props = OwnProps & Omit<DatoInputProps, 'id' | 'onChange'>;
 
-const DatoInput: FunctionComponent<Props> = ({ name, label, visFeil, fullskjermKalender, ...datoInputProps }) => (
+const DatoInput: FunctionComponent<Props & InjectedIntlProps> = ({
+    name,
+    label,
+    fullskjermKalender,
+    intl,
+    ...datoInputProps
+}) => (
     <Field
         name={name}
         type="date"
@@ -28,7 +35,11 @@ const DatoInput: FunctionComponent<Props> = ({ name, label, visFeil, fullskjermK
                     id={name}
                     label={label}
                     dato={get(form.values, name)}
-                    feil={feilmelding && visFeil ? { feilmelding } : undefined}
+                    feil={
+                        feilmelding && form.submitCount > 0
+                            ? { feilmelding: translateError(intl, feilmelding) }
+                            : undefined
+                    }
                     onChange={(dato?: Date) => {
                         form.setFieldValue(name, dato);
                     }}
@@ -41,4 +52,4 @@ const DatoInput: FunctionComponent<Props> = ({ name, label, visFeil, fullskjermK
     />
 );
 
-export default DatoInput;
+export default injectIntl(DatoInput);

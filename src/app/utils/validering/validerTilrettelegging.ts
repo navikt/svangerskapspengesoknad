@@ -1,5 +1,8 @@
+import moment from 'moment';
+
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
+import Valideringsfeil from 'app/types/Valideringsfeil';
 
 const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
     let errors: any = {};
@@ -9,7 +12,13 @@ const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
 
         if (t.type === Tilretteleggingstype.DELVIS) {
             if (t.stillingsprosent < 0 || t.stillingsprosent > 100) {
-                tErrors.stillingsprosent = 'Må være mellom 0 og 100';
+                tErrors.stillingsprosent = Valideringsfeil.STILLINGSPROSENT_RANGE;
+            }
+        }
+
+        if (t.type === Tilretteleggingstype.DELVIS || t.type === Tilretteleggingstype.HEL) {
+            if (t.tilrettelagtArbeidFom && moment(t.tilrettelagtArbeidFom).isBefore(t.behovForTilretteleggingFom)) {
+                tErrors.tilrettelagtArbeidFom = Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG;
             }
         }
 

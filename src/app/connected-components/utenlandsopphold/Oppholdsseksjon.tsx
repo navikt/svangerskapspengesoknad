@@ -1,18 +1,18 @@
 import React, { FunctionComponent, useState } from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
+import { Knapp } from 'nav-frontend-knapper';
 import get from 'lodash/get';
+import Modal from 'nav-frontend-modal';
 
 import { FormikProps } from 'app/types/Formik';
-import { Knapp } from 'nav-frontend-knapper';
-import Block from 'common/components/block/Block';
-import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
-import Modal from 'nav-frontend-modal';
-import getMessage from 'common/util/i18nUtils';
+import { UferdigSøknad } from 'app/types/Søknad';
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
+import Block from 'common/components/block/Block';
+import getMessage from 'common/util/i18nUtils';
+import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import List from 'common/components/list/List';
 import OppholdListElement from './OppholdListElement';
-import { UferdigSøknad } from 'app/types/Søknad';
 import Oppholdsvalg from './Oppholdsvalg';
 
 interface OwnProps {

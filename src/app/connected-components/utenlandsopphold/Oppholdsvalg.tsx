@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { Formik, FormikProps } from 'formik';
 import { InjectedIntl, injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
@@ -34,12 +34,11 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
     const { endre, opphold = initialOpphold, onAdd, onCancel, type, intl } = props;
 
     const countries = useMemo(() => getCountries(true, false, intl), [intl]);
-    const [showErrors, toggleErrors] = useState(false);
 
     return (
         <Formik
             initialValues={opphold}
-            validate={validerOpphold(type, intl)}
+            validate={validerOpphold(type)}
             onSubmit={onAdd}
             render={({ values, handleSubmit }: FormikProps<Utenlandsopphold>) => {
                 const datoAvgrensinger = getDatoAvgrensninger(type, values.periode.fom, values.periode.tom);
@@ -50,8 +49,6 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                     handleSubmit();
                 };
 
-                const onSubmitClick = () => toggleErrors(true);
-
                 return (
                     <form onSubmit={onFormSubmit} className={cls.block}>
                         <Block>
@@ -61,10 +58,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                         </Block>
                         <Block margin="none">
                             <Block margin="xs">
-                                <Select
-                                    name="land"
-                                    label={getMessage(intl, 'utenlandsopphold.land.label')}
-                                    visFeil={showErrors}>
+                                <Select name="land" label={getMessage(intl, 'utenlandsopphold.land.label')}>
                                     <option value="" />
                                     {countries.map((countryOption: string[]) => {
                                         const [countryCode, countryName] = countryOption;
@@ -80,14 +74,12 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                                 <DatoInput
                                     fullskjermKalender
                                     name="periode.fom"
-                                    visFeil={showErrors}
                                     label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
                                     datoAvgrensinger={datoAvgrensinger.fom}
                                 />
                                 <DatoInput
                                     fullskjermKalender
                                     name="periode.tom"
-                                    visFeil={showErrors}
                                     datoAvgrensinger={datoAvgrensinger.tom}
                                     label={getMessage(intl, 'utenlandsopphold.land.tilOgMed')}
                                 />
@@ -95,7 +87,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="utenlandsopphold.land.avbryt" />
                             </Knapp>
-                            <Hovedknapp htmlType="submit" onClick={onSubmitClick}>
+                            <Hovedknapp htmlType="submit">
                                 <FormattedMessage
                                     id={endre ? 'utenlandsopphold.land.endre' : 'utenlandsopphold.land.leggTil'}
                                 />

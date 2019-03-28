@@ -1,37 +1,51 @@
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import validerIntro from './validerIntro';
+import validerTermin from './validerTermin';
+import { StepID } from 'app/types/SøknadStep';
 import validerTilrettelegging from './validerTilrettelegging';
+import { SøknadRoute, AppRoute } from 'app/types/Routes';
 
-const validerSøknad = (søknad: UferdigSøknad): Søknadfeil => {
-    const intro: Søknadfeil = validerIntro(søknad);
-    const tilrettelegging: Søknadfeil = validerTilrettelegging(søknad);
+const validerSøknad = ({ path, step, subStep }: SøknadRoute) => (søknad: UferdigSøknad): Søknadfeil => {
+    if (path === AppRoute.INTRO) {
+        return {
+            ...validerIntro(søknad),
+        };
+    } else if (step) {
+        switch (step) {
+            case StepID.TERMIN:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                };
 
-    const errors = {
-        ...intro,
-        ...tilrettelegging,
-    };
+            case StepID.ARBEIDSFORHOLD:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                };
 
-    return errors;
-};
+            case StepID.TILRETTELEGGING:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                    ...validerTilrettelegging(søknad),
+                };
 
-export const containsErrors = (item: any): boolean => {
-    if (typeof item === 'string' && item !== '') {
-        return true;
-    } else if (Array.isArray(item)) {
-        for (const member of item) {
-            if (containsErrors(member)) {
-                return true;
-            }
-        }
-    } else if (typeof item === 'object') {
-        for (const property in item) {
-            if (containsErrors(item[property])) {
-                return true;
-            }
+            case StepID.UTENLANDSOPPHOLD:
+                return {
+                    ...validerIntro(søknad),
+                    ...validerTermin(søknad),
+                    ...validerTilrettelegging(søknad),
+                };
+
+            case StepID.OPPSUMMERING:
+                return {
+                    // ...validerOppsummering(søknad),
+                };
         }
     }
 
-    return false;
+    return {};
 };
 
 export default validerSøknad;

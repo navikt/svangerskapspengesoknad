@@ -1,11 +1,15 @@
+import { Location } from 'history';
+import { isEmpty } from 'lodash';
+
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import { History } from 'history';
-import { Søknadsgrunnlag } from 'app/types/Søknad';
+import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
+import validerIntro from './validering/validerIntro';
+import { SøknadRoute, AppRoute } from 'app/types/Routes';
 
-export const getSøknadStepPath = (step: SøknadStep) => {
-    let path = `/soknad/${step.step}`;
-    return step.subStep ? path + `/${step.subStep}` : path;
+export const getSøknadStepPath = (step: StepID, subStep?: string) => {
+    let path = `${AppRoute.SØKNAD}/${step}`;
+    return subStep ? path + `/${subStep}` : path;
 };
 
 function pureSplice<T>(array: Array<T>, start: number, deleteCount: number, ...substitutes: Array<T>): Array<T> {
@@ -64,13 +68,15 @@ export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep
     return [previousStep, nextStep];
 };
 
-export const parseStepFromHistory = (history: History) => {
-    const [, , step, subStep] = history.location.pathname.split('/');
+export const parsePathFromLocation = (location: Location): SøknadRoute => {
+    if (!location) {
+        return {
+            path: AppRoute.INTRO,
+        };
+    }
 
-    return {
-        step,
-        subStep,
-    };
+    const [, path, step, subStep] = location.pathname.split('/');
+    return { path: `/${path}`, step, subStep };
 };
 
 export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]) => {
@@ -82,4 +88,20 @@ export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Ar
     }
 
     return arbeidsgiverLabel;
+};
+
+const terminAvailable = (values: UferdigSøknad) => {
+    return isEmpty(validerIntro(values));
+};
+
+export const isAvailable = (path: StepID | string) => (values: UferdigSøknad): boolean => {
+    switch (path) {
+        case StepID.TERMIN:
+            return terminAvailable(values);
+
+        case 'SENDT':
+            return values.harGodkjentOppsummering;
+    }
+
+    return true;
 };

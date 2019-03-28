@@ -1,6 +1,6 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
-import Søker from './Søker';
+import Søker, { Søkerrolle } from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
@@ -27,6 +27,29 @@ export interface UferdigSøknad {
     søknadsgrunnlag: Søknadsgrunnlag[];
     søker: Søker;
 }
+
+export const initialSøknad: UferdigSøknad = {
+    harGodkjentVilkår: false,
+    harGodkjentOppsummering: false,
+    barn: {},
+    tilrettelegging: [],
+    søknadsgrunnlag: [],
+    informasjonOmUtenlandsopphold: {
+        jobbetINorgeSiste12Mnd: true,
+        iNorgePåHendelsestidspunktet: true,
+        tidligereOpphold: [],
+        senereOpphold: [],
+    },
+    søker: {
+        rolle: Søkerrolle.MOR,
+        harJobbetSomFrilansSiste10Mnd: false,
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: false,
+        selvstendigNæringsdrivendeInformasjon: [],
+        erAleneOmOmsorg: false,
+        harHattAnnenInntektSiste10Mnd: false,
+        andreInntekterSiste10Mnd: [],
+    },
+};
 
 export interface Søknadsgrunnlag {
     id: string;

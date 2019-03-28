@@ -2,23 +2,28 @@ import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
 import { NavFrontendInputProps, Input } from 'nav-frontend-skjema';
 import { get } from 'lodash';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { translateError } from 'app/utils/errorUtils';
 
-interface Props {
+interface OwnProps {
     name: string;
 }
 
-const InputField: FunctionComponent<Props & NavFrontendInputProps> = ({ name, ...inputProps }) => {
+type Props = OwnProps & NavFrontendInputProps & InjectedIntlProps;
+
+const InputField: FunctionComponent<Props> = ({ name, intl, ...inputProps }) => {
     return (
         <Field
             name={name}
             type={inputProps.type}
             render={({ field, form }: FieldProps) => {
                 const feilmelding = get(form.errors, name);
-                const feil = feilmelding
-                    ? {
-                          feilmelding,
-                      }
-                    : undefined;
+                const feil =
+                    feilmelding && form.submitCount > 0
+                        ? {
+                              feilmelding: translateError(intl, feilmelding),
+                          }
+                        : undefined;
 
                 return (
                     <Input
@@ -33,4 +38,4 @@ const InputField: FunctionComponent<Props & NavFrontendInputProps> = ({ name, ..
     );
 };
 
-export default InputField;
+export default injectIntl(InputField);

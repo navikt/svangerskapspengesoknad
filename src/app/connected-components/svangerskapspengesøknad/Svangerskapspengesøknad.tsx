@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Kjønn, Søkerinfo } from 'app/types/Søkerinfo';
 import FetchState, { FetchStatus } from 'app/types/FetchState';
 
@@ -7,14 +8,13 @@ import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { getData, getErrorCode } from 'app/utils/fromFetchState';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
-import Feil from 'app/components/Feil';
-import Kvittering from 'app/types/Kvittering';
-import SøknadForm from './SøknadForm';
-import SøknadRoutes from './SøknadRoutes';
 import Environment from 'app/Environment';
-import Loading from 'app/components/loading/Loading';
+import Feil from 'app/components/Feil';
+import FormikWrapper from '../formikWrapper/FormikWrapper';
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import Kvittering from 'app/types/Kvittering';
+import Loading from 'app/components/loading/Loading';
+import SøknadRoutes from '../søknadRoutes/SøknadRoutes';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;
@@ -51,9 +51,14 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
         return <Feil melding={getMessage(intl, 'feilside.mann')} />;
     } else {
         return (
-            <SøknadForm>
-                <SøknadRoutes harSendtSøknad={kvittering.status !== FetchStatus.UNFETCHED} />
-            </SøknadForm>
+            <FormikWrapper
+                contentRenderer={(formikProps) => (
+                    <SøknadRoutes
+                        formikProps={formikProps}
+                        harSendtSøknad={kvittering.status !== FetchStatus.UNFETCHED}
+                    />
+                )}
+            />
         );
     }
 };

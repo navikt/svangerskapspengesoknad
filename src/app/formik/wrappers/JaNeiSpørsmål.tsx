@@ -7,6 +7,7 @@ import RadioPanelGruppeResponsive, {
 } from 'common/components/skjema/elements/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
+import { translateError } from 'app/utils/errorUtils';
 
 type Props = Omit<RadioPanelGruppeResponsiveProps, 'radios' | 'onChange'> & {
     labels?: {
@@ -49,11 +50,12 @@ const JaNeiSpørsmål: FunctionComponent<Props & InjectedIntlProps> = ({
             ];
 
             const feilmelding = get(form.errors, name);
-            const radioPanelGruppeFeil = feilmelding
-                ? {
-                      feilmelding,
-                  }
-                : undefined;
+            const radioPanelGruppeFeil =
+                feilmelding && form.submitCount > 0
+                    ? {
+                          feilmelding: translateError(intl, feilmelding),
+                      }
+                    : undefined;
 
             return (
                 <RadioPanelGruppeResponsive
