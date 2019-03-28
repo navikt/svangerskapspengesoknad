@@ -28,9 +28,8 @@ import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 
 interface OwnProps {
+    id: string;
     step: SøknadStep;
-    tilretteleggingId: string;
-    tilretteleggingIndex: number;
     formikProps: CustomFormikProps;
 }
 
@@ -44,21 +43,11 @@ interface StateProps {
 type Props = OwnProps & StateProps & StepProps & InjectedIntlProps;
 
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
-    const {
-        step,
-        formikProps,
-        tilretteleggingId: id,
-        tilretteleggingIndex: index,
-        arbeidsforhold,
-        vedlegg,
-        uploadAttachment,
-        deleteAttachment,
-        intl,
-        history,
-    } = props;
+    const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, intl, history } = props;
 
     const { values } = formikProps;
 
+    const index = values.tilrettelegging.findIndex((t) => t.id === id);
     const tilrettelegging = values.tilrettelegging[index];
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
