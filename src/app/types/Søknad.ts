@@ -3,6 +3,7 @@ import Barn, { UferdigBarn } from './Barn';
 import Søker, { Søkerrolle } from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { FormikErrors } from 'formik';
 
 export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger',
@@ -56,8 +57,6 @@ export interface Søknadsgrunnlag {
     type: Arbeidsforholdstype;
 }
 
-export interface Søknadfeil {
-    [s: string]: string | Søknadfeil | undefined;
-}
+export type Søknadfeil = FormikErrors<UferdigSøknad>;
 
 export default Søknad;

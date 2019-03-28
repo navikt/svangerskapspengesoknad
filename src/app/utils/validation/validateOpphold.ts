@@ -30,7 +30,7 @@ export const getDatoAvgrensninger = (type: Oppholdstype, fom: Date, tom: Date) =
           };
 };
 
-const validerPeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): FormikErrors<Tidsperiode> => {
+const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): FormikErrors<Tidsperiode> => {
     let errors: any = {};
     const today = moment().startOf('day');
 
@@ -55,9 +55,9 @@ const validerPeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): FormikEr
     return Object.keys(errors).length > 0 ? errors : undefined;
 };
 
-const validerOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): FormikErrors<Utenlandsopphold> => {
+const validateOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): FormikErrors<Utenlandsopphold> => {
     const errors: FormikErrors<Utenlandsopphold> = {
-        periode: validerPeriode(opphold.periode, type),
+        periode: validatePeriode(opphold.periode, type),
     };
 
     if (opphold.land === '') {
@@ -67,4 +67,4 @@ const validerOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): Form
     return removeUndefinedFields(errors);
 };
 
-export default validerOpphold;
+export default validateOpphold;

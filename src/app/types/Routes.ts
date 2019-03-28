@@ -8,6 +8,6 @@ export enum AppRoute {
 
 export interface SøknadRoute {
     path: AppRoute | string;
-    step?: StepID | string;
+    step?: StepID;
     subStep?: string;
 }

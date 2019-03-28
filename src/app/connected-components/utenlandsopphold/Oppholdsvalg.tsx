@@ -11,7 +11,7 @@ import DatoInput from 'app/formik/wrappers/DatoInput';
 import getCountries from 'app/utils/getCountries';
 import getMessage from 'common/util/i18nUtils';
 import Select from 'app/formik/wrappers/Select';
-import validerOpphold, { getDatoAvgrensninger } from 'app/utils/validering/validerOpphold';
+import validateOpphold, { getDatoAvgrensninger } from 'app/utils/validation/validateOpphold';
 import './oppholdsvalg.less';
 
 const cls = BEMHelper('oppholdsvalg');
@@ -38,7 +38,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
     return (
         <Formik
             initialValues={opphold}
-            validate={validerOpphold(type)}
+            validate={validateOpphold(type)}
             onSubmit={onAdd}
             render={({ values, handleSubmit }: FormikProps<Utenlandsopphold>) => {
                 const datoAvgrensinger = getDatoAvgrensninger(type, values.periode.fom, values.periode.tom);

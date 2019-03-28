@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 
 import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
-import { getSøknadStepPath } from 'app/utils/stepUtils';
+import { getSøknadStepPath, isNextStepAvailable } from 'app/utils/stepUtils';
 import { StepID } from 'app/types/SøknadStep';
 import Arbeidsforhold from '../arbeidsforhold/Arbeidsforhold';
 import history from 'app/utils/history';
@@ -22,6 +22,9 @@ interface Props {
 
 const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad }) => {
     const { values } = formikProps;
+
+    const isSøknadAvailable = isNextStepAvailable({ path: AppRoute.INTRO }, values);
+    const isNextAvailable = (step: StepID) => isNextStepAvailable({ path: AppRoute.SØKNAD, step }, values);
 
     const tilretteleggingRoutes = values.søknadsgrunnlag.map(({ id }) => {
         const søknadStep = {
@@ -43,37 +46,49 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
         <Switch>
             <Route path={AppRoute.INTRO} render={(routeProps) => <Intro formik={formikProps} {...routeProps} />} />
 
-            <Route
-                path={getSøknadStepPath(StepID.TERMIN)}
-                key={StepID.TERMIN}
-                render={(props) => <Termin step={{ step: StepID.TERMIN }} formikProps={formikProps} {...props} />}
-            />
+            {isSøknadAvailable && (
+                <Route
+                    path={getSøknadStepPath(StepID.TERMIN)}
+                    key={StepID.TERMIN}
+                    render={(props) => <Termin step={{ step: StepID.TERMIN }} formikProps={formikProps} {...props} />}
+                />
+            )}
 
-            <Route
-                path={getSøknadStepPath(StepID.ARBEIDSFORHOLD)}
-                key={StepID.ARBEIDSFORHOLD}
-                render={(props) => (
-                    <Arbeidsforhold step={{ step: StepID.ARBEIDSFORHOLD }} formikProps={formikProps} {...props} />
-                )}
-            />
+            {isNextAvailable(StepID.TERMIN) && (
+                <Route
+                    path={getSøknadStepPath(StepID.ARBEIDSFORHOLD)}
+                    key={StepID.ARBEIDSFORHOLD}
+                    render={(props) => (
+                        <Arbeidsforhold step={{ step: StepID.ARBEIDSFORHOLD }} formikProps={formikProps} {...props} />
+                    )}
+                />
+            )}
 
-            {values.søknadsgrunnlag.length > 0 && [tilretteleggingRoutes]}
+            {isNextAvailable(StepID.ARBEIDSFORHOLD) && values.søknadsgrunnlag.length > 0 && tilretteleggingRoutes}
 
-            <Route
-                path={getSøknadStepPath(StepID.UTENLANDSOPPHOLD)}
-                key={StepID.UTENLANDSOPPHOLD}
-                render={(props) => (
-                    <Utenlandsopphold step={{ step: StepID.UTENLANDSOPPHOLD }} formikProps={formikProps} {...props} />
-                )}
-            />
+            {isNextAvailable(StepID.TILRETTELEGGING) && (
+                <Route
+                    path={getSøknadStepPath(StepID.UTENLANDSOPPHOLD)}
+                    key={StepID.UTENLANDSOPPHOLD}
+                    render={(props) => (
+                        <Utenlandsopphold
+                            step={{ step: StepID.UTENLANDSOPPHOLD }}
+                            formikProps={formikProps}
+                            {...props}
+                        />
+                    )}
+                />
+            )}
 
-            <Route
-                path={getSøknadStepPath(StepID.OPPSUMMERING)}
-                key={StepID.OPPSUMMERING}
-                render={(props) => (
-                    <Oppsummering step={{ step: StepID.OPPSUMMERING }} formikProps={formikProps} {...props} />
-                )}
-            />
+            {isNextAvailable(StepID.UTENLANDSOPPHOLD) && (
+                <Route
+                    path={getSøknadStepPath(StepID.OPPSUMMERING)}
+                    key={StepID.OPPSUMMERING}
+                    render={(props) => (
+                        <Oppsummering step={{ step: StepID.OPPSUMMERING }} formikProps={formikProps} {...props} />
+                    )}
+                />
+            )}
 
             <Redirect to={AppRoute.INTRO} key="redirect" />
         </Switch>

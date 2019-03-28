@@ -1,11 +1,12 @@
 import { Location } from 'history';
 import { isEmpty } from 'lodash';
 
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
-import validerIntro from './validering/validerIntro';
+import { appIsRunningInDevEnvironment } from './envUtils';
 import { SøknadRoute, AppRoute } from 'app/types/Routes';
+import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import validateSøknad from './validation/validateSøknad';
 
 export const getSøknadStepPath = (step: StepID, subStep?: string) => {
     let path = `${AppRoute.SØKNAD}/${step}`;
@@ -53,17 +54,8 @@ export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep
 
     const isFirstStep = indexOfCurrentStep === 0;
     const isLastStep = indexOfCurrentStep === allSteps.length - 1;
-
-    let previousStep = invalidStep;
-    let nextStep = invalidStep;
-
-    if (!isFirstStep) {
-        previousStep = allSteps[indexOfCurrentStep - 1];
-    }
-
-    if (!isLastStep) {
-        nextStep = allSteps[indexOfCurrentStep + 1];
-    }
+    const previousStep = isFirstStep ? invalidStep : allSteps[indexOfCurrentStep - 1];
+    const nextStep = isLastStep ? invalidStep : allSteps[indexOfCurrentStep + 1];
 
     return [previousStep, nextStep];
 };
@@ -75,8 +67,12 @@ export const parsePathFromLocation = (location: Location): SøknadRoute => {
         };
     }
 
-    const [, path, step, subStep] = location.pathname.split('/');
-    return { path: `/${path}`, step, subStep };
+    const [path, step, subStep] = location.pathname.split('/').slice(1);
+    return {
+        path: `/${path}` as AppRoute,
+        step: step as StepID,
+        subStep: subStep as string,
+    };
 };
 
 export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]) => {
@@ -90,18 +86,5 @@ export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Ar
     return arbeidsgiverLabel;
 };
 
-const terminAvailable = (values: UferdigSøknad) => {
-    return isEmpty(validerIntro(values));
-};
-
-export const isAvailable = (path: StepID | string) => (values: UferdigSøknad): boolean => {
-    switch (path) {
-        case StepID.TERMIN:
-            return terminAvailable(values);
-
-        case 'SENDT':
-            return values.harGodkjentOppsummering;
-    }
-
-    return true;
-};
+export const isNextStepAvailable = (route: SøknadRoute, values: UferdigSøknad): boolean =>
+    appIsRunningInDevEnvironment() || isEmpty(validateSøknad(route)(values));
