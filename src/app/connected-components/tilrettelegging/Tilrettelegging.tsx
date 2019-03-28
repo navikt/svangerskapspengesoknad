@@ -8,7 +8,7 @@ import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
-import { finnArbeidsgiversNavn, getSøknadStepPath } from 'app/utils/stepUtils';
+import { finnArbeidsgiversNavn, getSøknadStepPath, getAllSteps, getAdjacentSteps } from 'app/utils/stepUtils';
 import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
@@ -24,7 +24,7 @@ import FormikStep from 'app/components/formikStep/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import InputField from 'app/formik/wrappers/InputField';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
-import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 
 interface OwnProps {
@@ -78,15 +78,10 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     };
 
     const navigate = () => {
-        let nextStep, subStep;
-        if (index === values.tilrettelegging.length - 1) {
-            nextStep = StepID.UTENLANDSOPPHOLD;
-        } else {
-            nextStep = StepID.TILRETTELEGGING;
-            subStep = values.søknadsgrunnlag[index + 1].id;
-        }
-
-        navigateTo(getSøknadStepPath(nextStep, subStep), history);
+        const allSteps = getAllSteps(values.søknadsgrunnlag);
+        const nextStep = getAdjacentSteps(step, allSteps)[1];
+        const nextStepPath = getSøknadStepPath(nextStep.step, nextStep.subStep);
+        navigateTo(nextStepPath, history);
     };
 
     return (

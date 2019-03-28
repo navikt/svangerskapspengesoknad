@@ -55,7 +55,8 @@ const Step: FunctionComponent<Props> = (props) => {
         renderSendeknapp: nextStep.step === StepID.INGEN,
         renderTilbakeknapp: previousStep.step !== StepID.INGEN,
         onRequestNavigateToPreviousStep: () => {
-            navigateTo(getSøknadStepPath(previousStep.step, previousStep.subStep), history);
+            const previousPath = getSøknadStepPath(previousStep.step, previousStep.subStep);
+            navigateTo(previousPath, history);
         },
     };
 
@@ -84,7 +85,11 @@ const Step: FunctionComponent<Props> = (props) => {
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
                     {config.renderTilbakeknapp && (
-                        <BackButton hidden={false} onClick={config.onRequestNavigateToPreviousStep} />
+                        <BackButton
+                            text={getMessage(intl, 'steg.tilbake')}
+                            hidden={false}
+                            onClick={config.onRequestNavigateToPreviousStep}
+                        />
                     )}
                 </div>
                 <StegIndikator kompakt steg={stegForStegIndikator} visLabel={false} />

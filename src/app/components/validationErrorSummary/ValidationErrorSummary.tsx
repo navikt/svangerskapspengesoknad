@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'formik';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
-import { flattenErrors } from 'app/utils/errorUtils';
+import { flattenErrors, translateError } from 'app/utils/errorUtils';
 import { FormikProps } from 'app/types/Formik';
 import { UferdigSøknad } from 'app/types/Søknad';
 import BEMHelper from 'app/utils/bem';
@@ -17,7 +17,10 @@ type Props = InjectedIntlProps & FormikProps;
 
 const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors, submitCount }, intl }) => {
     if (errors) {
-        const errorMessages = flattenErrors(errors);
+        const errorMessages = flattenErrors(errors).map((error) => ({
+            ...error,
+            text: translateError(intl, error.text),
+        }));
 
         return (
             <Block visible={errorMessages.length > 0 && submitCount > 0}>

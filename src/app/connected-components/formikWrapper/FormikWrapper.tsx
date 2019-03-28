@@ -3,19 +3,19 @@ import { Formik } from 'formik';
 import { Location } from 'history';
 import isEmpty from 'lodash/isEmpty';
 
+import { appIsRunningInDevEnvironment } from 'app/utils/envUtils';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FormikBag } from 'app/types/FormikBag';
 import { parsePathFromLocation } from 'app/utils/stepUtils';
 import { UferdigSøknad, initialSøknad } from 'app/types/Søknad';
 import history from 'app/utils/history';
 import validerSøknad from 'app/utils/validering/validerSøknad';
-import { appIsRunningInDevEnvironment } from 'app/utils/envUtils';
 
 interface Props {
     contentRenderer: (formikProps: CustomFormikProps) => ReactNode;
 }
 
-const SøknadForm: FunctionComponent<Props> = ({ contentRenderer }) => {
+const FormikWrapper: FunctionComponent<Props> = ({ contentRenderer }) => {
     const [currentPath, setPath] = useState(parsePathFromLocation(history.location));
 
     const onRouteChange = (location: Location) => {
@@ -52,4 +52,4 @@ const SøknadForm: FunctionComponent<Props> = ({ contentRenderer }) => {
     );
 };
 
-export default SøknadForm;
+export default FormikWrapper;

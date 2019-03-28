@@ -38,7 +38,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
     return (
         <Formik
             initialValues={opphold}
-            validate={validerOpphold(type, intl)}
+            validate={validerOpphold(type)}
             onSubmit={onAdd}
             render={({ values, handleSubmit }: FormikProps<Utenlandsopphold>) => {
                 const datoAvgrensinger = getDatoAvgrensninger(type, values.periode.fom, values.periode.tom);

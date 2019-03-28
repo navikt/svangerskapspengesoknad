@@ -5,9 +5,11 @@
     "jaNeiSpørsmål.nei": "Nei",
     "app.banner": "Søknad om svangerskapspenger",
     "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
+    "datoinput.placeholder": "dd.mm.åååå",
 
     "steg.avbrytSøknad": "Avbryt søknad",
     "steg.nesteknapp": "Fortsett",
+    "steg.tilbake": "Tilbake",
 
     "feilside.title": "Det har skjedd en feil!",
     "feilside.mann": "Svangerskapspenger er noe som friske gravide kvinner som ikke kan fortsette å jobbe under svangerskapet fordi det kan medføre risiko for skade på det ufødte barnet kan søke om. Du kan dessverre ikke søke om å få svangerskapspenger.",
@@ -94,12 +96,19 @@
     "utenlandsopphold.land.tilOgMed": "Til og med",
 
     "oppsummering.sendSøknad": "Send søknad",
+    "søknadSendt.tekst": "Søknad med saksnummer {saksNr} ble sendt {dato}.",
     "søknadSendt.tittel": "Takk, {name}!",
 
-    "feil.annet.påkrevd": "Påkrevd",
-    "feil.utenlandsopphold.tidligereOpphold.måVæreTilbakeITid": "Må være før i dag",
-    "feil.utenlandsopphold.tidligereOpphold.måVæreFremoverITid": "Må være fremover i tid",
-    "feil.utenlandsopphold.tidsreiserIkkeTillatt": "Må være etter den første datoen",
+    "valideringsfeil.vilkårMåGodkjennes": "Du må godkjenne vilkårene for å kunne fortsette med søknaden.",
+    "valideringsfeil.oppsummeringMåGodkjennes": "Du må godkjenne svarene dine for å kunne sende inn søknaden",
+    "valideringsfeil.fødselsdatoMåVæreTilbakeITid": "Fødselsdato må være tilbake i tid",
+    "valideringsfeil.tidligereOppholdMåVæreTilbakeITid": "Tidligere opphold må være tilbake i tid",
+    "valideringsfeil.tidligereOppholdMåVæreFremoverITid": "Tidligere opphold må være fremover i tid",
+    "valideringsfeil.termindatoErPåkrevd": "Termindato er påkrevd",
+    "valideringsfeil.stillingsprosentRange": "Stillingsprosent må være mellom 0 og 100",
+    "valideringsfeil.tilrettelagtArbeidForTidlig": "Må være etter dato for å slutte å jobbe som vanlig",
+    "valideringsfeil.feltetErPåkrevd": "Påkrevd",
+    "valideringsfeil.tidsreiserIkkeTillatt": "Må være etter den første datoen",
 
     "feiloppsummering.tittel": "Du må rette opp i følgende feil:"
 }

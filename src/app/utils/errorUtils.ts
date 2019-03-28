@@ -1,6 +1,8 @@
 import { FormikErrors } from 'formik';
 import { SummaryError } from 'common/lib/validation/types';
 import { UferdigSøknad } from 'app/types/Søknad';
+import { InjectedIntl } from 'react-intl';
+import getMessage from 'common/util/i18nUtils';
 
 export const flattenErrors = (errors: FormikErrors<UferdigSøknad>, pathPrefix = ''): SummaryError[] => {
     let flattened: SummaryError[] = [];
@@ -20,3 +22,6 @@ export const flattenErrors = (errors: FormikErrors<UferdigSøknad>, pathPrefix =
 
     return flattened;
 };
+
+export const translateError = (intl: InjectedIntl, error?: any) =>
+    typeof error === 'string' ? getMessage(intl, `valideringsfeil.${error}`) : '';

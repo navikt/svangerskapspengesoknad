@@ -46,7 +46,13 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
                 </Block>
                 <Block>
                     <Ingress>
-                        Søknad med saksnummer {saksNr} ble sendt {dateToHours(new Date(mottattDato))}.
+                        <FormattedMessage
+                            id="søknadSendt.tekst"
+                            values={{
+                                saksNr,
+                                dato: dateToHours(new Date(mottattDato)),
+                            }}
+                        />
                     </Ingress>
                 </Block>
                 <Block>

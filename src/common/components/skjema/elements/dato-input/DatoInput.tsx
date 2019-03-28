@@ -12,6 +12,7 @@ import { Avgrensninger, Tidsperiode } from 'common/types';
 import BEMHelper from 'common/util/bem';
 import { dateToISOFormattedDateString } from 'common/util/datoUtils';
 import './datoInput.less';
+import getMessage from 'common/util/i18nUtils';
 
 export interface DatoInputProps extends DatovelgerCommonProps {
     name: string;
@@ -73,7 +74,7 @@ class DatoInput extends React.Component<Props, {}> {
                             kalender={kalender}
                             input={{
                                 id,
-                                placeholder: 'dd.mm.åååå',
+                                placeholder: getMessage(intl, 'datoinput.placeholder'),
                                 name,
                                 ariaDescribedby: ariaDescriptionId,
                             }}
