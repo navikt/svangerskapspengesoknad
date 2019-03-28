@@ -5,11 +5,11 @@ import { History } from 'history';
 import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { CustomFormikProps } from 'app/types/Formik';
+import { processUtfyltSøknad } from 'app/utils/søknadUtils';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
 import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formikStep/FormikStep';
-import processUtfyltSøknad from 'app/utils/processUtfyltSøknad';
 import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
 

@@ -8,7 +8,7 @@ import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { mapGrunnlagTilTilrettelegging } from 'app/utils/tilretteleggingUtils';
+import { mergeSøknadsgrunnlagIntoTilrettelegging } from 'app/utils/tilretteleggingUtils';
 import { navigateTo } from 'app/utils/navigationUtils';
 import { State } from 'app/redux/store';
 import { StepProps } from '../../components/step/Step';
@@ -42,10 +42,18 @@ const Arbeidsforhold: FunctionComponent<Props> = (props) => {
     const { values, setFieldValue } = formikProps;
     const harValgtMinstEttGrunnlag = values.søknadsgrunnlag.length > 0;
 
+    const prepareTilrettelegging = () => {
+        setFieldValue(
+            'tilrettelegging',
+            mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging)
+        );
+    };
+
     const navigate = () => {
-        const tilrettelegging = mapGrunnlagTilTilrettelegging(values.søknadsgrunnlag);
-        setFieldValue('tilrettelegging', tilrettelegging);
-        navigateTo(getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id), history);
+        prepareTilrettelegging();
+
+        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id);
+        navigateTo(pathToFirstTilrettelegging, history);
     };
 
     return (

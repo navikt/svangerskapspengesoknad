@@ -23,12 +23,7 @@ interface Props {
 const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad }) => {
     const { values } = formikProps;
 
-    const getPropsForTilrettelegging = (id: string, index: number) => ({
-        tilretteleggingId: id,
-        tilretteleggingIndex: index,
-    });
-
-    const tilretteleggingRoutes = values.søknadsgrunnlag.map(({ id }, index) => {
+    const tilretteleggingRoutes = values.søknadsgrunnlag.map(({ id }) => {
         const søknadStep = {
             step: StepID.TILRETTELEGGING,
             subStep: id,
@@ -39,14 +34,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
                 path={getSøknadStepPath(søknadStep.step, søknadStep.subStep)}
                 exact={false}
                 key={`${StepID.TILRETTELEGGING}.${id}`}
-                render={(props) => (
-                    <Tilrettelegging
-                        step={søknadStep}
-                        formikProps={formikProps}
-                        {...props}
-                        {...getPropsForTilrettelegging(id, index)}
-                    />
-                )}
+                render={(props) => <Tilrettelegging id={id} step={søknadStep} formikProps={formikProps} {...props} />}
             />
         );
     });

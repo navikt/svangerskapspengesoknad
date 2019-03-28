@@ -1,5 +1,5 @@
 import { Søknadsgrunnlag } from 'app/types/Søknad';
-import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype, UferdigTilrettelegging } from 'app/types/Tilrettelegging';
 
 export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag[]) => {
     return søknadsgrunnlag.map(({ id, type }) => {
@@ -14,4 +14,18 @@ export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag
             },
         };
     });
+};
+
+export const mergeSøknadsgrunnlagIntoTilrettelegging = (
+    søknadsgrunnlag: Søknadsgrunnlag[],
+    existingTilrettelegging: UferdigTilrettelegging[]
+) => {
+    const nyeTilrettelegginger = mapGrunnlagTilTilrettelegging(
+        søknadsgrunnlag.filter(
+            (grunnlag: Søknadsgrunnlag) =>
+                !existingTilrettelegging.find((t: UferdigTilrettelegging) => t.id === grunnlag.id)
+        )
+    );
+
+    return [...nyeTilrettelegginger, ...existingTilrettelegging];
 };
