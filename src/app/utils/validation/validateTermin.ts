@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 
-const validerTermin = (søknad: UferdigSøknad): Søknadfeil => {
+const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
     let errors: any = {};
     let barn = {};
 
@@ -30,4 +30,4 @@ const validerTermin = (søknad: UferdigSøknad): Søknadfeil => {
     return errors;
 };
 
-export default validerTermin;
+export default validateTermin;

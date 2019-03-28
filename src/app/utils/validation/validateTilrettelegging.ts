@@ -4,7 +4,7 @@ import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 
-const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
+const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
     let errors: any = {};
 
     for (const t of søknad.tilrettelegging) {
@@ -34,4 +34,4 @@ const validerTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
     return errors;
 };
 
-export default validerTilrettelegging;
+export default validateTilrettelegging;

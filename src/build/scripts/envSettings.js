@@ -7,6 +7,7 @@ function createEnvSettingsFile(settingsFile) {
             `window.appSettings = {
                 REST_API_URL: '${process.env.FORELDREPENGESOKNAD_API_URL}',
                 LOGIN_URL: '${process.env.LOGINSERVICE_URL}',
+                LOG_VALIDATION: '${process.env.LOG_VALIDATION}',
             };`
         );
     });

@@ -1,15 +1,14 @@
 import React, { ReactNode, FunctionComponent, useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { Location } from 'history';
-import isEmpty from 'lodash/isEmpty';
 
-import { appIsRunningInDevEnvironment } from 'app/utils/envUtils';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FormikBag } from 'app/types/FormikBag';
+import { logValidationErrors } from 'app/utils/devUtils';
 import { parsePathFromLocation } from 'app/utils/stepUtils';
 import { UferdigSøknad, initialSøknad } from 'app/types/Søknad';
 import history from 'app/utils/history';
-import validerSøknad from 'app/utils/validering/validerSøknad';
+import validateSøknad from 'app/utils/validation/validateSøknad';
 
 interface Props {
     contentRenderer: (formikProps: CustomFormikProps) => ReactNode;
@@ -31,15 +30,8 @@ const FormikWrapper: FunctionComponent<Props> = ({ contentRenderer }) => {
         <Formik
             initialValues={initialSøknad}
             validate={(values: any) => {
-                const errors = validerSøknad(currentPath)(values);
-
-                if (appIsRunningInDevEnvironment()) {
-                    if (!isEmpty(errors)) {
-                        // tslint:disable-next-line
-                        console.log(`❌ Validation errors for ${currentPath.path}/${currentPath.step || ''}:`, errors);
-                    }
-                }
-
+                const errors = validateSøknad(currentPath)(values);
+                logValidationErrors(currentPath, errors);
                 return errors;
             }}
             onSubmit={(søknad: UferdigSøknad, { setSubmitting, setFormikState, setTouched }: FormikBag) => {

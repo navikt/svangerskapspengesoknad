@@ -1,7 +1,7 @@
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 
-const validerIntro = (søknad: UferdigSøknad): Søknadfeil => {
+const validateIntro = (søknad: UferdigSøknad): Søknadfeil => {
     let errors: any = {};
 
     if (søknad.harGodkjentVilkår === false) {
@@ -11,4 +11,4 @@ const validerIntro = (søknad: UferdigSøknad): Søknadfeil => {
     return errors;
 };
 
-export default validerIntro;
+export default validateIntro;
