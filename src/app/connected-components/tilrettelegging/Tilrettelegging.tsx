@@ -20,7 +20,7 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
 import Block from 'common/components/block/Block';
 import DatoInput from 'app/formik/wrappers/DatoInput';
-import FormikStep from 'app/components/formikStep/FormikStep';
+import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import InputField from 'app/formik/wrappers/InputField';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';

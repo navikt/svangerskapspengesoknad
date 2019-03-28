@@ -10,11 +10,11 @@ import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
 import Environment from 'app/Environment';
 import Feil from 'app/components/Feil';
-import FormikWrapper from '../formikWrapper/FormikWrapper';
+import FormikWrapper from '../formik-wrapper/FormikWrapper';
 import getMessage from 'common/util/i18nUtils';
 import Kvittering from 'app/types/Kvittering';
 import Loading from 'app/components/loading/Loading';
-import SøknadRoutes from '../søknadRoutes/SøknadRoutes';
+import SøknadRoutes from '../søknad-routes/SøknadRoutes';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;

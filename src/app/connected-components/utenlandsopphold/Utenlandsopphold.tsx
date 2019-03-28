@@ -8,7 +8,7 @@ import { Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 import { StepProps } from 'app/components/step/Step';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Block from 'common/components/block/Block';
-import FormikStep from 'app/components/formikStep/FormikStep';
+import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import Oppholdsseksjon from './Oppholdsseksjon';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';

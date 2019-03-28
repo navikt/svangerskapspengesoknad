@@ -16,7 +16,7 @@ import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BEMHelper from 'app/utils/bem';
 import Block from 'common/components/block/Block';
-import FormikStep from 'app/components/formikStep/FormikStep';
+import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';

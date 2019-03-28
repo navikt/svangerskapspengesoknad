@@ -8,7 +8,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Block from 'common/components/block/Block';
 import DatoInput from 'app/formik/wrappers/DatoInput';
-import FormikStep from 'app/components/formikStep/FormikStep';
+import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';

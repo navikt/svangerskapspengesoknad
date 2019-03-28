@@ -24,7 +24,7 @@ import BackButton from 'common/components/back-button/BackButton';
 import BEMHelper from 'app/utils/bem';
 import getMessage from 'common/util/i18nUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import ValidationErrorSummary from '../validationErrorSummary/ValidationErrorSummary';
+import ValidationErrorSummary from '../validation-error-summary/ValidationErrorSummary';
 import './step.less';
 
 const cls = BEMHelper('step');

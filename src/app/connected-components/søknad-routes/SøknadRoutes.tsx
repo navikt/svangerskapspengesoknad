@@ -10,7 +10,7 @@ import Arbeidsforhold from '../arbeidsforhold/Arbeidsforhold';
 import history from 'app/utils/history';
 import Intro from '../intro/Intro';
 import Oppsummering from '../oppsummering/Oppsummering';
-import SøknadSendt from '../søknadSendt/SøknadSendt';
+import SøknadSendt from '../søknad-sendt/SøknadSendt';
 import Termin from '../termin/Termin';
 import Tilrettelegging from '../tilrettelegging/Tilrettelegging';
 import Utenlandsopphold from '../utenlandsopphold/Utenlandsopphold';

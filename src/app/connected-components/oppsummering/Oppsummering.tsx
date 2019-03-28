@@ -9,7 +9,7 @@ import { processUtfyltSøknad } from 'app/utils/søknadUtils';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
 import Block from 'common/components/block/Block';
-import FormikStep from 'app/components/formikStep/FormikStep';
+import FormikStep from 'app/components/formik-step/FormikStep';
 import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
 
