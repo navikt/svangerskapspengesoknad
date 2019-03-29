@@ -11,9 +11,9 @@ interface Props {
 }
 
 const Språkvelger: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, kode, setSpråkkode }) => {
-    const setLanguage = (kode: Språkkode) => {
-        moment.locale(kode);
-        setSpråkkode(kode);
+    const setLanguage = (lang: Språkkode) => {
+        moment.locale(lang);
+        setSpråkkode(lang);
     };
 
     return (
