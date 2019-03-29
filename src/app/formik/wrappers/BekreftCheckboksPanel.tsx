@@ -9,7 +9,7 @@ import { translateError } from 'app/utils/errorUtils';
 interface Props {
     label: string;
     name: string;
-    children: ReactNode;
+    children?: ReactNode;
     className?: string;
 }
 

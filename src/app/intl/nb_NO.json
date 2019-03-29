@@ -121,7 +121,7 @@
     "søknadSendt.tittel": "Takk, {name}!",
 
     "valideringsfeil.vilkårMåGodkjennes": "Du må godkjenne vilkårene for å kunne fortsette med søknaden.",
-    "valideringsfeil.oppsummeringMåGodkjennes": "Du må godkjenne svarene dine for å kunne sende inn søknaden",
+    "valideringsfeil.oppsummeringMåGodkjennes": "Du må godkjenne for å kunne sende inn søknaden",
     "valideringsfeil.fødselsdatoMåVæreTilbakeITid": "Fødselsdato må være tilbake i tid",
     "valideringsfeil.tidligereOppholdMåVæreTilbakeITid": "Tidligere opphold må være tilbake i tid",
     "valideringsfeil.tidligereOppholdMåVæreFremoverITid": "Tidligere opphold må være fremover i tid",

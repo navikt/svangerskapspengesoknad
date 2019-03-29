@@ -12,6 +12,11 @@ import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formik-step/FormikStep';
 import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import getMessage from 'common/util/i18nUtils';
+import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 
 interface OwnProps {
     step: SøknadStep;
@@ -24,10 +29,10 @@ interface StateProps {
     requestSendSøknad: (søknad: Søknad) => void;
 }
 
-type Props = OwnProps & StateProps;
+type Props = OwnProps & StateProps & InjectedIntlProps;
 
 const Oppsummering: FunctionComponent<Props> = (props) => {
-    const { step, vedlegg, requestSendSøknad, formikProps, history } = props;
+    const { step, vedlegg, requestSendSøknad, formikProps, history, intl } = props;
     const { values } = formikProps;
 
     const sendSøknad = () => {
@@ -39,22 +44,35 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <FormikStep
-            step={step}
-            formikProps={formikProps}
-            showNesteknapp={true}
-            onValidFormSubmit={sendSøknad}
-            history={history}>
-            <Block>
-                <code
-                    id="oppsummering-placeholder"
-                    style={{
-                        wordWrap: 'break-word',
-                    }}>
-                    {JSON.stringify(values)}
-                </code>
-            </Block>
-        </FormikStep>
+        <Applikasjonsside visTittel visSpråkvelger>
+            <FormikStep
+                step={step}
+                formikProps={formikProps}
+                showNesteknapp={true}
+                onValidFormSubmit={sendSøknad}
+                history={history}>
+                <Block>
+                    <Veilederinfo visVeileder stil="kompakt" type="info">
+                        <FormattedMessage id="oppsummering.veileder" />
+                    </Veilederinfo>
+                </Block>
+                <Block>
+                    <code
+                        id="oppsummering-placeholder"
+                        style={{
+                            wordWrap: 'break-word',
+                        }}>
+                        {JSON.stringify(values)}
+                    </code>
+                </Block>
+                <Block>
+                    <BekreftCheckboksPanel
+                        name="harGodkjentOppsummering"
+                        label={getMessage(intl, 'oppsummering.harGodkjentVilkår')}
+                    />
+                </Block>
+            </FormikStep>
+        </Applikasjonsside>
     );
 };
 
@@ -71,4 +89,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Oppsummering);
+)(injectIntl(Oppsummering));

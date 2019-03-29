@@ -5,7 +5,7 @@ import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 
 const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
-    let errors: any = {};
+    let errors: Søknadfeil = {};
     let barn = {};
 
     const tomorrow = moment()
