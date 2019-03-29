@@ -4,6 +4,7 @@ import validateTermin from './validateTermin';
 import { StepID } from 'app/types/SøknadStep';
 import { SøknadRoute, AppRoute } from 'app/types/Routes';
 import validateTilrettelegging from './validateTilrettelegging';
+import validateOppsummering from './validateOppsummering';
 
 const validateSøknad = (route: SøknadRoute) => (values: UferdigSøknad): Søknadfeil => {
     switch (route.path) {
@@ -39,7 +40,10 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad):
             return validateUntilStep(StepID.TILRETTELEGGING, values);
 
         case StepID.OPPSUMMERING:
-            return validateUntilStep(StepID.UTENLANDSOPPHOLD, values);
+            return {
+                ...validateUntilStep(StepID.UTENLANDSOPPHOLD, values),
+                ...validateOppsummering(values),
+            };
 
         case StepID.INGEN:
             return {};

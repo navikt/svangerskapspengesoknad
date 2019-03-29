@@ -3,12 +3,13 @@ import moment from 'moment';
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import { Tilretteleggingstype } from 'app/types/Tilrettelegging';
 import Valideringsfeil from 'app/types/Valideringsfeil';
+import { FormikErrors } from 'formik';
 
 const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
-    let errors: any = {};
+    let errors: Søknadfeil = {};
 
     for (const t of søknad.tilrettelegging) {
-        let tErrors: any = {};
+        let tErrors: FormikErrors<any> = {};
 
         if (t.type === Tilretteleggingstype.DELVIS) {
             if (t.stillingsprosent < 0 || t.stillingsprosent > 100) {

@@ -52,6 +52,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 
+    const visVedlegg =
+        (tilrettelegging.type === Tilretteleggingstype.HEL && !!tilrettelegging.tilrettelagtArbeidFom) ||
+        (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
+        tilrettelegging.type === Tilretteleggingstype.INGEN;
+
     const visKomponent = {
         typevelger: !!tilrettelegging.behovForTilretteleggingFom,
         helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
@@ -59,11 +64,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         fraHvilkenDato:
             (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.stillingsprosent) ||
             tilrettelegging.type === Tilretteleggingstype.HEL,
-        vedlegg:
-            (tilrettelegging.type === Tilretteleggingstype.HEL && !!tilrettelegging.tilrettelagtArbeidFom) ||
-            (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
-            tilrettelegging.type === Tilretteleggingstype.INGEN,
-        nesteknapp: attachments.length > 0,
+        vedlegg: visVedlegg,
+        nesteknapp: visVedlegg,
     };
 
     const navigate = () => {

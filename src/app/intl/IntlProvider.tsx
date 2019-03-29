@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import nb from 'react-intl/locale-data/nb';
 import nn from 'react-intl/locale-data/nn';
+import 'moment/locale/nb';
+import 'moment/locale/nn';
 
 import { Språkkode } from 'common/intl/types';
 import { State } from 'app/redux/store.js';

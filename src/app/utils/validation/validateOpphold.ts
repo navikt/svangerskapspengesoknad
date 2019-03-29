@@ -3,8 +3,10 @@ import { FormikErrors } from 'formik';
 
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
-import removeUndefinedFields from '../removeUndefinedFields';
 import Valideringsfeil from 'app/types/Valideringsfeil';
+import isEmpty from 'lodash/isEmpty';
+
+type Oppholdsfeil = FormikErrors<Utenlandsopphold>;
 
 export const getDatoAvgrensninger = (type: Oppholdstype, fom: Date, tom: Date) => {
     const today = new Date();
@@ -30,8 +32,8 @@ export const getDatoAvgrensninger = (type: Oppholdstype, fom: Date, tom: Date) =
           };
 };
 
-const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): FormikErrors<Tidsperiode> => {
-    let errors: any = {};
+const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): Oppholdsfeil => {
+    let errors: FormikErrors<Tidsperiode> = {};
     const today = moment().startOf('day');
 
     if (!fom) {
@@ -52,19 +54,19 @@ const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): FormikE
         }
     }
 
-    return Object.keys(errors).length > 0 ? errors : undefined;
+    return !isEmpty(errors) ? { periode: errors } : {};
 };
 
-const validateOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): FormikErrors<Utenlandsopphold> => {
-    const errors: FormikErrors<Utenlandsopphold> = {
-        periode: validatePeriode(opphold.periode, type),
+const validateOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): Oppholdsfeil => {
+    const errors: Oppholdsfeil = {
+        ...validatePeriode(opphold.periode, type),
     };
 
     if (opphold.land === '') {
         errors.land = Valideringsfeil.FELTET_ER_PÅKREVD;
     }
 
-    return removeUndefinedFields(errors);
+    return errors;
 };
 
 export default validateOpphold;
