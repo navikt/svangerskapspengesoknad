@@ -1,22 +1,28 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { History } from 'history';
+import moment from 'moment';
 
 import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { CustomFormikProps } from 'app/types/Formik';
+import { FetchStatus } from 'app/types/FetchState';
+import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
 import { processUtfyltSøknad } from 'app/utils/søknadUtils';
+import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
+import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
+import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formik-step/FormikStep';
+import getMessage from 'common/util/i18nUtils';
+import Oppsummeringspunkt from './Oppsummeringspunkt';
 import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
-import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import getMessage from 'common/util/i18nUtils';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
+import Tilrettelegging from 'app/types/Tilrettelegging';
+import './oppsummering.less';
 
 interface OwnProps {
     step: SøknadStep;
@@ -26,14 +32,19 @@ interface OwnProps {
 
 interface StateProps {
     vedlegg: Attachment[];
+    søkerinfo: Søkerinfo;
     requestSendSøknad: (søknad: Søknad) => void;
 }
 
 type Props = OwnProps & StateProps & InjectedIntlProps;
 
 const Oppsummering: FunctionComponent<Props> = (props) => {
-    const { step, vedlegg, requestSendSøknad, formikProps, history, intl } = props;
+    const { step, vedlegg, søkerinfo, requestSendSøknad, formikProps, history, intl } = props;
     const { values } = formikProps;
+
+    const visAdvarselOmManglendeDokumentasjon = values.tilrettelegging.some(
+        (t: Tilrettelegging) => t.vedlegg.length === 0
+    );
 
     const sendSøknad = () => {
         const ferdigSøknad = processUtfyltSøknad(values, vedlegg);
@@ -56,14 +67,30 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         <FormattedMessage id="oppsummering.veileder" />
                     </Veilederinfo>
                 </Block>
-                <Block>
-                    <code
-                        id="oppsummering-placeholder"
-                        style={{
-                            wordWrap: 'break-word',
-                        }}>
-                        {JSON.stringify(values)}
-                    </code>
+                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
+                    <FormattedHTMLMessage
+                        id="oppsummering.termin.personalia"
+                        values={{
+                            navn: `${søkerinfo.søker.fornavn} ${søkerinfo.søker.etternavn}`,
+                            fnr: søkerinfo.søker.fnr,
+                        }}
+                    />
+                </Oppsummeringspunkt>
+                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.barn.tittel')}>
+                    <FormattedMessage
+                        id="oppsummering.barn.termindato"
+                        values={{
+                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY'),
+                        }}
+                    />
+                </Oppsummeringspunkt>
+                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')} />
+                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')} />
+                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.medlemskap.tittel')} />
+                <Block visible={visAdvarselOmManglendeDokumentasjon}>
+                    <Veilederinfo stil="kompakt" type="advarsel">
+                        <FormattedMessage id="oppsummering.veileder.dokumentasjon" />
+                    </Veilederinfo>
                 </Block>
                 <Block>
                     <BekreftCheckboksPanel
@@ -77,6 +104,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 };
 
 const mapStateToProps = (state: State) => ({
+    søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     vedlegg: state.attachment.vedlegg,
 });
 

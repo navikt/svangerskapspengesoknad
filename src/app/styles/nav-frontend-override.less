@@ -28,8 +28,35 @@
         }
     }
 
-    .veilederinfo--kompakt {
-        padding: 0;
+    .veilederinfo {
+        &--kompakt {
+            padding: 0;
+        }
+
+        &__innhold {
+            border-color: @foreldrepenger-lilla;
+            margin-left: -2.25rem;
+            padding-left: 3rem;
+
+            &--advarsel {
+                border-color: #ffd399;
+            }
+        }
+
+        &__veileder {
+            width: 4.5rem;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            .veileder--undrende {
+                circle {
+                    fill: #ffd399;
+                }
+            }
+        }
     }
 
     .stegindikator {

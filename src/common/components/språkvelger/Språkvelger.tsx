@@ -1,6 +1,7 @@
 import React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Språkkode } from '../../intl/types';
+import moment from 'moment';
 
 import './språkvelger.less';
 
@@ -10,6 +11,11 @@ interface Props {
 }
 
 const Språkvelger: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, kode, setSpråkkode }) => {
+    const setLanguage = (kode: Språkkode) => {
+        moment.locale(kode);
+        setSpråkkode(kode);
+    };
+
     return (
         <div className="sprakvelger">
             <a
@@ -17,11 +23,11 @@ const Språkvelger: React.StatelessComponent<Props & InjectedIntlProps> = ({ int
                 onClick={(evt) => {
                     evt.stopPropagation();
                     evt.preventDefault();
-                    kode === 'nb' ? setSpråkkode('nn') : setSpråkkode('nb');
+                    kode === 'nb' ? setLanguage('nn') : setLanguage('nb');
                 }}
                 href="#">
                 {intl.formatMessage({
-                    id: 'komponent.språkvelger.endreMålform'
+                    id: 'komponent.språkvelger.endreMålform',
                 })}
             </a>
         </div>
