@@ -1,7 +1,7 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
 import Søker, { Søkerrolle } from './Søker';
-import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
+import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype, Tilretteleggingstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
 
@@ -30,16 +30,38 @@ export interface UferdigSøknad {
 }
 
 export const initialSøknad: UferdigSøknad = {
-    harGodkjentVilkår: false,
+    harGodkjentVilkår: true,
     harGodkjentOppsummering: false,
-    barn: {},
-    tilrettelegging: [],
-    søknadsgrunnlag: [],
+    barn: {
+        termindato: new Date('2019-04-27T00:00:00.000Z'),
+        erBarnetFødt: false,
+    },
+    tilrettelegging: [
+        {
+            id: '973135678',
+            vedlegg: [],
+            arbeidsforhold: {
+                id: '973135678',
+                type: Arbeidsforholdstype.VIRKSOMHET,
+            },
+            behovForTilretteleggingFom: new Date('2019-03-01T00:00:00.000Z'),
+            type: Tilretteleggingstype.HEL,
+            tilrettelagtArbeidFom: new Date('2019-03-14T00:00:00.000Z'),
+        },
+    ],
+    søknadsgrunnlag: [
+        {
+            id: '973135678',
+            type: Arbeidsforholdstype.VIRKSOMHET,
+        },
+    ],
     informasjonOmUtenlandsopphold: {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
         tidligereOpphold: [],
         senereOpphold: [],
+        iNorgeSiste12Mnd: true,
+        iNorgeNeste12Mnd: true,
     },
     søker: {
         rolle: Søkerrolle.MOR,

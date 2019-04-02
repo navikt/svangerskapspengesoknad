@@ -11,7 +11,7 @@ import getMessage from 'common/util/i18nUtils';
 import './arbeidsforhold.less';
 
 interface ArbeidsforholdInfoWrapperProps {
-    arbeidsforhold: Arbeidsforhold[];
+    arbeidsforhold: Arbeidsforhold[] | undefined;
 }
 const InformasjonOmArbeidsforholdWrapper: React.StatelessComponent<
     ArbeidsforholdInfoWrapperProps & InjectedIntlProps
@@ -29,7 +29,7 @@ const InformasjonOmArbeidsforholdWrapper: React.StatelessComponent<
             )}
             {harArbeidsforhold && (
                 <ul className="arbeidsforholdList">
-                    {arbeidsforhold.map((arbeidsforholdElement: Arbeidsforhold) => (
+                    {arbeidsforhold!.map((arbeidsforholdElement: Arbeidsforhold) => (
                         <li key={arbeidsforholdElement.arbeidsgiverId}>
                             <ArbeidsforholdInfoBox
                                 key={arbeidsforholdElement.arbeidsgiverId}

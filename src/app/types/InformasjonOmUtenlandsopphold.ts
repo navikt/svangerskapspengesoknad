@@ -2,7 +2,7 @@ import { Tidsperiode } from './Tidsperiode';
 
 export interface Utenlandsopphold {
     land: string;
-    periode: Tidsperiode;
+    tidsperiode: Tidsperiode;
 }
 
 export enum Oppholdstype {

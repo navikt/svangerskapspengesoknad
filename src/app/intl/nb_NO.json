@@ -12,7 +12,7 @@
     "steg.tilbake": "Tilbake",
 
     "feilside.title": "Det har skjedd en feil!",
-    "feilside.mann": "Svangerskapspenger er noe som friske gravide kvinner som ikke kan fortsette å jobbe under svangerskapet fordi det kan medføre risiko for skade på det ufødte barnet kan søke om. Du kan dessverre ikke søke om å få svangerskapspenger.",
+    "feilside.mann": "Svangerskapspenger er noe som friske, gravide kvinner som ikke kan fortsette å jobbe under svangerskapet fordi det kan medføre risiko for skade på det ufødte barnet kan søke om. Du kan dessverre ikke søke om å få svangerskapspenger.",
 
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold og inntekt",
@@ -111,8 +111,11 @@
     "oppsummering.tilrettelegging.manglerDokumentasjon": "Du mangler skjemaet for tilrettelegging og omplassering ved graviditet",
     "oppsummering.medlemskap.tittel": "Din bosituasjon",
     "oppsummering.medlemskap.iNorgeNårBarnetBlirFødt.ja": "Jeg kommer til å være i Norge når barnet blir født",
+    "oppsummering.medlemskap.iNorgeNårBarnetBlirFødt.nei": "Jeg kommer ikke til å være i Norge når barnet blir født",
     "oppsummering.medlemskap.senereOpphold.ja": "Jeg skal bo i Norge de neste 12 månedene",
+    "oppsummering.medlemskap.senereOpphold.nei": "Jeg skal ikke bo i Norge de neste 12 månedene",
     "oppsummering.medlemskap.tidligereOpphold.ja": "Jeg har bodd i Norge de siste 12 månedene",
+    "oppsummering.medlemskap.tidligereOpphold.nei": "Jeg har ikke bodd i Norge de siste 12 månedene",
     "oppsummering.veileder.dokumentasjon": "Husk å sende oss dokumentasjonen som mangler innen 3 uker. Hvis vi mangler nødvendige opplysninger når vi skal behandle søknaden, kan du få avslag.",
     "oppsummering.harGodkjentVilkår": "Jeg har gjort meg kjent med vilkårene for å motta svangerskapspenger, og kan ikke jobbe som vanlig i periodene jeg søker for.",
 
