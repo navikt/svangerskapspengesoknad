@@ -9,17 +9,21 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
     try {
         const response = yield call(getSøkerinfo);
+        const { arbeidsforhold, søker } = response.data;
         const søkerinfo: Søkerinfo = {
             ...response.data,
-            arbeidsforhold: response.data.arbeidsforhold.map((forhold: Arbeidsforhold) => ({
-                ...forhold,
-                arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn),
-            })),
+            arbeidsforhold:
+                arbeidsforhold !== undefined && arbeidsforhold.length > 0
+                    ? arbeidsforhold.map((forhold: Arbeidsforhold) => ({
+                          ...forhold,
+                          arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn),
+                      }))
+                    : [],
             søker: {
-                ...response.data.søker,
-                fornavn: normalizeName(response.data.søker.fornavn),
-                mellomnavn: response.data.søker.mellomnavn ? normalizeName(response.data.søker.mellomnavn) : undefined,
-                etternavn: normalizeName(response.data.søker.etternavn),
+                ...søker,
+                fornavn: normalizeName(søker.fornavn),
+                mellomnavn: søker.mellomnavn ? normalizeName(søker.mellomnavn) : undefined,
+                etternavn: normalizeName(søker.etternavn),
             },
         };
 
