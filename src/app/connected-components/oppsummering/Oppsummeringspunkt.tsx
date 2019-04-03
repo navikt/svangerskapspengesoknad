@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import BEMHelper from 'app/utils/bem';
 import Block from 'common/components/block/Block';
+import OppsummeringIkon from './OppsummeringIkon';
+import { OppsummeringIkonType } from 'app/types/OppsummeringIkonType';
 
 const cls = BEMHelper('oppsummering');
 
-const Oppsummeringspunkt = ({ title, children }: { title: string; children?: React.ReactNode }) => (
-    <section className={cls.element('punkt')}>
+interface Props {
+    title: string;
+    type: OppsummeringIkonType;
+    children?: React.ReactNode;
+}
+
+const Oppsummeringspunkt: FunctionComponent<Props> = ({ title, type, children }) => (
+    <section>
         <Block>
-            <Undertittel tag="h2">{title}</Undertittel>
+            <div className={cls.element('punkt')}>
+                <OppsummeringIkon type={type} className={cls.element('ikon')} />
+                <Undertittel className={cls.element('tittel')} tag="h2">
+                    {title}
+                </Undertittel>
+            </div>
             {children}
         </Block>
     </section>

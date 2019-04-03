@@ -23,11 +23,10 @@ import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import Tilrettelegging from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
-import './oppsummering.less';
 import TilretteleggingOppsummering from './components/TilretteleggingOppsummering';
-import { getRelevanteArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering';
+
+import './oppsummering.less';
 
 interface OwnProps {
     step: SøknadStep;
@@ -77,7 +76,9 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         <FormattedMessage id="oppsummering.veileder" />
                     </Veilederinfo>
                 </Block>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
+                <Oppsummeringspunkt
+                    type="termin"
+                    title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
                     <FormattedHTMLMessage
                         id="oppsummering.termin.personalia"
                         values={{
@@ -86,7 +87,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         }}
                     />
                 </Oppsummeringspunkt>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.barn.tittel')}>
+                <Oppsummeringspunkt type="barn" title={getMessage(intl, 'oppsummering.barn.tittel')}>
                     <FormattedMessage
                         id="oppsummering.barn.termindato"
                         values={{
@@ -94,19 +95,28 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         }}
                     />
                 </Oppsummeringspunkt>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
+                <Oppsummeringspunkt
+                    type="arbeidsforhold"
+                    title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
                     <ArbeidsforholdOppsummering
                         arbeidsforhold={arbeidsforhold}
                         søknadsgrunnlag={values.søknadsgrunnlag}
+                        harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd}
+                        harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd}
+                        harJobbetSomSelvstendigNæringsdrivende={
+                            values.søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd
+                        }
                     />
                 </Oppsummeringspunkt>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')}>
+                <Oppsummeringspunkt
+                    type="tilrettelegging"
+                    title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')}>
                     <TilretteleggingOppsummering
                         tilrettelegging={values.tilrettelegging}
                         arbeidsforhold={arbeidsforhold}
                     />
                 </Oppsummeringspunkt>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>
+                <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>
                     <FormattedMessage
                         id={
                             values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd
