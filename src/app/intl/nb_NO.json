@@ -12,7 +12,7 @@
     "steg.nesteknapp": "Fortsett",
     "steg.tilbake": "Tilbake",
 
-    "feilside.title": "Det har skjedd en feil!",
+    "feilside.title": "Du kan dessverre ikke søke om svangerskapspenger",
     "feilside.mann": "Svangerskapspenger er noe som friske gravide kvinner som ikke kan fortsette å jobbe under svangerskapet fordi det kan medføre risiko for skade på det ufødte barnet kan søke om. Du kan dessverre ikke søke om å få svangerskapspenger.",
 
     "stegtittel.termin": "Om barnet",
@@ -44,7 +44,7 @@
     "intro.dinePersonopplysninger.avsnitt.personvernerklaringen.tittel": "Personvernerklæringen i NAV",
     "intro.dinePersonopplysninger.avsnitt.svarPaSoknaden.html": "<p>Når søknaden din er behandlet, får du et vedtaksbrev. Det forteller deg om</p><ul><li>begrunnelse for beslutningen</li><li>hvordan du får innsyn i saksbehandlingen og reglene som er blitt brukt</li><li>hvordan du kan klage hvis du er uenig</li></ul>",
     "intro.dinePersonopplysninger.avsnitt.svarPaSoknaden.tittel": "Svar på søknaden",
-    "intro.dinePersonopplysninger.behandling.html": "<p>NAV innhenter og mottar opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få riktig tjeneste og ytelser.</p><p>Du har valgt å søke om foreldrepenger. Det er en ytelse fra folketrygden som du kan få hvis du fyller vilkårene. Vilkårene står på <a href=\"https://www.nav.no/foreldrepenger\"  class=\"lenke\" rel=\"noopener\">nav.no/foreldrepenger</a>.</p>",
+    "intro.dinePersonopplysninger.behandling.html": "<p>NAV innhenter og mottar opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få riktig tjeneste og ytelser.</p><p>Du har valgt å søke om foreldrepenger. Det er en ytelse fra folketrygden som du kan få hvis du fyller vilkårene. Vilkårene står på <a href=\"https://www.nav.no/foreldrepenger\"  class=\"lenke\" rel=\"noopener\">nav.no/svangerskapspenger</a>.</p>",
     "intro.dinePersonopplysninger.sectionheading": "Slik behandler NAV personopplysningene dine",
 
     "termin.termindato": "Når er termindato?",
