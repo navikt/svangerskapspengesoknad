@@ -32,7 +32,7 @@ const Block: React.StatelessComponent<BlockProps> = ({
     header,
     animated = true,
     children,
-    hasChildBlocks
+    hasChildBlocks,
 }) => {
     if (children === undefined || (animated !== true && visible === false)) {
         return null;
