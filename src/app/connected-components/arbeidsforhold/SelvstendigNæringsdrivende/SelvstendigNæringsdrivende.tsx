@@ -42,6 +42,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
     return (
         <Formik
             initialValues={element}
+            // tslint:disable-next-line: no-empty
             validate={() => {}} // TODO
             onSubmit={onAdd}
             render={({ handleSubmit, values }: FormikProps<Næring>) => {
@@ -99,8 +100,6 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         revisor !== undefined && revisor.erNærVennEllerFamilie !== undefined,
                     bliKontaktet: false,
                 } as any;
-
-                console.log(visKomponent);
 
                 return (
                     <form

@@ -38,7 +38,8 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
     return (
         <Formik
             initialValues={element}
-            validate={() => {}}
+            // tslint:disable-next-line: no-empty
+            validate={() => {}} // TODO
             onSubmit={onAdd}
             render={({ handleSubmit }: FormikProps<Utenlandsopphold>) => {
                 return (
