@@ -75,7 +75,7 @@ const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingspros
     } else {
         return (
             <FormattedHTMLMessage
-                id="oppsummering.tilrettelegging.info.hel"
+                id="oppsummering.tilrettelegging.info.start"
                 values={{
                     startDato: moment(startDato).format('Do MMMM YYYY'),
                 }}
