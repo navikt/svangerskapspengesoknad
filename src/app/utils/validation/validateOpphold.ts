@@ -54,12 +54,12 @@ const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): Opphold
         }
     }
 
-    return !isEmpty(errors) ? { periode: errors } : {};
+    return !isEmpty(errors) ? { tidsperiode: errors } : {};
 };
 
 const validateOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): Oppholdsfeil => {
     const errors: Oppholdsfeil = {
-        ...validatePeriode(opphold.periode, type),
+        ...validatePeriode(opphold.tidsperiode, type),
     };
 
     if (opphold.land === '') {
