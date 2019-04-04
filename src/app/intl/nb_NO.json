@@ -175,7 +175,7 @@
     "oppsummering.tilrettelegging.manglerDokumentasjon": "Du mangler skjemaet for tilrettelegging og omplassering ved graviditet",
     "oppsummering.tilrettelegging.info.startSluttProsent": "<strong>{startDato} - {sluttDato}:</strong> Du kan jobbe {prosent} prosent",
     "oppsummering.tilrettelegging.info.startSlutt": "<strong>{startDato} - {sluttDato}:</strong> Du kan ikke jobbe noe",
-    "oppsummering.tilrettelegging.info.start": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan jobbe",
+    "oppsummering.tilrettelegging.info.start": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan ikke jobbe noe",
     "oppsummering.medlemskap.tittel": "Din bosituasjon",
     "oppsummering.medlemskap.iNorgeNårBarnetBlirFødt.ja": "Jeg kommer til å være i Norge når barnet blir født",
     "oppsummering.medlemskap.iNorgeNårBarnetBlirFødt.nei": "Jeg kommer ikke til å være i Norge når barnet blir født",
