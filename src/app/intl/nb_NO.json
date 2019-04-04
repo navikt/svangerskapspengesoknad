@@ -173,9 +173,10 @@
     "oppsummering.arbeidsforhold.svar.andreInntekter": "hatt andre inntektskilder de siste ti månedene",
     "oppsummering.tilrettelegging.tittel": "Perioden du ikke kan jobbe som vanlig",
     "oppsummering.tilrettelegging.manglerDokumentasjon": "Du mangler skjemaet for tilrettelegging og omplassering ved graviditet",
-    "oppsummering.tilrettelegging.info.startSluttProsent": "<strong>{startDato} - {sluttDato}:</strong> Du kan jobbe {prosent} prosent",
-    "oppsummering.tilrettelegging.info.startSlutt": "<strong>{startDato} - {sluttDato}:</strong> Du kan ikke jobbe noe",
-    "oppsummering.tilrettelegging.info.start": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan ikke jobbe noe",
+    "oppsummering.tilrettelegging.info.jobbeDelvis": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan jobbe {prosent} prosent",
+    "oppsummering.tilrettelegging.info.ikkeJobbePeriode": "<strong>{startDato} - {sluttDato}:</strong> Du kan ikke jobbe noe",
+    "oppsummering.tilrettelegging.info.ikkeJobbe": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan ikke jobbe noe",
+    "oppsummering.tilrettelegging.info.jobbeFullt": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan jobbe",
     "oppsummering.medlemskap.tittel": "Din bosituasjon",
     "oppsummering.medlemskap.iNorgeNårBarnetBlirFødt.ja": "Jeg kommer til å være i Norge når barnet blir født",
     "oppsummering.medlemskap.iNorgeNårBarnetBlirFødt.nei": "Jeg kommer ikke til å være i Norge når barnet blir født",
@@ -187,7 +188,7 @@
     "oppsummering.harGodkjentVilkår": "Jeg har gjort meg kjent med vilkårene for å motta svangerskapspenger, og kan ikke jobbe som vanlig i periodene jeg søker for.",
 
     "søknadSendt.tekst": "Søknad med saksnummer {saksNr} ble sendt {dato}.",
-    "søknadSendt.tittel": "Takk, {name}!",
+    "søknadSendt.tittel": "Takk for søknaden {name}!",
 
     "valideringsfeil.vilkårMåGodkjennes": "Du må godkjenne vilkårene for å kunne fortsette med søknaden.",
     "valideringsfeil.oppsummeringMåGodkjennes": "Du må godkjenne for å kunne sende inn søknaden",
