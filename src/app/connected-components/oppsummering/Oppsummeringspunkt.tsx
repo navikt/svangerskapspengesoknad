@@ -18,7 +18,9 @@ const Oppsummeringspunkt: FunctionComponent<Props> = ({ title, type, children })
     <section>
         <Block>
             <div className={cls.element('punkt')}>
-                <OppsummeringIkon type={type} className={cls.element('ikon')} />
+                <div className={cls.element('ikon')}>
+                    <OppsummeringIkon type={type} />
+                </div>
                 <Undertittel className={cls.element('tittel')} tag="h2">
                     {title}
                 </Undertittel>

@@ -101,10 +101,10 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     <ArbeidsforholdOppsummering
                         arbeidsforhold={arbeidsforhold}
                         søknadsgrunnlag={values.søknadsgrunnlag}
-                        harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd}
-                        harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd}
+                        harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd!}
+                        harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd!}
                         harJobbetSomSelvstendigNæringsdrivende={
-                            values.søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd
+                            values.søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd!
                         }
                     />
                 </Oppsummeringspunkt>

@@ -8,7 +8,7 @@ import PassIkon from 'app/icons/PassIkon';
 
 interface Props {
     type: OppsummeringIkonType;
-    className: string;
+    className?: string;
 }
 
 const OppsummeringIkon: FunctionComponent<Props> = ({ type, className }) => {
