@@ -21,14 +21,14 @@ export const mapArbeidsToSøknadsgrunnlag = (søker: Partial<Søker>, arbeidsfor
         ...andreInntekterSiste10Mnd.map((annenInntekt: AnnenInntekt) => ({
             value: annenInntekt.type,
             label: annenInntekt.type,
-            type: Arbeidsforholdstype.SELVSTENDIG,
+            type: Arbeidsforholdstype.PRIVAT,
         })),
         ...(frilansInformasjon !== undefined
             ? [
                   {
                       value: 'Frilans',
                       label: 'Frilans',
-                      type: Arbeidsforholdstype.PRIVAT,
+                      type: Arbeidsforholdstype.FRILANSER,
                   },
               ]
             : []),
