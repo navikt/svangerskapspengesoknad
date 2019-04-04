@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import React, { ComponentClass, FunctionComponent, StatelessComponent, useState } from 'react';
+import { injectIntl, InjectedIntlProps, FormattedMessage, InjectedIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
 
@@ -9,33 +9,51 @@ import Block from 'common/components/block/Block';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import Modal from 'nav-frontend-modal';
 import getMessage from 'common/util/i18nUtils';
-import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
 import List from 'common/components/list/List';
 import { UferdigSøknad } from 'app/types/Søknad';
-import OppholdListElement from '../utenlandsopphold/OppholdListElement';
-import { ModalFormProps } from './SelvstendigNæringsdrivende/SelvstendigNæringsdrivende';
+
+export interface ModalFormProps<T> {
+    endre: boolean;
+    element?: T;
+    onAdd: (element: T) => void;
+    onCancel: () => void;
+}
+
+export interface ModalSummaryProps<T> {
+    element: T;
+    onEdit: () => void;
+    onDelete: () => void;
+    editButtonAriaText?: string;
+    deleteButtonAriaText?: string;
+    intl: InjectedIntl;
+}
 
 interface OwnProps<T> {
     name: string;
     listName: string;
-    type: any;
     legend: string;
     labels?: {
         ja: string;
         nei: string;
     };
     buttonLabel: string;
-    formComponent: React.ComponentClass<ModalFormProps<T>>;
+    infoboksTekst?: string | React.ReactNode;
+    summaryListTitle?: {
+        title: string;
+        info?: string;
+    };
+    summaryListElementComponent: StatelessComponent<ModalSummaryProps<T>>;
+    formComponent: ComponentClass<ModalFormProps<T>>;
 }
 
 type OuterProps = OwnProps<any> & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
 
 const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
-    const { formik, name, listName, legend, labels, type, buttonLabel, intl } = props;
+    const { formik, name, listName, legend, labels, buttonLabel, summaryListTitle, infoboksTekst, intl } = props;
     const visLandvelger = get(formik.values, name) === true;
 
-    const elementer: any[] = get(formik.values, listName);
+    const elementer: any[] = get(formik.values, listName, []);
 
     const [currentIndex, selectIndex] = useState(get(elementer, 'length', 0));
     const [modalIsOpen, toggleModal] = useState(false);
@@ -55,12 +73,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
     return (
         <>
             <Block margin="xs">
-                <JaNeiSpørsmål twoColumns name={name} legend={legend} labels={labels} />
-            </Block>
-            <Block visible={visLandvelger} margin="xs">
-                <Knapp onClick={openModalForAdding} htmlType="button">
-                    <FormattedMessage id={buttonLabel} />
-                </Knapp>
+                <JaNeiSpørsmål twoColumns name={name} legend={legend} labels={labels} infoboksTekst={infoboksTekst} />
             </Block>
 
             <FieldArray
@@ -68,20 +81,28 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                 render={({ push, replace, remove }) => {
                     return (
                         <>
-                            <Block margin="xs" visible={currentIndex > 0}>
+                            <Block margin="xs" visible={elementer.length > 0} header={summaryListTitle}>
                                 <List
                                     data={elementer}
-                                    renderElement={(oppholdToRender: Utenlandsopphold, index: number) => (
-                                        <OppholdListElement
-                                            key={oppholdToRender.land + index}
-                                            opphold={oppholdToRender}
-                                            onEdit={openModalForEditing(index)}
-                                            onDelete={() => {
-                                                remove(index);
-                                            }}
-                                        />
-                                    )}
+                                    renderElement={(element, index: number) => {
+                                        return (
+                                            <props.summaryListElementComponent
+                                                key={element + index}
+                                                intl={intl}
+                                                element={element}
+                                                onEdit={openModalForEditing(index)}
+                                                onDelete={() => {
+                                                    remove(index);
+                                                }}
+                                            />
+                                        );
+                                    }}
                                 />
+                            </Block>
+                            <Block visible={visLandvelger} margin="xs">
+                                <Knapp onClick={openModalForAdding} htmlType="button">
+                                    <FormattedMessage id={buttonLabel} />
+                                </Knapp>
                             </Block>
                             <Modal
                                 closeButton
@@ -89,7 +110,6 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>
                                 <props.formComponent
-                                    type={type}
                                     endre={endre}
                                     element={endre ? elementer[currentIndex] : undefined}
                                     onCancel={() => toggleModal(false)}

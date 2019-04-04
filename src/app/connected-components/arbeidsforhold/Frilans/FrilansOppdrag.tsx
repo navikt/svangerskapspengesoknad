@@ -12,6 +12,7 @@ import { isValid } from 'i18n-iso-countries';
 import getMessage from 'common/util/i18nUtils';
 import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
+import { Undertittel } from 'nav-frontend-typografi';
 
 const cls = BEMHelper('frilans-oppdrag');
 
@@ -51,9 +52,13 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                         }}
                         className={cls.block}>
                         <Block>
+                            <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
+                        </Block>
+
+                        <Block>
                             <InputField
-                                name="selvstendigNæringsdrivende-orgnr"
-                                label={getMessage(intl, 'selvstendigNæringsdrivende')}
+                                name="navnPåArbeidsgiver"
+                                label={getMessage(intl, 'arbeidsforhold.frilans.oppdrag.navnPåArbeidsgiver')}
                                 required={true}
                             />
                         </Block>
@@ -62,12 +67,12 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             <>
                                 <DatoInput
                                     fullskjermKalender
-                                    name="periode.fom"
+                                    name="tidsperiode.fom"
                                     label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
                                 />
                                 <DatoInput
                                     fullskjermKalender
-                                    name="periode.fom"
+                                    name="tidsperiode.tom"
                                     label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
                                 />
                             </>

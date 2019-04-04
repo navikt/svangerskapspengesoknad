@@ -22,16 +22,9 @@ import _ from 'lodash';
 import VarigEndringAvNæringsinntekt from './VarigEndringAvNæringsinntekt';
 import moment from 'moment';
 import Næringsrelasjon from './Næringsrelasjon';
+import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 
 const cls = BEMHelper('selvstendig-næringsdrivende');
-
-export interface ModalFormProps<T> {
-    endre: boolean;
-    element?: T;
-    type: any;
-    onAdd: (element: T) => void;
-    onCancel: () => void;
-}
 
 type Props = ModalFormProps<Næring> & InjectedIntlProps;
 const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => {

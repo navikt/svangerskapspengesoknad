@@ -5,11 +5,12 @@ import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import getMessage from 'common/util/i18nUtils';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import Block from 'common/components/block/Block';
-import ArbeidSeksjon from '../ArbeidSeksjon';
+import ArbeidSeksjon from '../ArbeidSeksjon/ArbeidSeksjon';
 import FrilansOppdrag from './FrilansOppdrag';
 import { CustomFormikProps } from 'app/types/Formik';
 import { normaliserFrilansinformasjon } from '../utils/normaliser';
 import _ from 'lodash';
+import FrilansListElement from './FrilansListElement';
 
 interface OwnProps {
     formikProps: CustomFormikProps;
@@ -58,9 +59,9 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                 <ArbeidSeksjon
                     name="søker.frilansInformasjon.harJobbetForNærVennEllerFamilieSiste10Mnd"
                     listName="søker.frilansInformasjon.oppdragForNæreVennerEllerFamilieSiste10Mnd"
-                    type={'test'}
                     legend={getMessage(intl, 'arbeidsforhold.frilans.oppdragForNæreVennerEllerFamilieSiste10Mnd')}
-                    buttonLabel={getMessage(intl, 'leggTil')}
+                    buttonLabel={getMessage(intl, 'leggtil')}
+                    summaryListElementComponent={FrilansListElement}
                     formComponent={FrilansOppdrag}
                 />
             </Block>

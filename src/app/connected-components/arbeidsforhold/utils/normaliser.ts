@@ -57,3 +57,26 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
     }
     return _.pick(næring, relevanteFeilter);
 };
+
+export const normaliserSøker = (søker: Partial<Søker>) => {
+    let relevanteFeilter: string[] = [
+        'rolle',
+        'harJobbetSomFrilansSiste10Mnd',
+        'harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd',
+        'harHattAnnenInntektSiste10Mnd',
+    ];
+
+    if (søker.harJobbetSomFrilansSiste10Mnd) {
+        relevanteFeilter.push('frilansInformasjon');
+    }
+
+    if (søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd) {
+        relevanteFeilter.push('selvstendigNæringsdrivendeInformasjon');
+    }
+
+    if (søker.harHattAnnenInntektSiste10Mnd) {
+        relevanteFeilter.push('andreINntekterSiste10Mnd');
+    }
+
+    return _.pick(søker, relevanteFeilter);
+};

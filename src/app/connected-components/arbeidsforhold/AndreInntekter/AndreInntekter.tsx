@@ -3,8 +3,6 @@ import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, Field, FieldProps, FieldArray } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
 
-import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
-
 import BEMHelper from 'app/utils/bem';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { isValid } from 'i18n-iso-countries';
@@ -22,19 +20,12 @@ import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import DatoInput from 'app/formik/wrappers/DatoInput';
+import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 
 const cls = BEMHelper('andre-inntekter');
 
-export interface ModalFormProps {
-    endre: boolean;
-    element?: any;
-    type: Oppholdstype;
-    onAdd: (opphold: AnnenInntekt) => void;
-    onCancel: () => void;
-}
-
-type Props = ModalFormProps & InjectedIntlProps;
-const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
+type Props = ModalFormProps<AnnenInntekt> & InjectedIntlProps;
+const AndreInntekter: FunctionComponent<Props> = (props) => {
     const {
         endre,
         onCancel,
@@ -53,12 +44,12 @@ const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
             // tslint:disable-next-line: no-empty
             validate={() => {}} // TODO
             onSubmit={onAdd}
-            render={({ handleSubmit }: FormikProps<Utenlandsopphold>) => {
+            render={({ values, handleSubmit }: FormikProps<AnnenInntekt>) => {
                 const visKomponent = {
-                    navn: false,
-                    land: false,
-                    advarselDokumentasjon: false,
-                    vedlegg: true,
+                    navn: values.type === AnnenInntektType.JOBB_I_UTLANDET,
+                    land: values.type === AnnenInntektType.JOBB_I_UTLANDET,
+                    advarselDokumentasjon: values.type !== AnnenInntektType.JOBB_I_UTLANDET,
+                    vedlegg: values.type !== AnnenInntektType.JOBB_I_UTLANDET,
                 };
 
                 return (
@@ -77,7 +68,7 @@ const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
 
                         <Block>
                             <RadioPanelGruppe
-                                name={'næringstyper'}
+                                name={'type'}
                                 legend={getMessage(intl, 'arbeidsforhold.andreInntekter.inntektstype')}
                                 radios={[
                                     {
@@ -119,7 +110,7 @@ const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
                         <Block visible={visKomponent.navn}>
                             <InputField
                                 name="arbeidsgiverNavn"
-                                label={getMessage(intl, 'annenInntekt.spørsmål.arbeidsgiver')}
+                                label={getMessage(intl, 'arbeidsforhold.andreInntekter.arbeidsgiverNavn')}
                             />
                         </Block>
 
@@ -127,12 +118,12 @@ const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
                             <>
                                 <DatoInput
                                     fullskjermKalender
-                                    name="periode.fom"
+                                    name="tidsperiode.fom"
                                     label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
                                 />
                                 <DatoInput
                                     fullskjermKalender
-                                    name="periode.tom"
+                                    name="tidsperiode.tom"
                                     label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
                                 />
                             </>
@@ -146,10 +137,10 @@ const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
 
                         <Block visible={visKomponent.vedlegg}>
                             <FieldArray
-                                name={`andreInntekter.vedlegg`}
+                                name={'vedlegg'}
                                 render={({ form, push, remove }) => (
                                     <AttachmentOverview
-                                        attachmentType={AttachmentType.TILRETTELEGGING}
+                                        attachmentType={AttachmentType.ANNEN_INNTEKT}
                                         skjemanummer={Skjemanummer.ANNET}
                                         attachments={element.vedlegg}
                                         onFilesSelect={(files: Attachment[]) => {
@@ -158,8 +149,8 @@ const AndreInntekter: FunctionComponent<Props> = (props: Props) => {
                                             });
                                         }}
                                         onFileDelete={(files: Attachment[]) => {
-                                            files.forEach((file) => {
-                                                remove(element.vedlegg.indexOf(file.id));
+                                            files.forEach((file: Attachment) => {
+                                                remove(form.values.vedlegg.indexOf(file.id));
                                             });
                                         }}
                                     />

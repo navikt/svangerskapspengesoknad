@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
+import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, InjectedIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'app/utils/bem';
 import moment from 'moment';
 
-import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import { FetchStatus } from 'app/types/FetchState';
 import { CustomFormikProps } from 'app/types/Formik';
 import { mergeSøknadsgrunnlagIntoTilrettelegging } from 'app/utils/tilretteleggingUtils';
@@ -16,7 +15,7 @@ import getMessage from 'common/util/i18nUtils';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import VelgSøknadsgrunnlag from 'app/formik/wrappers/VelgSøknadsgrunnlag';
-import Arbeidsforholdseksjon from './ArbeidSeksjon';
+import Arbeidsforholdseksjon from './ArbeidSeksjon/ArbeidSeksjon';
 import SelvstendigNæringsdrivende from './SelvstendigNæringsdrivende/SelvstendigNæringsdrivende';
 import AndreInntekter from './AndreInntekter/AndreInntekter';
 import FrilansSpørsmål from './Frilans/FrilansSpørsmål';
@@ -30,6 +29,11 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
 import Action from 'app/redux/types/Action';
+
+import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
+import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
+import { normaliserSøker } from './utils/normaliser';
+import { mapArbeidsToSøknadsgrunnlag } from './utils/søknadsgrunnlagMapper';
 
 import './arbeidsforhold.less';
 
@@ -52,14 +56,8 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const { step, formikProps, arbeidsforhold, intl, history } = props;
     const { values, setFieldValue } = formikProps;
     const { søker, søknadsgrunnlag } = values;
-    const { frilansInformasjon } = søker;
 
-    const harValgtMinstEttGrunnlag: boolean =
-        søknadsgrunnlag.length > 0 ||
-        søker.harJobbetSomFrilansSiste10Mnd === true ||
-        (søker.andreInntekterSiste10Mnd !== undefined && søker.andreInntekterSiste10Mnd.length > 0) ||
-        (søker.selvstendigNæringsdrivendeInformasjon !== undefined &&
-            søker.selvstendigNæringsdrivendeInformasjon.length > 0);
+    const harValgtMinstEttGrunnlag: boolean = søknadsgrunnlag.length > 0;
 
     const prepareTilrettelegging = () => {
         setFieldValue(
@@ -75,19 +73,33 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         navigateTo(pathToFirstTilrettelegging, history);
     };
 
+    const {
+        harJobbetSomFrilansSiste10Mnd,
+        frilansInformasjon,
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd,
+        selvstendigNæringsdrivendeInformasjon,
+        harHattAnnenInntektSiste10Mnd,
+        andreInntekterSiste10Mnd,
+    } = normaliserSøker(søker);
+
     const visKomponent = {
         harJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon:
-            søker.harJobbetSomFrilansSiste10Mnd === false ||
-            (frilansInformasjon && frilansInformasjon.driverFosterhjem !== undefined),
+            harJobbetSomFrilansSiste10Mnd === false ||
+            (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined),
         harHattAnnenInntektSiste10Mnd:
-            (søker.selvstendigNæringsdrivendeInformasjon && søker.selvstendigNæringsdrivendeInformasjon.length > 0) ||
-            søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false,
+            (selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length > 0) ||
+            harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false,
+        søknadsgrunnlag:
+            harHattAnnenInntektSiste10Mnd !== undefined &&
+            (arbeidsforhold.length > 0 ||
+                (selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length > 0) ||
+                frilansInformasjon !== undefined ||
+                (andreInntekterSiste10Mnd && andreInntekterSiste10Mnd.length > 0)),
         ingenArbeidsforholdVeileder:
-            (!harValgtMinstEttGrunnlag &&
-                (søker.selvstendigNæringsdrivendeInformasjon &&
-                    søker.selvstendigNæringsdrivendeInformasjon.length > 0)) ||
-            (søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
-                søker.harHattAnnenInntektSiste10Mnd === false),
+            arbeidsforhold.length === 0 &&
+            harJobbetSomFrilansSiste10Mnd === false &&
+            harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
+            harHattAnnenInntektSiste10Mnd === false,
     };
 
     return (
@@ -105,6 +117,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     }}>
                     <Normaltekst>{getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.text')}</Normaltekst>
                 </Block>
+
                 <Block
                     header={{
                         title: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.label'),
@@ -112,6 +125,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     }}>
                     <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
                 </Block>
+
                 <Block margin="s">
                     <Veilederinfo type="info" stil="kompakt">
                         {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
@@ -120,38 +134,41 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         })}
                     </Veilederinfo>
                 </Block>
-                <Block margin="l">
-                    <VelgSøknadsgrunnlag
-                        name="søknadsgrunnlag"
-                        label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
-                        options={arbeidsforhold.map((forhold: Arbeidsforhold) => ({
-                            value: forhold.arbeidsgiverId,
-                            label: forhold.arbeidsgiverNavn,
-                            type: Arbeidsforholdstype.VIRKSOMHET,
-                        }))}
-                    />
-                </Block>
+
                 <Block>
                     <FrilansSpørsmål formikProps={formikProps} />
                 </Block>
+
                 <Block visible={visKomponent.harJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
                     <Arbeidsforholdseksjon
                         name="søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd"
                         listName="søker.selvstendigNæringsdrivendeInformasjon"
-                        type={'test'}
                         legend={getMessage(intl, 'arbeidsforhold.selvstendig.erSelvstendigNæringsdrivende')}
                         buttonLabel={getMessage(intl, 'leggtil')}
+                        infoboksTekst={getMessage(intl, 'arbeidsforhold.selvstendig.infoboxTekst')}
+                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.dineVirksomheter') }}
+                        summaryListElementComponent={SelvstendigListElement}
                         formComponent={SelvstendigNæringsdrivende}
                     />
                 </Block>
+
                 <Block visible={visKomponent.harHattAnnenInntektSiste10Mnd}>
                     <Arbeidsforholdseksjon
                         name="søker.harHattAnnenInntektSiste10Mnd"
                         listName="søker.andreInntekterSiste10Mnd"
-                        type={'test'}
                         legend={getMessage(intl, 'arbeidsforhold.andreInntekter')}
                         buttonLabel={getMessage(intl, 'leggtil')}
+                        infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst intl={intl} />}
+                        summaryListElementComponent={AndreInntekterListElement}
                         formComponent={AndreInntekter}
+                    />
+                </Block>
+
+                <Block visible={visKomponent.søknadsgrunnlag} margin="l">
+                    <VelgSøknadsgrunnlag
+                        name="søknadsgrunnlag"
+                        label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
+                        options={mapArbeidsToSøknadsgrunnlag(values.søker, arbeidsforhold)}
                     />
                 </Block>
                 <Block visible={visKomponent.ingenArbeidsforholdVeileder}>
@@ -187,3 +204,18 @@ export default injectIntl(
         mapDispatchToProps
     )(Arbeidsforhold)
 );
+
+const AnnenInntektSiste10MndHjelpeTekst = ({ intl }: { intl: InjectedIntl }) => {
+    return (
+        <div>
+            <div>{getMessage(intl, 'annenInntekt.infoboksTekst.overskrift')}</div>
+            <ul>
+                <li>{getMessage(intl, 'annenInntekt.infoboksTekst.punktEn')}</li>
+                <li>{getMessage(intl, 'annenInntekt.infoboksTekst.punktTo')}</li>
+                <li>{getMessage(intl, 'annenInntekt.infoboksTekst.punktTre')}</li>
+                <li>{getMessage(intl, 'annenInntekt.infoboksTekst.punktFire')}</li>
+                <li>{getMessage(intl, 'annenInntekt.infoboksTekst.punktFem')}</li>
+            </ul>
+        </div>
+    );
+};

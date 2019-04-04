@@ -35,7 +35,6 @@ const mockedSøknad: Søknad = {
         harJobbetSomFrilansSiste10Mnd: false,
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: false,
         selvstendigNæringsdrivendeInformasjon: [],
-        erAleneOmOmsorg: false,
         harHattAnnenInntektSiste10Mnd: false,
         andreInntekterSiste10Mnd: [],
     },

@@ -65,11 +65,7 @@ export const initialSøknad: UferdigSøknad = {
     },
     søker: {
         rolle: Søkerrolle.MOR,
-        harJobbetSomFrilansSiste10Mnd: false,
-        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: false,
         selvstendigNæringsdrivendeInformasjon: [],
-        erAleneOmOmsorg: false,
-        harHattAnnenInntektSiste10Mnd: false,
         andreInntekterSiste10Mnd: [],
     },
 };

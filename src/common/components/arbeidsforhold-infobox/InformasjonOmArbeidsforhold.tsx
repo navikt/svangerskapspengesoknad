@@ -6,8 +6,8 @@ import Arbeidsforhold from '../../../app/types/Arbeidsforhold';
 import getMessage from 'common/util/i18nUtils';
 import BEMHelper from 'common/util/bem';
 
-import './arbeidsforhold.less';
 import { formatDate } from 'app/utils/formatDate';
+import './arbeidsforhold.less';
 
 interface InformasjonOmArbeidsforholdProps {
     arbeidsforhold: Arbeidsforhold;

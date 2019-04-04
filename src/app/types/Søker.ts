@@ -9,12 +9,11 @@ export enum Søkerrolle {
 export interface Søker {
     rolle: Søkerrolle.MOR;
     harJobbetSomFrilansSiste10Mnd: boolean;
-    harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: boolean;
-    erAleneOmOmsorg: boolean;
-    harHattAnnenInntektSiste10Mnd: boolean;
-    andreInntekterSiste10Mnd?: Array<AnnenInntekt>;
-    selvstendigNæringsdrivendeInformasjon?: Næring[];
     frilansInformasjon?: FrilansInformasjonPartial;
+    harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: boolean;
+    selvstendigNæringsdrivendeInformasjon?: Næring[];
+    harHattAnnenInntektSiste10Mnd: boolean;
+    andreInntekterSiste10Mnd?: AnnenInntekt[];
 }
 
 export default Søker;
