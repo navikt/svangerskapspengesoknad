@@ -18,7 +18,7 @@ const OppholdListElement: React.StatelessComponent<Props> = ({ opphold, intl, ..
     return (
         <InteractiveListElement
             title={countries.getName(opphold.land, intl.locale)}
-            text={prettifyTidsperiode(opphold.periode)}
+            text={prettifyTidsperiode(opphold.tidsperiode)}
             deleteLinkText={getMessage(intl, 'utenlandsopphold.land.slett')}
             {...rest}
         />

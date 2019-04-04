@@ -41,7 +41,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
             validate={validateOpphold(type)}
             onSubmit={onAdd}
             render={({ values, handleSubmit }: FormikProps<Utenlandsopphold>) => {
-                const datoAvgrensinger = getDatoAvgrensninger(type, values.periode.fom, values.periode.tom);
+                const datoAvgrensinger = getDatoAvgrensninger(type, values.tidsperiode.fom, values.tidsperiode.tom);
 
                 const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                     e.preventDefault();

@@ -7,7 +7,7 @@ import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
-import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { processUtfyltSøknad } from 'app/utils/søknadUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
@@ -22,7 +22,13 @@ import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import Tilrettelegging from 'app/types/Tilrettelegging';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import TilretteleggingOppsummering from './components/TilretteleggingOppsummering';
+import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering';
+
 import './oppsummering.less';
+import MedlemskapOppsummering from './MedlemskapOppsummering';
+import TerminOppsummering from './TerminOppsummering';
 
 interface OwnProps {
     step: SøknadStep;
@@ -32,14 +38,15 @@ interface OwnProps {
 
 interface StateProps {
     vedlegg: Attachment[];
-    søkerinfo: Søkerinfo;
+    søkerinfo: Søkerinfo | undefined;
+    arbeidsforhold: Arbeidsforhold[];
     requestSendSøknad: (søknad: Søknad) => void;
 }
 
 type Props = OwnProps & StateProps & InjectedIntlProps;
 
 const Oppsummering: FunctionComponent<Props> = (props) => {
-    const { step, vedlegg, søkerinfo, requestSendSøknad, formikProps, history, intl } = props;
+    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, history, intl } = props;
     const { values } = formikProps;
 
     const visAdvarselOmManglendeDokumentasjon = values.tilrettelegging.some(
@@ -54,6 +61,10 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
         }
     };
 
+    if (søkerinfo === undefined) {
+        return null;
+    }
+
     return (
         <Applikasjonsside visTittel visSpråkvelger>
             <FormikStep
@@ -67,16 +78,16 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         <FormattedMessage id="oppsummering.veileder" />
                     </Veilederinfo>
                 </Block>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
-                    <FormattedHTMLMessage
-                        id="oppsummering.termin.personalia"
-                        values={{
-                            navn: `${søkerinfo.søker.fornavn} ${søkerinfo.søker.etternavn}`,
-                            fnr: søkerinfo.søker.fnr,
-                        }}
+                <Oppsummeringspunkt
+                    type="termin"
+                    title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
+                    <TerminOppsummering
+                        fornavn={søkerinfo.søker.fornavn}
+                        etternavn={søkerinfo.søker.etternavn}
+                        fnr={søkerinfo.søker.fnr}
                     />
                 </Oppsummeringspunkt>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.barn.tittel')}>
+                <Oppsummeringspunkt type="barn" title={getMessage(intl, 'oppsummering.barn.tittel')}>
                     <FormattedMessage
                         id="oppsummering.barn.termindato"
                         values={{
@@ -84,9 +95,33 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         }}
                     />
                 </Oppsummeringspunkt>
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')} />
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')} />
-                <Oppsummeringspunkt title={getMessage(intl, 'oppsummering.medlemskap.tittel')} />
+                <Oppsummeringspunkt
+                    type="arbeidsforhold"
+                    title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
+                    <ArbeidsforholdOppsummering
+                        arbeidsforhold={arbeidsforhold}
+                        søknadsgrunnlag={values.søknadsgrunnlag}
+                        harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd!}
+                        harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd!}
+                        harJobbetSomSelvstendigNæringsdrivende={
+                            values.søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd!
+                        }
+                    />
+                </Oppsummeringspunkt>
+                <Oppsummeringspunkt
+                    type="tilrettelegging"
+                    title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')}>
+                    <TilretteleggingOppsummering
+                        tilrettelegging={values.tilrettelegging}
+                        arbeidsforhold={arbeidsforhold}
+                    />
+                </Oppsummeringspunkt>
+                <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>
+                    <MedlemskapOppsummering
+                        iNorgeNeste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
+                        iNorgeSiste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
+                    />
+                </Oppsummeringspunkt>
                 <Block visible={visAdvarselOmManglendeDokumentasjon}>
                     <Veilederinfo stil="kompakt" type="advarsel">
                         <FormattedMessage id="oppsummering.veileder.dokumentasjon" />
@@ -105,6 +140,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
+    arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
     vedlegg: state.attachment.vedlegg,
 });
 
