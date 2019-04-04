@@ -26,7 +26,7 @@ export interface UferdigSøknad {
     barn: UferdigBarn;
     tilrettelegging: UferdigTilrettelegging[];
     søknadsgrunnlag: Søknadsgrunnlag[];
-    søker: Søker;
+    søker: Partial<Søker>;
 }
 
 export const initialSøknad: UferdigSøknad = {
