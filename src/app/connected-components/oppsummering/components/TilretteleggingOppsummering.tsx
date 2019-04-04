@@ -3,11 +3,12 @@ import moment from 'moment';
 import BEMHelper from 'common/util/bem';
 
 import './tilretteleggingOppsummering.less';
-import { EtikettLiten, Element } from 'nav-frontend-typografi';
+import { EtikettLiten } from 'nav-frontend-typografi';
 import Tilrettelegging, { UferdigTilrettelegging, Tilretteleggingstype } from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { getArbeidsforholdNavnFromId } from 'app/utils/arbeidsforholdUtils';
 import { guid } from 'nav-frontend-js-utils';
+import { FormattedHTMLMessage } from 'react-intl';
 
 const cls = BEMHelper('tilretteleggingOppsummering');
 
@@ -16,31 +17,85 @@ interface Props {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-const renderDates = (startDato: Date, tilretteleggingsDato?: Date) => {
-    if (tilretteleggingsDato !== undefined) {
+const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingsprosent?: number) => {
+    if (tilretteleggingsDato !== undefined && stillingsprosent !== undefined) {
         const midtDato: Date = moment(tilretteleggingsDato)
             .subtract(24, 'hours')
             .toDate();
 
         return (
             <>
-                <Element>
-                    {moment(startDato).format('Do MMMM YYYY')} - {moment(midtDato).format('Do MMMM YYYY')}
-                </Element>
-                <Element>{moment(tilretteleggingsDato).format('Do MMMM YYYY')} - Fødselspermisjon</Element>
+                <div className="textWrapper">
+                    <FormattedHTMLMessage
+                        id="oppsummering.tilrettelegging.info.startSlutt"
+                        values={{
+                            startDato: moment(startDato).format('Do MMMM YYYY'),
+                            sluttDato: moment(midtDato).format('Do MMMM YYYY'),
+                        }}
+                    />
+                </div>
+                <div className="textWrapper">
+                    <FormattedHTMLMessage
+                        id="oppsummering.tilrettelegging.info.startSluttProsent"
+                        values={{
+                            startDato: moment(startDato).format('Do MMMM YYYY'),
+                            sluttDato: moment(midtDato).format('Do MMMM YYYY'),
+                            prosent: stillingsprosent,
+                        }}
+                    />
+                </div>
+            </>
+        );
+    } else if (tilretteleggingsDato !== undefined) {
+        const midtDato: Date = moment(tilretteleggingsDato)
+            .subtract(24, 'hours')
+            .toDate();
+
+        return (
+            <>
+                <div className="textWrapper">
+                    <FormattedHTMLMessage
+                        id="oppsummering.tilrettelegging.info.startSlutt"
+                        values={{
+                            startDato: moment(startDato).format('Do MMMM YYYY'),
+                            sluttDato: moment(midtDato).format('Do MMMM YYYY'),
+                        }}
+                    />
+                </div>
+                <div className="textWrapper">
+                    <FormattedHTMLMessage
+                        id="oppsummering.tilrettelegging.info.start"
+                        values={{
+                            startDato: moment(tilretteleggingsDato).format('Do MMMM YYYY'),
+                        }}
+                    />
+                </div>
             </>
         );
     } else {
-        return <Element>{moment(startDato).format('Do MMMM YYYY')} - Fødselspermisjon</Element>;
+        return (
+            <FormattedHTMLMessage
+                id="oppsummering.tilrettelegging.info.hel"
+                values={{
+                    startDato: moment(startDato).format('Do MMMM YYYY'),
+                }}
+            />
+        );
     }
 };
 
 const renderContent = (tilrettelegging: Tilrettelegging) => {
     switch (tilrettelegging.type) {
         case Tilretteleggingstype.DELVIS:
-            return renderDates(tilrettelegging.behovForTilretteleggingFom, tilrettelegging.tilrettelagtArbeidFom);
+            return renderDates(
+                tilrettelegging.behovForTilretteleggingFom,
+                tilrettelegging.tilrettelagtArbeidFom,
+                tilrettelegging.stillingsprosent
+            );
         case Tilretteleggingstype.HEL:
             return renderDates(tilrettelegging.behovForTilretteleggingFom, tilrettelegging.tilrettelagtArbeidFom);
+        case Tilretteleggingstype.INGEN:
+            return renderDates(tilrettelegging.behovForTilretteleggingFom);
         default:
             return null;
     }

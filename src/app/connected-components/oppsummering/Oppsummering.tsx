@@ -7,7 +7,7 @@ import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
-import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { processUtfyltSøknad } from 'app/utils/søknadUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
@@ -27,6 +27,8 @@ import TilretteleggingOppsummering from './components/TilretteleggingOppsummerin
 import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering';
 
 import './oppsummering.less';
+import MedlemskapOppsummering from './MedlemskapOppsummering';
+import TerminOppsummering from './TerminOppsummering';
 
 interface OwnProps {
     step: SøknadStep;
@@ -79,12 +81,10 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 <Oppsummeringspunkt
                     type="termin"
                     title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
-                    <FormattedHTMLMessage
-                        id="oppsummering.termin.personalia"
-                        values={{
-                            navn: `${søkerinfo.søker.fornavn} ${søkerinfo.søker.etternavn}`,
-                            fnr: søkerinfo.søker.fnr,
-                        }}
+                    <TerminOppsummering
+                        fornavn={søkerinfo.søker.fornavn}
+                        etternavn={søkerinfo.søker.etternavn}
+                        fnr={søkerinfo.søker.fnr}
                     />
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt type="barn" title={getMessage(intl, 'oppsummering.barn.tittel')}>
@@ -117,20 +117,9 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     />
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>
-                    <FormattedMessage
-                        id={
-                            values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd
-                                ? 'oppsummering.medlemskap.senereOpphold.ja'
-                                : 'oppsummering.medlemskap.senereOpphold.nei'
-                        }
-                    />
-                    <br />
-                    <FormattedMessage
-                        id={
-                            values.informasjonOmUtenlandsopphold.iNorgeSiste12Mnd
-                                ? 'oppsummering.medlemskap.tidligereOpphold.ja'
-                                : 'oppsummering.medlemskap.tidligereOpphold.nei'
-                        }
+                    <MedlemskapOppsummering
+                        iNorgeNeste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
+                        iNorgeSiste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
                     />
                 </Oppsummeringspunkt>
                 <Block visible={visAdvarselOmManglendeDokumentasjon}>
