@@ -1,7 +1,7 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
 import Søker, { Søkerrolle } from './Søker';
-import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
+import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype, Tilretteleggingstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
 
