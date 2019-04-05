@@ -1,11 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { dateToHours } from 'app/utils/formatDate';
 import { getData } from 'app/utils/fromFetchState';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
@@ -13,8 +10,13 @@ import BEMHelper from 'app/utils/bem';
 import Block from 'common/components/block/Block';
 import FetchState from 'app/types/FetchState';
 import Kvittering from 'app/types/Kvittering';
-import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
+import Panel from 'nav-frontend-paneler';
 import './søknadSendt.less';
+import StatusBoks from './components/StatusBoks';
+import Lenke from 'nav-frontend-lenker';
+import KvitteringHeader from './components/KvitteringHeader';
+import { FormattedMessage } from 'react-intl';
+import KvitteringSuksess from './components/KvitteringSuksess';
 
 const cls = BEMHelper('søknadSendt');
 
@@ -30,39 +32,35 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
     return (
         <Applikasjonsside visTittel={true}>
             <div className={cls.block}>
-                <Block margin="m">
-                    <SpotlightLetter className={cls.element('spotlightLetter')} />
+                <KvitteringHeader søker={søker} mottattDato={mottattDato} />
+
+                <KvitteringSuksess />
+
+                <StatusBoks saksNr={saksNr} />
+
+                <Block>
+                    <Undertittel className={cls.element('tittel')}>
+                        <FormattedMessage id="søknadSendt.foreldrepenger" />
+                    </Undertittel>
                 </Block>
 
                 <Block>
-                    <Innholdstittel>
-                        <FormattedMessage
-                            id="søknadSendt.tittel"
-                            values={{
-                                name: søker.fornavn,
-                            }}
-                        />
-                    </Innholdstittel>
-                </Block>
-                <Block>
-                    <Ingress>
-                        <FormattedMessage
-                            id="søknadSendt.tekst"
-                            values={{
-                                saksNr,
-                                dato: dateToHours(new Date(mottattDato)),
-                            }}
-                        />
-                    </Ingress>
-                </Block>
-                <Block>
-                    <Hovedknapp
-                        className={cls.element('avsluttKnapp')}
-                        onClick={() => ((window as any).location = 'https://tjenester.nav.no/dittnav/oversikt')}>
-                        <FormattedMessage id="avslutt" />
-                    </Hovedknapp>
+                    <Panel className={cls.element('foreldrepengerPanel')}>
+                        <div className="point5remMargin">
+                            <Undertittel>
+                                <FormattedMessage id="søknadSendt.foreldrepenger.boks.tittel" />
+                            </Undertittel>
+                        </div>
+                        <div className="oneremMargin">
+                            <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
+                        </div>
+                        <Lenke href="#" target="_blank">
+                            <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
+                        </Lenke>
+                    </Panel>
                 </Block>
             </div>
+            ;
         </Applikasjonsside>
     );
 };

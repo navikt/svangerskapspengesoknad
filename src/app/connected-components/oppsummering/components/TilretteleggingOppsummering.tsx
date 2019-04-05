@@ -29,7 +29,7 @@ const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingspros
         return (
             <>
                 {!kanTilretteleggeFraStart && (
-                    <div className="textWrapper">
+                    <div className="point5remMargin">
                         <FormattedHTMLMessage
                             id="oppsummering.tilrettelegging.info.ikkeJobbePeriode"
                             values={{
@@ -39,7 +39,7 @@ const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingspros
                         />
                     </div>
                 )}
-                <div className="textWrapper">
+                <div className="point5remMargin">
                     <FormattedHTMLMessage
                         id="oppsummering.tilrettelegging.info.jobbeDelvis"
                         values={{
@@ -61,7 +61,7 @@ const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingspros
         return (
             <>
                 {!kanTilretteleggeFraStart && (
-                    <div className="textWrapper">
+                    <div className="point5remMargin">
                         <FormattedHTMLMessage
                             id="oppsummering.tilrettelegging.info.ikkeJobbePeriode"
                             values={{
@@ -71,7 +71,7 @@ const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingspros
                         />
                     </div>
                 )}
-                <div className="textWrapper">
+                <div className="point5remMargin">
                     <FormattedHTMLMessage
                         id="oppsummering.tilrettelegging.info.jobbeFullt"
                         values={{
