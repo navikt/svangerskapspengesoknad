@@ -171,7 +171,7 @@
     "oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie": "jobbet som frilans de siste ti månedene",
     "oppsummering.arbeidsforhold.svar.selvstendig": "jobbet som selvstendig næringsdrivende de siste ti månedene",
     "oppsummering.arbeidsforhold.svar.andreInntekter": "hatt andre inntektskilder de siste ti månedene",
-    "oppsummering.tilrettelegging.tittel": "Perioden du ikke kan jobbe som vanlig",
+    "oppsummering.tilrettelegging.tittel": "Perioder du ikke kan jobbe, eller må jobbe mindre enn vanlig",
     "oppsummering.tilrettelegging.manglerDokumentasjon": "Du mangler skjemaet for tilrettelegging og omplassering ved graviditet",
     "oppsummering.tilrettelegging.info.jobbeDelvis": "<strong>{startDato} - Fødselspermisjon:</strong> Du kan jobbe {prosent} prosent",
     "oppsummering.tilrettelegging.info.ikkeJobbePeriode": "<strong>{startDato} - {sluttDato}:</strong> Du kan ikke jobbe noe",
