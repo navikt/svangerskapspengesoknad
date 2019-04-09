@@ -117,7 +117,7 @@
     "arbeidsforhold.veileder.ingenArbeidsforhold": "<b>Du kan dessverre ikke gå videre i denne søknaden</b><br/><br/>Det ser dessverre ikke ut som om du kan søke om svangerskapspenger. Det er ingen arbeidsforhold registrert på deg. Du jobber heller ikke som frilans eller selvstendig næringsdrivende. For oss virker det derfor ikke som at du har noen jobb som kan skade det ufødte barnet.<br/><br/>Hvis du mener at noe av informasjonen over ikke stemmer må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret. Når dette har blitt gjort vil det bli mulig for deg å søke. <br /> <br />Dersom du er usikker på om du har rett til å søke om svangerskapspenger kan du lese mer",
 
     "tilrettelegging.veileder.intro": "Her kan du fortelle oss om hvordan du kan jobbe hos <b>{arbeidsgiversNavn}</b> mens du er gravid.",
-    "tilrettelegging.behovForTilretteleggingFom.label": "Når må du slutte å jobbe som vanlig hos {arbeidsgiversNavn}?",
+    "tilrettelegging.behovForTilretteleggingFom.label": "Fra hvilken dato har du behov for tilrettelegging eller omplassering?",
     "tilrettelegging.slutteArbeidFom.label": "Når er din siste ordinære arbeidsdag?",
     "tilrettelegging.noeEllerIngen.label": "Kan du fortsette å jobbe noe etter dette?",
     "tilrettelegging.helEllerDelvis.label": "Hvor mye kan du jobbe når de tilrettelegger for deg?",
