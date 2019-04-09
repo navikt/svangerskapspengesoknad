@@ -11,6 +11,9 @@ import Modal from 'nav-frontend-modal';
 import getMessage from 'common/util/i18nUtils';
 import List from 'common/components/list/List';
 import { UferdigSøknad } from 'app/types/Søknad';
+import BEMHelper from 'app/utils/bem';
+
+import './arbeidSeksjon.less';
 
 export interface ModalFormProps<T> {
     endre: boolean;
@@ -48,6 +51,8 @@ interface OwnProps<T> {
 
 type OuterProps = OwnProps<any> & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
+
+const cls = BEMHelper('arbeidSeksjon');
 
 const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
     const { formik, name, listName, legend, labels, buttonLabel, summaryListTitle, infoboksTekst, intl } = props;
@@ -100,7 +105,10 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 />
                             </Block>
                             <Block visible={visLandvelger} margin="xs">
-                                <Knapp onClick={openModalForAdding} htmlType="button">
+                                <Knapp
+                                    className={cls.element('leggTil')}
+                                    onClick={openModalForAdding}
+                                    htmlType="button">
                                     <FormattedMessage id={buttonLabel} />
                                 </Knapp>
                             </Block>

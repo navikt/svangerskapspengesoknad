@@ -135,9 +135,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     </Veilederinfo>
                 </Block>
 
-                <Block>
-                    <FrilansSpørsmål formikProps={formikProps} />
-                </Block>
+                <FrilansSpørsmål formikProps={formikProps} />
 
                 <Block visible={visKomponent.harJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
                     <Arbeidsforholdseksjon
