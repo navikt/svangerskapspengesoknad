@@ -12,6 +12,7 @@ export interface BlockProps {
     header?: {
         title: string;
         info?: string;
+        stil?: 'normal' | 'seksjon';
     };
     visible?: boolean;
     /** Animation is set to default true if visible is !undefined, unless animated is set to false */
@@ -41,7 +42,7 @@ const Block: React.StatelessComponent<BlockProps> = ({
     const content =
         header !== undefined ? (
             <section className={contentClass}>
-                <div className="heading">
+                <div className={cls.element('heading', `stil-${header.stil || 'normal'}`)}>
                     <h1 className={`typo-element ${cls.element('title')}`}>{header.title}</h1>
                     {header.info && <Infoboks tekst={header.info} contentFullWidth={true} />}
                 </div>
