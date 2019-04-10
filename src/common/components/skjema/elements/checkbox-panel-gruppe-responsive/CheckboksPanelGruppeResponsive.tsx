@@ -6,22 +6,23 @@ import 'nav-frontend-skjema-style';
 import { CheckboksProps } from 'nav-frontend-skjema/lib/checkboks-panel';
 
 interface ResponsiveProps {
-    twoColumns?: boolean;
+    columns?: undefined | 2 | 1;
     disabled?: boolean;
 }
 
-type Props = CheckboksPanelGruppeProps & ResponsiveProps;
+export type CheckboxPanelgruppeResponsiveProps = CheckboksPanelGruppeProps & ResponsiveProps;
 
-class CheckboksPanelGruppeResponsive extends React.Component<Props> {
+class CheckboksPanelGruppeResponsive extends React.Component<CheckboxPanelgruppeResponsiveProps> {
     render() {
-        const { feil, twoColumns = false, disabled = false, legend, checkboxes, onChange } = this.props;
+        const { feil, columns, disabled = false, legend, checkboxes, onChange } = this.props;
 
         if (checkboxes === undefined) {
             return null;
         }
 
         const cls = classnames('checkboksPanelWrapper', {
-            'checkboksPanelWrapper--twoColumns': twoColumns === true,
+            'checkboksPanelWrapper--twoColumns': columns === 2,
+            'checkboksPanelWrapper--oneColumn': columns === 1,
         });
 
         return (

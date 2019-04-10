@@ -146,6 +146,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <CheckboksPanelGruppe
                         label="Hvordan kan du jobbe mens du er gravid?"
                         name={`tilrettelegging.${index}.type`}
+                        columns={1}
                         options={[
                             {
                                 label: 'a) Du kan fortsette med samme stillingsprosent',

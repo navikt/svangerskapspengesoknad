@@ -11,9 +11,17 @@
 
     .checkboksPanel {
         margin: 0 @panelRightMargin @panelBottomMargin 0;
+
         &__label {
             flex-grow: 1;
             flex-shrink: 0;
+        }
+    }
+
+    .checkboksPanelWrapper {
+        &--oneColumn {
+            flex-basis: 100% !important;
+            width: 100% !important;
         }
     }
 
@@ -32,10 +40,12 @@
         .checkboksPanelWrapper {
             flex-basis: 100% / 3;
             width: 100% / 3;
+
             &--twoColumns {
                 flex-basis: 50%;
                 width: 50%;
             }
+
         }
     }
 }
