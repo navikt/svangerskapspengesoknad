@@ -5,12 +5,12 @@ import './checkboksPanelGruppeResponsive.less';
 import 'nav-frontend-skjema-style';
 import { CheckboksProps } from 'nav-frontend-skjema/lib/checkboks-panel';
 
-interface ResponsiveProps {
+export interface CheckboksPanelGruppeResponsiveProps {
     twoColumns?: boolean;
     disabled?: boolean;
 }
 
-type Props = CheckboksPanelGruppeProps & ResponsiveProps;
+type Props = CheckboksPanelGruppeProps & CheckboksPanelGruppeResponsiveProps;
 
 class CheckboksPanelGruppeResponsive extends React.Component<Props> {
     render() {

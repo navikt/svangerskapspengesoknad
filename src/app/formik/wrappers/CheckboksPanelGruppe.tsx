@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
 import { FieldArrayRenderProps, FieldArray } from 'formik';
-import CheckboksPanelGruppeResponsive from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
+import CheckboksPanelGruppeResponsive, {
+    CheckboksPanelGruppeResponsiveProps,
+} from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit } from 'lodash';
 
 interface OwnProps {
@@ -13,7 +15,9 @@ interface OwnProps {
     }>;
 }
 
-type Props = OwnProps & Omit<CheckboksPanelGruppeProps, 'onChange' | 'checkboxes' | 'legend'>;
+type Props = OwnProps &
+    Omit<CheckboksPanelGruppeProps, 'onChange' | 'checkboxes' | 'legend'> &
+    CheckboksPanelGruppeResponsiveProps;
 
 const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
     const { name, label, options, ...checkboksPanelGruppeProps } = props;

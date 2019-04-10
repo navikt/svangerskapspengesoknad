@@ -36,7 +36,7 @@ const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
             <Block visible={visKomponent.erNærVennEllerFamilie}>
                 <JaNeiSpørsmål
                     name={`${type}.erNærVennEllerFamilie`}
-                    legend={`arbeidsforhold.selvstendig.næringsrelasjon.erNærVennEllerFamilie`}
+                    legend={getMessage(intl, `arbeidsforhold.selvstendig.næringsrelasjon.erNærVennEllerFamilie`)}
                 />
             </Block>
         </>

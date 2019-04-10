@@ -2,6 +2,11 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, Field, FieldProps } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import moment from 'moment';
+import _ from 'lodash';
+import { isValid } from 'i18n-iso-countries';
 
 import BEMHelper from 'app/utils/bem';
 import { Næringstype, Næring } from 'app/types/SelvstendigNæringsdrivende';
@@ -14,13 +19,8 @@ import { SelectChangeEvent } from 'app/types/events';
 import getCountries from 'app/utils/getCountries';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import { isValid } from 'i18n-iso-countries';
-import { Undertittel } from 'nav-frontend-typografi';
 import { normaliserNæring } from '../utils/normaliser';
-import _ from 'lodash';
 import VarigEndringAvNæringsinntekt from './VarigEndringAvNæringsinntekt';
-import moment from 'moment';
 import Næringsrelasjon from './Næringsrelasjon';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 
@@ -52,9 +52,11 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                     harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene,
                     oppstartsdato,
                     harRegnskapsfører,
+                    regnskapsfører,
                     revisor,
                     harRevisor,
                     endringAvNæringsinntektInformasjon,
+                    kanInnhenteOpplsyningerFraRevisor,
                 } = normalisertNæring;
 
                 const visKomponent = {
@@ -83,30 +85,34 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         (oppstartsdato !== undefined && oppstartsdato !== '') ||
                         (endringAvNæringsinntektInformasjon !== undefined &&
                             endringAvNæringsinntektInformasjon.forklaring !== undefined &&
-                            endringAvNæringsinntektInformasjon.forklaring !== ''),
+                            endringAvNæringsinntektInformasjon.forklaring !== '') ||
+                        harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === false,
                     næringsRelasjonRegnskapsfører: normalisertNæring.harRegnskapsfører === true,
-                    harRevisor:
-                        harRegnskapsfører === false ||
-                        (revisor !== undefined && revisor.erNærVennEllerFamilie !== undefined),
+                    harRevisor: harRegnskapsfører === false,
                     næringsrelasjonRevisor: harRevisor === true,
                     kanInnhenteOpplsyningerFraRevisor:
                         revisor !== undefined && revisor.erNærVennEllerFamilie !== undefined,
-                    bliKontaktet: false,
+                    bliKontaktet:
+                        harRevisor === false ||
+                        kanInnhenteOpplsyningerFraRevisor !== undefined ||
+                        (regnskapsfører !== undefined && regnskapsfører.erNærVennEllerFamilie !== undefined),
+                    formButtons:
+                        harRevisor === false ||
+                        kanInnhenteOpplsyningerFraRevisor !== undefined ||
+                        (regnskapsfører !== undefined && regnskapsfører.erNærVennEllerFamilie !== undefined),
                 } as any;
 
                 return (
                     <form
+                        className={cls.block}
                         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
                             e.preventDefault();
                             e.stopPropagation();
                             handleSubmit();
-                        }}
-                        className={cls.block}>
-                        <Block>
-                            <Undertittel>
-                                {getMessage(intl, `arbeidsforhold.selvstendig.tittel${endre ? '.endre' : ''}`)}
-                            </Undertittel>
-                        </Block>
+                        }}>
+                        <Undertittel className="title">
+                            {getMessage(intl, `arbeidsforhold.selvstendig.tittel${endre ? '.endre' : ''}`)}
+                        </Undertittel>
 
                         <Block>
                             <CheckboksPanelGruppe
@@ -116,6 +122,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                     label: getMessage(intl, `næringstype.${næringstype.toLocaleLowerCase()}`),
                                     value: næringstype,
                                 }))}
+                                twoColumns={true}
                             />
                         </Block>
 
@@ -243,7 +250,6 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                 legend={getMessage(intl, 'arbeidsforhold.selvstendig.harRevisor')}
                             />
                         </Block>
-
                         <Block visible={visKomponent.næringsrelasjonRevisor}>
                             <Næringsrelasjon type="revisor" />
                         </Block>
@@ -264,12 +270,14 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             </Veilederinfo>
                         </Block>
 
-                        <Knapp htmlType="button" onClick={onCancel}>
-                            <FormattedMessage id="avbryt" />
-                        </Knapp>
-                        <Hovedknapp disabled={!isValid} htmlType="submit">
-                            <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
-                        </Hovedknapp>
+                        <Block visible={visKomponent.formButtons}>
+                            <Knapp htmlType="button" onClick={onCancel}>
+                                <FormattedMessage id="avbryt" />
+                            </Knapp>
+                            <Hovedknapp disabled={!isValid} htmlType="submit">
+                                <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
+                            </Hovedknapp>
+                        </Block>
                     </form>
                 );
             }}
