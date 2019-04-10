@@ -5,7 +5,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { flattenErrors, translateError } from 'app/utils/errorUtils';
 import { FormikProps } from 'app/types/Formik';
 import { UferdigSøknad } from 'app/types/Søknad';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import Feiloppsummering from 'common/lib/validation/errors/Feiloppsummering';
 import getMessage from 'common/util/i18nUtils';

@@ -6,7 +6,6 @@ import { Undertittel } from 'nav-frontend-typografi';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
-import BEMHelper from 'app/utils/bem';
 import Block from 'common/components/block/Block';
 import FetchState from 'app/types/FetchState';
 import Kvittering from 'app/types/Kvittering';
@@ -17,6 +16,7 @@ import Lenke from 'nav-frontend-lenker';
 import KvitteringHeader from './components/KvitteringHeader';
 import { FormattedMessage } from 'react-intl';
 import KvitteringSuksess from './components/KvitteringSuksess';
+import BEMHelper from 'common/util/bem';
 
 const cls = BEMHelper('søknadSendt');
 

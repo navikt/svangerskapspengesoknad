@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Person } from 'app/types/Søkerinfo';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
 import { Sidetittel, EtikettLiten } from 'nav-frontend-typografi';

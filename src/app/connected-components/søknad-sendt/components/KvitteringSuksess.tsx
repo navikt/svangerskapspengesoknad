@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import CheckmarkIkon from 'app/icons/CheckmarkIkon';
 
 import './kvitteringSuksess.less';

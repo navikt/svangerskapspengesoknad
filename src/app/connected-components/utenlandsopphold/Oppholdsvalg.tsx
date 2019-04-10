@@ -5,7 +5,7 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import getCountries from 'app/utils/getCountries';

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import OppsummeringIkon from './OppsummeringIkon';
 import { OppsummeringIkonType } from 'app/types/OppsummeringIkonType';

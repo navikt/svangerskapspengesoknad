@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, InjectedIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import moment from 'moment';
 
 import { FetchStatus } from 'app/types/FetchState';

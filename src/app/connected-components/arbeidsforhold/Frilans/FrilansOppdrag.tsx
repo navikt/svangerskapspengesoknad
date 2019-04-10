@@ -4,7 +4,7 @@ import { Formik, FormikProps } from 'formik';
 
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import Block from 'common/components/block/Block';
