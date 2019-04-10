@@ -47,7 +47,7 @@ type Props = OwnProps & StateProps & StepProps & InjectedIntlProps;
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, intl, history } = props;
 
-    const { values } = formikProps;
+    const { values, setFieldValue } = formikProps;
 
     const index = values.tilrettelegging.findIndex((t) => t.id === id);
     const tilrettelegging = values.tilrettelegging[index];
@@ -86,7 +86,20 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         );
     };
 
+    const cleanupTilrettelegging = () => {
+        if (visKomponent.ingenTilrettelegging === false) {
+            setFieldValue(getInputName('ingenTilrettelegging'), undefined);
+        }
+        if (visKomponent.delvisTilrettelegging === false) {
+            setFieldValue(getInputName('delvisTilrettelegging'), undefined);
+        }
+        if (visKomponent.helTilrettelegging === false) {
+            setFieldValue(getInputName('helTilrettelegging'), undefined);
+        }
+    };
+
     const navigate = () => {
+        cleanupTilrettelegging();
         const allSteps = getAllSteps(values.søknadsgrunnlag);
         const nextStep = getAdjacentSteps(step, allSteps)[1];
         const nextStepPath = getSøknadStepPath(nextStep.step, nextStep.subStep);
