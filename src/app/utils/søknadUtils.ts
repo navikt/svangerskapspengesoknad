@@ -1,20 +1,19 @@
-import Søknad, { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
-import Tilrettelegging, { UferdigTilrettelegging, Tilretteleggingstype } from 'app/types/Tilrettelegging';
+import Søknad, { Søknadstype, UferdigSøknad } from 'app/types/Søknad';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
-const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
-    tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
+// const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
+//     tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
 
-const removeId = (t: UferdigTilrettelegging) => {
-    const { id, ...other } = t;
-    return other;
-};
+// const removeId = (t: UferdigTilrettelegging) => {
+//     const { id, ...other } = t;
+//     return other;
+// };
 
-const addSlutteArbeidFom = (tilrettelegging: Tilrettelegging): Tilrettelegging => {
-    return tilrettelegging.type === Tilretteleggingstype.INGEN
-        ? { ...tilrettelegging, slutteArbeidFom: tilrettelegging.behovForTilretteleggingFom }
-        : tilrettelegging;
-};
+// const addSlutteArbeidFom = (tilrettelegging: Tilrettelegging): Tilrettelegging => {
+//     return tilrettelegging.type === Tilretteleggingstype.INGEN
+//         ? { ...tilrettelegging, slutteArbeidFom: tilrettelegging.behovForTilretteleggingFom }
+//         : tilrettelegging;
+// };
 
 const areDefined = (...items: any[]) => items.some((item) => item !== undefined);
 
@@ -35,9 +34,9 @@ export const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Att
         return undefined;
     }
 
-    const tilrettelegging = fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag)
-        .map(removeId)
-        .map(addSlutteArbeidFom);
+    // const tilrettelegging = fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag)
+    //     .map(removeId)
+    //     .map(addSlutteArbeidFom);
 
     return {
         type: Søknadstype.SVANGERSKAPSPENGER,
@@ -58,6 +57,6 @@ export const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Att
         },
         vedlegg,
         søker: utfyltSøknad.søker,
-        tilrettelegging,
+        // tilrettelegging,
     };
 };

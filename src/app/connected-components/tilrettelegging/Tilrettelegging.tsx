@@ -13,7 +13,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
 import { StepProps } from 'app/components/step/Step';
-import { Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Action from 'app/redux/types/Action';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
@@ -22,8 +22,6 @@ import Block from 'common/components/block/Block';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
-import InputField from 'app/formik/wrappers/InputField';
-import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 
@@ -52,21 +50,23 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 
-    const visVedlegg =
-        (tilrettelegging.type === Tilretteleggingstype.HEL && !!tilrettelegging.tilrettelagtArbeidFom) ||
-        (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
-        tilrettelegging.type === Tilretteleggingstype.INGEN;
+    // const visVedlegg =
+    //     (tilrettelegging.type === Tilretteleggingstype.HEL && !!tilrettelegging.tilrettelagtArbeidFom) ||
+    //     (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
+    //     tilrettelegging.type === Tilretteleggingstype.INGEN;
 
     const visKomponent = {
-        typevelger: !!tilrettelegging.behovForTilretteleggingFom,
-        helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
-        stillingsprosent: tilrettelegging.type === Tilretteleggingstype.DELVIS,
-        fraHvilkenDato:
-            (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.stillingsprosent) ||
-            tilrettelegging.type === Tilretteleggingstype.HEL,
-        vedlegg: visVedlegg,
-        nesteknapp: visVedlegg,
+        nesteknapp: true,
+        vedlegg: true,
     };
+    //     typevelger: !!tilrettelegging.behovForTilretteleggingFom,
+    //     helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
+    //     stillingsprosent: tilrettelegging.type === Tilretteleggingstype.DELVIS,
+    //     fraHvilkenDato:
+    //         (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.stillingsprosent) ||
+    //         tilrettelegging.type === Tilretteleggingstype.HEL,
+    //     vedlegg: visVedlegg,
+    // };
 
     const navigate = () => {
         const allSteps = getAllSteps(values.søknadsgrunnlag);
@@ -101,7 +101,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         })}
                     />
                 </Block>
-                <Block visible={visKomponent.typevelger}>
+                {/* <Block visible={visKomponent.typevelger}>
                     <RadioPanelGruppe
                         id="tilrettelegging.noeEllerIngen"
                         name={`tilrettelegging.${index}.type`}
@@ -140,8 +140,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             },
                         ]}
                     />
-                </Block>
-                <Block margin="xs" visible={visKomponent.stillingsprosent}>
+                </Block> */}
+                {/* <Block margin="xs" visible={visKomponent.stillingsprosent}>
                     {tilrettelegging.type === Tilretteleggingstype.DELVIS && (
                         <InputField
                             type="number"
@@ -154,8 +154,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
                         />
                     )}
-                </Block>
-                <Block margin="s" visible={visKomponent.fraHvilkenDato}>
+                </Block> */}
+                {/* <Block margin="s" visible={visKomponent.fraHvilkenDato}>
                     <DatoInput
                         name={`tilrettelegging.${index}.tilrettelagtArbeidFom`}
                         label={getMessage(intl, 'tilrettelegging.tilrettelagtArbeidFom.label')}
@@ -164,7 +164,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             maksDato: values.barn.fødselsdato,
                         }}
                     />
-                </Block>
+                </Block> */}
                 <Block
                     visible={visKomponent.vedlegg}
                     header={{
