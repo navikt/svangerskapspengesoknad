@@ -60,7 +60,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
     const visKomponent = {
         vedlegg: true,
-        visDel1: attachments.length > 0 || true,
+        visDel1: attachments.length > 0,
         visDel2: !!tilrettelegging.behovForTilretteleggingFom,
         ingenTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.INGEN),
         delvisTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS),
