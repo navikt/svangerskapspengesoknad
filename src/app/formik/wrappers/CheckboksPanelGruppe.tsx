@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
 import { FieldArrayRenderProps, FieldArray } from 'formik';
 import CheckboksPanelGruppeResponsive from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
-import { Omit } from 'lodash';
+import { Omit, get } from 'lodash';
 
 interface OwnProps {
     name: string;
@@ -26,12 +26,16 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
                     <CheckboksPanelGruppeResponsive
                         {...checkboksPanelGruppeProps}
                         legend={label}
-                        checkboxes={options.map((option) => ({
-                            ...option,
-                            checked: form.values[name].includes(option.value),
-                        }))}
+                        checkboxes={options.map((option) => {
+                            const values = get(form.values, name);
+                            return {
+                                ...option,
+                                checked: values && values.includes(option.value),
+                            };
+                        })}
                         onChange={(_, value) => {
-                            const indexOfGrunnlag = form.values[name].indexOf(value);
+                            const values = get(form.values, name);
+                            const indexOfGrunnlag = values.indexOf(value);
                             if (indexOfGrunnlag === -1) {
                                 push(value);
                             } else {

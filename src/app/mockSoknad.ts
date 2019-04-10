@@ -14,6 +14,7 @@ const mockSøknad: UferdigSøknad = {
             id: '973135678',
             vedlegg: [],
             behovForTilretteleggingFom: new Date(),
+            type: [],
             arbeidsforhold: {
                 id: '973135678',
                 type: Arbeidsforholdstype.VIRKSOMHET,

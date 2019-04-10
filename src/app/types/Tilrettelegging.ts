@@ -34,6 +34,7 @@ export interface Tilrettelegging {
 
 export type UferdigTilrettelegging = Tilrettelegging & {
     behovForTilretteleggingFom?: Date;
+    type: Tilretteleggingstype[];
     helTilrettelegging?: {
         tilrettelagtArbeidFom?: Date;
     };
