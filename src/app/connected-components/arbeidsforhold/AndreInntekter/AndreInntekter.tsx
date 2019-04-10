@@ -3,7 +3,7 @@ import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, Field, FieldProps, FieldArray } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
 
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { isValid } from 'i18n-iso-countries';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';

@@ -11,7 +11,7 @@ import Modal from 'nav-frontend-modal';
 import getMessage from 'common/util/i18nUtils';
 import List from 'common/components/list/List';
 import { UferdigSøknad } from 'app/types/Søknad';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 
 import './arbeidSeksjon.less';
 
@@ -77,7 +77,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
 
     return (
         <>
-            <Block margin="xs">
+            <Block margin="none">
                 <JaNeiSpørsmål twoColumns name={name} legend={legend} labels={labels} infoboksTekst={infoboksTekst} />
             </Block>
 
@@ -104,7 +104,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     }}
                                 />
                             </Block>
-                            <Block visible={visLandvelger} margin="xs">
+                            <Block visible={visLandvelger} marginTop="xs" margin="none">
                                 <Knapp
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}

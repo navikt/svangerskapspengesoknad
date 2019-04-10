@@ -8,20 +8,18 @@ import './block.less';
 export type BlockPadding = 'xl' | 'l' | 'm' | 's' | 'xs' | 'xxs' | 'none';
 
 export interface BlockProps {
-    /** Default true */
     header?: {
         title: string;
         info?: string;
         stil?: 'normal' | 'seksjon';
     };
     visible?: boolean;
-    /** Animation is set to default true if visible is !undefined, unless animated is set to false */
     animated?: boolean;
-    /** Size - default m */
     margin?: BlockPadding;
-    /** If Block contains child Block. If so, it disables animation */
+    marginTop?: BlockPadding;
     hasChildBlocks?: boolean;
-    /** content */
+    align?: undefined | 'left' | 'center' | 'right';
+    style?: 'info' | undefined;
     children: React.ReactNode;
 }
 
@@ -33,12 +31,32 @@ const Block: React.StatelessComponent<BlockProps> = ({
     header,
     animated = true,
     children,
+    align,
+    marginTop,
     hasChildBlocks,
+    style,
 }) => {
     if (children === undefined || (animated !== true && visible === false)) {
         return null;
     }
-    const contentClass = classNames(cls.className, !hasChildBlocks ? cls.modifier(margin) : cls.modifier('none'));
+
+    let bottomMargin: BlockPadding;
+    if (margin === undefined && marginTop === undefined) {
+        bottomMargin = 'l';
+    } else if (margin === undefined && marginTop !== undefined) {
+        bottomMargin = 'none';
+    } else if (margin !== undefined) {
+        bottomMargin = margin;
+    } else {
+        bottomMargin = 'l';
+    }
+
+    const contentClass = classNames(cls.block, !hasChildBlocks ? cls.modifier(bottomMargin) : cls.modifier('none'), {
+        [cls.modifier(`top-${marginTop}`)]: marginTop,
+        [cls.modifier(`align-${align}`)]: align,
+        [cls.modifier(`style-${style}`)]: style,
+    });
+
     const content =
         header !== undefined ? (
             <section className={contentClass}>

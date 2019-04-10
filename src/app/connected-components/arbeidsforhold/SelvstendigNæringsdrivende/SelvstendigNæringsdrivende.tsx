@@ -3,7 +3,7 @@ import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, FormattedMessage }
 import { Formik, FormikProps, Field, FieldProps } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
 
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import { Næringstype, Næring } from 'app/types/SelvstendigNæringsdrivende';
 import getMessage from 'common/util/i18nUtils';
 import CheckboksPanelGruppe from 'app/formik/wrappers/CheckboksPanelGruppe';

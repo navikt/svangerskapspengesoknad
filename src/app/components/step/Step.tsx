@@ -21,7 +21,7 @@ import {
 import { State } from 'app/redux/store';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import BackButton from 'common/components/back-button/BackButton';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import getMessage from 'common/util/i18nUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import ValidationErrorSummary from '../validation-error-summary/ValidationErrorSummary';

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import './søknadstittel.less';
 
 const cls = BEMHelper('søknadstittel');

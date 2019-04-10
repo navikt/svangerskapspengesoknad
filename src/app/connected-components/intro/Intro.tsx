@@ -14,7 +14,7 @@ import { State } from 'app/redux/store';
 import { StepID } from 'app/types/SøknadStep';
 import Applikasjonsside from 'app/connected-components/applikasjonsside/Applikasjonsside';
 import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import DinePersonopplysningerModal from '../../components/dine-personopplysninger-modal/DinePersonopplysningerModal';
 import DinePlikterModal from '../../components/dine-plikter-modal/DinePlikterModal';
 import FetchState from 'app/types/FetchState';

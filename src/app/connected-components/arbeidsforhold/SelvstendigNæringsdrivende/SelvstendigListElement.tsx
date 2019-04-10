@@ -20,7 +20,7 @@ const SelvstendigListElement: React.StatelessComponent<ModalSummaryProps<Næring
 }) => {
     const cls = BEMHelper('selvstendigListElement');
     return (
-        <div className={cls.className}>
+        <div className={cls.block}>
             <div className={cls.element('topRow')}>
                 {element.registrertINorge && (
                     <EtikettLiten>
