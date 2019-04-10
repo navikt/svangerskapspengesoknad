@@ -1,9 +1,10 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
-import Søker, { Søkerrolle } from './Søker';
+import Søker from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
+import mockSøknad from '../mockSoknad';
 
 export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger',
@@ -29,24 +30,25 @@ export interface UferdigSøknad {
     søker: Partial<Søker>;
 }
 
-export const initialSøknad: UferdigSøknad = {
-    harGodkjentVilkår: false,
-    harGodkjentOppsummering: false,
-    barn: {},
-    tilrettelegging: [],
-    søknadsgrunnlag: [],
-    informasjonOmUtenlandsopphold: {
-        jobbetINorgeSiste12Mnd: true,
-        iNorgePåHendelsestidspunktet: true,
-        tidligereOpphold: [],
-        senereOpphold: [],
-    },
-    søker: {
-        rolle: Søkerrolle.MOR,
-        selvstendigNæringsdrivendeInformasjon: [],
-        andreInntekterSiste10Mnd: [],
-    },
-};
+export const initialSøknad: UferdigSøknad = mockSøknad;
+//  {
+//     harGodkjentVilkår: false,
+//     harGodkjentOppsummering: false,
+//     barn: {},
+//     tilrettelegging: [],
+//     søknadsgrunnlag: [],
+//     informasjonOmUtenlandsopphold: {
+//         jobbetINorgeSiste12Mnd: true,
+//         iNorgePåHendelsestidspunktet: true,
+//         tidligereOpphold: [],
+//         senereOpphold: [],
+//     },
+//     søker: {
+//         rolle: Søkerrolle.MOR,
+//         selvstendigNæringsdrivendeInformasjon: [],
+//         andreInntekterSiste10Mnd: [],
+//     },
+// };
 
 export interface Søknadsgrunnlag {
     id: string;

@@ -14,6 +14,7 @@ export enum Arbeidsforholdstype {
 
 export interface Tilrettelegging {
     id: string;
+    behovForTilretteleggingFom: Date;
     arbeidsforhold: {
         id?: string;
         type: Arbeidsforholdstype;
@@ -32,6 +33,7 @@ export interface Tilrettelegging {
 }
 
 export type UferdigTilrettelegging = Tilrettelegging & {
+    behovForTilretteleggingFom?: Date;
     helTilrettelegging?: {
         tilrettelagtArbeidFom?: Date;
     };

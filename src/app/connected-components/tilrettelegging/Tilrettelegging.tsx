@@ -58,6 +58,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const visKomponent = {
         nesteknapp: true,
         vedlegg: true,
+        visDel1: attachments.length > 0 || true,
+        visDel2: !!tilrettelegging.behovForTilretteleggingFom,
     };
     //     typevelger: !!tilrettelegging.behovForTilretteleggingFom,
     //     helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
@@ -83,24 +85,66 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 showNesteknapp={visKomponent.nesteknapp}
                 onValidFormSubmit={navigate}
                 history={history}>
-                <Block visible={tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET}>
-                    <Veilederinfo stil="kompakt" type="info">
-                        <FormattedHTMLMessage
-                            id="tilrettelegging.veileder.intro"
-                            values={{
-                                arbeidsgiversNavn,
-                            }}
+                <Block visible={visKomponent.vedlegg}>
+                    <Block>
+                        <Veilederinfo stil="kompakt" type="info">
+                            <FormattedHTMLMessage id="tilrettelegging.veileder.vedlegg" />
+                        </Veilederinfo>
+                    </Block>
+                    <Block
+                        header={{
+                            title: getMessage(intl, 'tilrettelegging.vedlegg.label'),
+                        }}>
+                        <FieldArray
+                            name={`tilrettelegging.${index}.vedlegg`}
+                            render={({ form, push, remove }) => (
+                                <AttachmentOverview
+                                    attachmentType={AttachmentType.TILRETTELEGGING}
+                                    skjemanummer={Skjemanummer.ANNET}
+                                    attachments={attachments}
+                                    onFilesSelect={(files: Attachment[]) => {
+                                        files.forEach((file) => {
+                                            push(file.id);
+                                            uploadAttachment(file, id);
+                                        });
+                                    }}
+                                    onFileDelete={(files: Attachment[]) => {
+                                        files.forEach((file) => {
+                                            remove(tilrettelegging.vedlegg.indexOf(file.id));
+                                            deleteAttachment(file, id);
+                                        });
+                                    }}
+                                />
+                            )}
                         />
-                    </Veilederinfo>
+                    </Block>
                 </Block>
-                <Block margin="xs">
-                    <DatoInput
-                        name={`tilrettelegging.${index}.behovForTilretteleggingFom`}
-                        label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label', {
-                            arbeidsgiversNavn,
-                        })}
-                    />
+                <Block visible={visKomponent.visDel1} margin="none">
+                    <Block visible={tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET}>
+                        <Veilederinfo stil="kompakt" type="info">
+                            <FormattedHTMLMessage
+                                id="tilrettelegging.veileder.intro"
+                                values={{
+                                    arbeidsgiversNavn,
+                                }}
+                            />
+                        </Veilederinfo>
+                    </Block>
+                    <Block header={{ title: 'Del 1', stil: 'seksjon' }}>
+                        <Block margin="xs">
+                            <DatoInput
+                                name={`tilrettelegging.${index}.behovForTilretteleggingFom`}
+                                label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label', {
+                                    arbeidsgiversNavn,
+                                })}
+                            />
+                        </Block>
+                    </Block>
                 </Block>
+                <Block header={{ title: 'Del 2', stil: 'seksjon' }} visible={visKomponent.visDel2}>
+                    sdf
+                </Block>
+
                 {/* <Block visible={visKomponent.typevelger}>
                     <RadioPanelGruppe
                         id="tilrettelegging.noeEllerIngen"
@@ -165,39 +209,6 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         }}
                     />
                 </Block> */}
-                <Block
-                    visible={visKomponent.vedlegg}
-                    header={{
-                        title: getMessage(intl, 'tilrettelegging.vedlegg.label'),
-                    }}>
-                    <Block margin="xs">
-                        <Veilederinfo stil="kompakt" type="info">
-                            <FormattedHTMLMessage id="tilrettelegging.veileder.vedlegg" />
-                        </Veilederinfo>
-                    </Block>
-                    <FieldArray
-                        name={`tilrettelegging.${index}.vedlegg`}
-                        render={({ form, push, remove }) => (
-                            <AttachmentOverview
-                                attachmentType={AttachmentType.TILRETTELEGGING}
-                                skjemanummer={Skjemanummer.ANNET}
-                                attachments={attachments}
-                                onFilesSelect={(files: Attachment[]) => {
-                                    files.forEach((file) => {
-                                        push(file.id);
-                                        uploadAttachment(file, id);
-                                    });
-                                }}
-                                onFileDelete={(files: Attachment[]) => {
-                                    files.forEach((file) => {
-                                        remove(tilrettelegging.vedlegg.indexOf(file.id));
-                                        deleteAttachment(file, id);
-                                    });
-                                }}
-                            />
-                        )}
-                    />
-                </Block>
             </FormikStep>
         </Applikasjonsside>
     );
