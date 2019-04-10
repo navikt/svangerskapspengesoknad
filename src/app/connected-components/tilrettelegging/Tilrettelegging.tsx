@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { FieldArray } from 'formik';
 import { InjectedIntlProps, injectIntl, FormattedHTMLMessage } from 'react-intl';
@@ -13,7 +14,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
 import { StepProps } from 'app/components/step/Step';
-import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype, Tilretteleggingstype } from 'app/types/Tilrettelegging';
 import Action from 'app/redux/types/Action';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
@@ -56,11 +57,17 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     //     (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
     //     tilrettelegging.type === Tilretteleggingstype.INGEN;
 
+    const tilretteleggingstypeName = `tilrettelegging.${index}.type`;
+    const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName);
+
     const visKomponent = {
         nesteknapp: true,
         vedlegg: true,
         visDel1: attachments.length > 0 || true,
         visDel2: !!tilrettelegging.behovForTilretteleggingFom,
+        ingenTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.INGEN),
+        delvisTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS),
+        helTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL),
     };
     //     typevelger: !!tilrettelegging.behovForTilretteleggingFom,
     //     helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
@@ -145,48 +152,30 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block header={{ title: 'Del 2', stil: 'seksjon' }} visible={visKomponent.visDel2}>
                     <CheckboksPanelGruppe
                         label="Hvordan kan du jobbe mens du er gravid?"
-                        name={`tilrettelegging.${index}.type`}
+                        name={tilretteleggingstypeName}
                         columns={1}
                         options={[
                             {
                                 label: 'a) Du kan fortsette med samme stillingsprosent',
-                                value: 'hel',
+                                value: Tilretteleggingstype.INGEN,
                             },
                             {
                                 label: 'b) Du kan fortsette med redusert arbeidstid',
-                                value: 'delvis',
+                                value: Tilretteleggingstype.DELVIS,
                             },
                             {
                                 label: 'c) Du må midlertidig gå ut av ditt arbeid',
-                                value: 'ingen',
+                                value: Tilretteleggingstype.HEL,
                             },
                         ]}
                     />
                 </Block>
 
-                {/* <Block visible={visKomponent.typevelger}>
-                    <RadioPanelGruppe
-                        id="tilrettelegging.noeEllerIngen"
-                        name={`tilrettelegging.${index}.type`}
-                        value={
-                            tilrettelegging.type === Tilretteleggingstype.DELVIS ||
-                            tilrettelegging.type === Tilretteleggingstype.HEL
-                                ? Tilretteleggingstype.NOE
-                                : undefined
-                        }
-                        legend={getMessage(intl, 'tilrettelegging.noeEllerIngen.label')}
-                        radios={[
-                            {
-                                value: Tilretteleggingstype.NOE,
-                                label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.NOE}`),
-                            },
-                            {
-                                value: Tilretteleggingstype.INGEN,
-                                label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.INGEN}`),
-                            },
-                        ]}
-                    />
-                </Block>
+                <Block visible={visKomponent.ingenTilrettelegging}>ingen</Block>
+                <Block visible={visKomponent.delvisTilrettelegging}>delvis</Block>
+                <Block visible={visKomponent.helTilrettelegging}>hel</Block>
+
+                {/* 
                 <Block visible={visKomponent.helEllerDelvis}>
                     <RadioPanelGruppe
                         id="tilrettelegging.helEllerDelvis"
