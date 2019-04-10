@@ -14,7 +14,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
 
             const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
             const tilretteleggingstypeName = getInputName('type');
-            const valgteTyper = get(søknad, tilretteleggingstypeName);
+            const valgteTyper = get(søknad, tilretteleggingstypeName) || [];
 
             if (valgteTyper.length === 0) {
                 set(tErrors, 'type', Valideringsfeil.FELTET_ER_PÅKREVD);
