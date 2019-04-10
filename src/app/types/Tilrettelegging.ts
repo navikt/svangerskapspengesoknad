@@ -27,7 +27,7 @@ export interface Tilrettelegging {
         tilrettelagtArbeidFom: Date;
         stillingsprosent: number;
     };
-    IngenTilrettelegging?: {
+    ingenTilrettelegging?: {
         slutteArbeidFom: Date;
     };
 }
@@ -42,7 +42,7 @@ export type UferdigTilrettelegging = Tilrettelegging & {
         tilrettelagtArbeidFom?: Date;
         stillingsprosent?: number;
     };
-    IngenTilrettelegging?: {
+    ingenTilrettelegging?: {
         slutteArbeidFom?: Date;
     };
 };
