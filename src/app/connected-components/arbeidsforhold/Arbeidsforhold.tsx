@@ -92,9 +92,10 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         søknadsgrunnlag:
             harHattAnnenInntektSiste10Mnd !== undefined &&
             (arbeidsforhold.length > 0 ||
-                (selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length > 0) ||
-                frilansInformasjon !== undefined ||
-                (andreInntekterSiste10Mnd && andreInntekterSiste10Mnd.length > 0)),
+                (selvstendigNæringsdrivendeInformasjon !== undefined &&
+                    selvstendigNæringsdrivendeInformasjon.length > 0) ||
+                (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined) ||
+                (andreInntekterSiste10Mnd !== undefined && andreInntekterSiste10Mnd.length > 0)),
         ingenArbeidsforholdVeileder:
             arbeidsforhold.length === 0 &&
             harJobbetSomFrilansSiste10Mnd === false &&
@@ -135,9 +136,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     </Veilederinfo>
                 </Block>
 
-                <Block>
-                    <FrilansSpørsmål formikProps={formikProps} />
-                </Block>
+                <FrilansSpørsmål formikProps={formikProps} />
 
                 <Block visible={visKomponent.harJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
                     <Arbeidsforholdseksjon
