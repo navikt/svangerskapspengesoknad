@@ -72,14 +72,6 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         delvisTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS),
         helTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL),
     };
-    //     typevelger: !!tilrettelegging.behovForTilretteleggingFom,
-    //     helEllerDelvis: tilrettelegging.type !== undefined && tilrettelegging.type !== Tilretteleggingstype.INGEN,
-    //     stillingsprosent: tilrettelegging.type === Tilretteleggingstype.DELVIS,
-    //     fraHvilkenDato:
-    //         (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.stillingsprosent) ||
-    //         tilrettelegging.type === Tilretteleggingstype.HEL,
-    //     vedlegg: visVedlegg,
-    // };
 
     const navigate = () => {
         const allSteps = getAllSteps(values.søknadsgrunnlag);
