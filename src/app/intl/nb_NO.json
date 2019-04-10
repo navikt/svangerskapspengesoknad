@@ -7,20 +7,16 @@
     "app.banner": "Søknad om svangerskapspenger",
     "komponent.språkvelger.endreMålform": "Endre målform til nynorsk",
     "datoinput.placeholder": "dd.mm.åååå",
-
     "steg.avbrytSøknad": "Avbryt og slett søknad",
     "steg.nesteknapp": "Fortsett",
     "steg.tilbake": "Tilbake",
-
     "feilside.title": "Du kan dessverre ikke søke om svangerskapspenger",
     "feilside.mann": "Svangerskapspenger gis til friske kvinner som ikke kan jobbe under svangerskapet fordi det kan føre til skade på det ufødte barnet.",
-
     "stegtittel.termin": "Om barnet",
     "stegtittel.arbeidsforhold": "Arbeidsforhold og inntekt",
     "stegtittel.utenlandsopphold": "Opphold i utlandet",
     "stegtittel.oppsummering": "Oppsummering",
     "stegtittel.tilrettelegging": "Tilrettelegging",
-
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
@@ -46,16 +42,13 @@
     "intro.dinePersonopplysninger.avsnitt.svarPaSoknaden.tittel": "Svar på søknaden",
     "intro.dinePersonopplysninger.behandling.html": "<p>NAV innhenter og mottar opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få riktig tjeneste og ytelser.</p><p>Du har valgt å søke om foreldrepenger. Det er en ytelse fra folketrygden som du kan få hvis du fyller vilkårene. Vilkårene står på <a href=\"https://www.nav.no/foreldrepenger\"  class=\"lenke\" rel=\"noopener\">nav.no/svangerskapspenger</a>.</p>",
     "intro.dinePersonopplysninger.sectionheading": "Slik behandler NAV personopplysningene dine",
-
     "termin.termindato": "Når er termindato?",
     "termin.erBarnetFødt": "Er barnet født?",
     "termin.fødselsdato": "Når ble barnet født?",
-
     "næringstype.annen": "Annen type virksomhet",
     "næringstype.dagmamma": "Dagmamma eller familiebarnehage i eget hjem",
     "næringstype.fiske": "Fiske",
     "næringstype.jordbruk_skogbruk": "Jordbruk",
-
     "arbeidsforhold.dineArbeidsforhold.label": "Dine arbeidsforhold",
     "arbeidsforhold.dineArbeidsforhold.infotekst": "Hvis du mangler informasjon om et eller flere arbeidsforhold, eller mener at informasjonen ikke stemmer så må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
     "arbeidsforhold.grunnlag.label": "Hvor skal du søke om svangerskapspenger fra?",
@@ -111,11 +104,9 @@
     "arbeidsforhold.andreInntekter.arbeidsgiverNavn": "Oppgi navnet på arbeidsgiveren",
     "arbeidsforhold.andreInntekter.militær_eller_siviltjeneste_info": "Du må legge ved dokumentasjon på perioden fra tjenestestedet ditt.",
     "vedlegg.lastoppknapp.anneninntektDokumentasjon": "Last opp dokumentasjon her",
-
     "inntektstype.militær_eller_siviltjeneste": "Førstegangstjeneste i forsvaret",
     "inntektstype.jobb_i_utlandet": "Jobb i utlandet",
-    "arbeidsforhold.veileder.ingenArbeidsforhold": "<b>Du kan dessverre ikke gå videre i denne søknaden</b><br/><br/>Det ser dessverre ikke ut som om du kan søke om svangerskapspenger. Det er ingen arbeidsforhold registrert på deg. Du jobber heller ikke som frilans eller selvstendig næringsdrivende. For oss virker det derfor ikke som at du har noen jobb som kan skade det ufødte barnet.<br/><br/>Hvis du mener at noe av informasjonen over ikke stemmer må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret. Når dette har blitt gjort vil det bli mulig for deg å søke. <br /> <br />Dersom du er usikker på om du har rett til å søke om svangerskapspenger kan du lese mer",
-
+    "arbeidsforhold.veileder.ingenArbeidsforhold": "<b>Du kan dessverre ikke gå videre i denne søknaden</b><br/><br/>Det ser dessverre ikke ut som om du kan søke om svangerskapspenger. Det er ingen arbeidsforhold registrert på deg. Du jobber heller ikke som frilans eller selvstendig næringsdrivende. For oss virker det derfor ikke som at du har noen jobb som kan skade det ufødte barnet.<br/><br/>Hvis du mener at noe av informasjonen over ikke stemmer må du kontakte din arbeidsgiver og be dem oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret. Når dette har blitt gjort vil det bli mulig for deg å søke. <br /> <br />Dersom du er usikker på om du har rett til å søke om svangerskapspenger kan du lese mer <a class=\"lenke\" rel=\"noopener\" href=\"https://familie.nav.no/om-svangerskapspenger\">om svangerskapspenger</a> eller <a class=\"lenke\" rel=\"noopener\" href=\"https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger\">ta kontakt med oss.</a>",
     "tilrettelegging.veileder.intro": "Her kan du fortelle oss om hvordan du kan jobbe hos <b>{arbeidsgiversNavn}</b> mens du er gravid.",
     "tilrettelegging.behovForTilretteleggingFom.label": "Når må du slutte å jobbe som vanlig hos {arbeidsgiversNavn}?",
     "tilrettelegging.slutteArbeidFom.label": "Når er din siste ordinære arbeidsdag?",
@@ -130,12 +121,10 @@
     "tilrettelegging.tilrettelagtArbeidFom.label": "Fra hvilken dato kan arbeidsgiver tilrettelegge?",
     "tilrettelegging.vedlegg.label": "Forklaring på hvor mye du kan jobbe",
     "tilrettelegging.veileder.vedlegg": "Vi trenger det ferdig utfylte <a target=\"_blank\" rel=\"noreferrer\" href=\"https://www.arbeidstilsynet.no/tema/graviditet-og-arbeidsmiljo/skjema-for-tilrettelegging-for-gravide/\">skjemaet for tilrettelegging og omplassering ved graviditet</a> fra deg for å kunne vurdere din søknad. Dette forklarer oss om du kan jobbe videre eller ikke i perioden du er gravid. Det må være utfylt av lege eller jordmor, og din arbeidsgiver.",
-
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
     "vedlegg.lastoppknapp.tilrettelegging": "Last opp skjemaet her",
     "vedlegg.liste.tittel": "Valgte vedlegg",
     "vedlegg.arialabel.slett": "Slett vedlegg",
-
     "utenlandsopphold.iNorgeSiste12Mnd.label": "Hvor har du bodd de siste 12 månedene?",
     "utenlandsopphold.iNorgeSiste12Mnd.ja": "kun bodd i Norge",
     "utenlandsopphold.iNorgeSiste12Mnd.nei": "bodd i utlandet eller delvis",
@@ -153,7 +142,6 @@
     "utenlandsopphold.land.label": "Hvilket land bodde du i?",
     "utenlandsopphold.land.fraOgMed": "Fra og med",
     "utenlandsopphold.land.tilOgMed": "Til og med",
-
     "oppsummering.sendSøknad": "Send søknad",
     "oppsummering.veileder": "Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
     "oppsummering.termin.tittel.barnetErIkkeFødt": "Du er gravid med barnet",
@@ -186,7 +174,6 @@
     "oppsummering.medlemskap.tidligereOpphold.nei": "Jeg har ikke bodd i Norge de siste 12 månedene",
     "oppsummering.veileder.dokumentasjon": "Husk å sende oss dokumentasjonen som mangler innen 3 uker. Hvis vi mangler nødvendige opplysninger når vi skal behandle søknaden, kan du få avslag.",
     "oppsummering.harGodkjentVilkår": "Jeg har gjort meg kjent med vilkårene for å motta svangerskapspenger, og kan ikke jobbe som vanlig i periodene jeg søker for.",
-
     "søknadSendt.tekst": "Søknad med saksnummer {saksNr} ble sendt {dato}.",
     "søknadSendt.tittel": "Takk for søknaden {name}!",
     "søknadSendt.sendtInn": "Sendt inn:",
@@ -200,7 +187,6 @@
     "søknadSendt.foreldrepenger.boks.tittel": "Har du begynt å planlegge foreldrepengeperioden din?",
     "søknadSendt.foreldrepenger.boks.innhold": "Du som er gravid kan få foreldrepenger fra tre uker før du har termin. Du kan søke NAV om dette fra og med svangerskapsuke 22.",
     "søknadSendt.foreldrepenger.boks.lenke": "Planlegg foreldrepengeperioden din her",
-
     "valideringsfeil.vilkårMåGodkjennes": "Du må godkjenne vilkårene for å kunne fortsette med søknaden.",
     "valideringsfeil.oppsummeringMåGodkjennes": "Du må godkjenne for å kunne sende inn søknaden",
     "valideringsfeil.fødselsdatoMåVæreTilbakeITid": "Fødselsdato må være tilbake i tid",
@@ -211,6 +197,5 @@
     "valideringsfeil.tilrettelagtArbeidForTidlig": "Må være etter dato for å slutte å jobbe som vanlig",
     "valideringsfeil.feltetErPåkrevd": "Påkrevd",
     "valideringsfeil.tidsreiserIkkeTillatt": "Må være etter den første datoen",
-
     "feiloppsummering.tittel": "Du må rette opp i følgende feil:"
 }
