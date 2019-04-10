@@ -68,23 +68,21 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                                 <DatoInput
                                     fullskjermKalender
                                     name="tidsperiode.fom"
-                                    label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
+                                    label={getMessage(intl, 'fraOgMed')}
                                 />
                                 <DatoInput
                                     fullskjermKalender
                                     name="tidsperiode.tom"
-                                    label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
+                                    label={getMessage(intl, 'tilOgMed')}
                                 />
                             </>
                         </Block>
 
                         <Knapp htmlType="button" onClick={onCancel}>
-                            <FormattedMessage id="utenlandsopphold.land.avbryt" />
+                            <FormattedMessage id="avbryt" />
                         </Knapp>
                         <Hovedknapp disabled={!isValid} htmlType="submit">
-                            <FormattedMessage
-                                id={endre ? 'utenlandsopphold.land.endre' : 'utenlandsopphold.land.leggTil'}
-                            />
+                            <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
                         </Hovedknapp>
                     </form>
                 );
