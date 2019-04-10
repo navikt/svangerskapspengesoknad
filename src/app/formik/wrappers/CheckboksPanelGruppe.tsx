@@ -41,11 +41,11 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
                             const values = get(form.values, name);
                             return {
                                 ...option,
-                                checked: values && values.includes(option.value),
+                                checked: values && values.includes(option.value) ? true : false,
                             };
                         })}
                         onChange={(_, value) => {
-                            const values = get(form.values, name);
+                            const values = get(form.values, name) || [];
                             const indexOfGrunnlag = values.indexOf(value);
                             if (indexOfGrunnlag === -1) {
                                 push(value);

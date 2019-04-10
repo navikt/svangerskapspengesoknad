@@ -56,7 +56,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
     const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
     const tilretteleggingstypeName = getInputName('type');
-    const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName);
+    const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName) || [];
 
     const visKomponent = {
         vedlegg: true,
