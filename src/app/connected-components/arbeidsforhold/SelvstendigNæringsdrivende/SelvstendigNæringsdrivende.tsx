@@ -30,7 +30,7 @@ type Props = ModalFormProps<Næring> & InjectedIntlProps;
 const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => {
     const { endre, onCancel, element = { næringstyper: [] }, onAdd, intl } = props;
 
-    const countries = useMemo(() => getCountries(true, false, intl), [intl]);
+    const countries = useMemo(() => getCountries(true, true, intl), [intl]);
 
     return (
         <Formik
@@ -265,12 +265,10 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         </Block>
 
                         <Knapp htmlType="button" onClick={onCancel}>
-                            <FormattedMessage id="utenlandsopphold.land.avbryt" />
+                            <FormattedMessage id="avbryt" />
                         </Knapp>
                         <Hovedknapp disabled={!isValid} htmlType="submit">
-                            <FormattedMessage
-                                id={endre ? 'utenlandsopphold.land.endre' : 'utenlandsopphold.land.leggTil'}
-                            />
+                            <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
                         </Hovedknapp>
                     </form>
                 );

@@ -16,8 +16,8 @@ import BEMHelper from 'app/utils/bem';
 import './arbeidSeksjon.less';
 
 export interface ModalFormProps<T> {
-    endre: boolean;
     element?: T;
+    endre: boolean;
     onAdd: (element: T) => void;
     onCancel: () => void;
 }

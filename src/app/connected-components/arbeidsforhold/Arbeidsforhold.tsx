@@ -26,9 +26,6 @@ import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import { StepProps } from 'app/components/step/Step';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
 import { navigateTo } from 'app/utils/navigationUtils';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
-import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
-import Action from 'app/redux/types/Action';
 
 import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
 import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
@@ -46,8 +43,6 @@ interface OwnProps {
 
 interface ConnectProps {
     arbeidsforhold: Arbeidsforhold[];
-    uploadAttachment: (attachment: Attachment, id: string) => void;
-    deleteAttachment: (attachment: Attachment, id: string) => void;
 }
 
 type Props = OwnProps & StepProps & ConnectProps & InjectedIntlProps;
@@ -188,21 +183,7 @@ const mapStateToProps = (state: State) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: (action: Action) => void) => {
-    return {
-        uploadAttachment: (attachment: Attachment) =>
-            dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
-        deleteAttachment: (attachment: Attachment) =>
-            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } }),
-    };
-};
-
-export default injectIntl(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(Arbeidsforhold)
-);
+export default injectIntl(connect(mapStateToProps)(Arbeidsforhold));
 
 const AnnenInntektSiste10MndHjelpeTekst = ({ intl }: { intl: InjectedIntl }) => {
     return (

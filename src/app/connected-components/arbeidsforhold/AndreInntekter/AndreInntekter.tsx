@@ -2,6 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, Field, FieldProps, FieldArray } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
+import { connect } from 'react-redux';
 
 import BEMHelper from 'app/utils/bem';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
@@ -21,19 +22,31 @@ import { Skjemanummer } from 'app/types/Skjemanummer';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
+import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
+import Action from 'app/redux/types/Action';
+import { State } from 'app/redux/store';
 
 const cls = BEMHelper('andre-inntekter');
 
-type Props = ModalFormProps<AnnenInntekt> & InjectedIntlProps;
+interface ConnectProps {
+    vedlegg: Attachment[];
+    uploadAttachment: (attachment: Attachment) => void;
+    deleteAttachment: (attachment: Attachment) => void;
+}
+
+type Props = ConnectProps & ModalFormProps<AnnenInntekt> & InjectedIntlProps;
 const AndreInntekter: FunctionComponent<Props> = (props) => {
     const {
         endre,
         onCancel,
         element = {
-            vedlegg: [],
+            vedlegg: [] as Attachment[],
         },
         onAdd,
         intl,
+        uploadAttachment,
+        deleteAttachment,
+        vedlegg,
     } = props;
 
     const countries = useMemo(() => getCountries(true, false, intl), [intl]);
@@ -119,12 +132,12 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                                 <DatoInput
                                     fullskjermKalender
                                     name="tidsperiode.fom"
-                                    label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
+                                    label={getMessage(intl, 'fraOgMed')}
                                 />
                                 <DatoInput
                                     fullskjermKalender
                                     name="tidsperiode.tom"
-                                    label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
+                                    label={getMessage(intl, 'tilOgMed')}
                                 />
                             </>
                         </Block>
@@ -138,33 +151,35 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                         <Block visible={visKomponent.vedlegg}>
                             <FieldArray
                                 name={'vedlegg'}
-                                render={({ form, push, remove }) => (
-                                    <AttachmentOverview
-                                        attachmentType={AttachmentType.ANNEN_INNTEKT}
-                                        skjemanummer={Skjemanummer.ANNET}
-                                        attachments={element.vedlegg}
-                                        onFilesSelect={(files: Attachment[]) => {
-                                            files.forEach((file) => {
-                                                push(file.id);
-                                            });
-                                        }}
-                                        onFileDelete={(files: Attachment[]) => {
-                                            files.forEach((file: Attachment) => {
-                                                remove(form.values.vedlegg.indexOf(file.id));
-                                            });
-                                        }}
-                                    />
-                                )}
+                                render={({ form, push, remove }) => {
+                                    return (
+                                        <AttachmentOverview
+                                            attachmentType={AttachmentType.ANNEN_INNTEKT}
+                                            skjemanummer={Skjemanummer.ANNET}
+                                            attachments={vedlegg.filter((v) => form.values.vedlegg.includes(v.id))}
+                                            onFilesSelect={(files: Attachment[]) => {
+                                                files.forEach((file) => {
+                                                    push(file.id);
+                                                    uploadAttachment(file);
+                                                });
+                                            }}
+                                            onFileDelete={(files: Attachment[]) => {
+                                                files.forEach((file: Attachment) => {
+                                                    remove(form.values.vedlegg.indexOf(file.id));
+                                                    deleteAttachment(file);
+                                                });
+                                            }}
+                                        />
+                                    );
+                                }}
                             />
                         </Block>
 
                         <Knapp htmlType="button" onClick={onCancel}>
-                            <FormattedMessage id="utenlandsopphold.land.avbryt" />
+                            <FormattedMessage id="avbryt" />
                         </Knapp>
                         <Hovedknapp disabled={!isValid} htmlType="submit">
-                            <FormattedMessage
-                                id={endre ? 'utenlandsopphold.land.endre' : 'utenlandsopphold.land.leggTil'}
-                            />
+                            <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
                         </Hovedknapp>
                     </form>
                 );
@@ -173,4 +188,22 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default injectIntl(AndreInntekter);
+const mapStateToProps = (state: State) => {
+    return {
+        vedlegg: state.attachment.vedlegg.filter((v) => v.type === AttachmentType.ANNEN_INNTEKT),
+    };
+};
+
+const mapDispatchToProps = (dispatch: (action: Action) => void) => {
+    return {
+        uploadAttachment: (attachment: Attachment) =>
+            dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
+        deleteAttachment: (attachment: Attachment) =>
+            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } }),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(injectIntl(AndreInntekter));
