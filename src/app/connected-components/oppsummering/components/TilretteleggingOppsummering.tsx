@@ -4,7 +4,7 @@ import BEMHelper from 'common/util/bem';
 
 import './tilretteleggingOppsummering.less';
 import { EtikettLiten } from 'nav-frontend-typografi';
-import Tilrettelegging, { UferdigTilrettelegging, Tilretteleggingstype } from 'app/types/Tilrettelegging';
+import Tilrettelegging, { UferdigTilrettelegging } from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { getArbeidsforholdNavnFromId } from 'app/utils/arbeidsforholdUtils';
 import { guid } from 'nav-frontend-js-utils';
@@ -17,7 +17,7 @@ interface Props {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingsprosent?: number) => {
+export const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingsprosent?: number) => {
     if (tilretteleggingsDato !== undefined && stillingsprosent !== undefined) {
         const kanTilretteleggeFraStart = moment(tilretteleggingsDato).isSame(moment(startDato));
         const midtDato: Date = kanTilretteleggeFraStart
@@ -94,20 +94,20 @@ const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stillingspros
 };
 
 const renderContent = (tilrettelegging: Tilrettelegging) => {
-    switch (tilrettelegging.type) {
-        case Tilretteleggingstype.DELVIS:
-            return renderDates(
-                tilrettelegging.behovForTilretteleggingFom,
-                tilrettelegging.tilrettelagtArbeidFom,
-                tilrettelegging.stillingsprosent
-            );
-        case Tilretteleggingstype.HEL:
-            return renderDates(tilrettelegging.behovForTilretteleggingFom, tilrettelegging.tilrettelagtArbeidFom);
-        case Tilretteleggingstype.INGEN:
-            return renderDates(tilrettelegging.behovForTilretteleggingFom);
-        default:
-            return null;
-    }
+    // switch (tilrettelegging.type) {
+    //     case Tilretteleggingstype.DELVIS:
+    //         return renderDates(
+    //             tilrettelegging.behovForTilretteleggingFom,
+    //             tilrettelegging.tilrettelagtArbeidFom,
+    //             tilrettelegging.stillingsprosent
+    //         );
+    //     case Tilretteleggingstype.HEL:
+    //         return renderDates(tilrettelegging.behovForTilretteleggingFom, tilrettelegging.tilrettelagtArbeidFom);
+    //     case Tilretteleggingstype.INGEN:
+    //         return renderDates(tilrettelegging.behovForTilretteleggingFom);
+    //     default:
+    //         return null;
+    // }
 };
 
 const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging, arbeidsforhold }) => {

@@ -12,42 +12,39 @@ export enum Arbeidsforholdstype {
     'PRIVAT' = 'privat',
 }
 
-interface Tilretteleggingsbase {
-    type: Tilretteleggingstype;
-    vedlegg: string[];
+export interface Tilrettelegging {
+    id: string;
     behovForTilretteleggingFom: Date;
     arbeidsforhold: {
         id?: string;
         type: Arbeidsforholdstype;
     };
+    vedlegg: string[];
+    helTilrettelegging?: {
+        tilrettelagtArbeidFom: Date;
+    };
+    delvisTilrettelegging?: {
+        tilrettelagtArbeidFom: Date;
+        stillingsprosent: number;
+    };
+    ingenTilrettelegging?: {
+        slutteArbeidFom: Date;
+    };
 }
-
-export interface HelTilrettelegging extends Tilretteleggingsbase {
-    type: Tilretteleggingstype.HEL;
-    tilrettelagtArbeidFom: Date;
-}
-
-export interface DelvisTilrettelegging extends Tilretteleggingsbase {
-    type: Tilretteleggingstype.DELVIS;
-    tilrettelagtArbeidFom: Date;
-    stillingsprosent: number;
-}
-
-export interface IngenTilrettelegging extends Tilretteleggingsbase {
-    type: Tilretteleggingstype.INGEN;
-    slutteArbeidFom: Date;
-}
-
-export interface NoeTilrettelegging extends Tilretteleggingsbase {
-    type: Tilretteleggingstype.NOE;
-}
-
-type Tilrettelegging = HelTilrettelegging | DelvisTilrettelegging | IngenTilrettelegging | NoeTilrettelegging;
 
 export type UferdigTilrettelegging = Tilrettelegging & {
-    id: string;
-    type?: Tilretteleggingstype;
     behovForTilretteleggingFom?: Date;
+    type: Tilretteleggingstype[];
+    helTilrettelegging?: {
+        tilrettelagtArbeidFom?: Date;
+    };
+    delvisTilrettelegging?: {
+        tilrettelagtArbeidFom?: Date;
+        stillingsprosent?: number;
+    };
+    ingenTilrettelegging?: {
+        slutteArbeidFom?: Date;
+    };
 };
 
 export default Tilrettelegging;

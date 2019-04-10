@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import './statusBoks.less';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import Lenkepanelbase from 'nav-frontend-lenkepanel';
 import { Undertittel, EtikettLiten, Ingress, Systemtittel } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';

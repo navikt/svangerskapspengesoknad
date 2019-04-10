@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
 import { FieldArrayRenderProps, FieldArray } from 'formik';
 import CheckboksPanelGruppeResponsive, {
-    CheckboksPanelGruppeResponsiveProps,
+    CheckboxPanelgruppeResponsiveProps,
 } from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
-import { Omit } from 'lodash';
+import { Omit, get } from 'lodash';
+import { translateError } from '../../utils/errorUtils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface OwnProps {
     name: string;
@@ -16,26 +17,36 @@ interface OwnProps {
 }
 
 type Props = OwnProps &
-    Omit<CheckboksPanelGruppeProps, 'onChange' | 'checkboxes' | 'legend'> &
-    CheckboksPanelGruppeResponsiveProps;
+    Omit<CheckboxPanelgruppeResponsiveProps, 'onChange' | 'checkboxes' | 'legend'> &
+    InjectedIntlProps;
 
 const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
-    const { name, label, options, ...checkboksPanelGruppeProps } = props;
+    const { name, label, options, intl, ...checkboksPanelGruppeProps } = props;
 
     return (
         <FieldArray
             name={name}
             render={({ form, push, remove }: FieldArrayRenderProps) => {
+                const feilmelding = get(form.errors, name) as string;
                 return (
                     <CheckboksPanelGruppeResponsive
                         {...checkboksPanelGruppeProps}
+                        feil={
+                            feilmelding && form.submitCount > 0
+                                ? { feilmelding: translateError(intl, feilmelding) }
+                                : undefined
+                        }
                         legend={label}
-                        checkboxes={options.map((option) => ({
-                            ...option,
-                            checked: form.values[name].includes(option.value),
-                        }))}
+                        checkboxes={options.map((option) => {
+                            const values = get(form.values, name);
+                            return {
+                                ...option,
+                                checked: values && values.includes(option.value) ? true : false,
+                            };
+                        })}
                         onChange={(_, value) => {
-                            const indexOfGrunnlag = form.values[name].indexOf(value);
+                            const values = get(form.values, name) || [];
+                            const indexOfGrunnlag = values.indexOf(value);
                             if (indexOfGrunnlag === -1) {
                                 push(value);
                             } else {
@@ -49,4 +60,4 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default CheckboksPanelGruppe;
+export default injectIntl(CheckboksPanelGruppe);

@@ -8,7 +8,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { isValid } from 'i18n-iso-countries';
 
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import { Næringstype, Næring } from 'app/types/SelvstendigNæringsdrivende';
 import getMessage from 'common/util/i18nUtils';
 import CheckboksPanelGruppe from 'app/formik/wrappers/CheckboksPanelGruppe';
@@ -122,7 +122,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                     label: getMessage(intl, `næringstype.${næringstype.toLocaleLowerCase()}`),
                                     value: næringstype,
                                 }))}
-                                twoColumns={true}
+                                columns={2}
                             />
                         </Block>
 

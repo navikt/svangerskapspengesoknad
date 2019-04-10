@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 
 import './duHarSvartNeiListe.less';
 

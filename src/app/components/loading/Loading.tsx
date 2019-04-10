@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Spinner from 'nav-frontend-spinner';
 
-import BEMHelper from 'app/utils/bem';
+import BEMHelper from 'common/util/bem';
 import './loading.less';
 
 const cls = BEMHelper('loading');

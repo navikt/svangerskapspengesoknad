@@ -24,12 +24,12 @@ const PersonMedSnakkeboble: React.StatelessComponent<Props> = ({
     dialog,
     personRenderer,
     stil,
-    fyltBakgrunn = true
+    fyltBakgrunn = true,
 }) => {
     return (
         <div
             className={classnames(
-                bem.className,
+                bem.block,
                 fyltBakgrunn ? bem.modifier('fyltBakgrunn') : undefined,
                 stil ? bem.modifier(stil) : undefined
             )}>
