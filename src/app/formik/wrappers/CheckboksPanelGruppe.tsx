@@ -4,6 +4,8 @@ import CheckboksPanelGruppeResponsive, {
     CheckboxPanelgruppeResponsiveProps,
 } from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit, get } from 'lodash';
+import { translateError } from '../../utils/errorUtils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface OwnProps {
     name: string;
@@ -14,18 +16,26 @@ interface OwnProps {
     }>;
 }
 
-type Props = OwnProps & Omit<CheckboxPanelgruppeResponsiveProps, 'onChange' | 'checkboxes' | 'legend'>;
+type Props = OwnProps &
+    Omit<CheckboxPanelgruppeResponsiveProps, 'onChange' | 'checkboxes' | 'legend'> &
+    InjectedIntlProps;
 
 const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
-    const { name, label, options, ...checkboksPanelGruppeProps } = props;
+    const { name, label, options, intl, ...checkboksPanelGruppeProps } = props;
 
     return (
         <FieldArray
             name={name}
             render={({ form, push, remove }: FieldArrayRenderProps) => {
+                const feilmelding = get(form.errors, name) as string;
                 return (
                     <CheckboksPanelGruppeResponsive
                         {...checkboksPanelGruppeProps}
+                        feil={
+                            feilmelding && form.submitCount > 0
+                                ? { feilmelding: translateError(intl, feilmelding) }
+                                : undefined
+                        }
                         legend={label}
                         checkboxes={options.map((option) => {
                             const values = get(form.values, name);
@@ -50,4 +60,4 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default CheckboksPanelGruppe;
+export default injectIntl(CheckboksPanelGruppe);

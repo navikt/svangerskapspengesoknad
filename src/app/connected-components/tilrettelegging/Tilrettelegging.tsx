@@ -54,23 +54,36 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 
-    // const visVedlegg =
-    //     (tilrettelegging.type === Tilretteleggingstype.HEL && !!tilrettelegging.tilrettelagtArbeidFom) ||
-    //     (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
-    //     tilrettelegging.type === Tilretteleggingstype.INGEN;
-
     const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
     const tilretteleggingstypeName = getInputName('type');
     const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName);
 
     const visKomponent = {
-        nesteknapp: true,
         vedlegg: true,
         visDel1: attachments.length > 0 || true,
         visDel2: !!tilrettelegging.behovForTilretteleggingFom,
         ingenTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.INGEN),
         delvisTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS),
         helTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL),
+    };
+
+    const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = values.tilrettelegging[index];
+    const visNesteKnapp = (): boolean => {
+        return (
+            visKomponent.visDel2 &&
+            valgteTilretteleggingstyper.length > 0 &&
+            (visKomponent.ingenTilrettelegging
+                ? ingenTilrettelegging !== undefined && ingenTilrettelegging.slutteArbeidFom !== undefined
+                : true) &&
+            (visKomponent.delvisTilrettelegging
+                ? delvisTilrettelegging !== undefined &&
+                  !isNaN(delvisTilrettelegging.stillingsprosent) &&
+                  delvisTilrettelegging.tilrettelagtArbeidFom !== undefined
+                : true) &&
+            (visKomponent.helTilrettelegging
+                ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
+                : true)
+        );
     };
 
     const navigate = () => {
@@ -85,7 +98,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             <FormikStep
                 step={step}
                 formikProps={formikProps}
-                showNesteknapp={visKomponent.nesteknapp}
+                showNesteknapp={visNesteKnapp()}
                 onValidFormSubmit={navigate}
                 history={history}>
                 <Block visible={visKomponent.vedlegg}>
@@ -192,7 +205,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                 bredde="XS"
                                 max={100}
                                 min={0}
-                                step={10}
+                                step={1}
                                 placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
                                 name={getInputName('delvisTilrettelegging.stillingsprosent')}
                                 label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
