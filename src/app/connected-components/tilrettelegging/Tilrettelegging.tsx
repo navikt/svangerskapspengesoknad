@@ -26,6 +26,8 @@ import getMessage from 'common/util/i18nUtils';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import CheckboksPanelGruppe from '../../formik/wrappers/CheckboksPanelGruppe';
+import InfoBlock from 'common/components/info-block/InfoBlock';
+import InputField from '../../formik/wrappers/InputField';
 
 interface OwnProps {
     id: string;
@@ -57,7 +59,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     //     (tilrettelegging.type === Tilretteleggingstype.DELVIS && !!tilrettelegging.tilrettelagtArbeidFom) ||
     //     tilrettelegging.type === Tilretteleggingstype.INGEN;
 
-    const tilretteleggingstypeName = `tilrettelegging.${index}.type`;
+    const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
+    const tilretteleggingstypeName = getInputName('type');
     const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName);
 
     const visKomponent = {
@@ -104,7 +107,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             title: getMessage(intl, 'tilrettelegging.vedlegg.label'),
                         }}>
                         <FieldArray
-                            name={`tilrettelegging.${index}.vedlegg`}
+                            name={getInputName('vedlegg')}
                             render={({ form, push, remove }) => (
                                 <AttachmentOverview
                                     attachmentType={AttachmentType.TILRETTELEGGING}
@@ -141,7 +144,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <Block header={{ title: 'Del 1', stil: 'seksjon' }}>
                         <Block margin="xs">
                             <DatoInput
-                                name={`tilrettelegging.${index}.behovForTilretteleggingFom`}
+                                name={getInputName('behovForTilretteleggingFom')}
                                 label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label', {
                                     arbeidsgiversNavn,
                                 })}
@@ -171,52 +174,64 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     />
                 </Block>
 
-                <Block visible={visKomponent.ingenTilrettelegging}>ingen</Block>
-                <Block visible={visKomponent.delvisTilrettelegging}>delvis</Block>
-                <Block visible={visKomponent.helTilrettelegging}>hel</Block>
-
-                {/* 
-                <Block visible={visKomponent.helEllerDelvis}>
-                    <RadioPanelGruppe
-                        id="tilrettelegging.helEllerDelvis"
-                        name={`tilrettelegging.${index}.type`}
-                        legend={getMessage(intl, 'tilrettelegging.helEllerDelvis.label')}
-                        radios={[
-                            {
-                                value: Tilretteleggingstype.HEL,
-                                label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.HEL}`),
-                            },
-                            {
-                                value: Tilretteleggingstype.DELVIS,
-                                label: getMessage(intl, `tilrettelegging.type.${Tilretteleggingstype.DELVIS}`),
-                            },
-                        ]}
-                    />
-                </Block> */}
-                {/* <Block margin="xs" visible={visKomponent.stillingsprosent}>
-                    {tilrettelegging.type === Tilretteleggingstype.DELVIS && (
-                        <InputField
-                            type="number"
-                            bredde="XS"
-                            max={100}
-                            min={0}
-                            step={10}
-                            placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
-                            name={`tilrettelegging.${index}.stillingsprosent`}
-                            label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
+                <Block
+                    visible={visKomponent.ingenTilrettelegging}
+                    header={{ title: 'a) Du kan fortsette å jobbe med samme stillingsprosent' }}>
+                    <InfoBlock>
+                        <DatoInput
+                            name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
+                            label={'Fra hvilken dato kan du fortsette med samme stillingsprosent?'}
+                            datoAvgrensinger={{
+                                minDato: tilrettelegging.behovForTilretteleggingFom,
+                                maksDato: values.barn.fødselsdato,
+                            }}
                         />
-                    )}
-                </Block> */}
-                {/* <Block margin="s" visible={visKomponent.fraHvilkenDato}>
-                    <DatoInput
-                        name={`tilrettelegging.${index}.tilrettelagtArbeidFom`}
-                        label={getMessage(intl, 'tilrettelegging.tilrettelagtArbeidFom.label')}
-                        datoAvgrensinger={{
-                            minDato: tilrettelegging.behovForTilretteleggingFom,
-                            maksDato: values.barn.fødselsdato,
-                        }}
-                    />
-                </Block> */}
+                    </InfoBlock>
+                </Block>
+                <Block
+                    visible={visKomponent.delvisTilrettelegging}
+                    header={{
+                        title: 'b) Du kan fortsette med redusert arbeidstid',
+                    }}>
+                    <InfoBlock>
+                        <Block margin="s">
+                            <InputField
+                                type="number"
+                                bredde="XS"
+                                max={100}
+                                min={0}
+                                step={10}
+                                placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
+                                name={getInputName('delvisTilrettelegging.stillingsprosent')}
+                                label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
+                            />
+                        </Block>
+                        <DatoInput
+                            name={getInputName('delvisTilrettelegging.tilrettelagtArbeidFom')}
+                            label={'Fra hvilken dato kan du jobbe redusert?'}
+                            datoAvgrensinger={{
+                                minDato: tilrettelegging.behovForTilretteleggingFom,
+                                maksDato: values.barn.fødselsdato,
+                            }}
+                        />
+                    </InfoBlock>
+                </Block>
+                <Block
+                    visible={visKomponent.helTilrettelegging}
+                    header={{
+                        title: 'c) Du må midlertidlig gå ut av ditt arbeid',
+                    }}>
+                    <InfoBlock>
+                        <DatoInput
+                            name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
+                            label={'Fra hvilken dato må du gå midlertidig ut av ditt arbeid?'}
+                            datoAvgrensinger={{
+                                minDato: tilrettelegging.behovForTilretteleggingFom,
+                                maksDato: values.barn.fødselsdato,
+                            }}
+                        />
+                    </InfoBlock>
+                </Block>
             </FormikStep>
         </Applikasjonsside>
     );
