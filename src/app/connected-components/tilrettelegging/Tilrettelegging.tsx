@@ -24,6 +24,7 @@ import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
+import CheckboksPanelGruppe from '../../formik/wrappers/CheckboksPanelGruppe';
 
 interface OwnProps {
     id: string;
@@ -142,7 +143,24 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </Block>
                 </Block>
                 <Block header={{ title: 'Del 2', stil: 'seksjon' }} visible={visKomponent.visDel2}>
-                    sdf
+                    <CheckboksPanelGruppe
+                        label="Hvordan kan du jobbe mens du er gravid?"
+                        name={`tilrettelegging.${index}.type`}
+                        options={[
+                            {
+                                label: 'a) Du kan fortsette med samme stillingsprosent',
+                                value: 'hel',
+                            },
+                            {
+                                label: 'b) Du kan fortsette med redusert arbeidstid',
+                                value: 'delvis',
+                            },
+                            {
+                                label: 'c) Du må midlertidig gå ut av ditt arbeid',
+                                value: 'ingen',
+                            },
+                        ]}
+                    />
                 </Block>
 
                 {/* <Block visible={visKomponent.typevelger}>
