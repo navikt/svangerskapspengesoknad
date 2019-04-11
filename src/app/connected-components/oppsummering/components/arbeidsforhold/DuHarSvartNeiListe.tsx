@@ -27,7 +27,7 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
     hattOppdragForNærVennEllerFamilie,
     arbeidsforholdOppsummering,
     frilansOppsummering,
-    selvstendigOppsummering,
+    selvstendigOppsummering
 }) => {
     return (
         <div>

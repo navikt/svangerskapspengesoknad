@@ -44,7 +44,7 @@ const DatoInput: FunctionComponent<Props & InjectedIntlProps> = ({
                         form.setFieldValue(name, dato);
                     }}
                     kalender={{
-                        plassering: fullskjermKalender ? 'fullskjerm' : 'under',
+                        plassering: fullskjermKalender ? 'fullskjerm' : 'under'
                     }}
                 />
             );

@@ -19,13 +19,13 @@ const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors, su
     if (errors) {
         const errorMessages = flattenErrors(errors).map((error) => ({
             ...error,
-            text: translateError(intl, error.text),
+            text: translateError(intl, error.text)
         }));
 
         return (
             <Block visible={errorMessages.length > 0 && submitCount > 0}>
                 <Feiloppsummering
-                    show
+                    show={true}
                     className={cls.block}
                     title={getMessage(intl, 'feiloppsummering.tittel')}
                     errors={errorMessages}

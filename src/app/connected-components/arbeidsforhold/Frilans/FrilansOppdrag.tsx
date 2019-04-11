@@ -30,10 +30,10 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
         endre,
         onCancel,
         element = {
-            næringstyper: [],
+            næringstyper: []
         },
         onAdd,
-        intl,
+        intl
     } = props;
 
     return (
@@ -66,12 +66,12 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                         <Block margin="xxs">
                             <>
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="tidsperiode.fom"
                                     label={getMessage(intl, 'fraOgMed')}
                                 />
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="tidsperiode.tom"
                                     label={getMessage(intl, 'tilOgMed')}
                                 />

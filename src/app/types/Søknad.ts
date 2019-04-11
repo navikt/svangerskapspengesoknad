@@ -7,7 +7,7 @@ import { FormikErrors } from 'formik';
 // import mockSøknad from '../mockSoknad';
 
 export enum Søknadstype {
-    'SVANGERSKAPSPENGER' = 'svangerskapspenger',
+    'SVANGERSKAPSPENGER' = 'svangerskapspenger'
 }
 
 interface Søknad {
@@ -40,13 +40,13 @@ export const initialSøknad: UferdigSøknad = {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
         tidligereOpphold: [],
-        senereOpphold: [],
+        senereOpphold: []
     },
     søker: {
         rolle: Søkerrolle.MOR,
         selvstendigNæringsdrivendeInformasjon: [],
-        andreInntekterSiste10Mnd: [],
-    },
+        andreInntekterSiste10Mnd: []
+    }
 };
 
 export interface Søknadsgrunnlag {

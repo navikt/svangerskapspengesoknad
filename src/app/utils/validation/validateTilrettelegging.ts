@@ -6,11 +6,11 @@ import { FormikErrors } from 'formik';
 import { Tilretteleggingstype } from '../../types/Tilrettelegging';
 
 const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
-    let errors: Søknadfeil = {};
+    const errors: Søknadfeil = {};
 
     if (søknad.tilrettelegging) {
         søknad.tilrettelegging.forEach((t, index) => {
-            let tErrors: FormikErrors<any> = {};
+            const tErrors: FormikErrors<any> = {};
 
             const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
             const tilretteleggingstypeName = getInputName('type');

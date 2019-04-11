@@ -56,16 +56,16 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                     revisor,
                     harRevisor,
                     endringAvNæringsinntektInformasjon,
-                    kanInnhenteOpplsyningerFraRevisor,
+                    kanInnhenteOpplsyningerFraRevisor
                 } = normalisertNæring;
 
                 const visKomponent = {
-                    navnPåNæringen: næringstyper !== undefined && næringstyper.length > 0,
+                    navnPåNæringen: næringstyper !== undefined && næringstyper.length! > 0,
                     advarselFisker:
                         næringstyper !== undefined &&
                         navnPåNæringen !== undefined &&
                         navnPåNæringen !== '' &&
-                        næringstyper.includes(Næringstype.FISKER),
+                        (næringstyper as Næringstype[]).includes(Næringstype.FISKER),
                     registrertINorge: navnPåNæringen !== undefined && navnPåNæringen !== '',
                     land: registrertINorge === false,
                     orgNr: registrertINorge === true,
@@ -79,7 +79,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                     ...(moment(tidsperiode.fom as Date).isSameOrAfter(moment().subtract(4, 'year')) && {
                         næringsinntekt: tidsperiode.fom !== undefined,
                         harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene: næringsinntekt !== undefined,
-                        oppstartsdato: harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === true,
+                        oppstartsdato: harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === true
                     }),
                     harRegnskapsfører:
                         (oppstartsdato !== undefined && oppstartsdato !== '') ||
@@ -99,7 +99,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                     formButtons:
                         harRevisor === false ||
                         kanInnhenteOpplsyningerFraRevisor !== undefined ||
-                        (regnskapsfører !== undefined && regnskapsfører.erNærVennEllerFamilie !== undefined),
+                        (regnskapsfører !== undefined && regnskapsfører.erNærVennEllerFamilie !== undefined)
                 } as any;
 
                 return (
@@ -120,7 +120,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                 label={getMessage(intl, 'arbeidsforhold.selvstendig.næringstype')}
                                 options={Object.values(Næringstype).map((næringstype: Næringstype) => ({
                                     label: getMessage(intl, `næringstype.${næringstype.toLocaleLowerCase()}`),
-                                    value: næringstype,
+                                    value: næringstype
                                 }))}
                                 columns={2}
                             />
@@ -147,7 +147,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             <JaNeiSpørsmål
                                 name="registrertINorge"
                                 legend={getMessage(intl, 'arbeidsforhold.selvstendig.registrertINorge', {
-                                    navn: values.navnPåNæringen,
+                                    navn: values.navnPåNæringen
                                 })}
                             />
                         </Block>
@@ -187,17 +187,17 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         <Block visible={visKomponent.tidsperiode}>
                             <>
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="tidsperiode.fom"
                                     label={getMessage(intl, 'arbeidsforhold.selvstendig.fom', {
-                                        navn: values.navnPåNæringen,
+                                        navn: values.navnPåNæringen
                                     })}
                                 />
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="tidsperiode.tom"
                                     label={getMessage(intl, 'arbeidsforhold.selvstendig.tom', {
-                                        navn: values.navnPåNæringen,
+                                        navn: values.navnPåNæringen
                                     })}
                                 />
                             </>
@@ -227,7 +227,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
 
                         <Block visible={visKomponent.oppstartsdato === true}>
                             <DatoInput
-                                fullskjermKalender
+                                fullskjermKalender={true}
                                 name="oppstartsdato"
                                 label={getMessage(intl, 'arbeidsforhold.selvstendig.oppstartsdato')}
                             />

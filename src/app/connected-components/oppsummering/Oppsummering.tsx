@@ -66,7 +66,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
     }
 
     return (
-        <Applikasjonsside visTittel visSpråkvelger>
+        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
             <FormikStep
                 step={step}
                 formikProps={formikProps}
@@ -74,7 +74,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 onValidFormSubmit={sendSøknad}
                 history={history}>
                 <Block>
-                    <Veilederinfo visVeileder stil="kompakt" type="info">
+                    <Veilederinfo visVeileder={true} stil="kompakt" type="info">
                         <FormattedMessage id="oppsummering.veileder" />
                     </Veilederinfo>
                 </Block>
@@ -91,7 +91,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     <FormattedMessage
                         id="oppsummering.barn.termindato"
                         values={{
-                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY'),
+                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
                         }}
                     />
                 </Oppsummeringspunkt>
@@ -141,13 +141,13 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
-    vedlegg: state.attachment.vedlegg,
+    vedlegg: state.attachment.vedlegg
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
     requestSendSøknad: (søknad: Søknad) => {
         dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
-    },
+    }
 });
 
 export default connect(

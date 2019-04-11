@@ -64,7 +64,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         visDel2: !!tilrettelegging.behovForTilretteleggingFom,
         ingenTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.INGEN),
         delvisTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS),
-        helTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL),
+        helTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL)
     };
 
     const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = values.tilrettelegging[index];
@@ -107,7 +107,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <Applikasjonsside visTittel visSpråkvelger>
+        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
             <FormikStep
                 step={step}
                 formikProps={formikProps}
@@ -122,7 +122,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </Block>
                     <Block
                         header={{
-                            title: getMessage(intl, 'tilrettelegging.vedlegg.label'),
+                            title: getMessage(intl, 'tilrettelegging.vedlegg.label')
                         }}>
                         <FieldArray
                             name={getInputName('vedlegg')}
@@ -154,7 +154,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             <FormattedHTMLMessage
                                 id="tilrettelegging.veileder.intro"
                                 values={{
-                                    arbeidsgiversNavn,
+                                    arbeidsgiversNavn
                                 }}
                             />
                         </Veilederinfo>
@@ -164,7 +164,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             <DatoInput
                                 name={getInputName('behovForTilretteleggingFom')}
                                 label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label', {
-                                    arbeidsgiversNavn,
+                                    arbeidsgiversNavn
                                 })}
                             />
                         </Block>
@@ -178,16 +178,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         options={[
                             {
                                 label: 'a) Du kan fortsette med samme stillingsprosent',
-                                value: Tilretteleggingstype.INGEN,
+                                value: Tilretteleggingstype.INGEN
                             },
                             {
                                 label: 'b) Du kan fortsette med redusert arbeidstid',
-                                value: Tilretteleggingstype.DELVIS,
+                                value: Tilretteleggingstype.DELVIS
                             },
                             {
                                 label: 'c) Du må midlertidig gå ut av ditt arbeid',
-                                value: Tilretteleggingstype.HEL,
-                            },
+                                value: Tilretteleggingstype.HEL
+                            }
                         ]}
                     />
                 </Block>
@@ -201,7 +201,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             label={'Fra hvilken dato kan du fortsette med samme stillingsprosent?'}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato,
+                                maksDato: values.barn.fødselsdato
                             }}
                         />
                     </InfoBlock>
@@ -209,7 +209,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block
                     visible={visKomponent.delvisTilrettelegging}
                     header={{
-                        title: 'b) Du kan fortsette med redusert arbeidstid',
+                        title: 'b) Du kan fortsette med redusert arbeidstid'
                     }}>
                     <InfoBlock>
                         <Block margin="s">
@@ -229,7 +229,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             label={'Fra hvilken dato kan du jobbe redusert?'}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato,
+                                maksDato: values.barn.fødselsdato
                             }}
                         />
                     </InfoBlock>
@@ -237,7 +237,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block
                     visible={visKomponent.helTilrettelegging}
                     header={{
-                        title: 'c) Du må midlertidlig gå ut av ditt arbeid',
+                        title: 'c) Du må midlertidlig gå ut av ditt arbeid'
                     }}>
                     <InfoBlock>
                         <DatoInput
@@ -245,7 +245,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             label={'Fra hvilken dato må du gå midlertidig ut av ditt arbeid?'}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato,
+                                maksDato: values.barn.fødselsdato
                             }}
                         />
                     </InfoBlock>
@@ -259,7 +259,7 @@ const mapStateToProps = (state: State) => {
     const søkerinfo = state.api.søkerinfo;
     return {
         vedlegg: state.attachment.vedlegg.filter((v) => v.type === AttachmentType.TILRETTELEGGING),
-        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined,
+        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined
     };
 };
 
@@ -268,7 +268,7 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
         uploadAttachment: (attachment: Attachment) =>
             dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
         deleteAttachment: (attachment: Attachment) =>
-            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } }),
+            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } })
     };
 };
 

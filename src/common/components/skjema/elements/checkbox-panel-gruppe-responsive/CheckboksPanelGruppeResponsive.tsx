@@ -22,7 +22,7 @@ class CheckboksPanelGruppeResponsive extends React.Component<CheckboxPanelgruppe
 
         const cls = classnames('checkboksPanelWrapper', {
             'checkboksPanelWrapper--twoColumns': columns === 2,
-            'checkboksPanelWrapper--oneColumn': columns === 1,
+            'checkboksPanelWrapper--oneColumn': columns === 1
         });
 
         return (

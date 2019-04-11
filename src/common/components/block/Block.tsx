@@ -34,7 +34,7 @@ const Block: React.StatelessComponent<BlockProps> = ({
     align,
     marginTop,
     hasChildBlocks,
-    style,
+    style
 }) => {
     if (children === undefined || (animated !== true && visible === false)) {
         return null;
@@ -54,7 +54,7 @@ const Block: React.StatelessComponent<BlockProps> = ({
     const contentClass = classNames(cls.block, !hasChildBlocks ? cls.modifier(bottomMargin) : cls.modifier('none'), {
         [cls.modifier(`top-${marginTop}`)]: marginTop,
         [cls.modifier(`align-${align}`)]: align,
-        [cls.modifier(`style-${style}`)]: style,
+        [cls.modifier(`style-${style}`)]: style
     });
 
     const content =

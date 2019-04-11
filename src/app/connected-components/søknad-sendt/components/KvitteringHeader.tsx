@@ -29,7 +29,7 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato }) => 
                     <FormattedMessage
                         id="søknadSendt.tittel"
                         values={{
-                            name: `${søker.fornavn} ${søker.etternavn}`,
+                            name: `${søker.fornavn} ${søker.etternavn}`
                         }}
                     />
                 </Sidetittel>

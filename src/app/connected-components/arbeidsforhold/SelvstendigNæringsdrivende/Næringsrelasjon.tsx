@@ -16,7 +16,7 @@ const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
 
     const visKomponent = {
         telefonnr: true,
-        erNærVennEllerFamilie: true,
+        erNærVennEllerFamilie: true
     };
 
     return (

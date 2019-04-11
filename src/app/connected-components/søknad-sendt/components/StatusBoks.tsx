@@ -22,7 +22,7 @@ const StatusBoks: FunctionComponent<Props> = ({ saksNr }) => {
                     <FormattedMessage id="søknadSendt.status.tittel" />
                 </Systemtittel>
             </div>
-            <Lenkepanelbase href="#" border className="statusBoks__lenkepanel" tittelProps="ingress">
+            <Lenkepanelbase href="#" border={true} className="statusBoks__lenkepanel" tittelProps="ingress">
                 <div className={cls.block}>
                     <div className={cls.element('left')}>
                         <div className="oneremMargin">

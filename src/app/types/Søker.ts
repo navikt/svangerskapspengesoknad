@@ -3,7 +3,7 @@ import { Næring } from './SelvstendigNæringsdrivende';
 import { AnnenInntekt } from './AnnenInntekt';
 
 export enum Søkerrolle {
-    'MOR' = 'mor',
+    'MOR' = 'mor'
 }
 
 export interface Søker {

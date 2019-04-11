@@ -14,7 +14,7 @@ export const normaliserFrilansinformasjon = (søker: Partial<Søker>): DeepParti
             'jobberFremdelesSomFrilans',
             'oppstart',
             'driverFosterhjem',
-            'harJobbetForNærVennEllerFamilieSiste10Mnd',
+            'harJobbetForNærVennEllerFamilieSiste10Mnd'
         ];
 
         if (frilansInformasjon.oppdragForNæreVennerEllerFamilieSiste10Mnd) {
@@ -26,7 +26,7 @@ export const normaliserFrilansinformasjon = (søker: Partial<Søker>): DeepParti
 };
 
 export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Næring> => {
-    let relevanteFeilter: string[] = [
+    const relevanteFeilter: string[] = [
         'næringstyper',
         'navnPåNæringen',
         'registrertINorge',
@@ -35,7 +35,7 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
         'hattVarigEndringAvNæringsinntektSiste4Kalenderår',
         'kanInnhenteOpplsyningerFraRevisor',
         'harRevisor',
-        'harRegnskapsfører',
+        'harRegnskapsfører'
     ];
 
     næring.registrertINorge === true
@@ -59,11 +59,11 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
 };
 
 export const normaliserSøker = (søker: Partial<Søker>) => {
-    let relevanteFeilter: string[] = [
+    const relevanteFeilter: string[] = [
         'rolle',
         'harJobbetSomFrilansSiste10Mnd',
         'harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd',
-        'harHattAnnenInntektSiste10Mnd',
+        'harHattAnnenInntektSiste10Mnd'
     ];
 
     if (søker.harJobbetSomFrilansSiste10Mnd) {

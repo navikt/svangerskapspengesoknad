@@ -31,7 +31,7 @@ const Termin: FunctionComponent<Props> = (props) => {
     const showNesteknapp = values.barn.erBarnetFødt === false || values.barn.fødselsdato !== undefined;
 
     return (
-        <Applikasjonsside visTittel visSpråkvelger>
+        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
             <FormikStep
                 step={step}
                 showNesteknapp={showNesteknapp}
@@ -49,7 +49,7 @@ const Termin: FunctionComponent<Props> = (props) => {
                         name="barn.fødselsdato"
                         label={getMessage(intl, 'termin.fødselsdato')}
                         datoAvgrensinger={{
-                            maksDato: new Date(),
+                            maksDato: new Date()
                         }}
                     />
                 </Block>

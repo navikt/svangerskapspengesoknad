@@ -35,7 +35,7 @@ class InteractiveListElement extends React.Component<AllListElementProps & Injec
             editButtonAriaText,
             onDelete,
             onEdit,
-            intl,
+            intl
         } = this.props;
         return (
             <li className={bem.block}>
