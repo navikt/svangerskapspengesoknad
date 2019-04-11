@@ -28,6 +28,7 @@ const VelgSøknadsgrunnlag: FunctionComponent<Props> = (props) => {
             render={({ form, push, remove }: FieldArrayRenderProps) => {
                 return (
                     <CheckboksPanelGruppeResponsive
+                        columns={1}
                         {...checkboksPanelGruppeProps}
                         legend={label}
                         checkboxes={options.map((option) => ({

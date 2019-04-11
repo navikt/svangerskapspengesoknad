@@ -65,7 +65,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = values.tilrettelegging[index];
 
     const frilansRisikoErOk = erFrilansEllerSelvstendig
-        ? tilrettelegging.risikoBeskrivelse !== undefined && tilrettelegging.risikoBeskrivelse.length > 3
+        ? tilrettelegging.risikoFaktorer !== undefined && tilrettelegging.risikoFaktorer.length > 3
         : true;
     const visFrilansEllerSelvstendig = erFrilansEllerSelvstendig;
     const visVedlegg = visFrilansEllerSelvstendig ? frilansRisikoErOk : true;
@@ -89,12 +89,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
             : true);
     const visTiltakForTilrettelegging = del1OgDel2ErOk && visFrilansEllerSelvstendig;
-    const vurderteTiltakBeskrivelseErOk = erFrilansEllerSelvstendig
-        ? tilrettelegging.vurderteTiltakBeskrivelse !== undefined &&
-          tilrettelegging.vurderteTiltakBeskrivelse.length > 3
+    const tilretteleggingstiltakErOk = erFrilansEllerSelvstendig
+        ? tilrettelegging.tilretteleggingstiltak !== undefined && tilrettelegging.tilretteleggingstiltak.length > 3
         : true;
 
-    const visNesteKnapp = del1OgDel2ErOk && vurderteTiltakBeskrivelseErOk;
+    const visNesteKnapp = del1OgDel2ErOk && tilretteleggingstiltakErOk;
 
     const cleanupTilrettelegging = () => {
         if (visIngenTilrettelegging === false) {
@@ -131,7 +130,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         </Veilederinfo>
                     </Block>
                     <Textarea
-                        name={getInputName('risikoBeskrivelse')}
+                        name={getInputName('risikoFaktorer')}
                         label="Hva kan skade det ufødte barnet i jobben din som frilanser?"
                     />
                 </Block>
@@ -272,7 +271,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 </Block>
                 <Block visible={visTiltakForTilrettelegging}>
                     <Textarea
-                        name={getInputName('vurderteTiltakBeskrivelse')}
+                        name={getInputName('tilretteleggingstiltak')}
                         label="Hvilke tiltak for tilrettelegging av arbeidssituasjonen din har du vurdert?"
                     />
                 </Block>

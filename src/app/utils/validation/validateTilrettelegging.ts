@@ -12,7 +12,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
     if (søknad.tilrettelegging) {
         søknad.tilrettelegging.forEach((tilrettelegging, index) => {
             if (index > idx) {
-                // Ikke valider arbeidsforhold som bruker ikke har kommet til enda
+                // Ikke valider arbeidsforhold som bruker ikke har kommet til enda i stegflyten
                 return;
             }
             const tErrors: FormikErrors<any> = {};
@@ -25,14 +25,14 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
                 tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.SELVSTENDIG
             ) {
-                if (tilrettelegging.risikoBeskrivelse === undefined || tilrettelegging.risikoBeskrivelse.length < 3) {
-                    set(tErrors, 'risikoBeskrivelse', Valideringsfeil.FELTET_ER_PÅKREVD);
+                if (tilrettelegging.risikoFaktorer === undefined || tilrettelegging.risikoFaktorer.length < 3) {
+                    set(tErrors, 'risikoFaktorer', Valideringsfeil.FELTET_ER_PÅKREVD);
                 }
                 if (
-                    tilrettelegging.vurderteTiltakBeskrivelse === undefined ||
-                    tilrettelegging.vurderteTiltakBeskrivelse.length < 3
+                    tilrettelegging.tilretteleggingstiltak === undefined ||
+                    tilrettelegging.tilretteleggingstiltak.length < 3
                 ) {
-                    set(tErrors, 'vurderteTiltakBeskrivelse', Valideringsfeil.FELTET_ER_PÅKREVD);
+                    set(tErrors, 'tilretteleggingstiltak', Valideringsfeil.FELTET_ER_PÅKREVD);
                 }
             }
 

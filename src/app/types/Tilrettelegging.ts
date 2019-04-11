@@ -45,8 +45,8 @@ export type UferdigTilrettelegging = Tilrettelegging & {
     ingenTilrettelegging?: {
         slutteArbeidFom?: Date;
     };
-    risikoBeskrivelse?: string;
-    vurderteTiltakBeskrivelse?: string;
+    risikoFaktorer?: string;
+    tilretteleggingstiltak?: string;
 };
 
 export default Tilrettelegging;

@@ -30,9 +30,9 @@ export interface UferdigSøknad {
     søker: Partial<Søker>;
 }
 
-export const initialSøknad: UferdigSøknad = mockSøknad;
+export const initialSøknadMock: UferdigSøknad = mockSøknad;
 
-export const sinitialSøknad: UferdigSøknad = {
+export const initialSøknad: UferdigSøknad = {
     harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
     barn: {},
