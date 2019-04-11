@@ -28,6 +28,7 @@ import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import CheckboksPanelGruppe from '../../formik/wrappers/CheckboksPanelGruppe';
 import InfoBlock from 'common/components/info-block/InfoBlock';
 import InputField from '../../formik/wrappers/InputField';
+import Textarea from '../../formik/wrappers/Textarea';
 
 interface OwnProps {
     id: string;
@@ -54,46 +55,55 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 
+    const erFrilans = tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER;
+    const erSelvstendig = tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.SELVSTENDIG;
+    const erFrilansEllerSelvstendig = erFrilans || erSelvstendig;
+
     const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
     const tilretteleggingstypeName = getInputName('type');
     const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName) || [];
-
-    const visKomponent = {
-        vedlegg: true,
-        visDel1: attachments.length > 0,
-        visDel2: !!tilrettelegging.behovForTilretteleggingFom,
-        ingenTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.INGEN),
-        delvisTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS),
-        helTilrettelegging: valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL)
-    };
-
     const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = values.tilrettelegging[index];
-    const visNesteKnapp = (): boolean => {
-        return (
-            visKomponent.visDel2 &&
-            valgteTilretteleggingstyper.length > 0 &&
-            (visKomponent.ingenTilrettelegging
-                ? ingenTilrettelegging !== undefined && ingenTilrettelegging.slutteArbeidFom !== undefined
-                : true) &&
-            (visKomponent.delvisTilrettelegging
-                ? delvisTilrettelegging !== undefined &&
-                  !isNaN(delvisTilrettelegging.stillingsprosent) &&
-                  delvisTilrettelegging.tilrettelagtArbeidFom !== undefined
-                : true) &&
-            (visKomponent.helTilrettelegging
-                ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
-                : true)
-        );
-    };
+
+    const frilansRisikoErOk = erFrilansEllerSelvstendig
+        ? tilrettelegging.risikoBeskrivelse !== undefined && tilrettelegging.risikoBeskrivelse.length > 3
+        : true;
+    const visFrilansEllerSelvstendig = erFrilansEllerSelvstendig;
+    const visVedlegg = visFrilansEllerSelvstendig ? frilansRisikoErOk : true;
+    const visDel1 = frilansRisikoErOk && attachments.length > 0;
+    const visDel2 = visDel1 === true && !!tilrettelegging.behovForTilretteleggingFom;
+    const visIngenTilrettelegging = visDel2 && valgteTilretteleggingstyper.includes(Tilretteleggingstype.INGEN);
+    const visDelvisTilrettelegging = visDel2 && valgteTilretteleggingstyper.includes(Tilretteleggingstype.DELVIS);
+    const visHelTilrettelegging = visDel2 && valgteTilretteleggingstyper.includes(Tilretteleggingstype.HEL);
+    const del1OgDel2ErOk =
+        visDel2 &&
+        valgteTilretteleggingstyper.length > 0 &&
+        (visIngenTilrettelegging
+            ? ingenTilrettelegging !== undefined && ingenTilrettelegging.slutteArbeidFom !== undefined
+            : true) &&
+        (visDelvisTilrettelegging
+            ? delvisTilrettelegging !== undefined &&
+              !isNaN(delvisTilrettelegging.stillingsprosent) &&
+              delvisTilrettelegging.tilrettelagtArbeidFom !== undefined
+            : true) &&
+        (visHelTilrettelegging
+            ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
+            : true);
+    const visTiltakForTilrettelegging = del1OgDel2ErOk && visFrilansEllerSelvstendig;
+    const vurderteTiltakBeskrivelseErOk = erFrilansEllerSelvstendig
+        ? tilrettelegging.vurderteTiltakBeskrivelse !== undefined &&
+          tilrettelegging.vurderteTiltakBeskrivelse.length > 3
+        : true;
+
+    const visNesteKnapp = del1OgDel2ErOk && vurderteTiltakBeskrivelseErOk;
 
     const cleanupTilrettelegging = () => {
-        if (visKomponent.ingenTilrettelegging === false) {
+        if (visIngenTilrettelegging === false) {
             setFieldValue(getInputName('ingenTilrettelegging'), undefined);
         }
-        if (visKomponent.delvisTilrettelegging === false) {
+        if (visDelvisTilrettelegging === false) {
             setFieldValue(getInputName('delvisTilrettelegging'), undefined);
         }
-        if (visKomponent.helTilrettelegging === false) {
+        if (visHelTilrettelegging === false) {
             setFieldValue(getInputName('helTilrettelegging'), undefined);
         }
     };
@@ -111,10 +121,21 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             <FormikStep
                 step={step}
                 formikProps={formikProps}
-                showNesteknapp={visNesteKnapp()}
+                showNesteknapp={visNesteKnapp}
                 onValidFormSubmit={navigate}
                 history={history}>
-                <Block visible={visKomponent.vedlegg}>
+                <Block visible={visFrilansEllerSelvstendig}>
+                    <Block margin="xs">
+                        <Veilederinfo stil="kompakt" type="info">
+                            <FormattedHTMLMessage id="tilrettelegging.veileder.frilans.html" />
+                        </Veilederinfo>
+                    </Block>
+                    <Textarea
+                        name={getInputName('risikoBeskrivelse')}
+                        label="Hva kan skade det ufødte barnet i jobben din som frilanser?"
+                    />
+                </Block>
+                <Block visible={visVedlegg}>
                     <Block>
                         <Veilederinfo stil="kompakt" type="info">
                             <FormattedHTMLMessage id="tilrettelegging.veileder.vedlegg" />
@@ -148,7 +169,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         />
                     </Block>
                 </Block>
-                <Block visible={visKomponent.visDel1} margin="none">
+                <Block visible={visDel1} margin="none">
                     <Block visible={tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET}>
                         <Veilederinfo stil="kompakt" type="info">
                             <FormattedHTMLMessage
@@ -170,7 +191,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         </Block>
                     </Block>
                 </Block>
-                <Block header={{ title: 'Del 2', stil: 'seksjon' }} visible={visKomponent.visDel2}>
+                <Block header={{ title: 'Del 2', stil: 'seksjon' }} visible={visDel2}>
                     <CheckboksPanelGruppe
                         label="Hvordan kan du jobbe mens du er gravid?"
                         name={tilretteleggingstypeName}
@@ -191,9 +212,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         ]}
                     />
                 </Block>
-
                 <Block
-                    visible={visKomponent.ingenTilrettelegging}
+                    visible={visIngenTilrettelegging}
                     header={{ title: 'a) Du kan fortsette å jobbe med samme stillingsprosent' }}>
                     <InfoBlock>
                         <DatoInput
@@ -207,7 +227,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </InfoBlock>
                 </Block>
                 <Block
-                    visible={visKomponent.delvisTilrettelegging}
+                    visible={visDelvisTilrettelegging}
                     header={{
                         title: 'b) Du kan fortsette med redusert arbeidstid'
                     }}>
@@ -235,7 +255,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </InfoBlock>
                 </Block>
                 <Block
-                    visible={visKomponent.helTilrettelegging}
+                    visible={visHelTilrettelegging}
                     header={{
                         title: 'c) Du må midlertidlig gå ut av ditt arbeid'
                     }}>
@@ -249,6 +269,12 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             }}
                         />
                     </InfoBlock>
+                </Block>
+                <Block visible={visTiltakForTilrettelegging}>
+                    <Textarea
+                        name={getInputName('vurderteTiltakBeskrivelse')}
+                        label="Hvilke tiltak for tilrettelegging av arbeidssituasjonen din har du vurdert?"
+                    />
                 </Block>
             </FormikStep>
         </Applikasjonsside>
