@@ -33,7 +33,6 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
         'harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene',
         'tidsperiode',
         'hattVarigEndringAvNæringsinntektSiste4Kalenderår',
-        'kanInnhenteOpplsyningerFraRevisor',
         'harRevisor',
         'harRegnskapsfører'
     ];
@@ -53,7 +52,7 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
     if (næring.harRegnskapsfører === true) {
         relevanteFeilter.push('regnskapsfører');
     } else if (næring.harRevisor === true) {
-        relevanteFeilter.push('revisor');
+        relevanteFeilter.push('revisor', 'kanInnhenteOpplsyningerFraRevisor');
     }
     return _.pick(næring, relevanteFeilter);
 };
