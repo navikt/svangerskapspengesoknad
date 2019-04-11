@@ -241,7 +241,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         </Block>
 
                         <Block visible={visKomponent.næringsRelasjonRegnskapsfører}>
-                            <Næringsrelasjon type="regnskapsfører" />
+                            <Næringsrelasjon type="regnskapsfører" values={values} />
                         </Block>
 
                         <Block visible={visKomponent.harRevisor}>
@@ -251,7 +251,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
                         <Block visible={visKomponent.næringsrelasjonRevisor}>
-                            <Næringsrelasjon type="revisor" />
+                            <Næringsrelasjon type="revisor" values={values} />
                         </Block>
 
                         <Block visible={visKomponent.kanInnhenteOpplsyningerFraRevisor}>
