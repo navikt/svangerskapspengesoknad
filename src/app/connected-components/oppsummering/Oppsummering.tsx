@@ -17,18 +17,18 @@ import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
-import Oppsummeringspunkt from './Oppsummeringspunkt';
+import Oppsummeringspunkt from './components/Oppsummeringspunkt';
 import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import Tilrettelegging from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import TilretteleggingOppsummering from './components/TilretteleggingOppsummering';
-import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering';
+import TilretteleggingOppsummering from './components/tilrettelegging/TilretteleggingOppsummering';
+import ArbeidsforholdOppsummering from './components/arbeidsforhold/ArbeidsforholdOppsummering';
 
 import './oppsummering.less';
-import MedlemskapOppsummering from './MedlemskapOppsummering';
-import TerminOppsummering from './TerminOppsummering';
+import MedlemskapOppsummering from './components/medlemskap/MedlemskapOppsummering';
+import TerminOppsummering from './components/termin/TerminOppsummering';
 
 interface OwnProps {
     step: SøknadStep;
@@ -100,6 +100,8 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
                     <ArbeidsforholdOppsummering
                         arbeidsforhold={arbeidsforhold}
+                        frilansInformasjon={values.søker.frilansInformasjon}
+                        selvstendigInformasjon={values.søker.selvstendigNæringsdrivendeInformasjon}
                         søknadsgrunnlag={values.søknadsgrunnlag}
                         harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd!}
                         harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd!}
