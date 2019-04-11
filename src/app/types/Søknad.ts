@@ -4,10 +4,10 @@ import Søker, { Søkerrolle } from './Søker';
 import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
-// import mockSøknad from '../mockSoknad';
+import mockSøknad from '../mockSoknad';
 
 export enum Søknadstype {
-    'SVANGERSKAPSPENGER' = 'svangerskapspenger',
+    'SVANGERSKAPSPENGER' = 'svangerskapspenger'
 }
 
 interface Søknad {
@@ -30,6 +30,8 @@ export interface UferdigSøknad {
     søker: Partial<Søker>;
 }
 
+export const initialSøknadMock: UferdigSøknad = mockSøknad;
+
 export const initialSøknad: UferdigSøknad = {
     harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
@@ -40,13 +42,13 @@ export const initialSøknad: UferdigSøknad = {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
         tidligereOpphold: [],
-        senereOpphold: [],
+        senereOpphold: []
     },
     søker: {
         rolle: Søkerrolle.MOR,
         selvstendigNæringsdrivendeInformasjon: [],
-        andreInntekterSiste10Mnd: [],
-    },
+        andreInntekterSiste10Mnd: []
+    }
 };
 
 export interface Søknadsgrunnlag {

@@ -34,7 +34,7 @@ export const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stilli
                             id="oppsummering.tilrettelegging.info.ikkeJobbePeriode"
                             values={{
                                 startDato: moment(startDato).format('Do MMMM YYYY'),
-                                sluttDato: moment(midtDato).format('Do MMMM YYYY'),
+                                sluttDato: moment(midtDato).format('Do MMMM YYYY')
                             }}
                         />
                     </div>
@@ -44,7 +44,7 @@ export const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stilli
                         id="oppsummering.tilrettelegging.info.jobbeDelvis"
                         values={{
                             startDato: moment(tilretteleggingsDato).format('Do MMMM YYYY'),
-                            prosent: stillingsprosent,
+                            prosent: stillingsprosent
                         }}
                     />
                 </div>
@@ -66,7 +66,7 @@ export const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stilli
                             id="oppsummering.tilrettelegging.info.ikkeJobbePeriode"
                             values={{
                                 startDato: moment(startDato).format('Do MMMM YYYY'),
-                                sluttDato: moment(midtDato).format('Do MMMM YYYY'),
+                                sluttDato: moment(midtDato).format('Do MMMM YYYY')
                             }}
                         />
                     </div>
@@ -75,7 +75,7 @@ export const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stilli
                     <FormattedHTMLMessage
                         id="oppsummering.tilrettelegging.info.jobbeFullt"
                         values={{
-                            startDato: moment(tilretteleggingsDato).format('Do MMMM YYYY'),
+                            startDato: moment(tilretteleggingsDato).format('Do MMMM YYYY')
                         }}
                     />
                 </div>
@@ -86,7 +86,7 @@ export const renderDates = (startDato: Date, tilretteleggingsDato?: Date, stilli
             <FormattedHTMLMessage
                 id="oppsummering.tilrettelegging.info.ikkeJobbe"
                 values={{
-                    startDato: moment(startDato).format('Do MMMM YYYY'),
+                    startDato: moment(startDato).format('Do MMMM YYYY')
                 }}
             />
         );

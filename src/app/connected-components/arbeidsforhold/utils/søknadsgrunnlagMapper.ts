@@ -11,26 +11,26 @@ export const mapArbeidsToSøknadsgrunnlag = (søker: Partial<Søker>, arbeidsfor
         ...arbeidsforhold.map((forhold: Arbeidsforhold) => ({
             value: forhold.arbeidsgiverId,
             label: forhold.arbeidsgiverNavn,
-            type: Arbeidsforholdstype.VIRKSOMHET,
+            type: Arbeidsforholdstype.VIRKSOMHET
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring: Næring) => ({
             value: næring.navnPåNæringen,
             label: næring.navnPåNæringen,
-            type: Arbeidsforholdstype.SELVSTENDIG,
+            type: Arbeidsforholdstype.SELVSTENDIG
         })),
         ...andreInntekterSiste10Mnd.map((annenInntekt: AnnenInntekt) => ({
             value: annenInntekt.type,
             label: annenInntekt.type,
-            type: Arbeidsforholdstype.PRIVAT,
+            type: Arbeidsforholdstype.PRIVAT
         })),
         ...(frilansInformasjon !== undefined
             ? [
                   {
                       value: 'Frilans',
                       label: 'Frilans',
-                      type: Arbeidsforholdstype.FRILANSER,
-                  },
+                      type: Arbeidsforholdstype.FRILANSER
+                  }
               ]
-            : []),
+            : [])
     ];
 };

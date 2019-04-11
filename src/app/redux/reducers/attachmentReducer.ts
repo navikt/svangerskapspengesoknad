@@ -2,11 +2,11 @@ import { Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentAction, { AttachmentActionTypes } from '../types/AttachmentAction';
 
 export const getDefaultAttachmentState = (): AttachmentState => ({
-    vedlegg: [],
+    vedlegg: []
 });
 
 export interface AttachmentState {
-    vedlegg: Array<Attachment>;
+    vedlegg: Attachment[];
 }
 
 const modifyAttachmentWithId = (compareId: string, newProperties: Partial<Attachment>) => (
@@ -16,7 +16,7 @@ const modifyAttachmentWithId = (compareId: string, newProperties: Partial<Attach
         ? existingAttachment
         : {
               ...existingAttachment,
-              ...newProperties,
+              ...newProperties
           };
 };
 
@@ -28,8 +28,8 @@ const attachmentReducer = (state = getDefaultAttachmentState(), action: Attachme
                 ...state.vedlegg,
                 {
                     ...attachment,
-                    pending: true,
-                },
+                    pending: true
+                }
             ];
 
             return { ...state, vedlegg };
@@ -42,7 +42,7 @@ const attachmentReducer = (state = getDefaultAttachmentState(), action: Attachme
                     url,
                     uuid,
                     pending: false,
-                    uploaded: true,
+                    uploaded: true
                 })
             );
 
@@ -53,7 +53,7 @@ const attachmentReducer = (state = getDefaultAttachmentState(), action: Attachme
             const { attachment, error } = action.payload;
             const vedlegg = state.vedlegg.map(
                 modifyAttachmentWithId(attachment.id, {
-                    error: error ? error.message : '',
+                    error: error ? error.message : ''
                 })
             );
 
@@ -64,7 +64,7 @@ const attachmentReducer = (state = getDefaultAttachmentState(), action: Attachme
             const { attachment } = action.payload;
             const vedlegg = state.vedlegg.map(
                 modifyAttachmentWithId(attachment.id, {
-                    pending: true,
+                    pending: true
                 })
             );
 
@@ -83,7 +83,7 @@ const attachmentReducer = (state = getDefaultAttachmentState(), action: Attachme
             const vedlegg = state.vedlegg.map(
                 modifyAttachmentWithId(attachment.id, {
                     pending: false,
-                    error: error ? error.message : '',
+                    error: error ? error.message : ''
                 })
             );
 

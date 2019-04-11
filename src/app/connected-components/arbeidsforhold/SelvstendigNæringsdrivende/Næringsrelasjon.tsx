@@ -19,7 +19,7 @@ const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
 
     const visKomponent = {
         telefonnummer: næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '',
-        erNærVennEllerFamilie: næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== '',
+        erNærVennEllerFamilie: næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== ''
     };
 
     return (

@@ -14,7 +14,7 @@ const TerminOppsummering: FunctionComponent<Props> = ({ fornavn, etternavn, fnr 
                 <FormattedMessage
                     id="oppsummering.termin.personalia.navn"
                     values={{
-                        navn: `${fornavn} ${etternavn}`,
+                        navn: `${fornavn} ${etternavn}`
                     }}
                 />
             </div>
@@ -22,7 +22,7 @@ const TerminOppsummering: FunctionComponent<Props> = ({ fornavn, etternavn, fnr 
                 <FormattedMessage
                     id="oppsummering.termin.personalia.fnr"
                     values={{
-                        fnr: fnr,
+                        fnr
                     }}
                 />
             </div>

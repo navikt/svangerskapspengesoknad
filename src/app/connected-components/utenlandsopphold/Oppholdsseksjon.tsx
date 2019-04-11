@@ -53,7 +53,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
     return (
         <>
             <Block margin="xs">
-                <JaNeiSpørsmål twoColumns name={name} legend={legend} labels={labels} />
+                <JaNeiSpørsmål twoColumns={true} name={name} legend={legend} labels={labels} />
             </Block>
             <Block visible={visLandvelger} margin="xs">
                 <Knapp onClick={openModalForAdding} htmlType="button">
@@ -82,7 +82,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                 />
                             </Block>
                             <Modal
-                                closeButton
+                                closeButton={true}
                                 isOpen={modalIsOpen}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>

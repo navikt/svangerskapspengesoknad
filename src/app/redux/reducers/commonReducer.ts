@@ -1,9 +1,8 @@
 import { Språkkode } from 'common/intl/types';
-import { CommonActionTypes } from '../types/CommonAction';
-import CommonAction from '../types/CommonAction';
+import CommonAction, { CommonActionTypes } from '../types/CommonAction';
 
 export const getDefaultCommonState = (): CommonState => ({
-    språkkode: 'nb',
+    språkkode: 'nb'
 });
 
 export interface CommonState {
@@ -15,7 +14,7 @@ const commonReducer = (state = getDefaultCommonState(), action: CommonAction): C
         case CommonActionTypes.SET_SPRÅK:
             return {
                 ...state,
-                språkkode: action.payload.språkkode,
+                språkkode: action.payload.språkkode
             };
     }
     return state;

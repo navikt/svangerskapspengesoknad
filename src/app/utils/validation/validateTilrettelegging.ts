@@ -1,20 +1,40 @@
 import moment from 'moment';
 import { get, set } from 'lodash';
-import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
+import { UferdigSøknad, Søknadfeil, Søknadsgrunnlag } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 import { FormikErrors } from 'formik';
-import { Tilretteleggingstype } from '../../types/Tilrettelegging';
+import { Tilretteleggingstype, Arbeidsforholdstype } from '../../types/Tilrettelegging';
 
-const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
-    let errors: Søknadfeil = {};
+const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: string): Søknadfeil => {
+    const errors: Søknadfeil = {};
 
+    const idx = søknad.søknadsgrunnlag.findIndex((grunnlag: Søknadsgrunnlag) => grunnlag.id === arbeidsforholdId);
     if (søknad.tilrettelegging) {
-        søknad.tilrettelegging.forEach((t, index) => {
-            let tErrors: FormikErrors<any> = {};
+        søknad.tilrettelegging.forEach((tilrettelegging, index) => {
+            if (index > idx) {
+                // Ikke valider arbeidsforhold som bruker ikke har kommet til enda i stegflyten
+                return;
+            }
+            const tErrors: FormikErrors<any> = {};
 
             const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
             const tilretteleggingstypeName = getInputName('type');
             const valgteTyper = get(søknad, tilretteleggingstypeName) || [];
+
+            if (
+                tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
+                tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.SELVSTENDIG
+            ) {
+                if (tilrettelegging.risikoFaktorer === undefined || tilrettelegging.risikoFaktorer.length < 3) {
+                    set(tErrors, 'risikoFaktorer', Valideringsfeil.FELTET_ER_PÅKREVD);
+                }
+                if (
+                    tilrettelegging.tilretteleggingstiltak === undefined ||
+                    tilrettelegging.tilretteleggingstiltak.length < 3
+                ) {
+                    set(tErrors, 'tilretteleggingstiltak', Valideringsfeil.FELTET_ER_PÅKREVD);
+                }
+            }
 
             if (valgteTyper.length === 0) {
                 set(tErrors, 'type', Valideringsfeil.FELTET_ER_PÅKREVD);
@@ -22,39 +42,43 @@ const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
 
             if (valgteTyper.includes(Tilretteleggingstype.INGEN)) {
                 if (
-                    t.ingenTilrettelegging &&
-                    (t.ingenTilrettelegging.slutteArbeidFom &&
-                        moment(t.ingenTilrettelegging.slutteArbeidFom).isBefore(t.behovForTilretteleggingFom))
+                    tilrettelegging.ingenTilrettelegging &&
+                    (tilrettelegging.ingenTilrettelegging.slutteArbeidFom &&
+                        moment(tilrettelegging.ingenTilrettelegging.slutteArbeidFom).isBefore(
+                            tilrettelegging.behovForTilretteleggingFom
+                        ))
                 ) {
                     set(
                         tErrors,
                         'ingenTilrettelegging.slutteArbeidFom',
                         Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
                     );
-                } else if (!t.ingenTilrettelegging) {
+                } else if (!tilrettelegging.ingenTilrettelegging) {
                     set(tErrors, 'ingenTilrettelegging.slutteArbeidFom', Valideringsfeil.FELTET_ER_PÅKREVD);
                 }
             }
             if (valgteTyper.includes(Tilretteleggingstype.DELVIS)) {
-                if (t.delvisTilrettelegging) {
+                if (tilrettelegging.delvisTilrettelegging) {
                     if (
-                        t.delvisTilrettelegging.stillingsprosent < 0 ||
-                        t.delvisTilrettelegging.stillingsprosent > 100
+                        tilrettelegging.delvisTilrettelegging.stillingsprosent < 0 ||
+                        tilrettelegging.delvisTilrettelegging.stillingsprosent > 100
                     ) {
                         set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.STILLINGSPROSENT_RANGE);
-                    } else if (t.delvisTilrettelegging.stillingsprosent === undefined) {
+                    } else if (tilrettelegging.delvisTilrettelegging.stillingsprosent === undefined) {
                         set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.FELTET_ER_PÅKREVD);
                     }
                     if (
-                        t.delvisTilrettelegging.tilrettelagtArbeidFom &&
-                        moment(t.delvisTilrettelegging.tilrettelagtArbeidFom).isBefore(t.behovForTilretteleggingFom)
+                        tilrettelegging.delvisTilrettelegging.tilrettelagtArbeidFom &&
+                        moment(tilrettelegging.delvisTilrettelegging.tilrettelagtArbeidFom).isBefore(
+                            tilrettelegging.behovForTilretteleggingFom
+                        )
                     ) {
                         set(
                             tErrors,
                             'delvisTilrettelegging.tilrettelagtArbeidFom',
                             Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
                         );
-                    } else if (t.delvisTilrettelegging.tilrettelagtArbeidFom === undefined) {
+                    } else if (tilrettelegging.delvisTilrettelegging.tilrettelagtArbeidFom === undefined) {
                         set(tErrors, 'delvisTilrettelegging.tilrettelagtArbeidFom', Valideringsfeil.FELTET_ER_PÅKREVD);
                     }
                 } else {
@@ -63,10 +87,12 @@ const validateTilrettelegging = (søknad: UferdigSøknad): Søknadfeil => {
                 }
             }
             if (valgteTyper.includes(Tilretteleggingstype.HEL)) {
-                if (t.helTilrettelegging) {
+                if (tilrettelegging.helTilrettelegging) {
                     if (
-                        t.helTilrettelegging.tilrettelagtArbeidFom &&
-                        moment(t.helTilrettelegging.tilrettelagtArbeidFom).isBefore(t.behovForTilretteleggingFom)
+                        tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom &&
+                        moment(tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom).isBefore(
+                            tilrettelegging.behovForTilretteleggingFom
+                        )
                     ) {
                         set(
                             tErrors,

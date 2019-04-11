@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
 
 import RadioPanelGruppeResponsive, {
-    RadioPanelGruppeResponsiveProps,
+    RadioPanelGruppeResponsiveProps
 } from 'common/components/skjema/elements/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { Omit } from 'lodash';
 

@@ -40,13 +40,13 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
         endre,
         onCancel,
         element = {
-            vedlegg: [] as Attachment[],
+            vedlegg: [] as Attachment[]
         },
         onAdd,
         intl,
         uploadAttachment,
         deleteAttachment,
-        vedlegg,
+        vedlegg
     } = props;
 
     const countries = useMemo(() => getCountries(true, false, intl), [intl]);
@@ -62,7 +62,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                     navn: values.type === AnnenInntektType.JOBB_I_UTLANDET,
                     land: values.type === AnnenInntektType.JOBB_I_UTLANDET,
                     advarselDokumentasjon: values.type !== AnnenInntektType.JOBB_I_UTLANDET,
-                    vedlegg: values.type !== AnnenInntektType.JOBB_I_UTLANDET,
+                    vedlegg: values.type !== AnnenInntektType.JOBB_I_UTLANDET
                 };
 
                 return (
@@ -86,12 +86,12 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                                 radios={[
                                     {
                                         value: AnnenInntektType.JOBB_I_UTLANDET,
-                                        label: getMessage(intl, 'inntektstype.jobb_i_utlandet'),
+                                        label: getMessage(intl, 'inntektstype.jobb_i_utlandet')
                                     },
                                     {
                                         value: AnnenInntektType.MILITÆRTJENESTE,
-                                        label: getMessage(intl, 'inntektstype.militær_eller_siviltjeneste'),
-                                    },
+                                        label: getMessage(intl, 'inntektstype.militær_eller_siviltjeneste')
+                                    }
                                 ]}
                             />
                         </Block>
@@ -130,12 +130,12 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                         <Block margin="xxs">
                             <>
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="tidsperiode.fom"
                                     label={getMessage(intl, 'fraOgMed')}
                                 />
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="tidsperiode.tom"
                                     label={getMessage(intl, 'tilOgMed')}
                                 />
@@ -190,7 +190,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
 
 const mapStateToProps = (state: State) => {
     return {
-        vedlegg: state.attachment.vedlegg.filter((v) => v.type === AttachmentType.ANNEN_INNTEKT),
+        vedlegg: state.attachment.vedlegg.filter((v) => v.type === AttachmentType.ANNEN_INNTEKT)
     };
 };
 
@@ -199,7 +199,7 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
         uploadAttachment: (attachment: Attachment) =>
             dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
         deleteAttachment: (attachment: Attachment) =>
-            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } }),
+            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } })
     };
 };
 

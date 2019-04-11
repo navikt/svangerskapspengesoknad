@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FieldArrayRenderProps, FieldArray } from 'formik';
 import CheckboksPanelGruppeResponsive, {
-    CheckboxPanelgruppeResponsiveProps,
+    CheckboxPanelgruppeResponsiveProps
 } from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit, get } from 'lodash';
 import { translateError } from '../../utils/errorUtils';
@@ -41,7 +41,7 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
                             const values = get(form.values, name);
                             return {
                                 ...option,
-                                checked: values && values.includes(option.value) ? true : false,
+                                checked: values && values.includes(option.value) ? true : false
                             };
                         })}
                         onChange={(_, value) => {

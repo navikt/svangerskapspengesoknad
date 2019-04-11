@@ -18,7 +18,7 @@ const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
     søknadsgrunnlag,
     harJobbetSomSelvstendigNæringsdrivende,
     harJobbetFrilans,
-    harHattAndreInntektskilder,
+    harHattAndreInntektskilder
 }) => {
     return (
         <>

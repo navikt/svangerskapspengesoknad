@@ -27,8 +27,7 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
     const visKomponent = {
         senereOpphold:
             opphold.iNorgeSiste12Mnd || (opphold.iNorgeSiste12Mnd === false && opphold.tidligereOpphold.length > 0),
-        nesteknapp:
-            opphold.iNorgeNeste12Mnd || (opphold.iNorgeNeste12Mnd === false && opphold.senereOpphold.length > 0),
+        nesteknapp: opphold.iNorgeNeste12Mnd || (opphold.iNorgeNeste12Mnd === false && opphold.senereOpphold.length > 0)
     };
 
     const navigate = () => {
@@ -36,7 +35,7 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <Applikasjonsside visTittel visSpråkvelger>
+        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
             <FormikStep
                 step={step}
                 formikProps={formikProps}
@@ -51,7 +50,7 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
                         legend={getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.label')}
                         labels={{
                             ja: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.ja'),
-                            nei: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.nei'),
+                            nei: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.nei')
                         }}
                     />
                 </Block>
@@ -63,7 +62,7 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
                         legend={getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.label')}
                         labels={{
                             ja: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.ja'),
-                            nei: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.nei'),
+                            nei: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.nei')
                         }}
                     />
                 </Block>

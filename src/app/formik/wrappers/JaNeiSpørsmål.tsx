@@ -3,7 +3,7 @@ import { Field, FieldProps } from 'formik';
 import { get, Omit } from 'lodash';
 
 import RadioPanelGruppeResponsive, {
-    RadioPanelGruppeResponsiveProps,
+    RadioPanelGruppeResponsiveProps
 } from 'common/components/skjema/elements/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
@@ -18,7 +18,7 @@ type Props = Omit<RadioPanelGruppeResponsiveProps, 'radios' | 'onChange'> & {
 
 enum Radios {
     'JA' = 'ja',
-    'NEI' = 'nei',
+    'NEI' = 'nei'
 }
 
 const JaNeiSpørsmål: FunctionComponent<Props & InjectedIntlProps> = ({
@@ -41,19 +41,19 @@ const JaNeiSpørsmål: FunctionComponent<Props & InjectedIntlProps> = ({
             const radios = [
                 {
                     label: labels ? labels.ja : getMessage(intl, 'jaNeiSpørsmål.ja'),
-                    value: Radios.JA,
+                    value: Radios.JA
                 },
                 {
                     label: labels ? labels.nei : getMessage(intl, 'jaNeiSpørsmål.nei'),
-                    value: Radios.NEI,
-                },
+                    value: Radios.NEI
+                }
             ];
 
             const feilmelding = get(form.errors, name);
             const radioPanelGruppeFeil =
                 feilmelding && form.submitCount > 0
                     ? {
-                          feilmelding: translateError(intl, feilmelding),
+                          feilmelding: translateError(intl, feilmelding)
                       }
                     : undefined;
 

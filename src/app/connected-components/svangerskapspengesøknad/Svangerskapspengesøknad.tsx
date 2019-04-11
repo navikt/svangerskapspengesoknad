@@ -65,13 +65,13 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
 
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo,
-    kvittering: state.api.kvittering,
+    kvittering: state.api.kvittering
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
     requestSøkerinfo: () => {
         dispatch({ type: ApiActionTypes.GET_SØKERINFO_REQUEST });
-    },
+    }
 });
 
 export default connect(

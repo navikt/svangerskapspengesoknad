@@ -21,7 +21,7 @@ const Select: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                 const feil =
                     feilmelding && form.submitCount > 0
                         ? {
-                              feilmelding: translateError(intl, feilmelding),
+                              feilmelding: translateError(intl, feilmelding)
                           }
                         : undefined;
 

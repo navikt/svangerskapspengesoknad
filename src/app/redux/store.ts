@@ -1,11 +1,9 @@
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import { AttachmentState } from './reducers/attachmentReducer';
-import { CommonState } from './reducers/commonReducer';
+import attachment, { AttachmentState } from './reducers/attachmentReducer';
+import common, { CommonState } from './reducers/commonReducer';
 import api, { ApiState } from './reducers/apiReducer';
-import common from './reducers/commonReducer';
-import attachment from './reducers/attachmentReducer';
 import rootSaga from './sagas';
 
 export interface State {
@@ -17,12 +15,12 @@ export interface State {
 const rootReducer = combineReducers({
     common,
     attachment,
-    api,
+    api
 });
 
 declare global {
     interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
     }
 }
 

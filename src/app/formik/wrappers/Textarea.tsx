@@ -1,21 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
-import { NavFrontendInputProps, Input } from 'nav-frontend-skjema';
+import { Textarea as NavFrontendTextarea, TextareaProps } from 'nav-frontend-skjema';
 import { get } from 'lodash';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { translateError } from 'app/utils/errorUtils';
+import { Omit } from 'react-redux';
 
 interface OwnProps {
     name: string;
 }
 
-type Props = OwnProps & NavFrontendInputProps & InjectedIntlProps;
+type Props = OwnProps & Omit<TextareaProps, 'value' | 'onChange'> & InjectedIntlProps;
 
-const InputField: FunctionComponent<Props> = ({ name, intl, ...inputProps }) => {
+const Textarea: FunctionComponent<Props> = ({ name, intl, ...textareaProps }) => {
     return (
         <Field
             name={name}
-            type={inputProps.type}
+            type="textarea"
             render={({ field, form }: FieldProps) => {
                 const feilmelding = get(form.errors, name);
                 const feil =
@@ -26,9 +27,9 @@ const InputField: FunctionComponent<Props> = ({ name, intl, ...inputProps }) => 
                         : undefined;
 
                 return (
-                    <Input
+                    <NavFrontendTextarea
                         {...field}
-                        {...inputProps}
+                        {...textareaProps}
                         value={field.value === undefined ? '' : field.value}
                         feil={feil}
                     />
@@ -38,4 +39,4 @@ const InputField: FunctionComponent<Props> = ({ name, intl, ...inputProps }) => 
     );
 };
 
-export default injectIntl(InputField);
+export default injectIntl(Textarea);

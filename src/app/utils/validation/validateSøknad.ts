@@ -12,19 +12,19 @@ const validateSøknad = (route: SøknadRoute) => (values: UferdigSøknad): Søkn
             return validateIntro(values);
 
         case AppRoute.SØKNAD:
-            return validateUntilStep(route.step, values);
+            return validateUntilStep(route.step, values, route.subStep);
 
         default:
             return {};
     }
 };
 
-const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad): Søknadfeil => {
+const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad, subStep?: string): Søknadfeil => {
     switch (step) {
         case StepID.TERMIN:
             return {
                 ...validateIntro(values),
-                ...validateTermin(values),
+                ...validateTermin(values)
             };
 
         case StepID.ARBEIDSFORHOLD:
@@ -33,7 +33,7 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad):
         case StepID.TILRETTELEGGING:
             return {
                 ...validateUntilStep(StepID.ARBEIDSFORHOLD, values),
-                ...validateTilrettelegging(values),
+                ...validateTilrettelegging(values, subStep)
             };
 
         case StepID.UTENLANDSOPPHOLD:
@@ -42,7 +42,7 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad):
         case StepID.OPPSUMMERING:
             return {
                 ...validateUntilStep(StepID.UTENLANDSOPPHOLD, values),
-                ...validateOppsummering(values),
+                ...validateOppsummering(values)
             };
 
         case StepID.INGEN:

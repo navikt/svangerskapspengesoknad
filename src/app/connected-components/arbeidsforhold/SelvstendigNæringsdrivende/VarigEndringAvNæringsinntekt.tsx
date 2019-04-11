@@ -22,7 +22,7 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
             values.endringAvNæringsinntektInformasjon.dato !== undefined,
         forklaring:
             values.endringAvNæringsinntektInformasjon !== undefined &&
-            values.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined,
+            values.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined
     };
 
     return (
@@ -39,7 +39,7 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
 
             <Block visible={visKomponent.dato}>
                 <DatoInput
-                    fullskjermKalender
+                    fullskjermKalender={true}
                     name="endringAvNæringsinntektInformasjon.dato"
                     label={getMessage(intl, 'arbeidsforhold.selvstendig.endringAvNæringsinntektInformasjon.dato')}
                 />

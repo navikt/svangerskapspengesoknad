@@ -1,47 +1,35 @@
 {
     "søker": {
-        "fnr": "28019400133",
-        "fornavn": "Henriette",
-        "etternavn": "Ibsen",
-        "fødselsdato": "1994-01-28",
+        "fnr": "31072626012",
+        "fornavn": "RAUS",
+        "etternavn": "BUSK",
         "kjønn": "K",
+        "fødselsdato": "1926-07-31",
         "land": "NO",
         "ikkeNordiskEøsLand": false,
         "barn": [
             {
-                "fornavn": "Amalie",
-                "etternavn": "Skraam",
-                "fnr": "29031857021",
-                "kjønn": "K",
-                "fødselsdato": "2018-03-31",
+                "fornavn": "NOBEL",
+                "etternavn": "KAKE",
+                "fnr": "03011982793",
+                "kjønn": "M",
+                "fødselsdato": "2019-01-03",
                 "annenForelder": {
-                    "fnr": "25059710888",
-                    "fornavn": "Espen",
-                    "etternavn": "Gabler",
-                    "fødselsdato": "1997-05-25"
+                    "fnr": "27087821132",
+                    "fornavn": "SEDAT",
+                    "etternavn": "DORULL",
+                    "fødselsdato": "1978-08-27"
                 }
             }
         ]
     },
     "arbeidsforhold": [
         {
-            "arbeidsgiverId": "973135678",
+            "arbeidsgiverId": "973861778",
             "arbeidsgiverIdType": "orgnr",
-            "arbeidsgiverNavn": "COLOR LINE CREW AS",
+            "arbeidsgiverNavn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET",
             "stillingsprosent": 100.0,
-            "fom": "2016-01-01",
-            "tom": null
-        },
-        {
-            "arbeidsgiverId": "974716860",
-            "arbeidsgiverIdType": "orgnr",
-            "arbeidsgiverNavn": "UNIVERSITETET I OSLO",
-            "stillingsprosent": 69.0,
-            "fom": "2018-08-01",
-            "tom": null
+            "fom": "2018-06-01"
         }
-    ],
-    "søknadsinfo": {
-        "deltUttaksplan": false
-    }
+    ]
 }

@@ -14,7 +14,7 @@ interface Props {
 
 const cls = (show: boolean, className?: string) =>
     classNames('feil-oppsummering-boks', className, {
-        'feil-oppsummering-boks--visible': show,
+        'feil-oppsummering-boks--visible': show
     });
 
 class Feiloppsummering extends React.Component<Props, {}> {

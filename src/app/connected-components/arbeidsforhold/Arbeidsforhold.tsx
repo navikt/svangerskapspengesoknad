@@ -74,7 +74,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd,
         selvstendigNæringsdrivendeInformasjon,
         harHattAnnenInntektSiste10Mnd,
-        andreInntekterSiste10Mnd,
+        andreInntekterSiste10Mnd
     } = normaliserSøker(søker);
 
     const visKomponent = {
@@ -82,24 +82,24 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
             harJobbetSomFrilansSiste10Mnd === false ||
             (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined),
         harHattAnnenInntektSiste10Mnd:
-            (selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length > 0) ||
+            ((selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length) || 0) > 0 ||
             harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false,
         søknadsgrunnlag:
             harHattAnnenInntektSiste10Mnd !== undefined &&
             (arbeidsforhold.length > 0 ||
                 (selvstendigNæringsdrivendeInformasjon !== undefined &&
-                    selvstendigNæringsdrivendeInformasjon.length > 0) ||
+                    (selvstendigNæringsdrivendeInformasjon.length || 0) > 0) ||
                 (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined) ||
-                (andreInntekterSiste10Mnd !== undefined && andreInntekterSiste10Mnd.length > 0)),
+                ((andreInntekterSiste10Mnd !== undefined && andreInntekterSiste10Mnd.length) || 0) > 0),
         ingenArbeidsforholdVeileder:
             arbeidsforhold.length === 0 &&
             harJobbetSomFrilansSiste10Mnd === false &&
             harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
-            harHattAnnenInntektSiste10Mnd === false,
+            harHattAnnenInntektSiste10Mnd === false
     };
 
     return (
-        <Applikasjonsside visTittel visSpråkvelger>
+        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
             <FormikStep
                 step={step}
                 className={cls.block}
@@ -109,7 +109,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                 history={history}>
                 <Block
                     header={{
-                        title: getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.label'),
+                        title: getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.label')
                     }}>
                     <Normaltekst>{getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.text')}</Normaltekst>
                 </Block>
@@ -117,7 +117,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                 <Block
                     header={{
                         title: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.label'),
-                        info: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.infotekst'),
+                        info: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.infotekst')
                     }}>
                     <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
                 </Block>
@@ -126,7 +126,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <Veilederinfo type="info" stil="kompakt">
                         {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
                             // TODO: Hva er riktig dato her?
-                            datoTidligst: moment().format('DD.MM.YYYY'),
+                            datoTidligst: moment().format('DD.MM.YYYY')
                         })}
                     </Veilederinfo>
                 </Block>
@@ -179,7 +179,7 @@ const mapStateToProps = (state: State) => {
     const { søkerinfo } = state.api;
 
     return {
-        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : [],
+        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : []
     };
 };
 

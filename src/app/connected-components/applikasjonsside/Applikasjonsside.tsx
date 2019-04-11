@@ -39,11 +39,11 @@ const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel
 };
 
 const mapStateToProps = (state: State): StateProps => ({
-    språkkode: state.common.språkkode,
+    språkkode: state.common.språkkode
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void): DispatchProps => ({
-    setSpråk: (språkkode: Språkkode) => dispatch({ type: CommonActionTypes.SET_SPRÅK, payload: { språkkode } }),
+    setSpråk: (språkkode: Språkkode) => dispatch({ type: CommonActionTypes.SET_SPRÅK, payload: { språkkode } })
 });
 
 export default connect(

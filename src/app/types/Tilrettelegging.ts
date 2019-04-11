@@ -2,14 +2,14 @@ export enum Tilretteleggingstype {
     'HEL' = 'hel',
     'DELVIS' = 'delvis',
     'INGEN' = 'ingen',
-    'NOE' = 'noe',
+    'NOE' = 'noe'
 }
 
 export enum Arbeidsforholdstype {
     'VIRKSOMHET' = 'virksomhet',
     'SELVSTENDIG' = 'selvstendig',
     'FRILANSER' = 'frilanser',
-    'PRIVAT' = 'privat',
+    'PRIVAT' = 'privat'
 }
 
 export interface Tilrettelegging {
@@ -45,6 +45,8 @@ export type UferdigTilrettelegging = Tilrettelegging & {
     ingenTilrettelegging?: {
         slutteArbeidFom?: Date;
     };
+    risikoFaktorer?: string;
+    tilretteleggingstiltak?: string;
 };
 
 export default Tilrettelegging;
