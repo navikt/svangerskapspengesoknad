@@ -15,16 +15,16 @@ export class Næring {
     navnPåNæringen: string;
     organisasjonsnummer: string;
     registrertINorge: boolean;
-    registrertILand: string;
-    stillingsprosent: string;
+    registrertILand?: string;
+    stillingsprosent?: string;
     harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene?: boolean;
     oppstartsdato?: string;
     hattVarigEndringAvNæringsinntektSiste4Kalenderår?: boolean;
     endringAvNæringsinntektInformasjon?: EndringAvNæringsinntektInformasjon;
     harRegnskapsfører: boolean;
-    regnskapsfører: Næringsrelasjon;
+    regnskapsfører?: Næringsrelasjon;
     harRevisor: boolean;
-    revisor: Næringsrelasjon;
+    revisor?: Næringsrelasjon;
     kanInnhenteOpplsyningerFraRevisor: boolean;
 }
 

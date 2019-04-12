@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
 import Block from 'common/components/block/Block';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
-import { EtikettLiten, Element } from 'nav-frontend-typografi';
 import EndringSelvstendig from './selvstendig/EndringSelvstendig';
 import RevisorSelvstendig from './selvstendig/RevisorSelvstendig';
 import RegnskapsførerSelvstendig from './selvstendig/RegnskapsførerSelvstendig';
+import DetaljerSelvstendig from './selvstendig/DetaljerSelvstendig';
+import DuHarSvartNeiListe from '../DuHarSvartNeiListe';
 
 interface Props {
     selvstendigInformasjon: Næring;
@@ -15,9 +15,14 @@ const InformasjonOmSelvstendig: FunctionComponent<Props> = ({ selvstendigInforma
     return (
         <Block margin="xxs">
             <div className="grayInfoBox">
-                <EtikettLiten>Org.nr: {selvstendigInformasjon.organisasjonsnummer}</EtikettLiten>
-                <Element>{selvstendigInformasjon.navnPåNæringen.toUpperCase()}</Element>
-                {moment(selvstendigInformasjon.oppstartsdato).format('DD.MM.YYYY')}
+                <DetaljerSelvstendig
+                    navnPåNæringen={selvstendigInformasjon.navnPåNæringen}
+                    orgnr={selvstendigInformasjon.organisasjonsnummer}
+                    oppstartsdato={selvstendigInformasjon.oppstartsdato!}
+                    pågående={selvstendigInformasjon.pågående}
+                    tidsperiode={selvstendigInformasjon.tidsperiode}
+                    typer={selvstendigInformasjon.næringstyper}
+                />
 
                 {selvstendigInformasjon.endringAvNæringsinntektInformasjon && (
                     <EndringSelvstendig
@@ -25,9 +30,16 @@ const InformasjonOmSelvstendig: FunctionComponent<Props> = ({ selvstendigInforma
                     />
                 )}
 
-                {selvstendigInformasjon.harRevisor && <RevisorSelvstendig />}
+                {selvstendigInformasjon.harRevisor && <RevisorSelvstendig revisor={selvstendigInformasjon.revisor!} />}
 
-                {selvstendigInformasjon.harRegnskapsfører && <RegnskapsførerSelvstendig />}
+                {selvstendigInformasjon.harRegnskapsfører && (
+                    <RegnskapsførerSelvstendig regnskapsfører={selvstendigInformasjon.regnskapsfører!} />
+                )}
+
+                <DuHarSvartNeiListe
+                    selvstendigOppsummering={true}
+                    endringAvNæringsinntekt={selvstendigInformasjon.hattVarigEndringAvNæringsinntektSiste4Kalenderår}
+                />
             </div>
         </Block>
     );

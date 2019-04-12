@@ -9,7 +9,7 @@ interface Props {
 const MedlemskapOppsummering: FunctionComponent<Props> = ({ iNorgeNeste12Mnd, iNorgeSiste12Mnd }) => {
     return (
         <>
-            <div className="point5remMargin">
+            <div className="margin-xs">
                 <FormattedMessage
                     id={
                         iNorgeNeste12Mnd
@@ -18,7 +18,7 @@ const MedlemskapOppsummering: FunctionComponent<Props> = ({ iNorgeNeste12Mnd, iN
                     }
                 />
             </div>
-            <div className="point5remMargin">
+            <div className="margin-xs">
                 <FormattedMessage
                     id={
                         iNorgeSiste12Mnd

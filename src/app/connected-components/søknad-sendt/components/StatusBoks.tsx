@@ -17,7 +17,7 @@ interface Props {
 const StatusBoks: FunctionComponent<Props> = ({ saksNr }) => {
     return (
         <Block>
-            <div className="oneremMargin">
+            <div className="margin-s">
                 <Systemtittel>
                     <FormattedMessage id="søknadSendt.status.tittel" />
                 </Systemtittel>
@@ -25,7 +25,7 @@ const StatusBoks: FunctionComponent<Props> = ({ saksNr }) => {
             <Lenkepanelbase href="#" border={true} className="statusBoks__lenkepanel" tittelProps="ingress">
                 <div className={cls.block}>
                     <div className={cls.element('left')}>
-                        <div className="oneremMargin">
+                        <div className="margin-s">
                             <Undertittel>
                                 <FormattedMessage id="søknadSendt.status.undertittel" />
                             </Undertittel>

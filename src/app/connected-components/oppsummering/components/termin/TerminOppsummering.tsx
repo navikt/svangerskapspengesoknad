@@ -10,7 +10,7 @@ interface Props {
 const TerminOppsummering: FunctionComponent<Props> = ({ fornavn, etternavn, fnr }) => {
     return (
         <>
-            <div className="point5remMargin">
+            <div className="margin-xs">
                 <FormattedMessage
                     id="oppsummering.termin.personalia.navn"
                     values={{
@@ -18,7 +18,7 @@ const TerminOppsummering: FunctionComponent<Props> = ({ fornavn, etternavn, fnr 
                     }}
                 />
             </div>
-            <div className="point5remMargin">
+            <div className="margin-xs">
                 <FormattedMessage
                     id="oppsummering.termin.personalia.fnr"
                     values={{

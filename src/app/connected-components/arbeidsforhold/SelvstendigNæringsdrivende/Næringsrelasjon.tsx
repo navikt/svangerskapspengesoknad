@@ -15,11 +15,11 @@ type Props = NæringsrelasjonBolkProps & InjectedIntlProps;
 
 const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
     const { values, type, intl } = props;
-    const næringsrelasjon = values[type] || {};
+    const næringsrelasjon = values[type];
 
     const visKomponent = {
-        telefonnummer: næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '',
-        erNærVennEllerFamilie: næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== ''
+        telefonnummer: næringsrelasjon !== undefined && næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '',
+        erNærVennEllerFamilie: næringsrelasjon !== undefined && næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== ''
     };
 
     return (

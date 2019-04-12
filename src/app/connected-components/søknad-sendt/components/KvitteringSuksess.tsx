@@ -16,7 +16,7 @@ const KvitteringSuksess: FunctionComponent = () => {
                     <CheckmarkIkon />
                 </div>
                 <div className={cls.element('tekst')}>
-                    <div className="point5remMargin">
+                    <div className="margin-xs">
                         <Undertittel>
                             <FormattedMessage id="søknadSendt.info.tittel" />
                         </Undertittel>
