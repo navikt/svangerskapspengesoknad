@@ -39,6 +39,12 @@ const InformasjonOmSelvstendig: FunctionComponent<Props> = ({ selvstendigInforma
                 <DuHarSvartNeiListe
                     selvstendigOppsummering={true}
                     endringAvNæringsinntekt={selvstendigInformasjon.hattVarigEndringAvNæringsinntektSiste4Kalenderår}
+                    harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene={
+                        selvstendigInformasjon.harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene
+                    }
+                    harRegnskapsfører={selvstendigInformasjon.harRegnskapsfører}
+                    harRevisor={selvstendigInformasjon.harRevisor}
+                    kanInnhenteOpplsyningerFraRevisor={selvstendigInformasjon.kanInnhenteOpplsyningerFraRevisor}
                 />
             </div>
         </Block>
