@@ -9,8 +9,4 @@ describe('søknadUtils', () => {
         const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger);
         expect(dto.length).toBe(9);
     });
-    it('lager en tilrettelegging for hel, delvis og ingen', () => {
-        const frilansDto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.frilansTilrettelegging]);
-        expect(frilansDto.length).toBe(3);
-    });
 });
