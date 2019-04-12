@@ -28,7 +28,7 @@ import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering'
 import './oppsummering.less';
 import MedlemskapOppsummering from './MedlemskapOppsummering';
 import TerminOppsummering from './TerminOppsummering';
-import SøknadDTO from '../../types/SøknadDTO';
+import SøknadDTO from '../../types/S\u00F8knad';
 
 interface OwnProps {
     step: SøknadStep;

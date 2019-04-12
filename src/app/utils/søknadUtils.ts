@@ -1,7 +1,6 @@
-import { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
+import SøknadDTO, { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { UferdigTilrettelegging, Tilrettelegging, Tilretteleggingstype } from '../types/Tilrettelegging';
-import SøknadDTO from '../types/SøknadDTO';
 import {
     TilretteleggingDTO,
     HelTilretteleggingDTO,
