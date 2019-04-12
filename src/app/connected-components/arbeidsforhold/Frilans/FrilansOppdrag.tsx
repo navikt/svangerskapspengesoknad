@@ -14,7 +14,9 @@ import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Undertittel } from 'nav-frontend-typografi';
 
-const cls = BEMHelper('frilans-oppdrag');
+import './frilansOppdrag.less';
+
+const cls = BEMHelper('frilansOppdrag');
 
 export interface ModalFormProps {
     endre: boolean;
@@ -55,7 +57,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
                         </Block>
 
-                        <Block>
+                        <Block margin="xxs">
                             <InputField
                                 name="navnPåArbeidsgiver"
                                 label={getMessage(intl, 'arbeidsforhold.frilans.oppdrag.navnPåArbeidsgiver')}
@@ -64,7 +66,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                         </Block>
 
                         <Block margin="xxs">
-                            <>
+                            <div className={cls.element('datoer')}>
                                 <DatoInput
                                     fullskjermKalender
                                     name="tidsperiode.fom"
@@ -75,15 +77,17 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                                     name="tidsperiode.tom"
                                     label={getMessage(intl, 'tilOgMed')}
                                 />
-                            </>
+                            </div>
                         </Block>
 
-                        <Knapp htmlType="button" onClick={onCancel}>
-                            <FormattedMessage id="avbryt" />
-                        </Knapp>
-                        <Hovedknapp disabled={!isValid} htmlType="submit">
-                            <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
-                        </Hovedknapp>
+                        <div className={cls.element('knapper')}>
+                            <Knapp htmlType="button" onClick={onCancel}>
+                                <FormattedMessage id="avbryt" />
+                            </Knapp>
+                            <Hovedknapp disabled={!isValid} htmlType="submit">
+                                <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
+                            </Hovedknapp>
+                        </div>
                     </form>
                 );
             }}
