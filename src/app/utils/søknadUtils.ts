@@ -1,14 +1,14 @@
 import { Søknadstype, UferdigSøknad, Søknadsgrunnlag } from 'app/types/Søknad';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { UferdigTilrettelegging, Tilrettelegging, Tilretteleggingstype } from '../types/Tilrettelegging';
-import SøknadDTO from '../types/S\u00F8knadDTO';
+import SøknadDTO from '../types/SøknadDTO';
 import {
     TilretteleggingDTO,
     HelTilretteleggingDTO,
     DelvisTilretteleggingDTO,
     IngenTilretteleggingDTO
 } from '../types/TilretteleggingDTO';
-import { Søker } from '../types/S\u00F8ker';
+import { Søker } from '../types/Søker';
 
 const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
     tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
@@ -54,7 +54,7 @@ const mapIngenTilrettelegging = (tilrettelegging: Tilrettelegging): IngenTilrett
     };
 };
 
-const mapTilretteleggingerTilDTO = (tilrettelegging: Tilrettelegging[]): TilretteleggingDTO[] => {
+export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilrettelegging[]): TilretteleggingDTO[] => {
     const dto: TilretteleggingDTO[] = [];
     tilrettelegging.forEach((t) => {
         if (t.helTilrettelegging) {
@@ -79,7 +79,6 @@ const mapTilretteleggingerTilDTO = (tilrettelegging: Tilrettelegging[]): Tilrett
     return dto;
 };
 
-// TODO fjerne any herfra
 export const processUtfyltSøknad = (utfyltSøknad: UferdigSøknad, vedlegg: Attachment[]): SøknadDTO | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
     const { fødselsdato: barnetsFødselsdato, ...utfyltBarn } = utfyltSøknad.barn;

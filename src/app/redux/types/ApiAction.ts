@@ -1,7 +1,7 @@
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import Kvittering from 'app/types/Kvittering';
 import { FetchError } from 'app/types/FetchState';
-import SøknadDTO from '../../types/S\u00F8knadDTO';
+import SøknadDTO from '../../types/SøknadDTO';
 
 export enum ApiActionTypes {
     'GET_SØKERINFO_REQUEST' = 'getSøkerInfoRequest',

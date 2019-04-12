@@ -4,7 +4,6 @@ import Søker, { Søkerrolle } from './Søker';
 import { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
-import mockSøknad from '../mockSoknad';
 import { TilretteleggingDTO } from './TilretteleggingDTO';
 
 export enum Søknadstype {
@@ -30,8 +29,6 @@ export interface UferdigSøknad {
     søknadsgrunnlag: Søknadsgrunnlag[];
     søker: Partial<Søker>;
 }
-
-export const initialSøknadMock: UferdigSøknad = mockSøknad;
 
 export const initialSøknad: UferdigSøknad = {
     harGodkjentVilkår: false,
