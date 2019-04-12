@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
-import { Formik, FormikProps, Field, FieldProps, FieldArray } from 'formik';
-import { Select as NavSelect } from 'nav-frontend-skjema';
+import { Formik, FormikProps, FieldArray } from 'formik';
 import { connect } from 'react-redux';
 
 import BEMHelper from 'common/util/bem';
@@ -10,7 +9,6 @@ import { isValid } from 'i18n-iso-countries';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
-import { SelectChangeEvent } from 'app/types/events';
 import getCountries from 'app/utils/getCountries';
 import InputField from 'app/formik/wrappers/InputField';
 import { AnnenInntektType, AnnenInntekt } from 'app/types/AnnenInntekt';
@@ -20,11 +18,13 @@ import AttachmentOverview from 'common/storage/attachment/components/AttachmentO
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
-import DatoInput from 'app/formik/wrappers/DatoInput';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
 import Action from 'app/redux/types/Action';
 import { State } from 'app/redux/store';
+import validateAndreInntekter from 'app/utils/validation/validateAndreInntekter';
+import DatoInput from 'app/formik/wrappers/DatoInput';
+import Select from 'app/formik/wrappers/Select';
 
 const cls = BEMHelper('andre-inntekter');
 
@@ -54,10 +54,9 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
     return (
         <Formik
             initialValues={element}
-            // tslint:disable-next-line: no-empty
-            validate={() => {}} // TODO
+            validate={validateAndreInntekter()}
             onSubmit={onAdd}
-            render={({ values, handleSubmit }: FormikProps<AnnenInntekt>) => {
+            render={({ values, handleSubmit, errors }: FormikProps<AnnenInntekt>) => {
                 const visKomponent = {
                     navn: values.type === AnnenInntektType.JOBB_I_UTLANDET,
                     land: values.type === AnnenInntektType.JOBB_I_UTLANDET,
@@ -97,27 +96,17 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                         </Block>
 
                         <Block visible={visKomponent.land} margin="xs">
-                            <Field
-                                name="land"
-                                render={({ field, form }: FieldProps<string>) => (
-                                    <NavSelect
-                                        label={getMessage(intl, 'arbeidsforhold.andreInntekter.land')}
-                                        value={field.value}
-                                        onChange={(e: SelectChangeEvent) => {
-                                            form.setFieldValue(field.name, e.target.value);
-                                        }}>
-                                        <option value="" />
-                                        {countries.map((countryOption: string[]) => {
-                                            const [countryCode, countryName] = countryOption;
-                                            return (
-                                                <option key={countryCode} value={countryCode}>
-                                                    {countryName}
-                                                </option>
-                                            );
-                                        })}
-                                    </NavSelect>
-                                )}
-                            />
+                            <Select name="land" label={getMessage(intl, 'arbeidsforhold.andreInntekter.land')}>
+                                <option value="" />
+                                {countries.map((countryOption: string[]) => {
+                                    const [countryCode, countryName] = countryOption;
+                                    return (
+                                        <option key={countryCode} value={countryCode}>
+                                            {countryName}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
                         </Block>
 
                         <Block visible={visKomponent.navn}>
