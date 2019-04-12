@@ -16,7 +16,7 @@ import {
     finnArbeidsgiversNavn,
     getAllSteps,
     getAdjacentSteps,
-    getSøknadStepPath,
+    getSøknadStepPath
 } from 'app/utils/stepUtils';
 import { State } from 'app/redux/store';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
@@ -57,7 +57,7 @@ const Step: FunctionComponent<Props> = (props) => {
         onRequestNavigateToPreviousStep: () => {
             const previousPath = getSøknadStepPath(previousStep.step, previousStep.subStep);
             navigateTo(previousPath, history);
-        },
+        }
     };
 
     const currentStep = parsePathFromLocation(history.location);
@@ -68,7 +68,7 @@ const Step: FunctionComponent<Props> = (props) => {
             label:
                 otherStep.step === StepID.TILRETTELEGGING && otherStep.subStep
                     ? finnArbeidsgiversNavn(otherStep.subStep, arbeidsforhold)
-                    : getMessage(intl, `stegtittel.${otherStep.step}`),
+                    : getMessage(intl, `stegtittel.${otherStep.step}`)
         };
     });
 
@@ -92,7 +92,7 @@ const Step: FunctionComponent<Props> = (props) => {
                         />
                     )}
                 </div>
-                <StegIndikator kompakt steg={stegForStegIndikator} visLabel={false} />
+                <StegIndikator kompakt={true} steg={stegForStegIndikator} visLabel={false} />
                 <div />
             </div>
 

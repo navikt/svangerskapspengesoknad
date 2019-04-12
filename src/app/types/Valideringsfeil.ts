@@ -8,7 +8,7 @@ enum Valideringsfeil {
     TIDLIGERE_OPPHOLD_MÅ_VÆRE_FREMOVER_I_TID = 'tidligereOppholdMåVæreFremoverITid',
     TIDSREISER_IKKE_TILLATT = 'tidsreiserIkkeTillatt',
     STILLINGSPROSENT_RANGE = 'stillingsprosentRange',
-    TILRETTELAGT_ARBEID_FOR_TIDLIG = 'tilrettelagtArbeidForTidlig',
+    TILRETTELAGT_ARBEID_FOR_TIDLIG = 'tilrettelagtArbeidForTidlig'
 }
 
 export default Valideringsfeil;

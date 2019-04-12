@@ -29,7 +29,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
     const tilretteleggingRoutes = values.søknadsgrunnlag.map(({ id }) => {
         const søknadStep = {
             step: StepID.TILRETTELEGGING,
-            subStep: id,
+            subStep: id
         };
 
         return (

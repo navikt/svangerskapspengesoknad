@@ -1,7 +1,7 @@
 import { Språkkode } from 'common/types';
 
 export enum CommonActionTypes {
-    'SET_SPRÅK' = 'setSpråk',
+    'SET_SPRÅK' = 'setSpråk'
 }
 
 interface SetSpråk {

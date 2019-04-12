@@ -16,7 +16,7 @@ const SelvstendigListElement: React.StatelessComponent<ModalSummaryProps<Næring
     onEdit,
     onDelete,
     editButtonAriaText,
-    deleteButtonAriaText,
+    deleteButtonAriaText
 }) => {
     const cls = BEMHelper('selvstendigListElement');
     return (
@@ -25,7 +25,7 @@ const SelvstendigListElement: React.StatelessComponent<ModalSummaryProps<Næring
                 {element.registrertINorge && (
                     <EtikettLiten>
                         {getMessage(intl, 'annenInntekt.arbeidsforhold.organisasjonsnummer', {
-                            organisasjonsnummer: element.organisasjonsnummer,
+                            organisasjonsnummer: element.organisasjonsnummer
                         })}
                     </EtikettLiten>
                 )}
@@ -44,7 +44,7 @@ const SelvstendigListElement: React.StatelessComponent<ModalSummaryProps<Næring
                         fom: formatDate(element.tidsperiode.fom),
                         tom: element.tidsperiode.tom
                             ? formatDate(element.tidsperiode.tom)
-                            : getMessage(intl, 'pågående'),
+                            : getMessage(intl, 'pågående')
                     })}
                 </Normaltekst>
                 <button

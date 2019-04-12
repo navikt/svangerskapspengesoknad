@@ -4,7 +4,7 @@ export enum StepID {
     'TILRETTELEGGING' = 'tilrettelegging',
     'UTENLANDSOPPHOLD' = 'utenlandsopphold',
     'OPPSUMMERING' = 'oppsummering',
-    'INGEN' = 'ingen',
+    'INGEN' = 'ingen'
 }
 
 interface SøknadStep {

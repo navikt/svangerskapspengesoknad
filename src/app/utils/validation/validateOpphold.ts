@@ -14,26 +14,26 @@ export const getDatoAvgrensninger = (type: Oppholdstype, fom: Date, tom: Date) =
     return type === Oppholdstype.TIDLIGERE_OPPHOLD
         ? {
               fom: {
-                  maksDato: moment.min([moment(today), moment(tom)]).toDate(),
+                  maksDato: moment.min([moment(today), moment(tom)]).toDate()
               },
               tom: {
                   minDato: fom,
-                  maksDato: today,
-              },
+                  maksDato: today
+              }
           }
         : {
               fom: {
                   minDato: today,
-                  maksDato: tom,
+                  maksDato: tom
               },
               tom: {
-                  minDato: moment.max([moment(today), moment(fom)]).toDate(),
-              },
+                  minDato: moment.max([moment(today), moment(fom)]).toDate()
+              }
           };
 };
 
 const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): Oppholdsfeil => {
-    let errors: FormikErrors<Tidsperiode> = {};
+    const errors: FormikErrors<Tidsperiode> = {};
     const today = moment().startOf('day');
 
     if (!fom) {
@@ -59,7 +59,7 @@ const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): Opphold
 
 const validateOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): Oppholdsfeil => {
     const errors: Oppholdsfeil = {
-        ...validatePeriode(opphold.tidsperiode, type),
+        ...validatePeriode(opphold.tidsperiode, type)
     };
 
     if (opphold.land === '') {

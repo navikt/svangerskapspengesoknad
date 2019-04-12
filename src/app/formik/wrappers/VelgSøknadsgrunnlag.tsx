@@ -28,11 +28,12 @@ const VelgSøknadsgrunnlag: FunctionComponent<Props> = (props) => {
             render={({ form, push, remove }: FieldArrayRenderProps) => {
                 return (
                     <CheckboksPanelGruppeResponsive
+                        columns={1}
                         {...checkboksPanelGruppeProps}
                         legend={label}
                         checkboxes={options.map((option) => ({
                             ...option,
-                            checked: form.values[name].some((v: Søknadsgrunnlag) => v.id === option.value),
+                            checked: form.values[name].some((v: Søknadsgrunnlag) => v.id === option.value)
                         }))}
                         onChange={(_, value) => {
                             const indexOfGrunnlag = form.values[name].findIndex((v: Søknadsgrunnlag) => v.id === value);
@@ -42,7 +43,7 @@ const VelgSøknadsgrunnlag: FunctionComponent<Props> = (props) => {
                                 if (indexOfGrunnlag === -1) {
                                     push({
                                         id: value,
-                                        type: matchingOption.type,
+                                        type: matchingOption.type
                                     });
                                 } else {
                                     remove(indexOfGrunnlag);

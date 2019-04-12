@@ -35,8 +35,8 @@ const parseAvgrensinger = (avgrensinger: Avgrensninger): DatovelgerAvgrensninger
             avgrensinger.ugyldigeTidsperioder &&
             avgrensinger.ugyldigeTidsperioder.map((t: Tidsperiode) => ({
                 fom: dateToISOFormattedDateString(t.fom)!,
-                tom: dateToISOFormattedDateString(t.tom)!,
-            })),
+                tom: dateToISOFormattedDateString(t.tom)!
+            }))
     };
 };
 
@@ -76,7 +76,7 @@ class DatoInput extends React.Component<Props, {}> {
                                 id,
                                 placeholder: getMessage(intl, 'datoinput.placeholder'),
                                 name,
-                                ariaDescribedby: ariaDescriptionId,
+                                ariaDescribedby: ariaDescriptionId
                             }}
                             onChange={(datoString: string) =>
                                 onChange(datoString && datoString !== 'Invalid date' ? new Date(datoString) : undefined)

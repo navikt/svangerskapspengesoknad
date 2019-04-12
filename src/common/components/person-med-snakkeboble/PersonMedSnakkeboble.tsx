@@ -24,7 +24,7 @@ const PersonMedSnakkeboble: React.StatelessComponent<Props> = ({
     dialog,
     personRenderer,
     stil,
-    fyltBakgrunn = true,
+    fyltBakgrunn = true
 }) => {
     return (
         <div

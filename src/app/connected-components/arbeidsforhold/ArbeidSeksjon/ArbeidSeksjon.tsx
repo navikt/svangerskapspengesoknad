@@ -78,7 +78,13 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
     return (
         <>
             <Block margin="none">
-                <JaNeiSpørsmål twoColumns name={name} legend={legend} labels={labels} infoboksTekst={infoboksTekst} />
+                <JaNeiSpørsmål
+                    twoColumns={true}
+                    name={name}
+                    legend={legend}
+                    labels={labels}
+                    infoboksTekst={infoboksTekst}
+                />
             </Block>
 
             <FieldArray
@@ -113,7 +119,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 </Knapp>
                             </Block>
                             <Modal
-                                closeButton
+                                closeButton={true}
                                 isOpen={modalIsOpen}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>

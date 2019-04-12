@@ -7,7 +7,7 @@ export enum AttachmentActionTypes {
     'UPLOAD_ATTACHMENT_FAILURE' = 'uploadAttachmentFailure',
     'DELETE_ATTACHMENT_REQUEST' = 'deleteAttachmentRequest',
     'DELETE_ATTACHMENT_SUCCESS' = 'deleteAttachmentSuccess',
-    'DELETE_ATTACHMENT_FAILURE' = 'deleteAttachmentFailure',
+    'DELETE_ATTACHMENT_FAILURE' = 'deleteAttachmentFailure'
 }
 
 export interface UploadAttachmentRequest {

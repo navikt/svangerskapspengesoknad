@@ -4,19 +4,22 @@ import Block from 'common/components/block/Block';
 import InputField from 'app/formik/wrappers/InputField';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import getMessage from 'common/util/i18nUtils';
+import { Næring } from 'app/types/SelvstendigNæringsdrivende';
 
 interface NæringsrelasjonBolkProps {
+    values: Næring;
     type: 'revisor' | 'regnskapsfører';
 }
 
 type Props = NæringsrelasjonBolkProps & InjectedIntlProps;
 
 const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
-    const { type, intl } = props;
+    const { values, type, intl } = props;
+    const næringsrelasjon = values[type] || {};
 
     const visKomponent = {
-        telefonnr: true,
-        erNærVennEllerFamilie: true,
+        telefonnummer: næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '',
+        erNærVennEllerFamilie: næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== ''
     };
 
     return (
@@ -27,9 +30,9 @@ const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
                     label={getMessage(intl, `arbeidsforhold.selvstendig.næringsrelasjon.${type}.navn`)}
                 />
             </Block>
-            <Block visible={visKomponent.telefonnr}>
+            <Block visible={visKomponent.telefonnummer}>
                 <InputField
-                    name={`${type}.telefonnr`}
+                    name={`${type}.telefonnummer`}
                     label={getMessage(intl, `arbeidsforhold.selvstendig.næringsrelasjon.${type}.tlfnr`)}
                 />
             </Block>

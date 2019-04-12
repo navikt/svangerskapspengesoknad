@@ -16,15 +16,15 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
                 arbeidsforhold !== undefined && arbeidsforhold.length > 0
                     ? arbeidsforhold.map((forhold: Arbeidsforhold) => ({
                           ...forhold,
-                          arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn),
+                          arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn)
                       }))
                     : [],
             søker: {
                 ...søker,
                 fornavn: normalizeName(søker.fornavn),
                 mellomnavn: søker.mellomnavn ? normalizeName(søker.mellomnavn) : undefined,
-                etternavn: normalizeName(søker.etternavn),
-            },
+                etternavn: normalizeName(søker.etternavn)
+            }
         };
 
         yield put({ type: ApiActionTypes.GET_SØKERINFO_SUCCESS, payload: { søkerinfo } });

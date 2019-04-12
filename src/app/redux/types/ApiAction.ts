@@ -1,7 +1,7 @@
 import { Søkerinfo } from 'app/types/Søkerinfo';
-import Søknad from 'app/types/Søknad';
 import Kvittering from 'app/types/Kvittering';
 import { FetchError } from 'app/types/FetchState';
+import SøknadDTO from '../../types/S\u00F8knad';
 
 export enum ApiActionTypes {
     'GET_SØKERINFO_REQUEST' = 'getSøkerInfoRequest',
@@ -9,7 +9,7 @@ export enum ApiActionTypes {
     'GET_SØKERINFO_FAILURE' = 'getSøkerInfoFailure',
     'SEND_SØKNAD_REQUEST' = 'sendSøknadRequest',
     'SEND_SØKNAD_SUCCESS' = 'sendSøknadSuccess',
-    'SEND_SØKNAD_FAILURE' = 'sendSøknadFailure',
+    'SEND_SØKNAD_FAILURE' = 'sendSøknadFailure'
 }
 
 export interface GetSøkerinfoRequest {
@@ -33,7 +33,7 @@ export interface GetSøkerinfoFailure {
 export interface SendSøknadRequest {
     type: ApiActionTypes.SEND_SØKNAD_REQUEST;
     payload: {
-        søknad: Søknad;
+        søknad: SøknadDTO;
     };
 }
 

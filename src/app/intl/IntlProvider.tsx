@@ -8,7 +8,7 @@ import 'moment/locale/nb';
 import 'moment/locale/nn';
 
 import { Språkkode } from 'common/intl/types';
-import { State } from 'app/redux/store.js';
+import { State } from 'app/redux/store';
 import nbMessages from './nb_NO.json';
 import nbMessagesCommon from '../../common/intl/nb_NO.json';
 import nnMessages from './nn_NO.json';
@@ -31,11 +31,11 @@ class IntlProvider extends React.Component<StateProps> {
             this.props.språkkode === 'nb'
                 ? {
                       ...nbMessages,
-                      ...nbMessagesCommon,
+                      ...nbMessagesCommon
                   }
                 : {
                       ...nnMessages,
-                      ...nnMessagesCommon,
+                      ...nnMessagesCommon
                   };
         return (
             <Provider key={this.props.språkkode} locale={this.props.språkkode} messages={messages || {}}>
@@ -46,7 +46,7 @@ class IntlProvider extends React.Component<StateProps> {
 }
 
 const mapStateToProps = (state: State): StateProps => ({
-    språkkode: state.common.språkkode,
+    språkkode: state.common.språkkode
 });
 
 export default connect(mapStateToProps)(IntlProvider);

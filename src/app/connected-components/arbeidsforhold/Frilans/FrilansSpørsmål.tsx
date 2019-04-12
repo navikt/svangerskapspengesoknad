@@ -26,14 +26,14 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
         oppstartsdato: formikProps.values.søker.harJobbetSomFrilansSiste10Mnd === true,
         jobberFremdelesSomFrilans: !_.isUndefined(normalisertFrilansinfo.oppstart),
         harJobbetForNærVennEllerFamilieSiste10Mnd: !_.isUndefined(normalisertFrilansinfo.jobberFremdelesSomFrilans),
-        driverFosterhjem: !_.isUndefined(normalisertFrilansinfo.harJobbetForNærVennEllerFamilieSiste10Mnd),
+        driverFosterhjem: !_.isUndefined(normalisertFrilansinfo.harJobbetForNærVennEllerFamilieSiste10Mnd)
     };
 
     return (
         <>
             <Block>
                 <JaNeiSpørsmål
-                    twoColumns
+                    twoColumns={true}
                     name="søker.harJobbetSomFrilansSiste10Mnd"
                     legend={getMessage(intl, 'arbeidsforhold.frilans.erFrilanser')}
                     infoboksTekst={getMessage(intl, 'arbeidsforhold.frilans.erFrilanser.infoboksTekst')}
@@ -48,7 +48,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                                 visible={visKomponent.oppstartsdato}
                                 margin={visKomponent.jobberFremdelesSomFrilans ? undefined : 'none'}>
                                 <DatoInput
-                                    fullskjermKalender
+                                    fullskjermKalender={true}
                                     name="søker.frilansInformasjon.oppstart"
                                     label={getMessage(intl, 'arbeidsforhold.frilans.fraOgMed')}
                                 />
@@ -56,7 +56,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
 
                             <Block visible={visKomponent.jobberFremdelesSomFrilans}>
                                 <JaNeiSpørsmål
-                                    twoColumns
+                                    twoColumns={true}
                                     name={'søker.frilansInformasjon.jobberFremdelesSomFrilans'}
                                     legend={getMessage(intl, 'arbeidsforhold.frilans.erDuFremdelesFrilanser')}
                                 />
@@ -78,7 +78,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
 
                             <Block visible={visKomponent.driverFosterhjem} margin="s">
                                 <JaNeiSpørsmål
-                                    twoColumns
+                                    twoColumns={true}
                                     name={'søker.frilansInformasjon.driverFosterhjem'}
                                     legend={getMessage(intl, 'arbeidsforhold.frilans.driverFosterhjem')}
                                 />

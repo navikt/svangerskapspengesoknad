@@ -27,7 +27,7 @@ const Språkvelger: React.StatelessComponent<Props & InjectedIntlProps> = ({ int
                 }}
                 href="#">
                 {intl.formatMessage({
-                    id: 'komponent.språkvelger.endreMålform',
+                    id: 'komponent.språkvelger.endreMålform'
                 })}
             </a>
         </div>

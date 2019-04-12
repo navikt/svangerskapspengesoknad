@@ -10,8 +10,8 @@ export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag
             vedlegg: [],
             arbeidsforhold: {
                 ...arbeidsgiversId,
-                type,
-            },
+                type
+            }
         };
     });
 };

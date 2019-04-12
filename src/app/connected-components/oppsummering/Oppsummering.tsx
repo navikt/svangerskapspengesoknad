@@ -18,7 +18,6 @@ import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import Oppsummeringspunkt from './components/Oppsummeringspunkt';
-import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import Tilrettelegging from 'app/types/Tilrettelegging';
@@ -29,6 +28,7 @@ import ArbeidsforholdOppsummering from './components/arbeidsforhold/Arbeidsforho
 import './oppsummering.less';
 import MedlemskapOppsummering from './components/medlemskap/MedlemskapOppsummering';
 import TerminOppsummering from './components/termin/TerminOppsummering';
+import SøknadDTO from '../../types/S\u00F8knad';
 
 interface OwnProps {
     step: SøknadStep;
@@ -40,7 +40,7 @@ interface StateProps {
     vedlegg: Attachment[];
     søkerinfo: Søkerinfo | undefined;
     arbeidsforhold: Arbeidsforhold[];
-    requestSendSøknad: (søknad: Søknad) => void;
+    requestSendSøknad: (søknad: SøknadDTO) => void;
 }
 
 type Props = OwnProps & StateProps & InjectedIntlProps;
@@ -55,7 +55,6 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 
     const sendSøknad = () => {
         const ferdigSøknad = processUtfyltSøknad(values, vedlegg);
-
         if (ferdigSøknad) {
             requestSendSøknad(ferdigSøknad);
         }
@@ -66,7 +65,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
     }
 
     return (
-        <Applikasjonsside visTittel visSpråkvelger>
+        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
             <FormikStep
                 step={step}
                 formikProps={formikProps}
@@ -74,7 +73,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 onValidFormSubmit={sendSøknad}
                 history={history}>
                 <Block>
-                    <Veilederinfo visVeileder stil="kompakt" type="info">
+                    <Veilederinfo visVeileder={true} stil="kompakt" type="info">
                         <FormattedMessage id="oppsummering.veileder" />
                     </Veilederinfo>
                 </Block>
@@ -91,7 +90,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     <FormattedMessage
                         id="oppsummering.barn.termindato"
                         values={{
-                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY'),
+                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
                         }}
                     />
                 </Oppsummeringspunkt>
@@ -143,13 +142,13 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
-    vedlegg: state.attachment.vedlegg,
+    vedlegg: state.attachment.vedlegg
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
-    requestSendSøknad: (søknad: Søknad) => {
+    requestSendSøknad: (søknad: SøknadDTO) => {
         dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
-    },
+    }
 });
 
 export default connect(

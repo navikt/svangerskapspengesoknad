@@ -9,11 +9,11 @@ import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import validateSøknad from './validation/validateSøknad';
 
 export const getSøknadStepPath = (step: StepID, subStep?: string) => {
-    let path = `${AppRoute.SØKNAD}/${step}`;
+    const path = `${AppRoute.SØKNAD}/${step}`;
     return subStep ? path + `/${subStep}` : path;
 };
 
-function pureSplice<T>(array: Array<T>, start: number, deleteCount: number, ...substitutes: Array<T>): Array<T> {
+function pureSplice<T>(array: T[], start: number, deleteCount: number, ...substitutes: T[]): T[] {
     const newArray = [...array];
     newArray.splice(start, deleteCount, ...substitutes);
 
@@ -25,13 +25,13 @@ const mainSteps = [
     StepID.ARBEIDSFORHOLD,
     StepID.TILRETTELEGGING,
     StepID.UTENLANDSOPPHOLD,
-    StepID.OPPSUMMERING,
+    StepID.OPPSUMMERING
 ];
 
 export const getAllSteps = (søknadsgrunnlag: Søknadsgrunnlag[]): SøknadStep[] => {
     const tilretteleggingSteps = søknadsgrunnlag.map((tilrettelegging) => ({
         step: StepID.TILRETTELEGGING,
-        subStep: tilrettelegging.id,
+        subStep: tilrettelegging.id
     }));
 
     return pureSplice(
@@ -63,7 +63,7 @@ export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep
 export const parsePathFromLocation = (location: Location): SøknadRoute => {
     if (!location) {
         return {
-            path: AppRoute.INTRO,
+            path: AppRoute.INTRO
         };
     }
 
@@ -71,7 +71,7 @@ export const parsePathFromLocation = (location: Location): SøknadRoute => {
     return {
         path: `/${path}` as AppRoute,
         step: step as StepID,
-        subStep: subStep as string,
+        subStep: subStep as string
     };
 };
 

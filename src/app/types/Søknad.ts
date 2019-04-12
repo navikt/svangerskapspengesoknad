@@ -1,22 +1,22 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
 import Søker, { Søkerrolle } from './Søker';
-import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
+import { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
-// import mockSøknad from '../mockSoknad';
+import { TilretteleggingDTO } from './TilretteleggingDTO';
 
 export enum Søknadstype {
-    'SVANGERSKAPSPENGER' = 'svangerskapspenger',
+    'SVANGERSKAPSPENGER' = 'svangerskapspenger'
 }
 
-interface Søknad {
+interface SøknadDTO {
     type: Søknadstype;
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: Barn;
     vedlegg?: Attachment[];
-    tilrettelegging: Tilrettelegging[];
+    tilrettelegging: TilretteleggingDTO[];
     søker: Søker;
 }
 
@@ -40,13 +40,13 @@ export const initialSøknad: UferdigSøknad = {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
         tidligereOpphold: [],
-        senereOpphold: [],
+        senereOpphold: []
     },
     søker: {
         rolle: Søkerrolle.MOR,
         selvstendigNæringsdrivendeInformasjon: [],
-        andreInntekterSiste10Mnd: [],
-    },
+        andreInntekterSiste10Mnd: []
+    }
 };
 
 export interface Søknadsgrunnlag {
@@ -56,4 +56,4 @@ export interface Søknadsgrunnlag {
 
 export type Søknadfeil = FormikErrors<UferdigSøknad>;
 
-export default Søknad;
+export default SøknadDTO;
