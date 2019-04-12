@@ -18,7 +18,6 @@ import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import Oppsummeringspunkt from './Oppsummeringspunkt';
-import Søknad from 'app/types/Søknad';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import Tilrettelegging from 'app/types/Tilrettelegging';
@@ -29,6 +28,7 @@ import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering'
 import './oppsummering.less';
 import MedlemskapOppsummering from './MedlemskapOppsummering';
 import TerminOppsummering from './TerminOppsummering';
+import SøknadDTO from '../../types/S\u00F8knad';
 
 interface OwnProps {
     step: SøknadStep;
@@ -40,7 +40,7 @@ interface StateProps {
     vedlegg: Attachment[];
     søkerinfo: Søkerinfo | undefined;
     arbeidsforhold: Arbeidsforhold[];
-    requestSendSøknad: (søknad: Søknad) => void;
+    requestSendSøknad: (søknad: SøknadDTO) => void;
 }
 
 type Props = OwnProps & StateProps & InjectedIntlProps;
@@ -55,7 +55,6 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 
     const sendSøknad = () => {
         const ferdigSøknad = processUtfyltSøknad(values, vedlegg);
-
         if (ferdigSøknad) {
             requestSendSøknad(ferdigSøknad);
         }
@@ -145,7 +144,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
-    requestSendSøknad: (søknad: Søknad) => {
+    requestSendSøknad: (søknad: SøknadDTO) => {
         dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
     }
 });

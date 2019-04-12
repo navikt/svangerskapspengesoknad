@@ -8,7 +8,7 @@ import 'moment/locale/nb';
 import 'moment/locale/nn';
 
 import { Språkkode } from 'common/intl/types';
-import { State } from 'app/redux/store.js';
+import { State } from 'app/redux/store';
 import nbMessages from './nb_NO.json';
 import nbMessagesCommon from '../../common/intl/nb_NO.json';
 import nnMessages from './nn_NO.json';

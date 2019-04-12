@@ -1,13 +1,12 @@
-import { UferdigSøknad } from './types/Søknad';
-import moment from 'moment';
-import { Søkerrolle } from './types/Søker';
-import { Arbeidsforholdstype, Tilretteleggingstype } from './types/Tilrettelegging';
+import { UferdigSøknad } from '../types/Søknad';
+import { Arbeidsforholdstype, Tilretteleggingstype } from '../types/Tilrettelegging';
+import { Søkerrolle } from '../types/Søker';
 
 const mockSøknad: UferdigSøknad = {
     harGodkjentVilkår: true,
     harGodkjentOppsummering: false,
     barn: {
-        termindato: moment('2019-04-11T00:00:00.000Z').toDate(),
+        termindato: new Date('2019-04-11T00:00:00.000Z'),
         erBarnetFødt: false
     },
     tilrettelegging: [
@@ -53,7 +52,7 @@ const mockSøknad: UferdigSøknad = {
         andreInntekterSiste10Mnd: [],
         harJobbetSomFrilansSiste10Mnd: true,
         frilansInformasjon: {
-            oppstart: moment('2019-04-21T00:00:00.000Z').toDate(),
+            oppstart: new Date('2019-04-21T00:00:00.000Z'),
             jobberFremdelesSomFrilans: true,
             harJobbetForNærVennEllerFamilieSiste10Mnd: false,
             driverFosterhjem: true
