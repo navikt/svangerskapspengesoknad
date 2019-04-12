@@ -1,22 +1,23 @@
 import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
 import Barn, { UferdigBarn } from './Barn';
 import Søker, { Søkerrolle } from './Søker';
-import Tilrettelegging, { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
+import { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
 import mockSøknad from '../mockSoknad';
+import { TilretteleggingDTO } from './TilretteleggingDTO';
 
 export enum Søknadstype {
     'SVANGERSKAPSPENGER' = 'svangerskapspenger'
 }
 
-interface Søknad {
+interface SøknadDTO {
     type: Søknadstype;
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: Barn;
     vedlegg?: Attachment[];
-    tilrettelegging: Tilrettelegging[];
+    tilrettelegging: TilretteleggingDTO[];
     søker: Søker;
 }
 
@@ -58,4 +59,4 @@ export interface Søknadsgrunnlag {
 
 export type Søknadfeil = FormikErrors<UferdigSøknad>;
 
-export default Søknad;
+export default SøknadDTO;
