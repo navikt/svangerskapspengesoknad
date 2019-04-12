@@ -4,9 +4,9 @@ import {
     ArbeidsforholdSelvstendigDTO,
     ArbeidsforholdVirksomhetDTO
 } from '../../types/TilretteleggingDTO';
-import { mapTilretteleggingerTilDTO } from '../søknadUtils';
 import SøknadUtilsMock from '../../mock/søknadUtils.mock';
 import { Arbeidsforholdstype } from '../../types/Tilrettelegging';
+import { mapTilretteleggingerTilDTO } from '../tilretteleggingUtils';
 
 const mock = SøknadUtilsMock;
 
