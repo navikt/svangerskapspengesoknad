@@ -10,7 +10,7 @@ import { mapTilretteleggingerTilDTO } from '../tilretteleggingUtils';
 
 const mock = SøknadUtilsMock;
 
-describe('søknadUtils', () => {
+describe('tilretteleggingUtils', () => {
     it('deler flere tilrettelegginger for et arbeidsforhold opp i egne tilrettelegginger', () => {
         const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger, '123');
         expect(dto.length).toBe(9);
