@@ -9,16 +9,17 @@ export enum Arbeidsforholdstype {
     'VIRKSOMHET' = 'virksomhet',
     'SELVSTENDIG' = 'selvstendig',
     'FRILANSER' = 'frilanser',
-    'PRIVAT' = 'privat'
+    'ANDRE_INNTEKTER' = 'privat'
 }
 
+export interface TilretteleggingArbeidsforhold {
+    id?: string;
+    type: Arbeidsforholdstype;
+}
 export interface Tilrettelegging {
     id: string;
     behovForTilretteleggingFom: Date;
-    arbeidsforhold: {
-        id?: string;
-        type: Arbeidsforholdstype;
-    };
+    arbeidsforhold: TilretteleggingArbeidsforhold;
     vedlegg: string[];
     helTilrettelegging?: {
         tilrettelagtArbeidFom: Date;
