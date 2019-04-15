@@ -8,16 +8,20 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { dateToHours } from 'app/utils/formatDate';
 
+import Lenke from 'nav-frontend-lenker';
+import { openPdfPreview } from '../util/pdfUtils';
+
 import './kvitteringHeader.less';
 
 interface Props {
     søker: Person;
     mottattDato: string;
+    pdf: string;
 }
 
 const cls = BEMHelper('kvitteringHeader');
 
-const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato }) => {
+const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato, pdf }) => {
     return (
         <div className={cls.block}>
             <Block margin="m">
@@ -34,6 +38,18 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato }) => 
                     />
                 </Sidetittel>
             </Block>
+
+            <Block visible={pdf !== undefined}>
+                <Lenke
+                    href={'#'}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        openPdfPreview(pdf);
+                    }}>
+                    <FormattedMessage id={'søknadSendt.pdf'} />
+                </Lenke>
+            </Block>
+
             <Block>
                 <div className={cls.element('sendtInnTid')}>
                     <EtikettLiten>
