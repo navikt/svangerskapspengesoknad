@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { Formik, FormikProps, Field, FieldProps } from 'formik';
-import { Select as NavSelect } from 'nav-frontend-skjema';
+import { Formik, FormikProps } from 'formik';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import moment from 'moment';
@@ -15,7 +14,6 @@ import CheckboksPanelGruppe from 'app/formik/wrappers/CheckboksPanelGruppe';
 import Block from 'common/components/block/Block';
 import InputField from 'app/formik/wrappers/InputField';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
-import { SelectChangeEvent } from 'app/types/events';
 import getCountries from 'app/utils/getCountries';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
@@ -23,6 +21,7 @@ import { normaliserNæring } from '../utils/normaliser';
 import VarigEndringAvNæringsinntekt from './VarigEndringAvNæringsinntekt';
 import Næringsrelasjon from './Næringsrelasjon';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
+import Select from 'app/formik/wrappers/Select';
 
 const cls = BEMHelper('selvstendig-næringsdrivende');
 
@@ -153,27 +152,19 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         </Block>
 
                         <Block margin="xs" visible={visKomponent.land}>
-                            <Field
+                            <Select
                                 name="registrertILand"
-                                render={({ field, form }: FieldProps<string>) => (
-                                    <NavSelect
-                                        label={getMessage(intl, 'arbeidsforhold.seslvstendig.registrertILand')}
-                                        value={field.value}
-                                        onChange={(e: SelectChangeEvent) => {
-                                            form.setFieldValue(field.name, e.target.value);
-                                        }}>
-                                        <option value="" />
-                                        {countries.map((countryOption: string[]) => {
-                                            const [countryCode, countryName] = countryOption;
-                                            return (
-                                                <option key={countryCode} value={countryCode}>
-                                                    {countryName}
-                                                </option>
-                                            );
-                                        })}
-                                    </NavSelect>
-                                )}
-                            />
+                                label={getMessage(intl, 'arbeidsforhold.seslvstendig.registrertILand')}>
+                                <option value="" />
+                                {countries.map((countryOption: string[]) => {
+                                    const [countryCode, countryName] = countryOption;
+                                    return (
+                                        <option key={countryCode} value={countryCode}>
+                                            {countryName}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
                         </Block>
 
                         <Block visible={visKomponent.orgNr}>
