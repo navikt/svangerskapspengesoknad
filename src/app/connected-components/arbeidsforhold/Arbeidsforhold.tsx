@@ -140,7 +140,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         listName="søker.selvstendigNæringsdrivendeInformasjon"
                         legend={getMessage(intl, 'arbeidsforhold.selvstendig.erSelvstendigNæringsdrivende')}
                         buttonLabel={getMessage(intl, 'leggtil')}
-                        infoboksTekst={getMessage(intl, 'arbeidsforhold.selvstendig.infoboxTekst')}
+                        infoboksTekst={<FormattedHTMLMessage id="arbeidsforhold.selvstendig.infoboxTekst" />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.dineVirksomheter') }}
                         summaryListElementComponent={SelvstendigListElement}
                         formComponent={SelvstendigNæringsdrivende}
