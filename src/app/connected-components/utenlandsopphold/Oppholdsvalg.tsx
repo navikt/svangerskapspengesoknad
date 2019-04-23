@@ -13,6 +13,8 @@ import getMessage from 'common/util/i18nUtils';
 import Select from 'app/formik/wrappers/Select';
 import validateOpphold, { getDatoAvgrensninger } from 'app/utils/validation/validateOpphold';
 import './oppholdsvalg.less';
+import Knapperad from 'common/components/knapperad/Knapperad';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 const cls = BEMHelper('oppholdsvalg');
 
@@ -56,34 +58,40 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                                 {getMessage(intl, `utenlandsopphold.modal.tittel${endre ? '.endre' : ''}`)}
                             </Undertittel>
                         </Block>
-                        <Block margin="none">
-                            <Block margin="xs">
-                                <Select name="land" label={getMessage(intl, 'utenlandsopphold.land.label')}>
-                                    <option value="" />
-                                    {countries.map((countryOption: string[]) => {
-                                        const [countryCode, countryName] = countryOption;
-                                        return (
-                                            <option key={countryCode} value={countryCode}>
-                                                {countryName}
-                                            </option>
-                                        );
-                                    })}
-                                </Select>
-                            </Block>
-                            <Block margin="xs">
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.fom"
-                                    label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
-                                    datoAvgrensinger={datoAvgrensinger.fom}
-                                />
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.tom"
-                                    datoAvgrensinger={datoAvgrensinger.tom}
-                                    label={getMessage(intl, 'utenlandsopphold.land.tilOgMed')}
-                                />
-                            </Block>
+                        <Block>
+                            <Select name="land" label={getMessage(intl, `utenlandsopphold.${type}.land.label`)}>
+                                <option value="" />
+                                {countries.map((countryOption: string[]) => {
+                                    const [countryCode, countryName] = countryOption;
+                                    return (
+                                        <option key={countryCode} value={countryCode}>
+                                            {countryName}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
+                        </Block>
+                        <Block>
+                            <DatoerInputLayout
+                                fra={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.fom"
+                                        label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
+                                        datoAvgrensinger={datoAvgrensinger.fom}
+                                    />
+                                }
+                                til={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.tom"
+                                        datoAvgrensinger={datoAvgrensinger.tom}
+                                        label={getMessage(intl, 'utenlandsopphold.land.tilOgMed')}
+                                    />
+                                }
+                            />
+                        </Block>
+                        <Knapperad stil="mobile-50-50">
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="utenlandsopphold.land.avbryt" />
                             </Knapp>
@@ -92,7 +100,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                                     id={endre ? 'utenlandsopphold.land.endre' : 'utenlandsopphold.land.leggTil'}
                                 />
                             </Hovedknapp>
-                        </Block>
+                        </Knapperad>
                     </form>
                 );
             }}
