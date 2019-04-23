@@ -83,7 +83,8 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
             (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined),
         harHattAnnenInntektSiste10Mnd:
             ((selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length) || 0) > 0 ||
-            harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false,
+            harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false ||
+            harHattAnnenInntektSiste10Mnd !== undefined,
         søknadsgrunnlag:
             harHattAnnenInntektSiste10Mnd !== undefined &&
             (arbeidsforhold.length > 0 ||

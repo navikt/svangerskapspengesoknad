@@ -1,5 +1,5 @@
 import React, { ComponentClass, FunctionComponent, StatelessComponent, useState } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage, InjectedIntl } from 'react-intl';
+import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
 
@@ -115,7 +115,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}
                                     htmlType="button">
-                                    <FormattedMessage id={buttonLabel} />
+                                    {buttonLabel}
                                 </Knapp>
                             </Block>
 
