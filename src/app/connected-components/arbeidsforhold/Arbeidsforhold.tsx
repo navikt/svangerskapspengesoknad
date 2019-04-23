@@ -146,7 +146,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         legend={getMessage(intl, 'arbeidsforhold.selvstendig.erSelvstendigNæringsdrivende')}
                         buttonLabel={getMessage(intl, 'leggtil')}
                         infoboksTekst={getMessage(intl, 'arbeidsforhold.selvstendig.infoboxTekst')}
-                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.dineVirksomheter') }}
+                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.listetittel') }}
                         summaryListElementComponent={SelvstendigListElement}
                         formComponent={SelvstendigNæringsdrivende}
                     />
@@ -159,6 +159,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         legend={getMessage(intl, 'arbeidsforhold.andreInntekter')}
                         buttonLabel={getMessage(intl, 'leggtil')}
                         infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst intl={intl} />}
+                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.andreInntekter.listetittel') }}
                         summaryListElementComponent={AndreInntekterListElement}
                         formComponent={AndreInntekter}
                     />

@@ -104,7 +104,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     renderElement={(element, index: number) => {
                                         return (
                                             <props.summaryListElementComponent
-                                                key={index}
+                                                key={`${listName}-${index}`}
                                                 intl={intl}
                                                 element={element}
                                                 onEdit={openModalForEditing(index)}
