@@ -15,15 +15,16 @@ type Props = VarigEndringAvNæringsinntektProps & InjectedIntlProps;
 const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) => {
     const { values, intl } = props;
 
-    const visKomponent = {
-        dato: values.hattVarigEndringAvNæringsinntektSiste4Kalenderår !== undefined,
-        næringsinntektEtterEndring:
-            values.endringAvNæringsinntektInformasjon !== undefined &&
-            values.endringAvNæringsinntektInformasjon.dato !== undefined,
-        forklaring:
-            values.endringAvNæringsinntektInformasjon !== undefined &&
-            values.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined
-    };
+    const visDato = values.hattVarigEndringAvNæringsinntektSiste4Kalenderår === true;
+    const visNæringsinntektEtterEndring =
+        visDato &&
+        values.endringAvNæringsinntektInformasjon !== undefined &&
+        values.endringAvNæringsinntektInformasjon.dato !== undefined;
+
+    const visForklaring =
+        visNæringsinntektEtterEndring &&
+        values.endringAvNæringsinntektInformasjon !== undefined &&
+        values.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined;
 
     return (
         <>
@@ -32,12 +33,12 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
                     name="hattVarigEndringAvNæringsinntektSiste4Kalenderår"
                     legend={getMessage(
                         intl,
-                        'arbeidsforhold.selvstendig.endingAvNæringsinntektInformasjon.hattVarigEndringAvNæringsinntektSiste4Kalenderår'
+                        'arbeidsforhold.selvstendig.endringAvNæringsinntektInformasjon.hattVarigEndringAvNæringsinntektSiste4Kalenderår'
                     )}
                 />
             </Block>
 
-            <Block visible={visKomponent.dato}>
+            <Block visible={visDato}>
                 <DatoInput
                     fullskjermKalender={true}
                     name="endringAvNæringsinntektInformasjon.dato"
@@ -45,7 +46,7 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
                 />
             </Block>
 
-            <Block visible={visKomponent.næringsinntektEtterEndring}>
+            <Block visible={visNæringsinntektEtterEndring}>
                 <InputField
                     name="endringAvNæringsinntektInformasjon.næringsinntektEtterEndring"
                     label={getMessage(
@@ -56,7 +57,7 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
                 />
             </Block>
 
-            <Block visible={visKomponent.forklaring}>
+            <Block visible={visForklaring}>
                 <InputField
                     name="endringAvNæringsinntektInformasjon.forklaring"
                     label={getMessage(intl, 'arbeidsforhold.selvstendig.endringAvNæringsinntektInformasjon.forklaring')}

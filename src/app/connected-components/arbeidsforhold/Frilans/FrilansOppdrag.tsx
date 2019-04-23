@@ -59,7 +59,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
                         </Block>
 
-                        <Block margin="s">
+                        <Block>
                             <InputField
                                 name="navnPåArbeidsgiver"
                                 label={getMessage(intl, 'arbeidsforhold.frilans.oppdrag.navnPåArbeidsgiver')}
@@ -86,7 +86,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             />
                         </Block>
 
-                        <Knapperad stil="mobile-50-50" align="center">
+                        <Knapperad align="center">
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
                             </Knapp>

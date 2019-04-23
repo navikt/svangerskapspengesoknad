@@ -27,7 +27,7 @@ interface Props {
 
 const initialOpphold = {
     land: '',
-    periode: {}
+    tidsperiode: {}
 };
 
 const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
@@ -73,13 +73,13 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                             <Block margin="xs">
                                 <DatoInput
                                     fullskjermKalender={true}
-                                    name="periode.fom"
+                                    name="tidsperiode.fom"
                                     label={getMessage(intl, 'utenlandsopphold.land.fraOgMed')}
                                     datoAvgrensinger={datoAvgrensinger.fom}
                                 />
                                 <DatoInput
                                     fullskjermKalender={true}
-                                    name="periode.tom"
+                                    name="tidsperiode.tom"
                                     datoAvgrensinger={datoAvgrensinger.tom}
                                     label={getMessage(intl, 'utenlandsopphold.land.tilOgMed')}
                                 />

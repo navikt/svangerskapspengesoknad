@@ -5,7 +5,7 @@ import { AnnenInntekt, AnnenInntektType, JobbIUtlandetInntekt } from 'app/types/
 
 type AnnenInntektFeil = FormikErrors<AnnenInntekt>;
 
-const validateAndreInntekter = () => (annenInntekt: AnnenInntekt): AnnenInntektFeil => {
+const validateAndreInntekter = () => (annenInntekt: Partial<AnnenInntekt>): AnnenInntektFeil => {
     const errors: AnnenInntektFeil = {};
 
     if (annenInntekt.type === undefined || (annenInntekt.type && annenInntekt.type.length === 0)) {

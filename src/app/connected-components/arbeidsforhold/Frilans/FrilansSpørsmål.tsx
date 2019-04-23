@@ -8,7 +8,7 @@ import Block from 'common/components/block/Block';
 import ArbeidSeksjon from '../ArbeidSeksjon/ArbeidSeksjon';
 import FrilansOppdrag from './FrilansOppdrag';
 import { CustomFormikProps } from 'app/types/Formik';
-import { normaliserFrilansinformasjon } from '../utils/normaliser';
+import { cleanupFrilansinformasjon } from '../utils/cleanup';
 import _ from 'lodash';
 import FrilansListElement from './FrilansListElement';
 import InfoBlock from 'common/components/info-block/InfoBlock';
@@ -20,7 +20,7 @@ interface OwnProps {
 type Props = OwnProps & InjectedIntlProps;
 const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
     const { formikProps, intl } = props;
-    const normalisertFrilansinfo = normaliserFrilansinformasjon(formikProps.values.søker);
+    const normalisertFrilansinfo = cleanupFrilansinformasjon(formikProps.values.søker);
 
     const visKomponent = {
         oppstartsdato: formikProps.values.søker.harJobbetSomFrilansSiste10Mnd === true,

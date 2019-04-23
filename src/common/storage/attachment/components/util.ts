@@ -36,10 +36,6 @@ export const getSkjemanummerForAndreInntekter = (annenInntektType: AnnenInntektT
             return Skjemanummer.DOK_MILITÆR_SILVIL_TJENESTE;
         case AnnenInntektType.JOBB_I_UTLANDET:
             return Skjemanummer.INNTEKTSOPPLYSNINGER_FRILANS_ELLER_SELVSTENDIG;
-        case AnnenInntektType.VENTELØNN:
-            return Skjemanummer.ETTERLØNN_ELLER_SLUTTVEDERLAG;
-        case AnnenInntektType.SLUTTPAKKE:
-            return Skjemanummer.ETTERLØNN_ELLER_SLUTTVEDERLAG;
         default:
             return Skjemanummer.ANNET;
     }

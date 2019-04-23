@@ -3,7 +3,6 @@ import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, FormattedMessage }
 import { Formik, FormikProps } from 'formik';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import moment from 'moment';
 import _ from 'lodash';
 import { isValid } from 'i18n-iso-countries';
 
@@ -17,11 +16,13 @@ import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import getCountries from 'app/utils/getCountries';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
-import { normaliserNæring } from '../utils/normaliser';
 import VarigEndringAvNæringsinntekt from './VarigEndringAvNæringsinntekt';
 import Næringsrelasjon from './Næringsrelasjon';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 import Select from 'app/formik/wrappers/Select';
+import validateSelvstendigNæringsdrivende from 'app/utils/validation/validateSelvstendigNæringsdrivende';
+import { visKomponentSelvstendigNæringsdrivende } from '../utils/visibility';
+import { cleanupNæring } from '../utils/cleanup';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import Knapperad from 'common/components/knapperad/Knapperad';
 
@@ -30,79 +31,18 @@ const cls = BEMHelper('selvstendig-næringsdrivende');
 type Props = ModalFormProps<Næring> & InjectedIntlProps;
 const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => {
     const { endre, onCancel, element = { næringstyper: [] }, onAdd, intl } = props;
-
     const countries = useMemo(() => getCountries(true, true, intl), [intl]);
+    const onSubmit = (næring: Næring) => {
+        onAdd(cleanupNæring(næring) as Næring);
+    };
 
     return (
         <Formik
             initialValues={element}
-            // tslint:disable-next-line: no-empty
-            validate={() => {}} // TODO
-            onSubmit={onAdd}
+            validate={validateSelvstendigNæringsdrivende()}
+            onSubmit={onSubmit}
             render={({ handleSubmit, values }: FormikProps<Næring>) => {
-                const normalisertNæring = normaliserNæring(values);
-
-                const {
-                    næringstyper,
-                    navnPåNæringen,
-                    registrertINorge,
-                    organisasjonsnummer,
-                    registrertILand,
-                    tidsperiode = {},
-                    næringsinntekt,
-                    harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene,
-                    oppstartsdato,
-                    harRegnskapsfører,
-                    regnskapsfører,
-                    revisor,
-                    harRevisor,
-                    endringAvNæringsinntektInformasjon,
-                    kanInnhenteOpplsyningerFraRevisor
-                } = normalisertNæring;
-
-                const visKomponent = {
-                    navnPåNæringen: næringstyper !== undefined && næringstyper.length! > 0,
-                    advarselFisker:
-                        næringstyper !== undefined &&
-                        navnPåNæringen !== undefined &&
-                        navnPåNæringen !== '' &&
-                        (næringstyper as Næringstype[]).includes(Næringstype.FISKER),
-                    registrertINorge: navnPåNæringen !== undefined && navnPåNæringen !== '',
-                    land: registrertINorge === false,
-                    orgNr: registrertINorge === true,
-                    tidsperiode:
-                        (registrertINorge === true && organisasjonsnummer !== undefined) ||
-                        registrertILand !== undefined,
-                    varigEndringAvNæringsinntektBolk:
-                        tidsperiode !== undefined &&
-                        tidsperiode.fom !== undefined &&
-                        moment(tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year')),
-                    ...(moment(tidsperiode.fom as Date).isSameOrAfter(moment().subtract(4, 'year')) && {
-                        næringsinntekt: tidsperiode.fom !== undefined,
-                        harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene: næringsinntekt !== undefined,
-                        oppstartsdato: harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === true
-                    }),
-                    harRegnskapsfører:
-                        (oppstartsdato !== undefined && oppstartsdato !== '') ||
-                        (endringAvNæringsinntektInformasjon !== undefined &&
-                            endringAvNæringsinntektInformasjon.forklaring !== undefined &&
-                            endringAvNæringsinntektInformasjon.forklaring !== '') ||
-                        harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === false,
-                    næringsRelasjonRegnskapsfører: normalisertNæring.harRegnskapsfører === true,
-                    harRevisor: harRegnskapsfører === false,
-                    næringsrelasjonRevisor: harRevisor === true,
-                    kanInnhenteOpplsyningerFraRevisor:
-                        revisor !== undefined && revisor.erNærVennEllerFamilie !== undefined,
-                    bliKontaktet:
-                        harRevisor === false ||
-                        kanInnhenteOpplsyningerFraRevisor !== undefined ||
-                        (regnskapsfører !== undefined && regnskapsfører.erNærVennEllerFamilie !== undefined),
-                    formButtons:
-                        harRevisor === false ||
-                        kanInnhenteOpplsyningerFraRevisor !== undefined ||
-                        (regnskapsfører !== undefined && regnskapsfører.erNærVennEllerFamilie !== undefined)
-                } as any;
-
+                const visKomponent = visKomponentSelvstendigNæringsdrivende(values);
                 return (
                     <form
                         className={cls.block}
@@ -127,7 +67,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.navnPåNæringen}>
+                        <Block visible={visKomponent.skalViseNavnPåNæringen}>
                             <InputField
                                 name="navnPåNæringen"
                                 label={getMessage(intl, 'arbeidsforhold.selvstendig.navn')}
@@ -135,7 +75,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.advarselFisker}>
+                        <Block visible={visKomponent.skalViseAdvarselFisker}>
                             <Veilederinfo type="advarsel">
                                 <FormattedHTMLMessage
                                     id="arbeidsforhold.selvstendig.fisker"
@@ -144,7 +84,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             </Veilederinfo>
                         </Block>
 
-                        <Block visible={visKomponent.registrertINorge}>
+                        <Block visible={visKomponent.skalViseRegistrertINorge}>
                             <JaNeiSpørsmål
                                 name="registrertINorge"
                                 legend={getMessage(intl, 'arbeidsforhold.selvstendig.registrertINorge', {
@@ -153,7 +93,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.land}>
+                        <Block visible={visKomponent.skalViseLand}>
                             <Select
                                 name="registrertILand"
                                 label={getMessage(intl, 'arbeidsforhold.seslvstendig.registrertILand')}>
@@ -169,7 +109,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             </Select>
                         </Block>
 
-                        <Block visible={visKomponent.orgNr}>
+                        <Block visible={visKomponent.skalViseOrgNr}>
                             <InputField
                                 name="organisasjonsnummer"
                                 label={getMessage(intl, 'arbeidsforhold.selvstendig.organisasjonsnummer')}
@@ -177,7 +117,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.tidsperiode}>
+                        <Block visible={visKomponent.skalViseTidsperiode}>
                             <DatoerInputLayout
                                 fullbredde={true}
                                 fra={
@@ -201,11 +141,11 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.varigEndringAvNæringsinntektBolk}>
+                        <Block visible={visKomponent.skalVisevarigEndringAvNæringsinntektBolk}>
                             <VarigEndringAvNæringsinntekt values={values} />
                         </Block>
 
-                        <Block visible={visKomponent.næringsinntekt === true}>
+                        <Block visible={visKomponent.skalViseNæringsinntekt}>
                             <InputField
                                 name="næringsinntekt"
                                 label={getMessage(intl, 'arbeidsforhold.selvstendig.næringsinntekt')}
@@ -213,7 +153,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === true}>
+                        <Block visible={visKomponent.skalViseharBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene}>
                             <JaNeiSpørsmål
                                 name="harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene"
                                 legend={getMessage(
@@ -223,7 +163,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.oppstartsdato === true}>
+                        <Block visible={visKomponent.skalViseOppstartsdato}>
                             <DatoInput
                                 fullskjermKalender={true}
                                 name="oppstartsdato"
@@ -231,28 +171,28 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.harRegnskapsfører}>
+                        <Block visible={visKomponent.skalViseHarRegnskapsfører}>
                             <JaNeiSpørsmål
                                 name="harRegnskapsfører"
                                 legend={getMessage(intl, 'arbeidsforhold.selvstendig.harRegnskapsfører')}
                             />
                         </Block>
 
-                        <Block visible={visKomponent.næringsRelasjonRegnskapsfører}>
+                        <Block visible={visKomponent.skalViseNæringsrelasjonRegnskapsfører}>
                             <Næringsrelasjon type="regnskapsfører" values={values} />
                         </Block>
 
-                        <Block visible={visKomponent.harRevisor}>
+                        <Block visible={visKomponent.skalViseRevisor}>
                             <JaNeiSpørsmål
                                 name="harRevisor"
                                 legend={getMessage(intl, 'arbeidsforhold.selvstendig.harRevisor')}
                             />
                         </Block>
-                        <Block visible={visKomponent.næringsrelasjonRevisor}>
+                        <Block visible={visKomponent.skalViseNæringsrelasjonRevisor}>
                             <Næringsrelasjon type="revisor" values={values} />
                         </Block>
 
-                        <Block visible={visKomponent.kanInnhenteOpplsyningerFraRevisor}>
+                        <Block visible={visKomponent.skalViseKanInnhenteOpplysningerFraRevisor}>
                             <JaNeiSpørsmål
                                 name="kanInnhenteOpplsyningerFraRevisor"
                                 legend={getMessage(
@@ -262,19 +202,19 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.bliKontaktet}>
+                        <Block visible={visKomponent.skalViseformButtons}>
                             <Veilederinfo type="advarsel">
                                 <FormattedHTMLMessage id="arbeidsforhold.selvstendig.bliKontaktet" />
                             </Veilederinfo>
                         </Block>
 
-                        <Block visible={visKomponent.formButtons}>
-                            <Knapperad align="center" stil="mobile-50-50">
+                        <Block visible={visKomponent.skalViseformButtons}>
+                            <Knapperad stil="mobile-50-50">
                                 <Knapp htmlType="button" onClick={onCancel}>
                                     <FormattedMessage id="avbryt" />
                                 </Knapp>
                                 <Hovedknapp disabled={!isValid} htmlType="submit">
-                                    <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
+                                    <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
                                 </Hovedknapp>
                             </Knapperad>
                         </Block>
