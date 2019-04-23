@@ -4,7 +4,7 @@ import Block from 'common/components/block/Block';
 import InputField from 'app/formik/wrappers/InputField';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import getMessage from 'common/util/i18nUtils';
-import { Næring } from 'app/types/SelvstendigNæringsdrivende';
+import { Næring, Næringsrelasjon as NæringsrelasjonType } from 'app/types/SelvstendigNæringsdrivende';
 
 interface NæringsrelasjonBolkProps {
     values: Næring;
@@ -15,12 +15,11 @@ type Props = NæringsrelasjonBolkProps & InjectedIntlProps;
 
 const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
     const { values, type, intl } = props;
-    const næringsrelasjon = values[type];
+    const næringsrelasjon: Partial<NæringsrelasjonType> = values[type] || {};
 
-    const visKomponent = {
-        telefonnummer: næringsrelasjon !== undefined && næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '',
-        erNærVennEllerFamilie: næringsrelasjon !== undefined && næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== ''
-    };
+    const skalViseTelefonnummer = næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '';
+    const skalViseErNærVennEllerFamilie =
+        skalViseTelefonnummer && næringsrelasjon.telefonnummer !== undefined && næringsrelasjon.telefonnummer !== '';
 
     return (
         <>
@@ -30,13 +29,13 @@ const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
                     label={getMessage(intl, `arbeidsforhold.selvstendig.næringsrelasjon.${type}.navn`)}
                 />
             </Block>
-            <Block visible={visKomponent.telefonnummer}>
+            <Block visible={skalViseTelefonnummer}>
                 <InputField
                     name={`${type}.telefonnummer`}
                     label={getMessage(intl, `arbeidsforhold.selvstendig.næringsrelasjon.${type}.tlfnr`)}
                 />
             </Block>
-            <Block visible={visKomponent.erNærVennEllerFamilie}>
+            <Block visible={skalViseErNærVennEllerFamilie}>
                 <JaNeiSpørsmål
                     name={`${type}.erNærVennEllerFamilie`}
                     legend={getMessage(intl, `arbeidsforhold.selvstendig.næringsrelasjon.erNærVennEllerFamilie`)}

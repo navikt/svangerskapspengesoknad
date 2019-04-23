@@ -38,13 +38,13 @@ const Termin: FunctionComponent<Props> = (props) => {
                 formikProps={formikProps}
                 onValidFormSubmit={navigate}
                 history={history}>
-                <Block margin="xs">
+                <Block>
                     <DatoInput name="barn.termindato" label={getMessage(intl, 'termin.termindato')} />
                 </Block>
-                <Block margin="m" visible={values.barn.termindato !== undefined}>
+                <Block visible={values.barn.termindato !== undefined}>
                     <JaNeiSpørsmål name="barn.erBarnetFødt" legend={getMessage(intl, 'termin.erBarnetFødt')} />
                 </Block>
-                <Block margin="xs" visible={values.barn.erBarnetFødt === true}>
+                <Block visible={values.barn.erBarnetFødt === true}>
                     <DatoInput
                         name="barn.fødselsdato"
                         label={getMessage(intl, 'termin.fødselsdato')}

@@ -55,12 +55,6 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
             <Block margin="xs">
                 <JaNeiSpørsmål twoColumns={true} name={name} legend={legend} labels={labels} />
             </Block>
-            <Block visible={visLandvelger} margin="xs">
-                <Knapp onClick={openModalForAdding} htmlType="button">
-                    <FormattedMessage id="utenlandsopphold.leggTilLand" />
-                </Knapp>
-            </Block>
-
             <FieldArray
                 name={land}
                 render={({ push, replace, remove }) => {
@@ -85,6 +79,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                 closeButton={true}
                                 isOpen={modalIsOpen}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
+                                shouldCloseOnOverlayClick={false}
                                 onRequestClose={() => toggleModal(false)}>
                                 <Oppholdsvalg
                                     type={type}
@@ -101,6 +96,11 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                     );
                 }}
             />
+            <Block visible={visLandvelger}>
+                <Knapp onClick={openModalForAdding} htmlType="button">
+                    <FormattedMessage id="utenlandsopphold.leggTilLand" />
+                </Knapp>
+            </Block>
         </>
     );
 };

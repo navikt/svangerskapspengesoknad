@@ -26,13 +26,13 @@ interface Props {
 }
 
 const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
-    const { mottattDato, saksNr } = getData(kvittering, {});
+    const { mottattDato, pdf, saksNr } = getData(kvittering, {});
     const { søker } = getData(søkerinfo, {});
 
     return (
         <Applikasjonsside visTittel={true}>
             <div className={cls.block}>
-                <KvitteringHeader søker={søker} mottattDato={mottattDato} />
+                <KvitteringHeader søker={søker} mottattDato={mottattDato} pdf={pdf} />
 
                 <KvitteringSuksess />
 

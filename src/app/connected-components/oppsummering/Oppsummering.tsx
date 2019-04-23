@@ -54,7 +54,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
     );
 
     const sendSøknad = () => {
-        const ferdigSøknad = processUtfyltSøknad(values, vedlegg);
+        const ferdigSøknad = processUtfyltSøknad(søkerinfo!.søker.fnr, values, vedlegg);
         if (ferdigSøknad) {
             requestSendSøknad(ferdigSøknad);
         }

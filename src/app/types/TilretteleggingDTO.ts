@@ -1,24 +1,40 @@
 import { Tilretteleggingstype, Arbeidsforholdstype } from './Tilrettelegging';
 
-interface ArbeidsforholdFrilansDTO {
-    type: Arbeidsforholdstype;
+export interface ArbeidsforholdFrilansDTO {
+    type: Arbeidsforholdstype.FRILANSER;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }
 
-interface ArbeidsforholdPrivatDTO {
-    type: Arbeidsforholdstype;
-    fnr: string;
+export interface ArbeidsforholdSelvstendigDTO {
+    type: Arbeidsforholdstype.SELVSTENDIG;
+    id: string;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }
 
-interface ArbeidsforholdVirksomhetDTO {
-    type: Arbeidsforholdstype;
-    orgnr: string;
+export interface ArbeidsforholdPrivatDTO {
+    type: Arbeidsforholdstype.ANDRE_INNTEKTER;
+    id: string;
+    risikoFaktorer?: string;
+    tilretteleggingstiltak?: string;
 }
 
-type ArbeidsforholdDTO = ArbeidsforholdFrilansDTO | ArbeidsforholdPrivatDTO | ArbeidsforholdVirksomhetDTO;
+export interface ArbeidsforholdVirksomhetDTO {
+    type: Arbeidsforholdstype.VIRKSOMHET;
+    id: string;
+}
+export const isArbeidsforholdVirksomhetDTO = (
+    arbeidsforhold: ArbeidsforholdDTO
+): arbeidsforhold is ArbeidsforholdVirksomhetDTO => {
+    return arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET;
+};
+
+export type ArbeidsforholdDTO =
+    | ArbeidsforholdFrilansDTO
+    | ArbeidsforholdSelvstendigDTO
+    | ArbeidsforholdVirksomhetDTO
+    | ArbeidsforholdPrivatDTO;
 
 interface TilretteleggingDTOBase {
     type: Tilretteleggingstype;

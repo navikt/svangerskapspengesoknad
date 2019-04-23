@@ -67,9 +67,9 @@ const virksomhetTilrettelegging: UferdigTilrettelegging = {
 };
 
 const tilrettelegginger: UferdigTilrettelegging[] = [
+    virksomhetTilrettelegging,
     selvstendigTilrettelegging,
-    frilansTilrettelegging,
-    virksomhetTilrettelegging
+    frilansTilrettelegging
 ];
 
 const uferdigSøknad: UferdigSøknad = {

@@ -14,14 +14,14 @@ export const mapArbeidsToSøknadsgrunnlag = (søker: Partial<Søker>, arbeidsfor
             type: Arbeidsforholdstype.VIRKSOMHET
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring: Næring) => ({
-            value: næring.navnPåNæringen,
+            value: næring.organisasjonsnummer,
             label: næring.navnPåNæringen,
             type: Arbeidsforholdstype.SELVSTENDIG
         })),
         ...andreInntekterSiste10Mnd.map((annenInntekt: AnnenInntekt) => ({
             value: annenInntekt.type,
             label: annenInntekt.type,
-            type: Arbeidsforholdstype.PRIVAT
+            type: Arbeidsforholdstype.ANDRE_INNTEKTER
         })),
         ...(frilansInformasjon !== undefined
             ? [
