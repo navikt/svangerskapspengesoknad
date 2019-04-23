@@ -47,7 +47,7 @@ describe('tilretteleggingUtils', () => {
                 .arbeidsforhold as ArbeidsforholdVirksomhetDTO;
             expect(arbeidsforhold).toBeDefined();
             expect(arbeidsforhold.type).toBe(Arbeidsforholdstype.VIRKSOMHET);
-            expect(arbeidsforhold.orgnr).toBeDefined();
+            expect(arbeidsforhold.id).toBeDefined();
         });
 
         it('for frilans', () => {
@@ -63,7 +63,7 @@ describe('tilretteleggingUtils', () => {
                 .arbeidsforhold as ArbeidsforholdSelvstendigDTO;
             expect(arbeidsforhold).toBeDefined();
             expect(arbeidsforhold.type).toBe(Arbeidsforholdstype.SELVSTENDIG);
-            expect(arbeidsforhold.fnr).toBeDefined();
+            expect(arbeidsforhold.id).toBeDefined();
             expect(arbeidsforhold.risikoFaktorer).toBeDefined();
             expect(arbeidsforhold.tilretteleggingstiltak).toBeDefined();
         });
