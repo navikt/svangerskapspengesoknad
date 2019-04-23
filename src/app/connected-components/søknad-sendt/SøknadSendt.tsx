@@ -51,9 +51,9 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
                                 <FormattedMessage id="søknadSendt.foreldrepenger.boks.tittel" />
                             </Undertittel>
                         </Block>
-                        <div className="margin-s">
+                        <Block margin="xs">
                             <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
-                        </div>
+                        </Block>
                         <Lenke href="#" target="_blank">
                             <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
                         </Lenke>

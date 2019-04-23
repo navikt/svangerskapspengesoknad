@@ -67,18 +67,18 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                     {(tilrett.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
                         tilrett.arbeidsforhold.type === Arbeidsforholdstype.SELVSTENDIG) && (
                         <>
-                            <div className="margin-s">
+                            <Block margin="xs">
                                 <OppsummeringBeskrivelse
                                     label="Farer for å skade det ufødte barnet:"
                                     innhold={tilrett.risikoFaktorer || ''}
                                 />
-                            </div>
-                            <div className="margin-s">
+                            </Block>
+                            <Block margin="xs">
                                 <OppsummeringBeskrivelse
                                     label="Hvordan du kan jobbe annerledes:"
                                     innhold={tilrett.tilretteleggingstiltak || ''}
                                 />
-                            </div>
+                            </Block>
                         </>
                     )}
                 </div>
