@@ -15,8 +15,8 @@ export class Næring {
     navnPåNæringen: string;
     organisasjonsnummer: string;
     registrertINorge: boolean;
-    registrertILand: string;
-    stillingsprosent: string;
+    registrertILand?: string;
+    stillingsprosent?: string;
     harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene?: boolean;
     oppstartsdato?: string;
     hattVarigEndringAvNæringsinntektSiste4Kalenderår?: boolean;

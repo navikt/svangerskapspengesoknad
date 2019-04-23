@@ -46,14 +46,14 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
 
                 <Block>
                     <Panel className={cls.element('foreldrepengerPanel')}>
-                        <div className="point5remMargin">
+                        <Block margin="xxs">
                             <Undertittel>
                                 <FormattedMessage id="søknadSendt.foreldrepenger.boks.tittel" />
                             </Undertittel>
-                        </div>
-                        <div className="oneremMargin">
+                        </Block>
+                        <Block margin="xs">
                             <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
-                        </div>
+                        </Block>
                         <Lenke href="#" target="_blank">
                             <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
                         </Lenke>

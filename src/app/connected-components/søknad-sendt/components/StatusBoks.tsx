@@ -17,19 +17,19 @@ interface Props {
 const StatusBoks: FunctionComponent<Props> = ({ saksNr }) => {
     return (
         <Block>
-            <div className="oneremMargin">
+            <Block margin="xs">
                 <Systemtittel>
                     <FormattedMessage id="søknadSendt.status.tittel" />
                 </Systemtittel>
-            </div>
+            </Block>
             <Lenkepanelbase href="#" border={true} className="statusBoks__lenkepanel" tittelProps="ingress">
                 <div className={cls.block}>
                     <div className={cls.element('left')}>
-                        <div className="oneremMargin">
+                        <Block margin="xs">
                             <Undertittel>
                                 <FormattedMessage id="søknadSendt.status.undertittel" />
                             </Undertittel>
-                        </div>
+                        </Block>
                         <EtikettBase type="fokus">
                             <FormattedMessage id="søknadSendt.status.status" />
                         </EtikettBase>

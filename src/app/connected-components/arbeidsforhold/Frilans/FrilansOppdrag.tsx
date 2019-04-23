@@ -30,15 +30,7 @@ export interface ModalFormProps {
 
 type Props = ModalFormProps & InjectedIntlProps;
 const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
-    const {
-        endre,
-        onCancel,
-        element = {
-            næringstyper: []
-        },
-        onAdd,
-        intl
-    } = props;
+    const { endre, onCancel, element = {}, onAdd, intl } = props;
 
     return (
         <Formik

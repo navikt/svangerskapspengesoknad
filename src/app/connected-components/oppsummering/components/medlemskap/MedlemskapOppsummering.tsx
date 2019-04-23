@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+import Block from 'common/components/block/Block';
 
 interface Props {
     iNorgeNeste12Mnd: boolean;
@@ -9,16 +10,7 @@ interface Props {
 const MedlemskapOppsummering: FunctionComponent<Props> = ({ iNorgeNeste12Mnd, iNorgeSiste12Mnd }) => {
     return (
         <>
-            <div className="point5remMargin">
-                <FormattedMessage
-                    id={
-                        iNorgeNeste12Mnd
-                            ? 'oppsummering.medlemskap.senereOpphold.ja'
-                            : 'oppsummering.medlemskap.senereOpphold.nei'
-                    }
-                />
-            </div>
-            <div className="point5remMargin">
+            <Block margin="xxs">
                 <FormattedMessage
                     id={
                         iNorgeSiste12Mnd
@@ -26,7 +18,16 @@ const MedlemskapOppsummering: FunctionComponent<Props> = ({ iNorgeNeste12Mnd, iN
                             : 'oppsummering.medlemskap.tidligereOpphold.nei'
                     }
                 />
-            </div>
+            </Block>
+            <Block margin="xxs">
+                <FormattedMessage
+                    id={
+                        iNorgeNeste12Mnd
+                            ? 'oppsummering.medlemskap.senereOpphold.ja'
+                            : 'oppsummering.medlemskap.senereOpphold.nei'
+                    }
+                />
+            </Block>
         </>
     );
 };
