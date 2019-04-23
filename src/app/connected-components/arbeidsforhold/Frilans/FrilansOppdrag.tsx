@@ -13,6 +13,7 @@ import getMessage from 'common/util/i18nUtils';
 import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Undertittel } from 'nav-frontend-typografi';
+import Knapperad from 'common/components/knapperad/Knapperad';
 
 import './frilansOppdrag.less';
 
@@ -57,7 +58,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
                         </Block>
 
-                        <Block margin="xxs">
+                        <Block margin="s">
                             <InputField
                                 name="navnPåArbeidsgiver"
                                 label={getMessage(intl, 'arbeidsforhold.frilans.oppdrag.navnPåArbeidsgiver')}
@@ -65,7 +66,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             />
                         </Block>
 
-                        <Block margin="xxs">
+                        <Block>
                             <div className={cls.element('datoer')}>
                                 <DatoInput
                                     fullskjermKalender={true}
@@ -80,14 +81,14 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             </div>
                         </Block>
 
-                        <div className={cls.element('knapper')}>
+                        <Knapperad style="mobile-50-50" align="center">
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
                             </Knapp>
                             <Hovedknapp disabled={!isValid} htmlType="submit">
                                 <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
                             </Hovedknapp>
-                        </div>
+                        </Knapperad>
                     </form>
                 );
             }}

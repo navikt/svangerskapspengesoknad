@@ -92,7 +92,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                 render={({ push, replace, remove }) => {
                     return (
                         <>
-                            <Block margin="xs" visible={elementer.length > 0} header={summaryListTitle}>
+                            <Block margin="none" marginTop="s" visible={elementer.length > 0} header={summaryListTitle}>
                                 <List
                                     data={elementer}
                                     renderElement={(element, index: number) => {
@@ -110,7 +110,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     }}
                                 />
                             </Block>
-                            <Block visible={visLandvelger} marginTop="xs" margin="none">
+                            <Block visible={visLandvelger} margin="none" marginTop="s">
                                 <Knapp
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}
@@ -118,6 +118,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     <FormattedMessage id={buttonLabel} />
                                 </Knapp>
                             </Block>
+
                             <Modal
                                 closeButton={true}
                                 isOpen={modalIsOpen}
