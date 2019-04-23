@@ -8,21 +8,21 @@ export interface ArbeidsforholdFrilansDTO {
 
 export interface ArbeidsforholdSelvstendigDTO {
     type: Arbeidsforholdstype.SELVSTENDIG;
-    fnr: string;
+    id: string;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }
 
 export interface ArbeidsforholdPrivatDTO {
     type: Arbeidsforholdstype.ANDRE_INNTEKTER;
-    fnr: string;
+    id: string;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }
 
 export interface ArbeidsforholdVirksomhetDTO {
     type: Arbeidsforholdstype.VIRKSOMHET;
-    orgnr: string;
+    id: string;
 }
 export const isArbeidsforholdVirksomhetDTO = (
     arbeidsforhold: ArbeidsforholdDTO
