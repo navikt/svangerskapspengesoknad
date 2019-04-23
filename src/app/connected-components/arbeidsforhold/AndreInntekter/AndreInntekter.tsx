@@ -25,6 +25,7 @@ import { State } from 'app/redux/store';
 import validateAndreInntekter from 'app/utils/validation/validateAndreInntekter';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import Select from 'app/formik/wrappers/Select';
+import { cleanupAnnenInntekt } from '../utils/cleanup';
 
 const cls = BEMHelper('andre-inntekter');
 
@@ -50,12 +51,15 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
     } = props;
 
     const countries = useMemo(() => getCountries(true, false, intl), [intl]);
+    const onSubmit = (annenInntekt: AnnenInntekt) => {
+        onAdd(cleanupAnnenInntekt(annenInntekt) as AnnenInntekt);
+    };
 
     return (
         <Formik
             initialValues={element}
             validate={validateAndreInntekter()}
-            onSubmit={onAdd}
+            onSubmit={onSubmit}
             render={({ values, handleSubmit, errors }: FormikProps<AnnenInntekt>) => {
                 const visKomponent = {
                     navn: values.type === AnnenInntektType.JOBB_I_UTLANDET,

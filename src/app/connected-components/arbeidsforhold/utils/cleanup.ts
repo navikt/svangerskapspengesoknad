@@ -1,11 +1,12 @@
 import { Søker } from 'app/types/Søker';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { FrilansInformasjon } from 'app/types/FrilansInformasjon';
 import { DeepPartial } from 'redux';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
-import moment from 'moment';
+import * as moment from 'moment';
+import { AnnenInntekt, AnnenInntektType } from 'app/types/AnnenInntekt';
 
-export const normaliserFrilansinformasjon = (søker: Partial<Søker>): DeepPartial<FrilansInformasjon> => {
+export const cleanupFrilansinformasjon = (søker: Partial<Søker>): DeepPartial<FrilansInformasjon> => {
     const { harJobbetSomFrilansSiste10Mnd, frilansInformasjon } = søker;
 
     let relevanteFeilter: string[] = [];
@@ -25,7 +26,7 @@ export const normaliserFrilansinformasjon = (søker: Partial<Søker>): DeepParti
     return _.pick(frilansInformasjon, relevanteFeilter);
 };
 
-export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Næring> => {
+export const cleanupNæring = (næring: Partial<Næring>): DeepPartial<Næring> => {
     const relevanteFeilter: string[] = [
         'næringstyper',
         'navnPåNæringen',
@@ -41,7 +42,9 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
         ? relevanteFeilter.push('organisasjonsnummer')
         : relevanteFeilter.push('registrertILand');
 
-    næring.tidsperiode && moment(næring.tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year'))
+    næring.tidsperiode &&
+    næring.tidsperiode.fom !== undefined &&
+    moment(næring.tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year'))
         ? relevanteFeilter.push('endringAvNæringsinntektInformasjon')
         : relevanteFeilter.push(
               'næringsinntekt',
@@ -57,7 +60,7 @@ export const normaliserNæring = (næring: Partial<Næring>): DeepPartial<Nærin
     return _.pick(næring, relevanteFeilter);
 };
 
-export const normaliserSøker = (søker: Partial<Søker>) => {
+export const cleanupSøker = (søker: Partial<Søker>) => {
     const relevanteFeilter: string[] = [
         'rolle',
         'harJobbetSomFrilansSiste10Mnd',
@@ -74,8 +77,13 @@ export const normaliserSøker = (søker: Partial<Søker>) => {
     }
 
     if (søker.harHattAnnenInntektSiste10Mnd) {
-        relevanteFeilter.push('andreINntekterSiste10Mnd');
+        relevanteFeilter.push('andreInntekterSiste10Mnd');
     }
 
     return _.pick(søker, relevanteFeilter);
+};
+
+export const cleanupAnnenInntekt = (annenInntekt: Partial<AnnenInntekt>): AnnenInntekt => {
+    annenInntekt.vedlegg = annenInntekt.type === AnnenInntektType.MILITÆRTJENESTE ? annenInntekt.vedlegg : [];
+    return annenInntekt as AnnenInntekt;
 };

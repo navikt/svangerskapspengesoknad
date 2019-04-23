@@ -20,7 +20,7 @@ const RadioPanelGruppe: FunctionComponent<Props & InjectedIntlProps> = (props) =
             name={radioPanelGruppeProps.name}
             type="string"
             render={({ field, form }: FieldProps) => {
-                const feilmelding = get(form.errors, name);
+                const feilmelding = get(form.errors, radioPanelGruppeProps.name);
                 const feil =
                     feilmelding && form.submitCount > 0
                         ? {

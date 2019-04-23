@@ -29,8 +29,9 @@ import { navigateTo } from 'app/utils/navigationUtils';
 
 import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
 import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
-import { normaliserSøker } from './utils/normaliser';
+import { cleanupSøker } from './utils/cleanup';
 import { mapArbeidsToSøknadsgrunnlag } from './utils/søknadsgrunnlagMapper';
+import Søker from 'app/types/Søker';
 
 import './arbeidsforhold.less';
 
@@ -54,6 +55,36 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
     const harValgtMinstEttGrunnlag: boolean = søknadsgrunnlag.length > 0;
 
+    const {
+        harJobbetSomFrilansSiste10Mnd,
+        frilansInformasjon,
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd,
+        selvstendigNæringsdrivendeInformasjon,
+        harHattAnnenInntektSiste10Mnd,
+        andreInntekterSiste10Mnd = []
+    } = cleanupSøker(søker);
+
+    const visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon =
+        harJobbetSomFrilansSiste10Mnd === false ||
+        (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined);
+
+    const visharHattAnnenInntektSiste10MndSeksjon =
+        (visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon &&
+            ((selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length) || 0) > 0) ||
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false;
+
+    const visSøknadnsgrunnlagValg =
+        visharHattAnnenInntektSiste10MndSeksjon &&
+        ((harHattAnnenInntektSiste10Mnd === true && andreInntekterSiste10Mnd.length > 0) ||
+            harHattAnnenInntektSiste10Mnd === false) &&
+        mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold).length > 0;
+
+    const visIngenArbeidsforholdVeileder =
+        arbeidsforhold.length === 0 &&
+        harJobbetSomFrilansSiste10Mnd === false &&
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
+        harHattAnnenInntektSiste10Mnd === false;
+
     const prepareTilrettelegging = () => {
         setFieldValue(
             'tilrettelegging',
@@ -61,41 +92,15 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         );
     };
 
-    const navigate = () => {
-        prepareTilrettelegging();
-
-        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id);
-        navigateTo(pathToFirstTilrettelegging, history);
+    const cleanupArbeidsforhold = () => {
+        setFieldValue('søker', cleanupSøker(søker));
     };
 
-    const {
-        harJobbetSomFrilansSiste10Mnd,
-        frilansInformasjon,
-        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd,
-        selvstendigNæringsdrivendeInformasjon,
-        harHattAnnenInntektSiste10Mnd,
-        andreInntekterSiste10Mnd
-    } = normaliserSøker(søker);
-
-    const visKomponent = {
-        harJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon:
-            harJobbetSomFrilansSiste10Mnd === false ||
-            (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined),
-        harHattAnnenInntektSiste10Mnd:
-            ((selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length) || 0) > 0 ||
-            harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false,
-        søknadsgrunnlag:
-            harHattAnnenInntektSiste10Mnd !== undefined &&
-            (arbeidsforhold.length > 0 ||
-                (selvstendigNæringsdrivendeInformasjon !== undefined &&
-                    (selvstendigNæringsdrivendeInformasjon.length || 0) > 0) ||
-                (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined) ||
-                ((andreInntekterSiste10Mnd !== undefined && andreInntekterSiste10Mnd.length) || 0) > 0),
-        ingenArbeidsforholdVeileder:
-            arbeidsforhold.length === 0 &&
-            harJobbetSomFrilansSiste10Mnd === false &&
-            harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
-            harHattAnnenInntektSiste10Mnd === false
+    const navigate = () => {
+        cleanupArbeidsforhold();
+        prepareTilrettelegging();
+        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id);
+        navigateTo(pathToFirstTilrettelegging, history);
     };
 
     return (
@@ -133,7 +138,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
                 <FrilansSpørsmål formikProps={formikProps} />
 
-                <Block visible={visKomponent.harJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
+                <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
                     <Arbeidsforholdseksjon
                         name="søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd"
                         listName="søker.selvstendigNæringsdrivendeInformasjon"
@@ -146,7 +151,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     />
                 </Block>
 
-                <Block visible={visKomponent.harHattAnnenInntektSiste10Mnd}>
+                <Block visible={visharHattAnnenInntektSiste10MndSeksjon}>
                     <Arbeidsforholdseksjon
                         name="søker.harHattAnnenInntektSiste10Mnd"
                         listName="søker.andreInntekterSiste10Mnd"
@@ -158,14 +163,14 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     />
                 </Block>
 
-                <Block visible={visKomponent.søknadsgrunnlag} margin="l">
+                <Block visible={visSøknadnsgrunnlagValg} margin="l">
                     <VelgSøknadsgrunnlag
                         name="søknadsgrunnlag"
                         label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
-                        options={mapArbeidsToSøknadsgrunnlag(values.søker, arbeidsforhold)}
+                        options={mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold)}
                     />
                 </Block>
-                <Block visible={visKomponent.ingenArbeidsforholdVeileder}>
+                <Block visible={visIngenArbeidsforholdVeileder}>
                     <Veilederinfo type="advarsel">
                         <FormattedHTMLMessage id="arbeidsforhold.veileder.ingenArbeidsforhold" />
                     </Veilederinfo>

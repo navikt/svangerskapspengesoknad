@@ -13,6 +13,8 @@ import List from 'common/components/list/List';
 import { UferdigSøknad } from 'app/types/Søknad';
 import BEMHelper from 'common/util/bem';
 
+import { AnnenInntekt } from 'app/types/AnnenInntekt';
+import { Næring } from 'app/types/SelvstendigNæringsdrivende';
 import './arbeidSeksjon.less';
 
 export interface ModalFormProps<T> {
@@ -56,7 +58,7 @@ const cls = BEMHelper('arbeidSeksjon');
 
 const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
     const { formik, name, listName, legend, labels, buttonLabel, summaryListTitle, infoboksTekst, intl } = props;
-    const visLandvelger = get(formik.values, name) === true;
+    const visLeggTilKnapp = get(formik.values, name) === true;
 
     const elementer: any[] = get(formik.values, listName, []);
 
@@ -91,8 +93,11 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                 name={listName}
                 render={({ push, replace, remove }) => {
                     return (
-                        <>
-                            <Block margin="xs" visible={elementer.length > 0} header={summaryListTitle}>
+                        <div className={cls.block}>
+                            <Block
+                                margin="xs"
+                                visible={elementer.length > 0 && visLeggTilKnapp}
+                                header={summaryListTitle}>
                                 <List
                                     data={elementer}
                                     renderElement={(element, index: number) => {
@@ -110,7 +115,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     }}
                                 />
                             </Block>
-                            <Block visible={visLandvelger} marginTop="xs" margin="none">
+                            <Block visible={visLeggTilKnapp} marginTop="xs" margin="none">
                                 <Knapp
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}
@@ -127,13 +132,13 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     endre={endre}
                                     element={endre ? elementer[currentIndex] : undefined}
                                     onCancel={() => toggleModal(false)}
-                                    onAdd={(arbeidsforhold: any) => {
+                                    onAdd={(arbeidsforhold: Næring | AnnenInntekt) => {
                                         endre ? replace(currentIndex, arbeidsforhold) : push(arbeidsforhold);
                                         toggleModal(false);
                                     }}
                                 />
                             </Modal>
-                        </>
+                        </div>
                     );
                 }}
             />

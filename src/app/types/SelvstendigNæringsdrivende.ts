@@ -10,7 +10,7 @@ export enum Næringstype {
 export class Næring {
     næringstyper: Næringstype[];
     tidsperiode: Partial<TidsperiodeMedValgfriSluttdato>;
-    næringsinntekt: number;
+    næringsinntekt: string;
     pågående: boolean;
     navnPåNæringen: string;
     organisasjonsnummer: string;
@@ -22,10 +22,10 @@ export class Næring {
     hattVarigEndringAvNæringsinntektSiste4Kalenderår?: boolean;
     endringAvNæringsinntektInformasjon?: EndringAvNæringsinntektInformasjon;
     harRegnskapsfører: boolean;
-    regnskapsfører: Næringsrelasjon;
+    regnskapsfører?: Næringsrelasjon;
     harRevisor: boolean;
-    revisor: Næringsrelasjon;
-    kanInnhenteOpplsyningerFraRevisor: boolean;
+    revisor?: Næringsrelasjon;
+    kanInnhenteOpplsyningerFraRevisor?: boolean;
 }
 
 export class EndringAvNæringsinntektInformasjon {
@@ -39,7 +39,3 @@ export class Næringsrelasjon {
     telefonnummer: string;
     erNærVennEllerFamilie: boolean;
 }
-
-export type NæringPartial = Partial<Næring>;
-export type EndringAvNæringsinntektInformasjonPartial = Partial<EndringAvNæringsinntektInformasjon>;
-export type NæringsrelasjonPartial = Partial<Næringsrelasjon>;

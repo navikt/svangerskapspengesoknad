@@ -14,7 +14,7 @@ export const mapArbeidsToSøknadsgrunnlag = (søker: Partial<Søker>, arbeidsfor
             type: Arbeidsforholdstype.VIRKSOMHET
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring: Næring) => ({
-            value: næring.navnPåNæringen,
+            value: næring.organisasjonsnummer,
             label: næring.navnPåNæringen,
             type: Arbeidsforholdstype.SELVSTENDIG
         })),
