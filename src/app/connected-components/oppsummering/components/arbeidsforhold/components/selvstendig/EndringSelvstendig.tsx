@@ -6,15 +6,18 @@ import BEMHelper from 'common/util/bem';
 
 import './endringSelvstendig.less';
 import OppsummeringBeskrivelse from '../../../OppsummeringBeskrivelse';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
+import Block from 'common/components/block/Block';
+import getMessage from 'common/util/i18nUtils';
 
 interface Props {
     endringAvNæringsinntektInformasjon: EndringAvNæringsinntektInformasjon;
+    intl: InjectedIntl;
 }
 
 const cls = BEMHelper('endringSelvstendig');
 
-const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntektInformasjon }) => {
+const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntektInformasjon, intl }) => {
     return (
         <div className={cls.block}>
             <div>
@@ -22,19 +25,19 @@ const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntekt
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.endring" />
                 </Element>
             </div>
-            <div className="margin-xs">{moment(endringAvNæringsinntektInformasjon.dato).format('DD.MM.YYYY')}</div>
-            <div className="margin-xs">
+            <Block margin="xxs">{moment(endringAvNæringsinntektInformasjon.dato).format('DD.MM.YYYY')}</Block>
+            <Block margin="xxs">
                 <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.etterEndring" />{' '}
                 {endringAvNæringsinntektInformasjon.næringsinntektEtterEndring}
-            </div>
-            <div className="margin-xs">
+            </Block>
+            <Block margin="xxs">
                 <OppsummeringBeskrivelse
-                    label="Beskrivelse av endring:"
+                    label={getMessage(intl, 'oppsummering.arbeidsforhold.svar.selvstendig.beskrivelseAvEndring')}
                     innhold={endringAvNæringsinntektInformasjon.forklaring}
                 />
-            </div>
+            </Block>
         </div>
     );
 };
 
-export default EndringSelvstendig;
+export default injectIntl(EndringSelvstendig);

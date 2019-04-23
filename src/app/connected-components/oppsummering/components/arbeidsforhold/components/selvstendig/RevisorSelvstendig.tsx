@@ -5,6 +5,7 @@ import { Næringsrelasjon } from 'app/types/SelvstendigNæringsdrivende';
 
 import './revisorSelvstendig.less';
 import { FormattedMessage } from 'react-intl';
+import Block from 'common/components/block/Block';
 
 const cls = BEMHelper('revisorSelvstendig');
 
@@ -20,25 +21,25 @@ const RevisorSelvstendig: FunctionComponent<Props> = ({ revisor }) => {
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.revisor" />
                 </Element>
             </div>
-            <div className="margin-xs">
+            <Block margin="xxs">
                 <FormattedMessage
                     id="oppsummering.arbeidsforhold.svar.selvstendig.revisor.navn"
                     values={{ navn: revisor.navn }}
                 />
-            </div>
-            <div className="margin-xs">
+            </Block>
+            <Block margin="xxs">
                 <FormattedMessage
                     id="oppsummering.arbeidsforhold.svar.selvstendig.revisor.tlf"
                     values={{ telefon: revisor.telefonnummer }}
                 />
-            </div>
-            <div className="margin-xs">
+            </Block>
+            <Block margin="xxs">
                 {revisor.erNærVennEllerFamilie ? (
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.revisor.vennEllerFamilie" />
                 ) : (
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.revisor.ikkeVennEllerFamilie" />
                 )}
-            </div>
+            </Block>
         </div>
     );
 };

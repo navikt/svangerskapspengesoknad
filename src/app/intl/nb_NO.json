@@ -168,6 +168,7 @@
     "oppsummering.arbeidsforhold.svar.selvstendig": "jobbet som selvstendig næringsdrivende de siste ti månedene",
     "oppsummering.arbeidsforhold.svar.selvstendig.orgnr": "Org.nr:",
     "oppsummering.arbeidsforhold.svar.selvstendig.endring": "Endring",
+    "oppsummering.arbeidsforhold.svar.selvstendig.beskrivelseAvEndring": "Beskrivelse av endring:",
     "oppsummering.arbeidsforhold.svar.selvstendig.etterEndring": "Næringsinntekt etter endring:",
     "oppsummering.arbeidsforhold.svar.selvstendig.revisor": "Revisor",
     "oppsummering.arbeidsforhold.svar.selvstendig.revisor.navn": "Navn: {navn}",

@@ -10,6 +10,7 @@ import { getArbeidsforholdNavnFromId } from 'app/utils/arbeidsforholdUtils';
 import { guid } from 'nav-frontend-js-utils';
 import { FormattedHTMLMessage } from 'react-intl';
 import OppsummeringBeskrivelse from '../OppsummeringBeskrivelse';
+import Block from 'common/components/block/Block';
 
 const cls = BEMHelper('tilretteleggingOppsummering');
 
@@ -26,7 +27,7 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                     <EtikettLiten>
                         {getArbeidsforholdNavnFromId(tilrett.arbeidsforhold.id, arbeidsforhold) || tilrett.id}
                     </EtikettLiten>
-                    <div className="margin-xs">
+                    <Block margin="xxs">
                         {tilrett.type.includes(Tilretteleggingstype.HEL) && (
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.jobbeFullt"
@@ -37,8 +38,8 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                                 }}
                             />
                         )}
-                    </div>
-                    <div className="margin-xs">
+                    </Block>
+                    <Block margin="xxs">
                         {tilrett.type.includes(Tilretteleggingstype.DELVIS) && (
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.jobbeDelvis"
@@ -50,8 +51,8 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                                 }}
                             />
                         )}
-                    </div>
-                    <div className="margin-xs">
+                    </Block>
+                    <Block margin="xxs">
                         {tilrett.type.includes(Tilretteleggingstype.INGEN) && (
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.ikkeJobbe"
@@ -62,7 +63,7 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                                 }}
                             />
                         )}
-                    </div>
+                    </Block>
                     {(tilrett.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
                         tilrett.arbeidsforhold.type === Arbeidsforholdstype.SELVSTENDIG) && (
                         <>

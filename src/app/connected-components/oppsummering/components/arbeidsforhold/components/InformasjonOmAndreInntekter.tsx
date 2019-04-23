@@ -13,9 +13,9 @@ const InformasjonOmAndreInntekter: FunctionComponent<Props> = ({ annenInntekt })
     return (
         <Block margin="xxs">
             <div className="grayInfoBox">
-                <div className="margin-xs">
+                <Block margin="xxs">
                     <Element>{annenInntekt.type}</Element>
-                </div>
+                </Block>
                 <div>
                     {moment(annenInntekt.tidsperiode.fom).format('DD.MM.YYYY')} -{' '}
                     {annenInntekt.pågående ? (

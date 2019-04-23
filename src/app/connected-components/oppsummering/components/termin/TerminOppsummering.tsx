@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+import Block from 'common/components/block/Block';
 
 interface Props {
     etternavn: string;
@@ -10,22 +11,22 @@ interface Props {
 const TerminOppsummering: FunctionComponent<Props> = ({ fornavn, etternavn, fnr }) => {
     return (
         <>
-            <div className="margin-xs">
+            <Block margin="xxs">
                 <FormattedMessage
                     id="oppsummering.termin.personalia.navn"
                     values={{
                         navn: `${fornavn} ${etternavn}`
                     }}
                 />
-            </div>
-            <div className="margin-xs">
+            </Block>
+            <Block margin="xxs">
                 <FormattedMessage
                     id="oppsummering.termin.personalia.fnr"
                     values={{
                         fnr
                     }}
                 />
-            </div>
+            </Block>
         </>
     );
 };

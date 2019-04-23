@@ -5,6 +5,7 @@ import BEMHelper from 'common/util/bem';
 import CheckmarkIkon from 'app/icons/CheckmarkIkon';
 
 import './kvitteringSuksess.less';
+import Block from 'common/components/block/Block';
 
 const cls = BEMHelper('kvittering');
 
@@ -16,11 +17,11 @@ const KvitteringSuksess: FunctionComponent = () => {
                     <CheckmarkIkon />
                 </div>
                 <div className={cls.element('tekst')}>
-                    <div className="margin-xs">
+                    <Block margin="xxs">
                         <Undertittel>
                             <FormattedMessage id="søknadSendt.info.tittel" />
                         </Undertittel>
-                    </div>
+                    </Block>
                     <div>
                         <FormattedMessage id="søknadSendt.info.innhold" />
                     </div>

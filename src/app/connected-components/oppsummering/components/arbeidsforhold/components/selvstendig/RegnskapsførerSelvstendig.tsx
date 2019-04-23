@@ -5,6 +5,7 @@ import { Element } from 'nav-frontend-typografi';
 import './regnskapsførerSelvstendig.less';
 import BEMHelper from 'common/util/bem';
 import { FormattedMessage } from 'react-intl';
+import Block from 'common/components/block/Block';
 
 const cls = BEMHelper('regnskapsførerSelvstendig.less');
 
@@ -20,25 +21,25 @@ const RegnskapsførerSelvstendig: FunctionComponent<Props> = ({ regnskapsfører 
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører" />
                 </Element>
             </div>
-            <div className="margin-xs">
+            <Block margin="xxs">
                 <FormattedMessage
                     id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører.navn"
                     values={{ navn: regnskapsfører.navn }}
                 />
-            </div>
-            <div className="margin-xs">
+            </Block>
+            <Block margin="xxs">
                 <FormattedMessage
                     id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører.tlf"
                     values={{ navn: regnskapsfører.telefonnummer }}
                 />
-            </div>
-            <div className="margin-xs">
+            </Block>
+            <Block margin="xxs">
                 {regnskapsfører.erNærVennEllerFamilie ? (
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører.vennEllerFamilie" />
                 ) : (
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører.vennEllerFamilie" />
                 )}
-            </div>
+            </Block>
         </div>
     );
 };

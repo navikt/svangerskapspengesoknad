@@ -8,6 +8,7 @@ import { TidsperiodeMedValgfriSluttdato } from 'common/types';
 import { Næringstype } from 'app/types/SelvstendigNæringsdrivende';
 import getMessage from 'common/util/i18nUtils';
 import { injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
+import Block from 'common/components/block/Block';
 
 interface Props {
     orgnr: string;
@@ -36,12 +37,13 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
                 <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.orgnr" /> {orgnr}
             </EtikettLiten>
             <Element>{navnPåNæringen.toUpperCase()}</Element>
-            <div className="margin-xs">
+            <Block margin="xxs">
                 <em>{typer.map((type) => getMessage(intl, `næringstype.${type.toLocaleLowerCase()}`))}</em>
-            </div>
-            <div className="margin-xs">
-                {moment(oppstartsdato).format('DD.MM.YYYY')} - {pågående ? 'Pågående' : tidsperiode.tom}
-            </div>
+            </Block>
+            <Block margin="xxs">
+                {moment(oppstartsdato).format('DD.MM.YYYY')} -{' '}
+                {pågående ? <FormattedMessage id="pågående" /> : tidsperiode.tom}
+            </Block>
         </div>
     );
 };
