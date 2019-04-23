@@ -16,6 +16,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Knapperad from 'common/components/knapperad/Knapperad';
 
 import './frilansOppdrag.less';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 const cls = BEMHelper('frilansOppdrag');
 
@@ -67,18 +68,22 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                         </Block>
 
                         <Block>
-                            <div className={cls.element('datoer')}>
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.fom"
-                                    label={getMessage(intl, 'fraOgMed')}
-                                />
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.tom"
-                                    label={getMessage(intl, 'tilOgMed')}
-                                />
-                            </div>
+                            <DatoerInputLayout
+                                fra={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.fom"
+                                        label={getMessage(intl, 'fraOgMed')}
+                                    />
+                                }
+                                til={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.tom"
+                                        label={getMessage(intl, 'tilOgMed')}
+                                    />
+                                }
+                            />
                         </Block>
 
                         <Knapperad style="mobile-50-50" align="center">
