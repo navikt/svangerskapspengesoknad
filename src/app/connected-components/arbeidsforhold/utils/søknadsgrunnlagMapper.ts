@@ -3,14 +3,12 @@ import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Søker from 'app/types/Søker';
 import { SøknadsgrunnlagOption } from '../../../formik/wrappers/VelgSøknadsgrunnlag';
 import { InjectedIntl } from 'react-intl';
-import { Countries } from '../../../utils/getCountries';
 import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
 
 export const mapArbeidsToSøknadsgrunnlag = (
     søker: Partial<Søker>,
     arbeidsforhold: Arbeidsforhold[],
-    intl: InjectedIntl,
-    countries: Countries
+    intl: InjectedIntl
 ): SøknadsgrunnlagOption[] => {
     const { selvstendigNæringsdrivendeInformasjon = [], andreInntekterSiste10Mnd = [], frilansInformasjon } = søker;
 
@@ -27,7 +25,7 @@ export const mapArbeidsToSøknadsgrunnlag = (
         })),
         ...andreInntekterSiste10Mnd.map((annenInntekt) => ({
             value: annenInntekt.type,
-            label: getAnnenInntektElementTitle(annenInntekt, countries, intl),
+            label: getAnnenInntektElementTitle(annenInntekt, intl),
             type: Arbeidsforholdstype.ANDRE_INNTEKTER
         })),
         ...(frilansInformasjon !== undefined

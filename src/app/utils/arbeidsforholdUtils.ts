@@ -1,7 +1,6 @@
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { AnnenInntekt, AnnenInntektType } from '../types/AnnenInntekt';
-import { Countries, getContryName } from './getCountries';
 import getMessage from 'common/util/i18nUtils';
 import { InjectedIntl } from 'react-intl';
 
@@ -23,14 +22,8 @@ export const getArbeidsforholdNavnFromId = (
     return arbForhold !== undefined ? arbForhold.arbeidsgiverNavn : undefined;
 };
 
-export const getAnnenInntektElementTitle = (
-    annenInntekt: AnnenInntekt,
-    countries: Countries,
-    intl: InjectedIntl
-): string => {
-    return countries
-        ? annenInntekt.type === AnnenInntektType.JOBB_I_UTLANDET
-            ? `${annenInntekt.arbeidsgiverNavn} (${getContryName(countries, annenInntekt.land)})`
-            : getMessage(intl, 'inntektstype.militær_eller_siviltjeneste')
-        : annenInntekt.type;
+export const getAnnenInntektElementTitle = (annenInntekt: AnnenInntekt, intl: InjectedIntl): string => {
+    return annenInntekt.type === AnnenInntektType.JOBB_I_UTLANDET
+        ? `${annenInntekt.arbeidsgiverNavn}`
+        : getMessage(intl, 'inntektstype.militær_eller_siviltjeneste');
 };
