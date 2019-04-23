@@ -7,13 +7,13 @@ import './knapperad.less';
 export interface Props {
     children: React.ReactNode;
     align?: 'left' | 'right' | 'center';
-    style?: 'normal' | 'mobile-50-50';
+    stil?: 'normal' | 'mobile-50-50';
 }
 
 const BEM = BEMHelper('knapperad');
 
-const Knapperad: React.StatelessComponent<Props> = ({ children, align = 'center', style = 'normal' }) => {
-    const cls = classnames(BEM.block, `${BEM.modifier(align)}`, `${BEM.modifier(style)}`);
+const Knapperad: React.StatelessComponent<Props> = ({ children, align = 'center', stil = 'normal' }) => {
+    const cls = classnames(BEM.block, `${BEM.modifier(align)}`, `${BEM.modifier(stil)}`);
     return (
         <div className={cls}>
             {React.Children.map(children, (knapp, index) => (

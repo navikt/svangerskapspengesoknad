@@ -1,5 +1,5 @@
 import React, { ComponentClass, FunctionComponent, StatelessComponent, useState } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage, InjectedIntl } from 'react-intl';
+import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
 
@@ -95,7 +95,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                     return (
                         <div className={cls.block}>
                             <Block
-                                margin="xs"
+                                margin="none"
                                 visible={elementer.length > 0 && visLeggTilKnapp}
                                 header={summaryListTitle}>
                                 <List
@@ -115,17 +115,19 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     }}
                                 />
                             </Block>
-                            <Block visible={visLeggTilKnapp} marginTop="xs" margin="none">
+                            <Block visible={visLeggTilKnapp} marginTop="s" margin="none">
                                 <Knapp
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}
                                     htmlType="button">
-                                    <FormattedMessage id={buttonLabel} />
+                                    {buttonLabel}
                                 </Knapp>
                             </Block>
+
                             <Modal
                                 closeButton={true}
                                 isOpen={modalIsOpen}
+                                shouldCloseOnOverlayClick={false}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>
                                 <props.formComponent

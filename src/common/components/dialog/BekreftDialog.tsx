@@ -41,6 +41,7 @@ class BekreftDialog extends React.Component<Props & InjectedIntlProps, {}> {
         } = this.props;
         return (
             <Modal
+                shouldCloseOnOverlayClick={false}
                 {...modalProps}
                 className={classnames(bem.block, størrelse ? bem.modifier(`size-${størrelse}`) : undefined)}>
                 {this.props.isOpen && (
@@ -51,7 +52,7 @@ class BekreftDialog extends React.Component<Props & InjectedIntlProps, {}> {
                             <Hovedknapp onClick={() => onBekreft()} className="bekreftDialog__bekreftKnapp">
                                 {this.props.bekreftLabel ||
                                     intl.formatMessage({
-                                        id: 'komponent.bekreftDialog.bekreftLabel',
+                                        id: 'komponent.bekreftDialog.bekreftLabel'
                                     })}
                             </Hovedknapp>
                             <Knapp
@@ -59,7 +60,7 @@ class BekreftDialog extends React.Component<Props & InjectedIntlProps, {}> {
                                 className="bekreftDialog__avbrytKnapp">
                                 {this.props.avbrytLabel ||
                                     intl.formatMessage({
-                                        id: 'komponent.bekreftDialog.avbrytLabel',
+                                        id: 'komponent.bekreftDialog.avbrytLabel'
                                     })}
                             </Knapp>
                         </Knapperad>

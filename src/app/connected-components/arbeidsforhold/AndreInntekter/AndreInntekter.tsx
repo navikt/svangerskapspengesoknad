@@ -25,6 +25,8 @@ import { State } from 'app/redux/store';
 import validateAndreInntekter from 'app/utils/validation/validateAndreInntekter';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import Select from 'app/formik/wrappers/Select';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
+import Knapperad from 'common/components/knapperad/Knapperad';
 import { cleanupAnnenInntekt } from '../utils/cleanup';
 
 const cls = BEMHelper('andre-inntekter');
@@ -70,7 +72,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
 
                 return (
                     <form
-                        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+                        onSubmit={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             handleSubmit();
@@ -84,6 +86,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
 
                         <Block>
                             <RadioPanelGruppe
+                                twoColumns={true}
                                 name={'type'}
                                 legend={getMessage(intl, 'arbeidsforhold.andreInntekter.inntektstype')}
                                 radios={[
@@ -99,7 +102,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                             />
                         </Block>
 
-                        <Block visible={visKomponent.land} margin="xs">
+                        <Block visible={visKomponent.land}>
                             <Select name="land" label={getMessage(intl, 'arbeidsforhold.andreInntekter.land')}>
                                 <option value="" />
                                 {countries.map((countryOption: string[]) => {
@@ -120,22 +123,26 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                             />
                         </Block>
 
-                        <Block margin="xxs">
-                            <>
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.fom"
-                                    label={getMessage(intl, 'fraOgMed')}
-                                />
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.tom"
-                                    label={getMessage(intl, 'tilOgMed')}
-                                />
-                            </>
+                        <Block>
+                            <DatoerInputLayout
+                                fra={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.fom"
+                                        label={getMessage(intl, 'fraOgMed')}
+                                    />
+                                }
+                                til={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.tom"
+                                        label={getMessage(intl, 'tilOgMed')}
+                                    />
+                                }
+                            />
                         </Block>
 
-                        <Block visible={visKomponent.advarselDokumentasjon}>
+                        <Block margin="none" visible={visKomponent.advarselDokumentasjon}>
                             <Veilederinfo type="info">
                                 <FormattedMessage id="arbeidsforhold.andreInntekter.militær_eller_siviltjeneste_info" />
                             </Veilederinfo>
@@ -168,12 +175,14 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                             />
                         </Block>
 
-                        <Knapp htmlType="button" onClick={onCancel}>
-                            <FormattedMessage id="avbryt" />
-                        </Knapp>
-                        <Hovedknapp disabled={!isValid} htmlType="submit">
-                            <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
-                        </Hovedknapp>
+                        <Knapperad stil="mobile-50-50">
+                            <Knapp htmlType="button" onClick={onCancel}>
+                                <FormattedMessage id="avbryt" />
+                            </Knapp>
+                            <Hovedknapp disabled={!isValid} htmlType="submit">
+                                <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
+                            </Hovedknapp>
+                        </Knapperad>
                     </form>
                 );
             }}

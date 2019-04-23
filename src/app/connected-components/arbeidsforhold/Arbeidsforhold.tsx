@@ -71,11 +71,12 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const visharHattAnnenInntektSiste10MndSeksjon =
         (visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon &&
             ((selvstendigNæringsdrivendeInformasjon && selvstendigNæringsdrivendeInformasjon.length) || 0) > 0) ||
-        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false;
+        harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false ||
+        harHattAnnenInntektSiste10Mnd !== undefined;
 
     const visSøknadnsgrunnlagValg =
         visharHattAnnenInntektSiste10MndSeksjon &&
-        ((harHattAnnenInntektSiste10Mnd === true && andreInntekterSiste10Mnd.length > 0) ||
+        ((harHattAnnenInntektSiste10Mnd === true && andreInntekterSiste10Mnd.length! > 0) ||
             harHattAnnenInntektSiste10Mnd === false) &&
         mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold).length > 0;
 

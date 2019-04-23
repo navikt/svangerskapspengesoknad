@@ -18,6 +18,7 @@ const DinePlikterModal = (props: Props) => {
             isOpen={props.isOpen}
             onRequestClose={() => props.onRequestClose()}
             closeButton={true}
+            shouldCloseOnOverlayClick={false}
             contentLabel={getMessage(intl, 'intro.dinePlikter.sectionheading')}>
             <article className="velkommenModalContent">
                 <Systemtittel tag="h1" className="velkommenModalContent__header">

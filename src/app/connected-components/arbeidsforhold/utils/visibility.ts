@@ -2,7 +2,7 @@ import { Næring, Næringstype } from 'app/types/SelvstendigNæringsdrivende';
 import { cleanupNæring } from './cleanup';
 import * as moment from 'moment';
 
-export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring>): { [key: string]: boolean } => {
+export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring>) => {
     const normalisertNæring = cleanupNæring(næring);
     const {
         næringstyper,
@@ -23,7 +23,7 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
     } = normalisertNæring;
 
     const skalViseNavnPåNæringen = næringstyper !== undefined && næringstyper.length! > 0;
-    const skalViseAdvarselFikser =
+    const skalViseAdvarselFisker =
         skalViseNavnPåNæringen && (næringstyper as Næringstype[]).includes(Næringstype.FISKER);
     const skalViseRegistrertINorge = skalViseNavnPåNæringen && navnPåNæringen !== undefined && navnPåNæringen !== '';
     const skalViseLand = skalViseRegistrertINorge && registrertINorge === false;
@@ -87,7 +87,7 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
 
     return {
         skalViseNavnPåNæringen,
-        skalViseAdvarselFikser,
+        skalViseAdvarselFisker,
         skalViseRegistrertINorge,
         skalViseLand,
         skalViseOrgNr,

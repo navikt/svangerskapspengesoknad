@@ -13,8 +13,10 @@ import getMessage from 'common/util/i18nUtils';
 import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Undertittel } from 'nav-frontend-typografi';
+import Knapperad from 'common/components/knapperad/Knapperad';
 
 import './frilansOppdrag.less';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 const cls = BEMHelper('frilansOppdrag');
 
@@ -57,7 +59,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
                         </Block>
 
-                        <Block margin="xxs">
+                        <Block>
                             <InputField
                                 name="navnPåArbeidsgiver"
                                 label={getMessage(intl, 'arbeidsforhold.frilans.oppdrag.navnPåArbeidsgiver')}
@@ -65,29 +67,33 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             />
                         </Block>
 
-                        <Block margin="xxs">
-                            <div className={cls.element('datoer')}>
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.fom"
-                                    label={getMessage(intl, 'fraOgMed')}
-                                />
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.tom"
-                                    label={getMessage(intl, 'tilOgMed')}
-                                />
-                            </div>
+                        <Block>
+                            <DatoerInputLayout
+                                fra={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.fom"
+                                        label={getMessage(intl, 'fraOgMed')}
+                                    />
+                                }
+                                til={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.tom"
+                                        label={getMessage(intl, 'tilOgMed')}
+                                    />
+                                }
+                            />
                         </Block>
 
-                        <div className={cls.element('knapper')}>
+                        <Knapperad align="center">
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
                             </Knapp>
                             <Hovedknapp disabled={!isValid} htmlType="submit">
-                                <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
+                                <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
                             </Hovedknapp>
-                        </div>
+                        </Knapperad>
                     </form>
                 );
             }}

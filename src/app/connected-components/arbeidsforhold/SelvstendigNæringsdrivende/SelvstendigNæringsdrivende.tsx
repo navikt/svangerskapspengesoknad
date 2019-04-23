@@ -23,6 +23,8 @@ import Select from 'app/formik/wrappers/Select';
 import validateSelvstendigNæringsdrivende from 'app/utils/validation/validateSelvstendigNæringsdrivende';
 import { visKomponentSelvstendigNæringsdrivende } from '../utils/visibility';
 import { cleanupNæring } from '../utils/cleanup';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
+import Knapperad from 'common/components/knapperad/Knapperad';
 
 const cls = BEMHelper('selvstendig-næringsdrivende');
 
@@ -73,7 +75,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block visible={visKomponent.skalViseAdvarselFikser}>
+                        <Block visible={visKomponent.skalViseAdvarselFisker}>
                             <Veilederinfo type="advarsel">
                                 <FormattedHTMLMessage
                                     id="arbeidsforhold.selvstendig.fisker"
@@ -91,7 +93,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             />
                         </Block>
 
-                        <Block margin="xs" visible={visKomponent.skalViseLand}>
+                        <Block visible={visKomponent.skalViseLand}>
                             <Select
                                 name="registrertILand"
                                 label={getMessage(intl, 'arbeidsforhold.seslvstendig.registrertILand')}>
@@ -116,22 +118,27 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         </Block>
 
                         <Block visible={visKomponent.skalViseTidsperiode}>
-                            <>
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.fom"
-                                    label={getMessage(intl, 'arbeidsforhold.selvstendig.fom', {
-                                        navn: values.navnPåNæringen
-                                    })}
-                                />
-                                <DatoInput
-                                    fullskjermKalender={true}
-                                    name="tidsperiode.tom"
-                                    label={getMessage(intl, 'arbeidsforhold.selvstendig.tom', {
-                                        navn: values.navnPåNæringen
-                                    })}
-                                />
-                            </>
+                            <DatoerInputLayout
+                                fullbredde={true}
+                                fra={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.fom"
+                                        label={getMessage(intl, 'arbeidsforhold.selvstendig.fom', {
+                                            navn: values.navnPåNæringen
+                                        })}
+                                    />
+                                }
+                                til={
+                                    <DatoInput
+                                        fullskjermKalender={true}
+                                        name="tidsperiode.tom"
+                                        label={getMessage(intl, 'arbeidsforhold.selvstendig.tom', {
+                                            navn: values.navnPåNæringen
+                                        })}
+                                    />
+                                }
+                            />
                         </Block>
 
                         <Block visible={visKomponent.skalVisevarigEndringAvNæringsinntektBolk}>
@@ -202,12 +209,14 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         </Block>
 
                         <Block visible={visKomponent.skalViseformButtons}>
-                            <Knapp htmlType="button" onClick={onCancel}>
-                                <FormattedMessage id="avbryt" />
-                            </Knapp>
-                            <Hovedknapp disabled={!isValid} htmlType="submit">
-                                <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
-                            </Hovedknapp>
+                            <Knapperad stil="mobile-50-50">
+                                <Knapp htmlType="button" onClick={onCancel}>
+                                    <FormattedMessage id="avbryt" />
+                                </Knapp>
+                                <Hovedknapp disabled={!isValid} htmlType="submit">
+                                    <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
+                                </Hovedknapp>
+                            </Knapperad>
                         </Block>
                     </form>
                 );

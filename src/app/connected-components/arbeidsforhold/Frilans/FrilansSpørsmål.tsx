@@ -46,7 +46,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                         <InfoBlock>
                             <Block
                                 visible={visKomponent.oppstartsdato}
-                                margin={visKomponent.jobberFremdelesSomFrilans ? undefined : 'none'}>
+                                margin={visKomponent.jobberFremdelesSomFrilans ? undefined : 'xxs'}>
                                 <DatoInput
                                     fullskjermKalender={true}
                                     name="søker.frilansInformasjon.oppstart"
