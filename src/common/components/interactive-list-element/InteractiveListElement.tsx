@@ -9,6 +9,7 @@ import getMessage from 'common/util/i18nUtils';
 import Pencil from './Pencil';
 
 export interface InteractiveListElementProps {
+    style?: 'gray' | 'grayWithBorder';
     onEdit: () => void;
     onDelete: () => void;
     editButtonAriaText?: string;
@@ -31,6 +32,7 @@ class InteractiveListElement extends React.Component<AllListElementProps & Injec
             text,
             deleteLinkText,
             etikettProps,
+            style = 'gray',
             deleteButtonAriaText,
             editButtonAriaText,
             onDelete,
@@ -38,7 +40,7 @@ class InteractiveListElement extends React.Component<AllListElementProps & Injec
             intl
         } = this.props;
         return (
-            <li className={bem.block}>
+            <li className={bem.classNames(bem.block, bem.modifier(style))}>
                 <div className={bem.element('top')}>
                     <Normaltekst className="title">{title}</Normaltekst>
                     <button
