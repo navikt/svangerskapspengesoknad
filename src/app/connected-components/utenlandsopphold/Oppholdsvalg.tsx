@@ -59,7 +59,7 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
                             </Undertittel>
                         </Block>
                         <Block>
-                            <Select name="land" label={getMessage(intl, 'utenlandsopphold.land.label')}>
+                            <Select name="land" label={getMessage(intl, `utenlandsopphold.${type}.land.label`)}>
                                 <option value="" />
                                 {countries.map((countryOption: string[]) => {
                                     const [countryCode, countryName] = countryOption;
