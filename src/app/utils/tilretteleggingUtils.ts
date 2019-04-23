@@ -39,7 +39,7 @@ export const mergeSøknadsgrunnlagIntoTilrettelegging = (
         )
     );
 
-    return [...nyeTilrettelegginger, ...existingTilrettelegging];
+    return [...existingTilrettelegging, ...nyeTilrettelegginger];
 };
 
 const mapHelTilrettelegging = (
