@@ -137,12 +137,20 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block visible={visVedlegg}>
                     <Block>
                         <Veilederinfo stil="kompakt" type="info">
-                            <FormattedHTMLMessage id="tilrettelegging.veileder.vedlegg" />
+                            <FormattedHTMLMessage
+                                id={
+                                    visFrilansEllerSelvstendig
+                                        ? 'tilrettelegging.veileder.vedlegg.frilansSN'
+                                        : 'tilrettelegging.veileder.vedlegg'
+                                }
+                            />
                         </Veilederinfo>
                     </Block>
                     <Block
                         header={{
-                            title: getMessage(intl, 'tilrettelegging.vedlegg.label')
+                            title: visFrilansEllerSelvstendig
+                                ? getMessage(intl, 'tilrettelegging.vedlegg.label.frilansSN')
+                                : getMessage(intl, 'tilrettelegging.vedlegg.label')
                         }}>
                         <FieldArray
                             name={getInputName('vedlegg')}
