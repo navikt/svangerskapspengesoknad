@@ -32,6 +32,8 @@ import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement'
 import { cleanupSøker } from './utils/cleanup';
 import { mapArbeidsToSøknadsgrunnlag } from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
+import { Søknadsgrunnlag } from 'app/types/Søknad';
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 
 import './arbeidsforhold.less';
 
@@ -86,6 +88,10 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
         harHattAnnenInntektSiste10Mnd === false;
 
+    const skalViseVeilederinfo = values.søknadsgrunnlag.some(
+        (s: Søknadsgrunnlag) => s.type === Arbeidsforholdstype.VIRKSOMHET
+    );
+
     const prepareTilrettelegging = () => {
         setFieldValue(
             'tilrettelegging',
@@ -128,15 +134,6 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
                 </Block>
 
-                <Block margin="s">
-                    <Veilederinfo type="info" stil="kompakt">
-                        {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
-                            // TODO: Hva er riktig dato her?
-                            datoTidligst: moment().format('DD.MM.YYYY')
-                        })}
-                    </Veilederinfo>
-                </Block>
-
                 <FrilansSpørsmål formikProps={formikProps} />
 
                 <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
@@ -171,6 +168,16 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         options={mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold)}
                     />
                 </Block>
+
+                <Block visible={skalViseVeilederinfo} margin="s">
+                    <Veilederinfo type="info" stil="kompakt">
+                        {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
+                            // TODO: Hva er riktig dato her?
+                            datoTidligst: moment().format('DD.MM.YYYY')
+                        })}
+                    </Veilederinfo>
+                </Block>
+
                 <Block visible={visIngenArbeidsforholdVeileder}>
                     <Veilederinfo type="advarsel">
                         <FormattedHTMLMessage id="arbeidsforhold.veileder.ingenArbeidsforhold" />
