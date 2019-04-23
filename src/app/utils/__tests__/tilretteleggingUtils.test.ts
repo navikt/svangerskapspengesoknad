@@ -63,7 +63,6 @@ describe('tilretteleggingUtils', () => {
                 .arbeidsforhold as ArbeidsforholdSelvstendigDTO;
             expect(arbeidsforhold).toBeDefined();
             expect(arbeidsforhold.type).toBe(Arbeidsforholdstype.SELVSTENDIG);
-            expect(arbeidsforhold.id).toBeDefined();
             expect(arbeidsforhold.risikoFaktorer).toBeDefined();
             expect(arbeidsforhold.tilretteleggingstiltak).toBeDefined();
         });
