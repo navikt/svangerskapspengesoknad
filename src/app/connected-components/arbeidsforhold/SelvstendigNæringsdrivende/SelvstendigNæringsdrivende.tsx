@@ -266,7 +266,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                 <FormattedMessage id="avbryt" />
                             </Knapp>
                             <Hovedknapp disabled={!isValid} htmlType="submit">
-                                <FormattedMessage id={endre ? 'endre' : 'leggTil'} />
+                                <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
                             </Hovedknapp>
                         </Block>
                     </form>
