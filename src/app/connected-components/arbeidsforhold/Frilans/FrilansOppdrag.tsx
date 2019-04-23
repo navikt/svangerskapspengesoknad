@@ -14,9 +14,9 @@ import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Undertittel } from 'nav-frontend-typografi';
 import Knapperad from 'common/components/knapperad/Knapperad';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 import './frilansOppdrag.less';
-import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 const cls = BEMHelper('frilansOppdrag');
 
