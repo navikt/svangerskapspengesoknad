@@ -102,6 +102,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         frilansInformasjon={values.søker.frilansInformasjon}
                         selvstendigInformasjon={values.søker.selvstendigNæringsdrivendeInformasjon}
                         søknadsgrunnlag={values.søknadsgrunnlag}
+                        andreInntekter={values.søker.andreInntekterSiste10Mnd}
                         harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd!}
                         harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd!}
                         harJobbetSomSelvstendigNæringsdrivende={

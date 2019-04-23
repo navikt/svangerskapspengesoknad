@@ -5,6 +5,8 @@ import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 
 import './endringSelvstendig.less';
+import OppsummeringBeskrivelse from '../../../OppsummeringBeskrivelse';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     endringAvNæringsinntektInformasjon: EndringAvNæringsinntektInformasjon;
@@ -16,17 +18,20 @@ const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntekt
     return (
         <div className={cls.block}>
             <div>
-                <Element>Endring</Element>
+                <Element>
+                    <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.endring" />
+                </Element>
             </div>
             <div className="margin-xs">{moment(endringAvNæringsinntektInformasjon.dato).format('DD.MM.YYYY')}</div>
             <div className="margin-xs">
-                Næringsinntekt etter endring: {endringAvNæringsinntektInformasjon.næringsinntektEtterEndring}
+                <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.etterEndring" />{' '}
+                {endringAvNæringsinntektInformasjon.næringsinntektEtterEndring}
             </div>
             <div className="margin-xs">
-                Beskrivelse av endring:
-                <div className={cls.element('beskrivelseAvEndring')}>
-                    <em>{endringAvNæringsinntektInformasjon.forklaring}</em>
-                </div>
+                <OppsummeringBeskrivelse
+                    label="Beskrivelse av endring:"
+                    innhold={endringAvNæringsinntektInformasjon.forklaring}
+                />
             </div>
         </div>
     );

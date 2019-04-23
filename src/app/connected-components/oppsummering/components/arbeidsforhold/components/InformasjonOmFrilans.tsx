@@ -4,6 +4,7 @@ import Block from 'common/components/block/Block';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FrilansInformasjon } from 'app/types/FrilansInformasjon';
 import DuHarSvartNeiListe from '../DuHarSvartNeiListe';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     frilansInformasjon: Partial<FrilansInformasjon>;
@@ -13,7 +14,9 @@ const InformasjonOmFrilans: FunctionComponent<Props> = ({ frilansInformasjon }) 
     return (
         <Block margin="xxs">
             <div className="grayInfoBox">
-                <Element>FRILANSOPPDRAG</Element>
+                <Element>
+                    <FormattedMessage id="oppsummering.arbeidsforhold.frilans" />
+                </Element>
                 <Normaltekst>{moment(frilansInformasjon.oppstart).format('DD.MM.YYYY')}</Normaltekst>
                 <DuHarSvartNeiListe
                     frilansOppsummering={true}

@@ -12,18 +12,18 @@ const MedlemskapOppsummering: FunctionComponent<Props> = ({ iNorgeNeste12Mnd, iN
             <div className="margin-xs">
                 <FormattedMessage
                     id={
-                        iNorgeNeste12Mnd
-                            ? 'oppsummering.medlemskap.senereOpphold.ja'
-                            : 'oppsummering.medlemskap.senereOpphold.nei'
+                        iNorgeSiste12Mnd
+                            ? 'oppsummering.medlemskap.tidligereOpphold.ja'
+                            : 'oppsummering.medlemskap.tidligereOpphold.nei'
                     }
                 />
             </div>
             <div className="margin-xs">
                 <FormattedMessage
                     id={
-                        iNorgeSiste12Mnd
-                            ? 'oppsummering.medlemskap.tidligereOpphold.ja'
-                            : 'oppsummering.medlemskap.tidligereOpphold.nei'
+                        iNorgeNeste12Mnd
+                            ? 'oppsummering.medlemskap.senereOpphold.ja'
+                            : 'oppsummering.medlemskap.senereOpphold.nei'
                     }
                 />
             </div>

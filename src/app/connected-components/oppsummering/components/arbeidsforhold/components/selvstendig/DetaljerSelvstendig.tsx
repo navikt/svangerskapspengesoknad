@@ -7,7 +7,7 @@ import './detaljerSelvstendig.less';
 import { TidsperiodeMedValgfriSluttdato } from 'common/types';
 import { Næringstype } from 'app/types/SelvstendigNæringsdrivende';
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import { injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
 
 interface Props {
     orgnr: string;
@@ -32,7 +32,9 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
 }) => {
     return (
         <div className={cls.block}>
-            <EtikettLiten>Org.nr: {orgnr}</EtikettLiten>
+            <EtikettLiten>
+                <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.orgnr" /> {orgnr}
+            </EtikettLiten>
             <Element>{navnPåNæringen.toUpperCase()}</Element>
             <div className="margin-xs">
                 <em>{typer.map((type) => getMessage(intl, `næringstype.${type.toLocaleLowerCase()}`))}</em>

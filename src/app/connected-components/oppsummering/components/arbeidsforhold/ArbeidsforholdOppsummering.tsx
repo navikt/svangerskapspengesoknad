@@ -9,6 +9,8 @@ import { Næring } from 'app/types/SelvstendigNæringsdrivende';
 import InformasjonOmSelvstendig from './components/InformasjonOmSelvstendig';
 import InformasjonOmAndreInntekter from './components/InformasjonOmAndreInntekter';
 import DuHarSvartNeiListe from './DuHarSvartNeiListe';
+import { AnnenInntekt } from 'app/types/AnnenInntekt';
+import { guid } from 'nav-frontend-js-utils';
 
 interface Props {
     arbeidsforhold: Arbeidsforhold[];
@@ -18,6 +20,7 @@ interface Props {
     harHattAndreInntektskilder: boolean;
     frilansInformasjon: Partial<FrilansInformasjon> | undefined;
     selvstendigInformasjon: Næring[] | undefined;
+    andreInntekter?: AnnenInntekt[];
 }
 
 const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
@@ -27,7 +30,8 @@ const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
     harJobbetFrilans,
     harHattAndreInntektskilder,
     frilansInformasjon,
-    selvstendigInformasjon
+    selvstendigInformasjon,
+    andreInntekter
 }) => {
     return (
         <>
@@ -45,7 +49,10 @@ const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
                     />
                 ))}
 
-            {harHattAndreInntektskilder && <InformasjonOmAndreInntekter />}
+            {harHattAndreInntektskilder &&
+                andreInntekter !== undefined &&
+                andreInntekter.length > 0 &&
+                andreInntekter.map((annenInn) => <InformasjonOmAndreInntekter key={guid()} annenInntekt={annenInn} />)}
 
             {(!harJobbetSomSelvstendigNæringsdrivende || !harJobbetFrilans || !harHattAndreInntektskilder) && (
                 <DuHarSvartNeiListe
