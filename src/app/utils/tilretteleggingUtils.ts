@@ -105,13 +105,12 @@ const mapArbeidsforholdForTilrettelegging = (
         case Arbeidsforholdstype.SELVSTENDIG:
             return {
                 type: Arbeidsforholdstype.SELVSTENDIG,
-                id: fnr,
                 risikoFaktorer: tilrettelegging.risikoFaktorer,
                 tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak
             };
-        case Arbeidsforholdstype.ANDRE_INNTEKTER:
+        case Arbeidsforholdstype.PRIVAT:
             return {
-                type: Arbeidsforholdstype.ANDRE_INNTEKTER,
+                type: Arbeidsforholdstype.PRIVAT,
                 id: fnr
             };
         case Arbeidsforholdstype.VIRKSOMHET:

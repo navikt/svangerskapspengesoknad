@@ -8,20 +8,18 @@ export interface ArbeidsforholdFrilansDTO {
 
 export interface ArbeidsforholdSelvstendigDTO {
     type: Arbeidsforholdstype.SELVSTENDIG;
-    id: string;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }
 
-export interface ArbeidsforholdPrivatDTO {
-    type: Arbeidsforholdstype.ANDRE_INNTEKTER;
-    id: string;
+export interface ArbeidsforholdAnnenInntektDTO {
+    type: Arbeidsforholdstype.FRILANSER;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }
 
 export interface ArbeidsforholdVirksomhetDTO {
-    type: Arbeidsforholdstype.VIRKSOMHET;
+    type: Arbeidsforholdstype.VIRKSOMHET | Arbeidsforholdstype.PRIVAT;
     id: string;
 }
 export const isArbeidsforholdVirksomhetDTO = (
@@ -30,11 +28,7 @@ export const isArbeidsforholdVirksomhetDTO = (
     return arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET;
 };
 
-export type ArbeidsforholdDTO =
-    | ArbeidsforholdFrilansDTO
-    | ArbeidsforholdSelvstendigDTO
-    | ArbeidsforholdVirksomhetDTO
-    | ArbeidsforholdPrivatDTO;
+export type ArbeidsforholdDTO = ArbeidsforholdFrilansDTO | ArbeidsforholdSelvstendigDTO | ArbeidsforholdVirksomhetDTO;
 
 interface TilretteleggingDTOBase {
     type: Tilretteleggingstype;

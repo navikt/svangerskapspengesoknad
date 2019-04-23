@@ -11,7 +11,7 @@ export const mapArbeidsToSøknadsgrunnlag = (søker: Partial<Søker>, arbeidsfor
         ...arbeidsforhold.map((forhold: Arbeidsforhold) => ({
             value: forhold.arbeidsgiverId,
             label: forhold.arbeidsgiverNavn,
-            type: Arbeidsforholdstype.VIRKSOMHET
+            type: forhold.arbeidsgiverIdType === 'orgnr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring: Næring) => ({
             value: næring.organisasjonsnummer,
@@ -21,7 +21,7 @@ export const mapArbeidsToSøknadsgrunnlag = (søker: Partial<Søker>, arbeidsfor
         ...andreInntekterSiste10Mnd.map((annenInntekt: AnnenInntekt) => ({
             value: annenInntekt.type,
             label: annenInntekt.type,
-            type: Arbeidsforholdstype.ANDRE_INNTEKTER
+            type: Arbeidsforholdstype.FRILANSER
         })),
         ...(frilansInformasjon !== undefined
             ? [
