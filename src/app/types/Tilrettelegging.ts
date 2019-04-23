@@ -9,7 +9,7 @@ export enum Arbeidsforholdstype {
     'VIRKSOMHET' = 'virksomhet',
     'SELVSTENDIG' = 'selvstendig',
     'FRILANSER' = 'frilanser',
-    'PRIVAT' = 'privat'
+    'ANDRE_INNTEKTER' = 'privat'
 }
 
 export interface TilretteleggingArbeidsforhold {
