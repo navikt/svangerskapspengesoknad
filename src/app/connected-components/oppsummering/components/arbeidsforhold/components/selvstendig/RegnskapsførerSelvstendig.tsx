@@ -33,9 +33,11 @@ const RegnskapsførerSelvstendig: FunctionComponent<Props> = ({ regnskapsfører 
                 />
             </div>
             <div className="margin-xs">
-                {regnskapsfører.erNærVennEllerFamilie
-                    ? 'Revisor er en nær venn eller familie'
-                    : 'Revisor er ikke en nær venn eller familie'}
+                {regnskapsfører.erNærVennEllerFamilie ? (
+                    <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører.vennEllerFamilie" />
+                ) : (
+                    <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører.vennEllerFamilie" />
+                )}
             </div>
         </div>
     );

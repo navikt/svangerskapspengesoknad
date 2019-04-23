@@ -16,7 +16,9 @@ const RevisorSelvstendig: FunctionComponent<Props> = ({ revisor }) => {
     return (
         <div className={cls.block}>
             <div>
-                <Element>Revisor</Element>
+                <Element>
+                    <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.revisor" />
+                </Element>
             </div>
             <div className="margin-xs">
                 <FormattedMessage
@@ -31,9 +33,11 @@ const RevisorSelvstendig: FunctionComponent<Props> = ({ revisor }) => {
                 />
             </div>
             <div className="margin-xs">
-                {revisor.erNærVennEllerFamilie
-                    ? 'Revisor er en nær venn eller familie'
-                    : 'Revisor er ikke en nær venn eller familie'}
+                {revisor.erNærVennEllerFamilie ? (
+                    <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.revisor.vennEllerFamilie" />
+                ) : (
+                    <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.revisor.ikkeVennEllerFamilie" />
+                )}
             </div>
         </div>
     );
