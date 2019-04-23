@@ -86,7 +86,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             />
                         </Block>
 
-                        <Knapperad style="mobile-50-50" align="center">
+                        <Knapperad stil="mobile-50-50" align="center">
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
                             </Knapp>

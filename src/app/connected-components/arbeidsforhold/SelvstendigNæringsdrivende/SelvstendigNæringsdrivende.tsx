@@ -269,7 +269,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         </Block>
 
                         <Block visible={visKomponent.formButtons}>
-                            <Knapperad align="center" style="mobile-50-50">
+                            <Knapperad align="center" stil="mobile-50-50">
                                 <Knapp htmlType="button" onClick={onCancel}>
                                     <FormattedMessage id="avbryt" />
                                 </Knapp>
