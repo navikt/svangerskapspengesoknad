@@ -4,11 +4,17 @@ import { AnnenInntekt } from 'app/types/AnnenInntekt';
 import InteractiveListElement from 'common/components/interactive-list-element/InteractiveListElement';
 import { prettifyTidsperiode } from 'app/utils/formatDate';
 import getMessage from 'common/util/i18nUtils';
+import { Countries } from '../../../utils/getCountries';
+import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
 
-const AnnenInntektListElement: StatelessComponent<ModalSummaryProps<AnnenInntekt>> = ({ element, intl, ...rest }) => {
+type Props = ModalSummaryProps<AnnenInntekt> & {
+    countries: Countries;
+};
+
+const AnnenInntektListElement: StatelessComponent<Props> = ({ element, countries, intl, ...rest }) => {
     return (
         <InteractiveListElement
-            title={element.type}
+            title={getAnnenInntektElementTitle(element, countries, intl)}
             text={prettifyTidsperiode(element.tidsperiode)}
             deleteLinkText={getMessage(intl, 'utenlandsopphold.land.slett')}
             {...rest}

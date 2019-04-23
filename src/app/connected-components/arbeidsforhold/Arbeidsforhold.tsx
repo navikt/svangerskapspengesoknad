@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, InjectedIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -34,6 +34,7 @@ import { mapArbeidsToSøknadsgrunnlag } from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
 
 import './arbeidsforhold.less';
+import { getCountries } from '../../utils/getCountries';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -52,6 +53,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const { step, formikProps, arbeidsforhold, intl, history } = props;
     const { values, setFieldValue } = formikProps;
     const { søker, søknadsgrunnlag } = values;
+    const countries = useMemo(() => getCountries(true, false, intl), [intl]);
 
     const harValgtMinstEttGrunnlag: boolean = søknadsgrunnlag.length > 0;
 
@@ -78,7 +80,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         visharHattAnnenInntektSiste10MndSeksjon &&
         ((harHattAnnenInntektSiste10Mnd === true && andreInntekterSiste10Mnd.length! > 0) ||
             harHattAnnenInntektSiste10Mnd === false) &&
-        mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold).length > 0;
+        mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold, intl, countries).length > 0;
 
     const visIngenArbeidsforholdVeileder =
         arbeidsforhold.length === 0 &&
@@ -169,7 +171,12 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <VelgSøknadsgrunnlag
                         name="søknadsgrunnlag"
                         label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
-                        options={mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold)}
+                        options={mapArbeidsToSøknadsgrunnlag(
+                            cleanupSøker(values.søker) as Søker,
+                            arbeidsforhold,
+                            intl,
+                            countries
+                        )}
                     />
                 </Block>
                 <Block visible={visIngenArbeidsforholdVeileder}>

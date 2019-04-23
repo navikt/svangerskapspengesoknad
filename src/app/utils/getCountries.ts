@@ -8,11 +8,9 @@ const countriesInEøs = [
 const isCountryInEøs = (countryCode: string) => countriesInEøs.includes(countryCode);
 const isCountryNorge = (countryCode: string) => countryCode === 'NO';
 
-export const getCountries = (
-    visLandUtenforEøs: boolean,
-    visNorge: boolean,
-    { locale }: InjectedIntl
-): React.ReactNode[] => {
+export type Countries = Array<[string, string]>;
+
+export const getCountries = (visLandUtenforEøs: boolean, visNorge: boolean, { locale }: InjectedIntl): Countries => {
     const countryNames: Array<[string, string]> = Object.entries(countries.getNames(locale));
     const namesDescending = (a: string[], b: string[]) => a[1].localeCompare(b[1], locale);
     const applyFilters = ([countryCode]: string[]) => {
@@ -23,6 +21,11 @@ export const getCountries = (
     };
 
     return countryNames.sort(namesDescending).filter(applyFilters);
+};
+
+export const getContryName = (countryList: Countries, contrycode: string): string | undefined => {
+    const country = countryList.find((c) => c[0] === contrycode);
+    return country ? country[1] : undefined;
 };
 
 export default getCountries;

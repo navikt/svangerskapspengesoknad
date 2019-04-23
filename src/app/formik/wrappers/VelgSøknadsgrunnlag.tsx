@@ -6,15 +6,16 @@ import { Omit } from 'lodash';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 
-interface Option {
+export interface SøknadsgrunnlagOption {
     value: string;
     type: Arbeidsforholdstype;
+    label: string;
 }
 
 interface OwnProps {
     name: string;
     label: string;
-    options: Array<Option & { label: string }>;
+    options: SøknadsgrunnlagOption[];
 }
 
 type Props = OwnProps & Omit<CheckboksPanelGruppeProps, 'onChange' | 'checkboxes' | 'legend'>;
