@@ -127,6 +127,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                             <Modal
                                 closeButton={true}
                                 isOpen={modalIsOpen}
+                                shouldCloseOnOverlayClick={false}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>
                                 <props.formComponent
