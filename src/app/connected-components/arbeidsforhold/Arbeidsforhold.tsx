@@ -88,15 +88,13 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
         harHattAnnenInntektSiste10Mnd === false;
 
+    const tilrettelegging = mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging);
     const skalViseVeilederinfo = values.søknadsgrunnlag.some(
         (s: Søknadsgrunnlag) => s.type === Arbeidsforholdstype.VIRKSOMHET
     );
 
     const prepareTilrettelegging = () => {
-        setFieldValue(
-            'tilrettelegging',
-            mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging)
-        );
+        setFieldValue('tilrettelegging', tilrettelegging);
     };
 
     const cleanupArbeidsforhold = () => {
@@ -106,7 +104,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const navigate = () => {
         cleanupArbeidsforhold();
         prepareTilrettelegging();
-        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id);
+        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, tilrettelegging[0].id);
         navigateTo(pathToFirstTilrettelegging, history);
     };
 
