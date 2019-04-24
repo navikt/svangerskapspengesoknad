@@ -4,13 +4,17 @@ import Søker from 'app/types/Søker';
 import { SøknadsgrunnlagOption } from '../../../formik/wrappers/VelgSøknadsgrunnlag';
 import { InjectedIntl } from 'react-intl';
 import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
+import { AnnenInntektType } from '../../../types/AnnenInntekt';
 
-export const mapArbeidsToSøknadsgrunnlag = (
+export const mapArbeidsforholdToSøknadsgrunnlag = (
     søker: Partial<Søker>,
     arbeidsforhold: Arbeidsforhold[],
     intl: InjectedIntl
 ): SøknadsgrunnlagOption[] => {
     const { selvstendigNæringsdrivendeInformasjon = [], andreInntekterSiste10Mnd = [], frilansInformasjon } = søker;
+    const førstegangstjeneste = andreInntekterSiste10Mnd.find(
+        (inntekt) => inntekt.type === AnnenInntektType.MILITÆRTJENESTE
+    );
 
     return [
         ...arbeidsforhold.map((forhold) => ({
@@ -23,11 +27,15 @@ export const mapArbeidsToSøknadsgrunnlag = (
             label: næring.navnPåNæringen,
             type: Arbeidsforholdstype.SELVSTENDIG
         })),
-        ...andreInntekterSiste10Mnd.map((annenInntekt) => ({
-            value: annenInntekt.type,
-            label: getAnnenInntektElementTitle(annenInntekt, intl),
-            type: Arbeidsforholdstype.ANDRE_INNTEKTER
-        })),
+        ...(førstegangstjeneste
+            ? [
+                  {
+                      value: førstegangstjeneste.type,
+                      label: getAnnenInntektElementTitle(førstegangstjeneste, intl),
+                      type: Arbeidsforholdstype.ANDRE_INNTEKTER
+                  }
+              ]
+            : []),
         ...(frilansInformasjon !== undefined
             ? [
                   {
