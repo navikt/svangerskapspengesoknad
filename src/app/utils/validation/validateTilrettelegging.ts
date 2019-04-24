@@ -28,11 +28,20 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 if (tilrettelegging.risikoFaktorer === undefined || tilrettelegging.risikoFaktorer.length < 3) {
                     set(tErrors, 'risikoFaktorer', Valideringsfeil.FELTET_ER_PÅKREVD);
                 }
+                if (tilrettelegging.risikoFaktorer !== undefined && tilrettelegging.risikoFaktorer.length > 2000) {
+                    set(tErrors, 'risikoFaktorer', Valideringsfeil.FELTET_KAN_VÆRE_MAX_2000_TEGN);
+                }
                 if (
                     tilrettelegging.tilretteleggingstiltak === undefined ||
                     tilrettelegging.tilretteleggingstiltak.length < 3
                 ) {
                     set(tErrors, 'tilretteleggingstiltak', Valideringsfeil.FELTET_ER_PÅKREVD);
+                }
+                if (
+                    tilrettelegging.tilretteleggingstiltak !== undefined &&
+                    tilrettelegging.tilretteleggingstiltak.length > 2000
+                ) {
+                    set(tErrors, 'tilretteleggingstiltak', Valideringsfeil.FELTET_KAN_VÆRE_MAX_2000_TEGN);
                 }
             }
 
