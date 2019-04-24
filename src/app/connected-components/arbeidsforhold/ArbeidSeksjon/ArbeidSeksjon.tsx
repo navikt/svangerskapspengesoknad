@@ -1,4 +1,4 @@
-import React, { ComponentClass, FunctionComponent, StatelessComponent, useState } from 'react';
+import React, { FunctionComponent, StatelessComponent, useState } from 'react';
 import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
@@ -48,7 +48,7 @@ interface OwnProps<T> {
         info?: string;
     };
     summaryListElementComponent: StatelessComponent<ModalSummaryProps<T>>;
-    formComponent: ComponentClass<ModalFormProps<T>>;
+    renderForm: (props: ModalFormProps<T>) => React.ReactNode;
 }
 
 type OuterProps = OwnProps<any> & InjectedIntlProps;
@@ -131,15 +131,15 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 shouldCloseOnOverlayClick={false}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 onRequestClose={() => toggleModal(false)}>
-                                <props.formComponent
-                                    endre={endre}
-                                    element={endre ? elementer[currentIndex] : undefined}
-                                    onCancel={() => toggleModal(false)}
-                                    onAdd={(arbeidsforhold: Næring | AnnenInntekt) => {
+                                {props.renderForm({
+                                    endre,
+                                    element: endre ? elementer[currentIndex] : undefined,
+                                    onCancel: () => toggleModal(false),
+                                    onAdd: (arbeidsforhold: Næring | AnnenInntekt) => {
                                         endre ? replace(currentIndex, arbeidsforhold) : push(arbeidsforhold);
                                         toggleModal(false);
-                                    }}
-                                />
+                                    }
+                                })}
                             </Modal>
                         </div>
                     );

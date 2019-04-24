@@ -149,7 +149,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         infoboksTekst={<FormattedHTMLMessage id="arbeidsforhold.selvstendig.infoboxTekst" />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.listetittel') }}
                         summaryListElementComponent={SelvstendigListElement}
-                        formComponent={SelvstendigNæringsdrivende}
+                        renderForm={(formProps) => <SelvstendigNæringsdrivende {...formProps} />}
                     />
                 </Block>
 
@@ -162,7 +162,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst intl={intl} />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.andreInntekter.listetittel') }}
                         summaryListElementComponent={AndreInntekterListElement}
-                        formComponent={AndreInntekter}
+                        renderForm={(formProps) => <AndreInntekter {...formProps} />}
                     />
                 </Block>
 
