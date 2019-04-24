@@ -13,10 +13,8 @@ export interface ArbeidsforholdSelvstendigDTO {
 }
 
 export interface ArbeidsforholdPrivatDTO {
-    type: Arbeidsforholdstype.ANDRE_INNTEKTER;
+    type: Arbeidsforholdstype.PRIVAT;
     id: string;
-    risikoFaktorer?: string;
-    tilretteleggingstiltak?: string;
 }
 
 export interface ArbeidsforholdVirksomhetDTO {
