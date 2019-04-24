@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
 import { Kjønn, Søkerinfo } from 'app/types/Søkerinfo';
 import FetchState, { FetchStatus } from 'app/types/FetchState';
 
@@ -41,14 +41,34 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
 
     const søker = getData(søkerinfo, {}).søker;
     const isLoading =
-        søkerinfo.status !== FetchStatus.SUCCESS ||
+        søkerinfo.status === FetchStatus.IN_PROGRESS ||
+        søkerinfo.status === FetchStatus.UNFETCHED ||
         kvittering.status === FetchStatus.IN_PROGRESS ||
         getErrorCode(søkerinfo) === 401;
 
     if (isLoading) {
         return <Loading />;
     } else if (søker && søker.kjønn === Kjønn.MANN) {
-        return <Feil melding={getMessage(intl, 'feilside.mann')} />;
+        return (
+            <Feil
+                tittel={getMessage(intl, 'feilside.mann.tittel')}
+                melding={getMessage(intl, 'feilside.mann.melding')}
+            />
+        );
+    } else if (kvittering.status === FetchStatus.FAILURE && getErrorCode(kvittering) !== 401) {
+        return (
+            <Feil
+                tittel={getMessage(intl, 'feilside.innsending.tittel')}
+                melding={<FormattedHTMLMessage id={'feilside.innsending.melding'} />}
+            />
+        );
+    } else if (søkerinfo.status === FetchStatus.FAILURE && getErrorCode(søkerinfo) !== 401) {
+        return (
+            <Feil
+                tittel={getMessage(intl, 'feilside.ikkeTilgjengelig.tittel')}
+                melding={getMessage(intl, 'feilside.ikkeTilgjengelig.melding')}
+            />
+        );
     } else {
         return (
             <FormikWrapper

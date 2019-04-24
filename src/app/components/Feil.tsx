@@ -5,10 +5,11 @@ import getMessage from 'common/util/i18nUtils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface Props {
-    melding: string;
+    tittel: string;
+    melding: string | React.ReactNode;
 }
 
-const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ melding, intl }) => {
+const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ tittel, melding, intl }) => {
     return (
         <Block margin="l">
             <VeilederMedSnakkeboble
@@ -18,7 +19,7 @@ const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ melding, intl }) =
                     stil: 'normal'
                 }}
                 dialog={{
-                    title: getMessage(intl, 'feilside.title'),
+                    title: getMessage(intl, tittel),
                     text: melding
                 }}
             />
