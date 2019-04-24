@@ -30,13 +30,16 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
 import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
 import { cleanupSøker } from './utils/cleanup';
-import { mapArbeidsforholdToSøknadsgrunnlag } from './utils/søknadsgrunnlagMapper';
+import {
+    mapArbeidsforholdToSøknadsgrunnlag,
+    mapArbeidsforholdToSøknadsgrunnlagOption
+} from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { AnnenInntektType } from '../../types/AnnenInntekt';
 
 import './arbeidsforhold.less';
-import { AnnenInntektType } from '../../types/AnnenInntekt';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -67,7 +70,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         andreInntekterSiste10Mnd = []
     } = cleanupSøker(søker);
 
-    const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlag(
+    const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlagOption(
         cleanupSøker(values.søker) as Søker,
         arbeidsforhold,
         intl
@@ -99,11 +102,11 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
         harHattAnnenInntektSiste10Mnd === false;
 
-    const tilrettelegging = mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging);
     const skalViseVeilederinfo = values.søknadsgrunnlag.some(
         (s: Søknadsgrunnlag) => s.type === Arbeidsforholdstype.VIRKSOMHET
     );
 
+    const tilrettelegging = mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging);
     const prepareTilrettelegging = () => {
         setFieldValue('tilrettelegging', tilrettelegging);
     };

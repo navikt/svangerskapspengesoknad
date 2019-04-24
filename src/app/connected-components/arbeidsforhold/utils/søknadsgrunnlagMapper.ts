@@ -6,7 +6,7 @@ import { InjectedIntl } from 'react-intl';
 import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
 import { AnnenInntektType } from '../../../types/AnnenInntekt';
 
-export const mapArbeidsforholdToSøknadsgrunnlag = (
+export const mapArbeidsforholdToSøknadsgrunnlagOption = (
     søker: Partial<Søker>,
     arbeidsforhold: Arbeidsforhold[],
     intl: InjectedIntl

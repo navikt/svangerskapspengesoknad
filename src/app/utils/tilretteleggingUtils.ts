@@ -15,7 +15,8 @@ import {
 
 export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag[]) => {
     return søknadsgrunnlag.map(({ id, type }) => {
-        const arbeidsgiversId = type === Arbeidsforholdstype.VIRKSOMHET ? { id } : {};
+        const arbeidsgiversId =
+            type === Arbeidsforholdstype.VIRKSOMHET || type === Arbeidsforholdstype.PRIVAT ? { id } : {};
 
         return {
             id,
