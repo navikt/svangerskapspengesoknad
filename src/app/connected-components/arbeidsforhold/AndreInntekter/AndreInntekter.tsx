@@ -32,12 +32,14 @@ import { cleanupAnnenInntekt } from '../utils/cleanup';
 const cls = BEMHelper('andre-inntekter');
 
 interface ConnectProps {
+    skjulFørstegangstjeneste?: boolean;
     vedlegg: Attachment[];
     uploadAttachment: (attachment: Attachment) => void;
     deleteAttachment: (attachment: Attachment) => void;
 }
 
 type Props = ConnectProps & ModalFormProps<AnnenInntekt> & InjectedIntlProps;
+
 const AndreInntekter: FunctionComponent<Props> = (props) => {
     const {
         endre,
@@ -49,7 +51,8 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
         intl,
         uploadAttachment,
         deleteAttachment,
-        vedlegg
+        vedlegg,
+        skjulFørstegangstjeneste
     } = props;
 
     const countries = useMemo(() => getCountries(true, false, intl), [intl]);
@@ -94,10 +97,14 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                                         value: AnnenInntektType.JOBB_I_UTLANDET,
                                         label: getMessage(intl, 'inntektstype.jobb_i_utlandet')
                                     },
-                                    {
-                                        value: AnnenInntektType.MILITÆRTJENESTE,
-                                        label: getMessage(intl, 'inntektstype.militær_eller_siviltjeneste')
-                                    }
+                                    ...(skjulFørstegangstjeneste
+                                        ? []
+                                        : [
+                                              {
+                                                  value: AnnenInntektType.MILITÆRTJENESTE,
+                                                  label: getMessage(intl, 'inntektstype.militær_eller_siviltjeneste')
+                                              }
+                                          ])
                                 ]}
                             />
                         </Block>
