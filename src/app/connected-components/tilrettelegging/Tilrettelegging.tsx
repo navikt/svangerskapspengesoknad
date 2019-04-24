@@ -213,7 +213,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                 value: Tilretteleggingstype.DELVIS
                             },
                             {
-                                label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
+                                label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting'),
                                 value: Tilretteleggingstype.HEL
                             }
                         ]}
