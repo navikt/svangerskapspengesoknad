@@ -36,6 +36,7 @@ import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 
 import './arbeidsforhold.less';
+import { AnnenInntektType } from '../../types/AnnenInntekt';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -71,6 +72,10 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         arbeidsforhold,
         intl
     );
+
+    const harLagtTilFørstegangstjeneste = søker.andreInntekterSiste10Mnd
+        ? søker.andreInntekterSiste10Mnd.some((i) => i.type === AnnenInntektType.MILITÆRTJENESTE)
+        : false;
 
     const visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon =
         harJobbetSomFrilansSiste10Mnd === false ||
@@ -149,7 +154,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         infoboksTekst={<FormattedHTMLMessage id="arbeidsforhold.selvstendig.infoboxTekst" />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.listetittel') }}
                         summaryListElementComponent={SelvstendigListElement}
-                        formComponent={SelvstendigNæringsdrivende}
+                        renderForm={(formProps) => <SelvstendigNæringsdrivende {...formProps} />}
                     />
                 </Block>
 
@@ -162,7 +167,9 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst intl={intl} />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.andreInntekter.listetittel') }}
                         summaryListElementComponent={AndreInntekterListElement}
-                        formComponent={AndreInntekter}
+                        renderForm={(formProps) => (
+                            <AndreInntekter {...formProps} skjulFørstegangstjeneste={harLagtTilFørstegangstjeneste} />
+                        )}
                     />
                 </Block>
 

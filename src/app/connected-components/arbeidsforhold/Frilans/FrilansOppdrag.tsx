@@ -2,10 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
 
-import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
+import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
 
 import BEMHelper from 'common/util/bem';
-import { Næring } from 'app/types/SelvstendigNæringsdrivende';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import Block from 'common/components/block/Block';
 import { isValid } from 'i18n-iso-countries';
@@ -15,20 +14,15 @@ import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Undertittel } from 'nav-frontend-typografi';
 import Knapperad from 'common/components/knapperad/Knapperad';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
+import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
+import { FrilansOppdrag } from '../../../types/FrilansInformasjon';
 
 import './frilansOppdrag.less';
 
 const cls = BEMHelper('frilansOppdrag');
 
-export interface ModalFormProps {
-    endre: boolean;
-    element?: any;
-    type: Oppholdstype;
-    onAdd: (næring: Næring) => void;
-    onCancel: () => void;
-}
+type Props = ModalFormProps<FrilansOppdrag> & InjectedIntlProps;
 
-type Props = ModalFormProps & InjectedIntlProps;
 const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
     const { endre, onCancel, element = {}, onAdd, intl } = props;
 
