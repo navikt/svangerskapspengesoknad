@@ -3,11 +3,11 @@ import Veileder, { VeilederProps } from '../veileder/Veileder';
 import PersonMedSnakkeboble from 'common/components/person-med-snakkeboble/PersonMedSnakkeboble';
 
 interface Props {
-    dialog?: Dialog;
+    dialog?: VeilederMedSnakkebobleDialog;
     veileder?: VeilederProps;
 }
 
-interface Dialog {
+export interface VeilederMedSnakkebobleDialog {
     title: string;
     text: string | React.ReactNode;
 }
