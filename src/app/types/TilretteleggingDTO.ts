@@ -8,7 +8,6 @@ export interface ArbeidsforholdFrilansDTO {
 
 export interface ArbeidsforholdSelvstendigDTO {
     type: Arbeidsforholdstype.SELVSTENDIG;
-    id: string;
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 }

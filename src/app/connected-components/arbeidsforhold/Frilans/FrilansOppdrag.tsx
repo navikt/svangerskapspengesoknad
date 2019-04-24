@@ -14,9 +14,9 @@ import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Undertittel } from 'nav-frontend-typografi';
 import Knapperad from 'common/components/knapperad/Knapperad';
+import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 import './frilansOppdrag.less';
-import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 
 const cls = BEMHelper('frilansOppdrag');
 
@@ -30,15 +30,7 @@ export interface ModalFormProps {
 
 type Props = ModalFormProps & InjectedIntlProps;
 const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
-    const {
-        endre,
-        onCancel,
-        element = {
-            næringstyper: []
-        },
-        onAdd,
-        intl
-    } = props;
+    const { endre, onCancel, element = {}, onAdd, intl } = props;
 
     return (
         <Formik

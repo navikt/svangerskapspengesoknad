@@ -26,7 +26,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
     const isSøknadAvailable = isNextStepAvailable({ path: AppRoute.INTRO }, values);
     const isNextAvailable = (step: StepID) => isNextStepAvailable({ path: AppRoute.SØKNAD, step }, values);
 
-    const tilretteleggingRoutes = values.søknadsgrunnlag.map(({ id }) => {
+    const tilretteleggingRoutes = values.tilrettelegging.map(({ id }) => {
         const søknadStep = {
             step: StepID.TILRETTELEGGING,
             subStep: id

@@ -48,6 +48,7 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
                         name="informasjonOmUtenlandsopphold.iNorgeSiste12Mnd"
                         land="informasjonOmUtenlandsopphold.tidligereOpphold"
                         legend={getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.label')}
+                        infoboksTekst={getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.infoboxTekst')}
                         labels={{
                             ja: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.ja'),
                             nei: getMessage(intl, 'utenlandsopphold.iNorgeSiste12Mnd.nei')
@@ -60,6 +61,7 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
                         name="informasjonOmUtenlandsopphold.iNorgeNeste12Mnd"
                         land="informasjonOmUtenlandsopphold.senereOpphold"
                         legend={getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.label')}
+                        infoboksTekst={getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.infoboxTekst')}
                         labels={{
                             ja: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.ja'),
                             nei: getMessage(intl, 'utenlandsopphold.iNorgeNeste12Mnd.nei')

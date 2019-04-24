@@ -32,6 +32,8 @@ import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement'
 import { cleanupSøker } from './utils/cleanup';
 import { mapArbeidsToSøknadsgrunnlag } from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
+import { Søknadsgrunnlag } from 'app/types/Søknad';
+import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 
 import './arbeidsforhold.less';
 
@@ -92,11 +94,13 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false &&
         harHattAnnenInntektSiste10Mnd === false;
 
+    const tilrettelegging = mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging);
+    const skalViseVeilederinfo = values.søknadsgrunnlag.some(
+        (s: Søknadsgrunnlag) => s.type === Arbeidsforholdstype.VIRKSOMHET
+    );
+
     const prepareTilrettelegging = () => {
-        setFieldValue(
-            'tilrettelegging',
-            mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging)
-        );
+        setFieldValue('tilrettelegging', tilrettelegging);
     };
 
     const cleanupArbeidsforhold = () => {
@@ -106,7 +110,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const navigate = () => {
         cleanupArbeidsforhold();
         prepareTilrettelegging();
-        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, values.søknadsgrunnlag[0].id);
+        const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, tilrettelegging[0].id);
         navigateTo(pathToFirstTilrettelegging, history);
     };
 
@@ -134,15 +138,6 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
                 </Block>
 
-                <Block margin="s">
-                    <Veilederinfo type="info" stil="kompakt">
-                        {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
-                            // TODO: Hva er riktig dato her?
-                            datoTidligst: moment().format('DD.MM.YYYY')
-                        })}
-                    </Veilederinfo>
-                </Block>
-
                 <FrilansSpørsmål formikProps={formikProps} />
 
                 <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
@@ -151,7 +146,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         listName="søker.selvstendigNæringsdrivendeInformasjon"
                         legend={getMessage(intl, 'arbeidsforhold.selvstendig.erSelvstendigNæringsdrivende')}
                         buttonLabel={getMessage(intl, 'leggtil')}
-                        infoboksTekst={getMessage(intl, 'arbeidsforhold.selvstendig.infoboxTekst')}
+                        infoboksTekst={<FormattedHTMLMessage id="arbeidsforhold.selvstendig.infoboxTekst" />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.listetittel') }}
                         summaryListElementComponent={SelvstendigListElement}
                         formComponent={SelvstendigNæringsdrivende}
@@ -178,6 +173,16 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         options={søknadsgrunnlagOptions}
                     />
                 </Block>
+
+                <Block visible={skalViseVeilederinfo} margin="s">
+                    <Veilederinfo type="info" stil="kompakt">
+                        {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
+                            // TODO: Hva er riktig dato her?
+                            datoTidligst: moment().format('DD.MM.YYYY')
+                        })}
+                    </Veilederinfo>
+                </Block>
+
                 <Block visible={visIngenArbeidsforholdVeileder}>
                     <Veilederinfo type="advarsel">
                         <FormattedHTMLMessage id="arbeidsforhold.veileder.ingenArbeidsforhold" />

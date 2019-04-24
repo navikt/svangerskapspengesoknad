@@ -39,7 +39,7 @@ export const mergeSøknadsgrunnlagIntoTilrettelegging = (
         )
     );
 
-    return [...nyeTilrettelegginger, ...existingTilrettelegging];
+    return [...existingTilrettelegging, ...nyeTilrettelegginger];
 };
 
 const mapHelTilrettelegging = (
@@ -105,7 +105,6 @@ const mapArbeidsforholdForTilrettelegging = (
         case Arbeidsforholdstype.SELVSTENDIG:
             return {
                 type: Arbeidsforholdstype.SELVSTENDIG,
-                id: fnr,
                 risikoFaktorer: tilrettelegging.risikoFaktorer,
                 tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak
             };

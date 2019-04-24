@@ -20,6 +20,7 @@ interface OwnProps {
     land: string;
     type: Oppholdstype;
     legend: string;
+    infoboksTekst: string;
     labels: {
         ja: string;
         nei: string;
@@ -30,7 +31,7 @@ type OuterProps = OwnProps & InjectedIntlProps;
 type Props = OuterProps & FormikProps;
 
 const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
-    const { formik, name, land, legend, labels, type, intl } = props;
+    const { formik, name, land, legend, labels, type, intl, infoboksTekst } = props;
     const visLandvelger = get(formik.values, name) === false;
 
     const alleOpphold: Utenlandsopphold[] = get(formik.values, land);
@@ -53,7 +54,13 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
     return (
         <>
             <Block margin="xs">
-                <JaNeiSpørsmål twoColumns={true} name={name} legend={legend} labels={labels} />
+                <JaNeiSpørsmål
+                    twoColumns={true}
+                    name={name}
+                    legend={legend}
+                    labels={labels}
+                    infoboksTekst={infoboksTekst}
+                />
             </Block>
             <FieldArray
                 name={land}

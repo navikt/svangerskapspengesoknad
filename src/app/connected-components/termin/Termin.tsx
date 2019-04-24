@@ -12,6 +12,7 @@ import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import * as moment from 'moment';
 
 interface OwnProps {
     step: SøknadStep;
@@ -22,13 +23,22 @@ type Props = OwnProps & InjectedIntlProps & HistoryProps;
 
 const Termin: FunctionComponent<Props> = (props) => {
     const { step, formikProps, intl, history } = props;
-    const { values } = formikProps;
+    const { values, setFieldValue } = formikProps;
 
-    const navigate = () => {
-        navigateTo(getSøknadStepPath(StepID.ARBEIDSFORHOLD), history);
+    const erTermindatoFør4UkerFremITid = moment(values.barn.termindato).isBefore(moment().add(4, 'weeks'));
+    const showNesteknapp =
+        values.barn.erBarnetFødt === false ||
+        values.barn.fødselsdato !== undefined ||
+        (!erTermindatoFør4UkerFremITid && values.barn.erBarnetFødt !== undefined);
+
+    const cleanupTermin = () => {
+        return { ...values.barn, fødselsdato: erTermindatoFør4UkerFremITid ? values.barn.fødselsdato : undefined };
     };
 
-    const showNesteknapp = values.barn.erBarnetFødt === false || values.barn.fødselsdato !== undefined;
+    const navigate = () => {
+        setFieldValue('barn', cleanupTermin());
+        navigateTo(getSøknadStepPath(StepID.ARBEIDSFORHOLD), history);
+    };
 
     return (
         <Applikasjonsside visTittel={true} visSpråkvelger={true}>
@@ -44,7 +54,7 @@ const Termin: FunctionComponent<Props> = (props) => {
                 <Block visible={values.barn.termindato !== undefined}>
                     <JaNeiSpørsmål name="barn.erBarnetFødt" legend={getMessage(intl, 'termin.erBarnetFødt')} />
                 </Block>
-                <Block visible={values.barn.erBarnetFødt === true}>
+                <Block visible={values.barn.erBarnetFødt === true && erTermindatoFør4UkerFremITid}>
                     <DatoInput
                         name="barn.fødselsdato"
                         label={getMessage(intl, 'termin.fødselsdato')}

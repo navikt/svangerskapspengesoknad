@@ -17,18 +17,18 @@ import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import Block from 'common/components/block/Block';
 import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
-import Oppsummeringspunkt from './Oppsummeringspunkt';
+import Oppsummeringspunkt from './components/Oppsummeringspunkt';
 import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import Tilrettelegging from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import TilretteleggingOppsummering from './components/TilretteleggingOppsummering';
-import ArbeidsforholdOppsummering from './components/ArbeidsforholdOppsummering';
+import TilretteleggingOppsummering from './components/tilrettelegging/TilretteleggingOppsummering';
+import ArbeidsforholdOppsummering from './components/arbeidsforhold/ArbeidsforholdOppsummering';
+import MedlemskapOppsummering from './components/medlemskap/MedlemskapOppsummering';
+import TerminOppsummering from './components/termin/TerminOppsummering';
+import SøknadDTO from '../../types/S\u00F8knad';
 
 import './oppsummering.less';
-import MedlemskapOppsummering from './MedlemskapOppsummering';
-import TerminOppsummering from './TerminOppsummering';
-import SøknadDTO from '../../types/Søknad';
 
 interface OwnProps {
     step: SøknadStep;
@@ -99,7 +99,10 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
                     <ArbeidsforholdOppsummering
                         arbeidsforhold={arbeidsforhold}
+                        frilansInformasjon={values.søker.frilansInformasjon}
+                        selvstendigInformasjon={values.søker.selvstendigNæringsdrivendeInformasjon}
                         søknadsgrunnlag={values.søknadsgrunnlag}
+                        andreInntekter={values.søker.andreInntekterSiste10Mnd}
                         harHattAndreInntektskilder={values.søker.harHattAnnenInntektSiste10Mnd!}
                         harJobbetFrilans={values.søker.harJobbetSomFrilansSiste10Mnd!}
                         harJobbetSomSelvstendigNæringsdrivende={

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
 
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import getMessage from 'common/util/i18nUtils';
@@ -36,7 +36,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                     twoColumns={true}
                     name="søker.harJobbetSomFrilansSiste10Mnd"
                     legend={getMessage(intl, 'arbeidsforhold.frilans.erFrilanser')}
-                    infoboksTekst={getMessage(intl, 'arbeidsforhold.frilans.erFrilanser.infoboksTekst')}
+                    infoboksTekst={<FormattedHTMLMessage id={'arbeidsforhold.frilans.erFrilanser.infoboksTekst'} />}
                 />
             </Block>
 

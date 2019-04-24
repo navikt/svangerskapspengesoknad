@@ -131,18 +131,26 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </Block>
                     <Textarea
                         name={getInputName('risikoFaktorer')}
-                        label="Hva kan skade det ufødte barnet i jobben din som frilanser?"
+                        label={getMessage(intl, 'tilrettelegging.frilans.risikoFaktorer')}
                     />
                 </Block>
                 <Block visible={visVedlegg}>
                     <Block>
                         <Veilederinfo stil="kompakt" type="info">
-                            <FormattedHTMLMessage id="tilrettelegging.veileder.vedlegg" />
+                            <FormattedHTMLMessage
+                                id={
+                                    visFrilansEllerSelvstendig
+                                        ? 'tilrettelegging.veileder.vedlegg.frilansSN'
+                                        : 'tilrettelegging.veileder.vedlegg'
+                                }
+                            />
                         </Veilederinfo>
                     </Block>
                     <Block
                         header={{
-                            title: getMessage(intl, 'tilrettelegging.vedlegg.label')
+                            title: visFrilansEllerSelvstendig
+                                ? getMessage(intl, 'tilrettelegging.vedlegg.label.frilansSN')
+                                : getMessage(intl, 'tilrettelegging.vedlegg.label')
                         }}>
                         <FieldArray
                             name={getInputName('vedlegg')}
@@ -179,7 +187,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             />
                         </Veilederinfo>
                     </Block>
-                    <Block header={{ title: 'Del 1', stil: 'seksjon' }}>
+                    <Block header={{ title: getMessage(intl, 'tilrettelegging.del1'), stil: 'seksjon' }}>
                         <Block margin="xs">
                             <DatoInput
                                 name={getInputName('behovForTilretteleggingFom')}
@@ -190,22 +198,22 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         </Block>
                     </Block>
                 </Block>
-                <Block header={{ title: 'Del 2', stil: 'seksjon' }} visible={visDel2}>
+                <Block header={{ title: getMessage(intl, 'tilrettelegging.del2'), stil: 'seksjon' }} visible={visDel2}>
                     <CheckboksPanelGruppe
-                        label="Hvordan kan du jobbe mens du er gravid?"
+                        label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')}
                         name={tilretteleggingstypeName}
                         columns={1}
                         options={[
                             {
-                                label: 'a) Du kan fortsette med samme stillingsprosent',
+                                label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
                                 value: Tilretteleggingstype.INGEN
                             },
                             {
-                                label: 'b) Du kan fortsette med redusert arbeidstid',
+                                label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis'),
                                 value: Tilretteleggingstype.DELVIS
                             },
                             {
-                                label: 'c) Du må midlertidig gå ut av ditt arbeid',
+                                label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
                                 value: Tilretteleggingstype.HEL
                             }
                         ]}
@@ -213,11 +221,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 </Block>
                 <Block
                     visible={visIngenTilrettelegging}
-                    header={{ title: 'a) Du kan fortsette å jobbe med samme stillingsprosent' }}>
+                    header={{ title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt') }}>
                     <InfoBlock>
                         <DatoInput
                             name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
-                            label={'Fra hvilken dato kan du fortsette med samme stillingsprosent?'}
+                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål')}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
                                 maksDato: values.barn.fødselsdato
@@ -228,7 +236,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block
                     visible={visDelvisTilrettelegging}
                     header={{
-                        title: 'b) Du kan fortsette med redusert arbeidstid'
+                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis')
                     }}>
                     <InfoBlock>
                         <Block margin="s">
@@ -245,7 +253,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         </Block>
                         <DatoInput
                             name={getInputName('delvisTilrettelegging.tilrettelagtArbeidFom')}
-                            label={'Fra hvilken dato kan du jobbe redusert?'}
+                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål')}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
                                 maksDato: values.barn.fødselsdato
@@ -256,12 +264,12 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block
                     visible={visHelTilrettelegging}
                     header={{
-                        title: 'c) Du må midlertidlig gå ut av ditt arbeid'
+                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting')
                     }}>
                     <InfoBlock>
                         <DatoInput
                             name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
-                            label={'Fra hvilken dato må du gå midlertidig ut av ditt arbeid?'}
+                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål')}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
                                 maksDato: values.barn.fødselsdato
@@ -272,7 +280,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block visible={visTiltakForTilrettelegging}>
                     <Textarea
                         name={getInputName('tilretteleggingstiltak')}
-                        label="Hvilke tiltak for tilrettelegging av arbeidssituasjonen din har du vurdert?"
+                        label={getMessage(intl, 'tilrettelegging.tiltak')}
                     />
                 </Block>
             </FormikStep>

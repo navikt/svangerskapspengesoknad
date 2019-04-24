@@ -16,6 +16,11 @@ interface Props {
     arbeidsforholdOppsummering?: boolean;
     frilansOppsummering?: boolean;
     selvstendigOppsummering?: boolean;
+    endringAvNæringsinntekt?: boolean;
+    harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene?: boolean;
+    harRegnskapsfører?: boolean;
+    harRevisor?: boolean;
+    kanInnhenteOpplsyningerFraRevisor?: boolean;
 }
 
 const DuHarSvartNeiListe: FunctionComponent<Props> = ({
@@ -27,7 +32,12 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
     hattOppdragForNærVennEllerFamilie,
     arbeidsforholdOppsummering,
     frilansOppsummering,
-    selvstendigOppsummering
+    selvstendigOppsummering,
+    endringAvNæringsinntekt,
+    harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene,
+    harRegnskapsfører,
+    harRevisor,
+    kanInnhenteOpplsyningerFraRevisor
 }) => {
     return (
         <div>
@@ -61,6 +71,31 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
                     </li>
                 )}
                 {frilansOppsummering && !hattOppdragForNærVennEllerFamilie && (
+                    <li>
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                    </li>
+                )}
+                {selvstendigOppsummering && !endringAvNæringsinntekt && (
+                    <li>
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                    </li>
+                )}
+                {selvstendigOppsummering && !harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene && (
+                    <li>
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                    </li>
+                )}
+                {selvstendigOppsummering && !harRegnskapsfører && (
+                    <li>
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                    </li>
+                )}
+                {selvstendigOppsummering && !harRevisor && (
+                    <li>
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                    </li>
+                )}
+                {selvstendigOppsummering && !kanInnhenteOpplsyningerFraRevisor && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
                     </li>
