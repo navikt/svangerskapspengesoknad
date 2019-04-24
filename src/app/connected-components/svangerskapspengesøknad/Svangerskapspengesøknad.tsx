@@ -41,7 +41,8 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
 
     const søker = getData(søkerinfo, {}).søker;
     const isLoading =
-        søkerinfo.status !== FetchStatus.SUCCESS ||
+        søkerinfo.status === FetchStatus.IN_PROGRESS ||
+        søkerinfo.status === FetchStatus.UNFETCHED ||
         kvittering.status === FetchStatus.IN_PROGRESS ||
         getErrorCode(søkerinfo) === 401;
 
@@ -49,6 +50,10 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
         return <Loading />;
     } else if (søker && søker.kjønn === Kjønn.MANN) {
         return <Feil melding={getMessage(intl, 'feilside.mann')} />;
+    } else if (kvittering.status === FetchStatus.FAILURE && getErrorCode(kvittering) !== 401) {
+        return <Feil melding={getMessage(intl, 'feilside.innsending')} />;
+    } else if (søkerinfo.status === FetchStatus.FAILURE && getErrorCode(søkerinfo) !== 401) {
+        return <Feil melding={getMessage(intl, 'feilside.generell')} />;
     } else {
         return (
             <FormikWrapper
