@@ -30,10 +30,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
 import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
 import { cleanupSøker } from './utils/cleanup';
-import {
-    mapArbeidsforholdToSøknadsgrunnlag,
-    mapArbeidsforholdToSøknadsgrunnlagOption
-} from './utils/søknadsgrunnlagMapper';
+import { mapArbeidsforholdToSøknadsgrunnlagOption } from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
