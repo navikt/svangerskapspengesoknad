@@ -5,11 +5,11 @@ import getMessage from 'common/util/i18nUtils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface Props {
-    tittel?: string;
+    tittel: string;
     melding: string | React.ReactNode;
 }
 
-const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ tittel = 'feilside.tittel', melding, intl }) => {
+const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ tittel, melding, intl }) => {
     return (
         <Block margin="l">
             <VeilederMedSnakkeboble

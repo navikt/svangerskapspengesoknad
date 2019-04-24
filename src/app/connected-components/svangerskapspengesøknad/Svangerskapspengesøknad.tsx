@@ -51,7 +51,7 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
     } else if (søker && søker.kjønn === Kjønn.MANN) {
         return (
             <Feil
-                tittel={getMessage(intl, 'feilside.menn.tittel')}
+                tittel={getMessage(intl, 'feilside.mann.tittel')}
                 melding={getMessage(intl, 'feilside.mann.melding')}
             />
         );
