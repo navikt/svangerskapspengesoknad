@@ -96,6 +96,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                         <div className={cls.block}>
                             <Block
                                 margin="none"
+                                marginTop={summaryListTitle ? 's' : undefined}
                                 visible={elementer.length > 0 && visLeggTilKnapp}
                                 header={summaryListTitle}>
                                 <List
@@ -103,7 +104,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     renderElement={(element, index: number) => {
                                         return (
                                             <props.summaryListElementComponent
-                                                key={element + index}
+                                                key={`${listName}-${index}`}
                                                 intl={intl}
                                                 element={element}
                                                 onEdit={openModalForEditing(index)}

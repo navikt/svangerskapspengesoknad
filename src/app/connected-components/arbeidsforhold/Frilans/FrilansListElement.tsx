@@ -8,6 +8,7 @@ import getMessage from 'common/util/i18nUtils';
 const FrilansListElement: StatelessComponent<ModalSummaryProps<FrilansOppdrag>> = ({ element, intl, ...rest }) => {
     return (
         <InteractiveListElement
+            style="grayWithBorder"
             title={element.navnPåArbeidsgiver}
             text={prettifyTidsperiode(element.tidsperiode)}
             deleteLinkText={getMessage(intl, 'utenlandsopphold.land.slett')}

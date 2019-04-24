@@ -73,6 +73,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                                     buttonLabel={getMessage(intl, 'leggtil')}
                                     summaryListElementComponent={FrilansListElement}
                                     formComponent={FrilansOppdrag}
+                                    summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.frilans.listetittel') }}
                                 />
                             </Block>
 

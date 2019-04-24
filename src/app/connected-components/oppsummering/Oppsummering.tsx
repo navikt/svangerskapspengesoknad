@@ -24,11 +24,11 @@ import Tilrettelegging from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import TilretteleggingOppsummering from './components/tilrettelegging/TilretteleggingOppsummering';
 import ArbeidsforholdOppsummering from './components/arbeidsforhold/ArbeidsforholdOppsummering';
-
-import './oppsummering.less';
 import MedlemskapOppsummering from './components/medlemskap/MedlemskapOppsummering';
 import TerminOppsummering from './components/termin/TerminOppsummering';
 import SøknadDTO from '../../types/S\u00F8knad';
+
+import './oppsummering.less';
 
 interface OwnProps {
     step: SøknadStep;

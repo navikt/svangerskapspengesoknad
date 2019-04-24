@@ -66,6 +66,12 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         andreInntekterSiste10Mnd = []
     } = cleanupSøker(søker);
 
+    const søknadsgrunnlagOptions = mapArbeidsToSøknadsgrunnlag(
+        cleanupSøker(values.søker) as Søker,
+        arbeidsforhold,
+        intl
+    );
+
     const visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon =
         harJobbetSomFrilansSiste10Mnd === false ||
         (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined);
@@ -80,7 +86,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         visharHattAnnenInntektSiste10MndSeksjon &&
         ((harHattAnnenInntektSiste10Mnd === true && andreInntekterSiste10Mnd.length! > 0) ||
             harHattAnnenInntektSiste10Mnd === false) &&
-        mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold).length > 0;
+        søknadsgrunnlagOptions.length > 0;
 
     const visIngenArbeidsforholdVeileder =
         arbeidsforhold.length === 0 &&
@@ -141,7 +147,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         legend={getMessage(intl, 'arbeidsforhold.selvstendig.erSelvstendigNæringsdrivende')}
                         buttonLabel={getMessage(intl, 'leggtil')}
                         infoboksTekst={<FormattedHTMLMessage id="arbeidsforhold.selvstendig.infoboxTekst" />}
-                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.dineVirksomheter') }}
+                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.listetittel') }}
                         summaryListElementComponent={SelvstendigListElement}
                         formComponent={SelvstendigNæringsdrivende}
                     />
@@ -154,6 +160,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         legend={getMessage(intl, 'arbeidsforhold.andreInntekter')}
                         buttonLabel={getMessage(intl, 'leggtil')}
                         infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst intl={intl} />}
+                        summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.andreInntekter.listetittel') }}
                         summaryListElementComponent={AndreInntekterListElement}
                         formComponent={AndreInntekter}
                     />
@@ -163,7 +170,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <VelgSøknadsgrunnlag
                         name="søknadsgrunnlag"
                         label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}
-                        options={mapArbeidsToSøknadsgrunnlag(cleanupSøker(values.søker) as Søker, arbeidsforhold)}
+                        options={søknadsgrunnlagOptions}
                     />
                 </Block>
 
