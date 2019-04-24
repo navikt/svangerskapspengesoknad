@@ -206,7 +206,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         options={[
                             {
                                 label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
-                                value: Tilretteleggingstype.INGEN
+                                value: Tilretteleggingstype.HEL
                             },
                             {
                                 label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis'),
@@ -214,7 +214,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             },
                             {
                                 label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting'),
-                                value: Tilretteleggingstype.HEL
+                                value: Tilretteleggingstype.INGEN
                             }
                         ]}
                     />
