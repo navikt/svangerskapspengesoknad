@@ -75,15 +75,12 @@ export const parsePathFromLocation = (location: Location): SøknadRoute => {
     };
 };
 
-export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]) => {
+export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]): string | undefined => {
     const matchingArbeidsforhold = arbeidsforhold.find((forhold) => forhold.arbeidsgiverId === arbeidsgiverId);
-    let arbeidsgiverLabel: string = arbeidsgiverId;
-
     if (matchingArbeidsforhold) {
-        arbeidsgiverLabel = matchingArbeidsforhold.arbeidsgiverNavn;
+        return matchingArbeidsforhold.arbeidsgiverNavn;
     }
-
-    return arbeidsgiverLabel;
+    return undefined;
 };
 
 export const isNextStepAvailable = (route: SøknadRoute, values: UferdigSøknad): boolean =>

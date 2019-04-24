@@ -61,13 +61,16 @@ const Step: FunctionComponent<Props> = (props) => {
     };
 
     const currentStep = parsePathFromLocation(history.location);
+    const arbeidsgiversNavn = currentStep.subStep
+        ? finnArbeidsgiversNavn(currentStep.subStep, arbeidsforhold)
+        : undefined;
     const stegForStegIndikator = allSøknadSteps.map((otherStep, index) => {
         return {
             index,
             aktiv: otherStep.step === currentStep.step && otherStep.subStep === currentStep.subStep,
             label:
                 otherStep.step === StepID.TILRETTELEGGING && otherStep.subStep
-                    ? finnArbeidsgiversNavn(otherStep.subStep, arbeidsforhold)
+                    ? arbeidsgiversNavn || getMessage(intl, `stegtittel.${otherStep.subStep}`)
                     : getMessage(intl, `stegtittel.${otherStep.step}`)
         };
     });
@@ -79,7 +82,7 @@ const Step: FunctionComponent<Props> = (props) => {
             </h1>
             {currentStep.subStep && (
                 <Undertittel className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
-                    {finnArbeidsgiversNavn(currentStep.subStep, arbeidsforhold)}
+                    {arbeidsgiversNavn || getMessage(intl, `stegtittel.${currentStep.subStep}`)}
                 </Undertittel>
             )}
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
