@@ -54,7 +54,7 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
                         <Block margin="xs">
                             <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
                         </Block>
-                        <Lenke href="#" target="_blank">
+                        <Lenke href="https://foreldrepengeplanlegger.nav.no/" target="_blank">
                             <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
                         </Lenke>
                     </Panel>
