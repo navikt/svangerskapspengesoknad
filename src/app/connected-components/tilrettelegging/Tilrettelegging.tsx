@@ -220,11 +220,13 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     />
                 </Block>
                 <Block
-                    visible={visIngenTilrettelegging}
-                    header={{ title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt') }}>
+                    visible={visHelTilrettelegging}
+                    header={{
+                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt')
+                    }}>
                     <InfoBlock>
                         <DatoInput
-                            name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
+                            name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
                             label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål')}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
@@ -262,13 +264,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </InfoBlock>
                 </Block>
                 <Block
-                    visible={visHelTilrettelegging}
-                    header={{
-                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting')
-                    }}>
+                    visible={visIngenTilrettelegging}
+                    header={{ title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting') }}>
                     <InfoBlock>
                         <DatoInput
-                            name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
+                            name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
                             label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål')}
                             datoAvgrensinger={{
                                 minDato: tilrettelegging.behovForTilretteleggingFom,
