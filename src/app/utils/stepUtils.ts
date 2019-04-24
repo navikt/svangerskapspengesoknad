@@ -7,6 +7,8 @@ import { Søknadsgrunnlag, UferdigSøknad } from 'app/types/Søknad';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import validateSøknad from './validation/validateSøknad';
+import { InjectedIntl } from 'react-intl';
+import getMessage from 'common/util/i18nUtils';
 
 export const getSøknadStepPath = (step: StepID, subStep?: string) => {
     const path = `${AppRoute.SØKNAD}/${step}`;
@@ -75,15 +77,16 @@ export const parsePathFromLocation = (location: Location): SøknadRoute => {
     };
 };
 
-export const finnArbeidsgiversNavn = (arbeidsgiverId: string, arbeidsforhold: Arbeidsforhold[]) => {
+export const finnArbeidsforholdNavn = (
+    arbeidsgiverId: string,
+    arbeidsforhold: Arbeidsforhold[],
+    intl: InjectedIntl
+): string => {
     const matchingArbeidsforhold = arbeidsforhold.find((forhold) => forhold.arbeidsgiverId === arbeidsgiverId);
-    let arbeidsgiverLabel: string = arbeidsgiverId;
-
     if (matchingArbeidsforhold) {
-        arbeidsgiverLabel = matchingArbeidsforhold.arbeidsgiverNavn;
+        return matchingArbeidsforhold.arbeidsgiverNavn;
     }
-
-    return arbeidsgiverLabel;
+    return getMessage(intl, `stegtittel.${arbeidsgiverId}`);
 };
 
 export const isNextStepAvailable = (route: SøknadRoute, values: UferdigSøknad): boolean =>

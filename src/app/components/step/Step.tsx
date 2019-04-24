@@ -13,10 +13,10 @@ import { FetchStatus } from 'app/types/FetchState';
 import { navigateTo } from 'app/utils/navigationUtils';
 import {
     parsePathFromLocation,
-    finnArbeidsgiversNavn,
     getAllSteps,
     getAdjacentSteps,
-    getSøknadStepPath
+    getSøknadStepPath,
+    finnArbeidsforholdNavn
 } from 'app/utils/stepUtils';
 import { State } from 'app/redux/store';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
@@ -67,7 +67,7 @@ const Step: FunctionComponent<Props> = (props) => {
             aktiv: otherStep.step === currentStep.step && otherStep.subStep === currentStep.subStep,
             label:
                 otherStep.step === StepID.TILRETTELEGGING && otherStep.subStep
-                    ? finnArbeidsgiversNavn(otherStep.subStep, arbeidsforhold)
+                    ? finnArbeidsforholdNavn(otherStep.subStep, arbeidsforhold, intl)
                     : getMessage(intl, `stegtittel.${otherStep.step}`)
         };
     });
@@ -79,7 +79,7 @@ const Step: FunctionComponent<Props> = (props) => {
             </h1>
             {currentStep.subStep && (
                 <Undertittel className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
-                    {finnArbeidsgiversNavn(currentStep.subStep, arbeidsforhold)}
+                    {finnArbeidsforholdNavn(currentStep.subStep, arbeidsforhold, intl)}
                 </Undertittel>
             )}
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>

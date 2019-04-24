@@ -19,7 +19,6 @@ interface SøknadDTO {
     tilrettelegging: TilretteleggingDTO[];
     søker: Søker;
 }
-
 export interface UferdigSøknad {
     harGodkjentVilkår: boolean;
     harGodkjentOppsummering: boolean;

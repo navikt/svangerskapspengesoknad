@@ -9,7 +9,7 @@ import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
-import { finnArbeidsgiversNavn, getSøknadStepPath, getAllSteps, getAdjacentSteps } from 'app/utils/stepUtils';
+import { finnArbeidsforholdNavn, getSøknadStepPath, getAllSteps, getAdjacentSteps } from 'app/utils/stepUtils';
 import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
@@ -52,7 +52,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
     const index = values.tilrettelegging.findIndex((t) => t.id === id);
     const tilrettelegging = values.tilrettelegging[index];
-    const arbeidsgiversNavn = finnArbeidsgiversNavn(id, arbeidsforhold);
+    const arbeidsgiversNavn = finnArbeidsforholdNavn(id, arbeidsforhold, intl);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 
     const erFrilans = tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER;
