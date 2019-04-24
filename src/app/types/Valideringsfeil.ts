@@ -12,7 +12,8 @@ enum Valideringsfeil {
     UGYLDIG_ORGANISASJONSNUMMER = 'ugyldigOrganisasjonsnummer',
     MÅ_VÆRE_HELTALL = 'måVæreHeltall',
     MÅ_BESTÅ_AV_9_SIFFER = 'måBeståAv9Siffer',
-    FELTET_KAN_VÆRE_MAX_100_TEGN = 'feltetKanVæreMax100Tegn'
+    FELTET_KAN_VÆRE_MAX_100_TEGN = 'feltetKanVæreMax100Tegn',
+    FELTET_KAN_VÆRE_MAX_2000_TEGN = 'feltetKanVæreMax2000Tegn'
 }
 
 export default Valideringsfeil;
