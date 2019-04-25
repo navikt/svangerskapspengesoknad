@@ -26,7 +26,10 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
         oppstartsdato: formikProps.values.søker.harJobbetSomFrilansSiste10Mnd === true,
         jobberFremdelesSomFrilans: !_.isUndefined(normalisertFrilansinfo.oppstart),
         harJobbetForNærVennEllerFamilieSiste10Mnd: !_.isUndefined(normalisertFrilansinfo.jobberFremdelesSomFrilans),
-        driverFosterhjem: !_.isUndefined(normalisertFrilansinfo.harJobbetForNærVennEllerFamilieSiste10Mnd)
+        driverFosterhjem:
+            normalisertFrilansinfo.harJobbetForNærVennEllerFamilieSiste10Mnd === false ||
+            (normalisertFrilansinfo.oppdragForNæreVennerEllerFamilieSiste10Mnd !== undefined &&
+                normalisertFrilansinfo.oppdragForNæreVennerEllerFamilieSiste10Mnd.length > 0)
     };
 
     return (

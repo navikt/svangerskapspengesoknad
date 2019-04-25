@@ -79,7 +79,12 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
     const visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon =
         harJobbetSomFrilansSiste10Mnd === false ||
-        (frilansInformasjon !== undefined && frilansInformasjon.driverFosterhjem !== undefined);
+        (frilansInformasjon !== undefined &&
+            (frilansInformasjon.harJobbetForNærVennEllerFamilieSiste10Mnd === false ||
+                (frilansInformasjon.harJobbetForNærVennEllerFamilieSiste10Mnd === true &&
+                    frilansInformasjon.oppdragForNæreVennerEllerFamilieSiste10Mnd !== undefined &&
+                    frilansInformasjon.oppdragForNæreVennerEllerFamilieSiste10Mnd.length > 0)) &&
+            frilansInformasjon.driverFosterhjem !== undefined);
 
     const visharHattAnnenInntektSiste10MndSeksjon =
         (visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon &&
