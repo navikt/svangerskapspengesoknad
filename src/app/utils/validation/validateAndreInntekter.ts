@@ -20,6 +20,18 @@ const validateAndreInntekter = () => (annenInntekt: Partial<AnnenInntekt>): Anne
         if (!annenInntekt.arbeidsgiverNavn) {
             (errors as FormikErrors<JobbIUtlandetInntekt>).arbeidsgiverNavn = Valideringsfeil.FELTET_ER_PÅKREVD;
         }
+
+        if (annenInntekt.arbeidsgiverNavn && annenInntekt.arbeidsgiverNavn.length > 100) {
+            (errors as FormikErrors<JobbIUtlandetInntekt>).arbeidsgiverNavn =
+                Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN;
+        }
+
+        if (
+            annenInntekt.tidsperiode === undefined ||
+            (annenInntekt.tidsperiode !== undefined && annenInntekt.tidsperiode.fom === undefined)
+        ) {
+            errors.tidsperiode = { fom: Valideringsfeil.FELTET_ER_PÅKREVD };
+        }
     }
     return errors;
 };
