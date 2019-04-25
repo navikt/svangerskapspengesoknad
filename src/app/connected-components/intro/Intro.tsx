@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 import { CustomFormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
@@ -23,6 +23,8 @@ import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
+import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
+import DocumentIkon from 'app/icons/DocumentIkon';
 
 const cls = BEMHelper('intro');
 
@@ -59,9 +61,9 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                 <Innholdstittel className="blokk-xs">
                     <FormattedMessage id="intro.tittel" />
                 </Innholdstittel>
-                <Ingress className="blokk-l">
-                    <FormattedMessage id="intro.ingress" />
-                </Ingress>
+                <Veilederinfo CustomIcon={DocumentIkon}>
+                    <FormattedHTMLMessage id="intro.ingress" />
+                </Veilederinfo>
                 <BekreftCheckboksPanel
                     className="blokk-m"
                     name="harGodkjentVilkår"
