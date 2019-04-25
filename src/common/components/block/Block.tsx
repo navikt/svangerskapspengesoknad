@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BEMHelper from 'common/util/bem';
-import Infoboks from 'common/components/infoboks/Infoboks';
+import LabelMedInfobox from '../label-med-infobox/LabelMedInfobox';
 
 import './block.less';
 
@@ -60,10 +60,7 @@ const Block: React.StatelessComponent<BlockProps> = ({
     const content =
         header !== undefined ? (
             <section className={contentClass}>
-                <div className={cls.element('heading', `stil-${header.stil || 'normal'}`)}>
-                    <h1 className={`typo-element ${cls.element('title')}`}>{header.title}</h1>
-                    {header.info && <Infoboks tekst={header.info} contentFullWidth={true} />}
-                </div>
+                <LabelMedInfobox {...header} />
                 {children}
             </section>
         ) : (

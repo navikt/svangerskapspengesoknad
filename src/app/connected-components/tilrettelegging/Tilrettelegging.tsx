@@ -199,19 +199,19 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                 label={
                                     visFrilansEllerSelvstendig ? (
                                         <LabelMedInfobox
-                                            label={getMessage(
+                                            title={getMessage(
                                                 intl,
                                                 'tilrettelegging.behovForTilretteleggingFom.label.frilansSN'
                                             )}
-                                            infoBox={getMessage(
+                                            info={getMessage(
                                                 intl,
                                                 'tilrettelegging.behovForTilretteleggingFom.infoBox.frilansSN'
                                             )}
                                         />
                                     ) : (
                                         <LabelMedInfobox
-                                            label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label')}
-                                            infoBox={getMessage(
+                                            title={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label')}
+                                            info={getMessage(
                                                 intl,
                                                 'tilrettelegging.behovForTilretteleggingFom.infoBox'
                                             )}
@@ -227,13 +227,13 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         label={
                             visFrilansEllerSelvstendig ? (
                                 <LabelMedInfobox
-                                    label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN')}
-                                    infoBox={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN.infoBox')}
+                                    title={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN')}
+                                    info={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN.infoBox')}
                                 />
                             ) : (
                                 <LabelMedInfobox
-                                    label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')}
-                                    infoBox={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.infoBox')}
+                                    title={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')}
+                                    info={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.infoBox')}
                                 />
                             )
                         }

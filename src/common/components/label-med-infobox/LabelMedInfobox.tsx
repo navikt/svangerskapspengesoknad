@@ -2,17 +2,20 @@ import * as React from 'react';
 import Infoboks from 'common/components/infoboks/Infoboks';
 import BEMHelper from 'common/util/bem';
 
+import './labelMedInfobox.less';
+
 interface LabelMedInfoboxProps {
-    label: string | React.ReactNode;
-    infoBox?: string | React.ReactNode;
+    title: string | React.ReactNode;
+    info?: string | React.ReactNode;
+    stil?: 'normal' | 'seksjon';
 }
 
-const LabelMedInfobox: React.StatelessComponent<LabelMedInfoboxProps> = ({ label, infoBox }) => {
-    const cls = BEMHelper('block');
+const LabelMedInfobox: React.StatelessComponent<LabelMedInfoboxProps> = ({ title, info, stil }) => {
+    const cls = BEMHelper('labelMedInfobox');
     return (
-        <div className={cls.element('heading', `stil-normal'}`)}>
-            <h1 className={`typo-element ${cls.element('title')}`}>{label}</h1>
-            {infoBox && <Infoboks tekst={infoBox} contentFullWidth={true} />}
+        <div className={cls.element('heading', `stil-${stil || 'normal'}`)}>
+            <h1 className={`typo-element ${cls.element('title')}`}>{title}</h1>
+            {info && <Infoboks tekst={info} contentFullWidth={true} />}
         </div>
     );
 };
