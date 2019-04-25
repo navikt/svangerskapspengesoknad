@@ -238,6 +238,8 @@
     "valideringsfeil.stillingsprosentRange": "Stillingsprosent må være mellom 0 og 100",
     "valideringsfeil.tilrettelagtArbeidForTidlig": "Må være etter dato for å slutte å jobbe som vanlig",
     "valideringsfeil.feltetErPåkrevd": "Påkrevd",
+    "valideringsfeil.feltetKanVæreMax100Tegn": "Du kan maks ha 100 tegn",
+    "valideringsfeil.feltetKanVæreMax1000Tegn": "Du kan maks ha 1000 tegn",
     "valideringsfeil.feltetKanVæreMax2000Tegn": "Du kan maks ha 2000 tegn",
     "valideringsfeil.tidsreiserIkkeTillatt": "Må være etter den første datoen",
     "feiloppsummering.tittel": "Du må rette opp i følgende feil:"

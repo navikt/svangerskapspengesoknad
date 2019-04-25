@@ -11,6 +11,10 @@ const validateFrilansoppdrag = () => (frilansOppdrag: Partial<FrilansOppdrag>): 
         errors.navnPåArbeidsgiver = Valideringsfeil.FELTET_ER_PÅKREVD;
     }
 
+    if (frilansOppdrag.navnPåArbeidsgiver !== undefined && frilansOppdrag.navnPåArbeidsgiver.length > 100) {
+        errors.navnPåArbeidsgiver = Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN;
+    }
+
     if (
         frilansOppdrag.tidsperiode === undefined ||
         (frilansOppdrag.tidsperiode !== undefined && frilansOppdrag.tidsperiode.fom === undefined)
