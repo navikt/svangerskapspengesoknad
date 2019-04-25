@@ -6,7 +6,7 @@ import { InjectedIntl } from 'react-intl';
 import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
 import { AnnenInntektType } from '../../../types/AnnenInntekt';
 
-export const mapArbeidsforholdToSøknadsgrunnlagOption = (
+export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
     søker: Partial<Søker>,
     arbeidsforhold: Arbeidsforhold[],
     intl: InjectedIntl
@@ -20,7 +20,7 @@ export const mapArbeidsforholdToSøknadsgrunnlagOption = (
         ...arbeidsforhold.map((forhold) => ({
             value: forhold.arbeidsgiverId,
             label: forhold.arbeidsgiverNavn,
-            type: forhold.arbeidsgiverIdType === 'orgr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT
+            type: forhold.arbeidsgiverIdType === 'orgnr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring) => ({
             value: næring.organisasjonsnummer || `${næring.navnPåNæringen}${næring.registrertILand}`,

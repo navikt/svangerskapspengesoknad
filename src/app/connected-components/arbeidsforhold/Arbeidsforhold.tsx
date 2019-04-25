@@ -30,7 +30,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
 import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
 import { cleanupSøker } from './utils/cleanup';
-import { mapArbeidsforholdToSøknadsgrunnlagOption } from './utils/søknadsgrunnlagMapper';
+import { mapArbeidsforholdToSøknadsgrunnlagOptions } from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
@@ -67,7 +67,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         andreInntekterSiste10Mnd = []
     } = cleanupSøker(søker);
 
-    const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlagOption(
+    const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlagOptions(
         cleanupSøker(values.søker) as Søker,
         arbeidsforhold,
         intl
