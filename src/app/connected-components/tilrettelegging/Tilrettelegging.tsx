@@ -29,6 +29,7 @@ import CheckboksPanelGruppe from '../../formik/wrappers/CheckboksPanelGruppe';
 import InfoBlock from 'common/components/info-block/InfoBlock';
 import InputField from '../../formik/wrappers/InputField';
 import Textarea from '../../formik/wrappers/Textarea';
+import LabelMedInfobox from 'common/components/label-med-infobox/LabelMedInfobox';
 
 interface OwnProps {
     id: string;
@@ -196,9 +197,26 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             <DatoInput
                                 name={getInputName('behovForTilretteleggingFom')}
                                 label={
-                                    visFrilansEllerSelvstendig
-                                        ? getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label.frilansSN')
-                                        : getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label')
+                                    visFrilansEllerSelvstendig ? (
+                                        <LabelMedInfobox
+                                            label={getMessage(
+                                                intl,
+                                                'tilrettelegging.behovForTilretteleggingFom.label.frilansSN'
+                                            )}
+                                            infoBox={getMessage(
+                                                intl,
+                                                'tilrettelegging.behovForTilretteleggingFom.infoBox.frilansSN'
+                                            )}
+                                        />
+                                    ) : (
+                                        <LabelMedInfobox
+                                            label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label')}
+                                            infoBox={getMessage(
+                                                intl,
+                                                'tilrettelegging.behovForTilretteleggingFom.infoBox'
+                                            )}
+                                        />
+                                    )
                                 }
                             />
                         </Block>
@@ -207,9 +225,17 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block header={{ title: getMessage(intl, 'tilrettelegging.del2'), stil: 'seksjon' }} visible={visDel2}>
                     <CheckboksPanelGruppe
                         label={
-                            visFrilansEllerSelvstendig
-                                ? getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN')
-                                : getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')
+                            visFrilansEllerSelvstendig ? (
+                                <LabelMedInfobox
+                                    label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN')}
+                                    infoBox={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN.infoBox')}
+                                />
+                            ) : (
+                                <LabelMedInfobox
+                                    label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')}
+                                    infoBox={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.infoBox')}
+                                />
+                            )
                         }
                         name={tilretteleggingstypeName}
                         columns={1}
@@ -232,7 +258,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block
                     visible={visHelTilrettelegging}
                     header={{
-                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt')
+                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt')
                     }}>
                     <InfoBlock>
                         <DatoInput
@@ -248,7 +275,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block
                     visible={visDelvisTilrettelegging}
                     header={{
-                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis')
+                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis'),
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.infoBox')
                     }}>
                     <InfoBlock>
                         <Block margin="s">
@@ -275,7 +303,10 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 </Block>
                 <Block
                     visible={visIngenTilrettelegging}
-                    header={{ title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting') }}>
+                    header={{
+                        title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting'),
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.infoBox')
+                    }}>
                     <InfoBlock>
                         <DatoInput
                             name={getInputName('ingenTilrettelegging.slutteArbeidFom')}

@@ -7,6 +7,7 @@ import { Element } from 'nav-frontend-typografi';
 
 export interface Props {
     label: string | React.ReactNode;
+    infoboksTekst?: string | React.ReactNode;
     feil?: SkjemaelementFeil;
     id?: string;
     children: React.ReactNode;

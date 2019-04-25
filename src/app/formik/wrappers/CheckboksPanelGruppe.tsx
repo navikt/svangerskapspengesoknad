@@ -9,7 +9,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface OwnProps {
     name: string;
-    label: string;
+    label: string | React.ReactNode;
     options: Array<{
         value: string;
         label: string;

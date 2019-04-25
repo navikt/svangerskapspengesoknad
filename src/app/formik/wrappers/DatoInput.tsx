@@ -9,7 +9,7 @@ import { translateError } from 'app/utils/errorUtils';
 
 interface OwnProps {
     name: string;
-    label: string;
+    label: string | React.ReactNode;
     fullskjermKalender?: boolean;
 }
 
