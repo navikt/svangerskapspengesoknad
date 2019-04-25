@@ -40,7 +40,11 @@ export const mergeSøknadsgrunnlagIntoTilrettelegging = (
         )
     );
 
-    return [...existingTilrettelegging, ...nyeTilrettelegginger];
+    const selectedTilrettelegging = existingTilrettelegging.filter((t) =>
+        søknadsgrunnlag.map((s) => s.id).includes(t.id)
+    );
+
+    return [...selectedTilrettelegging, ...nyeTilrettelegginger];
 };
 
 const mapHelTilrettelegging = (
