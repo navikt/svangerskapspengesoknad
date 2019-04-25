@@ -1,35 +1,19 @@
 {
     "søker": {
-        "fnr": "31072626012",
-        "fornavn": "RAUS",
-        "etternavn": "BUSK",
+        "fnr": "17076622086",
+        "fornavn": "ABSURD",
+        "etternavn": "MYGG",
         "kjønn": "K",
-        "fødselsdato": "1926-07-31",
+        "fødselsdato": "1966-07-17",
         "land": "NO",
-        "ikkeNordiskEøsLand": false,
-        "barn": [
-            {
-                "fornavn": "NOBEL",
-                "etternavn": "KAKE",
-                "fnr": "03011982793",
-                "kjønn": "M",
-                "fødselsdato": "2019-01-03",
-                "annenForelder": {
-                    "fnr": "27087821132",
-                    "fornavn": "SEDAT",
-                    "etternavn": "DORULL",
-                    "fødselsdato": "1978-08-27"
-                }
-            }
-        ]
+        "ikkeNordiskEøsLand": false
     },
     "arbeidsforhold": [
         {
-            "arbeidsgiverId": "973861778",
-            "arbeidsgiverIdType": "orgnr",
-            "arbeidsgiverNavn": "EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET",
+            "arbeidsgiverId": "15029725443",
+            "arbeidsgiverIdType": "fnr",
             "stillingsprosent": 100.0,
-            "fom": "2018-06-01"
+            "fom": "1999-04-25"
         }
     ]
 }

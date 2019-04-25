@@ -84,7 +84,7 @@ export const finnArbeidsforholdNavn = (
 ): string => {
     const matchingArbeidsforhold = arbeidsforhold.find((forhold) => forhold.arbeidsgiverId === arbeidsgiverId);
     if (matchingArbeidsforhold) {
-        return matchingArbeidsforhold.arbeidsgiverNavn;
+        return matchingArbeidsforhold.arbeidsgiverNavn || matchingArbeidsforhold.arbeidsgiverId;
     }
     return getMessage(intl, `stegtittel.${arbeidsgiverId}`);
 };
