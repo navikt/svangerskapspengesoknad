@@ -249,5 +249,7 @@
     "valideringsfeil.feltetKanVæreMax2000Tegn": "Du kan maks ha 2000 tegn",
     "valideringsfeil.feltetKanVæreMax1000Tegn": "Du kan maks ha 1000 tegn",
     "valideringsfeil.tidsreiserIkkeTillatt": "Må være etter den første datoen",
+    "valideringsfeil.måBeståAv9Siffer": "Organisasjonsnummer må bestå av 9 tall",
+    "valideringsfeil.ugyldigOrganisasjonsnummer": "Organisasjonsnummeret er ikke et gyldig norsk organisasjonsnummer",
     "feiloppsummering.tittel": "Du må rette opp i følgende feil:"
 }
