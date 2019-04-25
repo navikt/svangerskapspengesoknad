@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
+import DocumentTitle from 'react-document-title';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 
 import { CommonActionTypes } from 'app/redux/types/CommonAction';
@@ -29,7 +30,8 @@ type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
 
 const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel, språkkode, setSpråk, children }) => {
     return (
-        <React.Fragment>
+        <>
+            <DocumentTitle title="Svangerskapspengesøknad" />
             {/* {visSpråkvelger && <Språkvelger kode={språkkode} setSpråkkode={setSpråk} />} */}
             {visSpråkvelger && (
                 <div className="sprakvelger">
@@ -42,7 +44,7 @@ const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel
                 </Søknadstittel>
             )}
             {children}
-        </React.Fragment>
+        </>
     );
 };
 
