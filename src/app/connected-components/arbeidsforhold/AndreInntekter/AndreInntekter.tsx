@@ -195,7 +195,9 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
                             </Knapp>
-                            <Hovedknapp disabled={!isValid} htmlType="submit">
+                            <Hovedknapp
+                                disabled={!isValid || values.type === AnnenInntektType.MILITÆRTJENESTE}
+                                htmlType="submit">
                                 <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
                             </Hovedknapp>
                         </Knapperad>
