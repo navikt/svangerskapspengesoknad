@@ -74,6 +74,7 @@
     "dependencies": {
         "@types/bytes": "^3.0.0",
         "@types/react-collapse": "^4.0.2",
+        "@types/react-document-title": "^2.0.3",
         "@types/react-intl": "^2.3.17",
         "app": "^0.1.0",
         "axios": "^0.18.0",
@@ -129,6 +130,7 @@
         "prop-types": "^15.7.2",
         "react": "^16.8.4",
         "react-collapse": "^4.0.3",
+        "react-document-title": "^2.0.3",
         "react-dom": "^16.8.4",
         "react-intl": "^2.8.0",
         "react-modal": "^3.8.1",
