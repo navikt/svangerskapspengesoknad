@@ -121,7 +121,9 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>
                     <MedlemskapOppsummering
                         iNorgeNeste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
-                        iNorgeSiste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
+                        iNorgeSiste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeSiste12Mnd!}
+                        senereOpphold={values.informasjonOmUtenlandsopphold.senereOpphold}
+                        tidligereOpphold={values.informasjonOmUtenlandsopphold.tidligereOpphold}
                     />
                 </Oppsummeringspunkt>
                 <Block visible={visAdvarselOmManglendeDokumentasjon}>
