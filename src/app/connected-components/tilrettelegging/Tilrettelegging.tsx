@@ -131,7 +131,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     </Block>
                     <Textarea
                         name={getInputName('risikoFaktorer')}
-                        label={getMessage(intl, 'tilrettelegging.frilans.risikoFaktorer')}
+                        label={
+                            visFrilansEllerSelvstendig
+                                ? getMessage(intl, 'tilrettelegging.frilans.risikoFaktorer.frilansSN')
+                                : getMessage(intl, 'tilrettelegging.frilans.risikoFaktorer')
+                        }
                     />
                 </Block>
                 <Block visible={visVedlegg}>
@@ -191,16 +195,22 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         <Block margin="xs">
                             <DatoInput
                                 name={getInputName('behovForTilretteleggingFom')}
-                                label={getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label', {
-                                    arbeidsgiversNavn
-                                })}
+                                label={
+                                    visFrilansEllerSelvstendig
+                                        ? getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label.frilansSN')
+                                        : getMessage(intl, 'tilrettelegging.behovForTilretteleggingFom.label')
+                                }
                             />
                         </Block>
                     </Block>
                 </Block>
                 <Block header={{ title: getMessage(intl, 'tilrettelegging.del2'), stil: 'seksjon' }} visible={visDel2}>
                     <CheckboksPanelGruppe
-                        label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')}
+                        label={
+                            visFrilansEllerSelvstendig
+                                ? getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.frilansSN')
+                                : getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe')
+                        }
                         name={tilretteleggingstypeName}
                         columns={1}
                         options={[
