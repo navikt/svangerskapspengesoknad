@@ -15,4 +15,3 @@ export interface FrilansInformasjon {
 }
 
 export type FrilansInformasjonPartial = Partial<FrilansInformasjon>;
-export type FrilansOppdragPartial = Partial<FrilansOppdrag>;

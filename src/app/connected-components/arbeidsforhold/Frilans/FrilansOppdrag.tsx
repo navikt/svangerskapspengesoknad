@@ -16,6 +16,7 @@ import Knapperad from 'common/components/knapperad/Knapperad';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 import { FrilansOppdrag } from '../../../types/FrilansInformasjon';
+import validateFrilansoppdrag from 'app/utils/validation/validateFrilansoppdrag';
 
 import './frilansOppdrag.less';
 
@@ -29,8 +30,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
     return (
         <Formik
             initialValues={element}
-            // tslint:disable-next-line: no-empty
-            validate={() => {}} // TODO
+            validate={validateFrilansoppdrag()}
             onSubmit={onAdd}
             render={({ handleSubmit }: FormikProps<Utenlandsopphold>) => {
                 return (
