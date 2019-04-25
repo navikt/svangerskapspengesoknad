@@ -15,7 +15,8 @@ import {
 
 export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag[]) => {
     return søknadsgrunnlag.map(({ id, type }) => {
-        const arbeidsgiversId = type === Arbeidsforholdstype.VIRKSOMHET ? { id } : {};
+        const arbeidsgiversId =
+            type === Arbeidsforholdstype.VIRKSOMHET || type === Arbeidsforholdstype.PRIVAT ? { id } : {};
 
         return {
             id,
@@ -90,10 +91,7 @@ const mapIngenTilrettelegging = (
     };
 };
 
-const mapArbeidsforholdForTilrettelegging = (
-    tilrettelegging: UferdigTilrettelegging,
-    fnr: string
-): ArbeidsforholdDTO => {
+const mapArbeidsforholdForTilrettelegging = (tilrettelegging: UferdigTilrettelegging): ArbeidsforholdDTO => {
     const { arbeidsforhold } = tilrettelegging;
     switch (arbeidsforhold.type) {
         case Arbeidsforholdstype.FRILANSER:
@@ -108,10 +106,10 @@ const mapArbeidsforholdForTilrettelegging = (
                 risikoFaktorer: tilrettelegging.risikoFaktorer,
                 tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak
             };
-        case Arbeidsforholdstype.ANDRE_INNTEKTER:
+        case Arbeidsforholdstype.PRIVAT:
             return {
-                type: Arbeidsforholdstype.ANDRE_INNTEKTER,
-                id: fnr
+                type: Arbeidsforholdstype.PRIVAT,
+                id: tilrettelegging.id
             };
         case Arbeidsforholdstype.VIRKSOMHET:
             return {
@@ -126,7 +124,7 @@ export const mapTilretteleggingerTilDTO = (
 ): TilretteleggingDTO[] => {
     const dto: TilretteleggingDTO[] = [];
     tilrettelegging.forEach((t) => {
-        const arbeidsforhold = mapArbeidsforholdForTilrettelegging(t, søkerFnr);
+        const arbeidsforhold = mapArbeidsforholdForTilrettelegging(t);
         if (t.helTilrettelegging) {
             const helTilrettelegging = mapHelTilrettelegging(t, arbeidsforhold);
             if (helTilrettelegging) {
