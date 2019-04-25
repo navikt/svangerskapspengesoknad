@@ -22,10 +22,6 @@ export const processUtfyltSøknad = (
         return undefined;
     }
 
-    if (utfyltBarn.erBarnetFødt && !utfyltSøknad.barn.fødselsdato) {
-        return undefined;
-    }
-
     if (!utfyltBarn.termindato) {
         return undefined;
     }
