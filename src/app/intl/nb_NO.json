@@ -32,7 +32,7 @@
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
-    "intro.ingress": "Har du <a class=\"lenke\" rel=\"noopener\" href=\"https://familie.nav.no/om-svangerskapspenger#slik-soker-du\">skjemaet for risiko og tilrettelegging i svangerskapet</a> klart? Skjemaet må være fylt ut av din lege eller jordmor, og din arbeidsgiver hvis du har det. Du kan ta bilde av skjemaet og laste det opp. ",
+    "intro.ingress": "Har du <a class=\"lenke\" rel=\"noopener\" href=\"https://familie.nav.no/om-svangerskapspenger#slik-soker-du\" target=\"_blank\">skjemaet for risiko og tilrettelegging i svangerskapet</a> klart? Skjemaet må være fylt ut av din lege eller jordmor, og din arbeidsgiver hvis du har det. Du kan ta bilde av skjemaet og laste det opp. ",
     "intro.godkjennVilkår.label": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link } ",
     "intro.godkjennVilkår.bekreft": "Jeg bekrefter at jeg har lest og forstått",
     "intro.begynnSøknad.knapp": "Begynn med søknad",
