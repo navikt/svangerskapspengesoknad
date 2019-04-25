@@ -32,7 +32,7 @@
     "intro.bobletittel": "Hei, {name}!",
     "intro.bobletekst": "Jeg vil hjelpe deg med å fylle ut søknaden.",
     "intro.tittel": "Velkommen til søknad om svangerskapspenger",
-    "intro.ingress": "Svangerskapspenger gis til friske kvinner som ikke kan jobbe under svangerskapet fordi det kan føre til skade på det ufødte barnet.",
+    "intro.ingress": "Har du <a class=\"lenke\" rel=\"noopener\" href=\"https://familie.nav.no/om-svangerskapspenger#slik-soker-du\">skjemaet for risiko og tilrettelegging i svangerskapet</a> klart? Skjemaet må være fylt ut av din lege eller jordmor, og din arbeidsgiver hvis du har det. Du kan ta bilde av skjemaet og laste det opp. ",
     "intro.godkjennVilkår.label": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link } Vi lagrer søknaden din for deg i 24 timer. Hvis du ikke fortsetter eller du avbryter søknaden, blir opplysningene du har lagt inn slettet.",
     "intro.godkjennVilkår.bekreft": "Jeg bekrefter at jeg har lest og forstått",
     "intro.begynnSøknad.knapp": "Begynn med søknad",

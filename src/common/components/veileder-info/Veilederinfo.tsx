@@ -11,6 +11,7 @@ export interface VeilederInfoProps {
     stil?: 'kompakt' | 'normal' | 'kunTekst';
     type?: Infotype;
     maxWidth?: '30' | '45';
+    CustomIcon?: any;
 }
 
 const getAnsiktFromType = (type: Infotype): Ansiktstype => {
@@ -29,7 +30,8 @@ const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
     stil = 'normal',
     type = 'info',
     maxWidth,
-    children
+    children,
+    CustomIcon
 }) => {
     return (
         <div
@@ -44,7 +46,11 @@ const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
             )}>
             {visVeileder && (
                 <span className="veilederinfo__veileder" role="presentation" aria-hidden={true}>
-                    <Veileder farge="lilla" ansikt={getAnsiktFromType(type)} stil="kompakt" />
+                    {CustomIcon !== undefined ? (
+                        <CustomIcon />
+                    ) : (
+                        <Veileder farge="lilla" ansikt={getAnsiktFromType(type)} stil="kompakt" />
+                    )}
                 </span>
             )}
             <div className={classnames('veilederinfo__innhold', `veilederinfo__innhold--${type}`, 'typo-normal')}>
