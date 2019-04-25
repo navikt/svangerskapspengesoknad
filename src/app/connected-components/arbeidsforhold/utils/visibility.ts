@@ -19,7 +19,8 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
         revisor,
         harRevisor,
         endringAvNæringsinntektInformasjon,
-        kanInnhenteOpplsyningerFraRevisor
+        kanInnhenteOpplsyningerFraRevisor,
+        hattVarigEndringAvNæringsinntektSiste4Kalenderår
     } = normalisertNæring;
 
     const skalViseNavnPåNæringen = næringstyper !== undefined && næringstyper.length! > 0;
@@ -53,13 +54,13 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
             (oppstartsdato !== undefined && oppstartsdato !== '')) ||
         (skalViseharBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene &&
             harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === false) ||
-        (skalVisevarigEndringAvNæringsinntektBolk &&
-            endringAvNæringsinntektInformasjon !== undefined &&
-            endringAvNæringsinntektInformasjon.dato !== undefined &&
-            endringAvNæringsinntektInformasjon.dato !== '' &&
-            endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined &&
-            endringAvNæringsinntektInformasjon.forklaring !== undefined &&
-            endringAvNæringsinntektInformasjon.forklaring !== '');
+        ((skalVisevarigEndringAvNæringsinntektBolk && hattVarigEndringAvNæringsinntektSiste4Kalenderår === false) ||
+            (endringAvNæringsinntektInformasjon !== undefined &&
+                endringAvNæringsinntektInformasjon.dato !== undefined &&
+                endringAvNæringsinntektInformasjon.dato !== '' &&
+                endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined &&
+                endringAvNæringsinntektInformasjon.forklaring !== undefined &&
+                endringAvNæringsinntektInformasjon.forklaring !== ''));
     const skalViseNæringsrelasjonRegnskapsfører = skalViseHarRegnskapsfører && harRegnskapsfører === true;
     const skalViseRevisor = skalViseHarRegnskapsfører && harRegnskapsfører === false;
     const skalViseNæringsrelasjonRevisor = skalViseRevisor && harRevisor === true;

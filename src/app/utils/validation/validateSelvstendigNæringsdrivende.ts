@@ -44,6 +44,19 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
         }
     }
 
+    if (næring.endringAvNæringsinntektInformasjon) {
+        if (
+            næring.endringAvNæringsinntektInformasjon.forklaring &&
+            næring.endringAvNæringsinntektInformasjon.forklaring.length > 1000
+        ) {
+            set(
+                errors,
+                ['endringAvNæringsinntektInformasjon', 'forklaring'],
+                Valideringsfeil.FELTET_KAN_VÆRE_MAX_1000_TEGN
+            );
+        }
+    }
+
     return errors;
 };
 export default validateSelvstendigNæringsdrivende;

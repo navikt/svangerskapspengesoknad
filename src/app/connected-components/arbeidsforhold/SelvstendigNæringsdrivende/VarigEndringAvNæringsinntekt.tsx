@@ -6,6 +6,7 @@ import DatoInput from 'app/formik/wrappers/DatoInput';
 import InputField from 'app/formik/wrappers/InputField';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
+import Textarea from 'app/formik/wrappers/Textarea';
 
 interface VarigEndringAvNæringsinntektProps {
     values: Partial<Næring>;
@@ -58,10 +59,10 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
             </Block>
 
             <Block visible={visForklaring}>
-                <InputField
+                <Textarea
                     name="endringAvNæringsinntektInformasjon.forklaring"
                     label={getMessage(intl, 'arbeidsforhold.selvstendig.endringAvNæringsinntektInformasjon.forklaring')}
-                    required={true}
+                    maxLength={1000}
                 />
             </Block>
         </>
