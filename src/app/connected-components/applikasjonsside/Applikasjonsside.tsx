@@ -7,7 +7,10 @@ import { Språkkode } from 'common/types';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
 import Søknadstittel from 'app/components/søknadstittel/Søknadstittel';
-import Språkvelger from 'common/components/språkvelger/Språkvelger';
+// import Språkvelger from 'common/components/språkvelger/Språkvelger';
+import { Normaltekst } from 'nav-frontend-typografi';
+
+import './../../../common/components/språkvelger/språkvelger.less'; // Fjern når nynorsk er på plass
 
 interface OwnProps {
     visSpråkvelger?: boolean;
@@ -27,7 +30,12 @@ type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
 const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel, språkkode, setSpråk, children }) => {
     return (
         <React.Fragment>
-            {visSpråkvelger && <Språkvelger kode={språkkode} setSpråkkode={setSpråk} />}
+            {/* {visSpråkvelger && <Språkvelger kode={språkkode} setSpråkkode={setSpråk} />} */}
+            {visSpråkvelger && (
+                <div className="sprakvelger">
+                    <Normaltekst>Nynorsk versjon av søknaden er under arbeid</Normaltekst>
+                </div>
+            )}
             {visTittel && (
                 <Søknadstittel>
                     <FormattedMessage id="app.banner" />
