@@ -66,6 +66,7 @@
     "arbeidsforhold.utbetalingerFraNAV.label": "Utbetalinger fra NAV",
     "arbeidsforhold.utbetalingerFraNAV.text": "Hvis du får penger fra NAV, trenger du ikke opplyse om det i søknaden din.",
     "arbeidsforhold.veileder.inntektsmelding": "Husk å be arbeidsgiveren din sende inntektsmelding til NAV. Vi trenger den for å kunne behandle søknaden din. Vi vil i noen tilfeller kontakte arbeidsgiver i forbindelse med behandling av søknaden.",
+    "arbeidsforhold.veileder.førstegangstjeneste": "For å søke om svangerskapspenger for førstegangstjeneste i forsvaret må du sende søknaden i posten. <a class=\"lenke\" rel=\"noopener\" href=\"https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Forsteside+for+innsending\">Finn skjemaet her.</a>",
     "arbeidsforhold.frilans.listetittel": "Dine frilansoppdrag",
     "arbeidsforhold.frilans.erFrilanser.infoboksTekst": "TODO",
     "arbeidsforhold.frilans.erFrilanser": "Har du jobbet som frilanser de siste ti månedene?",

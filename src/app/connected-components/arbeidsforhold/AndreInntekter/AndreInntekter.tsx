@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, InjectedIntlProps, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Formik, FormikProps, FieldArray } from 'formik';
 import { connect } from 'react-redux';
 
@@ -70,7 +70,8 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                     navn: values.type === AnnenInntektType.JOBB_I_UTLANDET,
                     land: values.type === AnnenInntektType.JOBB_I_UTLANDET,
                     advarselDokumentasjon: values.type !== AnnenInntektType.JOBB_I_UTLANDET,
-                    vedlegg: values.type !== AnnenInntektType.JOBB_I_UTLANDET
+                    vedlegg: values.type !== AnnenInntektType.JOBB_I_UTLANDET,
+                    visInnhold: values.type === AnnenInntektType.JOBB_I_UTLANDET
                 };
 
                 return (
@@ -109,77 +110,85 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                             />
                         </Block>
 
-                        <Block visible={visKomponent.land}>
-                            <Select name="land" label={getMessage(intl, 'arbeidsforhold.andreInntekter.land')}>
-                                <option value="" />
-                                {countries.map((countryOption: string[]) => {
-                                    const [countryCode, countryName] = countryOption;
-                                    return (
-                                        <option key={countryCode} value={countryCode}>
-                                            {countryName}
-                                        </option>
-                                    );
-                                })}
-                            </Select>
-                        </Block>
+                        <Block visible={visKomponent.visInnhold}>
+                            <Block visible={visKomponent.land}>
+                                <Select name="land" label={getMessage(intl, 'arbeidsforhold.andreInntekter.land')}>
+                                    <option value="" />
+                                    {countries.map((countryOption: string[]) => {
+                                        const [countryCode, countryName] = countryOption;
+                                        return (
+                                            <option key={countryCode} value={countryCode}>
+                                                {countryName}
+                                            </option>
+                                        );
+                                    })}
+                                </Select>
+                            </Block>
 
-                        <Block visible={visKomponent.navn}>
-                            <InputField
-                                name="arbeidsgiverNavn"
-                                label={getMessage(intl, 'arbeidsforhold.andreInntekter.arbeidsgiverNavn')}
-                            />
-                        </Block>
+                            <Block visible={visKomponent.navn}>
+                                <InputField
+                                    name="arbeidsgiverNavn"
+                                    label={getMessage(intl, 'arbeidsforhold.andreInntekter.arbeidsgiverNavn')}
+                                />
+                            </Block>
 
-                        <Block>
-                            <DatoerInputLayout
-                                fra={
-                                    <DatoInput
-                                        fullskjermKalender={true}
-                                        name="tidsperiode.fom"
-                                        label={getMessage(intl, 'fraOgMed')}
-                                    />
-                                }
-                                til={
-                                    <DatoInput
-                                        fullskjermKalender={true}
-                                        name="tidsperiode.tom"
-                                        label={getMessage(intl, 'tilOgMed')}
-                                    />
-                                }
-                            />
-                        </Block>
-
-                        <Block margin="none" visible={visKomponent.advarselDokumentasjon}>
-                            <Veilederinfo type="info">
-                                <FormattedMessage id="arbeidsforhold.andreInntekter.militær_eller_siviltjeneste_info" />
-                            </Veilederinfo>
-                        </Block>
-
-                        <Block visible={visKomponent.vedlegg}>
-                            <FieldArray
-                                name={'vedlegg'}
-                                render={({ form, push, remove }) => {
-                                    return (
-                                        <AttachmentOverview
-                                            attachmentType={AttachmentType.ANNEN_INNTEKT}
-                                            skjemanummer={Skjemanummer.ANNET}
-                                            attachments={vedlegg.filter((v) => form.values.vedlegg.includes(v.id))}
-                                            onFilesSelect={(files: Attachment[]) => {
-                                                files.forEach((file) => {
-                                                    push(file.id);
-                                                    uploadAttachment(file);
-                                                });
-                                            }}
-                                            onFileDelete={(files: Attachment[]) => {
-                                                files.forEach((file: Attachment) => {
-                                                    remove(form.values.vedlegg.indexOf(file.id));
-                                                    deleteAttachment(file);
-                                                });
-                                            }}
+                            <Block>
+                                <DatoerInputLayout
+                                    fra={
+                                        <DatoInput
+                                            fullskjermKalender={true}
+                                            name="tidsperiode.fom"
+                                            label={getMessage(intl, 'fraOgMed')}
                                         />
-                                    );
-                                }}
-                            />
+                                    }
+                                    til={
+                                        <DatoInput
+                                            fullskjermKalender={true}
+                                            name="tidsperiode.tom"
+                                            label={getMessage(intl, 'tilOgMed')}
+                                        />
+                                    }
+                                />
+                            </Block>
+
+                            <Block margin="none" visible={visKomponent.advarselDokumentasjon}>
+                                <Veilederinfo type="info">
+                                    <FormattedMessage id="arbeidsforhold.andreInntekter.militær_eller_siviltjeneste_info" />
+                                </Veilederinfo>
+                            </Block>
+
+                            <Block visible={visKomponent.vedlegg}>
+                                <FieldArray
+                                    name={'vedlegg'}
+                                    render={({ form, push, remove }) => {
+                                        return (
+                                            <AttachmentOverview
+                                                attachmentType={AttachmentType.ANNEN_INNTEKT}
+                                                skjemanummer={Skjemanummer.ANNET}
+                                                attachments={vedlegg.filter((v) => form.values.vedlegg.includes(v.id))}
+                                                onFilesSelect={(files: Attachment[]) => {
+                                                    files.forEach((file) => {
+                                                        push(file.id);
+                                                        uploadAttachment(file);
+                                                    });
+                                                }}
+                                                onFileDelete={(files: Attachment[]) => {
+                                                    files.forEach((file: Attachment) => {
+                                                        remove(form.values.vedlegg.indexOf(file.id));
+                                                        deleteAttachment(file);
+                                                    });
+                                                }}
+                                            />
+                                        );
+                                    }}
+                                />
+                            </Block>
+                        </Block>
+
+                        <Block visible={values.type === AnnenInntektType.MILITÆRTJENESTE}>
+                            <Veilederinfo type="info">
+                                <FormattedHTMLMessage id="arbeidsforhold.veileder.førstegangstjeneste" />
+                            </Veilederinfo>
                         </Block>
 
                         <Knapperad stil="mobile-50-50">
