@@ -87,12 +87,22 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     />
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt type="barn" title={getMessage(intl, 'oppsummering.barn.tittel')}>
-                    <FormattedMessage
-                        id="oppsummering.barn.termindato"
-                        values={{
-                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
-                        }}
-                    />
+                    <Block margin="xxs">
+                        <FormattedMessage
+                            id="oppsummering.barn.termindato"
+                            values={{
+                                dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
+                            }}
+                        />
+                    </Block>
+                    <div>
+                        {values.barn.fødselsdato !== undefined && (
+                            <FormattedMessage
+                                id="oppsummering.barn.fødselsdato"
+                                values={{ dato: moment(values.barn.fødselsdato).format('dddd Do MMMM YYYY') }}
+                            />
+                        )}
+                    </div>
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt
                     type="arbeidsforhold"
@@ -121,7 +131,9 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>
                     <MedlemskapOppsummering
                         iNorgeNeste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
-                        iNorgeSiste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd!}
+                        iNorgeSiste12Mnd={values.informasjonOmUtenlandsopphold.iNorgeSiste12Mnd!}
+                        senereOpphold={values.informasjonOmUtenlandsopphold.senereOpphold}
+                        tidligereOpphold={values.informasjonOmUtenlandsopphold.tidligereOpphold}
                     />
                 </Oppsummeringspunkt>
                 <Block visible={visAdvarselOmManglendeDokumentasjon}>

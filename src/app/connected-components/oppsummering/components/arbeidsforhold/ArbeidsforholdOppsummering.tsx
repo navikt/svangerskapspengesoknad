@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
-import { getRelevanteArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import InformasjonOmFrilans from './components/InformasjonOmFrilans';
 import { FrilansInformasjon } from 'app/types/FrilansInformasjon';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
@@ -25,7 +24,6 @@ interface Props {
 
 const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
     arbeidsforhold,
-    søknadsgrunnlag,
     harJobbetSomSelvstendigNæringsdrivende,
     harJobbetFrilans,
     harHattAndreInntektskilder,
@@ -35,9 +33,7 @@ const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
 }) => {
     return (
         <>
-            <InformasjonOmArbeidsforholdWrapper
-                arbeidsforhold={getRelevanteArbeidsforhold(arbeidsforhold, søknadsgrunnlag)}
-            />
+            <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
 
             {harJobbetFrilans && <InformasjonOmFrilans frilansInformasjon={frilansInformasjon!} />}
 
