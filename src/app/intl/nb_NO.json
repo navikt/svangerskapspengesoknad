@@ -185,6 +185,7 @@
     "oppsummering.termin.personalia.fnr": "Ditt fødselsnummer: {fnr}",
     "oppsummering.barn.tittel": "Barnet",
     "oppsummering.barn.termindato": "Termin {dato}",
+    "oppsummering.barn.fødselsdato": "Født {dato}",
     "oppsummering.arbeidsforhold.tittel": "Ditt arbeidsforhold",
     "oppsummering.arbeidsforhold.manglerDokumentasjon": "Du mangler dokumentasjon på inntektskilde",
     "oppsummering.arbeidsforhold.frilans": "FRILANSOPPDRAG",

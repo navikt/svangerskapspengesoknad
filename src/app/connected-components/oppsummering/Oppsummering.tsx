@@ -87,12 +87,22 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     />
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt type="barn" title={getMessage(intl, 'oppsummering.barn.tittel')}>
-                    <FormattedMessage
-                        id="oppsummering.barn.termindato"
-                        values={{
-                            dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
-                        }}
-                    />
+                    <Block margin="xxs">
+                        <FormattedMessage
+                            id="oppsummering.barn.termindato"
+                            values={{
+                                dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
+                            }}
+                        />
+                    </Block>
+                    <div>
+                        {values.barn.fødselsdato !== undefined && (
+                            <FormattedMessage
+                                id="oppsummering.barn.fødselsdato"
+                                values={{ dato: moment(values.barn.fødselsdato).format('dddd Do MMMM YYYY') }}
+                            />
+                        )}
+                    </div>
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt
                     type="arbeidsforhold"
