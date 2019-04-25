@@ -16,7 +16,10 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
                 arbeidsforhold !== undefined && arbeidsforhold.length > 0
                     ? arbeidsforhold.map((forhold: Arbeidsforhold) => ({
                           ...forhold,
-                          arbeidsgiverNavn: normalizeName(forhold.arbeidsgiverNavn)
+                          arbeidsgiverNavn:
+                              forhold.arbeidsgiverNavn !== undefined
+                                  ? normalizeName(forhold.arbeidsgiverNavn)
+                                  : undefined
                       }))
                     : [],
             søker: {
