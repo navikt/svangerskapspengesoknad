@@ -19,7 +19,7 @@ export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
     return [
         ...arbeidsforhold.map((forhold) => ({
             value: forhold.arbeidsgiverId,
-            label: forhold.arbeidsgiverNavn || forhold.arbeidsgiverId,
+            label: forhold.arbeidsgiverNavn || 'privat arbeidsgiver',
             type: forhold.arbeidsgiverIdType === 'orgnr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring) => ({
