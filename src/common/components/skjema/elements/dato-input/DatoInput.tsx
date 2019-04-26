@@ -11,8 +11,8 @@ import moment from 'moment';
 import { Avgrensninger, Tidsperiode } from 'common/types';
 import BEMHelper from 'common/util/bem';
 import { dateToISOFormattedDateString } from 'common/util/datoUtils';
-import './datoInput.less';
 import getMessage from 'common/util/i18nUtils';
+import './datoInput.less';
 
 export interface DatoInputProps extends DatovelgerCommonProps {
     name: string;
