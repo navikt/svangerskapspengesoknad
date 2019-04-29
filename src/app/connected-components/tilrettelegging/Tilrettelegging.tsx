@@ -162,7 +162,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             render={({ form, push, remove }) => (
                                 <AttachmentOverview
                                     attachmentType={AttachmentType.TILRETTELEGGING}
-                                    skjemanummer={Skjemanummer.ANNET}
+                                    skjemanummer={
+                                        erFrilansEllerSelvstendig
+                                            ? Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG
+                                            : Skjemanummer.TILRETTELEGGING_FOR_ARBEIDSTAKERE
+                                    }
                                     attachments={attachments}
                                     onFilesSelect={(files: Attachment[]) => {
                                         files.forEach((file) => {
