@@ -96,8 +96,7 @@ const mapIngenTilrettelegging = (
 };
 
 const mapArbeidsforholdForTilrettelegging = (tilrettelegging: UferdigTilrettelegging): ArbeidsforholdDTO => {
-    const { arbeidsforhold } = tilrettelegging;
-    switch (arbeidsforhold.type) {
+    switch (tilrettelegging.arbeidsforhold.type) {
         case Arbeidsforholdstype.FRILANSER:
             return {
                 type: Arbeidsforholdstype.FRILANSER,
@@ -113,19 +112,16 @@ const mapArbeidsforholdForTilrettelegging = (tilrettelegging: UferdigTilretteleg
         case Arbeidsforholdstype.PRIVAT:
             return {
                 type: Arbeidsforholdstype.PRIVAT,
-                id: tilrettelegging.id
+                id: tilrettelegging.arbeidsforhold.id || tilrettelegging.id
             };
         case Arbeidsforholdstype.VIRKSOMHET:
             return {
                 type: Arbeidsforholdstype.VIRKSOMHET,
-                id: tilrettelegging.id
+                id: tilrettelegging.arbeidsforhold.id || tilrettelegging.id
             };
     }
 };
-export const mapTilretteleggingerTilDTO = (
-    tilrettelegging: UferdigTilrettelegging[],
-    søkerFnr: string
-): TilretteleggingDTO[] => {
+export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilrettelegging[]): TilretteleggingDTO[] => {
     const dto: TilretteleggingDTO[] = [];
     tilrettelegging.forEach((t) => {
         const arbeidsforhold = mapArbeidsforholdForTilrettelegging(t);
