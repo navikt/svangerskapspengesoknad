@@ -263,7 +263,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     visible={visHelTilrettelegging}
                     header={{
                         title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
-                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt')
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.info')
                     }}>
                     <InfoBlock>
                         <DatoInput
