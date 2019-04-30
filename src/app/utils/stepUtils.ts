@@ -82,9 +82,9 @@ export const finnArbeidsforholdNavn = (
     arbeidsforhold: Arbeidsforhold[],
     intl: InjectedIntl
 ): string => {
-    const matchingArbeidsforhold = arbeidsforhold.find((forhold) => forhold.arbeidsgiverId === arbeidsgiverId);
+    const matchingArbeidsforhold = arbeidsforhold.find((forhold) => forhold.guid === arbeidsgiverId);
     if (matchingArbeidsforhold) {
-        return matchingArbeidsforhold.arbeidsgiverNavn || matchingArbeidsforhold.arbeidsgiverId;
+        return matchingArbeidsforhold.arbeidsgiverNavn || matchingArbeidsforhold.guid;
     }
     return getMessage(intl, `stegtittel.${arbeidsgiverId}`);
 };

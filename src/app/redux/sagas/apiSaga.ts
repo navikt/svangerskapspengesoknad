@@ -5,6 +5,7 @@ import Kvittering from 'app/types/Kvittering';
 import { ApiActionTypes, GetSøkerinfoRequest, SendSøknadRequest } from '../types/ApiAction';
 import normalizeName from 'app/utils/normalizeName';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import { guid } from 'nav-frontend-js-utils';
 
 function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
     try {
@@ -14,13 +15,16 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
             ...response.data,
             arbeidsforhold:
                 arbeidsforhold !== undefined && arbeidsforhold.length > 0
-                    ? arbeidsforhold.map((forhold: Arbeidsforhold) => ({
-                          ...forhold,
-                          arbeidsgiverNavn:
-                              forhold.arbeidsgiverNavn !== undefined
-                                  ? normalizeName(forhold.arbeidsgiverNavn)
-                                  : undefined
-                      }))
+                    ? arbeidsforhold.map(
+                          (forhold: Arbeidsforhold): Arbeidsforhold => ({
+                              ...forhold,
+                              guid: guid(),
+                              arbeidsgiverNavn:
+                                  forhold.arbeidsgiverNavn !== undefined
+                                      ? normalizeName(forhold.arbeidsgiverNavn)
+                                      : undefined
+                          })
+                      )
                     : [],
             søker: {
                 ...søker,

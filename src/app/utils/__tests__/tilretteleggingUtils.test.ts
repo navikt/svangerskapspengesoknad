@@ -12,22 +12,22 @@ const mock = SøknadUtilsMock;
 
 describe('tilretteleggingUtils', () => {
     it('deler flere tilrettelegginger for et arbeidsforhold opp i egne tilrettelegginger', () => {
-        const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger, '123');
+        const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger);
         expect(dto.length).toBe(9);
     });
     it('fjerner evt. id fra dto', () => {
-        const dto: any[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger, '123');
+        const dto: any[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger);
         expect(dto.some((d) => d.id !== undefined)).toBeFalsy();
     });
     it('har alle nødvendige props', () => {
-        const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger, '123');
+        const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(mock.tilrettelegginger);
         expect(dto.some((d) => d.type === undefined)).toBeFalsy();
         expect(dto.some((d) => d.arbeidsforhold === undefined)).toBeFalsy();
         expect(dto.some((d) => d.behovForTilretteleggingFom === undefined)).toBeFalsy();
         expect(dto.some((d) => d.arbeidsforhold === undefined)).toBeFalsy();
     });
     it('har identisk arbeidsforhold for hver tilrettelegginstype', () => {
-        const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.virksomhetTilrettelegging], '123');
+        const dto: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.virksomhetTilrettelegging]);
         const del1: string = JSON.stringify(dto[0].arbeidsforhold);
         const del2: string = JSON.stringify(dto[1].arbeidsforhold);
         const del3: string = JSON.stringify(dto[2].arbeidsforhold);
@@ -35,12 +35,9 @@ describe('tilretteleggingUtils', () => {
         expect(del2).toEqual(del3);
     });
     describe('mapper arbeidsforhold korrekt', () => {
-        const dtoVirksomhet: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.virksomhetTilrettelegging], '123');
-        const dtoFrilans: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.frilansTilrettelegging], '123');
-        const dtoSelvstendig: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(
-            [mock.selvstendigTilrettelegging],
-            '123'
-        );
+        const dtoVirksomhet: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.virksomhetTilrettelegging]);
+        const dtoFrilans: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.frilansTilrettelegging]);
+        const dtoSelvstendig: TilretteleggingDTO[] = mapTilretteleggingerTilDTO([mock.selvstendigTilrettelegging]);
 
         it('for virksomhet', () => {
             const arbeidsforhold: ArbeidsforholdVirksomhetDTO = dtoVirksomhet[0]

@@ -4,16 +4,36 @@ import { UferdigTilrettelegging } from '../types/Tilrettelegging';
 import { TilretteleggingDTO } from '../types/TilretteleggingDTO';
 import { Søker } from '../types/Søker';
 import { mapTilretteleggingerTilDTO } from './tilretteleggingUtils';
+import Arbeidsforhold from 'app/types/Arbeidsforhold';
 
 const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
     tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
 
 const areDefined = (...items: any[]) => items.some((item) => item !== undefined);
 
+const korrigerTilretteleggingArbeidsforhold = (
+    tilrettelegging: UferdigTilrettelegging,
+    arbeidsforhold: Arbeidsforhold[]
+): UferdigTilrettelegging => {
+    const forhold = tilrettelegging.arbeidsforhold.id
+        ? arbeidsforhold.find((a) => a.guid === tilrettelegging.arbeidsforhold.id)
+        : undefined;
+    if (forhold) {
+        return {
+            ...tilrettelegging,
+            arbeidsforhold: {
+                ...tilrettelegging.arbeidsforhold,
+                id: forhold.arbeidsgiverId
+            }
+        };
+    }
+    return tilrettelegging;
+};
+
 export const processUtfyltSøknad = (
-    fødselsnummer: string,
     utfyltSøknad: UferdigSøknad,
-    vedlegg: Attachment[]
+    vedlegg: Attachment[],
+    arbeidsforhold: Arbeidsforhold[]
 ): SøknadDTO | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
     const { fødselsdato: barnetsFødselsdato, ...utfyltBarn } = utfyltSøknad.barn;
@@ -27,8 +47,9 @@ export const processUtfyltSøknad = (
     }
 
     const tilrettelegging: TilretteleggingDTO[] = mapTilretteleggingerTilDTO(
-        fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag),
-        fødselsnummer
+        fjernForkastetTilrettelegging(utfyltSøknad.tilrettelegging, utfyltSøknad.søknadsgrunnlag).map((t) => {
+            return korrigerTilretteleggingArbeidsforhold(t, arbeidsforhold);
+        })
     );
 
     return {
