@@ -1,7 +1,5 @@
-/* tslint:disable:no-console */
-
-import nb from '../nb_NO.json';
-import nn from '../nn_NO.json';
+const nb = require('../nb_NO.json');
+const nn = require('../nn_NO.json');
 
 describe('intl tests', () => {
     it('Bokmål and nynorsk files should have exactly the same keys', () => {
