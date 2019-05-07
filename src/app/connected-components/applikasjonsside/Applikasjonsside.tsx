@@ -8,10 +8,7 @@ import { Språkkode } from 'common/types';
 import { State } from 'app/redux/store';
 import Action from 'app/redux/types/Action';
 import Søknadstittel from 'app/components/søknadstittel/Søknadstittel';
-// import Språkvelger from 'common/components/språkvelger/Språkvelger';
-import { Normaltekst } from 'nav-frontend-typografi';
-
-import './../../../common/components/språkvelger/språkvelger.less'; // Fjern når nynorsk er på plass
+import LanguageToggle from 'common/components/language-toggle/LanguageToggle';
 
 interface OwnProps {
     visSpråkvelger?: boolean;
@@ -32,11 +29,11 @@ const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel
     return (
         <>
             <DocumentTitle title="Svangerskapspengesøknad" />
-            {/* {visSpråkvelger && <Språkvelger kode={språkkode} setSpråkkode={setSpråk} />} */}
             {visSpråkvelger && (
-                <div className="sprakvelger">
-                    <Normaltekst>Nynorsk versjon av søknaden er under arbeid</Normaltekst>
-                </div>
+                <LanguageToggle
+                    language={språkkode}
+                    toggleLanguage={(languageCode: Språkkode) => setSpråk(languageCode)}
+                />
             )}
             {visTittel && (
                 <Søknadstittel>
