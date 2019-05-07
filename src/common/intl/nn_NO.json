@@ -14,5 +14,18 @@
     "common.tall-8": "åtte",
     "common.tall-9": "ni",
     "common.tall-10": "ti",
-    "common.og": "og"
+    "common.og": "og",
+
+    "infoboks.sirkeltekst": "Hjelp",
+
+    "datoinput.avgrensninger.beskrivelse.fraTil": "Du kan velge en dato{fra}{til}. ",
+    "datoinput.avgrensninger.beskrivelse.fraOgMed": " frå og med {dato}",
+    "datoinput.avgrensninger.beskrivelse.tilOgMed": " til og med {dato}",
+    "datoinput.avgrensninger.beskrivelse.ikkeHelg": "Du kan ikke velje en helgedag.",
+    "pågående": "Pågående",
+
+    "annenInntekt.arbeidsforhold.ingenRegistrerteArbeidsforhold": "Du er ikkje registrert med nokon arbeidsforhold.",
+    "annenInntekt.arbeidsforhold.organisasjonsnummer": "ORG.NR: {organisasjonsnummer}",
+    "annenInntekt.arbeidsforhold.periode": "{fom} - {tom}",
+    "annenInntekt.arbeidsforhold.stillingsprosent": "{stillingsprosent} prosent"
 }
