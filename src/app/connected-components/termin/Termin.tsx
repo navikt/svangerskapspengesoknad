@@ -41,7 +41,7 @@ const Termin: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
+        <Applikasjonsside visTittel={true}>
             <FormikStep
                 step={step}
                 showNesteknapp={showNesteknapp}

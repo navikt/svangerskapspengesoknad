@@ -125,7 +125,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     };
 
     return (
-        <Applikasjonsside visTittel={true} visSpråkvelger={true}>
+        <Applikasjonsside visTittel={true}>
             <FormikStep
                 step={step}
                 className={cls.block}
