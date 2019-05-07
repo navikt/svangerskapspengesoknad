@@ -22,7 +22,7 @@
     "datoinput.avgrensninger.beskrivelse.fraOgMed": " frå og med {dato}",
     "datoinput.avgrensninger.beskrivelse.tilOgMed": " til og med {dato}",
     "datoinput.avgrensninger.beskrivelse.ikkeHelg": "Du kan ikke velje en helgedag.",
-    "pågående": "Pågående",
+    "pågående": "Eg jobbar her framleis",
 
     "annenInntekt.arbeidsforhold.ingenRegistrerteArbeidsforhold": "Du er ikkje registrert med nokon arbeidsforhold.",
     "annenInntekt.arbeidsforhold.organisasjonsnummer": "ORG.NR: {organisasjonsnummer}",
