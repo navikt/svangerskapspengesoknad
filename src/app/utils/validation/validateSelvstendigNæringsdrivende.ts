@@ -20,7 +20,7 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
                 : Valideringsfeil.UGYLDIG_ORGANISASJONSNUMMER;
     }
 
-    if (næring.næringsinntekt && isNaN(Number(næring.næringsinntekt))) {
+    if (næring.næringsinntekt && isNaN(Number(næring.næringsinntekt)) || næring.næringsinntekt && (næring.næringsinntekt.includes(',') || næring.næringsinntekt.includes('.'))) {
         errors.næringsinntekt = Valideringsfeil.MÅ_VÆRE_HELTALL;
     }
 
