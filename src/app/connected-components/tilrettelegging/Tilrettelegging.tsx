@@ -165,7 +165,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                     skjemanummer={
                                         erFrilansEllerSelvstendig
                                             ? Skjemanummer.TILRETTELEGGING_FOR_FRILANS_ELLER_SELVSTENDIG
-                                            : Skjemanummer.ANNET
+                                            : Skjemanummer.TILRETTELEGGING_OG_OMPLASSERING_VED_GRAVIDITET
                                     }
                                     attachments={attachments}
                                     onFilesSelect={(files: Attachment[]) => {
