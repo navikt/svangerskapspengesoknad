@@ -1,5 +1,5 @@
 name: svangerskapspengesoknad
-team: nais
+team: teamforeldrepenger
 image: repo.adeo.no:5443/svangerskapspengesoknad
 replicas:
     min: 2
