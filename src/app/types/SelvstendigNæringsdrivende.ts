@@ -30,7 +30,7 @@ export class Næring {
 
 export class EndringAvNæringsinntektInformasjon {
     dato: Date;
-    næringsinntektEtterEndring: number;
+    næringsinntektEtterEndring: string;
     forklaring: string;
 }
 

@@ -55,6 +55,11 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
                 Valideringsfeil.FELTET_KAN_VÆRE_MAX_1000_TEGN
             );
         }
+
+        const næringsinntektEtterEndring = næring.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring;
+        if (næringsinntektEtterEndring && isNaN(Number(næringsinntektEtterEndring)) || næringsinntektEtterEndring && (næringsinntektEtterEndring.includes(',') || næringsinntektEtterEndring.includes('.'))) {
+            errors.næringsinntekt = Valideringsfeil.MÅ_VÆRE_HELTALL;
+        }
     }
 
     return errors;
