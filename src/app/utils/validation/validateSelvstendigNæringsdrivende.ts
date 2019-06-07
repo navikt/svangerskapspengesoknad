@@ -58,7 +58,11 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
 
         const næringsinntektEtterEndring = næring.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring;
         if (næringsinntektEtterEndring && isNaN(Number(næringsinntektEtterEndring)) || næringsinntektEtterEndring && (næringsinntektEtterEndring.includes(',') || næringsinntektEtterEndring.includes('.'))) {
-            errors.næringsinntekt = Valideringsfeil.MÅ_VÆRE_HELTALL;
+            set(
+                errors,
+                ['endringAvNæringsinntektInformasjon', 'næringsinntektEtterEndring'],
+                Valideringsfeil.MÅ_VÆRE_HELTALL
+            );
         }
     }
 
