@@ -289,7 +289,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                 bredde="XS"
                                 max={100}
                                 min={0}
-                                step={1}
+                                step={0.01}
                                 placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
                                 name={getInputName('delvisTilrettelegging.stillingsprosent')}
                                 label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
