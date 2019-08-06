@@ -36,7 +36,7 @@
         "@types/react-router-dom": "^4.3.1",
         "@types/react-test-renderer": "^16.0.3",
         "@types/react-transition-group": "^2.0.16",
-        "acorn": "^6.0.6",
+        "acorn": "^6.2.1",
         "autoprefixer": "^9.4.7",
         "awesome-typescript-loader": "^5.2.1",
         "babel-jest": "^24.7.1",
