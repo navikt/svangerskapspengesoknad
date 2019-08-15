@@ -29,6 +29,7 @@ import TerminOppsummering from './components/termin/TerminOppsummering';
 import SøknadDTO from '../../types/S\u00F8knad';
 
 import './oppsummering.less';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 interface OwnProps {
     step: SøknadStep;
@@ -155,7 +156,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
-    vedlegg: state.attachment.vedlegg
+    vedlegg: state.attachment.vedlegg.filter((a) => !isAttachmentWithError)
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({

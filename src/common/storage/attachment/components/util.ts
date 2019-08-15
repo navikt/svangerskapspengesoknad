@@ -22,9 +22,9 @@ export const mapFileToAttachment = (
     innsendingsType
 });
 
-export const isAttachmentWithError = ({ pending, uploaded, innsendingsType }: Attachment) => {
+export const isAttachmentWithError = ({ pending, uploaded, innsendingsType, filesize }: Attachment) => {
     if (innsendingsType === InnsendingsType.SEND_SENERE) {
         return false;
     }
-    return pending === false && uploaded === false;
+    return (pending === false && uploaded === false) || filesize === 0;
 };
