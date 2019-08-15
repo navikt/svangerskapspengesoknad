@@ -71,6 +71,9 @@ export const processUtfyltSøknad = (
         },
         vedlegg,
         søker: utfyltSøknad.søker as Søker,
-        tilrettelegging
+        tilrettelegging: tilrettelegging.map((t) => ({
+            ...t,
+            vedlegg: t.vedlegg.filter((vedleggId) => vedlegg.find((v) => v.id === vedleggId))
+        }))
     };
 };

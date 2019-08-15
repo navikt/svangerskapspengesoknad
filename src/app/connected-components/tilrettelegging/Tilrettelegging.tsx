@@ -30,6 +30,7 @@ import InfoBlock from 'common/components/info-block/InfoBlock';
 import InputField from '../../formik/wrappers/InputField';
 import Textarea from '../../formik/wrappers/Textarea';
 import LabelMedInfobox from 'common/components/label-med-infobox/LabelMedInfobox';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 interface OwnProps {
     id: string;
@@ -121,7 +122,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             <FormikStep
                 step={step}
                 formikProps={formikProps}
-                showNesteknapp={visNesteKnapp}
+                showNesteknapp={visNesteKnapp && vedlegg.filter((a) => !isAttachmentWithError(a)).length > 0}
                 onValidFormSubmit={navigate}
                 history={history}>
                 <Block visible={visFrilansEllerSelvstendig}>
