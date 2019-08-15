@@ -156,7 +156,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
-    vedlegg: state.attachment.vedlegg.filter((a) => !isAttachmentWithError)
+    vedlegg: state.attachment.vedlegg.filter((a) => !isAttachmentWithError(a))
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
