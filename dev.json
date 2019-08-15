@@ -1,0 +1,12 @@
+{
+    "ingress": "https://svangerskapspengesoknad-q.nav.no",
+    "ingress-internal": "https://svangerskapspengesoknad.nais.oera-q.local",
+    "application_name": "svangerskapspengesoknad",
+    "env": {
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
+        "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login",
+        "FEATURE_LOGGING": "on",
+        "FEATURE_MINI_DIALOG": "on",
+        "FEATURE_HISTORIKK": "on"
+    }
+}
