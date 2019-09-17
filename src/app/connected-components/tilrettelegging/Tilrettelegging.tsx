@@ -48,6 +48,10 @@ interface StateProps {
 type Props = OwnProps & StateProps & StepProps & InjectedIntlProps;
 
 const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilrettelegging): UferdigTilrettelegging => {
+    if (tilrettelegging.ingenTilrettelegging !== undefined) {
+        return tilrettelegging;
+    }
+
     tilrettelegging.ingenTilrettelegging = {
         slutteArbeidFom: [undefined as any]
     };
@@ -331,15 +335,15 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                     'tilrettelegging.stillingsprosent.placeholder'
                                                 )}
                                                 name={`${getInputName(
-                                                    'delvisTilrettelegging.stillingsprosent'
-                                                )}.${ind}`}
+                                                    'delvisTilrettelegging'
+                                                )}.${ind}.stillingsprosent`}
                                                 label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
                                             />
                                         </Block>
                                         <DatoInput
                                             name={`${getInputName(
-                                                'delvisTilrettelegging.tilrettelagtArbeidFom'
-                                            )}.${ind}`}
+                                                'delvisTilrettelegging'
+                                            )}.${ind}.tilrettelagtArbeidFom`}
                                             label={getMessage(
                                                 intl,
                                                 'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål'
