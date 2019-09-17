@@ -32,7 +32,7 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.jobbeFullt"
                                 values={{
-                                    startDato: moment(tilrett.helTilrettelegging!.tilrettelagtArbeidFom).format(
+                                    startDato: moment(tilrett.helTilrettelegging!.tilrettelagtArbeidFom[0]).format(
                                         'Do MMMM YYYY'
                                     )
                                 }}
@@ -44,10 +44,10 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.jobbeDelvis"
                                 values={{
-                                    startDato: moment(tilrett.delvisTilrettelegging!.tilrettelagtArbeidFom).format(
+                                    startDato: moment(tilrett.delvisTilrettelegging![0].tilrettelagtArbeidFom).format(
                                         'Do MMMM YYYY'
                                     ),
-                                    prosent: tilrett.delvisTilrettelegging!.stillingsprosent
+                                    prosent: tilrett.delvisTilrettelegging![0].stillingsprosent
                                 }}
                             />
                         )}
@@ -57,7 +57,7 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.ikkeJobbe"
                                 values={{
-                                    startDato: moment(tilrett.ingenTilrettelegging!.slutteArbeidFom).format(
+                                    startDato: moment(tilrett.ingenTilrettelegging!.slutteArbeidFom[0]).format(
                                         'Do MMMM YYYY'
                                     )
                                 }}

@@ -53,7 +53,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 if (
                     tilrettelegging.ingenTilrettelegging &&
                     (tilrettelegging.ingenTilrettelegging.slutteArbeidFom &&
-                        moment(tilrettelegging.ingenTilrettelegging.slutteArbeidFom).isBefore(
+                        moment(tilrettelegging.ingenTilrettelegging.slutteArbeidFom[0]).isBefore(
                             tilrettelegging.behovForTilretteleggingFom
                         ))
                 ) {
@@ -69,16 +69,16 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             if (valgteTyper.includes(Tilretteleggingstype.DELVIS)) {
                 if (tilrettelegging.delvisTilrettelegging) {
                     if (
-                        tilrettelegging.delvisTilrettelegging.stillingsprosent < 0 ||
-                        tilrettelegging.delvisTilrettelegging.stillingsprosent > 100
+                        tilrettelegging.delvisTilrettelegging[0].stillingsprosent < 0 ||
+                        tilrettelegging.delvisTilrettelegging[0].stillingsprosent > 100
                     ) {
                         set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.STILLINGSPROSENT_RANGE);
-                    } else if (tilrettelegging.delvisTilrettelegging.stillingsprosent === undefined) {
+                    } else if (tilrettelegging.delvisTilrettelegging[0].stillingsprosent === undefined) {
                         set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.FELTET_ER_PÅKREVD);
                     }
                     if (
-                        tilrettelegging.delvisTilrettelegging.tilrettelagtArbeidFom &&
-                        moment(tilrettelegging.delvisTilrettelegging.tilrettelagtArbeidFom).isBefore(
+                        tilrettelegging.delvisTilrettelegging[0].tilrettelagtArbeidFom &&
+                        moment(tilrettelegging.delvisTilrettelegging[0].tilrettelagtArbeidFom).isBefore(
                             tilrettelegging.behovForTilretteleggingFom
                         )
                     ) {
@@ -87,7 +87,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             'delvisTilrettelegging.tilrettelagtArbeidFom',
                             Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
                         );
-                    } else if (tilrettelegging.delvisTilrettelegging.tilrettelagtArbeidFom === undefined) {
+                    } else if (tilrettelegging.delvisTilrettelegging[0].tilrettelagtArbeidFom === undefined) {
                         set(tErrors, 'delvisTilrettelegging.tilrettelagtArbeidFom', Valideringsfeil.FELTET_ER_PÅKREVD);
                     }
                 } else {
@@ -99,7 +99,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 if (tilrettelegging.helTilrettelegging) {
                     if (
                         tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom &&
-                        moment(tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom).isBefore(
+                        moment(tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom[0]).isBefore(
                             tilrettelegging.behovForTilretteleggingFom
                         )
                     ) {

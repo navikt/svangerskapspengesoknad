@@ -14,7 +14,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
 import { StepProps } from 'app/components/step/Step';
-import { Arbeidsforholdstype, Tilretteleggingstype } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype, Tilretteleggingstype, UferdigTilrettelegging } from 'app/types/Tilrettelegging';
 import Action from 'app/redux/types/Action';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
@@ -47,6 +47,25 @@ interface StateProps {
 
 type Props = OwnProps & StateProps & StepProps & InjectedIntlProps;
 
+const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilrettelegging): UferdigTilrettelegging => {
+    tilrettelegging.ingenTilrettelegging = {
+        slutteArbeidFom: [undefined as any]
+    };
+
+    tilrettelegging.delvisTilrettelegging = [
+        {
+            stillingsprosent: undefined as any,
+            tilrettelagtArbeidFom: undefined as any
+        }
+    ];
+
+    tilrettelegging.helTilrettelegging = {
+        tilrettelagtArbeidFom: [undefined as any]
+    };
+
+    return tilrettelegging;
+};
+
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, intl, history } = props;
 
@@ -64,7 +83,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
     const tilretteleggingstypeName = getInputName('type');
     const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName) || [];
-    const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = values.tilrettelegging[index];
+    const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = initialValuesForTilrettelegginger(
+        values.tilrettelegging[index]
+    );
 
     const frilansRisikoErOk = erFrilansEllerSelvstendig
         ? tilrettelegging.risikoFaktorer !== undefined && tilrettelegging.risikoFaktorer.length > 3
@@ -84,8 +105,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
             : true) &&
         (visDelvisTilrettelegging
             ? delvisTilrettelegging !== undefined &&
-              !isNaN(delvisTilrettelegging.stillingsprosent) &&
-              delvisTilrettelegging.tilrettelagtArbeidFom !== undefined
+              !isNaN(delvisTilrettelegging[0].stillingsprosent) &&
+              delvisTilrettelegging[0].tilrettelagtArbeidFom !== undefined
             : true) &&
         (visHelTilrettelegging
             ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
@@ -267,13 +288,21 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.infoBox')
                     }}>
                     <InfoBlock>
-                        <DatoInput
+                        <FieldArray
                             name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
-                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål')}
-                            datoAvgrensinger={{
-                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato
-                            }}
+                            render={() =>
+                                tilrettelegging.helTilrettelegging !== undefined &&
+                                tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom.map((helTil, ind) => (
+                                    <DatoInput
+                                        name={`${getInputName('helTilrettelegging.tilrettelagtArbeidFom')}.${ind}`}
+                                        label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål')}
+                                        datoAvgrensinger={{
+                                            minDato: tilrettelegging.behovForTilretteleggingFom,
+                                            maksDato: values.barn.fødselsdato
+                                        }}
+                                    />
+                                ))
+                            }
                         />
                     </InfoBlock>
                 </Block>
@@ -284,25 +313,45 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.infoBox')
                     }}>
                     <InfoBlock>
-                        <Block margin="s">
-                            <InputField
-                                type="number"
-                                bredde="XS"
-                                max={100}
-                                min={0}
-                                step={0.01}
-                                placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
-                                name={getInputName('delvisTilrettelegging.stillingsprosent')}
-                                label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
-                            />
-                        </Block>
-                        <DatoInput
-                            name={getInputName('delvisTilrettelegging.tilrettelagtArbeidFom')}
-                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål')}
-                            datoAvgrensinger={{
-                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato
-                            }}
+                        <FieldArray
+                            name={getInputName('delvisTilrettelegging')}
+                            render={() =>
+                                tilrettelegging.delvisTilrettelegging !== undefined &&
+                                tilrettelegging.delvisTilrettelegging.map((delTil, ind) => (
+                                    <>
+                                        <Block margin="s">
+                                            <InputField
+                                                type="number"
+                                                bredde="XS"
+                                                max={100}
+                                                min={0}
+                                                step={0.01}
+                                                placeholder={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.stillingsprosent.placeholder'
+                                                )}
+                                                name={`${getInputName(
+                                                    'delvisTilrettelegging.stillingsprosent'
+                                                )}.${ind}`}
+                                                label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
+                                            />
+                                        </Block>
+                                        <DatoInput
+                                            name={`${getInputName(
+                                                'delvisTilrettelegging.tilrettelagtArbeidFom'
+                                            )}.${ind}`}
+                                            label={getMessage(
+                                                intl,
+                                                'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål'
+                                            )}
+                                            datoAvgrensinger={{
+                                                minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                maksDato: values.barn.fødselsdato
+                                            }}
+                                        />
+                                    </>
+                                ))
+                            }
                         />
                     </InfoBlock>
                 </Block>
@@ -313,13 +362,21 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.infoBox')
                     }}>
                     <InfoBlock>
-                        <DatoInput
+                        <FieldArray
                             name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
-                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål')}
-                            datoAvgrensinger={{
-                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato
-                            }}
+                            render={() =>
+                                tilrettelegging.ingenTilrettelegging !== undefined &&
+                                tilrettelegging.ingenTilrettelegging.slutteArbeidFom.map((ingenTil, ind) => (
+                                    <DatoInput
+                                        name={`${getInputName('ingenTilrettelegging.slutteArbeidFom')}.${ind}`}
+                                        label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål')}
+                                        datoAvgrensinger={{
+                                            minDato: tilrettelegging.behovForTilretteleggingFom,
+                                            maksDato: values.barn.fødselsdato
+                                        }}
+                                    />
+                                ))
+                            }
                         />
                     </InfoBlock>
                 </Block>
