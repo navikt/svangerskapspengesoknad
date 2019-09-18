@@ -52,8 +52,8 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             if (valgteTyper.includes(Tilretteleggingstype.INGEN)) {
                 if (
                     tilrettelegging.ingenTilrettelegging &&
-                    (tilrettelegging.ingenTilrettelegging.slutteArbeidFom &&
-                        moment(tilrettelegging.ingenTilrettelegging.slutteArbeidFom[0]).isBefore(
+                    (tilrettelegging.ingenTilrettelegging[0].slutteArbeidFom &&
+                        moment(tilrettelegging.ingenTilrettelegging[0].slutteArbeidFom).isBefore(
                             tilrettelegging.behovForTilretteleggingFom
                         ))
                 ) {
@@ -98,8 +98,8 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             if (valgteTyper.includes(Tilretteleggingstype.HEL)) {
                 if (tilrettelegging.helTilrettelegging) {
                     if (
-                        tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom &&
-                        moment(tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom[0]).isBefore(
+                        tilrettelegging.helTilrettelegging[0].tilrettelagtArbeidFom &&
+                        moment(tilrettelegging.helTilrettelegging[0].tilrettelagtArbeidFom).isBefore(
                             tilrettelegging.behovForTilretteleggingFom
                         )
                     ) {

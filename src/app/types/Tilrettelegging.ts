@@ -22,30 +22,38 @@ export interface DelvisTilrettelegging {
     stillingsprosent: number;
 }
 
+export interface HelTilrettelegging {
+    tilrettelagtArbeidFom: Date;
+}
+
+export interface IngenTilrettelegging {
+    slutteArbeidFom: Date;
+}
+
 export interface Tilrettelegging {
     id: string;
     behovForTilretteleggingFom: Date;
     arbeidsforhold: TilretteleggingArbeidsforhold;
     vedlegg: string[];
-    helTilrettelegging?: {
-        tilrettelagtArbeidFom: Date[];
-    };
+    helTilrettelegging?: HelTilrettelegging[];
     delvisTilrettelegging?: DelvisTilrettelegging[];
-    ingenTilrettelegging?: {
-        slutteArbeidFom: Date[];
-    };
+    ingenTilrettelegging?: IngenTilrettelegging[];
 }
 
 export type UferdigTilrettelegging = Tilrettelegging & {
     behovForTilretteleggingFom?: Date;
     type: Tilretteleggingstype[];
-    helTilrettelegging?: {
-        tilrettelagtArbeidFom?: Date[];
-    };
+    helTilrettelegging?: [
+        {
+            tilrettelagtArbeidFom?: Date;
+        }
+    ];
     delvisTilrettelegging?: DelvisTilrettelegging[];
-    ingenTilrettelegging?: {
-        slutteArbeidFom?: Date[];
-    };
+    ingenTilrettelegging?: [
+        {
+            slutteArbeidFom?: Date;
+        }
+    ];
     risikoFaktorer?: string;
     tilretteleggingstiltak?: string;
 };

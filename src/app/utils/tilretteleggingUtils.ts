@@ -59,7 +59,7 @@ const mapHelTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        tilrettelagtArbeidFom: tilrettelegging.helTilrettelegging!.tilrettelagtArbeidFom[0]
+        tilrettelagtArbeidFom: tilrettelegging.helTilrettelegging![0].tilrettelagtArbeidFom
     };
 };
 
@@ -91,7 +91,7 @@ const mapIngenTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        slutteArbeidFom: tilrettelegging.ingenTilrettelegging.slutteArbeidFom[0]
+        slutteArbeidFom: tilrettelegging.ingenTilrettelegging[0].slutteArbeidFom
     };
 };
 

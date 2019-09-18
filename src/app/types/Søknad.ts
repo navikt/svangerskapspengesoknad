@@ -44,18 +44,22 @@ export const initialSøknad: UferdigSøknad = {
                 id: '096429518-3033-5344-0878-86180859528444',
                 type: Arbeidsforholdstype.VIRKSOMHET
             },
-            ingenTilrettelegging: {
-                slutteArbeidFom: [new Date('2019-09-01')]
-            },
+            ingenTilrettelegging: [
+                {
+                    slutteArbeidFom: new Date('2019-09-01')
+                }
+            ],
             delvisTilrettelegging: [
                 {
                     stillingsprosent: 66,
                     tilrettelagtArbeidFom: new Date('2019-09-01')
                 }
             ],
-            helTilrettelegging: {
-                tilrettelagtArbeidFom: [new Date('2019-09-01')]
-            },
+            helTilrettelegging: [
+                {
+                    tilrettelagtArbeidFom: new Date('2019-09-01')
+                }
+            ],
             behovForTilretteleggingFom: new Date('2019-09-01'),
             type: [Tilretteleggingstype.HEL, Tilretteleggingstype.DELVIS, Tilretteleggingstype.INGEN]
         }

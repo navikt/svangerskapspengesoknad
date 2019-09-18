@@ -32,7 +32,7 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.jobbeFullt"
                                 values={{
-                                    startDato: moment(tilrett.helTilrettelegging!.tilrettelagtArbeidFom[0]).format(
+                                    startDato: moment(tilrett.helTilrettelegging![0].tilrettelagtArbeidFom).format(
                                         'Do MMMM YYYY'
                                     )
                                 }}
@@ -57,7 +57,7 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                             <FormattedHTMLMessage
                                 id="oppsummering.tilrettelegging.info.ikkeJobbe"
                                 values={{
-                                    startDato: moment(tilrett.ingenTilrettelegging!.slutteArbeidFom[0]).format(
+                                    startDato: moment(tilrett.ingenTilrettelegging![0].slutteArbeidFom).format(
                                         'Do MMMM YYYY'
                                     )
                                 }}

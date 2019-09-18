@@ -1,7 +1,7 @@
 import { Arbeidsforholdstype, Tilretteleggingstype, UferdigTilrettelegging } from '../types/Tilrettelegging';
 import { initialSøknad, UferdigSøknad } from '../types/Søknad';
 
-const selvstendigTilrettelegging = {
+const selvstendigTilrettelegging: UferdigTilrettelegging = {
     id: 'sdgf',
     vedlegg: ['V82187933376995392214929871235303834'],
     arbeidsforhold: {
@@ -10,16 +10,22 @@ const selvstendigTilrettelegging = {
     risikoFaktorer: 'Selvstendig er skummelt i seg selv',
     behovForTilretteleggingFom: new Date(),
     type: [Tilretteleggingstype.INGEN, Tilretteleggingstype.DELVIS, Tilretteleggingstype.HEL],
-    ingenTilrettelegging: {
-        slutteArbeidFom: [new Date()]
-    },
-    delvisTilrettelegging: [{
-        stillingsprosent: 20,
-        tilrettelagtArbeidFom: new Date()
-    }],
-    helTilrettelegging: {
-        tilrettelagtArbeidFom: [new Date()]
-    },
+    ingenTilrettelegging: [
+        {
+            slutteArbeidFom: new Date()
+        }
+    ],
+    delvisTilrettelegging: [
+        {
+            stillingsprosent: 20,
+            tilrettelagtArbeidFom: new Date()
+        }
+    ],
+    helTilrettelegging: [
+        {
+            tilrettelagtArbeidFom: new Date()
+        }
+    ],
     tilretteleggingstiltak: 'sdfsdf'
 };
 
@@ -32,16 +38,22 @@ const frilansTilrettelegging: UferdigTilrettelegging = {
     risikoFaktorer: 'sdfsdf',
     behovForTilretteleggingFom: new Date(),
     type: [Tilretteleggingstype.INGEN, Tilretteleggingstype.DELVIS, Tilretteleggingstype.HEL],
-    ingenTilrettelegging: {
-        slutteArbeidFom: [new Date()]
-    },
-    delvisTilrettelegging: [{
-        tilrettelagtArbeidFom: new Date(),
-        stillingsprosent: 22
-    }],
-    helTilrettelegging: {
-        tilrettelagtArbeidFom: [new Date()]
-    },
+    ingenTilrettelegging: [
+        {
+            slutteArbeidFom: new Date()
+        }
+    ],
+    delvisTilrettelegging: [
+        {
+            tilrettelagtArbeidFom: new Date(),
+            stillingsprosent: 22
+        }
+    ],
+    helTilrettelegging: [
+        {
+            tilrettelagtArbeidFom: new Date()
+        }
+    ],
     tilretteleggingstiltak: 'sdfsdf'
 };
 
@@ -54,16 +66,22 @@ const virksomhetTilrettelegging: UferdigTilrettelegging = {
     },
     behovForTilretteleggingFom: new Date(),
     type: [Tilretteleggingstype.INGEN, Tilretteleggingstype.DELVIS, Tilretteleggingstype.HEL],
-    ingenTilrettelegging: {
-        slutteArbeidFom: [new Date()]
-    },
-    delvisTilrettelegging: [{
-        stillingsprosent: 22,
-        tilrettelagtArbeidFom: new Date()
-    }],
-    helTilrettelegging: {
-        tilrettelagtArbeidFom: [new Date()]
-    }
+    ingenTilrettelegging: [
+        {
+            slutteArbeidFom: new Date()
+        }
+    ],
+    delvisTilrettelegging: [
+        {
+            stillingsprosent: 22,
+            tilrettelagtArbeidFom: new Date()
+        }
+    ],
+    helTilrettelegging: [
+        {
+            tilrettelagtArbeidFom: new Date()
+        }
+    ]
 };
 
 const tilrettelegginger: UferdigTilrettelegging[] = [

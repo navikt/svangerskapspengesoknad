@@ -53,9 +53,11 @@ const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilretteleggi
         return tilrettelegging;
     }
 
-    tilrettelegging.ingenTilrettelegging = {
-        slutteArbeidFom: [undefined as any]
-    };
+    tilrettelegging.ingenTilrettelegging = [
+        {
+            slutteArbeidFom: undefined as any
+        }
+    ];
 
     tilrettelegging.delvisTilrettelegging = [
         {
@@ -64,9 +66,11 @@ const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilretteleggi
         }
     ];
 
-    tilrettelegging.helTilrettelegging = {
-        tilrettelagtArbeidFom: [undefined as any]
-    };
+    tilrettelegging.helTilrettelegging = [
+        {
+            tilrettelagtArbeidFom: undefined as any
+        }
+    ];
 
     return tilrettelegging;
 };
@@ -106,7 +110,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         visDel2 &&
         valgteTilretteleggingstyper.length > 0 &&
         (visIngenTilrettelegging
-            ? ingenTilrettelegging !== undefined && ingenTilrettelegging.slutteArbeidFom !== undefined
+            ? ingenTilrettelegging !== undefined && ingenTilrettelegging[0].slutteArbeidFom !== undefined
             : true) &&
         (visDelvisTilrettelegging
             ? delvisTilrettelegging !== undefined &&
@@ -114,7 +118,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
               delvisTilrettelegging[0].tilrettelagtArbeidFom !== undefined
             : true) &&
         (visHelTilrettelegging
-            ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
+            ? helTilrettelegging !== undefined && helTilrettelegging[0].tilrettelagtArbeidFom !== undefined
             : true);
     const visTiltakForTilrettelegging = del1OgDel2ErOk && visFrilansEllerSelvstendig;
     const tilretteleggingstiltakErOk = erFrilansEllerSelvstendig
@@ -294,16 +298,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     }}>
                     <InfoBlock>
                         <FieldArray
-                            name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
+                            name={getInputName('helTilrettelegging')}
                             render={(arrayHelpers) =>
                                 tilrettelegging.helTilrettelegging !== undefined &&
-                                tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom.map((helTil, ind, arr) => (
+                                tilrettelegging.helTilrettelegging.map((helTil, ind, arr) => (
                                     <>
                                         <Block margin="xs">
                                             <DatoInput
                                                 name={`${getInputName(
-                                                    'helTilrettelegging.tilrettelagtArbeidFom'
-                                                )}.${ind}`}
+                                                    'helTilrettelegging'
+                                                )}.${ind}.tilrettelagtArbeidFom`}
                                                 label={getMessage(
                                                     intl,
                                                     'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål'
@@ -383,6 +387,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 }}
                                             />
                                         </Block>
+                                        {ind !== 0 && (
+                                            <div>
+                                                <Knapp
+                                                    onClick={() => arrayHelpers.remove(ind)}
+                                                    htmlType="button"
+                                                    mini={true}>
+                                                    Fjern periode
+                                                </Knapp>
+                                            </div>
+                                        )}
                                         <Block visible={arr.length - 1 === ind}>
                                             <Knapp
                                                 onClick={() => arrayHelpers.push(undefined)}
@@ -405,14 +419,14 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     }}>
                     <InfoBlock>
                         <FieldArray
-                            name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
+                            name={getInputName('ingenTilrettelegging')}
                             render={(arrayHelpers) =>
                                 tilrettelegging.ingenTilrettelegging !== undefined &&
-                                tilrettelegging.ingenTilrettelegging.slutteArbeidFom.map((ingenTil, ind, arr) => (
+                                tilrettelegging.ingenTilrettelegging.map((ingenTil, ind, arr) => (
                                     <>
                                         <Block margin="xs">
                                             <DatoInput
-                                                name={`${getInputName('ingenTilrettelegging.slutteArbeidFom')}.${ind}`}
+                                                name={`${getInputName('ingenTilrettelegging')}.${ind}.slutteArbeidFom`}
                                                 label={getMessage(
                                                     intl,
                                                     'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål'
@@ -423,6 +437,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 }}
                                             />
                                         </Block>
+                                        {ind !== 0 && (
+                                            <div>
+                                                <Knapp
+                                                    onClick={() => arrayHelpers.remove(ind)}
+                                                    htmlType="button"
+                                                    mini={true}>
+                                                    Fjern periode
+                                                </Knapp>
+                                            </div>
+                                        )}
                                         <Block visible={arr.length - 1 === ind}>
                                             <Knapp
                                                 onClick={() => arrayHelpers.push(undefined)}
