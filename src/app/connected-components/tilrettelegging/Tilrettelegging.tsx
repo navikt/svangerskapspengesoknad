@@ -31,6 +31,7 @@ import InputField from '../../formik/wrappers/InputField';
 import Textarea from '../../formik/wrappers/Textarea';
 import LabelMedInfobox from 'common/components/label-med-infobox/LabelMedInfobox';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import { Knapp } from 'nav-frontend-knapper';
 
 interface OwnProps {
     id: string;
@@ -294,17 +295,44 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
-                            render={() =>
+                            render={(arrayHelpers) =>
                                 tilrettelegging.helTilrettelegging !== undefined &&
-                                tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom.map((helTil, ind) => (
-                                    <DatoInput
-                                        name={`${getInputName('helTilrettelegging.tilrettelagtArbeidFom')}.${ind}`}
-                                        label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål')}
-                                        datoAvgrensinger={{
-                                            minDato: tilrettelegging.behovForTilretteleggingFom,
-                                            maksDato: values.barn.fødselsdato
-                                        }}
-                                    />
+                                tilrettelegging.helTilrettelegging.tilrettelagtArbeidFom.map((helTil, ind, arr) => (
+                                    <>
+                                        <Block margin="xs">
+                                            <DatoInput
+                                                name={`${getInputName(
+                                                    'helTilrettelegging.tilrettelagtArbeidFom'
+                                                )}.${ind}`}
+                                                label={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål'
+                                                )}
+                                                datoAvgrensinger={{
+                                                    minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                    maksDato: values.barn.fødselsdato
+                                                }}
+                                            />
+                                            {ind !== 0 && (
+                                                <div>
+                                                    <Knapp
+                                                        onClick={() => arrayHelpers.remove(ind)}
+                                                        htmlType="button"
+                                                        mini={true}>
+                                                        Fjern periode
+                                                    </Knapp>
+                                                </div>
+                                            )}
+                                        </Block>
+                                        <Block visible={arr.length - 1 === ind}>
+                                            <Knapp
+                                                onClick={() => arrayHelpers.push(undefined)}
+                                                htmlType="button"
+                                                mini={true}>
+                                                Legg til ny periode
+                                            </Knapp>
+                                        </Block>
+                                    </>
                                 ))
                             }
                         />
@@ -319,11 +347,11 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('delvisTilrettelegging')}
-                            render={() =>
+                            render={(arrayHelpers) =>
                                 tilrettelegging.delvisTilrettelegging !== undefined &&
-                                tilrettelegging.delvisTilrettelegging.map((delTil, ind) => (
+                                tilrettelegging.delvisTilrettelegging.map((delTil, ind, arr) => (
                                     <>
-                                        <Block margin="s">
+                                        <Block margin="xs">
                                             <InputField
                                                 type="number"
                                                 bredde="XS"
@@ -340,19 +368,29 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
                                             />
                                         </Block>
-                                        <DatoInput
-                                            name={`${getInputName(
-                                                'delvisTilrettelegging'
-                                            )}.${ind}.tilrettelagtArbeidFom`}
-                                            label={getMessage(
-                                                intl,
-                                                'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål'
-                                            )}
-                                            datoAvgrensinger={{
-                                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                maksDato: values.barn.fødselsdato
-                                            }}
-                                        />
+                                        <Block margin="xs">
+                                            <DatoInput
+                                                name={`${getInputName(
+                                                    'delvisTilrettelegging'
+                                                )}.${ind}.tilrettelagtArbeidFom`}
+                                                label={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål'
+                                                )}
+                                                datoAvgrensinger={{
+                                                    minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                    maksDato: values.barn.fødselsdato
+                                                }}
+                                            />
+                                        </Block>
+                                        <Block visible={arr.length - 1 === ind}>
+                                            <Knapp
+                                                onClick={() => arrayHelpers.push(undefined)}
+                                                htmlType="button"
+                                                mini={true}>
+                                                Legg til ny periode
+                                            </Knapp>
+                                        </Block>
                                     </>
                                 ))
                             }
@@ -368,17 +406,32 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
-                            render={() =>
+                            render={(arrayHelpers) =>
                                 tilrettelegging.ingenTilrettelegging !== undefined &&
-                                tilrettelegging.ingenTilrettelegging.slutteArbeidFom.map((ingenTil, ind) => (
-                                    <DatoInput
-                                        name={`${getInputName('ingenTilrettelegging.slutteArbeidFom')}.${ind}`}
-                                        label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål')}
-                                        datoAvgrensinger={{
-                                            minDato: tilrettelegging.behovForTilretteleggingFom,
-                                            maksDato: values.barn.fødselsdato
-                                        }}
-                                    />
+                                tilrettelegging.ingenTilrettelegging.slutteArbeidFom.map((ingenTil, ind, arr) => (
+                                    <>
+                                        <Block margin="xs">
+                                            <DatoInput
+                                                name={`${getInputName('ingenTilrettelegging.slutteArbeidFom')}.${ind}`}
+                                                label={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål'
+                                                )}
+                                                datoAvgrensinger={{
+                                                    minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                    maksDato: values.barn.fødselsdato
+                                                }}
+                                            />
+                                        </Block>
+                                        <Block visible={arr.length - 1 === ind}>
+                                            <Knapp
+                                                onClick={() => arrayHelpers.push(undefined)}
+                                                htmlType="button"
+                                                mini={true}>
+                                                Legg til ny periode
+                                            </Knapp>
+                                        </Block>
+                                    </>
                                 ))
                             }
                         />
