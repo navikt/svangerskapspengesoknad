@@ -1,6 +1,5 @@
 {
     "ingress": "https://svangerskapspengesoknad.nav.no",
-    "ingress-internal": "https://svangerskapspengesoknad.nais.oera.local",
     "application_name": "svangerskapspengesoknad",
     "env": {
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.nav.no/rest",
