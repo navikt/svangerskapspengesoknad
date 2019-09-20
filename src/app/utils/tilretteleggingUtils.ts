@@ -126,7 +126,7 @@ export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilretteleggi
     tilrettelegging.forEach((t) => {
         const arbeidsforhold = mapArbeidsforholdForTilrettelegging(t);
         if (t.helTilrettelegging) {
-            t.helTilrettelegging.forEach((helTil) => {
+            t.helTilrettelegging.forEach(() => {
                 const helTilrettelegging = mapHelTilrettelegging(t, arbeidsforhold);
                 if (helTilrettelegging) {
                     dto.push(helTilrettelegging);
@@ -134,7 +134,7 @@ export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilretteleggi
             });
         }
         if (t.delvisTilrettelegging) {
-            t.delvisTilrettelegging.forEach((helTil) => {
+            t.delvisTilrettelegging.forEach(() => {
                 const delvisTilrettelegging = mapDelvisTilrettelegging(t, arbeidsforhold);
                 if (delvisTilrettelegging) {
                     dto.push(delvisTilrettelegging);
@@ -142,7 +142,7 @@ export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilretteleggi
             });
         }
         if (t.ingenTilrettelegging) {
-            t.ingenTilrettelegging.forEach((helTil) => {
+            t.ingenTilrettelegging.forEach(() => {
                 const ingenTilrettelegging = mapIngenTilrettelegging(t, arbeidsforhold);
                 if (ingenTilrettelegging) {
                     dto.push(ingenTilrettelegging);
