@@ -1,4 +1,5 @@
 {
+    "namespace" : "foreldrepenger",
     "ingress": "https://svangerskapspengesoknad.dev-nav.no",
     "application_name": "svangerskapspengesoknad",
     "env": {
