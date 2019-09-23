@@ -10,6 +10,15 @@ metadata:
   labels:
     team: {{team}}
 spec:
+  accessPolicy:
+    outbound:
+      external:
+        - host: {{appres}}
+      rules : []
+    inbound:
+      rules:
+      - application: istio-ingressgateway
+        namespace: istio-system
   image: {{version}}
   port: 8080
   replicas:
