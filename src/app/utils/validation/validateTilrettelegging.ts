@@ -14,6 +14,9 @@ import { formatDate } from '../formatDate';
 
 const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: string): Søknadfeil => {
     const errors: Søknadfeil = {};
+    const checkForDuplicateDates = (dates: string[], date: string) => {
+        return dates.filter((d: string) => d === date).length > 1;
+    };
 
     const idx = søknad.søknadsgrunnlag.findIndex((grunnlag: Søknadsgrunnlag) => grunnlag.id === arbeidsforholdId);
     if (søknad.tilrettelegging) {
@@ -56,6 +59,12 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                               return result;
                           }, [])
                     : [];
+
+            const alleDatoer = [
+                ...ingenTilretteleggingDatoer,
+                ...delvisTilretteleggingDatoer,
+                ...helTilretteleggingDatoer
+            ];
 
             if (
                 tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
@@ -109,8 +118,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
 
                         if (
                             ingenTil.slutteArbeidFom !== undefined &&
-                            (helTilretteleggingDatoer.includes(formatDate(ingenTil.slutteArbeidFom)!) ||
-                                delvisTilretteleggingDatoer.includes(formatDate(ingenTil.slutteArbeidFom)!))
+                            checkForDuplicateDates(alleDatoer, formatDate(ingenTil.slutteArbeidFom)!)
                         ) {
                             merge(
                                 tErrors,
@@ -140,8 +148,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
 
                         if (
                             delTil.tilrettelagtArbeidFom !== undefined &&
-                            (helTilretteleggingDatoer.includes(formatDate(delTil.tilrettelagtArbeidFom)!) ||
-                                ingenTilretteleggingDatoer.includes(formatDate(delTil.tilrettelagtArbeidFom)!))
+                            checkForDuplicateDates(alleDatoer, formatDate(delTil.tilrettelagtArbeidFom)!)
                         ) {
                             merge(
                                 tErrors,
@@ -221,8 +228,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
 
                         if (
                             helTil.tilrettelagtArbeidFom !== undefined &&
-                            (delvisTilretteleggingDatoer.includes(formatDate(helTil.tilrettelagtArbeidFom)!) ||
-                                ingenTilretteleggingDatoer.includes(formatDate(helTil.tilrettelagtArbeidFom)!))
+                            checkForDuplicateDates(alleDatoer, formatDate(helTil.tilrettelagtArbeidFom)!)
                         ) {
                             merge(
                                 tErrors,
