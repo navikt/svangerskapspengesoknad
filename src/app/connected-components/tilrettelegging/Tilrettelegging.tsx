@@ -14,7 +14,7 @@ import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
 import { StepProps } from 'app/components/step/Step';
-import { Arbeidsforholdstype, Tilretteleggingstype } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype, Tilretteleggingstype, UferdigTilrettelegging } from 'app/types/Tilrettelegging';
 import Action from 'app/redux/types/Action';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
@@ -27,10 +27,11 @@ import SøknadStep from 'app/types/SøknadStep';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import CheckboksPanelGruppe from '../../formik/wrappers/CheckboksPanelGruppe';
 import InfoBlock from 'common/components/info-block/InfoBlock';
-import InputField from '../../formik/wrappers/InputField';
 import Textarea from '../../formik/wrappers/Textarea';
 import LabelMedInfobox from 'common/components/label-med-infobox/LabelMedInfobox';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import { Knapp } from 'nav-frontend-knapper';
+import AddTilrettelegging from './components/AddTilrettelegging';
 
 interface OwnProps {
     id: string;
@@ -46,6 +47,33 @@ interface StateProps {
 }
 
 type Props = OwnProps & StateProps & StepProps & InjectedIntlProps;
+
+const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilrettelegging): UferdigTilrettelegging => {
+    if (tilrettelegging.ingenTilrettelegging !== undefined) {
+        return tilrettelegging;
+    }
+
+    tilrettelegging.ingenTilrettelegging = [
+        {
+            slutteArbeidFom: undefined as any
+        }
+    ];
+
+    tilrettelegging.delvisTilrettelegging = [
+        {
+            stillingsprosent: undefined as any,
+            tilrettelagtArbeidFom: undefined as any
+        }
+    ];
+
+    tilrettelegging.helTilrettelegging = [
+        {
+            tilrettelagtArbeidFom: undefined as any
+        }
+    ];
+
+    return tilrettelegging;
+};
 
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, intl, history } = props;
@@ -64,7 +92,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
     const tilretteleggingstypeName = getInputName('type');
     const valgteTilretteleggingstyper = get(values, tilretteleggingstypeName) || [];
-    const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = values.tilrettelegging[index];
+    const { ingenTilrettelegging, delvisTilrettelegging, helTilrettelegging } = initialValuesForTilrettelegginger(
+        values.tilrettelegging[index]
+    );
 
     const frilansRisikoErOk = erFrilansEllerSelvstendig
         ? tilrettelegging.risikoFaktorer !== undefined && tilrettelegging.risikoFaktorer.length > 3
@@ -80,15 +110,15 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         visDel2 &&
         valgteTilretteleggingstyper.length > 0 &&
         (visIngenTilrettelegging
-            ? ingenTilrettelegging !== undefined && ingenTilrettelegging.slutteArbeidFom !== undefined
+            ? ingenTilrettelegging !== undefined && ingenTilrettelegging[0].slutteArbeidFom !== undefined
             : true) &&
         (visDelvisTilrettelegging
             ? delvisTilrettelegging !== undefined &&
-              !isNaN(delvisTilrettelegging.stillingsprosent) &&
-              delvisTilrettelegging.tilrettelagtArbeidFom !== undefined
+              !isNaN(delvisTilrettelegging[0].stillingsprosent) &&
+              delvisTilrettelegging[0].tilrettelagtArbeidFom !== undefined
             : true) &&
         (visHelTilrettelegging
-            ? helTilrettelegging !== undefined && helTilrettelegging.tilrettelagtArbeidFom !== undefined
+            ? helTilrettelegging !== undefined && helTilrettelegging[0].tilrettelagtArbeidFom !== undefined
             : true);
     const visTiltakForTilrettelegging = del1OgDel2ErOk && visFrilansEllerSelvstendig;
     const tilretteleggingstiltakErOk = erFrilansEllerSelvstendig
@@ -267,13 +297,41 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.infoBox')
                     }}>
                     <InfoBlock>
-                        <DatoInput
-                            name={getInputName('helTilrettelegging.tilrettelagtArbeidFom')}
-                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål')}
-                            datoAvgrensinger={{
-                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato
-                            }}
+                        <FieldArray
+                            name={getInputName('helTilrettelegging')}
+                            render={(arrayHelpers) =>
+                                tilrettelegging.helTilrettelegging !== undefined &&
+                                tilrettelegging.helTilrettelegging.map((helTil, ind, arr) => (
+                                    <>
+                                        <Block margin="xs">
+                                            <AddTilrettelegging
+                                                datoAvgrensninger={{
+                                                    minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                    maksDato: values.barn.fødselsdato
+                                                }}
+                                                datoInputName={`${getInputName(
+                                                    'helTilrettelegging'
+                                                )}.${ind}.tilrettelagtArbeidFom`}
+                                                datoLabel={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.hvordanKanDuJobbe.fullt.spørsmål'
+                                                )}
+                                                showDeleteButton={ind !== 0}
+                                                delvisTilrettelegging={false}
+                                                onDelete={() => arrayHelpers.remove(ind)}
+                                            />
+                                        </Block>
+                                        <Block margin="xs" visible={arr.length - 1 === ind}>
+                                            <Knapp
+                                                onClick={() => arrayHelpers.push({ tilrettelagtArbeidFom: undefined })}
+                                                htmlType="button"
+                                                mini={true}>
+                                                {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
+                                            </Knapp>
+                                        </Block>
+                                    </>
+                                ))
+                            }
                         />
                     </InfoBlock>
                 </Block>
@@ -284,25 +342,53 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.infoBox')
                     }}>
                     <InfoBlock>
-                        <Block margin="s">
-                            <InputField
-                                type="number"
-                                bredde="XS"
-                                max={100}
-                                min={0}
-                                step={0.01}
-                                placeholder={getMessage(intl, 'tilrettelegging.stillingsprosent.placeholder')}
-                                name={getInputName('delvisTilrettelegging.stillingsprosent')}
-                                label={getMessage(intl, 'tilrettelegging.stillingsprosent.label')}
-                            />
-                        </Block>
-                        <DatoInput
-                            name={getInputName('delvisTilrettelegging.tilrettelagtArbeidFom')}
-                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål')}
-                            datoAvgrensinger={{
-                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato
-                            }}
+                        <FieldArray
+                            name={getInputName('delvisTilrettelegging')}
+                            render={(arrayHelpers) =>
+                                tilrettelegging.delvisTilrettelegging !== undefined &&
+                                tilrettelegging.delvisTilrettelegging.map((delTil, ind, arr) => (
+                                    <>
+                                        <Block margin="xs">
+                                            <AddTilrettelegging
+                                                datoAvgrensninger={{
+                                                    minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                    maksDato: values.barn.fødselsdato
+                                                }}
+                                                datoInputName={`${getInputName(
+                                                    'delvisTilrettelegging'
+                                                )}.${ind}.tilrettelagtArbeidFom`}
+                                                datoLabel={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.hvordanKanDuJobbe.delvis.spørsmål'
+                                                )}
+                                                prosentInputName={`${getInputName(
+                                                    'delvisTilrettelegging'
+                                                )}.${ind}.stillingsprosent`}
+                                                prosentLabel={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.stillingsprosent.label'
+                                                )}
+                                                showDeleteButton={ind !== 0}
+                                                delvisTilrettelegging={true}
+                                                onDelete={() => arrayHelpers.remove(ind)}
+                                            />
+                                        </Block>
+                                        <Block margin="xs" visible={arr.length - 1 === ind}>
+                                            <Knapp
+                                                onClick={() =>
+                                                    arrayHelpers.push({
+                                                        stillingsprosent: undefined,
+                                                        tilrettelagtArbeidFom: undefined
+                                                    })
+                                                }
+                                                htmlType="button"
+                                                mini={true}>
+                                                {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
+                                            </Knapp>
+                                        </Block>
+                                    </>
+                                ))
+                            }
                         />
                     </InfoBlock>
                 </Block>
@@ -313,13 +399,41 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.infoBox')
                     }}>
                     <InfoBlock>
-                        <DatoInput
-                            name={getInputName('ingenTilrettelegging.slutteArbeidFom')}
-                            label={getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål')}
-                            datoAvgrensinger={{
-                                minDato: tilrettelegging.behovForTilretteleggingFom,
-                                maksDato: values.barn.fødselsdato
-                            }}
+                        <FieldArray
+                            name={getInputName('ingenTilrettelegging')}
+                            render={(arrayHelpers) =>
+                                tilrettelegging.ingenTilrettelegging !== undefined &&
+                                tilrettelegging.ingenTilrettelegging.map((ingenTil, ind, arr) => (
+                                    <>
+                                        <Block margin="xs">
+                                            <AddTilrettelegging
+                                                datoAvgrensninger={{
+                                                    minDato: tilrettelegging.behovForTilretteleggingFom,
+                                                    maksDato: values.barn.fødselsdato
+                                                }}
+                                                datoInputName={`${getInputName(
+                                                    'ingenTilrettelegging'
+                                                )}.${ind}.slutteArbeidFom`}
+                                                datoLabel={getMessage(
+                                                    intl,
+                                                    'tilrettelegging.hvordanKanDuJobbe.ingenting.spørsmål'
+                                                )}
+                                                showDeleteButton={ind !== 0}
+                                                delvisTilrettelegging={false}
+                                                onDelete={() => arrayHelpers.remove(ind)}
+                                            />
+                                        </Block>
+                                        <Block margin="xs" visible={arr.length - 1 === ind}>
+                                            <Knapp
+                                                onClick={() => arrayHelpers.push({ slutteArbeidFom: undefined })}
+                                                htmlType="button"
+                                                mini={true}>
+                                                {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
+                                            </Knapp>
+                                        </Block>
+                                    </>
+                                ))
+                            }
                         />
                     </InfoBlock>
                 </Block>

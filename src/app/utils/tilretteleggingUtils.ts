@@ -3,7 +3,10 @@ import {
     Arbeidsforholdstype,
     UferdigTilrettelegging,
     Tilrettelegging,
-    Tilretteleggingstype
+    Tilretteleggingstype,
+    HelTilrettelegging,
+    DelvisTilrettelegging,
+    IngenTilrettelegging
 } from 'app/types/Tilrettelegging';
 import {
     ArbeidsforholdDTO,
@@ -49,7 +52,8 @@ export const mergeSøknadsgrunnlagIntoTilrettelegging = (
 
 const mapHelTilrettelegging = (
     tilrettelegging: Tilrettelegging,
-    arbeidsforhold: ArbeidsforholdDTO
+    arbeidsforhold: ArbeidsforholdDTO,
+    helTilrettelegging: HelTilrettelegging
 ): HelTilretteleggingDTO | undefined => {
     if (!tilrettelegging.helTilrettelegging) {
         return undefined;
@@ -59,13 +63,14 @@ const mapHelTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        tilrettelagtArbeidFom: tilrettelegging.helTilrettelegging!.tilrettelagtArbeidFom
+        tilrettelagtArbeidFom: helTilrettelegging.tilrettelagtArbeidFom
     };
 };
 
 const mapDelvisTilrettelegging = (
     tilrettelegging: Tilrettelegging,
-    arbeidsforhold: ArbeidsforholdDTO
+    arbeidsforhold: ArbeidsforholdDTO,
+    delvisTilrettelegging: DelvisTilrettelegging
 ): DelvisTilretteleggingDTO | undefined => {
     if (!tilrettelegging.delvisTilrettelegging) {
         return undefined;
@@ -75,13 +80,15 @@ const mapDelvisTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        tilrettelagtArbeidFom: tilrettelegging.delvisTilrettelegging!.tilrettelagtArbeidFom,
-        stillingsprosent: tilrettelegging.delvisTilrettelegging!.stillingsprosent
+        tilrettelagtArbeidFom: delvisTilrettelegging.tilrettelagtArbeidFom,
+        stillingsprosent: delvisTilrettelegging.stillingsprosent
     };
 };
+
 const mapIngenTilrettelegging = (
     tilrettelegging: Tilrettelegging,
-    arbeidsforhold: ArbeidsforholdDTO
+    arbeidsforhold: ArbeidsforholdDTO,
+    ingenTilrettelegging: IngenTilrettelegging
 ): IngenTilretteleggingDTO | undefined => {
     if (!tilrettelegging.ingenTilrettelegging) {
         return undefined;
@@ -91,7 +98,7 @@ const mapIngenTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        slutteArbeidFom: tilrettelegging.ingenTilrettelegging.slutteArbeidFom
+        slutteArbeidFom: ingenTilrettelegging.slutteArbeidFom
     };
 };
 
@@ -121,27 +128,34 @@ const mapArbeidsforholdForTilrettelegging = (tilrettelegging: UferdigTilretteleg
             };
     }
 };
+
 export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilrettelegging[]): TilretteleggingDTO[] => {
     const dto: TilretteleggingDTO[] = [];
     tilrettelegging.forEach((t) => {
         const arbeidsforhold = mapArbeidsforholdForTilrettelegging(t);
         if (t.helTilrettelegging) {
-            const helTilrettelegging = mapHelTilrettelegging(t, arbeidsforhold);
-            if (helTilrettelegging) {
-                dto.push(helTilrettelegging);
-            }
+            t.helTilrettelegging.forEach((helTil: HelTilrettelegging) => {
+                const helTilrettelegging = mapHelTilrettelegging(t, arbeidsforhold, helTil);
+                if (helTilrettelegging) {
+                    dto.push(helTilrettelegging);
+                }
+            });
         }
         if (t.delvisTilrettelegging) {
-            const delvisTilrettelegging = mapDelvisTilrettelegging(t, arbeidsforhold);
-            if (delvisTilrettelegging) {
-                dto.push(delvisTilrettelegging);
-            }
+            t.delvisTilrettelegging.forEach((delTil: DelvisTilrettelegging) => {
+                const delvisTilrettelegging = mapDelvisTilrettelegging(t, arbeidsforhold, delTil);
+                if (delvisTilrettelegging) {
+                    dto.push(delvisTilrettelegging);
+                }
+            });
         }
         if (t.ingenTilrettelegging) {
-            const ingenTilrettelegging = mapIngenTilrettelegging(t, arbeidsforhold);
-            if (ingenTilrettelegging) {
-                dto.push(ingenTilrettelegging);
-            }
+            t.ingenTilrettelegging.forEach((ingenTil: IngenTilrettelegging) => {
+                const ingenTilrettelegging = mapIngenTilrettelegging(t, arbeidsforhold, ingenTil);
+                if (ingenTilrettelegging) {
+                    dto.push(ingenTilrettelegging);
+                }
+            });
         }
     });
     return dto;
