@@ -326,7 +326,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 onClick={() => arrayHelpers.push({ tilrettelagtArbeidFom: undefined })}
                                                 htmlType="button"
                                                 mini={true}>
-                                                Legg til ny periode
+                                                {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
                                             </Knapp>
                                         </Block>
                                     </>
@@ -383,7 +383,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 }
                                                 htmlType="button"
                                                 mini={true}>
-                                                Legg til ny periode
+                                                {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
                                             </Knapp>
                                         </Block>
                                     </>
@@ -428,7 +428,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 onClick={() => arrayHelpers.push({ slutteArbeidFom: undefined })}
                                                 htmlType="button"
                                                 mini={true}>
-                                                Legg til ny periode
+                                                {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
                                             </Knapp>
                                         </Block>
                                     </>

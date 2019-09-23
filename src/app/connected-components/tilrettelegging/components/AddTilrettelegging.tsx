@@ -7,6 +7,8 @@ import BEMHelper from 'common/util/bem';
 import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
 
 import './addTilrettelegging.less';
+import { injectIntl, InjectedIntl } from 'react-intl';
+import getMessage from 'common/util/i18nUtils';
 
 interface Props {
     showDeleteButton: boolean;
@@ -16,6 +18,7 @@ interface Props {
     prosentLabel?: string;
     datoAvgrensninger: Avgrensninger;
     delvisTilrettelegging: boolean;
+    intl: InjectedIntl;
     onDelete: () => void;
 }
 
@@ -27,7 +30,8 @@ const AddTilrettelegging: React.FunctionComponent<Props> = ({
     datoLabel,
     prosentInputName,
     prosentLabel,
-    delvisTilrettelegging
+    delvisTilrettelegging,
+    intl
 }) => {
     const cls = BEMHelper('addTilrettelegging');
 
@@ -53,9 +57,7 @@ const AddTilrettelegging: React.FunctionComponent<Props> = ({
                 )}
                 <div className={cls.element('deleteWrapper')}>
                     {showDeleteButton && (
-                        <SlettKnapp onClick={onDelete} ariaLabel="Slett tilrettelegging">
-                            Fjern periode
-                        </SlettKnapp>
+                        <SlettKnapp onClick={onDelete} ariaLabel={getMessage(intl, 'tilrettelegging.fjernPeriode')} />
                     )}
                 </div>
             </div>
@@ -63,4 +65,4 @@ const AddTilrettelegging: React.FunctionComponent<Props> = ({
     );
 };
 
-export default AddTilrettelegging;
+export default injectIntl(AddTilrettelegging);
