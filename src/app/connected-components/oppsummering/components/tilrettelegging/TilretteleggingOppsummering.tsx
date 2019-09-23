@@ -27,42 +27,45 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                     <EtikettLiten>
                         {getArbeidsforholdNavnFromId(tilrett.arbeidsforhold.id, arbeidsforhold) || tilrett.id}
                     </EtikettLiten>
-                    <Block margin="xxs">
-                        {tilrett.type.includes(Tilretteleggingstype.HEL) && (
-                            <FormattedHTMLMessage
-                                id="oppsummering.tilrettelegging.info.jobbeFullt"
-                                values={{
-                                    startDato: moment(tilrett.helTilrettelegging![0].tilrettelagtArbeidFom).format(
-                                        'Do MMMM YYYY'
-                                    )
-                                }}
-                            />
-                        )}
+                    <Block visible={tilrett.type.includes(Tilretteleggingstype.HEL)} margin="xxs">
+                        {tilrett.helTilrettelegging &&
+                            tilrett.helTilrettelegging.map((helTil) => (
+                                <Block margin="xxs">
+                                    <FormattedHTMLMessage
+                                        id="oppsummering.tilrettelegging.info.jobbeFullt"
+                                        values={{
+                                            startDato: moment(helTil.tilrettelagtArbeidFom).format('Do MMMM YYYY')
+                                        }}
+                                    />
+                                </Block>
+                            ))}
                     </Block>
-                    <Block margin="xxs">
-                        {tilrett.type.includes(Tilretteleggingstype.DELVIS) && (
-                            <FormattedHTMLMessage
-                                id="oppsummering.tilrettelegging.info.jobbeDelvis"
-                                values={{
-                                    startDato: moment(tilrett.delvisTilrettelegging![0].tilrettelagtArbeidFom).format(
-                                        'Do MMMM YYYY'
-                                    ),
-                                    prosent: tilrett.delvisTilrettelegging![0].stillingsprosent
-                                }}
-                            />
-                        )}
+                    <Block visible={tilrett.type.includes(Tilretteleggingstype.DELVIS)} margin="xxs">
+                        {tilrett.delvisTilrettelegging &&
+                            tilrett.delvisTilrettelegging.map((delTil) => (
+                                <Block margin="xxs">
+                                    <FormattedHTMLMessage
+                                        id="oppsummering.tilrettelegging.info.jobbeDelvis"
+                                        values={{
+                                            startDato: moment(delTil.tilrettelagtArbeidFom).format('Do MMMM YYYY'),
+                                            prosent: delTil.stillingsprosent
+                                        }}
+                                    />
+                                </Block>
+                            ))}
                     </Block>
-                    <Block margin="xxs">
-                        {tilrett.type.includes(Tilretteleggingstype.INGEN) && (
-                            <FormattedHTMLMessage
-                                id="oppsummering.tilrettelegging.info.ikkeJobbe"
-                                values={{
-                                    startDato: moment(tilrett.ingenTilrettelegging![0].slutteArbeidFom).format(
-                                        'Do MMMM YYYY'
-                                    )
-                                }}
-                            />
-                        )}
+                    <Block visible={tilrett.type.includes(Tilretteleggingstype.INGEN)} margin="xxs">
+                        {tilrett.ingenTilrettelegging &&
+                            tilrett.ingenTilrettelegging.map((ingenTil) => (
+                                <Block margin="xxs">
+                                    <FormattedHTMLMessage
+                                        id="oppsummering.tilrettelegging.info.ikkeJobbe"
+                                        values={{
+                                            startDato: moment(ingenTil.slutteArbeidFom).format('Do MMMM YYYY')
+                                        }}
+                                    />
+                                </Block>
+                            ))}
                     </Block>
                     {(tilrett.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
                         tilrett.arbeidsforhold.type === Arbeidsforholdstype.SELVSTENDIG) && (
