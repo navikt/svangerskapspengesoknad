@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { get, set } from 'lodash';
+import { get, set, merge } from 'lodash';
 import { UferdigSøknad, Søknadfeil, Søknadsgrunnlag } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 import { FormikErrors } from 'formik';
@@ -50,71 +50,109 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             }
 
             if (valgteTyper.includes(Tilretteleggingstype.INGEN)) {
-                if (
-                    tilrettelegging.ingenTilrettelegging &&
-                    (tilrettelegging.ingenTilrettelegging[0].slutteArbeidFom &&
-                        moment(tilrettelegging.ingenTilrettelegging[0].slutteArbeidFom).isBefore(
-                            tilrettelegging.behovForTilretteleggingFom
-                        ))
-                ) {
-                    set(
-                        tErrors,
-                        'ingenTilrettelegging.slutteArbeidFom',
-                        Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
-                    );
-                } else if (!tilrettelegging.ingenTilrettelegging) {
-                    set(tErrors, 'ingenTilrettelegging.slutteArbeidFom', Valideringsfeil.FELTET_ER_PÅKREVD);
+                if (tilrettelegging.ingenTilrettelegging) {
+                    tilrettelegging.ingenTilrettelegging.forEach((ingenTil, ind) => {
+                        if (
+                            ingenTil.slutteArbeidFom &&
+                            moment(ingenTil.slutteArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
+                        ) {
+                            set(
+                                tErrors,
+                                `ingenTilrettelegging.${ind}.slutteArbeidFom`,
+                                Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
+                            );
+                        }
+
+                        if (ingenTil.slutteArbeidFom === undefined) {
+                            set(
+                                tErrors,
+                                `ingenTilrettelegging.${ind}.slutteArbeidFom`,
+                                Valideringsfeil.FELTET_ER_PÅKREVD
+                            );
+                        }
+                    });
                 }
             }
             if (valgteTyper.includes(Tilretteleggingstype.DELVIS)) {
                 if (tilrettelegging.delvisTilrettelegging) {
-                    if (
-                        tilrettelegging.delvisTilrettelegging[0].stillingsprosent < 0 ||
-                        tilrettelegging.delvisTilrettelegging[0].stillingsprosent > 100
-                    ) {
-                        set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.STILLINGSPROSENT_RANGE);
-                    } else if (tilrettelegging.delvisTilrettelegging[0].stillingsprosent === undefined) {
-                        set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.FELTET_ER_PÅKREVD);
-                    }
-                    if (
-                        tilrettelegging.delvisTilrettelegging[0].tilrettelagtArbeidFom &&
-                        moment(tilrettelegging.delvisTilrettelegging[0].tilrettelagtArbeidFom).isBefore(
-                            tilrettelegging.behovForTilretteleggingFom
-                        )
-                    ) {
-                        set(
-                            tErrors,
-                            'delvisTilrettelegging.tilrettelagtArbeidFom',
-                            Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
-                        );
-                    } else if (tilrettelegging.delvisTilrettelegging[0].tilrettelagtArbeidFom === undefined) {
-                        set(tErrors, 'delvisTilrettelegging.tilrettelagtArbeidFom', Valideringsfeil.FELTET_ER_PÅKREVD);
-                    }
-                } else {
-                    set(tErrors, 'delvisTilrettelegging.stillingsprosent', Valideringsfeil.FELTET_ER_PÅKREVD);
-                    set(tErrors, 'delvisTilrettelegging.tilrettelagtArbeidFom', Valideringsfeil.FELTET_ER_PÅKREVD);
+                    tilrettelegging.delvisTilrettelegging.forEach((delTil, ind) => {
+                        if (
+                            delTil.tilrettelagtArbeidFom &&
+                            moment(delTil.tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
+                        ) {
+                            set(
+                                tErrors,
+                                `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
+                                Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
+                            );
+                        }
+
+                        // Browser konverterer ugyldig input for <input type="number" ... /> til tom streng
+                        const isEmptyInputField =
+                            delTil.stillingsprosent !== undefined &&
+                            ((delTil.stillingsprosent as unknown) as string).length === 0;
+
+                        if (
+                            delTil.stillingsprosent !== undefined &&
+                            !isEmptyInputField &&
+                            (delTil.stillingsprosent <= 0 || delTil.stillingsprosent >= 100)
+                        ) {
+                            merge(
+                                tErrors,
+                                set(
+                                    tErrors,
+                                    `delvisTilrettelegging.${ind}.stillingsprosent`,
+                                    Valideringsfeil.STILLINGSPROSENT_RANGE
+                                )
+                            );
+                        }
+
+                        if (isEmptyInputField || delTil.stillingsprosent === undefined) {
+                            merge(
+                                tErrors,
+                                set(
+                                    tErrors,
+                                    `delvisTilrettelegging.${ind}.stillingsprosent`,
+                                    Valideringsfeil.FELTET_ER_PÅKREVD
+                                )
+                            );
+                        }
+
+                        if (delTil.tilrettelagtArbeidFom === undefined) {
+                            merge(
+                                tErrors,
+                                set(
+                                    tErrors,
+                                    `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
+                                    Valideringsfeil.FELTET_ER_PÅKREVD
+                                )
+                            );
+                        }
+                    });
                 }
             }
             if (valgteTyper.includes(Tilretteleggingstype.HEL)) {
                 if (tilrettelegging.helTilrettelegging) {
-                    if (
-                        tilrettelegging.helTilrettelegging[0].tilrettelagtArbeidFom &&
-                        moment(tilrettelegging.helTilrettelegging[0].tilrettelagtArbeidFom).isBefore(
-                            tilrettelegging.behovForTilretteleggingFom
-                        )
-                    ) {
-                        set(
-                            tErrors,
-                            'helTilrettelegging.tilrettelagtArbeidFom',
-                            Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
-                        );
-                    }
-                } else {
-                    set(
-                        tErrors,
-                        getInputName('helTilrettelegging.tilrettelagtArbeidFom'),
-                        Valideringsfeil.FELTET_ER_PÅKREVD
-                    );
+                    tilrettelegging.helTilrettelegging.forEach((helTil, ind) => {
+                        if (
+                            helTil.tilrettelagtArbeidFom &&
+                            moment(helTil.tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
+                        ) {
+                            set(
+                                tErrors,
+                                `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
+                                Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
+                            );
+                        }
+
+                        if (helTil.tilrettelagtArbeidFom === undefined) {
+                            set(
+                                tErrors,
+                                `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
+                                Valideringsfeil.FELTET_ER_PÅKREVD
+                            );
+                        }
+                    });
                 }
             }
             if (Object.keys(tErrors).length > 0) {

@@ -323,7 +323,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                         </Block>
                                         <Block margin="xs" visible={arr.length - 1 === ind}>
                                             <Knapp
-                                                onClick={() => arrayHelpers.push(undefined)}
+                                                onClick={() => arrayHelpers.push({ tilrettelagtArbeidFom: undefined })}
                                                 htmlType="button"
                                                 mini={true}>
                                                 Legg til ny periode
@@ -375,7 +375,12 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                         </Block>
                                         <Block margin="xs" visible={arr.length - 1 === ind}>
                                             <Knapp
-                                                onClick={() => arrayHelpers.push(undefined)}
+                                                onClick={() =>
+                                                    arrayHelpers.push({
+                                                        stillingsprosent: undefined,
+                                                        tilrettelagtArbeidFom: undefined
+                                                    })
+                                                }
                                                 htmlType="button"
                                                 mini={true}>
                                                 Legg til ny periode
@@ -420,7 +425,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                         </Block>
                                         <Block margin="xs" visible={arr.length - 1 === ind}>
                                             <Knapp
-                                                onClick={() => arrayHelpers.push(undefined)}
+                                                onClick={() => arrayHelpers.push({ slutteArbeidFom: undefined })}
                                                 htmlType="button"
                                                 mini={true}>
                                                 Legg til ny periode

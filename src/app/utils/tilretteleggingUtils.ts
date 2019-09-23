@@ -79,6 +79,7 @@ const mapDelvisTilrettelegging = (
         stillingsprosent: tilrettelegging.delvisTilrettelegging[0].stillingsprosent
     };
 };
+
 const mapIngenTilrettelegging = (
     tilrettelegging: Tilrettelegging,
     arbeidsforhold: ArbeidsforholdDTO
@@ -121,6 +122,7 @@ const mapArbeidsforholdForTilrettelegging = (tilrettelegging: UferdigTilretteleg
             };
     }
 };
+
 export const mapTilretteleggingerTilDTO = (tilrettelegging: UferdigTilrettelegging[]): TilretteleggingDTO[] => {
     const dto: TilretteleggingDTO[] = [];
     tilrettelegging.forEach((t) => {
