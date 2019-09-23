@@ -3,7 +3,14 @@ import { get, set, merge } from 'lodash';
 import { UferdigSøknad, Søknadfeil, Søknadsgrunnlag } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 import { FormikErrors } from 'formik';
-import { Tilretteleggingstype, Arbeidsforholdstype } from '../../types/Tilrettelegging';
+import {
+    Tilretteleggingstype,
+    Arbeidsforholdstype,
+    IngenTilrettelegging,
+    DelvisTilrettelegging,
+    HelTilrettelegging
+} from '../../types/Tilrettelegging';
+import { formatDate } from '../formatDate';
 
 const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: string): Søknadfeil => {
     const errors: Søknadfeil = {};
@@ -20,6 +27,35 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
             const tilretteleggingstypeName = getInputName('type');
             const valgteTyper = get(søknad, tilretteleggingstypeName) || [];
+            const ingenTilretteleggingDatoer: string[] =
+                tilrettelegging.ingenTilrettelegging !== undefined
+                    ? tilrettelegging.ingenTilrettelegging
+                          .filter((ingen: IngenTilrettelegging) => ingen.slutteArbeidFom !== undefined)
+                          .reduce((result: string[], ingen: IngenTilrettelegging) => {
+                              result.push(formatDate(ingen.slutteArbeidFom)!);
+                              return result;
+                          }, [])
+                    : [];
+
+            const delvisTilretteleggingDatoer: string[] =
+                tilrettelegging.delvisTilrettelegging !== undefined
+                    ? tilrettelegging.delvisTilrettelegging
+                          .filter((delvis: DelvisTilrettelegging) => delvis.tilrettelagtArbeidFom !== undefined)
+                          .reduce((result: string[], delvis: DelvisTilrettelegging) => {
+                              result.push(formatDate(delvis.tilrettelagtArbeidFom)!);
+                              return result;
+                          }, [])
+                    : [];
+
+            const helTilretteleggingDatoer: string[] =
+                tilrettelegging.helTilrettelegging !== undefined
+                    ? tilrettelegging.helTilrettelegging
+                          .filter((hel: HelTilrettelegging) => hel.tilrettelagtArbeidFom !== undefined)
+                          .reduce((result: string[], hel: HelTilrettelegging) => {
+                              result.push(formatDate(hel.tilrettelagtArbeidFom)!);
+                              return result;
+                          }, [])
+                    : [];
 
             if (
                 tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER ||
@@ -70,6 +106,21 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 Valideringsfeil.FELTET_ER_PÅKREVD
                             );
                         }
+
+                        if (
+                            ingenTil.slutteArbeidFom !== undefined &&
+                            (helTilretteleggingDatoer.includes(formatDate(ingenTil.slutteArbeidFom)!) ||
+                                delvisTilretteleggingDatoer.includes(formatDate(ingenTil.slutteArbeidFom)!))
+                        ) {
+                            merge(
+                                tErrors,
+                                set(
+                                    tErrors,
+                                    `ingenTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.OVERLAPPENDE_PERIODE
+                                )
+                            );
+                        }
                     });
                 }
             }
@@ -84,6 +135,21 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 tErrors,
                                 `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
                                 Valideringsfeil.TILRETTELAGT_ARBEID_FOR_TIDLIG
+                            );
+                        }
+
+                        if (
+                            delTil.tilrettelagtArbeidFom !== undefined &&
+                            (helTilretteleggingDatoer.includes(formatDate(delTil.tilrettelagtArbeidFom)!) ||
+                                ingenTilretteleggingDatoer.includes(formatDate(delTil.tilrettelagtArbeidFom)!))
+                        ) {
+                            merge(
+                                tErrors,
+                                set(
+                                    tErrors,
+                                    `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
+                                    Valideringsfeil.OVERLAPPENDE_PERIODE
+                                )
                             );
                         }
 
@@ -150,6 +216,21 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 tErrors,
                                 `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
                                 Valideringsfeil.FELTET_ER_PÅKREVD
+                            );
+                        }
+
+                        if (
+                            helTil.tilrettelagtArbeidFom !== undefined &&
+                            (delvisTilretteleggingDatoer.includes(formatDate(helTil.tilrettelagtArbeidFom)!) ||
+                                ingenTilretteleggingDatoer.includes(formatDate(helTil.tilrettelagtArbeidFom)!))
+                        ) {
+                            merge(
+                                tErrors,
+                                set(
+                                    tErrors,
+                                    `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
+                                    Valideringsfeil.OVERLAPPENDE_PERIODE
+                                )
                             );
                         }
                     });

@@ -259,6 +259,7 @@
     "valideringsfeil.tidsreiserIkkeTillatt": "Må være etter den første datoen",
     "valideringsfeil.måBeståAv9Siffer": "Organisasjonsnummer må bestå av 9 tall",
     "valideringsfeil.ugyldigOrganisasjonsnummer": "Organisasjonsnummeret er ikke et gyldig norsk organisasjonsnummer",
+    "valideringsfeil.overlappendePeriode": "Perioder med tilrettelegging kan ikke overlappe",
     "feiloppsummering.tittel": "Du må rette opp i følgende feil:",
     "languageToggle.bokmål": "Bokmål - Norsk",
     "languageToggle.nynorsk": "Nynorsk - Norsk"
