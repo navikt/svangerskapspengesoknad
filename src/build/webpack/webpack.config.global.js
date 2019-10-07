@@ -6,64 +6,65 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
     entry: {
-        bundle: ['@babel/polyfill', `${__dirname}/../../app/bootstrap.tsx`],
+        bundle: ['@babel/polyfill', `${__dirname}/../../app/bootstrap.tsx`]
     },
     output: {
         path: path.resolve(__dirname, './../../../dist'),
         filename: 'js/[name].js',
-        publicPath: '/dist',
+        publicPath: '/dist'
     },
+    devtool: 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         alias: {
             app: path.resolve(__dirname, './../../app'),
-            common: path.resolve(__dirname, './../../common'),
-        },
+            common: path.resolve(__dirname, './../../common')
+        }
     },
     module: {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
                 loader: require.resolve('tslint-loader'),
-                enforce: 'pre',
+                enforce: 'pre'
             },
             {
                 test: /\.(ts|tsx)$/,
                 include: [
                     path.resolve(__dirname, './../../app'),
                     path.resolve(__dirname, './../../common'),
-                    path.resolve(__dirname, './../../storage'),
+                    path.resolve(__dirname, './../../storage')
                 ],
-                loader: require.resolve('awesome-typescript-loader'),
+                loader: require.resolve('awesome-typescript-loader')
             },
 
             {
                 test: /\.js$/,
                 use: [{ loader: 'babel-loader' }],
-                exclude: /node_modules/,
+                exclude: /node_modules/
             },
             {
                 test: /\.(less|css)$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
             },
             {
                 test: /\.svg$/,
-                use: 'svg-sprite-loader',
-            },
-        ],
+                use: 'svg-sprite-loader'
+            }
+        ]
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
             disable: false,
-            allChunks: true,
+            allChunks: true
         }),
         new SpriteLoaderPlugin({
-            plainSprite: true,
+            plainSprite: true
         }),
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb|nn|en/),
-    ],
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb|nn|en/)
+    ]
 };
 
 module.exports = webpackConfig;
