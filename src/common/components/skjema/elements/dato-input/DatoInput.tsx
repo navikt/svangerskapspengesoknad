@@ -76,7 +76,16 @@ class DatoInput extends React.Component<Props, {}> {
                                 id,
                                 placeholder: getMessage(intl, 'datoinput.placeholder'),
                                 name,
-                                ariaDescribedby: ariaDescriptionId
+                                ariaDescribedby: ariaDescriptionId,
+                                onChange: (datoString: string, evt: any) => {
+                                    if (moment(datoString, 'DDMMYYYY', true).isValid()) {
+                                        onChange(moment.utc(datoString, 'DDMMYYYY').toDate());
+                                    }
+
+                                    if (moment(datoString, 'D.M.YYYY', true).isValid()) {
+                                        onChange(moment.utc(datoString, 'D.M.YYYY').toDate());
+                                    }
+                                }
                             }}
                             onChange={(datoString: string) =>
                                 onChange(datoString && datoString !== 'Invalid date' ? new Date(datoString) : undefined)
