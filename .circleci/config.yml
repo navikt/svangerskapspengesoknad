@@ -58,7 +58,7 @@ jobs:
             template-vars: dev-gcp.json
             environment: dev-gcp
   
-  prod-gcp-deploy:
+    prod-gcp-deploy:
       executor: go
       steps:
         - nais-deploy:
@@ -107,6 +107,27 @@ workflows:
               only: master
           requires:
             - build 
+      - hold:
+          type: approval
+          filters:
+            branches:
+              only: master
+          requires:
+            - dev-deploy   
+      - slack/approval-notification:
+          webhook: $SLACK
+          message: "Godkjenn deploy til prod av $CIRCLE_PROJECT_REPONAME"
+          url: https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_WORKSPACE_ID
+          requires:
+            - dev-deploy
+      - prod-deploy:
+          context: NAIS deployment
+          filters:
+            branches:
+              only: master
+          requires:
+            - hold       
+      
       - dev-gcp-deploy:
           context: NAIS deployment
           filters:
@@ -114,25 +135,23 @@ workflows:
               only: master
           requires:
             - build      
-      - hold:
+      - hold-gcp:
           type: approval
           filters:
             branches:
               only: master
           requires:
-            - dev-deploy
-
+            - dev-gcp-deploy       
       - slack/approval-notification:
           webhook: $SLACK
-          message: "Godkjenn deploy til prod av $CIRCLE_PROJECT_REPONAME"
+          message: "Godkjenn deploy til prod-gcp av $CIRCLE_PROJECT_REPONAME"
           url: https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_WORKSPACE_ID
           requires:
-            - dev-deploy
-
-      - prod-deploy:
+            - dev-gcp-deploy       
+      - prod-gcp-deploy:
           context: NAIS deployment
           filters:
             branches:
               only: master
           requires:
-            - hold
+            - hold-gcp    
