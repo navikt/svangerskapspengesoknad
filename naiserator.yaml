@@ -10,11 +10,13 @@ metadata:
   labels:
     team: {{team}}
 spec:
+ {{#if namespace}}        
   accessPolicy:
     outbound:
       external:
         - host: {{appres}}
-      rules : []
+      rules : []  
+{{/if}}       
   image: {{version}}
   port: 8080
   replicas:
