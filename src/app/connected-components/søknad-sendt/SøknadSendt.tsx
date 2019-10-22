@@ -17,6 +17,7 @@ import KvitteringHeader from './components/KvitteringHeader';
 import { FormattedMessage } from 'react-intl';
 import KvitteringSuksess from './components/KvitteringSuksess';
 import BEMHelper from 'common/util/bem';
+import HvorLengeIkon from 'app/icons/HvorLenge';
 
 const cls = BEMHelper('søknadSendt');
 
@@ -46,17 +47,22 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
 
                 <Block>
                     <Panel className={cls.element('foreldrepengerPanel')}>
-                        <Block margin="xxs">
-                            <Undertittel>
-                                <FormattedMessage id="søknadSendt.foreldrepenger.boks.tittel" />
-                            </Undertittel>
-                        </Block>
-                        <Block margin="xs">
-                            <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
-                        </Block>
-                        <Lenke href="https://foreldrepengeplanlegger.nav.no/" target="_blank">
-                            <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
-                        </Lenke>
+                        <div>
+                            <Block margin="xxs">
+                                <Undertittel>
+                                    <FormattedMessage id="søknadSendt.foreldrepenger.boks.tittel" />
+                                </Undertittel>
+                            </Block>
+                            <Block margin="xs">
+                                <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
+                            </Block>
+                            <Lenke href="https://foreldrepengeplanlegger.nav.no/" target="_blank">
+                                <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
+                            </Lenke>
+                        </div>
+                        <div className={cls.element('ikon')}>
+                            <HvorLengeIkon />
+                        </div>
                     </Panel>
                 </Block>
             </div>
