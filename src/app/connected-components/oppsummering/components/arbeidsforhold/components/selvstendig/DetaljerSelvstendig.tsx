@@ -42,7 +42,7 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
             </Block>
             <Block margin="xxs">
                 {moment(oppstartsdato).format('DD.MM.YYYY')} -{' '}
-                {pågående ? <FormattedMessage id="pågående" /> : tidsperiode.tom}
+                {pågående ? <FormattedMessage id="pågående" /> : moment(tidsperiode.tom).format('DD.MM.YYYY')}
             </Block>
         </div>
     );
