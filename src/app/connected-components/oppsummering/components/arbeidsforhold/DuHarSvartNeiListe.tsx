@@ -45,57 +45,57 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
                 <FormattedHTMLMessage id="oppsummering.arbeidsforhold.svar" />
             </div>
             <ul className={cls.element('liste')}>
-                {arbeidsforholdOppsummering && !harJobbetSomSelvstendigNæringsdrivende && (
+                {arbeidsforholdOppsummering && harJobbetSomSelvstendigNæringsdrivende === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig" />
                     </li>
                 )}
-                {arbeidsforholdOppsummering && !harJobbetFrilans && (
+                {arbeidsforholdOppsummering && harJobbetFrilans === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans" />
                     </li>
                 )}
-                {arbeidsforholdOppsummering && !harHattAndreInntektskilder && (
+                {arbeidsforholdOppsummering && harHattAndreInntektskilder === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.andreInntekter" />
                     </li>
                 )}
-                {frilansOppsummering && !hattInntektSomFosterforelder && (
+                {frilansOppsummering && hattInntektSomFosterforelder === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.fosterforelder" />
                     </li>
                 )}
-                {frilansOppsummering && !nyoppstartetFrilanser && (
+                {frilansOppsummering && nyoppstartetFrilanser === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.nyoppstartet" />
                     </li>
                 )}
-                {frilansOppsummering && !hattOppdragForNærVennEllerFamilie && (
+                {frilansOppsummering && hattOppdragForNærVennEllerFamilie === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
                     </li>
                 )}
-                {selvstendigOppsummering && !endringAvNæringsinntekt && (
+                {selvstendigOppsummering && endringAvNæringsinntekt === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.endringAvNæringsinntekt" />
                     </li>
                 )}
-                {selvstendigOppsummering && !harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene && (
+                {selvstendigOppsummering && harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene" />
                     </li>
                 )}
-                {selvstendigOppsummering && !harRegnskapsfører && (
+                {selvstendigOppsummering && harRegnskapsfører === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.harRegnskapsfører" />
                     </li>
                 )}
-                {selvstendigOppsummering && !harRevisor && (
+                {selvstendigOppsummering && harRevisor === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.harRevisor" />
                     </li>
                 )}
-                {selvstendigOppsummering && !kanInnhenteOpplsyningerFraRevisor && (
+                {selvstendigOppsummering && kanInnhenteOpplsyningerFraRevisor === false && (
                     <li>
                         <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.kanInnhenteOpplsyningerFraRevisor" />
                     </li>
