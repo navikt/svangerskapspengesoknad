@@ -77,27 +77,27 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
                 )}
                 {selvstendigOppsummering && !endringAvNæringsinntekt && (
                     <li>
-                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.endringAvNæringsinntekt" />
                     </li>
                 )}
                 {selvstendigOppsummering && !harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene && (
                     <li>
-                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene" />
                     </li>
                 )}
                 {selvstendigOppsummering && !harRegnskapsfører && (
                     <li>
-                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.harRegnskapsfører" />
                     </li>
                 )}
                 {selvstendigOppsummering && !harRevisor && (
                     <li>
-                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.harRevisor" />
                     </li>
                 )}
                 {selvstendigOppsummering && !kanInnhenteOpplsyningerFraRevisor && (
                     <li>
-                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.frilans.oppdragNærVennFamilie" />
+                        <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.kanInnhenteOpplsyningerFraRevisor" />
                     </li>
                 )}
             </ul>
