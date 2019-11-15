@@ -33,7 +33,7 @@ import { cleanupSøker } from './utils/cleanup';
 import { mapArbeidsforholdToSøknadsgrunnlagOptions } from './utils/søknadsgrunnlagMapper';
 import Søker from 'app/types/Søker';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
-import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
+import { Arbeidsforholdstype, UferdigTilrettelegging } from 'app/types/Tilrettelegging';
 import { AnnenInntektType } from '../../types/AnnenInntekt';
 
 import './arbeidsforhold.less';
@@ -92,7 +92,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd === false ||
         harHattAnnenInntektSiste10Mnd !== undefined;
 
-    const visSøknadnsgrunnlagValg =
+    const visSøknadsgrunnlagValg =
         visharHattAnnenInntektSiste10MndSeksjon &&
         ((harHattAnnenInntektSiste10Mnd === true && andreInntekterSiste10Mnd.length! > 0) ||
             harHattAnnenInntektSiste10Mnd === false) &&
@@ -108,8 +108,20 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         (s: Søknadsgrunnlag) => s.type === Arbeidsforholdstype.VIRKSOMHET
     );
 
-    const tilrettelegging = mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging);
+    let tilrettelegging = mergeSøknadsgrunnlagIntoTilrettelegging(values.søknadsgrunnlag, values.tilrettelegging);
     const prepareTilrettelegging = () => {
+        if (frilansInformasjon === undefined) {
+            tilrettelegging = tilrettelegging.filter(
+                (til: UferdigTilrettelegging) => til.arbeidsforhold.type !== Arbeidsforholdstype.FRILANSER
+            );
+        }
+
+        if (selvstendigNæringsdrivendeInformasjon === undefined) {
+            tilrettelegging = tilrettelegging.filter(
+                (til: UferdigTilrettelegging) => til.arbeidsforhold.type !== Arbeidsforholdstype.SELVSTENDIG
+            );
+        }
+
         setFieldValue('tilrettelegging', tilrettelegging);
     };
 
@@ -178,7 +190,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     />
                 </Block>
 
-                <Block visible={visSøknadnsgrunnlagValg} margin="l">
+                <Block visible={visSøknadsgrunnlagValg} margin="l">
                     <VelgSøknadsgrunnlag
                         name="søknadsgrunnlag"
                         label={getMessage(intl, 'arbeidsforhold.grunnlag.label')}

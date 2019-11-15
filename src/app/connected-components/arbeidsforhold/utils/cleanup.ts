@@ -9,9 +9,9 @@ import { AnnenInntekt, AnnenInntektType } from 'app/types/AnnenInntekt';
 export const cleanupFrilansinformasjon = (søker: Partial<Søker>): DeepPartial<FrilansInformasjon> => {
     const { harJobbetSomFrilansSiste10Mnd, frilansInformasjon } = søker;
 
-    let relevanteFeilter: string[] = [];
+    let relevanteFelter: string[] = [];
     if (harJobbetSomFrilansSiste10Mnd && frilansInformasjon) {
-        relevanteFeilter = [
+        relevanteFelter = [
             'jobberFremdelesSomFrilans',
             'oppstart',
             'driverFosterhjem',
@@ -19,15 +19,15 @@ export const cleanupFrilansinformasjon = (søker: Partial<Søker>): DeepPartial<
         ];
 
         if (frilansInformasjon.oppdragForNæreVennerEllerFamilieSiste10Mnd) {
-            relevanteFeilter.push('oppdragForNæreVennerEllerFamilieSiste10Mnd');
+            relevanteFelter.push('oppdragForNæreVennerEllerFamilieSiste10Mnd');
         }
     }
 
-    return _.pick(frilansInformasjon, relevanteFeilter);
+    return _.pick(frilansInformasjon, relevanteFelter);
 };
 
 export const cleanupNæring = (næring: Partial<Næring>): DeepPartial<Næring> => {
-    const relevanteFeilter: string[] = [
+    const relevanteFelter: string[] = [
         'næringstyper',
         'navnPåNæringen',
         'registrertINorge',
@@ -39,29 +39,29 @@ export const cleanupNæring = (næring: Partial<Næring>): DeepPartial<Næring> 
     ];
 
     næring.registrertINorge === true
-        ? relevanteFeilter.push('organisasjonsnummer')
-        : relevanteFeilter.push('registrertILand');
+        ? relevanteFelter.push('organisasjonsnummer')
+        : relevanteFelter.push('registrertILand');
 
     næring.tidsperiode &&
     næring.tidsperiode.fom !== undefined &&
     moment(næring.tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year'))
-        ? relevanteFeilter.push('endringAvNæringsinntektInformasjon')
-        : relevanteFeilter.push(
+        ? relevanteFelter.push('endringAvNæringsinntektInformasjon')
+        : relevanteFelter.push(
               'næringsinntekt',
               'oppstartsdato',
               'harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene'
           );
 
     if (næring.harRegnskapsfører === true) {
-        relevanteFeilter.push('regnskapsfører');
+        relevanteFelter.push('regnskapsfører');
     } else if (næring.harRevisor === true) {
-        relevanteFeilter.push('revisor', 'kanInnhenteOpplsyningerFraRevisor');
+        relevanteFelter.push('revisor', 'kanInnhenteOpplsyningerFraRevisor');
     }
-    return _.pick(næring, relevanteFeilter);
+    return _.pick(næring, relevanteFelter);
 };
 
 export const cleanupSøker = (søker: Partial<Søker>) => {
-    const relevanteFeilter: string[] = [
+    const relevanteFelter: string[] = [
         'rolle',
         'harJobbetSomFrilansSiste10Mnd',
         'harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd',
@@ -69,18 +69,18 @@ export const cleanupSøker = (søker: Partial<Søker>) => {
     ];
 
     if (søker.harJobbetSomFrilansSiste10Mnd) {
-        relevanteFeilter.push('frilansInformasjon');
+        relevanteFelter.push('frilansInformasjon');
     }
 
     if (søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd) {
-        relevanteFeilter.push('selvstendigNæringsdrivendeInformasjon');
+        relevanteFelter.push('selvstendigNæringsdrivendeInformasjon');
     }
 
     if (søker.harHattAnnenInntektSiste10Mnd) {
-        relevanteFeilter.push('andreInntekterSiste10Mnd');
+        relevanteFelter.push('andreInntekterSiste10Mnd');
     }
 
-    return _.pick(søker, relevanteFeilter);
+    return _.pick(søker, relevanteFelter);
 };
 
 export const cleanupAnnenInntekt = (annenInntekt: Partial<AnnenInntekt>): AnnenInntekt => {

@@ -65,7 +65,7 @@
     "arbeidsforhold.dineArbeidsforhold.infotekst": "Er det feil eller manglar i informasjonen om dine arbeidsforhold? Da må du be din arbeidsgjevar oppdatere med riktig informasjon i Arbeidsgiver- og arbeidstakerregisteret.",
     "annenInntekt.arbeidsforhold.ingenRegistrerteArbeidsforhold": "Du er ikkje registrert med noko arbeidsforhold.",
     "annenInntekt.arbeidsforhold.label": "Arbeidsforholda dine",
-    "annenInntekt.arbeidsforhold.organisasjonsnummer": "ORG.NR: {organisasjonsnummer}",",
+    "annenInntekt.arbeidsforhold.organisasjonsnummer": "ORG.NR: {organisasjonsnummer}",
     "arbeidsforhold.grunnlag.label": "Kvar skal du søkje om svangerskapspengar frå?",
     "arbeidsforhold.utbetalingerFraNAV.label": "Utbetalingar frå NAV",
     "arbeidsforhold.utbetalingerFraNAV.text": "Dersom du får pengar utbetalt frå NAV, treng du ikkje opplyse om det i søknaden din.",
