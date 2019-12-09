@@ -269,5 +269,7 @@
     "valideringsfeil.overlappendePeriode": "Perioder med tilrettelegging kan ikke overlappe",
     "feiloppsummering.tittel": "Du må rette opp i følgende feil:",
     "languageToggle.bokmål": "Bokmål - Norsk",
-    "languageToggle.nynorsk": "Nynorsk - Norsk"
+    "languageToggle.nynorsk": "Nynorsk - Norsk",
+
+    "feilmelding.nedetid": "Svangerskapspengesøknaden er dessverre utilgjengelig tirsdag 10. desember 12-13."
 }
