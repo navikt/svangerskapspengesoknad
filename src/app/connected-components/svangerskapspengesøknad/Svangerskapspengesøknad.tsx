@@ -24,30 +24,38 @@ interface Props {
 
 const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProps> = (props) => {
     const { søkerinfo, kvittering, requestSøkerinfo, intl } = props;
-
+    
     useEffect(() => {
         if (søkerinfo.status === FetchStatus.UNFETCHED) {
             requestSøkerinfo();
         }
-
+        
         if (getErrorCode(søkerinfo) === 401) {
             redirectToLogin();
         }
     });
-
+    
     const redirectToLogin = () => {
         window.location.href = Environment.LOGIN_URL + '?redirect=' + window.location.href;
     };
-
+    
     const søker = getData(søkerinfo, {}).søker;
     const isLoading =
-        søkerinfo.status === FetchStatus.IN_PROGRESS ||
-        søkerinfo.status === FetchStatus.UNFETCHED ||
-        kvittering.status === FetchStatus.IN_PROGRESS ||
-        getErrorCode(søkerinfo) === 401;
-
+    søkerinfo.status === FetchStatus.IN_PROGRESS ||
+    søkerinfo.status === FetchStatus.UNFETCHED ||
+    kvittering.status === FetchStatus.IN_PROGRESS ||
+    getErrorCode(søkerinfo) === 401;
+    
+    const visFeilside = true;
     if (isLoading) {
         return <Loading />;
+    } else if (visFeilside) {
+        return (
+            <Feil
+                tittel="Søknaden er ikke tilgjengelig"
+                melding="Svangerskapspengesøknaden er dessverre utilgjengelig tirsdag 10. desember klokken 12-13."
+            />
+        );
     } else if (søker && søker.kjønn === Kjønn.MANN) {
         return (
             <Feil
