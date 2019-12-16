@@ -30,12 +30,9 @@ export interface UferdigSøknad {
 }
 
 export const initialSøknad: UferdigSøknad = {
-    harGodkjentVilkår: true,
+    harGodkjentVilkår: false,
     harGodkjentOppsummering: false,
-    barn: {
-        termindato: new Date('2019-11-01'),
-        erBarnetFødt: false
-    },
+    barn: {},
     tilrettelegging: [],
     søknadsgrunnlag: [],
     informasjonOmUtenlandsopphold: {
@@ -50,25 +47,6 @@ export const initialSøknad: UferdigSøknad = {
         andreInntekterSiste10Mnd: []
     }
 };
-
-// export const initialSøknad: UferdigSøknad = {
-//     harGodkjentVilkår: false,
-//     harGodkjentOppsummering: false,
-//     barn: {},
-//     tilrettelegging: [],
-//     søknadsgrunnlag: [],
-//     informasjonOmUtenlandsopphold: {
-//         jobbetINorgeSiste12Mnd: true,
-//         iNorgePåHendelsestidspunktet: true,
-//         tidligereOpphold: [],
-//         senereOpphold: []
-//     },
-//     søker: {
-//         rolle: Søkerrolle.MOR,
-//         selvstendigNæringsdrivendeInformasjon: [],
-//         andreInntekterSiste10Mnd: []
-//     }
-// };
 
 export interface Søknadsgrunnlag {
     id: string;
