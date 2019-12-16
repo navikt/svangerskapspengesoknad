@@ -3,7 +3,7 @@ import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Søker from 'app/types/Søker';
 import { SøknadsgrunnlagOption } from '../../../formik/wrappers/VelgSøknadsgrunnlag';
 import { InjectedIntl } from 'react-intl';
-import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
+import { getAnnenInntektElementTitle, getUnikeArbeidsforhold } from '../../../utils/arbeidsforholdUtils';
 import { AnnenInntektType } from '../../../types/AnnenInntekt';
 
 export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
@@ -15,9 +15,10 @@ export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
     const førstegangstjeneste = andreInntekterSiste10Mnd.find(
         (inntekt) => inntekt.type === AnnenInntektType.MILITÆRTJENESTE
     );
+    const unikeArbeidsforhold = getUnikeArbeidsforhold(arbeidsforhold);
 
     return [
-        ...arbeidsforhold.map((forhold) => ({
+        ...unikeArbeidsforhold.map((forhold) => ({
             value: forhold.guid,
             label: forhold.arbeidsgiverNavn || 'privat arbeidsgiver',
             type: forhold.arbeidsgiverIdType === 'orgnr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT
@@ -29,21 +30,21 @@ export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
         })),
         ...(førstegangstjeneste
             ? [
-                  {
-                      value: førstegangstjeneste.type,
-                      label: getAnnenInntektElementTitle(førstegangstjeneste, intl),
-                      type: Arbeidsforholdstype.PRIVAT
-                  }
-              ]
+                {
+                    value: førstegangstjeneste.type,
+                    label: getAnnenInntektElementTitle(førstegangstjeneste, intl),
+                    type: Arbeidsforholdstype.PRIVAT
+                }
+            ]
             : []),
         ...(frilansInformasjon !== undefined
             ? [
-                  {
-                      value: 'Frilans',
-                      label: 'Frilans',
-                      type: Arbeidsforholdstype.FRILANSER
-                  }
-              ]
+                {
+                    value: 'Frilans',
+                    label: 'Frilans',
+                    type: Arbeidsforholdstype.FRILANSER
+                }
+            ]
             : [])
     ];
 };

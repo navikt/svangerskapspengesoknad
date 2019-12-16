@@ -37,6 +37,7 @@ import { Arbeidsforholdstype, UferdigTilrettelegging } from 'app/types/Tilrettel
 import { AnnenInntektType } from '../../types/AnnenInntekt';
 
 import './arbeidsforhold.less';
+import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -157,7 +158,9 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         title: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.label'),
                         info: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.infotekst')
                     }}>
-                    <InformasjonOmArbeidsforholdWrapper arbeidsforhold={arbeidsforhold} />
+                    <InformasjonOmArbeidsforholdWrapper
+                        arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
+                    />
                 </Block>
 
                 <FrilansSpørsmål formikProps={formikProps} />
