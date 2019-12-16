@@ -30,6 +30,7 @@ import SøknadDTO from '../../types/S\u00F8knad';
 
 import './oppsummering.less';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 
 interface OwnProps {
     step: SøknadStep;
@@ -109,7 +110,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     type="arbeidsforhold"
                     title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
                     <ArbeidsforholdOppsummering
-                        arbeidsforhold={arbeidsforhold}
+                        arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
                         frilansInformasjon={values.søker.frilansInformasjon}
                         selvstendigInformasjon={values.søker.selvstendigNæringsdrivendeInformasjon}
                         søknadsgrunnlag={values.søknadsgrunnlag}
@@ -126,7 +127,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')}>
                     <TilretteleggingOppsummering
                         tilrettelegging={values.tilrettelegging}
-                        arbeidsforhold={arbeidsforhold}
+                        arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
                     />
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>

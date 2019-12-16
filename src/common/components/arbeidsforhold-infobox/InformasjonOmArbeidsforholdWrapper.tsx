@@ -9,6 +9,7 @@ import ArbeidsforholdInfoBox from 'common/components/arbeidsforhold-infobox/Info
 import getMessage from 'common/util/i18nUtils';
 
 import './arbeidsforhold.less';
+import { guid } from 'nav-frontend-js-utils';
 
 interface ArbeidsforholdInfoWrapperProps {
     arbeidsforhold: Arbeidsforhold[] | undefined;
@@ -30,7 +31,7 @@ const InformasjonOmArbeidsforholdWrapper: React.StatelessComponent<
             {harArbeidsforhold && (
                 <ul className="arbeidsforholdList">
                     {arbeidsforhold!.map((arbeidsforholdElement: Arbeidsforhold) => (
-                        <li key={arbeidsforholdElement.arbeidsgiverId}>
+                        <li key={guid()}>
                             <ArbeidsforholdInfoBox
                                 key={arbeidsforholdElement.arbeidsgiverId}
                                 arbeidsforhold={arbeidsforholdElement}

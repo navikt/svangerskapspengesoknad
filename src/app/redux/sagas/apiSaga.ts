@@ -4,31 +4,8 @@ import { Søkerinfo } from 'app/types/Søkerinfo';
 import Kvittering from 'app/types/Kvittering';
 import { ApiActionTypes, GetSøkerinfoRequest, SendSøknadRequest } from '../types/ApiAction';
 import normalizeName from 'app/utils/normalizeName';
-import Arbeidsforhold from 'app/types/Arbeidsforhold';
-import { guid } from 'nav-frontend-js-utils';
-import uniqBy from 'lodash/uniqBy';
 import { SøkerinfoDTOArbeidsforhold } from 'app/types/SøkerinfoArbeidsforholdDTO';
-
-const getArbeidsgiverId = (arbeidsforhold: SøkerinfoDTOArbeidsforhold): string => {
-    return arbeidsforhold !== undefined ? arbeidsforhold.arbeidsgiverId : '';
-};
-
-const mapArbeidsforhold = (arbeidsforhold: SøkerinfoDTOArbeidsforhold[] | undefined): Arbeidsforhold[] => {
-    if (arbeidsforhold !== undefined && arbeidsforhold.length > 0) {
-        return uniqBy(arbeidsforhold, getArbeidsgiverId).map(
-            (forhold: SøkerinfoDTOArbeidsforhold): Arbeidsforhold => ({
-                ...forhold,
-                fom: new Date(forhold.fom),
-                tom: forhold.tom !== undefined ? new Date(forhold.tom) : undefined,
-                guid: guid(),
-                arbeidsgiverNavn:
-                    forhold.arbeidsgiverNavn !== undefined ? normalizeName(forhold.arbeidsgiverNavn) : undefined
-            })
-        );
-    }
-
-    return [];
-};
+import { mapArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 
 function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
     try {
