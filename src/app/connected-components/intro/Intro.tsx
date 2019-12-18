@@ -25,7 +25,6 @@ import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/V
 import './intro.less';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import DocumentIkon from 'app/icons/DocumentIkon';
-import AlertStripe from 'nav-frontend-alertstriper';
 
 const cls = BEMHelper('intro');
 
@@ -59,13 +58,6 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                 }}
             />
             <form className={cls.block} onSubmit={formik.handleSubmit}>
-                <div className="blokk-s">
-                    <AlertStripe type="info">
-                        <Normaltekst>
-                            <FormattedMessage id="feilmelding.nedetid" />
-                        </Normaltekst>
-                    </AlertStripe>
-                </div>
                 <Innholdstittel className="blokk-xs">
                     <FormattedMessage id="intro.tittel" />
                 </Innholdstittel>
