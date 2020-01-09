@@ -31,7 +31,6 @@ jobs:
            ${{ runner.os }}-
          
       - run:  npm install
-      - run:  npm run jest
       - run: |
           npm run build
           echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG" 
