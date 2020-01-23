@@ -127,7 +127,7 @@
         "nav-frontend-veileder-style": "^2.0.7",
         "nav-frontend-veilederpanel": "^0.1.11",
         "nav-frontend-veilederpanel-style": "0.0.15",
-        "prettier": "^1.16.4",
+        "prettier": "^1.19.1",
         "pretty-quick": "1.4.1",
         "prom-client": "^11.3.0",
         "prop-types": "^15.7.2",
