@@ -53,7 +53,7 @@
         "jest-css-modules": "^2.0.0",
         "jsdom": "^13.2.0",
         "less": "^3.9.0",
-        "less-loader": "^4.1.0",
+        "less-loader": "^5.0.0",
         "mini-css-extract-plugin": "^0.8.0",
         "multer": "^1.4.1",
         "mustache-express": "^1.2.8",
