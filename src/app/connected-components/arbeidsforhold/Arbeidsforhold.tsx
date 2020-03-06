@@ -38,6 +38,7 @@ import { AnnenInntektType } from '../../types/AnnenInntekt';
 
 import './arbeidsforhold.less';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
+import InfoTilFiskere from 'app/components/info-til-fiskere/InfoTilFiskere';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -161,6 +162,10 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <InformasjonOmArbeidsforholdWrapper
                         arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
                     />
+                </Block>
+
+                <Block margin="xs">
+                    <InfoTilFiskere />
                 </Block>
 
                 <FrilansSpørsmål formikProps={formikProps} />
