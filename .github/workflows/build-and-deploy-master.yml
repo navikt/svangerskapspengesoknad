@@ -12,7 +12,26 @@ jobs:
   kompiler:
     runs-on: ubuntu-latest
     steps:
-    
+      - name: Lukk deployment-issues
+        uses: actions/github-script@0.5.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['deploy']
+            }).then(response => {
+              response.data.forEach(issue => {
+                github.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+              });
+            });
       - name: Sjekk ut kode
         uses: actions/checkout@v2
      
@@ -46,6 +65,7 @@ jobs:
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: createdeployissue
         with:
+          tags: 'bygg'
           token: ${{ secrets.NOTIFICATION }}
           title: Bygg av ${{ env.TAG }}
           body: |
