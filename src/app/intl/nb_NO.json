@@ -118,7 +118,7 @@
     "andreInntekter.infoTilFiskere.del7": "Hvis du mottar både lott og hyre så mottar du inntekt både som arbeidstaker og som selvstendig næringsrivende.",
     "andreInntekter.infoTilFiskere.del8": "For den delen av inntekten din som er hyre er du å regne som arbeidstaker, og du mottar lønn som arbeidstaker.  Det er ikke alle fiskere som er registret med et arbeidsforhold i arbeids- og arbeidstakerregisteret slik at det er synlig i søknaden. Hvis du er fisker med hyre, må arbeidsgiveren din sende inn inntektsmelding med informasjon om inntekten din.",
     "andreInntekter.infoTilFiskere.del9": "For den delen av innteksten din som er lott, er du å regne som selvstendig næringsdrivende. I søknadsdialogen må du svare ja på spørsmålet om du er selvstendig næringsdrivende, du må velge at du er fisker når du fyller ut informasjon om næringen din. Spørsmålene du får i søknaden er tilpasset din situasjon og du får veiledning og informasjon underveis. Når du gir oss informasjon om at du er fisker får vi registret riktig informasjon om deg, og vi får sendt riktig informasjon om deg til skatteetaten.",
-    "arbeidsforhold.andreInntekter": "Har du hatt andre inntektskilder de siste 4 månedene?",
+    "arbeidsforhold.andreInntekter": "Har du hatt andre inntektskilder de siste 4 ukene?",
     "arbeidsforhold.andreInntekter.listetittel": "Dine andre inntektskilder",
     "annenInntekt.infoboksTekst.overskrift": "Disse inntektene kan gi deg rett til svangerskapspenger:",
     "annenInntekt.infoboksTekst.punktEn": "Førstegangstjeneste i forsvaret eller sivilforsvaret",
