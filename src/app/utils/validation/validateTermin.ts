@@ -11,6 +11,9 @@ const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
     const tomorrow = moment()
         .startOf('day')
         .add(1, 'day');
+    const nineMonthsAhead = moment()
+        .startOf('day')
+        .add(9, 'months');
     if (søknad.barn.fødselsdato && !moment(søknad.barn.fødselsdato).isBefore(tomorrow)) {
         barn = {
             fødselsdato: Valideringsfeil.FØDSELSDATO_MÅ_VÆRE_TILBAKE_I_TID
@@ -21,6 +24,14 @@ const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
         barn = {
             termindato: Valideringsfeil.TERMINDATO_ER_PÅKREVD
         };
+    }
+
+    if (søknad.barn.termindato) {
+        if (moment(søknad.barn.termindato).isSameOrAfter(nineMonthsAhead)) {
+            barn = {
+                termindato: Valideringsfeil.FOR_LANGT_FREM_I_TID
+            };
+        }
     }
 
     if (!isEmpty(barn)) {

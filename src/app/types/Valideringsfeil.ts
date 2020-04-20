@@ -15,7 +15,9 @@ enum Valideringsfeil {
     MÅ_BESTÅ_AV_9_SIFFER = 'måBeståAv9Siffer',
     FELTET_KAN_VÆRE_MAX_100_TEGN = 'feltetKanVæreMax100Tegn',
     FELTET_KAN_VÆRE_MAX_1000_TEGN = 'feltetKanVæreMax1000Tegn',
-    FELTET_KAN_VÆRE_MAX_2000_TEGN = 'feltetKanVæreMax2000Tegn'
+    FELTET_KAN_VÆRE_MAX_2000_TEGN = 'feltetKanVæreMax2000Tegn',
+    FOR_LANGT_FREM_I_TID = 'forLangtFremITid',
+    FOR_LANGT_TILBAKE_I_TID = 'forLangtTilbakeITid'
 }
 
 export default Valideringsfeil;
