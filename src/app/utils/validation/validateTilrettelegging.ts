@@ -17,6 +17,12 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
     const checkForDuplicateDates = (dates: string[], date: string) => {
         return dates.filter((d: string) => d === date).length > 1;
     };
+    const nineMonthsBeforeTermindato = moment(søknad.barn.termindato)
+        .startOf('day')
+        .subtract(9, 'months');
+    const nineMonthsAhead = moment()
+        .startOf('day')
+        .add(9, 'months');
 
     const idx = søknad.søknadsgrunnlag.findIndex((grunnlag: Søknadsgrunnlag) => grunnlag.id === arbeidsforholdId);
     if (søknad.tilrettelegging) {
@@ -97,9 +103,11 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             if (valgteTyper.includes(Tilretteleggingstype.INGEN)) {
                 if (tilrettelegging.ingenTilrettelegging) {
                     tilrettelegging.ingenTilrettelegging.forEach((ingenTil, ind) => {
+                        const { slutteArbeidFom } = ingenTil;
+
                         if (
-                            ingenTil.slutteArbeidFom &&
-                            moment(ingenTil.slutteArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
+                            slutteArbeidFom &&
+                            moment(slutteArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
                         ) {
                             set(
                                 tErrors,
@@ -108,7 +116,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             );
                         }
 
-                        if (ingenTil.slutteArbeidFom === undefined) {
+                        if (slutteArbeidFom === undefined) {
                             set(
                                 tErrors,
                                 `ingenTilrettelegging.${ind}.slutteArbeidFom`,
@@ -116,9 +124,27 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             );
                         }
 
+                        if (slutteArbeidFom) {
+                            if (moment(slutteArbeidFom).isSameOrAfter(nineMonthsAhead)) {
+                                set(
+                                    tErrors,
+                                    `ingenTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.FOR_LANGT_FREM_I_TID
+                                );
+                            }
+
+                            if (moment(slutteArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
+                                set(
+                                    tErrors,
+                                    `ingenTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.FOR_LANGT_TILBAKE_I_TID
+                                );
+                            }
+                        }
+
                         if (
-                            ingenTil.slutteArbeidFom !== undefined &&
-                            checkForDuplicateDates(alleDatoer, formatDate(ingenTil.slutteArbeidFom)!)
+                            slutteArbeidFom !== undefined &&
+                            checkForDuplicateDates(alleDatoer, formatDate(slutteArbeidFom)!)
                         ) {
                             merge(
                                 tErrors,
@@ -135,9 +161,11 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             if (valgteTyper.includes(Tilretteleggingstype.DELVIS)) {
                 if (tilrettelegging.delvisTilrettelegging) {
                     tilrettelegging.delvisTilrettelegging.forEach((delTil, ind) => {
+                        const { tilrettelagtArbeidFom } = delTil;
+
                         if (
-                            delTil.tilrettelagtArbeidFom &&
-                            moment(delTil.tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
+                            tilrettelagtArbeidFom &&
+                            moment(tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
                         ) {
                             set(
                                 tErrors,
@@ -147,8 +175,8 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (
-                            delTil.tilrettelagtArbeidFom !== undefined &&
-                            checkForDuplicateDates(alleDatoer, formatDate(delTil.tilrettelagtArbeidFom)!)
+                            tilrettelagtArbeidFom !== undefined &&
+                            checkForDuplicateDates(alleDatoer, formatDate(tilrettelagtArbeidFom)!)
                         ) {
                             merge(
                                 tErrors,
@@ -191,7 +219,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             );
                         }
 
-                        if (delTil.tilrettelagtArbeidFom === undefined) {
+                        if (tilrettelagtArbeidFom === undefined) {
                             merge(
                                 tErrors,
                                 set(
@@ -201,15 +229,35 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 )
                             );
                         }
+
+                        if (tilrettelagtArbeidFom) {
+                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(nineMonthsAhead)) {
+                                set(
+                                    tErrors,
+                                    `delvisTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.FOR_LANGT_FREM_I_TID
+                                );
+                            }
+
+                            if (moment(tilrettelagtArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
+                                set(
+                                    tErrors,
+                                    `delvisTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.FOR_LANGT_TILBAKE_I_TID
+                                );
+                            }
+                        }
                     });
                 }
             }
             if (valgteTyper.includes(Tilretteleggingstype.HEL)) {
                 if (tilrettelegging.helTilrettelegging) {
                     tilrettelegging.helTilrettelegging.forEach((helTil, ind) => {
+                        const { tilrettelagtArbeidFom } = helTil;
+
                         if (
-                            helTil.tilrettelagtArbeidFom &&
-                            moment(helTil.tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
+                            tilrettelagtArbeidFom &&
+                            moment(tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
                         ) {
                             set(
                                 tErrors,
@@ -218,7 +266,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             );
                         }
 
-                        if (helTil.tilrettelagtArbeidFom === undefined) {
+                        if (tilrettelagtArbeidFom === undefined) {
                             set(
                                 tErrors,
                                 `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
@@ -226,9 +274,27 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             );
                         }
 
+                        if (tilrettelagtArbeidFom) {
+                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(nineMonthsAhead)) {
+                                set(
+                                    tErrors,
+                                    `helTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.FOR_LANGT_FREM_I_TID
+                                );
+                            }
+
+                            if (moment(tilrettelagtArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
+                                set(
+                                    tErrors,
+                                    `helTilrettelegging.${ind}.slutteArbeidFom`,
+                                    Valideringsfeil.FOR_LANGT_TILBAKE_I_TID
+                                );
+                            }
+                        }
+
                         if (
-                            helTil.tilrettelagtArbeidFom !== undefined &&
-                            checkForDuplicateDates(alleDatoer, formatDate(helTil.tilrettelagtArbeidFom)!)
+                            tilrettelagtArbeidFom !== undefined &&
+                            checkForDuplicateDates(alleDatoer, formatDate(tilrettelagtArbeidFom)!)
                         ) {
                             merge(
                                 tErrors,
