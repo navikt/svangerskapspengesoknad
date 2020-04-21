@@ -234,7 +234,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             if (moment(tilrettelagtArbeidFom).isSameOrAfter(nineMonthsAhead)) {
                                 set(
                                     tErrors,
-                                    `delvisTilrettelegging.${ind}.slutteArbeidFom`,
+                                    `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
                                     Valideringsfeil.FOR_LANGT_FREM_I_TID
                                 );
                             }
@@ -242,7 +242,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             if (moment(tilrettelagtArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
                                 set(
                                     tErrors,
-                                    `delvisTilrettelegging.${ind}.slutteArbeidFom`,
+                                    `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
                                     Valideringsfeil.FOR_LANGT_TILBAKE_I_TID
                                 );
                             }
@@ -278,7 +278,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             if (moment(tilrettelagtArbeidFom).isSameOrAfter(nineMonthsAhead)) {
                                 set(
                                     tErrors,
-                                    `helTilrettelegging.${ind}.slutteArbeidFom`,
+                                    `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
                                     Valideringsfeil.FOR_LANGT_FREM_I_TID
                                 );
                             }
@@ -286,7 +286,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                             if (moment(tilrettelagtArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
                                 set(
                                     tErrors,
-                                    `helTilrettelegging.${ind}.slutteArbeidFom`,
+                                    `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
                                     Valideringsfeil.FOR_LANGT_TILBAKE_I_TID
                                 );
                             }
