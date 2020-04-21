@@ -32,6 +32,8 @@ import LabelMedInfobox from 'common/components/label-med-infobox/LabelMedInfobox
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import { Knapp } from 'nav-frontend-knapper';
 import AddTilrettelegging from './components/AddTilrettelegging';
+import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
+import UtvidetInformasjon from 'app/components/utvidet-informasjon/UtvidetInformasjon';
 
 interface OwnProps {
     id: string;
@@ -214,6 +216,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                 />
                             )}
                         />
+                        <UtvidetInformasjon apneLabel="Les om hvordan ta et bra bilde">
+                            <PictureScanningGuide />
+                        </UtvidetInformasjon>
                     </Block>
                 </Block>
                 <Block visible={visDel1} margin="none">
