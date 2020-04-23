@@ -67,6 +67,7 @@
     "annenInntekt.arbeidsforhold.ingenRegistrerteArbeidsforhold": "Du er ikke registrert med noen arbeidsforhold.",
     "annenInntekt.arbeidsforhold.label": "Arbeidsforholdene dine",
     "annenInntekt.arbeidsforhold.organisasjonsnummer": "ORG.NR: {organisasjonsnummer}",
+    "arbeidsforhold.erJegNæringsdrivendeFrilansEllerArbeidstaker": "Er jeg selvstendig næringsdrivende, frilanser eller arbeidstaker?",
     "arbeidsforhold.grunnlag.label": "Hvor skal du søke om svangerskapspenger fra?",
     "arbeidsforhold.utbetalingerFraNAV.label": "Utbetalinger fra NAV",
     "arbeidsforhold.utbetalingerFraNAV.text": "Hvis du får penger utbetalt fra NAV, trenger du ikke opplyse om det i søknaden din.",
