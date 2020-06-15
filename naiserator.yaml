@@ -15,7 +15,6 @@ spec:
     outbound:
       external:
         - host: {{appres}}
-      rules : []  
 {{/if}}       
   image: {{image}}
   port: 8080
