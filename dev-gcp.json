@@ -1,7 +1,7 @@
 {
     "appres": "www-q1.nav.no",
     "namespace": "teamforeldrepenger",
-    "ingress": "https://svangerskapspengesoknad.dev-nav.no",
+    "ingresses": ["https://svangerskapspengesoknad.dev-nav.no", "https://svangerskapspengesoknad.nais.no"],
     "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev-nav.no/rest",
