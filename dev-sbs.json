@@ -1,5 +1,4 @@
 {
-    "appres": "appres-q1.nav.no",
     "ingresses": ["https://svangerskapspengesoknad-q.nav.no","https://svangerskapspengesoknad.dev-sbs.nais.io"],
     "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",

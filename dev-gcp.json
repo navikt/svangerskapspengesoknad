@@ -1,5 +1,4 @@
 {
-    "appres": "www-q1.nav.no",
     "namespace": "teamforeldrepenger",
     "ingresses": ["https://svangerskapspengesoknad.dev-nav.no"],
     "env": {
