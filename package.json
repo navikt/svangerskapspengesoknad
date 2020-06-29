@@ -63,7 +63,7 @@
         "react-test-renderer": "^16.7.0",
         "terser-webpack-plugin": "^1.2.2",
         "ts-jest": "^24.0.2",
-        "tslint": "^5.14.0",
+        "tslint": "^5.20.1",
         "tslint-config-prettier": "^1.18.0",
         "tslint-loader": "^3.5.4",
         "tslint-react": "^3.6.0",
