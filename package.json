@@ -25,7 +25,7 @@
         "@babel/preset-react": "^7.0.0",
         "@types/classnames": "^2.2.7",
         "@types/enzyme": "^3.1.18",
-        "@types/enzyme-adapter-react-16": "^1.0.4",
+        "@types/enzyme-adapter-react-16": "^1.0.6",
         "@types/jest": "^23.3.3",
         "@types/lodash": "^4.14.121",
         "@types/moment": "^2.13.0",
