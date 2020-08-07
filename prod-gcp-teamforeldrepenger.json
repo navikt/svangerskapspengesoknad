@@ -1,6 +1,5 @@
 {
     "gcp" : "true",
-    "namespace": "foreldrepenger",
     "ingresses": ["https://svangerskapspengesoknad.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
