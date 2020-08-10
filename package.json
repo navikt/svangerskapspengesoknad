@@ -43,7 +43,7 @@
         "babel-loader": "^8.0.5",
         "case-sensitive-paths-webpack-plugin": "^2.2.0",
         "css-loader": "^2.1.0",
-        "dotenv": "^6.2.0",
+        "dotenv": "^8.2.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.9.1",
         "fs-extra": "^9.0.1",
