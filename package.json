@@ -37,7 +37,7 @@
         "@types/react-test-renderer": "^16.0.3",
         "@types/react-transition-group": "^2.0.16",
         "acorn": "^6.0.6",
-        "autoprefixer": "^9.6.1",
+        "autoprefixer": "^9.8.6",
         "awesome-typescript-loader": "^5.2.1",
         "babel-jest": "^24.7.1",
         "babel-loader": "^8.0.5",
