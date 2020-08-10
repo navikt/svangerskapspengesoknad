@@ -39,7 +39,7 @@
         "acorn": "^6.0.6",
         "autoprefixer": "^9.8.6",
         "awesome-typescript-loader": "^5.2.1",
-        "babel-jest": "^24.7.1",
+        "babel-jest": "^26.3.0",
         "babel-loader": "^8.0.5",
         "case-sensitive-paths-webpack-plugin": "^2.2.0",
         "css-loader": "^2.1.0",
