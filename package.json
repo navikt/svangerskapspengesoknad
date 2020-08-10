@@ -22,7 +22,7 @@
         "@babel/core": "^7.2.2",
         "@babel/polyfill": "^7.2.5",
         "@babel/preset-env": "^7.11.0",
-        "@babel/preset-react": "^7.0.0",
+        "@babel/preset-react": "^7.10.4",
         "@types/classnames": "^2.2.7",
         "@types/enzyme": "^3.1.18",
         "@types/enzyme-adapter-react-16": "^1.0.4",
