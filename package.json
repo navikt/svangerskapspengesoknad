@@ -74,7 +74,7 @@
     },
     "dependencies": {
         "@sentry/browser": "^5.6.3",
-        "@types/bytes": "^3.0.0",
+        "@types/bytes": "^3.1.0",
         "@types/react-collapse": "^4.0.2",
         "@types/react-document-title": "^2.0.4",
         "@types/react-intl": "^2.3.17",
