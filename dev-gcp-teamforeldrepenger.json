@@ -1,7 +1,6 @@
 {
-    "appres": "appres-q1.nav.no",
-    "namespace": "foreldrepenger",
-    "ingress": "https://svangerskapspengesoknad.dev-nav.no",
+    "gcp" : "true",
+    "ingresses": ["https://svangerskapspengesoknad.dev-nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev-nav.no/rest",
