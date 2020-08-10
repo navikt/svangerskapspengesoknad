@@ -76,7 +76,7 @@
         "@sentry/browser": "^5.6.3",
         "@types/bytes": "^3.0.0",
         "@types/react-collapse": "^4.0.2",
-        "@types/react-document-title": "^2.0.3",
+        "@types/react-document-title": "^2.0.4",
         "@types/react-intl": "^2.3.17",
         "app": "^0.1.0",
         "axios": "^0.19.0",
