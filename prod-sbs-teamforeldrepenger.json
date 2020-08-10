@@ -1,0 +1,8 @@
+{
+    "ingresses": ["https://svangerskapspengesoknad.nav.no","https://svangerskapspengesoknad.prod-sbs.nais.no"],
+    "env": {
+        "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.nav.no/rest",
+        "LOGINSERVICE_URL": "https://loginservice.nav.no/login"
+    }
+}

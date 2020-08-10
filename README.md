@@ -1,4 +1,4 @@
-# Selvbetjeningsløsning for søknad om svangerskapspenger
+# Selvbetjeningsløsning svangerskapspenger
 
 Kildekoden til frontend-appen for ny selvbetjeningsløsning for
 svangerskapspenger.

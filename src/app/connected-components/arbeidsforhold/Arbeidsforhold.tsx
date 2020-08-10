@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, InjectedIntl } from 'react-intl';
+import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, InjectedIntl, FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import moment from 'moment';
@@ -39,6 +39,7 @@ import { AnnenInntektType } from '../../types/AnnenInntekt';
 import './arbeidsforhold.less';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import InfoTilFiskere from 'app/components/info-til-fiskere/InfoTilFiskere';
+import Lenke from 'nav-frontend-lenker';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -170,7 +171,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
                 <FrilansSpørsmål formikProps={formikProps} />
 
-                <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon}>
+                <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon} margin="xs">
                     <Arbeidsforholdseksjon
                         name="søker.harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd"
                         listName="søker.selvstendigNæringsdrivendeInformasjon"
@@ -181,6 +182,13 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         summaryListElementComponent={SelvstendigListElement}
                         renderForm={(formProps) => <SelvstendigNæringsdrivende {...formProps} />}
                     />
+                </Block>
+                <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon} margin="xs">
+                    <Lenke
+                        target="_blank"
+                        href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/er-jeg-selvstendig-naeringsdrivende-frilanser-eller-arbeidstaker">
+                        <FormattedMessage id="arbeidsforhold.erJegNæringsdrivendeFrilansEllerArbeidstaker" />
+                    </Lenke>
                 </Block>
 
                 <Block visible={visharHattAnnenInntektSiste10MndSeksjon}>

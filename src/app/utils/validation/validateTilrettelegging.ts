@@ -20,9 +20,9 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
     const nineMonthsBeforeTermindato = moment(søknad.barn.termindato)
         .startOf('day')
         .subtract(9, 'months');
-    const nineMonthsAhead = moment()
+    const threeMonthsAfterTermindato = moment(søknad.barn.termindato)
         .startOf('day')
-        .add(9, 'months');
+        .add(3, 'months');
 
     const idx = søknad.søknadsgrunnlag.findIndex((grunnlag: Søknadsgrunnlag) => grunnlag.id === arbeidsforholdId);
     if (søknad.tilrettelegging) {
@@ -125,7 +125,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (slutteArbeidFom) {
-                            if (moment(slutteArbeidFom).isSameOrAfter(nineMonthsAhead)) {
+                            if (moment(slutteArbeidFom).isSameOrAfter(threeMonthsAfterTermindato)) {
                                 set(
                                     tErrors,
                                     `ingenTilrettelegging.${ind}.slutteArbeidFom`,
@@ -231,7 +231,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (tilrettelagtArbeidFom) {
-                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(nineMonthsAhead)) {
+                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(threeMonthsAfterTermindato)) {
                                 set(
                                     tErrors,
                                     `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
@@ -275,7 +275,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (tilrettelagtArbeidFom) {
-                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(nineMonthsAhead)) {
+                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(threeMonthsAfterTermindato)) {
                                 set(
                                     tErrors,
                                     `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,

@@ -1,8 +1,7 @@
 {
-    "appres" : "appres-q1.nav.no",
-    "ingress": "https://svangerskapspengesoknad-q.nav.no",
+    "ingresses": ["https://svangerskapspengesoknad-q.nav.no","https://svangerskapspengesoknad.dev-sbs.nais.io"],
     "env": {
-        "APPRES_CMS_URL": "https://appres-q1.nav.no",
+        "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login"
     }
