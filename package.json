@@ -44,7 +44,7 @@
         "autoprefixer": "^9.8.6",
         "awesome-typescript-loader": "^5.2.1",
         "babel-jest": "^26.3.0",
-        "babel-loader": "^8.0.5",
+        "babel-loader": "^8.1.0",
         "case-sensitive-paths-webpack-plugin": "^2.2.0",
         "css-loader": "^4.2.1",
         "dotenv": "^8.2.0",
