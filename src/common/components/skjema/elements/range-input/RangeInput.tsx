@@ -131,7 +131,8 @@ class RangeInput extends React.Component<Props, State> {
                         })}
                         ref={(c) => (this.container = c)}
                         onBlur={this.handleBlur}
-                        onFocus={this.handleFocus}>
+                        onFocus={this.handleFocus}
+                    >
                         {steppers && (
                             <div className={`${bemStepper.block} ${bemStepper.modifier('previous')}`}>
                                 <RangeStepper

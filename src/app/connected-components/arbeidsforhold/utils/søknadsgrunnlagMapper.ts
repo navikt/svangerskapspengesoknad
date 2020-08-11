@@ -21,30 +21,30 @@ export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
         ...unikeArbeidsforhold.map((forhold) => ({
             value: forhold.guid,
             label: forhold.arbeidsgiverNavn || 'privat arbeidsgiver',
-            type: forhold.arbeidsgiverIdType === 'orgnr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT
+            type: forhold.arbeidsgiverIdType === 'orgnr' ? Arbeidsforholdstype.VIRKSOMHET : Arbeidsforholdstype.PRIVAT,
         })),
         ...selvstendigNæringsdrivendeInformasjon.map((næring) => ({
             value: næring.organisasjonsnummer || `${næring.navnPåNæringen}${næring.registrertILand}`,
             label: næring.navnPåNæringen,
-            type: Arbeidsforholdstype.SELVSTENDIG
+            type: Arbeidsforholdstype.SELVSTENDIG,
         })),
         ...(førstegangstjeneste
             ? [
-                {
-                    value: førstegangstjeneste.type,
-                    label: getAnnenInntektElementTitle(førstegangstjeneste, intl),
-                    type: Arbeidsforholdstype.PRIVAT
-                }
-            ]
+                  {
+                      value: førstegangstjeneste.type,
+                      label: getAnnenInntektElementTitle(førstegangstjeneste, intl),
+                      type: Arbeidsforholdstype.PRIVAT,
+                  },
+              ]
             : []),
         ...(frilansInformasjon !== undefined
             ? [
-                {
-                    value: 'Frilans',
-                    label: 'Frilans',
-                    type: Arbeidsforholdstype.FRILANSER
-                }
-            ]
-            : [])
+                  {
+                      value: 'Frilans',
+                      label: 'Frilans',
+                      type: Arbeidsforholdstype.FRILANSER,
+                  },
+              ]
+            : []),
     ];
 };

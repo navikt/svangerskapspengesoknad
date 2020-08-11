@@ -73,7 +73,8 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 formikProps={formikProps}
                 showNesteknapp={true}
                 onValidFormSubmit={sendSøknad}
-                history={history}>
+                history={history}
+            >
                 <Block>
                     <Veilederinfo visVeileder={true} stil="kompakt" type="info">
                         <FormattedMessage id="oppsummering.veileder" />
@@ -81,7 +82,8 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 </Block>
                 <Oppsummeringspunkt
                     type="termin"
-                    title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}>
+                    title={getMessage(intl, 'oppsummering.termin.tittel.barnetErIkkeFødt')}
+                >
                     <TerminOppsummering
                         fornavn={søkerinfo.søker.fornavn}
                         etternavn={søkerinfo.søker.etternavn}
@@ -93,7 +95,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                         <FormattedMessage
                             id="oppsummering.barn.termindato"
                             values={{
-                                dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY')
+                                dato: moment(values.barn.termindato).format('dddd Do MMMM YYYY'),
                             }}
                         />
                     </Block>
@@ -108,7 +110,8 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt
                     type="arbeidsforhold"
-                    title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}>
+                    title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}
+                >
                     <ArbeidsforholdOppsummering
                         arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
                         frilansInformasjon={values.søker.frilansInformasjon}
@@ -124,7 +127,8 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt
                     type="tilrettelegging"
-                    title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')}>
+                    title={getMessage(intl, 'oppsummering.tilrettelegging.tittel')}
+                >
                     <TilretteleggingOppsummering
                         tilrettelegging={values.tilrettelegging}
                         arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
@@ -157,16 +161,13 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
-    vedlegg: state.attachment.vedlegg.filter((a) => !isAttachmentWithError(a))
+    vedlegg: state.attachment.vedlegg.filter((a) => !isAttachmentWithError(a)),
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
     requestSendSøknad: (søknad: SøknadDTO) => {
         dispatch({ type: ApiActionTypes.SEND_SØKNAD_REQUEST, payload: { søknad } });
-    }
+    },
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(injectIntl(Oppsummering));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Oppsummering));

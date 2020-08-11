@@ -23,8 +23,8 @@ const korrigerTilretteleggingArbeidsforhold = (
             ...tilrettelegging,
             arbeidsforhold: {
                 ...tilrettelegging.arbeidsforhold,
-                id: forhold.arbeidsgiverId
-            }
+                id: forhold.arbeidsgiverId,
+            },
         };
     }
     return tilrettelegging;
@@ -61,19 +61,19 @@ export const processUtfyltSøknad = (
             iNorgeNeste12Mnd: !!utland.iNorgeNeste12Mnd,
             jobbetINorgeSiste12Mnd: !!utland.jobbetINorgeSiste12Mnd,
             tidligereOpphold: utland.tidligereOpphold,
-            senereOpphold: utland.senereOpphold
+            senereOpphold: utland.senereOpphold,
         },
         barn: {
             ...utfyltBarn,
             erBarnetFødt: utfyltBarn.erBarnetFødt === undefined ? false : utfyltBarn.erBarnetFødt,
             termindato: utfyltBarn.termindato,
-            fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato as Date] : undefined
+            fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato as Date] : undefined,
         },
         vedlegg,
         søker: utfyltSøknad.søker as Søker,
         tilrettelegging: tilrettelegging.map((t) => ({
             ...t,
-            vedlegg: t.vedlegg.filter((vedleggId) => vedlegg.find((v) => v.id === vedleggId))
-        }))
+            vedlegg: t.vedlegg.filter((vedleggId) => vedlegg.find((v) => v.id === vedleggId)),
+        })),
     };
 };

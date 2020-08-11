@@ -29,7 +29,7 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
     pågående,
     tidsperiode,
     typer,
-    intl
+    intl,
 }) => {
     return (
         <div className={cls.block}>

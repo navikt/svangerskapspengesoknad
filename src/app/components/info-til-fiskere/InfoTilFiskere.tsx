@@ -22,7 +22,7 @@ const InfoTilFiskere = () => {
                         id="andreInntekter.infoTilFiskere.del3"
                         values={{
                             link:
-                                'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/foreldrepenger-og-svangerskapspenger2'
+                                'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/foreldrepenger-og-svangerskapspenger2',
                         }}
                     />
                 </Block>
@@ -37,7 +37,7 @@ const InfoTilFiskere = () => {
                         id="andreInntekter.infoTilFiskere.del5"
                         values={{
                             link:
-                                'https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/'
+                                'https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/',
                         }}
                     />
                 </Block>
@@ -64,7 +64,7 @@ const InfoTilFiskere = () => {
                         id="andreInntekter.infoTilFiskere.del5"
                         values={{
                             link:
-                                'https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/'
+                                'https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/',
                         }}
                     />
                 </Block>

@@ -22,7 +22,8 @@ const GoodScanning: React.StatelessComponent<ScanProps> = ({ title, height }) =>
                     width="121.2%"
                     height="115.1%"
                     filterUnits="objectBoundingBox"
-                    id="good_1__a">
+                    id="good_1__a"
+                >
                     <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
                     <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
                     <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
@@ -55,7 +56,8 @@ const KeystoneScanning: React.StatelessComponent<ScanProps> = ({ title, height }
                     width="119.4%"
                     height="120.3%"
                     filterUnits="objectBoundingBox"
-                    id="keystone_2__a">
+                    id="keystone_2__a"
+                >
                     <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
                     <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
                     <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
@@ -88,7 +90,8 @@ const HorizontalScanning: React.StatelessComponent<ScanProps> = ({ title, height
                     width="121.2%"
                     height="131.1%"
                     filterUnits="objectBoundingBox"
-                    id="horizontal_3__a">
+                    id="horizontal_3__a"
+                >
                     <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
                     <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
                     <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
@@ -121,7 +124,8 @@ const ShadowScanning: React.StatelessComponent<ScanProps> = ({ title, height }) 
                     width="120%"
                     height="114.6%"
                     filterUnits="objectBoundingBox"
-                    id="shadow_4__a">
+                    id="shadow_4__a"
+                >
                     <feOffset dy={2} in="SourceAlpha" result="shadowOffsetOuter1" />
                     <feGaussianBlur stdDeviation={2} in="shadowOffsetOuter1" result="shadowBlurOuter1" />
                     <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />

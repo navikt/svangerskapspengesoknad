@@ -67,7 +67,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd,
         selvstendigNæringsdrivendeInformasjon,
         harHattAnnenInntektSiste10Mnd,
-        andreInntekterSiste10Mnd = []
+        andreInntekterSiste10Mnd = [],
     } = cleanupSøker(søker);
 
     const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlagOptions(
@@ -147,19 +147,22 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                 formikProps={formikProps}
                 showNesteknapp={harValgtMinstEttGrunnlag}
                 onValidFormSubmit={navigate}
-                history={history}>
+                history={history}
+            >
                 <Block
                     header={{
-                        title: getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.label')
-                    }}>
+                        title: getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.label'),
+                    }}
+                >
                     <Normaltekst>{getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.text')}</Normaltekst>
                 </Block>
 
                 <Block
                     header={{
                         title: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.label'),
-                        info: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.infotekst')
-                    }}>
+                        info: getMessage(intl, 'arbeidsforhold.dineArbeidsforhold.infotekst'),
+                    }}
+                >
                     <InformasjonOmArbeidsforholdWrapper
                         arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
                     />
@@ -186,7 +189,8 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                 <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon} margin="xs">
                     <Lenke
                         target="_blank"
-                        href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/er-jeg-selvstendig-naeringsdrivende-frilanser-eller-arbeidstaker">
+                        href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/er-jeg-selvstendig-naeringsdrivende-frilanser-eller-arbeidstaker"
+                    >
                         <FormattedMessage id="arbeidsforhold.erJegNæringsdrivendeFrilansEllerArbeidstaker" />
                     </Lenke>
                 </Block>
@@ -218,7 +222,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     <Veilederinfo type="info" stil="kompakt">
                         {getMessage(intl, 'arbeidsforhold.veileder.inntektsmelding', {
                             // TODO: Hva er riktig dato her?
-                            datoTidligst: moment().format('DD.MM.YYYY')
+                            datoTidligst: moment().format('DD.MM.YYYY'),
                         })}
                     </Veilederinfo>
                 </Block>
@@ -237,7 +241,7 @@ const mapStateToProps = (state: State) => {
     const { søkerinfo } = state.api;
 
     return {
-        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : []
+        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : [],
     };
 };
 

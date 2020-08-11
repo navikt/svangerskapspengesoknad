@@ -4,7 +4,7 @@ export enum FetchStatus {
     'UNFETCHED' = 'Unfetched',
     'IN_PROGRESS' = 'InProgress',
     'SUCCESS' = 'Success',
-    'FAILURE' = 'Failure'
+    'FAILURE' = 'Failure',
 }
 
 export type FetchError = AxiosError;

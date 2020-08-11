@@ -87,7 +87,7 @@ class AttachmentInput extends React.Component<Props> {
             <label
                 role="button"
                 aria-label={intl.formatMessage({
-                    id: 'vedlegg.lastoppknapp.arialabel'
+                    id: 'vedlegg.lastoppknapp.arialabel',
                 })}
                 id={id}
                 tabIndex={0}
@@ -95,7 +95,8 @@ class AttachmentInput extends React.Component<Props> {
                 className={BEM.block}
                 onDragOver={(e) => this.onFileDragOverHandler(e)}
                 onDrop={(e) => this.onFileDropHandler(e)}
-                onKeyPress={(e) => this.onKeyPress(e)}>
+                onKeyPress={(e) => this.onKeyPress(e)}
+            >
                 <div className={BEM.element('icon')}>
                     <CustomSVG iconRef={uploadIcon} size={22} />
                 </div>

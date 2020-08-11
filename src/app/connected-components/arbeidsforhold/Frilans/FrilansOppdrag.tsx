@@ -40,7 +40,8 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             e.stopPropagation();
                             handleSubmit();
                         }}
-                        className={cls.block}>
+                        className={cls.block}
+                    >
                         <Block>
                             <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
                         </Block>

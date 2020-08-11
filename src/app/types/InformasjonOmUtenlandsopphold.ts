@@ -7,7 +7,7 @@ export interface Utenlandsopphold {
 
 export enum Oppholdstype {
     'TIDLIGERE_OPPHOLD' = 'tidligereOpphold',
-    'SENERE_OPPHOLD' = 'senereOpphold'
+    'SENERE_OPPHOLD' = 'senereOpphold',
 }
 
 interface InformasjonOmUtenlandsopphold {

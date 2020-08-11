@@ -7,7 +7,7 @@ import {
     UploadAttachmentFailure,
     DeleteAttachmentRequest,
     DeleteAttachmentSuccess,
-    DeleteAttachmentFailure
+    DeleteAttachmentFailure,
 } from '../types/AttachmentAction';
 
 function* uploadAttachment(action: UploadAttachmentRequest) {
@@ -23,8 +23,8 @@ function* uploadAttachment(action: UploadAttachmentRequest) {
             payload: {
                 attachment,
                 uuid,
-                url
-            }
+                url,
+            },
         };
 
         yield put(successAction);
@@ -33,8 +33,8 @@ function* uploadAttachment(action: UploadAttachmentRequest) {
             type: AttachmentActionTypes.UPLOAD_ATTACHMENT_FAILURE,
             payload: {
                 attachment,
-                error
-            }
+                error,
+            },
         };
 
         yield put(failureAction);
@@ -50,8 +50,8 @@ function* deleteAttachment(action: DeleteAttachmentRequest) {
         const successAction: DeleteAttachmentSuccess = {
             type: AttachmentActionTypes.DELETE_ATTACHMENT_SUCCESS,
             payload: {
-                attachment
-            }
+                attachment,
+            },
         };
 
         yield put(successAction);
@@ -60,8 +60,8 @@ function* deleteAttachment(action: DeleteAttachmentRequest) {
             type: AttachmentActionTypes.DELETE_ATTACHMENT_FAILURE,
             payload: {
                 attachment,
-                error
-            }
+                error,
+            },
         };
         yield put(failureAction);
     }
@@ -70,6 +70,6 @@ function* deleteAttachment(action: DeleteAttachmentRequest) {
 export default function* attachmentSaga() {
     yield all([
         takeEvery(AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, uploadAttachment),
-        takeEvery(AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, deleteAttachment)
+        takeEvery(AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, deleteAttachment),
     ]);
 }

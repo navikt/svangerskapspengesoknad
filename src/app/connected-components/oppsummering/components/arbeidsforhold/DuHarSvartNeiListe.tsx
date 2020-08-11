@@ -37,7 +37,7 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
     harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene,
     harRegnskapsfører,
     harRevisor,
-    kanInnhenteOpplsyningerFraRevisor
+    kanInnhenteOpplsyningerFraRevisor,
 }) => {
     return (
         <div>

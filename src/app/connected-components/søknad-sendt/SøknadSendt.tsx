@@ -73,7 +73,7 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
 
 const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo,
-    kvittering: state.api.kvittering
+    kvittering: state.api.kvittering,
 });
 
 export default connect(mapStateToProps)(SøknadSendt);

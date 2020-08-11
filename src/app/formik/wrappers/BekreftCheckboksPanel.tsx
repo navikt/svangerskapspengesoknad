@@ -17,7 +17,7 @@ const BekreftCheckboksPanel: React.StatelessComponent<Props & InjectedIntlProps>
     label,
     children,
     className,
-    intl
+    intl,
 }) => (
     <Field
         name={name}
@@ -30,11 +30,12 @@ const BekreftCheckboksPanel: React.StatelessComponent<Props & InjectedIntlProps>
                 className={className}
                 inputProps={{
                     name: field.name,
-                    onBlur: field.onBlur
+                    onBlur: field.onBlur,
                 }}
                 feil={{
-                    feilmelding: form.touched[name] && form.errors[name] ? translateError(intl, form.errors[name]) : ''
-                }}>
+                    feilmelding: form.touched[name] && form.errors[name] ? translateError(intl, form.errors[name]) : '',
+                }}
+            >
                 {children}
             </BekreftCheckboksPanelNav>
         )}

@@ -21,7 +21,7 @@ interface Props {
 
 const cls = BEMHelper('kvitteringHeader');
 
-const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato, pdf }) => {
+const KvitteringHeader: FunctionComponent<Props> = ({ søker, pdf }) => {
     return (
         <div className={cls.block}>
             <Block margin="m">
@@ -33,7 +33,7 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato, pdf }
                     <FormattedMessage
                         id="søknadSendt.tittel"
                         values={{
-                            name: `${søker.fornavn} ${søker.etternavn}`
+                            name: `${søker.fornavn} ${søker.etternavn}`,
                         }}
                     />
                 </Sidetittel>
@@ -45,7 +45,8 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, mottattDato, pdf }
                     onClick={(e) => {
                         e.preventDefault();
                         openPdfPreview(pdf);
-                    }}>
+                    }}
+                >
                     <FormattedMessage id={'søknadSendt.pdf'} />
                 </Lenke>
             </Block>

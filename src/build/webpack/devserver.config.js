@@ -18,7 +18,7 @@ const configureDevServer = (decoratorFragments) => ({
     quiet: false,
     noInfo: false,
     stats: 'minimal',
-    publicPath: '/dist'
+    publicPath: '/dist',
 });
 
 module.exports = configureDevServer;

@@ -3,7 +3,7 @@ import countries from 'i18n-iso-countries';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 import InteractiveListElement, {
-    InteractiveListElementProps
+    InteractiveListElementProps,
 } from 'common/components/interactive-list-element/InteractiveListElement';
 import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
 import { prettifyTidsperiode } from 'app/utils/formatDate';

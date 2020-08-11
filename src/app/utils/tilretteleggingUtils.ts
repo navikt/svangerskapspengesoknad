@@ -6,14 +6,14 @@ import {
     Tilretteleggingstype,
     HelTilrettelegging,
     DelvisTilrettelegging,
-    IngenTilrettelegging
+    IngenTilrettelegging,
 } from 'app/types/Tilrettelegging';
 import {
     ArbeidsforholdDTO,
     HelTilretteleggingDTO,
     IngenTilretteleggingDTO,
     DelvisTilretteleggingDTO,
-    TilretteleggingDTO
+    TilretteleggingDTO,
 } from '../types/TilretteleggingDTO';
 
 export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag[]) => {
@@ -26,8 +26,8 @@ export const mapGrunnlagTilTilrettelegging = (søknadsgrunnlag: Søknadsgrunnlag
             vedlegg: [],
             arbeidsforhold: {
                 ...arbeidsgiversId,
-                type
-            }
+                type,
+            },
         };
     });
 };
@@ -63,7 +63,7 @@ const mapHelTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        tilrettelagtArbeidFom: helTilrettelegging.tilrettelagtArbeidFom
+        tilrettelagtArbeidFom: helTilrettelegging.tilrettelagtArbeidFom,
     };
 };
 
@@ -81,7 +81,7 @@ const mapDelvisTilrettelegging = (
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
         tilrettelagtArbeidFom: delvisTilrettelegging.tilrettelagtArbeidFom,
-        stillingsprosent: delvisTilrettelegging.stillingsprosent
+        stillingsprosent: delvisTilrettelegging.stillingsprosent,
     };
 };
 
@@ -98,7 +98,7 @@ const mapIngenTilrettelegging = (
         behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        slutteArbeidFom: ingenTilrettelegging.slutteArbeidFom
+        slutteArbeidFom: ingenTilrettelegging.slutteArbeidFom,
     };
 };
 
@@ -108,23 +108,23 @@ const mapArbeidsforholdForTilrettelegging = (tilrettelegging: UferdigTilretteleg
             return {
                 type: Arbeidsforholdstype.FRILANSER,
                 risikoFaktorer: tilrettelegging.risikoFaktorer,
-                tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak
+                tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak,
             };
         case Arbeidsforholdstype.SELVSTENDIG:
             return {
                 type: Arbeidsforholdstype.SELVSTENDIG,
                 risikoFaktorer: tilrettelegging.risikoFaktorer,
-                tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak
+                tilretteleggingstiltak: tilrettelegging.tilretteleggingstiltak,
             };
         case Arbeidsforholdstype.PRIVAT:
             return {
                 type: Arbeidsforholdstype.PRIVAT,
-                id: tilrettelegging.arbeidsforhold.id || tilrettelegging.id
+                id: tilrettelegging.arbeidsforhold.id || tilrettelegging.id,
             };
         case Arbeidsforholdstype.VIRKSOMHET:
             return {
                 type: Arbeidsforholdstype.VIRKSOMHET,
-                id: tilrettelegging.arbeidsforhold.id || tilrettelegging.id
+                id: tilrettelegging.arbeidsforhold.id || tilrettelegging.id,
             };
     }
 };

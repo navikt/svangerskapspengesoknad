@@ -32,7 +32,8 @@ const DinePersonopplysningerModal = (props: Props) => {
             onRequestClose={() => props.onRequestClose()}
             shouldCloseOnOverlayClick={false}
             closeButton={true}
-            contentLabel={getMessage(intl, 'intro.dinePersonopplysninger.sectionheading')}>
+            contentLabel={getMessage(intl, 'intro.dinePersonopplysninger.sectionheading')}
+        >
             <article className="velkommenModalContent velkommenModalContent--50">
                 <Block margin="s">
                     <Systemtittel tag="h1" className="velkommenModalContent__header">

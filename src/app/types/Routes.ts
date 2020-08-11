@@ -3,7 +3,7 @@ import { StepID } from './SøknadStep';
 export enum AppRoute {
     'INTRO' = '/velkommen',
     'SØKNAD' = '/soknad',
-    'SENDT' = '/sendt'
+    'SENDT' = '/sendt',
 }
 
 export interface SøknadRoute {

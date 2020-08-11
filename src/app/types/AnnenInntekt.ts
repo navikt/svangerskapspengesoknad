@@ -3,7 +3,7 @@ import { TidsperiodeMedValgfriSluttdato } from 'common/types';
 
 export enum AnnenInntektType {
     'MILITÆRTJENESTE' = 'MILITÆR_ELLER_SIVILTJENESTE',
-    'JOBB_I_UTLANDET' = 'JOBB_I_UTLANDET'
+    'JOBB_I_UTLANDET' = 'JOBB_I_UTLANDET',
 }
 
 abstract class AnnenInntektBase {

@@ -7,7 +7,7 @@ import { FormikErrors } from 'formik';
 import { TilretteleggingDTO } from './TilretteleggingDTO';
 
 export enum Søknadstype {
-    'SVANGERSKAPSPENGER' = 'svangerskapspenger'
+    'SVANGERSKAPSPENGER' = 'svangerskapspenger',
 }
 
 interface SøknadDTO {
@@ -39,13 +39,13 @@ export const initialSøknad: UferdigSøknad = {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
         tidligereOpphold: [],
-        senereOpphold: []
+        senereOpphold: [],
     },
     søker: {
         rolle: Søkerrolle.MOR,
         selvstendigNæringsdrivendeInformasjon: [],
-        andreInntekterSiste10Mnd: []
-    }
+        andreInntekterSiste10Mnd: [],
+    },
 };
 
 export interface Søknadsgrunnlag {

@@ -7,7 +7,7 @@ const mockSøknad: UferdigSøknad = {
     harGodkjentOppsummering: false,
     barn: {
         termindato: new Date('2019-04-11T00:00:00.000Z'),
-        erBarnetFødt: false
+        erBarnetFødt: false,
     },
     tilrettelegging: [
         {
@@ -17,8 +17,8 @@ const mockSøknad: UferdigSøknad = {
             type: [Tilretteleggingstype.HEL],
             arbeidsforhold: {
                 id: '973861778',
-                type: Arbeidsforholdstype.VIRKSOMHET
-            }
+                type: Arbeidsforholdstype.VIRKSOMHET,
+            },
         },
         {
             id: 'Frilans',
@@ -26,25 +26,25 @@ const mockSøknad: UferdigSøknad = {
             behovForTilretteleggingFom: new Date(),
             type: [Tilretteleggingstype.HEL],
             arbeidsforhold: {
-                type: Arbeidsforholdstype.FRILANSER
-            }
-        }
+                type: Arbeidsforholdstype.FRILANSER,
+            },
+        },
     ],
     søknadsgrunnlag: [
         {
             id: '973861778',
-            type: Arbeidsforholdstype.VIRKSOMHET
+            type: Arbeidsforholdstype.VIRKSOMHET,
         },
         {
             id: 'Frilans',
-            type: Arbeidsforholdstype.FRILANSER
-        }
+            type: Arbeidsforholdstype.FRILANSER,
+        },
     ],
     informasjonOmUtenlandsopphold: {
         jobbetINorgeSiste12Mnd: true,
         iNorgePåHendelsestidspunktet: true,
         tidligereOpphold: [],
-        senereOpphold: []
+        senereOpphold: [],
     },
     søker: {
         rolle: Søkerrolle.MOR,
@@ -55,10 +55,10 @@ const mockSøknad: UferdigSøknad = {
             oppstart: new Date('2019-04-21T00:00:00.000Z'),
             jobberFremdelesSomFrilans: true,
             harJobbetForNærVennEllerFamilieSiste10Mnd: false,
-            driverFosterhjem: true
+            driverFosterhjem: true,
         },
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: false,
-        harHattAnnenInntektSiste10Mnd: false
-    }
+        harHattAnnenInntektSiste10Mnd: false,
+    },
 };
 export default mockSøknad;

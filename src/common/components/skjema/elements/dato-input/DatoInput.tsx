@@ -35,13 +35,13 @@ const parseAvgrensinger = (avgrensinger: Avgrensninger): DatovelgerAvgrensninger
             avgrensinger.ugyldigeTidsperioder &&
             avgrensinger.ugyldigeTidsperioder.map((t: Tidsperiode) => ({
                 fom: dateToISOFormattedDateString(t.fom)!,
-                tom: dateToISOFormattedDateString(t.tom)!
-            }))
+                tom: dateToISOFormattedDateString(t.tom)!,
+            })),
     };
 };
 
 const bem = BEMHelper('datoInput');
-class DatoInput extends React.Component<Props, {}> {
+class DatoInput extends React.Component<Props, unknown> {
     render() {
         const {
             id,
@@ -77,7 +77,7 @@ class DatoInput extends React.Component<Props, {}> {
                                 placeholder: getMessage(intl, 'datoinput.placeholder'),
                                 name,
                                 ariaDescribedby: ariaDescriptionId,
-                                onChange: (datoString: string, evt: any) => {
+                                onChange: (datoString: string) => {
                                     if (moment(datoString, 'DDMMYYYY', true).isValid()) {
                                         onChange(moment.utc(datoString, 'DDMMYYYY').toDate());
                                     }
@@ -85,7 +85,7 @@ class DatoInput extends React.Component<Props, {}> {
                                     if (moment(datoString, 'D.M.YYYY', true).isValid()) {
                                         onChange(moment.utc(datoString, 'D.M.YYYY').toDate());
                                     }
-                                }
+                                },
                             }}
                             onChange={(datoString: string) =>
                                 onChange(datoString && datoString !== 'Invalid date' ? new Date(datoString) : undefined)

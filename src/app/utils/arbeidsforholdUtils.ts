@@ -46,7 +46,7 @@ export const mapArbeidsforhold = (arbeidsforhold: SøkerinfoDTOArbeidsforhold[] 
                 tom: forhold.tom !== undefined ? new Date(forhold.tom) : undefined,
                 guid: guid(),
                 arbeidsgiverNavn:
-                    forhold.arbeidsgiverNavn !== undefined ? normalizeName(forhold.arbeidsgiverNavn) : undefined
+                    forhold.arbeidsgiverNavn !== undefined ? normalizeName(forhold.arbeidsgiverNavn) : undefined,
             })
         );
     }
@@ -62,7 +62,7 @@ export const getUnikeArbeidsforhold = (arbeidsforhold: Arbeidsforhold[] | undefi
             tom: forhold.tom !== undefined ? new Date(forhold.tom) : undefined,
             guid: forhold.guid,
             arbeidsgiverNavn:
-                forhold.arbeidsgiverNavn !== undefined ? normalizeName(forhold.arbeidsgiverNavn) : undefined
+                forhold.arbeidsgiverNavn !== undefined ? normalizeName(forhold.arbeidsgiverNavn) : undefined,
         }));
     }
 

@@ -13,7 +13,7 @@ export const flattenErrors = (errors: FormikErrors<UferdigSøknad>, pathPrefix =
         if (typeof errors[key] === 'string') {
             flattened.push({
                 name: prefix,
-                text: errors[key]
+                text: errors[key],
             });
         } else if (typeof errors[key] === 'object') {
             flattened = flattened.concat(flattenErrors(errors[key], prefix));

@@ -4,7 +4,7 @@ export type Dekningsgrad = '80' | '100';
 
 export enum Forelder {
     'MOR' = 'mor',
-    'FARMEDMOR' = 'farMedmor'
+    'FARMEDMOR' = 'farMedmor',
 }
 
 export interface NavnPåForeldre {

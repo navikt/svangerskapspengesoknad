@@ -29,7 +29,7 @@ interface Props {
 
 const initialOpphold = {
     land: '',
-    tidsperiode: {}
+    tidsperiode: {},
 };
 
 const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {

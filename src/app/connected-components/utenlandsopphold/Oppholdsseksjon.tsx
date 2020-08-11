@@ -87,7 +87,8 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                 isOpen={modalIsOpen}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 shouldCloseOnOverlayClick={false}
-                                onRequestClose={() => toggleModal(false)}>
+                                onRequestClose={() => toggleModal(false)}
+                            >
                                 <Oppholdsvalg
                                     type={type}
                                     endre={endreLand}

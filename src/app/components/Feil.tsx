@@ -16,11 +16,11 @@ const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ tittel, melding, i
                 veileder={{
                     ansikt: 'skeptisk',
                     farge: 'lilla',
-                    stil: 'normal'
+                    stil: 'normal',
                 }}
                 dialog={{
                     title: getMessage(intl, tittel),
-                    text: melding
+                    text: melding,
                 }}
             />
         </Block>

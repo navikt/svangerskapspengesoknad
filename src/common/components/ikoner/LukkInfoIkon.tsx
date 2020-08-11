@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const LukkInfoIkon = (props: any) => (
+const LukkInfoIkon = () => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-16.000000, -20.000000)">

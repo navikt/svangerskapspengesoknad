@@ -31,7 +31,7 @@ const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
     type = 'info',
     maxWidth,
     children,
-    CustomIcon
+    CustomIcon,
 }) => {
     return (
         <div
@@ -41,9 +41,10 @@ const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
                 `veilederinfo--${type}`,
                 maxWidth ? `veilederinfo--maxWidth-${maxWidth}` : null,
                 {
-                    'veilederinfo--utenVeileder': !visVeileder
+                    'veilederinfo--utenVeileder': !visVeileder,
                 }
-            )}>
+            )}
+        >
             {visVeileder && (
                 <span className="veilederinfo__veileder" role="presentation" aria-hidden={true}>
                     {CustomIcon !== undefined ? (

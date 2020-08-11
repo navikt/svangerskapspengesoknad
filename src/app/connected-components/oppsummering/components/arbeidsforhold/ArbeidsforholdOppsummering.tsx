@@ -29,7 +29,7 @@ const ArbeidsforholdOppsummering: FunctionComponent<Props> = ({
     harHattAndreInntektskilder,
     frilansInformasjon,
     selvstendigInformasjon,
-    andreInntekter
+    andreInntekter,
 }) => {
     return (
         <>

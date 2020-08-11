@@ -27,13 +27,13 @@ const mainSteps = [
     StepID.ARBEIDSFORHOLD,
     StepID.TILRETTELEGGING,
     StepID.UTENLANDSOPPHOLD,
-    StepID.OPPSUMMERING
+    StepID.OPPSUMMERING,
 ];
 
 export const getAllSteps = (søknadsgrunnlag: Søknadsgrunnlag[]): SøknadStep[] => {
     const tilretteleggingSteps = søknadsgrunnlag.map((tilrettelegging) => ({
         step: StepID.TILRETTELEGGING,
-        subStep: tilrettelegging.id
+        subStep: tilrettelegging.id,
     }));
 
     return pureSplice(
@@ -65,7 +65,7 @@ export const getAdjacentSteps = (currentStep: SøknadStep, allSteps: SøknadStep
 export const parsePathFromLocation = (location: Location): SøknadRoute => {
     if (!location) {
         return {
-            path: AppRoute.INTRO
+            path: AppRoute.INTRO,
         };
     }
 
@@ -73,7 +73,7 @@ export const parsePathFromLocation = (location: Location): SøknadRoute => {
     return {
         path: `/${path}` as AppRoute,
         step: step as StepID,
-        subStep: subStep as string
+        subStep: subStep as string,
     };
 };
 

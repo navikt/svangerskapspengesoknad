@@ -23,7 +23,7 @@ const getTidligereOppholdText = (tidligereOpphold: Utenlandsopphold[], countries
                     values={{
                         land: getContryName(countries, tidlOpphold.land),
                         startDato: moment(tidlOpphold.tidsperiode.fom).format('dddd Do MMMM YYYY'),
-                        sluttDato: moment(tidlOpphold.tidsperiode.tom).format('dddd Do MMMM YYYY')
+                        sluttDato: moment(tidlOpphold.tidsperiode.tom).format('dddd Do MMMM YYYY'),
                     }}
                 />
             </div>
@@ -40,7 +40,7 @@ const getSenereOppholdText = (senereOpphold: Utenlandsopphold[], countries: Coun
                     values={{
                         land: getContryName(countries, senOpphold.land),
                         startDato: moment(senOpphold.tidsperiode.fom).format('dddd Do MMMM YYYY'),
-                        sluttDato: moment(senOpphold.tidsperiode.tom).format('dddd Do MMMM YYYY')
+                        sluttDato: moment(senOpphold.tidsperiode.tom).format('dddd Do MMMM YYYY'),
                     }}
                 />
             </div>
@@ -53,7 +53,7 @@ const MedlemskapOppsummering: FunctionComponent<Props> = ({
     iNorgeSiste12Mnd,
     tidligereOpphold,
     senereOpphold,
-    intl
+    intl,
 }) => {
     const countries = useMemo(() => getCountries(true, false, intl), [intl]);
 

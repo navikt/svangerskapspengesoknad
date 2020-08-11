@@ -8,7 +8,7 @@ import {
     Arbeidsforholdstype,
     IngenTilrettelegging,
     DelvisTilrettelegging,
-    HelTilrettelegging
+    HelTilrettelegging,
 } from '../../types/Tilrettelegging';
 import { formatDate } from '../formatDate';
 
@@ -17,12 +17,8 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
     const checkForDuplicateDates = (dates: string[], date: string) => {
         return dates.filter((d: string) => d === date).length > 1;
     };
-    const nineMonthsBeforeTermindato = moment(søknad.barn.termindato)
-        .startOf('day')
-        .subtract(9, 'months');
-    const threeMonthsAfterTermindato = moment(søknad.barn.termindato)
-        .startOf('day')
-        .add(3, 'months');
+    const nineMonthsBeforeTermindato = moment(søknad.barn.termindato).startOf('day').subtract(9, 'months');
+    const threeMonthsAfterTermindato = moment(søknad.barn.termindato).startOf('day').add(3, 'months');
 
     const idx = søknad.søknadsgrunnlag.findIndex((grunnlag: Søknadsgrunnlag) => grunnlag.id === arbeidsforholdId);
     if (søknad.tilrettelegging) {
@@ -69,7 +65,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             const alleDatoer = [
                 ...ingenTilretteleggingDatoer,
                 ...delvisTilretteleggingDatoer,
-                ...helTilretteleggingDatoer
+                ...helTilretteleggingDatoer,
             ];
 
             if (

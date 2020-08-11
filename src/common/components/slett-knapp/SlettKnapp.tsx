@@ -16,7 +16,8 @@ const SlettKnapp: React.StatelessComponent<SlettKnappProps> = ({ onClick, ariaLa
         onClick={(e) => {
             e.stopPropagation();
             onClick();
-        }}>
+        }}
+    >
         <TrashcanIkon width={20} height={20} />
     </button>
 );

@@ -21,7 +21,7 @@ const InputField: FunctionComponent<Props> = ({ name, intl, ...inputProps }) => 
                 const feil =
                     feilmelding && form.submitCount > 0
                         ? {
-                              feilmelding: translateError(intl, feilmelding)
+                              feilmelding: translateError(intl, feilmelding),
                           }
                         : undefined;
 

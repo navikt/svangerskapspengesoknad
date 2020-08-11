@@ -2,7 +2,7 @@ import {
     TilretteleggingDTO,
     ArbeidsforholdFrilansDTO,
     ArbeidsforholdSelvstendigDTO,
-    ArbeidsforholdVirksomhetDTO
+    ArbeidsforholdVirksomhetDTO,
 } from '../../types/TilretteleggingDTO';
 import SøknadUtilsMock from '../../mock/søknadUtils.mock';
 import { Arbeidsforholdstype } from '../../types/Tilrettelegging';

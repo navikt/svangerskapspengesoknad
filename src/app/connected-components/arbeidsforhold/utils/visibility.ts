@@ -20,7 +20,7 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
         harRevisor,
         endringAvNæringsinntektInformasjon,
         kanInnhenteOpplsyningerFraRevisor,
-        hattVarigEndringAvNæringsinntektSiste4Kalenderår
+        hattVarigEndringAvNæringsinntektSiste4Kalenderår,
     } = normalisertNæring;
 
     const skalViseNavnPåNæringen = næringstyper !== undefined && næringstyper.length! > 0;
@@ -51,16 +51,17 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
         harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === true;
     const skalViseHarRegnskapsfører =
         (skalViseharBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene &&
-            (oppstartsdato !== undefined && oppstartsdato !== '')) ||
+            oppstartsdato !== undefined &&
+            oppstartsdato !== '') ||
         (skalViseharBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene &&
             harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene === false) ||
-        ((skalVisevarigEndringAvNæringsinntektBolk && hattVarigEndringAvNæringsinntektSiste4Kalenderår === false) ||
-            (endringAvNæringsinntektInformasjon !== undefined &&
-                endringAvNæringsinntektInformasjon.dato !== undefined &&
-                endringAvNæringsinntektInformasjon.dato !== '' &&
-                endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined &&
-                endringAvNæringsinntektInformasjon.forklaring !== undefined &&
-                endringAvNæringsinntektInformasjon.forklaring !== ''));
+        (skalVisevarigEndringAvNæringsinntektBolk && hattVarigEndringAvNæringsinntektSiste4Kalenderår === false) ||
+        (endringAvNæringsinntektInformasjon !== undefined &&
+            endringAvNæringsinntektInformasjon.dato !== undefined &&
+            endringAvNæringsinntektInformasjon.dato !== '' &&
+            endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined &&
+            endringAvNæringsinntektInformasjon.forklaring !== undefined &&
+            endringAvNæringsinntektInformasjon.forklaring !== '');
     const skalViseNæringsrelasjonRegnskapsfører = skalViseHarRegnskapsfører && harRegnskapsfører === true;
     const skalViseRevisor = skalViseHarRegnskapsfører && harRegnskapsfører === false;
     const skalViseNæringsrelasjonRevisor = skalViseRevisor && harRevisor === true;
@@ -102,6 +103,6 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
         skalViseRevisor,
         skalViseNæringsrelasjonRevisor,
         skalViseKanInnhenteOpplysningerFraRevisor,
-        skalViseformButtons
+        skalViseformButtons,
     };
 };
