@@ -308,7 +308,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 if (!errors.tilrettelegging) {
                     errors.tilrettelegging = [];
                 }
-                errors.tilrettelegging.push(tErrors);
+                (errors.tilrettelegging as any[]).push(tErrors);
             }
         });
     }

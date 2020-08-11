@@ -13,17 +13,9 @@ export interface Props {
     ariaLive?: 'assertive' | 'polite' | 'off';
     /** Om skjul/vis skal animeres. Default true */
     animert?: boolean;
-    /** Om noe av innholdet er ekspandertbart */
-    harEkspanderbartInnhold?: boolean;
 }
 
-const EkspanderbartInnhold = ({
-    children,
-    animert = true,
-    harEkspanderbartInnhold = false,
-    erApen = false,
-    ariaLive = 'off',
-}: Props) => {
+const EkspanderbartInnhold = ({ children, animert = true, erApen = false, ariaLive = 'off' }: Props) => {
     const content = <div aria-live={ariaLive}>{erApen ? <div>{children}</div> : <div />}</div>;
     if (!animert) {
         return content;
@@ -32,11 +24,9 @@ const EkspanderbartInnhold = ({
     return (
         <Collapse
             isOpened={erApen}
-            springConfig={{ stiffness: 250, damping: 30 }}
             className={classnames('ekspanderbartInnhold', {
                 'ekspanderbartInnhold--apen': erApen,
             })}
-            hasNestedCollapse={harEkspanderbartInnhold}
         >
             {content}
         </Collapse>

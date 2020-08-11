@@ -30,11 +30,11 @@ class CheckboksPanelGruppeResponsive extends React.Component<CheckboxPanelgruppe
                 <Fieldset legend={legend}>
                     <SkjemaGruppe className="checkboksPanelGruppe--responsive" feil={feil}>
                         {checkboxes &&
-                            checkboxes.map((checkboks: CheckboksProps, index: number) => {
+                            checkboxes.map(({ checked, ...checkboks }: CheckboksProps, index: number) => {
                                 return (
                                     <div className={cls} key={checkboks.value}>
                                         <CheckboksPanel
-                                            checked={checkboks.checked || false}
+                                            checked={checked || false}
                                             disabled={disabled || false}
                                             onChange={(event) => onChange(event, checkboks.value)}
                                             {...checkboks}

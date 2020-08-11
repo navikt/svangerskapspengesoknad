@@ -36,7 +36,6 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
     const skalVisevarigEndringAvNæringsinntektBolk =
         tidsperiode !== undefined &&
         tidsperiode.fom !== undefined &&
-        tidsperiode.fom !== '' &&
         moment(tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year'));
     const skalViseNæringsinntekt =
         skalViseTidsperiode && !skalVisevarigEndringAvNæringsinntektBolk && tidsperiode.fom !== undefined;
@@ -58,7 +57,6 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
         (skalVisevarigEndringAvNæringsinntektBolk && hattVarigEndringAvNæringsinntektSiste4Kalenderår === false) ||
         (endringAvNæringsinntektInformasjon !== undefined &&
             endringAvNæringsinntektInformasjon.dato !== undefined &&
-            endringAvNæringsinntektInformasjon.dato !== '' &&
             endringAvNæringsinntektInformasjon.næringsinntektEtterEndring !== undefined &&
             endringAvNæringsinntektInformasjon.forklaring !== undefined &&
             endringAvNæringsinntektInformasjon.forklaring !== '');

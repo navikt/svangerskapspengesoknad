@@ -14,14 +14,20 @@ import nbMessagesCommon from '../../common/intl/nb_NO.json';
 import nnMessages from './nn_NO.json';
 import nnMessagesCommon from '../../common/intl/nn_NO.json';
 
+interface OwnProps {
+    children: React.ReactNode;
+}
+
 interface StateProps {
     språkkode: Språkkode;
 }
 
+type Props = OwnProps & StateProps;
+
 moment.locale('nb');
 
-class IntlProvider extends React.Component<StateProps> {
-    constructor(props: StateProps) {
+class IntlProvider extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
         addLocaleData([...nb, ...nn]);
     }

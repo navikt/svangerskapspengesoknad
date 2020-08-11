@@ -13,6 +13,7 @@ import LanguageToggle from 'common/components/language-toggle/LanguageToggle';
 interface OwnProps {
     visSpråkvelger?: boolean;
     visTittel?: boolean;
+    children: React.ReactNode;
 }
 
 interface StateProps {
