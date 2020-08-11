@@ -57,21 +57,21 @@ const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilretteleggi
 
     tilrettelegging.ingenTilrettelegging = [
         {
-            slutteArbeidFom: undefined as any
-        }
+            slutteArbeidFom: undefined as any,
+        },
     ];
 
     tilrettelegging.delvisTilrettelegging = [
         {
             stillingsprosent: undefined as any,
-            tilrettelagtArbeidFom: undefined as any
-        }
+            tilrettelagtArbeidFom: undefined as any,
+        },
     ];
 
     tilrettelegging.helTilrettelegging = [
         {
-            tilrettelagtArbeidFom: undefined as any
-        }
+            tilrettelagtArbeidFom: undefined as any,
+        },
     ];
 
     return tilrettelegging;
@@ -156,7 +156,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 formikProps={formikProps}
                 showNesteknapp={visNesteKnapp && vedlegg.filter((a) => !isAttachmentWithError(a)).length > 0}
                 onValidFormSubmit={navigate}
-                history={history}>
+                history={history}
+            >
                 <Block visible={visFrilansEllerSelvstendig}>
                     <Block margin="xs">
                         <Veilederinfo stil="kompakt" type="info">
@@ -188,11 +189,12 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         header={{
                             title: visFrilansEllerSelvstendig
                                 ? getMessage(intl, 'tilrettelegging.vedlegg.label.frilansSN')
-                                : getMessage(intl, 'tilrettelegging.vedlegg.label')
-                        }}>
+                                : getMessage(intl, 'tilrettelegging.vedlegg.label'),
+                        }}
+                    >
                         <FieldArray
                             name={getInputName('vedlegg')}
-                            render={({ form, push, remove }) => (
+                            render={({ push, remove }) => (
                                 <AttachmentOverview
                                     attachmentType={AttachmentType.TILRETTELEGGING}
                                     skjemanummer={
@@ -227,7 +229,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                             <FormattedHTMLMessage
                                 id="tilrettelegging.veileder.intro"
                                 values={{
-                                    arbeidsgiversNavn
+                                    arbeidsgiversNavn,
                                 }}
                             />
                         </Veilederinfo>
@@ -282,16 +284,16 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                         options={[
                             {
                                 label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
-                                value: Tilretteleggingstype.HEL
+                                value: Tilretteleggingstype.HEL,
                             },
                             {
                                 label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis'),
-                                value: Tilretteleggingstype.DELVIS
+                                value: Tilretteleggingstype.DELVIS,
                             },
                             {
                                 label: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting'),
-                                value: Tilretteleggingstype.INGEN
-                            }
+                                value: Tilretteleggingstype.INGEN,
+                            },
                         ]}
                     />
                 </Block>
@@ -299,20 +301,21 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     visible={visHelTilrettelegging}
                     header={{
                         title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt'),
-                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.infoBox')
-                    }}>
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.fullt.infoBox'),
+                    }}
+                >
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('helTilrettelegging')}
                             render={(arrayHelpers) =>
                                 tilrettelegging.helTilrettelegging !== undefined &&
-                                tilrettelegging.helTilrettelegging.map((helTil, ind, arr) => (
+                                tilrettelegging.helTilrettelegging.map((_helTil, ind, arr) => (
                                     <>
                                         <Block margin="xs">
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: values.barn.fødselsdato
+                                                    maksDato: values.barn.fødselsdato,
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'helTilrettelegging'
@@ -330,7 +333,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <Knapp
                                                 onClick={() => arrayHelpers.push({ tilrettelagtArbeidFom: undefined })}
                                                 htmlType="button"
-                                                mini={true}>
+                                                mini={true}
+                                            >
                                                 {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
                                             </Knapp>
                                         </Block>
@@ -344,20 +348,21 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     visible={visDelvisTilrettelegging}
                     header={{
                         title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis'),
-                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.infoBox')
-                    }}>
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.delvis.infoBox'),
+                    }}
+                >
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('delvisTilrettelegging')}
                             render={(arrayHelpers) =>
                                 tilrettelegging.delvisTilrettelegging !== undefined &&
-                                tilrettelegging.delvisTilrettelegging.map((delTil, ind, arr) => (
+                                tilrettelegging.delvisTilrettelegging.map((_delTil, ind, arr) => (
                                     <>
                                         <Block margin="xs">
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: values.barn.fødselsdato
+                                                    maksDato: values.barn.fødselsdato,
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'delvisTilrettelegging'
@@ -383,11 +388,12 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                                 onClick={() =>
                                                     arrayHelpers.push({
                                                         stillingsprosent: undefined,
-                                                        tilrettelagtArbeidFom: undefined
+                                                        tilrettelagtArbeidFom: undefined,
                                                     })
                                                 }
                                                 htmlType="button"
-                                                mini={true}>
+                                                mini={true}
+                                            >
                                                 {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
                                             </Knapp>
                                         </Block>
@@ -401,20 +407,21 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     visible={visIngenTilrettelegging}
                     header={{
                         title: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting'),
-                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.infoBox')
-                    }}>
+                        info: getMessage(intl, 'tilrettelegging.hvordanKanDuJobbe.ingenting.infoBox'),
+                    }}
+                >
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('ingenTilrettelegging')}
                             render={(arrayHelpers) =>
                                 tilrettelegging.ingenTilrettelegging !== undefined &&
-                                tilrettelegging.ingenTilrettelegging.map((ingenTil, ind, arr) => (
+                                tilrettelegging.ingenTilrettelegging.map((_ingenTil, ind, arr) => (
                                     <>
                                         <Block margin="xs">
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: values.barn.fødselsdato
+                                                    maksDato: values.barn.fødselsdato,
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'ingenTilrettelegging'
@@ -432,7 +439,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <Knapp
                                                 onClick={() => arrayHelpers.push({ slutteArbeidFom: undefined })}
                                                 htmlType="button"
-                                                mini={true}>
+                                                mini={true}
+                                            >
                                                 {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
                                             </Knapp>
                                         </Block>
@@ -457,7 +465,7 @@ const mapStateToProps = (state: State) => {
     const søkerinfo = state.api.søkerinfo;
     return {
         vedlegg: state.attachment.vedlegg.filter((v) => v.type === AttachmentType.TILRETTELEGGING),
-        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined
+        arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined,
     };
 };
 
@@ -466,11 +474,8 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
         uploadAttachment: (attachment: Attachment) =>
             dispatch({ type: AttachmentActionTypes.UPLOAD_ATTACHMENT_REQUEST, payload: { attachment } }),
         deleteAttachment: (attachment: Attachment) =>
-            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } })
+            dispatch({ type: AttachmentActionTypes.DELETE_ATTACHMENT_REQUEST, payload: { attachment } }),
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(injectIntl(Tilrettelegging));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Tilrettelegging));

@@ -6,7 +6,7 @@ export const getVarighetString = (antallDager: number, intl: InjectedIntl): stri
     const dagerStr = intl.formatMessage(
         { id: 'common.varighet.dager' },
         {
-            dager
+            dager,
         }
     );
     if (uker === 0) {
@@ -15,7 +15,7 @@ export const getVarighetString = (antallDager: number, intl: InjectedIntl): stri
     const ukerStr = intl.formatMessage({ id: 'common.varighet.uker' }, { uker });
     if (dager > 0) {
         return `${ukerStr} ${intl.formatMessage({
-            id: 'common.varighet.og'
+            id: 'common.varighet.og',
         })} ${dagerStr}`;
     }
     return ukerStr;

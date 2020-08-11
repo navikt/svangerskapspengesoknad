@@ -8,10 +8,10 @@ const countriesInEøs = [
 const isCountryInEøs = (countryCode: string) => countriesInEøs.includes(countryCode);
 const isCountryNorge = (countryCode: string) => countryCode === 'NO';
 
-export type Countries = Array<[string, string]>;
+export type Countries = [string, string][];
 
 export const getCountries = (visLandUtenforEøs: boolean, visNorge: boolean, { locale }: InjectedIntl): Countries => {
-    const countryNames: Array<[string, string]> = Object.entries(countries.getNames(locale));
+    const countryNames: [string, string][] = Object.entries(countries.getNames(locale));
     const namesDescending = (a: string[], b: string[]) => a[1].localeCompare(b[1], locale);
     const applyFilters = ([countryCode]: string[]) => {
         const keepNorway = visNorge || !isCountryNorge(countryCode);

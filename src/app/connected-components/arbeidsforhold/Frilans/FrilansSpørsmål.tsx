@@ -29,7 +29,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
         driverFosterhjem:
             normalisertFrilansinfo.harJobbetForNærVennEllerFamilieSiste10Mnd === false ||
             (normalisertFrilansinfo.oppdragForNæreVennerEllerFamilieSiste10Mnd !== undefined &&
-                normalisertFrilansinfo.oppdragForNæreVennerEllerFamilieSiste10Mnd.length > 0)
+                normalisertFrilansinfo.oppdragForNæreVennerEllerFamilieSiste10Mnd.length > 0),
     };
 
     return (
@@ -49,7 +49,8 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                         <InfoBlock>
                             <Block
                                 visible={visKomponent.oppstartsdato}
-                                margin={visKomponent.jobberFremdelesSomFrilans ? undefined : 'xxs'}>
+                                margin={visKomponent.jobberFremdelesSomFrilans ? undefined : 'xxs'}
+                            >
                                 <DatoInput
                                     fullskjermKalender={true}
                                     name="søker.frilansInformasjon.oppstart"

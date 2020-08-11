@@ -19,7 +19,8 @@ const DinePlikterModal = (props: Props) => {
             onRequestClose={() => props.onRequestClose()}
             closeButton={true}
             shouldCloseOnOverlayClick={false}
-            contentLabel={getMessage(intl, 'intro.dinePlikter.sectionheading')}>
+            contentLabel={getMessage(intl, 'intro.dinePlikter.sectionheading')}
+        >
             <article className="velkommenModalContent">
                 <Systemtittel tag="h1" className="velkommenModalContent__header">
                     {getMessage(intl, 'intro.dinePlikter.sectionheading')}
@@ -37,7 +38,7 @@ const DinePlikterModal = (props: Props) => {
                                         <Lenke href="https://nav.no/rettOgPlikt" target="_blank">
                                             <FormattedMessage id="intro.dinePlikter.listeElement.2.link" />
                                         </Lenke>
-                                    )
+                                    ),
                                 }}
                             />
                         </Normaltekst>

@@ -24,11 +24,11 @@ class RadioPanelGruppeResponsive extends React.Component<RadioPanelGruppeRespons
             checked,
             name,
             radios,
-            onChange
+            onChange,
         } = this.props;
 
         const cls = classnames('radioPanelWrapper', {
-            'radioPanelWrapper--twoColumns': twoColumns === true
+            'radioPanelWrapper--twoColumns': twoColumns === true,
         });
 
         return (

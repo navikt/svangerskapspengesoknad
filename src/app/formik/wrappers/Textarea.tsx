@@ -22,7 +22,7 @@ const Textarea: FunctionComponent<Props> = ({ name, intl, ...textareaProps }) =>
                 const feil =
                     feilmelding && form.submitCount > 0
                         ? {
-                              feilmelding: translateError(intl, feilmelding)
+                              feilmelding: translateError(intl, feilmelding),
                           }
                         : undefined;
 

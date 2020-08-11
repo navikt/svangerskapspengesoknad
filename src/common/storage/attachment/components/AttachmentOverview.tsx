@@ -73,7 +73,7 @@ class AttachmentOverview extends React.Component<Props, State> {
             skjemanummer,
             showFileSize,
             onFileDelete,
-            onFilesSelect
+            onFilesSelect,
         } = this.props;
 
         const showErrorMessage: boolean = this.props.attachments.some(isAttachmentWithError);
@@ -98,7 +98,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                             <AlertstripeWithCloseButton
                                 lukknappProps={{
                                     hvit: true,
-                                    type: 'button'
+                                    type: 'button',
                                 }}
                                 errorMessages={this.createErrorMessagesForFailedAttachments(
                                     this.props.attachments.filter(isAttachmentWithError)
@@ -119,7 +119,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                                             values={{
                                                 størrelse: bytesString(
                                                     getTotalFileSize(attachmentsToRender.map((a: Attachment) => a.file))
-                                                )
+                                                ),
                                             }}
                                         />
                                     </LabelText>

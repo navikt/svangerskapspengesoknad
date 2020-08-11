@@ -24,7 +24,7 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad, 
         case StepID.TERMIN:
             return {
                 ...validateIntro(values),
-                ...validateTermin(values)
+                ...validateTermin(values),
             };
 
         case StepID.ARBEIDSFORHOLD:
@@ -33,7 +33,7 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad, 
         case StepID.TILRETTELEGGING:
             return {
                 ...validateUntilStep(StepID.ARBEIDSFORHOLD, values),
-                ...validateTilrettelegging(values, subStep)
+                ...validateTilrettelegging(values, subStep),
             };
 
         case StepID.UTENLANDSOPPHOLD:
@@ -42,7 +42,7 @@ const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad, 
         case StepID.OPPSUMMERING:
             return {
                 ...validateUntilStep(StepID.UTENLANDSOPPHOLD, values),
-                ...validateOppsummering(values)
+                ...validateOppsummering(values),
             };
 
         case StepID.INGEN:

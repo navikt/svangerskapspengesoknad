@@ -15,7 +15,7 @@ export interface State {
 const rootReducer = combineReducers({
     common,
     attachment,
-    api
+    api,
 });
 
 declare global {

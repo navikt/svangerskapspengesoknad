@@ -31,7 +31,7 @@ const AddTilrettelegging: React.FunctionComponent<Props> = ({
     prosentInputName,
     prosentLabel,
     delvisTilrettelegging,
-    intl
+    intl,
 }) => {
     const cls = BEMHelper('addTilrettelegging');
 

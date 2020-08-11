@@ -47,7 +47,7 @@ const renderMenuItem = (intl: InjectedIntl, languageCode: string) => {
     );
 };
 
-const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
+const handleSelection = (value: JSX.Element[], _e: any, toggleLanguage: any) => {
     toggleLanguage(getLanguageCodeFromValue(value[1].props.children));
 };
 
@@ -58,7 +58,8 @@ const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ i
         <div className="languageToggle">
             <Wrapper
                 className="languageToggle__wrapper"
-                onSelection={(value: JSX.Element[], e: any) => handleSelection(value, e, toggleLanguage)}>
+                onSelection={(value: JSX.Element[], e: any) => handleSelection(value, e, toggleLanguage)}
+            >
                 <Button className="languageToggle__button">
                     <div className="languageToggle__button__flag">
                         {language === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}

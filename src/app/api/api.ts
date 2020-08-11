@@ -7,7 +7,7 @@ const sendSøknadUrl = `${apiBaseUrl}/soknad`;
 export function getSøkerinfo() {
     return axios.get(`${apiBaseUrl}/sokerinfo`, {
         timeout: 15 * 1000,
-        withCredentials: true
+        withCredentials: true,
     });
 }
 
@@ -15,7 +15,7 @@ export function sendSøknad(søknad: any) {
     return axios.post(sendSøknadUrl, søknad, {
         withCredentials: true,
         headers: {
-            'content-type': 'application/json;'
-        }
+            'content-type': 'application/json;',
+        },
     });
 }

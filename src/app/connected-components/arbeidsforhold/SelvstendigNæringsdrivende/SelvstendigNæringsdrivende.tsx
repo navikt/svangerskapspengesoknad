@@ -50,7 +50,8 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             e.preventDefault();
                             e.stopPropagation();
                             handleSubmit();
-                        }}>
+                        }}
+                    >
                         <Undertittel className="title">
                             {getMessage(intl, `arbeidsforhold.selvstendig.tittel${endre ? '.endre' : ''}`)}
                         </Undertittel>
@@ -61,7 +62,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                 label={getMessage(intl, 'arbeidsforhold.selvstendig.næringstype')}
                                 options={Object.values(Næringstype).map((næringstype: Næringstype) => ({
                                     label: getMessage(intl, `næringstype.${næringstype.toLocaleLowerCase()}`),
-                                    value: næringstype
+                                    value: næringstype,
                                 }))}
                                 columns={2}
                             />
@@ -88,7 +89,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             <JaNeiSpørsmål
                                 name="registrertINorge"
                                 legend={getMessage(intl, 'arbeidsforhold.selvstendig.registrertINorge', {
-                                    navn: values.navnPåNæringen
+                                    navn: values.navnPåNæringen,
                                 })}
                             />
                         </Block>
@@ -96,7 +97,8 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                         <Block visible={visKomponent.skalViseLand}>
                             <Select
                                 name="registrertILand"
-                                label={getMessage(intl, 'arbeidsforhold.seslvstendig.registrertILand')}>
+                                label={getMessage(intl, 'arbeidsforhold.seslvstendig.registrertILand')}
+                            >
                                 <option value="" />
                                 {countries.map((countryOption: string[]) => {
                                     const [countryCode, countryName] = countryOption;
@@ -125,7 +127,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                         fullskjermKalender={true}
                                         name="tidsperiode.fom"
                                         label={getMessage(intl, 'arbeidsforhold.selvstendig.fom', {
-                                            navn: values.navnPåNæringen
+                                            navn: values.navnPåNæringen,
                                         })}
                                     />
                                 }
@@ -134,7 +136,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                                         fullskjermKalender={true}
                                         name="tidsperiode.tom"
                                         label={getMessage(intl, 'arbeidsforhold.selvstendig.tom', {
-                                            navn: values.navnPåNæringen
+                                            navn: values.navnPåNæringen,
                                         })}
                                     />
                                 }

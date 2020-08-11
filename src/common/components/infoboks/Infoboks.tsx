@@ -29,14 +29,14 @@ class Infoboks extends React.Component<Props, InfoboksState> {
 
         this.state = {
             isExpanded: false,
-            windowPos: 0
+            windowPos: 0,
         };
         this.toggleIsExpanded = this.toggleIsExpanded.bind(this);
     }
 
     toggleIsExpanded() {
         this.setState({
-            isExpanded: !this.state.isExpanded
+            isExpanded: !this.state.isExpanded,
         });
     }
 
@@ -80,10 +80,11 @@ class Infoboks extends React.Component<Props, InfoboksState> {
                     hasNestedCollapse={true}
                     className={classNames('infoboks', {
                         'infoboks--open': isExpanded,
-                        'infoboks__content--fullWidth': contentFullWidth
+                        'infoboks__content--fullWidth': contentFullWidth,
                     })}
                     isOpened={isExpanded}
-                    springConfig={{ stiffness: 250, damping: 30 }}>
+                    springConfig={{ stiffness: 250, damping: 30 }}
+                >
                     {isExpanded ? <div className="infoboks__wrapper typo-normal">{tekst}</div> : <span />}
                 </Collapse>
             </React.Fragment>

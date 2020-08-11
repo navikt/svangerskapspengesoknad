@@ -7,7 +7,8 @@ const KvinneIkon = (props: any) => (
         viewBox="0 0 32 32"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink">
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
         <defs />
         <g
             id="Component/static/person-header"
@@ -15,7 +16,8 @@ const KvinneIkon = (props: any) => (
             strokeWidth="1"
             fill="none"
             fillRule="evenodd"
-            transform="translate(0.000000, -11.000000)">
+            transform="translate(0.000000, -11.000000)"
+        >
             <g id="⚙️/-ikon/-id-markering-/-kvinne" transform="translate(0.000000, 11.000000)">
                 <circle id="Oval" fill="#FFFFFF" cx="16" cy="16" r="16" />
                 <g id="kvinne" strokeWidth="1" fill="#C86151">

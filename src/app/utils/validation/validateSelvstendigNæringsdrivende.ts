@@ -20,7 +20,10 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
                 : Valideringsfeil.UGYLDIG_ORGANISASJONSNUMMER;
     }
 
-    if (næring.næringsinntekt && isNaN(Number(næring.næringsinntekt)) || næring.næringsinntekt && (næring.næringsinntekt.includes(',') || næring.næringsinntekt.includes('.'))) {
+    if (
+        (næring.næringsinntekt && isNaN(Number(næring.næringsinntekt))) ||
+        (næring.næringsinntekt && (næring.næringsinntekt.includes(',') || næring.næringsinntekt.includes('.')))
+    ) {
         errors.næringsinntekt = Valideringsfeil.MÅ_VÆRE_HELTALL;
     }
 
@@ -57,7 +60,11 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
         }
 
         const næringsinntektEtterEndring = næring.endringAvNæringsinntektInformasjon.næringsinntektEtterEndring;
-        if (næringsinntektEtterEndring && isNaN(Number(næringsinntektEtterEndring)) || næringsinntektEtterEndring && (næringsinntektEtterEndring.includes(',') || næringsinntektEtterEndring.includes('.'))) {
+        if (
+            (næringsinntektEtterEndring && isNaN(Number(næringsinntektEtterEndring))) ||
+            (næringsinntektEtterEndring &&
+                (næringsinntektEtterEndring.includes(',') || næringsinntektEtterEndring.includes('.')))
+        ) {
             set(
                 errors,
                 ['endringAvNæringsinntektInformasjon', 'næringsinntektEtterEndring'],

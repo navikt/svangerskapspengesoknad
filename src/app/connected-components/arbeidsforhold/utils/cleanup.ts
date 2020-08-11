@@ -15,7 +15,7 @@ export const cleanupFrilansinformasjon = (søker: Partial<Søker>): DeepPartial<
             'jobberFremdelesSomFrilans',
             'oppstart',
             'driverFosterhjem',
-            'harJobbetForNærVennEllerFamilieSiste10Mnd'
+            'harJobbetForNærVennEllerFamilieSiste10Mnd',
         ];
 
         if (frilansInformasjon.oppdragForNæreVennerEllerFamilieSiste10Mnd) {
@@ -35,7 +35,7 @@ export const cleanupNæring = (næring: Partial<Næring>): DeepPartial<Næring> 
         'tidsperiode',
         'hattVarigEndringAvNæringsinntektSiste4Kalenderår',
         'harRevisor',
-        'harRegnskapsfører'
+        'harRegnskapsfører',
     ];
 
     næring.registrertINorge === true
@@ -65,7 +65,7 @@ export const cleanupSøker = (søker: Partial<Søker>) => {
         'rolle',
         'harJobbetSomFrilansSiste10Mnd',
         'harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd',
-        'harHattAnnenInntektSiste10Mnd'
+        'harHattAnnenInntektSiste10Mnd',
     ];
 
     if (søker.harJobbetSomFrilansSiste10Mnd) {

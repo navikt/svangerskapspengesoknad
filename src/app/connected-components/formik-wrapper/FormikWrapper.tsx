@@ -34,7 +34,7 @@ const FormikWrapper: FunctionComponent<Props> = ({ contentRenderer }) => {
                 logValidationErrors(currentPath, errors);
                 return errors;
             }}
-            onSubmit={(søknad: UferdigSøknad, { setSubmitting, setFormikState, setTouched }: FormikBag) => {
+            onSubmit={(_søknad: UferdigSøknad, { setSubmitting, setFormikState, setTouched }: FormikBag) => {
                 setSubmitting(false);
                 setFormikState({ submitCount: 0 });
                 setTouched({});

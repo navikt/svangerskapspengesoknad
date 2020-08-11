@@ -30,11 +30,11 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                     <Block visible={tilrett.type.includes(Tilretteleggingstype.HEL)} margin="xxs">
                         {tilrett.helTilrettelegging &&
                             tilrett.helTilrettelegging.map((helTil) => (
-                                <Block margin="xxs">
+                                <Block key={guid()} margin="xxs">
                                     <FormattedHTMLMessage
                                         id="oppsummering.tilrettelegging.info.jobbeFullt"
                                         values={{
-                                            startDato: moment(helTil.tilrettelagtArbeidFom).format('Do MMMM YYYY')
+                                            startDato: moment(helTil.tilrettelagtArbeidFom).format('Do MMMM YYYY'),
                                         }}
                                     />
                                 </Block>
@@ -43,12 +43,12 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                     <Block visible={tilrett.type.includes(Tilretteleggingstype.DELVIS)} margin="xxs">
                         {tilrett.delvisTilrettelegging &&
                             tilrett.delvisTilrettelegging.map((delTil) => (
-                                <Block margin="xxs">
+                                <Block key={guid()} margin="xxs">
                                     <FormattedHTMLMessage
                                         id="oppsummering.tilrettelegging.info.jobbeDelvis"
                                         values={{
                                             startDato: moment(delTil.tilrettelagtArbeidFom).format('Do MMMM YYYY'),
-                                            prosent: delTil.stillingsprosent
+                                            prosent: delTil.stillingsprosent,
                                         }}
                                     />
                                 </Block>
@@ -57,11 +57,11 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                     <Block visible={tilrett.type.includes(Tilretteleggingstype.INGEN)} margin="xxs">
                         {tilrett.ingenTilrettelegging &&
                             tilrett.ingenTilrettelegging.map((ingenTil) => (
-                                <Block margin="xxs">
+                                <Block key={guid()} margin="xxs">
                                     <FormattedHTMLMessage
                                         id="oppsummering.tilrettelegging.info.ikkeJobbe"
                                         values={{
-                                            startDato: moment(ingenTil.slutteArbeidFom).format('Do MMMM YYYY')
+                                            startDato: moment(ingenTil.slutteArbeidFom).format('Do MMMM YYYY'),
                                         }}
                                     />
                                 </Block>

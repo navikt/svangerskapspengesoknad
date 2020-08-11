@@ -4,7 +4,7 @@ import { Field, FieldProps } from 'formik';
 import { Omit, get } from 'lodash';
 
 import RadioPanelGruppeResponsive, {
-    RadioPanelGruppeResponsiveProps
+    RadioPanelGruppeResponsiveProps,
 } from 'common/components/skjema/elements/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { translateError } from 'app/utils/errorUtils';
 
@@ -24,7 +24,7 @@ const RadioPanelGruppe: FunctionComponent<Props & InjectedIntlProps> = (props) =
                 const feil =
                     feilmelding && form.submitCount > 0
                         ? {
-                              feilmelding: translateError(intl, feilmelding)
+                              feilmelding: translateError(intl, feilmelding),
                           }
                         : undefined;
                 return (

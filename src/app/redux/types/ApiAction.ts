@@ -9,7 +9,7 @@ export enum ApiActionTypes {
     'GET_SØKERINFO_FAILURE' = 'getSøkerInfoFailure',
     'SEND_SØKNAD_REQUEST' = 'sendSøknadRequest',
     'SEND_SØKNAD_SUCCESS' = 'sendSøknadSuccess',
-    'SEND_SØKNAD_FAILURE' = 'sendSøknadFailure'
+    'SEND_SØKNAD_FAILURE' = 'sendSøknadFailure',
 }
 
 export interface GetSøkerinfoRequest {

@@ -37,7 +37,8 @@ const Termin: FunctionComponent<Props> = (props) => {
                 showNesteknapp={showNesteknapp}
                 formikProps={formikProps}
                 onValidFormSubmit={navigate}
-                history={history}>
+                history={history}
+            >
                 <Block>
                     <DatoInput name="barn.termindato" label={getMessage(intl, 'termin.termindato')} />
                 </Block>
@@ -49,7 +50,7 @@ const Termin: FunctionComponent<Props> = (props) => {
                         name="barn.fødselsdato"
                         label={getMessage(intl, 'termin.fødselsdato')}
                         datoAvgrensinger={{
-                            maksDato: new Date()
+                            maksDato: new Date(),
                         }}
                     />
                 </Block>

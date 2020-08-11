@@ -7,7 +7,7 @@ const BEMHelper = (cls: string) => ({
     modifierConditional: (m: string, condition: boolean | undefined) =>
         condition === true ? `${cls}--${m}` : undefined,
     child: (c: string) => BEMHelper(BEMHelper(cls).element(c)),
-    classNames
+    classNames,
 });
 
 export default BEMHelper;

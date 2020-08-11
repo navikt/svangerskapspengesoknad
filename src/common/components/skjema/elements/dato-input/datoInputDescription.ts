@@ -12,12 +12,12 @@ export const getAvgrensningerDescriptionForInput = (
         if (avgrensninger.minDato || avgrensninger.maksDato) {
             const fraTekst = avgrensninger.minDato
                 ? getMessage(intl, 'datoinput.avgrensninger.beskrivelse.fraOgMed', {
-                      dato: formaterDatoTall(avgrensninger.minDato)
+                      dato: formaterDatoTall(avgrensninger.minDato),
                   })
                 : undefined;
             const tilTekst = avgrensninger.maksDato
                 ? getMessage(intl, 'datoinput.avgrensninger.beskrivelse.tilOgMed', {
-                      dato: formaterDatoTall(avgrensninger.maksDato)
+                      dato: formaterDatoTall(avgrensninger.maksDato),
                   })
                 : undefined;
             str = getMessage(intl, 'datoinput.avgrensninger.beskrivelse.fraTil', { fra: fraTekst, til: tilTekst });

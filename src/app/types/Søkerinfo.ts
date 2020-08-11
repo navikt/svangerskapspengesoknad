@@ -7,7 +7,7 @@ export default interface Bankkonto {
 
 export enum Kjønn {
     'MANN' = 'M',
-    'KVINNE' = 'K'
+    'KVINNE' = 'K',
 }
 
 export interface PersonBase {

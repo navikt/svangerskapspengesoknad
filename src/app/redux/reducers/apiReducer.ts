@@ -10,11 +10,11 @@ export interface ApiState {
 
 const getDefaultState = (): ApiState => ({
     søkerinfo: {
-        status: FetchStatus.UNFETCHED
+        status: FetchStatus.UNFETCHED,
     },
     kvittering: {
-        status: FetchStatus.UNFETCHED
-    }
+        status: FetchStatus.UNFETCHED,
+    },
 });
 
 const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
@@ -23,8 +23,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
             return {
                 ...state,
                 søkerinfo: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.GET_SØKERINFO_SUCCESS:
@@ -33,9 +33,9 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 søkerinfo: {
                     status: FetchStatus.SUCCESS,
                     data: {
-                        ...action.payload.søkerinfo
-                    }
-                }
+                        ...action.payload.søkerinfo,
+                    },
+                },
             };
 
         case ApiActionTypes.GET_SØKERINFO_FAILURE:
@@ -43,16 +43,16 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 søkerinfo: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
 
         case ApiActionTypes.SEND_SØKNAD_REQUEST:
             return {
                 ...state,
                 kvittering: {
-                    status: FetchStatus.IN_PROGRESS
-                }
+                    status: FetchStatus.IN_PROGRESS,
+                },
             };
 
         case ApiActionTypes.SEND_SØKNAD_SUCCESS:
@@ -60,8 +60,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 kvittering: {
                     status: FetchStatus.SUCCESS,
-                    data: action.payload.kvittering
-                }
+                    data: action.payload.kvittering,
+                },
             };
 
         case ApiActionTypes.SEND_SØKNAD_FAILURE:
@@ -69,8 +69,8 @@ const apiReducer = (state = getDefaultState(), action: ApiAction): ApiState => {
                 ...state,
                 kvittering: {
                     status: FetchStatus.FAILURE,
-                    error: action.payload.error
-                }
+                    error: action.payload.error,
+                },
             };
 
         default: {

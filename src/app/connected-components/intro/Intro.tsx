@@ -52,9 +52,9 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
             <VeilederMedSnakkeboble
                 dialog={{
                     title: getMessage(intl, 'intro.bobletittel', {
-                        name: søker.fornavn
+                        name: søker.fornavn,
                     }),
-                    text: getMessage(intl, 'intro.bobletekst')
+                    text: getMessage(intl, 'intro.bobletekst'),
                 }}
             />
             <form className={cls.block} onSubmit={formik.handleSubmit}>
@@ -67,7 +67,8 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                 <BekreftCheckboksPanel
                     className="blokk-m"
                     name="harGodkjentVilkår"
-                    label={getMessage(intl, 'intro.godkjennVilkår.bekreft')}>
+                    label={getMessage(intl, 'intro.godkjennVilkår.bekreft')}
+                >
                     <FormattedMessage
                         id="intro.godkjennVilkår.label"
                         values={{
@@ -78,10 +79,11 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                                     onClick={(e) => {
                                         e.preventDefault();
                                         toggleDinePlikter(true);
-                                    }}>
+                                    }}
+                                >
                                     <FormattedHTMLMessage id="intro.dinePlikter" />
                                 </a>
-                            )
+                            ),
                         }}
                     />
                 </BekreftCheckboksPanel>
@@ -95,7 +97,8 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                         onClick={(e) => {
                             e.preventDefault();
                             toggleDinePersonopplysninger(true);
-                        }}>
+                        }}
+                    >
                         <FormattedMessage id="intro.lesMerOmPersonopplysninger" />
                     </a>
                 </Normaltekst>
@@ -110,7 +113,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
 };
 
 const mapStateToProps = (state: State) => ({
-    søkerinfo: state.api.søkerinfo
+    søkerinfo: state.api.søkerinfo,
 });
 
 export default injectIntl(connect(mapStateToProps)(Intro));

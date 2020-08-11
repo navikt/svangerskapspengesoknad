@@ -11,7 +11,7 @@ export const openPdfPreview = (base64: string) => {
     window.open(
         URL.createObjectURL(
             new Blob([base64ToArrayBuffer(base64)], {
-                type: 'application/pdf'
+                type: 'application/pdf',
             })
         )
     );

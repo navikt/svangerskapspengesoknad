@@ -98,7 +98,8 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 margin="none"
                                 marginTop={summaryListTitle ? 's' : undefined}
                                 visible={elementer.length > 0 && visLeggTilKnapp}
-                                header={summaryListTitle}>
+                                header={summaryListTitle}
+                            >
                                 <List
                                     data={elementer}
                                     renderElement={(element, index: number) => {
@@ -120,7 +121,8 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 <Knapp
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}
-                                    htmlType="button">
+                                    htmlType="button"
+                                >
                                     {buttonLabel}
                                 </Knapp>
                             </Block>
@@ -130,7 +132,8 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 isOpen={modalIsOpen}
                                 shouldCloseOnOverlayClick={false}
                                 contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
-                                onRequestClose={() => toggleModal(false)}>
+                                onRequestClose={() => toggleModal(false)}
+                            >
                                 {props.renderForm({
                                     endre,
                                     element: endre ? elementer[currentIndex] : undefined,
@@ -138,7 +141,7 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                     onAdd: (arbeidsforhold: Næring | AnnenInntekt) => {
                                         endre ? replace(currentIndex, arbeidsforhold) : push(arbeidsforhold);
                                         toggleModal(false);
-                                    }
+                                    },
                                 })}
                             </Modal>
                         </div>

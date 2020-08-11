@@ -37,7 +37,7 @@ class InteractiveListElement extends React.Component<AllListElementProps & Injec
             editButtonAriaText,
             onDelete,
             onEdit,
-            intl
+            intl,
         } = this.props;
         return (
             <li className={bem.classNames(bem.block, bem.modifier(style))}>
@@ -47,7 +47,8 @@ class InteractiveListElement extends React.Component<AllListElementProps & Injec
                         type="button"
                         className={bem.element('editButton')}
                         onClick={onEdit}
-                        aria-label={editButtonAriaText || getMessage(intl, 'rediger')}>
+                        aria-label={editButtonAriaText || getMessage(intl, 'rediger')}
+                    >
                         <Pencil />
                     </button>
                 </div>
@@ -58,7 +59,8 @@ class InteractiveListElement extends React.Component<AllListElementProps & Injec
                         className={bem.element('deleteButton')}
                         onClick={onDelete}
                         type="button"
-                        aria-label={deleteButtonAriaText}>
+                        aria-label={deleteButtonAriaText}
+                    >
                         {deleteLinkText}
                     </button>
                 </div>

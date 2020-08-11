@@ -20,8 +20,8 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
                 ...søker,
                 fornavn: normalizeName(søker.fornavn),
                 mellomnavn: søker.mellomnavn ? normalizeName(søker.mellomnavn) : undefined,
-                etternavn: normalizeName(søker.etternavn)
-            }
+                etternavn: normalizeName(søker.etternavn),
+            },
         };
 
         yield put({ type: ApiActionTypes.GET_SØKERINFO_SUCCESS, payload: { søkerinfo } });

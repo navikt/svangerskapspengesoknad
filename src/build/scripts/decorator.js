@@ -19,7 +19,7 @@ const getDecorator = () =>
                     NAV_SCRIPTS: document.getElementById('scripts')[prop],
                     NAV_STYLES: document.getElementById('styles')[prop],
                     NAV_HEADING: document.getElementById('header-withmenu')[prop],
-                    NAV_FOOTER: document.getElementById('footer-withmenu')[prop]
+                    NAV_FOOTER: document.getElementById('footer-withmenu')[prop],
                 };
                 resolve(data);
             } else {
