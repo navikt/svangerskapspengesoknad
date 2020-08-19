@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import { Knapp } from 'nav-frontend-knapper';
 import get from 'lodash/get';
@@ -27,11 +27,12 @@ interface OwnProps {
     };
 }
 
-type OuterProps = OwnProps & InjectedIntlProps;
+type OuterProps = OwnProps;
 type Props = OuterProps & FormikProps;
 
 const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
-    const { formik, name, land, legend, labels, type, intl, infoboksTekst } = props;
+    const intl = useIntl();
+    const { formik, name, land, legend, labels, type, infoboksTekst } = props;
     const visLandvelger = get(formik.values, name) === false;
 
     const alleOpphold: Utenlandsopphold[] = get(formik.values, land);
@@ -94,7 +95,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                     endre={endreLand}
                                     opphold={endreLand ? alleOpphold[currentIndex] : undefined}
                                     onCancel={() => toggleModal(false)}
-                                    onAdd={(opphold) => {
+                                    onAdd={(opphold: any) => {
                                         endreLand ? replace(currentIndex, opphold) : push(opphold);
                                         toggleModal(false);
                                     }}
@@ -113,4 +114,4 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default injectIntl(formConnect<OuterProps, UferdigSøknad>(Oppholdsspørsmål));
+export default formConnect<OuterProps, UferdigSøknad>(Oppholdsspørsmål);

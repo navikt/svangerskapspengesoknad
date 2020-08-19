@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
 
 import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
@@ -22,10 +22,11 @@ import './frilansOppdrag.less';
 
 const cls = BEMHelper('frilansOppdrag');
 
-type Props = ModalFormProps<FrilansOppdrag> & InjectedIntlProps;
+type Props = ModalFormProps<FrilansOppdrag>;
 
 const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
-    const { endre, onCancel, element = {}, onAdd, intl } = props;
+    const intl = useIntl();
+    const { endre, onCancel, element = {}, onAdd } = props;
 
     return (
         <Formik
@@ -88,4 +89,4 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-export default injectIntl(FrilansOppdrag);
+export default FrilansOppdrag;

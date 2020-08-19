@@ -7,7 +7,7 @@ import { ApiActionTypes } from 'app/redux/types/ApiAction';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { processUtfyltSøknad } from 'app/utils/søknadUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
@@ -45,10 +45,11 @@ interface StateProps {
     requestSendSøknad: (søknad: SøknadDTO) => void;
 }
 
-type Props = OwnProps & StateProps & InjectedIntlProps;
+type Props = OwnProps & StateProps;
 
 const Oppsummering: FunctionComponent<Props> = (props) => {
-    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, history, intl } = props;
+    const intl = useIntl();
+    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, history } = props;
     const { values } = formikProps;
 
     const visAdvarselOmManglendeDokumentasjon = values.tilrettelegging.some(
@@ -170,4 +171,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Oppsummering));
+export default connect(mapStateToProps, mapDispatchToProps)(Oppsummering);

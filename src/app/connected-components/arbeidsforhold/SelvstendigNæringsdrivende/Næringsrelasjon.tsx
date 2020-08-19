@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 import InputField from 'app/formik/wrappers/InputField';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
@@ -11,10 +11,11 @@ interface NæringsrelasjonBolkProps {
     type: 'revisor' | 'regnskapsfører';
 }
 
-type Props = NæringsrelasjonBolkProps & InjectedIntlProps;
+type Props = NæringsrelasjonBolkProps;
 
 const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
-    const { values, type, intl } = props;
+    const intl = useIntl();
+    const { values, type } = props;
     const næringsrelasjon: Partial<NæringsrelasjonType> = values[type] || {};
 
     const skalViseTelefonnummer = næringsrelasjon.navn !== undefined && næringsrelasjon.navn !== '';
@@ -44,4 +45,4 @@ const Næringsrelasjon: React.FunctionComponent<Props> = (props: Props) => {
         </>
     );
 };
-export default injectIntl(Næringsrelasjon);
+export default Næringsrelasjon;

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Field, FieldProps } from 'formik';
 import { Omit, get } from 'lodash';
 
@@ -13,8 +13,9 @@ type Props = Omit<RadioPanelGruppeResponsiveProps, 'onChange'> & {
     value?: string;
 };
 
-const RadioPanelGruppe: FunctionComponent<Props & InjectedIntlProps> = (props) => {
-    const { id, value, intl, ...radioPanelGruppeProps } = props;
+const RadioPanelGruppe: FunctionComponent<Props> = (props) => {
+    const intl = useIntl();
+    const { id, value, ...radioPanelGruppeProps } = props;
     return (
         <Field
             name={radioPanelGruppeProps.name}
@@ -42,4 +43,4 @@ const RadioPanelGruppe: FunctionComponent<Props & InjectedIntlProps> = (props) =
         />
     );
 };
-export default injectIntl(RadioPanelGruppe);
+export default RadioPanelGruppe;

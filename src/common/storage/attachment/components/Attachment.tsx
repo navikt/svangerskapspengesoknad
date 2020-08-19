@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 
 import './attachment.less';
@@ -18,9 +18,10 @@ interface OwnProps {
     onDelete?: (file: Attachment) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps;
 
-const Attachment: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete, intl }) => {
+const Attachment: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
+    const intl = useIntl();
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.block, {
         [BEM.modifier('pending')]: attachment.pending,
@@ -56,4 +57,4 @@ const Attachment: React.StatelessComponent<Props> = ({ attachment, showFileSize,
     );
 };
 
-export default injectIntl(Attachment);
+export default Attachment;

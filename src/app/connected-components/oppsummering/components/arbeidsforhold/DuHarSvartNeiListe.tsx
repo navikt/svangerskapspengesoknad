@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import BEMHelper from 'common/util/bem';
 
 import './duHarSvartNeiListe.less';
@@ -42,7 +42,12 @@ const DuHarSvartNeiListe: FunctionComponent<Props> = ({
     return (
         <div>
             <div className={cls.element('overskrift')}>
-                <FormattedHTMLMessage id="oppsummering.arbeidsforhold.svar" />
+                <FormattedMessage
+                    id="oppsummering.arbeidsforhold.svar"
+                    values={{
+                        strong: (msg: any) => <strong>{msg}</strong>,
+                    }}
+                />
             </div>
             <ul className={cls.element('liste')}>
                 {arbeidsforholdOppsummering && harJobbetSomSelvstendigNæringsdrivende === false && (

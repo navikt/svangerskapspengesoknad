@@ -1,7 +1,7 @@
 import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import Block from 'common/components/block/Block';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import UtvidetInformasjon from '../utvidet-informasjon/UtvidetInformasjon';
 
 const InfoTilFiskere = () => {
@@ -18,11 +18,19 @@ const InfoTilFiskere = () => {
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del2" />
                 </Block>
                 <Block margin="xs">
-                    <FormattedHTMLMessage
+                    <FormattedMessage
                         id="andreInntekter.infoTilFiskere.del3"
                         values={{
-                            link:
-                                'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/foreldrepenger-og-svangerskapspenger2',
+                            a: (msg: any) => (
+                                <a
+                                    className="lenke"
+                                    rel="noopener noreferrer"
+                                    href="https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/foreldrepenger-og-svangerskapspenger2"
+                                    target="_blank"
+                                >
+                                    {msg}
+                                </a>
+                            ),
                         }}
                     />
                 </Block>
@@ -33,11 +41,19 @@ const InfoTilFiskere = () => {
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del4" />
                 </Block>
                 <Block margin="xs">
-                    <FormattedHTMLMessage
+                    <FormattedMessage
                         id="andreInntekter.infoTilFiskere.del5"
                         values={{
-                            link:
-                                'https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/',
+                            a: (msg: any) => (
+                                <a
+                                    className="lenke"
+                                    rel="noopener noreferrer"
+                                    href="https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/"
+                                    target="_blank"
+                                >
+                                    {msg}
+                                </a>
+                            ),
                         }}
                     />
                 </Block>
@@ -60,11 +76,19 @@ const InfoTilFiskere = () => {
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del9" />
                 </Block>
                 <Block margin="none">
-                    <FormattedHTMLMessage
+                    <FormattedMessage
                         id="andreInntekter.infoTilFiskere.del5"
                         values={{
-                            link:
-                                'https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/',
+                            a: (msg: any) => (
+                                <a
+                                    className="lenke"
+                                    rel="noopener noreferrer"
+                                    href="https://www.skatteetaten.no/rettskilder/type/handboker/skatte-abc/2019/fiske/F-14.014/F-14.048/"
+                                    target="_blank"
+                                >
+                                    {msg}
+                                </a>
+                            ),
                         }}
                     />
                 </Block>

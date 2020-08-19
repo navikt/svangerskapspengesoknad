@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, FieldArray } from 'formik';
 import { connect } from 'react-redux';
 
@@ -38,9 +38,10 @@ interface ConnectProps {
     deleteAttachment: (attachment: Attachment) => void;
 }
 
-type Props = ConnectProps & ModalFormProps<AnnenInntekt> & InjectedIntlProps;
+type Props = ConnectProps & ModalFormProps<AnnenInntekt>;
 
 const AndreInntekter: FunctionComponent<Props> = (props) => {
+    const intl = useIntl();
     const {
         endre,
         onCancel,
@@ -48,14 +49,13 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
             vedlegg: [] as Attachment[],
         },
         onAdd,
-        intl,
         uploadAttachment,
         deleteAttachment,
         vedlegg,
         skjulFørstegangstjeneste,
     } = props;
 
-    const countries = useMemo(() => getCountries(true, false, intl), [intl]);
+    const countries = useMemo(() => getCountries(true, false, intl.locale), []);
     const onSubmit = (annenInntekt: AnnenInntekt) => {
         onAdd(cleanupAnnenInntekt(annenInntekt) as AnnenInntekt);
     };
@@ -185,13 +185,24 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                                 />
                             </Block>
                         </Block>
-
                         <Block visible={values.type === AnnenInntektType.MILITÆRTJENESTE}>
                             <Veilederinfo type="info">
-                                <FormattedHTMLMessage id="arbeidsforhold.veileder.førstegangstjeneste" />
+                                <FormattedMessage
+                                    id="arbeidsforhold.veileder.førstegangstjeneste"
+                                    values={{
+                                        a: (msg: any) => (
+                                            <a
+                                                className="lenke"
+                                                rel="noopener noreferrer"
+                                                href="https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Forsteside+for+innsending"
+                                            >
+                                                {msg}
+                                            </a>
+                                        ),
+                                    }}
+                                />
                             </Veilederinfo>
                         </Block>
-
                         <Knapperad stil="mobile-50-50">
                             <Knapp htmlType="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
@@ -225,4 +236,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(AndreInntekter));
+export default connect(mapStateToProps, mapDispatchToProps)(AndreInntekter);

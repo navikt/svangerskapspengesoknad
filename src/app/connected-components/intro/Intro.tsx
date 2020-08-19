@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
-
 import { CustomFormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
@@ -33,9 +32,10 @@ interface OwnProps {
     formik: CustomFormikProps;
 }
 
-type Props = OwnProps & InjectedIntlProps & HistoryProps;
+type Props = OwnProps & HistoryProps;
 
-const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) => {
+const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history }) => {
+    const intl = useIntl();
     const søker = getData(søkerinfo, {}).søker;
     const { values, isSubmitting, isValid } = formik;
     const disableNextButton = !values.harGodkjentVilkår;
@@ -62,7 +62,21 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                     <FormattedMessage id="intro.tittel" />
                 </Innholdstittel>
                 <Veilederinfo CustomIcon={DocumentIkon}>
-                    <FormattedHTMLMessage id="intro.ingress" />
+                    <FormattedMessage
+                        id="intro.ingress"
+                        values={{
+                            a: (msg: any) => (
+                                <a
+                                    className="lenke"
+                                    rel="noopener noreferrer"
+                                    href="https://familie.nav.no/om-svangerskapspenger#slik-soker-du"
+                                    target="_blank"
+                                >
+                                    {msg}
+                                </a>
+                            ),
+                        }}
+                    />
                 </Veilederinfo>
                 <BekreftCheckboksPanel
                     className="blokk-m"
@@ -81,7 +95,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history, intl }) 
                                         toggleDinePlikter(true);
                                     }}
                                 >
-                                    <FormattedHTMLMessage id="intro.dinePlikter" />
+                                    <FormattedMessage id="intro.dinePlikter" />
                                 </a>
                             ),
                         }}
@@ -116,4 +130,4 @@ const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo,
 });
 
-export default injectIntl(connect(mapStateToProps)(Intro));
+export default connect(mapStateToProps)(Intro);

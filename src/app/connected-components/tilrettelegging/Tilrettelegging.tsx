@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { FieldArray } from 'formik';
-import { InjectedIntlProps, injectIntl, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
@@ -48,7 +48,7 @@ interface StateProps {
     deleteAttachment: (attachment: Attachment, id: string) => void;
 }
 
-type Props = OwnProps & StateProps & StepProps & InjectedIntlProps;
+type Props = OwnProps & StateProps & StepProps;
 
 const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilrettelegging): UferdigTilrettelegging => {
     if (tilrettelegging.ingenTilrettelegging !== undefined) {
@@ -78,7 +78,8 @@ const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilretteleggi
 };
 
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
-    const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, intl, history } = props;
+    const intl = useIntl();
+    const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, history } = props;
 
     const { values, setFieldValue } = formikProps;
 
@@ -161,7 +162,12 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block visible={visFrilansEllerSelvstendig}>
                     <Block margin="xs">
                         <Veilederinfo stil="kompakt" type="info">
-                            <FormattedHTMLMessage id="tilrettelegging.veileder.frilans.html" />
+                            <FormattedMessage
+                                id="tilrettelegging.veileder.frilans.html"
+                                values={{
+                                    strong: (msg: any) => <strong>{msg}</strong>,
+                                }}
+                            />
                         </Veilederinfo>
                     </Block>
                     <Textarea
@@ -176,7 +182,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block visible={visVedlegg}>
                     <Block>
                         <Veilederinfo stil="kompakt" type="info">
-                            <FormattedHTMLMessage
+                            <FormattedMessage
                                 id={
                                     visFrilansEllerSelvstendig
                                         ? 'tilrettelegging.veileder.vedlegg.frilansSN'
@@ -226,7 +232,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 <Block visible={visDel1} margin="none">
                     <Block visible={tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.VIRKSOMHET}>
                         <Veilederinfo stil="kompakt" type="info">
-                            <FormattedHTMLMessage
+                            <FormattedMessage
                                 id="tilrettelegging.veileder.intro"
                                 values={{
                                     arbeidsgiversNavn,
@@ -478,4 +484,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Tilrettelegging));
+export default connect(mapStateToProps, mapDispatchToProps)(Tilrettelegging);

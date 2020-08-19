@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import getMessage from 'common/util/i18nUtils';
@@ -13,13 +13,16 @@ import _ from 'lodash';
 import FrilansListElement from './FrilansListElement';
 import InfoBlock from 'common/components/info-block/InfoBlock';
 
+import FrilansSpørsmålInfoBoksTekst from './FrilansSpørsmålInfoBoksTekst';
+
 interface OwnProps {
     formikProps: CustomFormikProps;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps;
 const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
-    const { formikProps, intl } = props;
+    const intl = useIntl();
+    const { formikProps } = props;
     const normalisertFrilansinfo = cleanupFrilansinformasjon(formikProps.values.søker);
 
     const visKomponent = {
@@ -39,7 +42,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                     twoColumns={true}
                     name="søker.harJobbetSomFrilansSiste10Mnd"
                     legend={getMessage(intl, 'arbeidsforhold.frilans.erFrilanser')}
-                    infoboksTekst={<FormattedHTMLMessage id={'arbeidsforhold.frilans.erFrilanser.infoboksTekst'} />}
+                    infoboksTekst={<FrilansSpørsmålInfoBoksTekst />}
                 />
             </Block>
 
@@ -76,7 +79,7 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
                                     )}
                                     buttonLabel={getMessage(intl, 'leggtil')}
                                     summaryListElementComponent={FrilansListElement}
-                                    renderForm={(formProps) => <FrilansOppdrag {...formProps} />}
+                                    renderForm={(formProps: any) => <FrilansOppdrag {...formProps} />}
                                     summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.frilans.listetittel') }}
                                 />
                             </Block>
@@ -96,4 +99,4 @@ const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-export default injectIntl(FrilansSpørsmål);
+export default FrilansSpørsmål;

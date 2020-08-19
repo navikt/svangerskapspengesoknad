@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
@@ -28,10 +28,11 @@ import Knapperad from 'common/components/knapperad/Knapperad';
 
 const cls = BEMHelper('selvstendig-næringsdrivende');
 
-type Props = ModalFormProps<Næring> & InjectedIntlProps;
+type Props = ModalFormProps<Næring>;
 const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => {
-    const { endre, onCancel, element = { næringstyper: [] }, onAdd, intl } = props;
-    const countries = useMemo(() => getCountries(true, true, intl), [intl]);
+    const intl = useIntl();
+    const { endre, onCancel, element = { næringstyper: [] }, onAdd } = props;
+    const countries = useMemo(() => getCountries(true, true, intl.locale), []);
     const onSubmit = (næring: Næring) => {
         onAdd(cleanupNæring(næring) as Næring);
     };
@@ -78,7 +79,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
 
                         <Block visible={visKomponent.skalViseAdvarselFisker}>
                             <Veilederinfo type="advarsel">
-                                <FormattedHTMLMessage
+                                <FormattedMessage
                                     id="arbeidsforhold.selvstendig.fisker"
                                     values={{ navnPåNæringen: values.navnPåNæringen }}
                                 />
@@ -206,7 +207,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
 
                         <Block visible={visKomponent.skalViseformButtons}>
                             <Veilederinfo type="advarsel">
-                                <FormattedHTMLMessage id="arbeidsforhold.selvstendig.bliKontaktet" />
+                                <FormattedMessage id="arbeidsforhold.selvstendig.bliKontaktet" />
                             </Veilederinfo>
                         </Block>
 
@@ -227,4 +228,4 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
     );
 };
 
-export default injectIntl(SelvstendigNæringsdrivende);
+export default SelvstendigNæringsdrivende;

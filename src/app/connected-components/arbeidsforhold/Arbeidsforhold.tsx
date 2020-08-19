@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedHTMLMessage, InjectedIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import moment from 'moment';
@@ -52,12 +52,13 @@ interface ConnectProps {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-type Props = OwnProps & StepProps & ConnectProps & InjectedIntlProps;
+type Props = OwnProps & StepProps & ConnectProps;
 
 const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
-    const { step, formikProps, arbeidsforhold, intl, history } = props;
+    const { step, formikProps, arbeidsforhold, history } = props;
     const { values, setFieldValue } = formikProps;
     const { søker, søknadsgrunnlag } = values;
+    const intl = useIntl();
 
     const harValgtMinstEttGrunnlag: boolean = søknadsgrunnlag.length > 0;
 
@@ -72,8 +73,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
     const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlagOptions(
         cleanupSøker(values.søker) as Søker,
-        arbeidsforhold,
-        intl
+        arbeidsforhold
     );
 
     const harLagtTilFørstegangstjeneste = søker.andreInntekterSiste10Mnd
@@ -180,10 +180,25 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         listName="søker.selvstendigNæringsdrivendeInformasjon"
                         legend={getMessage(intl, 'arbeidsforhold.selvstendig.erSelvstendigNæringsdrivende')}
                         buttonLabel={getMessage(intl, 'leggtil')}
-                        infoboksTekst={<FormattedHTMLMessage id="arbeidsforhold.selvstendig.infoboxTekst" />}
+                        infoboksTekst={
+                            <FormattedMessage
+                                id="arbeidsforhold.selvstendig.infoboxTekst"
+                                values={{
+                                    a: (msg: any) => (
+                                        <a
+                                            className="lenke"
+                                            rel="noopener noreferrer"
+                                            href="https://www.skatteetaten.no/bedrift-og-organisasjon/starte-og-drive/er-jeg-naringsdrivende/"
+                                        >
+                                            {msg}
+                                        </a>
+                                    ),
+                                }}
+                            />
+                        }
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.selvstendig.listetittel') }}
                         summaryListElementComponent={SelvstendigListElement}
-                        renderForm={(formProps) => <SelvstendigNæringsdrivende {...formProps} />}
+                        renderForm={(formProps: any) => <SelvstendigNæringsdrivende {...formProps} />}
                     />
                 </Block>
                 <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon} margin="xs">
@@ -201,10 +216,10 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         listName="søker.andreInntekterSiste10Mnd"
                         legend={getMessage(intl, 'arbeidsforhold.andreInntekter')}
                         buttonLabel={getMessage(intl, 'leggtil')}
-                        infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst intl={intl} />}
+                        infoboksTekst={<AnnenInntektSiste10MndHjelpeTekst />}
                         summaryListTitle={{ title: getMessage(intl, 'arbeidsforhold.andreInntekter.listetittel') }}
                         summaryListElementComponent={AndreInntekterListElement}
-                        renderForm={(formProps) => (
+                        renderForm={(formProps: any) => (
                             <AndreInntekter {...formProps} skjulFørstegangstjeneste={harLagtTilFørstegangstjeneste} />
                         )}
                     />
@@ -229,7 +244,35 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
                 <Block visible={visIngenArbeidsforholdVeileder}>
                     <Veilederinfo type="advarsel">
-                        <FormattedHTMLMessage id="arbeidsforhold.veileder.ingenArbeidsforhold" />
+                        <FormattedMessage
+                            id="arbeidsforhold.veileder.ingenArbeidsforhold"
+                            values={{
+                                b: (msg: any) => <b>{msg}</b>,
+                                a: (msg: any) => (
+                                    <a
+                                        className="lenke"
+                                        rel="noopener noreferrer"
+                                        href="https://familie.nav.no/om-svangerskapspenger"
+                                    >
+                                        {msg}
+                                    </a>
+                                ),
+                            }}
+                        />
+                        <FormattedMessage
+                            id="arbeidsforhold.veileder.ingenArbeidsforhold.forsettelse"
+                            values={{
+                                a: (msg: any) => (
+                                    <a
+                                        className="lenke"
+                                        rel="noopener noreferrer"
+                                        href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger"
+                                    >
+                                        {msg}
+                                    </a>
+                                ),
+                            }}
+                        />
                     </Veilederinfo>
                 </Block>
             </FormikStep>
@@ -245,9 +288,10 @@ const mapStateToProps = (state: State) => {
     };
 };
 
-export default injectIntl(connect(mapStateToProps)(Arbeidsforhold));
+export default connect(mapStateToProps)(Arbeidsforhold);
 
-const AnnenInntektSiste10MndHjelpeTekst = ({ intl }: { intl: InjectedIntl }) => {
+const AnnenInntektSiste10MndHjelpeTekst = () => {
+    const intl = useIntl();
     return (
         <div>
             <div>{getMessage(intl, 'annenInntekt.infoboksTekst.overskrift')}</div>

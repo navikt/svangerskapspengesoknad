@@ -1,7 +1,7 @@
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { AnnenInntekt, AnnenInntektType } from '../types/AnnenInntekt';
 import getMessage from 'common/util/i18nUtils';
-import { InjectedIntl } from 'react-intl';
+import { IntlShape } from 'react-intl';
 import { SøkerinfoDTOArbeidsforhold } from 'app/types/SøkerinfoArbeidsforholdDTO';
 import { guid } from 'nav-frontend-js-utils';
 import uniqBy from 'lodash/uniqBy';
@@ -17,7 +17,7 @@ export const getArbeidsforholdNavnFromId = (
     return arbForhold !== undefined ? arbForhold.arbeidsgiverNavn : undefined;
 };
 
-export const getAnnenInntektElementTitle = (annenInntekt: AnnenInntekt, intl: InjectedIntl): string => {
+export const getAnnenInntektElementTitle = (annenInntekt: AnnenInntekt, intl: IntlShape): string => {
     return annenInntekt.type === AnnenInntektType.JOBB_I_UTLANDET
         ? `${annenInntekt.arbeidsgiverNavn}`
         : getMessage(intl, 'inntektstype.militær_eller_siviltjeneste');

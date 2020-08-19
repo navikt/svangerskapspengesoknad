@@ -1,5 +1,5 @@
 import React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import getMessage from 'common/util/i18nUtils';
 import { SubmitEvent } from '../../../app/types/events';
@@ -11,8 +11,10 @@ interface FortsettKnappProps {
     onClick?: (e: SubmitEvent) => void;
 }
 
-const FortsettKnapp = (props: FortsettKnappProps & InjectedIntlProps) => {
-    const { intl, children, onClick } = props;
+const FortsettKnapp = (props: FortsettKnappProps) => {
+    const intl = useIntl();
+    const { children, onClick } = props;
+
     return (
         <Hovedknapp className="fortsettKnapp" htmlType="submit" onClick={onClick}>
             {children || getMessage(intl, 'fortsettknapp.label')}
@@ -20,4 +22,4 @@ const FortsettKnapp = (props: FortsettKnappProps & InjectedIntlProps) => {
     );
 };
 
-export default injectIntl(FortsettKnapp);
+export default FortsettKnapp;

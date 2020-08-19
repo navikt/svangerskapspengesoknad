@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'formik';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { flattenErrors, translateError } from 'app/utils/errorUtils';
 import { FormikProps } from 'app/types/Formik';
@@ -13,9 +13,10 @@ import './validationErrorSummary.less';
 
 const cls = BEMHelper('validationErrorSummary');
 
-type Props = InjectedIntlProps & FormikProps;
+type Props = FormikProps;
 
-const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors, submitCount }, intl }) => {
+const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors, submitCount } }) => {
+    const intl = useIntl();
     if (errors) {
         const errorMessages = flattenErrors(errors).map((error) => ({
             ...error,
@@ -37,4 +38,4 @@ const ValidationErrorSummary: FunctionComponent<Props> = ({ formik: { errors, su
     return null;
 };
 
-export default injectIntl(connect<InjectedIntlProps, UferdigSøknad>(ValidationErrorSummary));
+export default connect<unknown, UferdigSøknad>(ValidationErrorSummary);

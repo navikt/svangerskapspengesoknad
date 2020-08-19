@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Kjønn, Søkerinfo } from 'app/types/Søkerinfo';
 import FetchState, { FetchStatus } from 'app/types/FetchState';
 
@@ -22,8 +22,9 @@ interface Props {
     requestSøkerinfo: () => void;
 }
 
-const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProps> = (props) => {
-    const { søkerinfo, kvittering, requestSøkerinfo, intl } = props;
+const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
+    const intl = useIntl();
+    const { søkerinfo, kvittering, requestSøkerinfo } = props;
 
     useEffect(() => {
         if (søkerinfo.status === FetchStatus.UNFETCHED) {
@@ -59,7 +60,23 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props & InjectedIntlProp
         return (
             <Feil
                 tittel={getMessage(intl, 'feilside.innsending.tittel')}
-                melding={<FormattedHTMLMessage id={'feilside.innsending.melding'} />}
+                melding={
+                    <FormattedMessage
+                        id={'feilside.innsending.melding'}
+                        values={{
+                            a: (msg: any) => (
+                                <a
+                                    href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="lenke"
+                                >
+                                    {msg}
+                                </a>
+                            ),
+                        }}
+                    />
+                }
             />
         );
     } else if (søkerinfo.status === FetchStatus.FAILURE && getErrorCode(søkerinfo) !== 401) {
@@ -94,4 +111,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Svangerskapspengesøknad));
+export default connect(mapStateToProps, mapDispatchToProps)(Svangerskapspengesøknad);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 
 interface DineRettigheterModalProps {
@@ -10,9 +10,9 @@ interface DineRettigheterModalProps {
     onRequestClose: () => void;
 }
 
-type Props = DineRettigheterModalProps & InjectedIntlProps;
+type Props = DineRettigheterModalProps;
 const DinePlikterModal = (props: Props) => {
-    const { intl } = props;
+    const intl = useIntl();
     return (
         <Modal
             isOpen={props.isOpen}
@@ -49,4 +49,4 @@ const DinePlikterModal = (props: Props) => {
     );
 };
 
-export default injectIntl(DinePlikterModal);
+export default DinePlikterModal;
