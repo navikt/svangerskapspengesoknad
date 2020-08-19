@@ -40,7 +40,7 @@
         "@types/react-router-dom": "^5.1.5",
         "@types/react-test-renderer": "^16.9.3",
         "@types/react-transition-group": "^4.4.0",
-        "acorn": "^6.0.6",
+        "acorn": "^7.4.0",
         "autoprefixer": "^9.8.6",
         "awesome-typescript-loader": "^5.2.1",
         "babel-jest": "^26.3.0",
