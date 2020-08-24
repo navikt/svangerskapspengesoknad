@@ -1,5 +1,7 @@
 {
-    "ingresses": ["https://svangerskapspengesoknad-q.nav.no","https://svangerskapspengesoknad.dev-sbs.nais.io"],
+   "ingresses": ["https://svangerskapspengesoknad-q.nav.no","https://svangerskapspengesoknad.dev-sbs.nais.io"],
+   "dekoratoren" : "www-q1.nav.no",
+   "nav" : "www.nav.no",
     "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",

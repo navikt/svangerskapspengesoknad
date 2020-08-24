@@ -6,6 +6,10 @@ metadata:
   labels:
     team: teamforeldrepenger
 spec:
+  outbound:
+      external:
+      - host:  {{dekoratoren}}
+      - host:  {{nav}}
   image: {{image}}
   port: 8080
   replicas:

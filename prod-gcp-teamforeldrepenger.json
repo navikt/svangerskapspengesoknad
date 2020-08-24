@@ -1,5 +1,7 @@
 {
     "gcp" : "true",
+    "dekoratoren" : "www.nav.no",
+    "nav" : "www.nav.no",
     "ingresses": ["https://svangerskapspengesoknad.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
