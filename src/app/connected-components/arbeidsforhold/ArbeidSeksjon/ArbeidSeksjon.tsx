@@ -1,5 +1,5 @@
 import React, { FunctionComponent, StatelessComponent, useState } from 'react';
-import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
 
@@ -30,7 +30,7 @@ export interface ModalSummaryProps<T> {
     onDelete: () => void;
     editButtonAriaText?: string;
     deleteButtonAriaText?: string;
-    intl: InjectedIntl;
+    //intl: InjectedIntl;
 }
 
 interface OwnProps<T> {
@@ -51,13 +51,14 @@ interface OwnProps<T> {
     renderForm: (props: ModalFormProps<T>) => React.ReactNode;
 }
 
-type OuterProps = OwnProps<any> & InjectedIntlProps;
+type OuterProps = OwnProps<any>;
 type Props = OuterProps & FormikProps;
 
 const cls = BEMHelper('arbeidSeksjon');
 
 const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
-    const { formik, name, listName, legend, labels, buttonLabel, summaryListTitle, infoboksTekst, intl } = props;
+    const intl = useIntl();
+    const { formik, name, listName, legend, labels, buttonLabel, summaryListTitle, infoboksTekst } = props;
     const visLeggTilKnapp = get(formik.values, name) === true;
 
     const elementer: any[] = get(formik.values, listName, []);
@@ -106,7 +107,6 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                         return (
                                             <props.summaryListElementComponent
                                                 key={`${listName}-${index}`}
-                                                intl={intl}
                                                 element={element}
                                                 onEdit={openModalForEditing(index)}
                                                 onDelete={() => {
@@ -152,4 +152,4 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-export default injectIntl(formConnect<OuterProps, UferdigSøknad>(Arbeidsforholdseksjon));
+export default formConnect<OuterProps, UferdigSøknad>(Arbeidsforholdseksjon);

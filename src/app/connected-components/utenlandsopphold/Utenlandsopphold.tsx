@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { CustomFormikProps } from 'app/types/Formik';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
@@ -18,10 +18,11 @@ interface OwnProps {
     formikProps: CustomFormikProps;
 }
 
-type Props = OwnProps & StepProps & InjectedIntlProps;
+type Props = OwnProps & StepProps;
 
 const Utenlandsopphold: FunctionComponent<Props> = (props) => {
-    const { step, formikProps, intl, history } = props;
+    const intl = useIntl();
+    const { step, formikProps, history } = props;
     const { informasjonOmUtenlandsopphold: opphold } = formikProps.values;
 
     const visKomponent = {
@@ -75,4 +76,4 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default injectIntl(Utenlandsopphold);
+export default Utenlandsopphold;

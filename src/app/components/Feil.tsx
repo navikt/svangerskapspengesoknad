@@ -2,14 +2,15 @@ import React, { FunctionComponent } from 'react';
 import Block from 'common/components/block/Block';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 interface Props {
     tittel: string;
     melding: string | React.ReactNode;
 }
 
-const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ tittel, melding, intl }) => {
+const Feil: FunctionComponent<Props> = ({ tittel, melding }) => {
+    const intl = useIntl();
     return (
         <Block margin="l">
             <VeilederMedSnakkeboble
@@ -27,4 +28,4 @@ const Feil: FunctionComponent<Props & InjectedIntlProps> = ({ tittel, melding, i
     );
 };
 
-export default injectIntl(Feil);
+export default Feil;

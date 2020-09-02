@@ -2,15 +2,16 @@ import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Søker from 'app/types/Søker';
 import { SøknadsgrunnlagOption } from '../../../formik/wrappers/VelgSøknadsgrunnlag';
-import { InjectedIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { getAnnenInntektElementTitle, getUnikeArbeidsforhold } from '../../../utils/arbeidsforholdUtils';
 import { AnnenInntektType } from '../../../types/AnnenInntekt';
 
 export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
     søker: Partial<Søker>,
-    arbeidsforhold: Arbeidsforhold[],
-    intl: InjectedIntl
+    arbeidsforhold: Arbeidsforhold[]
+    //intl: intl
 ): SøknadsgrunnlagOption[] => {
+    const intl = useIntl();
     const { selvstendigNæringsdrivendeInformasjon = [], andreInntekterSiste10Mnd = [], frilansInformasjon } = søker;
     const førstegangstjeneste = andreInntekterSiste10Mnd.find(
         (inntekt) => inntekt.type === AnnenInntektType.MILITÆRTJENESTE

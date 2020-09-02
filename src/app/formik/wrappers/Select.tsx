@@ -4,15 +4,16 @@ import { Select as NavSelect } from 'nav-frontend-skjema';
 import { SelectChangeEvent } from 'app/types/events';
 import get from 'lodash/get';
 import { translateError } from 'app/utils/errorUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 interface Props {
     name: string;
     label: string;
 }
 
-const Select: FunctionComponent<Props & InjectedIntlProps> = (props) => {
-    const { name, label, intl, children } = props;
+const Select: FunctionComponent<Props> = (props) => {
+    const intl = useIntl();
+    const { name, label, children } = props;
     return (
         <Field
             name={name}
@@ -42,4 +43,4 @@ const Select: FunctionComponent<Props & InjectedIntlProps> = (props) => {
     );
 };
 
-export default injectIntl(Select);
+export default Select;

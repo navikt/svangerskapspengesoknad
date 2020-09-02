@@ -4,8 +4,10 @@ import { FrilansOppdrag } from 'app/types/FrilansInformasjon';
 import InteractiveListElement from 'common/components/interactive-list-element/InteractiveListElement';
 import { prettifyTidsperiode } from 'app/utils/formatDate';
 import getMessage from 'common/util/i18nUtils';
+import { useIntl } from 'react-intl';
 
-const FrilansListElement: StatelessComponent<ModalSummaryProps<FrilansOppdrag>> = ({ element, intl, ...rest }) => {
+const FrilansListElement: StatelessComponent<ModalSummaryProps<FrilansOppdrag>> = ({ element, ...rest }) => {
+    const intl = useIntl();
     return (
         <InteractiveListElement
             style="grayWithBorder"

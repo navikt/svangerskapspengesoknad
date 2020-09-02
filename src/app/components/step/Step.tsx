@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -41,10 +41,11 @@ interface StateProps {
     arbeidsforhold: Arbeidsforhold[];
 }
 
-type Props = StepProps & StateProps & InjectedIntlProps;
+type Props = StepProps & StateProps;
 
 const Step: FunctionComponent<Props> = (props) => {
-    const { step, formikProps, history, className, showNesteknapp, arbeidsforhold, intl } = props;
+    const intl = useIntl();
+    const { step, formikProps, history, className, showNesteknapp, arbeidsforhold } = props;
 
     const allSøknadSteps = getAllSteps(formikProps.values.søknadsgrunnlag);
     const [previousStep, nextStep] = getAdjacentSteps(step, allSøknadSteps);
@@ -134,4 +135,4 @@ const mapStateToProps = (state: State) => {
     return { arbeidsforhold: søkerinfo.status === FetchStatus.SUCCESS ? søkerinfo.data.arbeidsforhold : undefined };
 };
 
-export default connect(mapStateToProps)(injectIntl(Step));
+export default connect(mapStateToProps)(Step);

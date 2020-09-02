@@ -8,7 +8,7 @@ import { UferdigTilrettelegging, Tilretteleggingstype, Arbeidsforholdstype } fro
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { getArbeidsforholdNavnFromId } from 'app/utils/arbeidsforholdUtils';
 import { guid } from 'nav-frontend-js-utils';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import OppsummeringBeskrivelse from '../OppsummeringBeskrivelse';
 import Block from 'common/components/block/Block';
 
@@ -31,10 +31,11 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                         {tilrett.helTilrettelegging &&
                             tilrett.helTilrettelegging.map((helTil) => (
                                 <Block key={guid()} margin="xxs">
-                                    <FormattedHTMLMessage
+                                    <FormattedMessage
                                         id="oppsummering.tilrettelegging.info.jobbeFullt"
                                         values={{
                                             startDato: moment(helTil.tilrettelagtArbeidFom).format('Do MMMM YYYY'),
+                                            strong: (msg: any) => <strong>{msg}</strong>,
                                         }}
                                     />
                                 </Block>
@@ -44,11 +45,12 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                         {tilrett.delvisTilrettelegging &&
                             tilrett.delvisTilrettelegging.map((delTil) => (
                                 <Block key={guid()} margin="xxs">
-                                    <FormattedHTMLMessage
+                                    <FormattedMessage
                                         id="oppsummering.tilrettelegging.info.jobbeDelvis"
                                         values={{
                                             startDato: moment(delTil.tilrettelagtArbeidFom).format('Do MMMM YYYY'),
                                             prosent: delTil.stillingsprosent,
+                                            strong: (msg: any) => <strong>{msg}</strong>,
                                         }}
                                     />
                                 </Block>
@@ -58,10 +60,11 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
                         {tilrett.ingenTilrettelegging &&
                             tilrett.ingenTilrettelegging.map((ingenTil) => (
                                 <Block key={guid()} margin="xxs">
-                                    <FormattedHTMLMessage
+                                    <FormattedMessage
                                         id="oppsummering.tilrettelegging.info.ikkeJobbe"
                                         values={{
                                             startDato: moment(ingenTil.slutteArbeidFom).format('Do MMMM YYYY'),
+                                            strong: (msg: any) => <strong>{msg}</strong>,
                                         }}
                                     />
                                 </Block>

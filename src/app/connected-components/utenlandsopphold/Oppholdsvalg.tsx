@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { Formik, FormikProps } from 'formik';
-import { InjectedIntl, injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 
@@ -24,7 +24,6 @@ interface Props {
     type: Oppholdstype;
     onAdd: (opphold: Utenlandsopphold) => void;
     onCancel: () => void;
-    intl: InjectedIntl;
 }
 
 const initialOpphold = {
@@ -32,10 +31,11 @@ const initialOpphold = {
     tidsperiode: {},
 };
 
-const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
-    const { endre, opphold = initialOpphold, onAdd, onCancel, type, intl } = props;
+const Oppholdvalg: FunctionComponent<Props> = (props) => {
+    const intl = useIntl();
+    const { endre, opphold = initialOpphold, onAdd, onCancel, type } = props;
 
-    const countries = useMemo(() => getCountries(true, false, intl), [intl]);
+    const countries = useMemo(() => getCountries(true, false, intl.locale), []);
 
     return (
         <Formik
@@ -108,4 +108,4 @@ const Oppholdvalg: FunctionComponent<Props & InjectedIntlProps> = (props) => {
     );
 };
 
-export default injectIntl(Oppholdvalg);
+export default Oppholdvalg;

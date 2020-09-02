@@ -5,9 +5,8 @@ import DatoInput from 'app/formik/wrappers/DatoInput';
 import { Avgrensninger } from 'common/types';
 import BEMHelper from 'common/util/bem';
 import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
-
 import './addTilrettelegging.less';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 
 interface Props {
@@ -18,7 +17,6 @@ interface Props {
     prosentLabel?: string;
     datoAvgrensninger: Avgrensninger;
     delvisTilrettelegging: boolean;
-    intl: InjectedIntl;
     onDelete: () => void;
 }
 
@@ -31,8 +29,8 @@ const AddTilrettelegging: React.FunctionComponent<Props> = ({
     prosentInputName,
     prosentLabel,
     delvisTilrettelegging,
-    intl,
 }) => {
+    const intl = useIntl();
     const cls = BEMHelper('addTilrettelegging');
 
     return (
@@ -65,4 +63,4 @@ const AddTilrettelegging: React.FunctionComponent<Props> = ({
     );
 };
 
-export default injectIntl(AddTilrettelegging);
+export default AddTilrettelegging;

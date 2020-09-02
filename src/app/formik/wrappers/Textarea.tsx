@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
 import { Textarea as NavFrontendTextarea, TextareaProps } from 'nav-frontend-skjema';
 import { get } from 'lodash';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { translateError } from 'app/utils/errorUtils';
 import { Omit } from 'react-redux';
 
@@ -10,9 +10,10 @@ interface OwnProps {
     name: string;
 }
 
-type Props = OwnProps & Omit<TextareaProps, 'value' | 'onChange'> & InjectedIntlProps;
+type Props = OwnProps & Omit<TextareaProps, 'value' | 'onChange'>;
 
-const Textarea: FunctionComponent<Props> = ({ name, intl, ...textareaProps }) => {
+const Textarea: FunctionComponent<Props> = ({ name, ...textareaProps }) => {
+    const intl = useIntl();
     return (
         <Field
             name={name}
@@ -39,4 +40,4 @@ const Textarea: FunctionComponent<Props> = ({ name, intl, ...textareaProps }) =>
     );
 };
 
-export default injectIntl(Textarea);
+export default Textarea;

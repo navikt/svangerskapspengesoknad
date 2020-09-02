@@ -1,40 +1,41 @@
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import { Systemtittel, Undertittel } from 'nav-frontend-typografi';
-
 import BEMHelper from 'common/util/bem';
 import getMessage from 'common/util/i18nUtils';
-import ScanningIkon from 'app/icons/ScanningIkon';
 import PictureScanningExample from './PictureScanningExample';
-
 import './pictureScanningGuide.less';
-
+import ScanningIkon from 'app/icons/ScanningIkon';
 const bem = BEMHelper('pictureScanningGuide');
-
-interface Props {
-    intl: InjectedIntl;
-}
-
-const PictureScanningGuide: React.FunctionComponent<Props> = ({ intl }) => {
+const PictureScanningGuide = () => {
     const svgIconHeight = 100;
+    const intl = useIntl();
     return (
         <div className={bem.block}>
             <Systemtittel className={bem.element('title')}>
                 <FormattedMessage id="psg.innholdstittel" />
             </Systemtittel>
-
             <Undertittel className={bem.element('title')}>
                 <FormattedMessage id="psg.section1.tittel" />
             </Undertittel>
-            <FormattedHTMLMessage tagName="ul" id="psg.section1.liste" />
-
+            <ul>
+                <FormattedMessage tagName="li" id="psg.section1.liste.punkt1" />
+                <FormattedMessage
+                    tagName="li"
+                    id="psg.section1.liste.punkt2"
+                    values={{ i: (msg: any) => <i>{msg}</i> }}
+                />
+                <FormattedMessage tagName="li" id="psg.section1.liste.punkt3" />
+            </ul>
             <Undertittel className={bem.element('title')}>
                 <FormattedMessage id="psg.section2.tittel" />
             </Undertittel>
-
-            <FormattedHTMLMessage tagName="ul" id="psg.section2.liste" />
+            <ul>
+                <FormattedMessage tagName="li" id="psg.section2.liste.punkt1" />
+                <FormattedMessage tagName="li" id="psg.section2.liste.punkt2" />
+                <FormattedMessage tagName="li" id="psg.section2.liste.punkt3" />
+            </ul>
             <div className={bem.element('examples')}>
                 <Undertittel tag="h3" className={bem.element('title')}>
                     <FormattedMessage id="psg.icon.heading" />
@@ -80,4 +81,4 @@ const PictureScanningGuide: React.FunctionComponent<Props> = ({ intl }) => {
         </div>
     );
 };
-export default injectIntl(PictureScanningGuide);
+export default PictureScanningGuide;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { CommonActionTypes } from 'app/redux/types/CommonAction';
 import { Språkkode } from 'common/types';
@@ -23,7 +23,7 @@ interface DispatchProps {
     setSpråk: (språkkode: Språkkode) => void;
 }
 
-type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
+type Props = OwnProps & StateProps & DispatchProps;
 
 const Applikasjonsside: FunctionComponent<Props> = ({ visSpråkvelger, visTittel, språkkode, setSpråk, children }) => {
     return (
@@ -53,4 +53,4 @@ const mapDispatchToProps = (dispatch: (action: Action) => void): DispatchProps =
     setSpråk: (språkkode: Språkkode) => dispatch({ type: CommonActionTypes.SET_SPRÅK, payload: { språkkode } }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Applikasjonsside));
+export default connect(mapStateToProps, mapDispatchToProps)(Applikasjonsside);

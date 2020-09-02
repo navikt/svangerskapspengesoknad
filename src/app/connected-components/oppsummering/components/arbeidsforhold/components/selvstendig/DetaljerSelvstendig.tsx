@@ -7,7 +7,7 @@ import './detaljerSelvstendig.less';
 import { TidsperiodeMedValgfriSluttdato } from 'common/types';
 import { Næringstype } from 'app/types/SelvstendigNæringsdrivende';
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 
 interface Props {
@@ -17,7 +17,6 @@ interface Props {
     pågående: boolean;
     tidsperiode: Partial<TidsperiodeMedValgfriSluttdato>;
     typer: Næringstype[];
-    intl: InjectedIntl;
 }
 
 const cls = BEMHelper('detaljerSelvstendig');
@@ -29,8 +28,9 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
     pågående,
     tidsperiode,
     typer,
-    intl,
 }) => {
+    const intl = useIntl();
+
     return (
         <div className={cls.block}>
             <EtikettLiten>
@@ -48,4 +48,4 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
     );
 };
 
-export default injectIntl(DetaljerSelvstendig);
+export default DetaljerSelvstendig;

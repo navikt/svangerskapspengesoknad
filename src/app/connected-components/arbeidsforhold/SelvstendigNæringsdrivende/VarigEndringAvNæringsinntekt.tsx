@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import DatoInput from 'app/formik/wrappers/DatoInput';
 import InputField from 'app/formik/wrappers/InputField';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
@@ -12,9 +12,10 @@ interface VarigEndringAvNæringsinntektProps {
     values: Partial<Næring>;
 }
 
-type Props = VarigEndringAvNæringsinntektProps & InjectedIntlProps;
+type Props = VarigEndringAvNæringsinntektProps;
 const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) => {
-    const { values, intl } = props;
+    const intl = useIntl();
+    const { values } = props;
 
     const visDato = values.hattVarigEndringAvNæringsinntektSiste4Kalenderår === true;
     const visNæringsinntektEtterEndring =
@@ -69,4 +70,4 @@ const VarigEndringAvNæringsinntekt: FunctionComponent<Props> = (props: Props) =
     );
 };
 
-export default injectIntl(VarigEndringAvNæringsinntekt);
+export default VarigEndringAvNæringsinntekt;

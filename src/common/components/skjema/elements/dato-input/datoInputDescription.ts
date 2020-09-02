@@ -1,12 +1,12 @@
 import { formaterDatoTall } from 'common/util/datoUtils';
-import { InjectedIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 import { DatovelgerAvgrensninger } from 'nav-datovelger';
 
 export const getAvgrensningerDescriptionForInput = (
-    intl: InjectedIntl,
     avgrensninger: DatovelgerAvgrensninger | undefined
 ): string | undefined => {
+    const intl = useIntl();
     if (avgrensninger) {
         let str;
         if (avgrensninger.minDato || avgrensninger.maksDato) {

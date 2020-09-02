@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, InjectedIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
 import { guid } from 'nav-frontend-js-utils';
@@ -11,19 +11,19 @@ interface Props {
     iNorgeSiste12Mnd: boolean;
     tidligereOpphold: Utenlandsopphold[];
     senereOpphold: Utenlandsopphold[];
-    intl: InjectedIntl;
 }
 
 const getTidligereOppholdText = (tidligereOpphold: Utenlandsopphold[], countries: Countries) => {
     return tidligereOpphold.map((tidlOpphold: Utenlandsopphold) => {
         return (
             <div key={guid()}>
-                <FormattedHTMLMessage
+                <FormattedMessage
                     id="oppsummering.medlemskap.iNorgeSiste12Måneder.nei"
                     values={{
                         land: getContryName(countries, tidlOpphold.land),
                         startDato: moment(tidlOpphold.tidsperiode.fom).format('dddd Do MMMM YYYY'),
                         sluttDato: moment(tidlOpphold.tidsperiode.tom).format('dddd Do MMMM YYYY'),
+                        b: (msg: any) => <b>{msg}</b>,
                     }}
                 />
             </div>
@@ -35,12 +35,13 @@ const getSenereOppholdText = (senereOpphold: Utenlandsopphold[], countries: Coun
     return senereOpphold.map((senOpphold: Utenlandsopphold) => {
         return (
             <div key={guid()}>
-                <FormattedHTMLMessage
+                <FormattedMessage
                     id="oppsummering.medlemskap.iNorgeNeste12Måneder.nei"
                     values={{
                         land: getContryName(countries, senOpphold.land),
                         startDato: moment(senOpphold.tidsperiode.fom).format('dddd Do MMMM YYYY'),
                         sluttDato: moment(senOpphold.tidsperiode.tom).format('dddd Do MMMM YYYY'),
+                        b: (msg: any) => <b>{msg}</b>,
                     }}
                 />
             </div>
@@ -53,9 +54,9 @@ const MedlemskapOppsummering: FunctionComponent<Props> = ({
     iNorgeSiste12Mnd,
     tidligereOpphold,
     senereOpphold,
-    intl,
 }) => {
-    const countries = useMemo(() => getCountries(true, false, intl), [intl]);
+    const intl = useIntl();
+    const countries = useMemo(() => getCountries(true, false, intl.locale), []);
 
     return (
         <>
@@ -77,4 +78,4 @@ const MedlemskapOppsummering: FunctionComponent<Props> = ({
     );
 };
 
-export default injectIntl(MedlemskapOppsummering);
+export default MedlemskapOppsummering;

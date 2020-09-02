@@ -1,6 +1,6 @@
 import React from 'react';
 import countries from 'i18n-iso-countries';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 import InteractiveListElement, {
     InteractiveListElementProps,
@@ -12,9 +12,11 @@ interface OppholdListeElementProps extends InteractiveListElementProps {
     opphold: Utenlandsopphold;
 }
 
-type Props = OppholdListeElementProps & InjectedIntlProps;
+type Props = OppholdListeElementProps;
 
-const OppholdListElement: React.StatelessComponent<Props> = ({ opphold, intl, ...rest }) => {
+const OppholdListElement: React.StatelessComponent<Props> = ({ opphold, ...rest }) => {
+    const intl = useIntl();
+
     return (
         <InteractiveListElement
             title={countries.getName(opphold.land, intl.locale)}
@@ -25,4 +27,4 @@ const OppholdListElement: React.StatelessComponent<Props> = ({ opphold, intl, ..
     );
 };
 
-export default injectIntl(OppholdListElement);
+export default OppholdListElement;

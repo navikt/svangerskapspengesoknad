@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Sirkelknapp, { Stil } from 'common/components/sirkelknapp/Sirkelknapp';
 import LukkInfoIkon from 'common/components/ikoner/LukkInfoIkon';
 import InfoIkon from 'common/components/ikoner/InfoIkon';
 import { Collapse } from 'react-collapse';
 const classNames = require('classnames');
 import getMessage from 'common/util/i18nUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import './infoboks.less';
 
@@ -16,80 +16,65 @@ interface InfoboksProps {
     fieldsetClsName?: string;
 }
 
-interface InfoboksState {
-    isExpanded: boolean;
-    windowPos: number;
-}
+const Infoboks: React.FunctionComponent<InfoboksProps> = ({
+    tekst,
+    stil = 'info',
+    contentFullWidth,
+    fieldsetClsName,
+}) => {
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
+    const [windowPos, setWindowPos] = useState<number>(0);
+    const intl = useIntl();
 
-type Props = InfoboksProps & InjectedIntlProps;
+    const toggleIsExpanded = () => {
+        setIsExpanded(!isExpanded);
+    };
 
-class Infoboks extends React.Component<Props, InfoboksState> {
-    constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            isExpanded: false,
-            windowPos: 0,
-        };
-        this.toggleIsExpanded = this.toggleIsExpanded.bind(this);
-    }
-
-    toggleIsExpanded() {
-        this.setState({
-            isExpanded: !this.state.isExpanded,
-        });
-    }
-
-    componentDidMount(): void {
-        this.getComponentSize();
-        window.addEventListener('resize', this.getComponentSize);
-    }
-    componentWillUnmount(): void {
-        window.removeEventListener('resize', this.getComponentSize);
-    }
-
-    getComponentSize = () => {
-        const cls = this.props.fieldsetClsName ? this.props.fieldsetClsName : '';
+    const getComponentSize = () => {
+        const cls = fieldsetClsName ? fieldsetClsName : '';
         if (cls.length > 1) {
             const overskriftTilblockElement = document.querySelector('.' + cls + ' .skjema__legend');
             const overskriftTilblockElementBredde = overskriftTilblockElement
                 ? overskriftTilblockElement.clientWidth + 16
                 : 0;
-            this.setState({ windowPos: overskriftTilblockElementBredde });
+            setWindowPos(overskriftTilblockElementBredde);
         }
     };
 
-    render() {
-        const { tekst, stil = 'info', contentFullWidth, intl } = this.props;
-        const { isExpanded } = this.state;
+    useEffect(() => {
+        getComponentSize();
+        window.addEventListener('resize', getComponentSize);
+        return () => {
+            window.removeEventListener('resize', getComponentSize);
+        };
+    }, [getComponentSize]);
 
-        const ikon = isExpanded ? <LukkInfoIkon /> : <InfoIkon />;
-        return (
-            <React.Fragment>
-                <span className="infoboks__sirkel">
-                    <Sirkelknapp
-                        posisjoneringFraHøyre={this.state.windowPos !== 0 ? this.state.windowPos : undefined}
-                        stil={stil}
-                        ariaLabel={getMessage(intl, 'infoboks.sirkeltekst')}
-                        onClick={this.toggleIsExpanded}
-                        ikon={ikon}
-                        toggle={{ pressed: isExpanded }}
-                    />
-                </span>
-                <Collapse
-                    hasNestedCollapse={true}
-                    className={classNames('infoboks', {
-                        'infoboks--open': isExpanded,
-                        'infoboks__content--fullWidth': contentFullWidth,
-                    })}
-                    isOpened={isExpanded}
-                    springConfig={{ stiffness: 250, damping: 30 }}
-                >
-                    {isExpanded ? <div className="infoboks__wrapper typo-normal">{tekst}</div> : <span />}
-                </Collapse>
-            </React.Fragment>
-        );
-    }
-}
+    const ikon = isExpanded ? <LukkInfoIkon /> : <InfoIkon />;
 
-export default injectIntl(Infoboks);
+    return (
+        <React.Fragment>
+            <span className="infoboks__sirkel">
+                <Sirkelknapp
+                    posisjoneringFraHøyre={windowPos !== 0 ? windowPos : undefined}
+                    stil={stil}
+                    ariaLabel={getMessage(intl, 'infoboks.sirkeltekst')}
+                    onClick={toggleIsExpanded}
+                    ikon={ikon}
+                    toggle={{ pressed: isExpanded }}
+                />
+            </span>
+            <Collapse
+                hasNestedCollapse={true}
+                className={classNames('infoboks', {
+                    'infoboks--open': isExpanded,
+                    'infoboks__content--fullWidth': contentFullWidth,
+                })}
+                isOpened={isExpanded}
+                springConfig={{ stiffness: 250, damping: 30 }}
+            >
+                {isExpanded ? <div className="infoboks__wrapper typo-normal">{tekst}</div> : <span />}
+            </Collapse>
+        </React.Fragment>
+    );
+};
+export default Infoboks;

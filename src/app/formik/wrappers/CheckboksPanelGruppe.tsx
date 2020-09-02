@@ -5,7 +5,7 @@ import CheckboksPanelGruppeResponsive, {
 } from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit, get } from 'lodash';
 import { translateError } from '../../utils/errorUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 interface OwnProps {
     name: string;
@@ -16,12 +16,11 @@ interface OwnProps {
     }[];
 }
 
-type Props = OwnProps &
-    Omit<CheckboxPanelgruppeResponsiveProps, 'onChange' | 'checkboxes' | 'legend'> &
-    InjectedIntlProps;
+type Props = OwnProps & Omit<CheckboxPanelgruppeResponsiveProps, 'onChange' | 'checkboxes' | 'legend'>;
 
 const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
-    const { name, label, options, intl, ...checkboksPanelGruppeProps } = props;
+    const intl = useIntl();
+    const { name, label, options, ...checkboksPanelGruppeProps } = props;
 
     return (
         <FieldArray
@@ -60,4 +59,4 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default injectIntl(CheckboksPanelGruppe);
+export default CheckboksPanelGruppe;

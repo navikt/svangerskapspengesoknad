@@ -3,21 +3,20 @@ import moment from 'moment';
 import { EndringAvNæringsinntektInformasjon } from 'app/types/SelvstendigNæringsdrivende';
 import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
-
 import './endringSelvstendig.less';
 import OppsummeringBeskrivelse from '../../../OppsummeringBeskrivelse';
-import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
 
 interface Props {
     endringAvNæringsinntektInformasjon: EndringAvNæringsinntektInformasjon;
-    intl: InjectedIntl;
 }
 
 const cls = BEMHelper('endringSelvstendig');
 
-const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntektInformasjon, intl }) => {
+const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntektInformasjon }) => {
+    const intl = useIntl();
     return (
         <div className={cls.block}>
             <div>
@@ -40,4 +39,4 @@ const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntekt
     );
 };
 
-export default injectIntl(EndringSelvstendig);
+export default EndringSelvstendig;

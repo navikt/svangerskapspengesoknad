@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
-
 import { CustomFormikProps } from 'app/types/Formik';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
 import { HistoryProps } from 'app/redux/types/common';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { navigateTo } from 'app/utils/navigationUtils';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Block from 'common/components/block/Block';
@@ -18,11 +17,13 @@ interface OwnProps {
     formikProps: CustomFormikProps;
 }
 
-type Props = OwnProps & InjectedIntlProps & HistoryProps;
+type Props = OwnProps & HistoryProps;
 
 const Termin: FunctionComponent<Props> = (props) => {
-    const { step, formikProps, intl, history } = props;
+    const { step, formikProps, history } = props;
     const { values } = formikProps;
+
+    const intl = useIntl();
 
     const navigate = () => {
         navigateTo(getSøknadStepPath(StepID.ARBEIDSFORHOLD), history);
@@ -59,4 +60,4 @@ const Termin: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default injectIntl(Termin);
+export default Termin;
