@@ -1,5 +1,5 @@
 {
-    "ingresses": ["https://svangerskapspengesoknad-q.nav.no", "https://svangerskapspengesoknad.dev-sbs.nais.io"],
+    "ingresses": ["https://svangerskapspengesoknad-q.nav.no"],
     "dekoratoren": "www-q1.nav.no",
     "nav": "www.nav.no",
     "env": {
