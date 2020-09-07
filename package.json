@@ -94,7 +94,7 @@
         "express": "^4.17.1",
         "formik": "^1.5.1",
         "history": "^4.7.2",
-        "husky": "^4.2.5",
+        "husky": "^4.3.0",
         "i18n-iso-countries": "^3.7.8",
         "lodash": "^4.17.20",
         "lodash.throttle": "^4.1.1",
