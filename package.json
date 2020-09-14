@@ -133,7 +133,7 @@
         "nav-frontend-veilederpanel": "^0.1.11",
         "nav-frontend-veilederpanel-style": "0.0.15",
         "prettier": "^2.1.1",
-        "pretty-quick": "3.0.0",
+        "pretty-quick": "3.0.2",
         "prom-client": "^12.0.0",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
