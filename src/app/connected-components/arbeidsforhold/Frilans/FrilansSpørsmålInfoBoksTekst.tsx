@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { generateLink } from '../../../components/componentsUtils/componentsUtils';
 
 const FrilansSpørsmålInfoBoksTekst = () => {
     return (
@@ -17,15 +18,11 @@ const FrilansSpørsmålInfoBoksTekst = () => {
             <FormattedMessage
                 id="arbeidsforhold.frilans.erFrilanser.infoboksTekst.link"
                 values={{
-                    a: (msg: any) => (
-                        <a
-                            className="lenke"
-                            rel="noopener inoreferrer"
-                            href="https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/a-meldingen/veiledning/arbeidsforholdet/type-arbeidsforhold/frilanser-oppdragstaker-og-personer-som-mottar-honorarer\"
-                        >
-                            {msg}
-                        </a>
-                    ),
+                    a: (msg: any) =>
+                        generateLink(
+                            msg,
+                            'https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/a-meldingen/veiledning/arbeidsforholdet/type-arbeidsforhold/frilanser-oppdragstaker-og-personer-som-mottar-honorarer '
+                        ),
                 }}
             />
         </>

@@ -40,6 +40,7 @@ import './arbeidsforhold.less';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import InfoTilFiskere from 'app/components/info-til-fiskere/InfoTilFiskere';
 import Lenke from 'nav-frontend-lenker';
+import { generateLink } from '../../components/componentsUtils/componentsUtils';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -184,15 +185,11 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                             <FormattedMessage
                                 id="arbeidsforhold.selvstendig.infoboxTekst"
                                 values={{
-                                    a: (msg: any) => (
-                                        <a
-                                            className="lenke"
-                                            rel="noopener noreferrer"
-                                            href="https://www.skatteetaten.no/bedrift-og-organisasjon/starte-og-drive/er-jeg-naringsdrivende/"
-                                        >
-                                            {msg}
-                                        </a>
-                                    ),
+                                    a: (msg: any) =>
+                                        generateLink(
+                                            msg,
+                                            'https://www.skatteetaten.no/bedrift-og-organisasjon/starte-og-drive/er-jeg-naringsdrivende/'
+                                        ),
                                 }}
                             />
                         }
@@ -248,29 +245,17 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                             id="arbeidsforhold.veileder.ingenArbeidsforhold"
                             values={{
                                 b: (msg: any) => <b>{msg}</b>,
-                                a: (msg: any) => (
-                                    <a
-                                        className="lenke"
-                                        rel="noopener noreferrer"
-                                        href="https://familie.nav.no/om-svangerskapspenger"
-                                    >
-                                        {msg}
-                                    </a>
-                                ),
+                                a: (msg: any) => generateLink(msg, 'https://familie.nav.no/om-svangerskapspenger'),
                             }}
                         />
                         <FormattedMessage
                             id="arbeidsforhold.veileder.ingenArbeidsforhold.forsettelse"
                             values={{
-                                a: (msg: any) => (
-                                    <a
-                                        className="lenke"
-                                        rel="noopener noreferrer"
-                                        href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger"
-                                    >
-                                        {msg}
-                                    </a>
-                                ),
+                                a: (msg: any) =>
+                                    generateLink(
+                                        msg,
+                                        'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Relatert+informasjon/chat-med-oss-om-foreldrepenger'
+                                    ),
                             }}
                         />
                     </Veilederinfo>

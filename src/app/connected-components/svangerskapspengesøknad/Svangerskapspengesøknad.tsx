@@ -15,6 +15,7 @@ import getMessage from 'common/util/i18nUtils';
 import Kvittering from 'app/types/Kvittering';
 import Loading from 'app/components/loading/Loading';
 import SøknadRoutes from '../søknad-routes/SøknadRoutes';
+import { generateLink } from '../../components/componentsUtils/componentsUtils';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;
@@ -64,16 +65,11 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
                     <FormattedMessage
                         id={'feilside.innsending.melding'}
                         values={{
-                            a: (msg: any) => (
-                                <a
-                                    href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="lenke"
-                                >
-                                    {msg}
-                                </a>
-                            ),
+                            a: (msg: any) =>
+                                generateLink(
+                                    msg,
+                                    'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749'
+                                ),
                         }}
                     />
                 }

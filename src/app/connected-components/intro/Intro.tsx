@@ -24,6 +24,7 @@ import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/V
 import './intro.less';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import DocumentIkon from 'app/icons/DocumentIkon';
+import { generateLink } from '../../components/componentsUtils/componentsUtils';
 
 const cls = BEMHelper('intro');
 
@@ -65,16 +66,8 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history }) => {
                     <FormattedMessage
                         id="intro.ingress"
                         values={{
-                            a: (msg: any) => (
-                                <a
-                                    className="lenke"
-                                    rel="noopener noreferrer"
-                                    href="https://familie.nav.no/om-svangerskapspenger#slik-soker-du"
-                                    target="_blank"
-                                >
-                                    {msg}
-                                </a>
-                            ),
+                            a: (msg: any) =>
+                                generateLink(msg, 'https://familie.nav.no/om-svangerskapspenger#slik-soker-du'),
                         }}
                     />
                 </Veilederinfo>

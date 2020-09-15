@@ -5,6 +5,8 @@ import getMessage from 'common/util/i18nUtils';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 import BEMHelper from 'common/util/bem';
+import { generateLink } from '../componentsUtils/componentsUtils';
+
 const bem = BEMHelper('dinePersonOpplysningerModal');
 
 interface DineRettigheterModalProps {
@@ -33,7 +35,6 @@ const Avsnitt: React.FunctionComponent<{ id: string }> = ({ id }) => {
 type Props = DineRettigheterModalProps;
 const DinePersonopplysningerModal = (props: Props) => {
     const intl = useIntl();
-    //const { intl } = props;
     return (
         <Modal
             isOpen={props.isOpen}
@@ -54,15 +55,7 @@ const DinePersonopplysningerModal = (props: Props) => {
                             id="intro.dinePersonopplysninger.behandling.html"
                             values={{
                                 p: (msg: any) => <p>{msg}</p>,
-                                a: (msg: any) => (
-                                    <a
-                                        className="lenke"
-                                        rel="noopener noreferrer"
-                                        href="https://www.nav.no/foreldrepenger"
-                                    >
-                                        {msg}
-                                    </a>
-                                ),
+                                a: (msg: any) => generateLink(msg, 'https://www.nav.no/foreldrepenger'),
                             }}
                         />
                     </Normaltekst>

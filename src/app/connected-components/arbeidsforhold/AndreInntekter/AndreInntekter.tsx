@@ -28,6 +28,7 @@ import Select from 'app/formik/wrappers/Select';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import Knapperad from 'common/components/knapperad/Knapperad';
 import { cleanupAnnenInntekt } from '../utils/cleanup';
+import { generateLink } from '../../../components/componentsUtils/componentsUtils';
 
 const cls = BEMHelper('andre-inntekter');
 
@@ -190,15 +191,11 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                                 <FormattedMessage
                                     id="arbeidsforhold.veileder.førstegangstjeneste"
                                     values={{
-                                        a: (msg: any) => (
-                                            <a
-                                                className="lenke"
-                                                rel="noopener noreferrer"
-                                                href="https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Forsteside+for+innsending"
-                                            >
-                                                {msg}
-                                            </a>
-                                        ),
+                                        a: (msg: any) =>
+                                            generateLink(
+                                                msg,
+                                                'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Forsteside+for+innsending'
+                                            ),
                                     }}
                                 />
                             </Veilederinfo>
