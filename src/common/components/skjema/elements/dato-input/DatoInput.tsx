@@ -1,20 +1,18 @@
 import React from 'react';
-
 import SkjemaInputElement from '../skjema-input-element/SkjemaInputElement';
 import { Feil } from '../skjema-input-element/types';
-import NavDatovelger, { DatovelgerAvgrensninger } from 'nav-datovelger';
+import { DatovelgerAvgrensninger } from 'nav-datovelger';
 import { useIntl } from 'react-intl';
-import { DatovelgerCommonProps } from 'nav-datovelger/dist/datovelger/Datovelger';
+import Datovelger, { DatovelgerProps } from 'nav-datovelger/lib/Datovelger';
 import AriaText from 'common/components/aria/AriaText';
 import { getAvgrensningerDescriptionForInput } from 'common/components/skjema/elements/dato-input/datoInputDescription';
 import moment from 'moment';
 import { Avgrensninger, Tidsperiode } from 'common/types';
 import BEMHelper from 'common/util/bem';
 import { dateToISOFormattedDateString } from 'common/util/datoUtils';
-import getMessage from 'common/util/i18nUtils';
 import './datoInput.less';
 
-export interface DatoInputProps extends DatovelgerCommonProps {
+export interface DatoInputProps extends Omit<DatovelgerProps, 'onChange' | 'input'> {
     name: string;
     label: React.ReactNode;
     dato?: Date;
@@ -63,7 +61,7 @@ const DatoInput: React.FunctionComponent<Props> = ({
         <SkjemaInputElement id={id} feil={feil} label={label}>
             <div className={bem.block}>
                 <div className={bem.element('datovelger')}>
-                    <NavDatovelger.Datovelger
+                    <Datovelger
                         {...rest}
                         valgtDato={dato ? moment.utc(dato).format('YYYY-MM-DD') : undefined}
                         id={id ? id : name}
@@ -71,18 +69,9 @@ const DatoInput: React.FunctionComponent<Props> = ({
                         kalender={kalender}
                         input={{
                             id,
-                            placeholder: getMessage(intl, 'datoinput.placeholder'),
+                            placeholder: 'dd.mm.åååå',
                             name,
                             ariaDescribedby: ariaDescriptionId,
-                            onChange: (datoString: string) => {
-                                if (moment(datoString, 'DDMMYYYY', true).isValid()) {
-                                    onChange(moment.utc(datoString, 'DDMMYYYY').toDate());
-                                }
-
-                                if (moment(datoString, 'D.M.YYYY', true).isValid()) {
-                                    onChange(moment.utc(datoString, 'D.M.YYYY').toDate());
-                                }
-                            },
                         }}
                         onChange={(datoString: string) =>
                             onChange(datoString && datoString !== 'Invalid date' ? new Date(datoString) : undefined)

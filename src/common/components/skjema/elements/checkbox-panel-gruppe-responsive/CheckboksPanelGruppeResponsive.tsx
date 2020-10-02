@@ -34,10 +34,10 @@ class CheckboksPanelGruppeResponsive extends React.Component<CheckboxPanelgruppe
                                 return (
                                     <div className={cls} key={checkboks.value}>
                                         <CheckboksPanel
+                                            {...checkboks}
                                             checked={checkboks.checked || false}
                                             disabled={disabled || false}
                                             onChange={(event) => onChange(event, checkboks.value)}
-                                            {...checkboks}
                                             key={index}
                                         />
                                     </div>

@@ -3,7 +3,6 @@ import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { FieldArray } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
-
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
@@ -34,6 +33,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import AddTilrettelegging from './components/AddTilrettelegging';
 import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
 import UtvidetInformasjon from 'app/components/utvidet-informasjon/UtvidetInformasjon';
+import { tiMånederSiden, treUkerSiden, dagenFør } from '../../../common/util/datoUtils';
 
 interface OwnProps {
     id: string;
@@ -266,6 +266,10 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                         />
                                     )
                                 }
+                                datoAvgrensinger={{
+                                    minDato: tiMånederSiden(values.barn.termindato!).toDate(),
+                                    maksDato: dagenFør(values.barn.termindato!).toDate(),
+                                }}
                             />
                         </Block>
                     </Block>
@@ -321,7 +325,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: values.barn.fødselsdato,
+                                                    maksDato: treUkerSiden(values.barn.termindato!).toDate(),
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'helTilrettelegging'
@@ -368,7 +372,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: values.barn.fødselsdato,
+                                                    maksDato: treUkerSiden(values.barn.termindato!).toDate(),
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'delvisTilrettelegging'
@@ -427,7 +431,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: values.barn.fødselsdato,
+                                                    maksDato: treUkerSiden(values.barn.termindato!).toDate(),
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'ingenTilrettelegging'

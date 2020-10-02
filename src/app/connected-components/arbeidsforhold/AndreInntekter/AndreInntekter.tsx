@@ -2,7 +2,6 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, FieldArray } from 'formik';
 import { connect } from 'react-redux';
-
 import BEMHelper from 'common/util/bem';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { isValid } from 'i18n-iso-countries';

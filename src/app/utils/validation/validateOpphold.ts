@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { FormikErrors } from 'formik';
-
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 import Valideringsfeil from 'app/types/Valideringsfeil';
