@@ -54,7 +54,7 @@ const Termin: FunctionComponent<Props> = (props) => {
                 <Block visible={values.barn.termindato !== undefined}>
                     <JaNeiSpørsmål name="barn.erBarnetFødt" legend={getMessage(intl, 'termin.erBarnetFødt')} />
                 </Block>
-                <Block visible={values.barn.erBarnetFødt === true /*&& values.barn.termindato! <= new Date()*/}>
+                <Block visible={values.barn.erBarnetFødt === true}>
                     <DatoInput
                         name="barn.fødselsdato"
                         label={getMessage(intl, 'termin.fødselsdato')}
