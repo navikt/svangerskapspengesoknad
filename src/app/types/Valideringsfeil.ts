@@ -18,6 +18,7 @@ enum Valideringsfeil {
     FELTET_KAN_VÆRE_MAX_2000_TEGN = 'feltetKanVæreMax2000Tegn',
     FOR_LANGT_FREM_I_TID = 'forLangtFremITid',
     FOR_LANGT_TILBAKE_I_TID = 'forLangtTilbakeITid',
+    VENNLIGST_OPPGI_BARNETS_FØDSELSDATO = 'vennligstOppgiBarnetsFødselsDato',
 }
 
 export default Valideringsfeil;

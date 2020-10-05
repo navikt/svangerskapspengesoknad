@@ -4,21 +4,25 @@ import { isEmpty } from 'lodash';
 import { UferdigSøknad, Søknadfeil } from 'app/types/Søknad';
 import Valideringsfeil from 'app/types/Valideringsfeil';
 
+import {
+    dagenEtter,
+    niMånederFremITid,
+    etÅrSiden,
+    enMånedSiden,
+    halvannetÅrSiden,
+} from '../../../common/util/datoUtils';
+
 const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
     const errors: Søknadfeil = {};
     let barn = {};
 
-    const tomorrow = moment().startOf('day').add(1, 'day');
-    const nineMonthsAhead = moment().startOf('day').add(9, 'months');
-    const aYearAgo = moment().startOf('day').subtract(1, 'year');
     if (søknad.barn.fødselsdato) {
-        if (!moment(søknad.barn.fødselsdato).isBefore(tomorrow)) {
+        if (!moment(søknad.barn.fødselsdato).isBefore(dagenEtter(new Date()))) {
             barn = {
                 fødselsdato: Valideringsfeil.FØDSELSDATO_MÅ_VÆRE_TILBAKE_I_TID,
             };
         }
-
-        if (moment(søknad.barn.fødselsdato).isBefore(aYearAgo)) {
+        if (moment(søknad.barn.fødselsdato).isBefore(halvannetÅrSiden(new Date()))) {
             barn = {
                 fødselsdato: Valideringsfeil.FOR_LANGT_TILBAKE_I_TID,
             };
@@ -32,15 +36,22 @@ const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
     }
 
     if (søknad.barn.termindato) {
-        if (moment(søknad.barn.termindato).isSameOrAfter(nineMonthsAhead)) {
+        if (moment(søknad.barn.termindato).isSameOrAfter(niMånederFremITid(new Date()))) {
             barn = {
                 termindato: Valideringsfeil.FOR_LANGT_FREM_I_TID,
             };
         }
-
-        if (moment(søknad.barn.termindato).isBefore(aYearAgo)) {
+        if (moment(søknad.barn.termindato).isBefore(etÅrSiden(new Date()))) {
             barn = {
                 termindato: Valideringsfeil.FOR_LANGT_TILBAKE_I_TID,
+            };
+        }
+        if (
+            moment(søknad.barn.termindato).isBefore(enMånedSiden(new Date())) &&
+            søknad.barn.fødselsdato === undefined
+        ) {
+            barn = {
+                fødselsdato: Valideringsfeil.VENNLIGST_OPPGI_BARNETS_FØDSELSDATO,
             };
         }
     }

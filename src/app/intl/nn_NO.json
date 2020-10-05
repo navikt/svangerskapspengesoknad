@@ -297,6 +297,7 @@
     "valideringsfeil.overlappendePeriode": "Perioder med tilrettelegging kan ikke overlappe",
     "valideringsfeil.forLangtTilbakeITid": "Du kan ikke søke så langt tilbake i tid",
     "valideringsfeil.forLangtFremITid": "Du kan ikke søke så langt frem i tid",
+    "valideringsfeil.vennligstOppgiBarnetsFødselsDato": "Termindato er meir enn 1 månad sidan. Ver vennleg og gi opp barnets/barnas fødselsdato",
     "feiloppsummering.tittel": "Du må rette opp i følgjande feil:",
     "languageToggle.bokmål": "Bokmål - Norsk",
     "languageToggle.nynorsk": "Nynorsk - Norsk",

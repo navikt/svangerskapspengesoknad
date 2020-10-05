@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
 import CommonDatoInput, { DatoInputProps } from 'common/components/skjema/elements/dato-input/DatoInput';
-import 'nav-datovelger/dist/datovelger/styles/datovelger.css';
 import get from 'lodash/get';
 import { Omit } from 'lodash';
 import { useIntl } from 'react-intl';
