@@ -98,7 +98,7 @@
         "i18n-iso-countries": "^3.7.8",
         "lodash": "^4.17.20",
         "lodash.throttle": "^4.1.1",
-        "moment": "^2.28.0",
+        "moment": "^2.29.0",
         "nav-datovelger": "^6.1.10",
         "nav-frontend-alertstriper": "^2.0.5",
         "nav-frontend-alertstriper-style": "^1.0.4",
