@@ -17,13 +17,12 @@ const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
     let barn = {};
 
     if (søknad.barn.fødselsdato) {
-        if (!moment(søknad.barn.fødselsdato).isBefore(dagenEtter(new Date()).toDate())) {
+        if (!moment(søknad.barn.fødselsdato).isBefore(dagenEtter(new Date()))) {
             barn = {
                 fødselsdato: Valideringsfeil.FØDSELSDATO_MÅ_VÆRE_TILBAKE_I_TID,
             };
         }
-
-        if (moment(søknad.barn.fødselsdato).isBefore(halvannetÅrSiden(new Date()).toDate())) {
+        if (moment(søknad.barn.fødselsdato).isBefore(halvannetÅrSiden(new Date()))) {
             barn = {
                 fødselsdato: Valideringsfeil.FOR_LANGT_TILBAKE_I_TID,
             };
@@ -37,20 +36,18 @@ const validateTermin = (søknad: UferdigSøknad): Søknadfeil => {
     }
 
     if (søknad.barn.termindato) {
-        if (moment(søknad.barn.termindato).isSameOrAfter(niMånederFremITid(new Date()).toDate())) {
+        if (moment(søknad.barn.termindato).isSameOrAfter(niMånederFremITid(new Date()))) {
             barn = {
                 termindato: Valideringsfeil.FOR_LANGT_FREM_I_TID,
             };
         }
-
-        if (moment(søknad.barn.termindato).isBefore(etÅrSiden(new Date()).toDate())) {
+        if (moment(søknad.barn.termindato).isBefore(etÅrSiden(new Date()))) {
             barn = {
                 termindato: Valideringsfeil.FOR_LANGT_TILBAKE_I_TID,
             };
         }
-
         if (
-            moment(søknad.barn.termindato).isBefore(enMånedSiden(new Date()).toDate()) &&
+            moment(søknad.barn.termindato).isBefore(enMånedSiden(new Date())) &&
             søknad.barn.fødselsdato === undefined
         ) {
             barn = {
