@@ -19,6 +19,8 @@ enum Valideringsfeil {
     FOR_LANGT_FREM_I_TID = 'forLangtFremITid',
     FOR_LANGT_TILBAKE_I_TID = 'forLangtTilbakeITid',
     VENNLIGST_OPPGI_BARNETS_FØDSELSDATO = 'vennligstOppgiBarnetsFødselsDato',
+    MAX_10_MÅNEDER_FØR_TERMINDATO = 'maxTiMånederFørTerminDato',
+    DATO_MÅ_VÆRE_FØR_TERMINDATO = 'datoMåVæreFørTerminDato',
 }
 
 export default Valideringsfeil;
