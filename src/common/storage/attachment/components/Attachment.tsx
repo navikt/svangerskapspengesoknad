@@ -12,15 +12,13 @@ import { bytesString } from 'common/util/filesize';
 import BEMHelper from 'common/util/bem';
 import VedleggIkon from 'common/components/ikoner/VedleggIkon';
 
-interface OwnProps {
+interface Props {
     attachment: Attachment;
     showFileSize?: boolean;
     onDelete?: (file: Attachment) => void;
 }
 
-type Props = OwnProps;
-
-const Attachment: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
+const Attachment: React.FunctionComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
     const intl = useIntl();
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.block, {
