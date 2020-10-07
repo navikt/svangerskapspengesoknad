@@ -17,8 +17,8 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
     const checkForDuplicateDates = (dates: string[], date: string) => {
         return dates.filter((d: string) => d === date).length > 1;
     };
-    const nineMonthsBeforeTermindato = moment(søknad.barn.termindato).startOf('day').subtract(9, 'months');
-    const threeMonthsAfterTermindato = moment(søknad.barn.termindato).startOf('day').add(3, 'months');
+
+    const tiMånederSiden = moment(søknad.barn.termindato).startOf('day').subtract(10, 'months');
 
     const idx = søknad.søknadsgrunnlag.findIndex((grunnlag: Søknadsgrunnlag) => grunnlag.id === arbeidsforholdId);
     if (søknad.tilrettelegging) {
@@ -29,9 +29,18 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
             }
             const tErrors: FormikErrors<any> = {};
 
+            if (moment(tilrettelegging.behovForTilretteleggingFom).isBefore(tiMånederSiden)) {
+                set(tErrors, `behovForTilretteleggingFom`, Valideringsfeil.MAX_10_MÅNEDER_FØR_TERMINDATO);
+            }
+
+            if (moment(tilrettelegging.behovForTilretteleggingFom).isSameOrAfter(søknad.barn.termindato)) {
+                set(tErrors, `behovForTilretteleggingFom`, Valideringsfeil.DATO_MÅ_VÆRE_FØR_TERMINDATO);
+            }
+
             const getInputName = (name: string) => `tilrettelegging.${index}.${name}`;
             const tilretteleggingstypeName = getInputName('type');
             const valgteTyper = get(søknad, tilretteleggingstypeName) || [];
+
             const ingenTilretteleggingDatoer: string[] =
                 tilrettelegging.ingenTilrettelegging !== undefined
                     ? tilrettelegging.ingenTilrettelegging
@@ -121,7 +130,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (slutteArbeidFom) {
-                            if (moment(slutteArbeidFom).isSameOrAfter(threeMonthsAfterTermindato)) {
+                            if (moment(slutteArbeidFom).isSameOrAfter(søknad.barn.termindato)) {
                                 set(
                                     tErrors,
                                     `ingenTilrettelegging.${ind}.slutteArbeidFom`,
@@ -129,7 +138,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 );
                             }
 
-                            if (moment(slutteArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
+                            if (moment(slutteArbeidFom).isBefore(tiMånederSiden)) {
                                 set(
                                     tErrors,
                                     `ingenTilrettelegging.${ind}.slutteArbeidFom`,
@@ -227,7 +236,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (tilrettelagtArbeidFom) {
-                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(threeMonthsAfterTermindato)) {
+                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(søknad.barn.termindato)) {
                                 set(
                                     tErrors,
                                     `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
@@ -235,7 +244,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 );
                             }
 
-                            if (moment(tilrettelagtArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
+                            if (moment(tilrettelagtArbeidFom).isBefore(tiMånederSiden)) {
                                 set(
                                     tErrors,
                                     `delvisTilrettelegging.${ind}.tilrettelagtArbeidFom`,
@@ -250,7 +259,6 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 if (tilrettelegging.helTilrettelegging) {
                     tilrettelegging.helTilrettelegging.forEach((helTil, ind) => {
                         const { tilrettelagtArbeidFom } = helTil;
-
                         if (
                             tilrettelagtArbeidFom &&
                             moment(tilrettelagtArbeidFom).isBefore(tilrettelegging.behovForTilretteleggingFom)
@@ -271,7 +279,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         }
 
                         if (tilrettelagtArbeidFom) {
-                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(threeMonthsAfterTermindato)) {
+                            if (moment(tilrettelagtArbeidFom).isSameOrAfter(søknad.barn.termindato)) {
                                 set(
                                     tErrors,
                                     `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
@@ -279,7 +287,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                                 );
                             }
 
-                            if (moment(tilrettelagtArbeidFom).isBefore(nineMonthsBeforeTermindato)) {
+                            if (moment(tilrettelagtArbeidFom).isBefore(tiMånederSiden)) {
                                 set(
                                     tErrors,
                                     `helTilrettelegging.${ind}.tilrettelagtArbeidFom`,
