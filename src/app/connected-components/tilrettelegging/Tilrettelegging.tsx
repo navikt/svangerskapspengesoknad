@@ -51,29 +51,28 @@ interface StateProps {
 type Props = OwnProps & StateProps & StepProps;
 
 const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilrettelegging): UferdigTilrettelegging => {
-    if (tilrettelegging.ingenTilrettelegging !== undefined) {
-        return tilrettelegging;
+    if (tilrettelegging.ingenTilrettelegging === undefined) {
+        tilrettelegging.ingenTilrettelegging = [
+            {
+                slutteArbeidFom: undefined as any,
+            },
+        ];
     }
-
-    tilrettelegging.ingenTilrettelegging = [
-        {
-            slutteArbeidFom: undefined as any,
-        },
-    ];
-
-    tilrettelegging.delvisTilrettelegging = [
-        {
-            stillingsprosent: undefined as any,
-            tilrettelagtArbeidFom: undefined as any,
-        },
-    ];
-
-    tilrettelegging.helTilrettelegging = [
-        {
-            tilrettelagtArbeidFom: undefined as any,
-        },
-    ];
-
+    if (tilrettelegging.delvisTilrettelegging === undefined) {
+        tilrettelegging.delvisTilrettelegging = [
+            {
+                stillingsprosent: undefined as any,
+                tilrettelagtArbeidFom: undefined as any,
+            },
+        ];
+    }
+    if (tilrettelegging.helTilrettelegging === undefined) {
+        tilrettelegging.helTilrettelegging = [
+            {
+                tilrettelagtArbeidFom: undefined as any,
+            },
+        ];
+    }
     return tilrettelegging;
 };
 
