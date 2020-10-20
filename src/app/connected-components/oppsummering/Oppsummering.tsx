@@ -32,10 +32,13 @@ import './oppsummering.less';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 
+import { Språkkode } from 'common/types';
+
 interface OwnProps {
     step: SøknadStep;
     formikProps: CustomFormikProps;
     history: History;
+    språkkode: Språkkode;
 }
 
 interface StateProps {
@@ -49,7 +52,7 @@ type Props = OwnProps & StateProps;
 
 const Oppsummering: FunctionComponent<Props> = (props) => {
     const intl = useIntl();
-    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, history } = props;
+    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, history, språkkode } = props;
     const { values } = formikProps;
 
     const visAdvarselOmManglendeDokumentasjon = values.tilrettelegging.some(
@@ -57,7 +60,7 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
     );
 
     const sendSøknad = () => {
-        const ferdigSøknad = processUtfyltSøknad(values, vedlegg, arbeidsforhold);
+        const ferdigSøknad = processUtfyltSøknad(values, vedlegg, arbeidsforhold, språkkode);
         if (ferdigSøknad) {
             requestSendSøknad(ferdigSøknad);
         }
@@ -163,6 +166,7 @@ const mapStateToProps = (state: State) => ({
     søkerinfo: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data : undefined,
     arbeidsforhold: state.api.søkerinfo.status === FetchStatus.SUCCESS ? state.api.søkerinfo.data.arbeidsforhold : [],
     vedlegg: state.attachment.vedlegg.filter((a) => !isAttachmentWithError(a)),
+    språkkode: state.common.språkkode,
 });
 
 const mapDispatchToProps = (dispatch: (action: Action) => void) => ({

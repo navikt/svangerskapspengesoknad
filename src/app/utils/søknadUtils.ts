@@ -5,6 +5,7 @@ import { TilretteleggingDTO } from '../types/TilretteleggingDTO';
 import { Søker } from '../types/Søker';
 import { mapTilretteleggingerTilDTO } from './tilretteleggingUtils';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import { Språkkode } from 'common/types';
 
 const fjernForkastetTilrettelegging = (tilrettelegging: UferdigTilrettelegging[], søknadsgrunnlag: Søknadsgrunnlag[]) =>
     tilrettelegging.filter((t) => søknadsgrunnlag.some((g) => g.id === t.id));
@@ -33,7 +34,8 @@ const korrigerTilretteleggingArbeidsforhold = (
 export const processUtfyltSøknad = (
     utfyltSøknad: UferdigSøknad,
     vedlegg: Attachment[],
-    arbeidsforhold: Arbeidsforhold[]
+    arbeidsforhold: Arbeidsforhold[],
+    språkkode: Språkkode
 ): SøknadDTO | undefined => {
     const { informasjonOmUtenlandsopphold: utland } = utfyltSøknad;
     const { fødselsdato: barnetsFødselsdato, ...utfyltBarn } = utfyltSøknad.barn;
@@ -70,7 +72,10 @@ export const processUtfyltSøknad = (
             fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato as Date] : undefined,
         },
         vedlegg,
-        søker: utfyltSøknad.søker as Søker,
+        søker: {
+            ...(utfyltSøknad.søker as Søker),
+            språkkode,
+        },
         tilrettelegging: tilrettelegging.map((t) => ({
             ...t,
             vedlegg: t.vedlegg.filter((vedleggId) => vedlegg.find((v) => v.id === vedleggId)),
