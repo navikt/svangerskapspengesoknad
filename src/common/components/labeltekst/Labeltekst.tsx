@@ -5,15 +5,13 @@ import './labeltekst.less';
 
 type MessageValue = string | number | boolean | Date | null | undefined;
 
-interface OwnProps {
+interface Props {
     children?: React.ReactNode;
     intlId?: string;
     intlValue?: { [key: string]: MessageValue };
 }
 
-export type Props = OwnProps;
-
-const Labeltekst: React.StatelessComponent<Props> = ({ children, intlId, intlValue }) => {
+const Labeltekst: React.FunctionComponent<Props> = ({ children, intlId, intlValue }) => {
     const intl = useIntl();
     return <span className="labeltext">{intlId ? intl.formatMessage({ id: intlId }, intlValue) : children}</span>;
 };

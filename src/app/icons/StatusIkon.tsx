@@ -2,15 +2,13 @@ import React from 'react';
 
 export type StatusIkonStatusKey = 'suksess' | 'advarsel' | 'feil';
 
-export interface OwnProps {
+export interface Props {
     status: StatusIkonStatusKey;
     title?: string;
     size?: number;
 }
 
-type Props = OwnProps;
-
-const FeilSirkelFyll: React.StatelessComponent<Props> = (props) => {
+const FeilSirkelFyll: React.FunctionComponent<Props> = (props) => {
     return (
         <svg role="presentation" focusable="false" viewBox="0 0 24 24" width={props.size} height={props.size}>
             <g fill="none" fillRule="evenodd">

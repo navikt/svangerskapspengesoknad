@@ -59,6 +59,7 @@ const mockSøknad: UferdigSøknad = {
         },
         harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd: false,
         harHattAnnenInntektSiste10Mnd: false,
+        språkkode: 'nb',
     },
 };
 export default mockSøknad;

@@ -15,11 +15,10 @@ import InfoBlock from 'common/components/info-block/InfoBlock';
 
 import FrilansSpørsmålInfoBoksTekst from './FrilansSpørsmålInfoBoksTekst';
 
-interface OwnProps {
+interface Props {
     formikProps: CustomFormikProps;
 }
 
-type Props = OwnProps;
 const FrilansSpørsmål: FunctionComponent<Props> = (props: Props) => {
     const intl = useIntl();
     const { formikProps } = props;

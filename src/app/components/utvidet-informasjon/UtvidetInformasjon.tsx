@@ -7,14 +7,12 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { useIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 
-interface OwnProps {
+interface Props {
     children: React.ReactNode;
     erApen?: boolean;
     apneLabel?: string;
     lukkLabel?: string;
 }
-
-type Props = OwnProps;
 
 const UtvidetInformasjon: React.FunctionComponent<Props> = ({ children, apneLabel }) => {
     const intl = useIntl();
