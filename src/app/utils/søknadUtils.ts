@@ -31,6 +31,14 @@ const korrigerTilretteleggingArbeidsforhold = (
     return tilrettelegging;
 };
 
+const convertSpråkkode = (språkkode: Språkkode) => {
+    if (språkkode === 'nn') {
+        return 'NN';
+    } else {
+        return 'NB';
+    }
+};
+
 export const processUtfyltSøknad = (
     utfyltSøknad: UferdigSøknad,
     vedlegg: Attachment[],
@@ -74,7 +82,7 @@ export const processUtfyltSøknad = (
         vedlegg,
         søker: {
             ...(utfyltSøknad.søker as Søker),
-            språkkode,
+            språkkode: convertSpråkkode(språkkode),
         },
         tilrettelegging: tilrettelegging.map((t) => ({
             ...t,
