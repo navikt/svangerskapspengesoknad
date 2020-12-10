@@ -31,7 +31,7 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
             requestSøkerinfo();
         }
 
-        if (getErrorCode(søkerinfo) === 401) {
+        if (getErrorCode(søkerinfo) === 401 || getErrorCode(søkerinfo) === 403) {
             redirectToLogin();
         }
     });
