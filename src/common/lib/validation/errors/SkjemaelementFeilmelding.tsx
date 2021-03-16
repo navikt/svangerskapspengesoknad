@@ -1,13 +1,12 @@
 import React from 'react';
-import { SkjemaelementFeil } from 'nav-frontend-skjema/src/skjemaelement-feilmelding';
 import { useIntl } from 'react-intl';
 import { ValidatorFailTextIntl } from 'common/lib/validation/types';
 
 export interface Props {
-    feil?: SkjemaelementFeil;
+    feil?: any;
 }
 
-const renderFeil = (feil: SkjemaelementFeil): JSX.Element => {
+const renderFeil = (feil: any): JSX.Element => {
     let msg;
     const intl = useIntl();
     if (typeof feil.feilmelding === 'string') {

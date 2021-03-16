@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Element, EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import Arbeidsforhold from '../../../app/types/Arbeidsforhold';
 import getMessage from 'common/util/i18nUtils';
@@ -21,17 +21,17 @@ const InformasjonOmArbeidsforhold: React.StatelessComponent<Props> = ({ arbeidsf
         <div className={cls.block}>
             <div className={cls.element('topRow')}>
                 {arbeidsforhold.arbeidsgiverIdType === 'orgnr' && (
-                    <EtikettLiten>
+                    <Normaltekst>
                         {getMessage(intl, 'annenInntekt.arbeidsforhold.organisasjonsnummer', {
                             organisasjonsnummer: arbeidsforhold.arbeidsgiverId,
                         })}
-                    </EtikettLiten>
+                    </Normaltekst>
                 )}
-                <EtikettLiten className={cls.element('stillingsprosent')}>
+                <Normaltekst className={cls.element('stillingsprosent')}>
                     {getMessage(intl, 'annenInntekt.arbeidsforhold.stillingsprosent', {
                         stillingsprosent: arbeidsforhold.stillingsprosent,
                     })}
-                </EtikettLiten>
+                </Normaltekst>
             </div>
             <Element>
                 {arbeidsforhold.arbeidsgiverIdType === 'orgnr'

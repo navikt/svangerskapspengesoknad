@@ -37,8 +37,7 @@ type Props = OwnProps & HistoryProps;
 const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history }) => {
     const intl = useIntl();
     const søker = getData(søkerinfo, {}).søker;
-    const { values, isSubmitting, isValid } = formik;
-    const disableNextButton = !values.harGodkjentVilkår;
+    const { isSubmitting, isValid } = formik;
 
     useFormikSubmit(isSubmitting, isValid, () => {
         navigateTo(getSøknadStepPath(StepID.TERMIN), history);
@@ -101,7 +100,7 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history }) => {
                         }}
                     />
                 </BekreftCheckboksPanel>
-                <Hovedknapp htmlType="submit" disabled={disableNextButton} className="blokk-m">
+                <Hovedknapp htmlType="submit" className="blokk-m">
                     <FormattedMessage id="intro.begynnSøknad.knapp" />
                 </Hovedknapp>
                 <Normaltekst className="velkommen__personopplysningerLink">

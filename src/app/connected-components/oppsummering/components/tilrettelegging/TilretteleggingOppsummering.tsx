@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import BEMHelper from 'common/util/bem';
 
-import './tilretteleggingOppsummering.less';
-import { EtikettLiten } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { UferdigTilrettelegging, Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { getArbeidsforholdNavnFromId } from 'app/utils/arbeidsforholdUtils';
@@ -11,6 +10,8 @@ import { guid } from 'nav-frontend-js-utils';
 import { FormattedMessage } from 'react-intl';
 import OppsummeringBeskrivelse from '../OppsummeringBeskrivelse';
 import Block from 'common/components/block/Block';
+
+import './tilretteleggingOppsummering.less';
 
 const cls = BEMHelper('tilretteleggingOppsummering');
 
@@ -24,9 +25,9 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
         <>
             {tilrettelegging.map((tilrett: UferdigTilrettelegging) => (
                 <div key={guid()} className={cls.element('container')}>
-                    <EtikettLiten>
+                    <Normaltekst>
                         {getArbeidsforholdNavnFromId(tilrett.arbeidsforhold.id, arbeidsforhold) || tilrett.id}
-                    </EtikettLiten>
+                    </Normaltekst>
                     <Block visible={tilrett.type.includes(Tilretteleggingstype.HEL)} margin="xxs">
                         {tilrett.helTilrettelegging &&
                             tilrett.helTilrettelegging.map((helTil) => (

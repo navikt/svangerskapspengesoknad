@@ -1,5 +1,5 @@
 import React from 'react';
-import { EtikettLiten, Element } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
 
 interface InnholdMedLedetekstProps {
@@ -17,7 +17,7 @@ const InnholdMedLedetekst: React.StatelessComponent<InnholdMedLedetekstProps> = 
 }) => {
     return (
         <div className={className}>
-            <EtikettLiten>{ledetekst}</EtikettLiten>
+            <Normaltekst>{ledetekst}</Normaltekst>
             {!Array.isArray(children) && hasListOfChildren((children as JSX.Element).props.children)
                 ? (children as JSX.Element).props.children.map((child: string) => (
                       <Element className="feltoppsummering__verdi" key={guid()}>

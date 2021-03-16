@@ -1,9 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
-import { SkjemaGruppe, Fieldset, RadioPanel, RadioPanelGruppeProps } from 'nav-frontend-skjema';
-import './radioPanelGruppeResponsive.less';
-import 'nav-frontend-skjema-style';
+import { SkjemaGruppe, RadioPanel, RadioPanelGruppeProps } from 'nav-frontend-skjema';
 import Infoboks from 'common/components/infoboks/Infoboks';
+
+import './radioPanelGruppeResponsive.less';
 
 interface ResponsiveProps {
     twoColumns?: boolean;
@@ -33,24 +33,22 @@ class RadioPanelGruppeResponsive extends React.Component<RadioPanelGruppeRespons
 
         return (
             <div className="radioPanelGruppe">
-                <SkjemaGruppe feil={feil}>
-                    <Fieldset className={fieldsetClassname} legend={legend}>
-                        {infoboksTekst && <Infoboks fieldsetClsName={fieldsetClassname} tekst={infoboksTekst} />}
-                        <div className="radioPanelGruppe--responsive">
-                            {radios.map((radio) => {
-                                return (
-                                    <div className={cls} key={radio.value}>
-                                        <RadioPanel
-                                            checked={checked === radio.value}
-                                            name={name}
-                                            onChange={(event) => onChange(event, radio.value)}
-                                            {...radio}
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </Fieldset>
+                <SkjemaGruppe feil={feil} legend={legend}>
+                    {infoboksTekst && <Infoboks fieldsetClsName={fieldsetClassname} tekst={infoboksTekst} />}
+                    <div className="radioPanelGruppe--responsive">
+                        {radios.map((radio) => {
+                            return (
+                                <div className={cls} key={`${radio.value}`}>
+                                    <RadioPanel
+                                        checked={checked === radio.value}
+                                        name={name}
+                                        onChange={(event) => onChange(event, radio.value)}
+                                        {...radio}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
                 </SkjemaGruppe>
             </div>
         );

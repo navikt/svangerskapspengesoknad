@@ -38,8 +38,8 @@ const DatoInput: FunctionComponent<Props> = ({ name, label, fullskjermKalender, 
                         onChange={(dato?: Date) => {
                             form.setFieldValue(name, dato);
                         }}
-                        kalender={{
-                            plassering: fullskjermKalender ? 'fullskjerm' : 'under',
+                        calendarSettings={{
+                            position: fullskjermKalender ? 'fullscreen' : 'under',
                         }}
                     />
                 );

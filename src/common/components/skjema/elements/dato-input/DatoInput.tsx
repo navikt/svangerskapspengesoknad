@@ -1,18 +1,20 @@
 import React from 'react';
 import SkjemaInputElement from '../skjema-input-element/SkjemaInputElement';
 import { Feil } from '../skjema-input-element/types';
-import { DatovelgerAvgrensninger } from 'nav-datovelger';
 import { useIntl } from 'react-intl';
-import Datovelger, { DatovelgerProps } from 'nav-datovelger/lib/Datovelger';
 import AriaText from 'common/components/aria/AriaText';
 import { getAvgrensningerDescriptionForInput } from 'common/components/skjema/elements/dato-input/datoInputDescription';
 import moment from 'moment';
 import { Avgrensninger, Tidsperiode } from 'common/types';
 import BEMHelper from 'common/util/bem';
 import { dateToISOFormattedDateString } from 'common/util/datoUtils';
+import { Datepicker, DatepickerLimitations } from 'nav-datovelger';
+import { DatepickerProps } from 'nav-datovelger/lib/Datepicker';
+
 import './datoInput.less';
 
-export interface DatoInputProps extends Omit<DatovelgerProps, 'onChange' | 'input'> {
+export interface DatoInputProps extends Omit<DatepickerProps, 'onChange' | 'input'> {
+    id: string;
     name: string;
     label: React.ReactNode;
     dato?: Date;
@@ -24,16 +26,16 @@ export interface DatoInputProps extends Omit<DatovelgerProps, 'onChange' | 'inpu
 
 export type Props = DatoInputProps;
 
-const parseAvgrensinger = (avgrensinger: Avgrensninger): DatovelgerAvgrensninger => {
+const parseAvgrensinger = (avgrensinger: Avgrensninger): DatepickerLimitations => {
     return {
-        maksDato: dateToISOFormattedDateString(avgrensinger.maksDato),
-        minDato: dateToISOFormattedDateString(avgrensinger.minDato),
-        helgedagerIkkeTillatt: avgrensinger.helgedagerIkkeTillatt,
-        ugyldigeTidsperioder:
+        maxDate: dateToISOFormattedDateString(avgrensinger.maksDato),
+        minDate: dateToISOFormattedDateString(avgrensinger.minDato),
+        weekendsNotSelectable: avgrensinger.helgedagerIkkeTillatt,
+        invalidDateRanges:
             avgrensinger.ugyldigeTidsperioder &&
             avgrensinger.ugyldigeTidsperioder.map((t: Tidsperiode) => ({
-                fom: dateToISOFormattedDateString(t.fom)!,
-                tom: dateToISOFormattedDateString(t.tom)!,
+                from: dateToISOFormattedDateString(t.fom)!,
+                to: dateToISOFormattedDateString(t.tom)!,
             })),
     };
 };
@@ -46,37 +48,35 @@ const DatoInput: React.FunctionComponent<Props> = ({
     postfix,
     feil,
     onChange,
-    kalender,
+    calendarSettings,
     name,
-    avgrensninger,
+    limitations,
     dato,
     datoAvgrensinger,
     ...rest
 }) => {
     const intl = useIntl();
-    const avgrensningerTekst = avgrensninger ? getAvgrensningerDescriptionForInput(avgrensninger) : undefined;
+    const avgrensningerTekst = limitations ? getAvgrensningerDescriptionForInput(limitations) : undefined;
     const ariaDescriptionId = avgrensningerTekst ? `${id}_ariaDesc` : undefined;
 
     return (
         <SkjemaInputElement id={id} feil={feil} label={label}>
             <div className={bem.block}>
                 <div className={bem.element('datovelger')}>
-                    <Datovelger
+                    <Datepicker
                         {...rest}
-                        valgtDato={dato ? moment.utc(dato).format('YYYY-MM-DD') : undefined}
-                        id={id ? id : name}
-                        locale={intl.locale}
-                        kalender={kalender}
-                        input={{
-                            id,
+                        value={dato ? moment.utc(dato).format('YYYY-MM-DD') : undefined}
+                        locale={intl.locale as any}
+                        calendarSettings={calendarSettings}
+                        inputProps={{
                             placeholder: 'dd.mm.åååå',
                             name,
-                            ariaDescribedby: ariaDescriptionId,
+                            'aria-describedby': ariaDescriptionId,
                         }}
                         onChange={(datoString: string) =>
                             onChange(datoString && datoString !== 'Invalid date' ? new Date(datoString) : undefined)
                         }
-                        avgrensninger={datoAvgrensinger ? parseAvgrensinger(datoAvgrensinger) : undefined}
+                        limitations={datoAvgrensinger ? parseAvgrensinger(datoAvgrensinger) : undefined}
                     />
                     {ariaDescriptionId && (
                         <AriaText id={ariaDescriptionId} aria-role="presentation" aria-hidden="true">

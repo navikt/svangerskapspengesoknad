@@ -28,10 +28,7 @@ const BekreftCheckboksPanel: React.FunctionComponent<Props> = ({ name, label, ch
                         name: field.name,
                         onBlur: field.onBlur,
                     }}
-                    feil={{
-                        feilmelding:
-                            form.touched[name] && form.errors[name] ? translateError(intl, form.errors[name]) : '',
-                    }}
+                    feil={form.touched[name] && form.errors[name] ? translateError(intl, form.errors[name]) : ''}
                 >
                     {children}
                 </BekreftCheckboksPanelNav>

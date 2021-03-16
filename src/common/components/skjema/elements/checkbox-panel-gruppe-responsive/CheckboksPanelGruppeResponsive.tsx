@@ -1,9 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
-import { SkjemaGruppe, Fieldset, CheckboksPanel, CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
+import { SkjemaGruppe, CheckboksPanel, CheckboksPanelGruppeProps, CheckboxProps } from 'nav-frontend-skjema';
 import './checkboksPanelGruppeResponsive.less';
 import 'nav-frontend-skjema-style';
-import { CheckboksProps } from 'nav-frontend-skjema/lib/checkboks-panel';
 
 interface ResponsiveProps {
     columns?: undefined | 2 | 1;
@@ -27,24 +26,22 @@ class CheckboksPanelGruppeResponsive extends React.Component<CheckboxPanelgruppe
 
         return (
             <div className="checkboksPanelGruppe">
-                <Fieldset legend={legend}>
-                    <SkjemaGruppe className="checkboksPanelGruppe--responsive" feil={feil}>
-                        {checkboxes &&
-                            checkboxes.map((checkboks: CheckboksProps, index: number) => {
-                                return (
-                                    <div className={cls} key={checkboks.value}>
-                                        <CheckboksPanel
-                                            {...checkboks}
-                                            checked={checkboks.checked || false}
-                                            disabled={disabled || false}
-                                            onChange={(event) => onChange(event, checkboks.value)}
-                                            key={index}
-                                        />
-                                    </div>
-                                );
-                            })}
-                    </SkjemaGruppe>
-                </Fieldset>
+                <SkjemaGruppe className="checkboksPanelGruppe--responsive" feil={feil} legend={legend}>
+                    {checkboxes &&
+                        checkboxes.map((checkboks: CheckboxProps, index: number) => {
+                            return (
+                                <div className={cls} key={`${checkboks.value}`}>
+                                    <CheckboksPanel
+                                        {...checkboks}
+                                        checked={checkboks.checked || false}
+                                        disabled={disabled || false}
+                                        onChange={(event) => onChange(event, checkboks.value)}
+                                        key={index}
+                                    />
+                                </div>
+                            );
+                        })}
+                </SkjemaGruppe>
             </div>
         );
     }

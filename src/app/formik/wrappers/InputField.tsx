@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Field, FieldProps } from 'formik';
-import { NavFrontendInputProps, Input } from 'nav-frontend-skjema';
+import { Input, InputProps } from 'nav-frontend-skjema';
 import { get } from 'lodash';
 import { useIntl } from 'react-intl';
 import { translateError } from 'app/utils/errorUtils';
@@ -9,7 +9,7 @@ interface OwnProps {
     name: string;
 }
 
-type Props = OwnProps & NavFrontendInputProps;
+type Props = OwnProps & InputProps;
 
 const InputField: FunctionComponent<Props> = ({ name, ...inputProps }) => {
     const intl = useIntl();

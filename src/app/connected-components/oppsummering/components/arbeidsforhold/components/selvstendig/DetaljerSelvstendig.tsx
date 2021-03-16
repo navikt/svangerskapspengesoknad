@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { EtikettLiten, Element } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 
-import './detaljerSelvstendig.less';
 import { TidsperiodeMedValgfriSluttdato } from 'common/types';
 import { Næringstype } from 'app/types/SelvstendigNæringsdrivende';
 import getMessage from 'common/util/i18nUtils';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
+
+import './detaljerSelvstendig.less';
 
 interface Props {
     orgnr: string;
@@ -33,9 +34,9 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
 
     return (
         <div className={cls.block}>
-            <EtikettLiten>
+            <Normaltekst>
                 <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.orgnr" /> {orgnr}
-            </EtikettLiten>
+            </Normaltekst>
             <Element>{navnPåNæringen.toUpperCase()}</Element>
             <Block margin="xxs">
                 <em>{typer.map((type) => getMessage(intl, `næringstype.${type.toLocaleLowerCase()}`))}</em>

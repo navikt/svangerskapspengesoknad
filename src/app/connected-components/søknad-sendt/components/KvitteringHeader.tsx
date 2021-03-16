@@ -3,7 +3,7 @@ import { Person } from 'app/types/Søkerinfo';
 import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
-import { Sidetittel, EtikettLiten } from 'nav-frontend-typografi';
+import { Sidetittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { dateToHours } from 'app/utils/formatDate';
@@ -53,9 +53,9 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, pdf }) => {
 
             <Block>
                 <div className={cls.element('sendtInnTid')}>
-                    <EtikettLiten>
+                    <Normaltekst>
                         <FormattedMessage id="søknadSendt.sendtInn" />
-                    </EtikettLiten>
+                    </Normaltekst>
                     <span style={{ width: '0.25rem' }} />
                     {moment().format('Do MMMM YYYY')}, kl. {dateToHours(moment().toDate())}
                 </div>

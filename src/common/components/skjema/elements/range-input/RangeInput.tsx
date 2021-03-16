@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { guid } from 'nav-frontend-js-utils';
 import RangeStepper from './RangeStepper';
-import { Fieldset } from 'nav-frontend-skjema';
+import { SkjemaGruppe } from 'nav-frontend-skjema';
 import Infoboks from 'common/components/infoboks/Infoboks';
 
 import './rangeInput.less';
@@ -68,13 +68,13 @@ class RangeInput extends React.Component<Props, State> {
             active: false,
         };
     }
-    handleBlur(e: React.FocusEvent<HTMLDivElement>) {
+    handleBlur() {
         if (!this.container) {
             return;
         }
         setTimeout(() => this.deactivateIfOutside(), 0);
     }
-    handleFocus(e: React.FocusEvent<HTMLDivElement>) {
+    handleFocus() {
         this.setState({
             active: true,
         });
@@ -116,7 +116,7 @@ class RangeInput extends React.Component<Props, State> {
 
         return (
             <div className={bemWrapper.block}>
-                <Fieldset legend={label} className={'uttakfordeler'}>
+                <SkjemaGruppe legend={label} className={'uttakfordeler'}>
                     {hjelpetekst && (
                         <div className={bemWrapper.element('help')}>
                             <Infoboks tekst={hjelpetekst} fieldsetClsName={'uttakfordeler'} />
@@ -172,7 +172,7 @@ class RangeInput extends React.Component<Props, State> {
                         {valueLabelPlacement === 'below' && labelRenderer({ value, min, max })}
                     </div>
                     {bottomRenderer({ value, min, max })}
-                </Fieldset>
+                </SkjemaGruppe>
             </div>
         );
     }

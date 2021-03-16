@@ -2,18 +2,17 @@ import React from 'react';
 const { guid } = require('nav-frontend-js-utils');
 import classnames from 'classnames';
 import SkjemaelementFeilmelding from 'common/lib/validation/errors/SkjemaelementFeilmelding';
-import { SkjemaelementFeil } from 'nav-frontend-skjema/src/skjemaelement-feilmelding';
 import { Element } from 'nav-frontend-typografi';
 
 export interface Props {
     label: string | React.ReactNode;
     infoboksTekst?: string | React.ReactNode;
-    feil?: SkjemaelementFeil;
+    feil?: any;
     id?: string;
     children: React.ReactNode;
 }
 
-const SkjemaInputElement: React.StatelessComponent<Props> = (props: Props) => {
+const SkjemaInputElement: React.FunctionComponent<Props> = (props: Props) => {
     const { label, id, feil, children } = props;
     const inputId = id || guid();
     return (
