@@ -26,7 +26,7 @@
         "@babel/preset-env": "^7.11.5",
         "@babel/preset-react": "^7.10.4",
         "@types/classnames": "^2.2.10",
-        "@types/enzyme": "^3.10.6",
+        "@types/enzyme": "^3.10.8",
         "@types/enzyme-adapter-react-16": "^1.0.6",
         "@types/jest": "^26.0.13",
         "@types/lodash": "^4.14.161",
