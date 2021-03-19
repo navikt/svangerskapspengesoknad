@@ -77,7 +77,7 @@ export const processUtfyltSøknad = (
             ...utfyltBarn,
             erBarnetFødt: utfyltBarn.erBarnetFødt === undefined ? false : utfyltBarn.erBarnetFødt,
             termindato: utfyltBarn.termindato,
-            fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato as Date] : undefined,
+            fødselsdatoer: barnetsFødselsdato ? [barnetsFødselsdato] : undefined,
         },
         vedlegg,
         søker: {

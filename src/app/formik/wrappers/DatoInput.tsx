@@ -19,7 +19,7 @@ const DatoInput: FunctionComponent<Props> = ({ name, label, fullskjermKalender, 
     return (
         <Field
             name={name}
-            type="date"
+            type="string"
             render={({ form }: FieldProps) => {
                 const feilmelding = get(form.errors, name) as string;
 
@@ -30,12 +30,8 @@ const DatoInput: FunctionComponent<Props> = ({ name, label, fullskjermKalender, 
                         id={name}
                         label={label}
                         dato={get(form.values, name)}
-                        feil={
-                            feilmelding && form.submitCount > 0
-                                ? { feilmelding: translateError(intl, feilmelding) }
-                                : undefined
-                        }
-                        onChange={(dato?: Date) => {
+                        feil={feilmelding && form.submitCount > 0 ? translateError(intl, feilmelding) : undefined}
+                        onChange={(dato?: string) => {
                             form.setFieldValue(name, dato);
                         }}
                         calendarSettings={{

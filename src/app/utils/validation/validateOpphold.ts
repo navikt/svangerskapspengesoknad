@@ -2,7 +2,6 @@ import moment from 'moment';
 import { FormikErrors } from 'formik';
 import { Tidsperiode } from 'app/types/Tidsperiode';
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
-import Valideringsfeil from 'app/types/Valideringsfeil';
 import isEmpty from 'lodash/isEmpty';
 
 type Oppholdsfeil = FormikErrors<Utenlandsopphold>;
@@ -36,20 +35,20 @@ const validatePeriode = ({ fom, tom }: Tidsperiode, type: Oppholdstype): Opphold
     const today = moment().startOf('day');
 
     if (!fom) {
-        errors.fom = Valideringsfeil.FELTET_ER_PÅKREVD;
+        errors.fom = 'valideringsfeil.feltetErPåkrevd';
     } else {
         if (type === Oppholdstype.TIDLIGERE_OPPHOLD && moment(fom).isAfter(today)) {
-            errors.fom = Valideringsfeil.TIDLIGERE_OPPHOLD_MÅ_VÆRE_TILBAKE_I_TID;
+            errors.fom = 'valideringsfeil.tidligereOppholdMåVæreTilbakeITid';
         } else if (type === Oppholdstype.SENERE_OPPHOLD && moment(fom).isBefore(today)) {
-            errors.fom = Valideringsfeil.TIDLIGERE_OPPHOLD_MÅ_VÆRE_FREMOVER_I_TID;
+            errors.fom = 'valideringsfeil.tidligereOppholdMåVæreFremoverITid';
         }
     }
 
     if (!tom) {
-        errors.tom = Valideringsfeil.FELTET_ER_PÅKREVD;
+        errors.tom = 'valideringsfeil.feltetErPåkrevd';
     } else {
         if (moment(tom).isBefore(fom)) {
-            errors.tom = Valideringsfeil.TIDSREISER_IKKE_TILLATT;
+            errors.tom = 'valideringsfeil.tidsreiserIkkeTillatt';
         }
     }
 
@@ -62,7 +61,7 @@ const validateOpphold = (type: Oppholdstype) => (opphold: Utenlandsopphold): Opp
     };
 
     if (opphold.land === '') {
-        errors.land = Valideringsfeil.FELTET_ER_PÅKREVD;
+        errors.land = 'valideringsfeil.feltetErPåkrevd';
     }
 
     return errors;

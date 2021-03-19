@@ -40,6 +40,7 @@ import './arbeidsforhold.less';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import InfoTilFiskere from 'app/components/info-til-fiskere/InfoTilFiskere';
 import Lenke from 'nav-frontend-lenker';
+import dayjs from 'dayjs';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -164,7 +165,10 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     }}
                 >
                     <InformasjonOmArbeidsforholdWrapper
-                        arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
+                        arbeidsforhold={getAktiveArbeidsforhold(
+                            arbeidsforhold,
+                            dayjs(formikProps.values.barn.termindato).toDate()
+                        )}
                     />
                 </Block>
 

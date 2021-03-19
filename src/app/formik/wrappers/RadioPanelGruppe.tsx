@@ -15,24 +15,20 @@ type Props = Omit<RadioPanelGruppeResponsiveProps, 'onChange'> & {
 
 const RadioPanelGruppe: FunctionComponent<Props> = (props) => {
     const intl = useIntl();
-    const { id, value, ...radioPanelGruppeProps } = props;
+    const { id, value, legend, ...radioPanelGruppeProps } = props;
     return (
         <Field
             name={radioPanelGruppeProps.name}
             type="string"
             render={({ field, form }: FieldProps) => {
                 const feilmelding = get(form.errors, radioPanelGruppeProps.name);
-                const feil =
-                    feilmelding && form.submitCount > 0
-                        ? {
-                              feilmelding: translateError(intl, feilmelding),
-                          }
-                        : undefined;
+                const feil = feilmelding && form.submitCount > 0 ? translateError(intl, feilmelding) : undefined;
                 return (
                     <RadioPanelGruppeResponsive
                         {...radioPanelGruppeProps}
                         name={id || radioPanelGruppeProps.name}
                         checked={value || field.value}
+                        legend={legend}
                         onChange={(_, newValue) => {
                             form.setFieldValue(radioPanelGruppeProps.name, newValue);
                         }}

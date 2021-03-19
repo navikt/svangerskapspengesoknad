@@ -1,4 +1,5 @@
 enum Valideringsfeil {
+    UGYLDIG_DATO = 'ugyldigDato',
     FELTET_ER_PÅKREVD = 'feltetErPåkrevd',
     OVERLAPPENDE_PERIODE = 'overlappendePeriode',
     VILKÅR_MÅ_GODKJENNES = 'vilkårMåGodkjennes',

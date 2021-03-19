@@ -6,7 +6,7 @@ const mockSøknad: UferdigSøknad = {
     harGodkjentVilkår: true,
     harGodkjentOppsummering: false,
     barn: {
-        termindato: new Date('2019-04-11T00:00:00.000Z'),
+        termindato: '2019-04-11',
         erBarnetFødt: false,
     },
     tilrettelegging: [

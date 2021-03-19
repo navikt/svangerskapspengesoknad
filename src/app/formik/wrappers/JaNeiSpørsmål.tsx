@@ -47,19 +47,14 @@ const JaNeiSpørsmål: FunctionComponent<Props> = ({ labels, name, ...radioPanel
                 ];
 
                 const feilmelding = get(form.errors, name);
-                const radioPanelGruppeFeil =
-                    feilmelding && form.submitCount > 0
-                        ? {
-                              feilmelding: translateError(intl, feilmelding),
-                          }
-                        : undefined;
+                const feil = feilmelding && form.submitCount > 0 ? translateError(intl, feilmelding) : undefined;
 
                 return (
                     <RadioPanelGruppeResponsive
                         {...radioPanelGruppeProps}
                         name={name}
                         radios={radios}
-                        feil={radioPanelGruppeFeil}
+                        feil={feil}
                         checked={checked}
                         onChange={(_, value) => {
                             form.setFieldValue(name, value === Radios.JA);

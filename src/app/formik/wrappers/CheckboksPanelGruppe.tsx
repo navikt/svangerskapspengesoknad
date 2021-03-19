@@ -30,11 +30,7 @@ const CheckboksPanelGruppe: FunctionComponent<Props> = (props) => {
                 return (
                     <CheckboksPanelGruppeResponsive
                         {...checkboksPanelGruppeProps}
-                        feil={
-                            feilmelding && form.submitCount > 0
-                                ? { feilmelding: translateError(intl, feilmelding) }
-                                : undefined
-                        }
+                        feil={feilmelding && form.submitCount > 0 ? translateError(intl, feilmelding) : undefined}
                         legend={label}
                         checkboxes={options.map((option) => {
                             const values = get(form.values, name);

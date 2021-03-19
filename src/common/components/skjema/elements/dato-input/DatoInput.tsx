@@ -1,15 +1,14 @@
 import React from 'react';
-import SkjemaInputElement from '../skjema-input-element/SkjemaInputElement';
-import { Feil } from '../skjema-input-element/types';
 import { useIntl } from 'react-intl';
 import AriaText from 'common/components/aria/AriaText';
 import { getAvgrensningerDescriptionForInput } from 'common/components/skjema/elements/dato-input/datoInputDescription';
-import moment from 'moment';
 import { Avgrensninger, Tidsperiode } from 'common/types';
 import BEMHelper from 'common/util/bem';
 import { dateToISOFormattedDateString } from 'common/util/datoUtils';
 import { Datepicker, DatepickerLimitations } from 'nav-datovelger';
 import { DatepickerProps } from 'nav-datovelger/lib/Datepicker';
+import { SkjemaGruppe } from 'nav-frontend-skjema';
+import { Element } from 'nav-frontend-typografi';
 
 import './datoInput.less';
 
@@ -17,10 +16,10 @@ export interface DatoInputProps extends Omit<DatepickerProps, 'onChange' | 'inpu
     id: string;
     name: string;
     label: React.ReactNode;
-    dato?: Date;
+    dato?: string;
     postfix?: string;
-    feil?: Feil;
-    onChange: (dato?: Date) => void;
+    feil?: React.ReactNode;
+    onChange: (dato?: string) => void;
     datoAvgrensinger?: Avgrensninger;
 }
 
@@ -60,12 +59,13 @@ const DatoInput: React.FunctionComponent<Props> = ({
     const ariaDescriptionId = avgrensningerTekst ? `${id}_ariaDesc` : undefined;
 
     return (
-        <SkjemaInputElement id={id} feil={feil} label={label}>
+        <SkjemaGruppe id={id} feil={feil} legend={label ? <Element tag="div">{label}</Element> : undefined}>
             <div className={bem.block}>
                 <div className={bem.element('datovelger')}>
                     <Datepicker
                         {...rest}
-                        value={dato ? moment.utc(dato).format('YYYY-MM-DD') : undefined}
+                        allowInvalidDateSelection={true}
+                        value={dato}
                         locale={intl.locale as any}
                         calendarSettings={calendarSettings}
                         inputProps={{
@@ -73,9 +73,7 @@ const DatoInput: React.FunctionComponent<Props> = ({
                             name,
                             'aria-describedby': ariaDescriptionId,
                         }}
-                        onChange={(datoString: string) =>
-                            onChange(datoString && datoString !== 'Invalid date' ? new Date(datoString) : undefined)
-                        }
+                        onChange={(datoString: string) => onChange(datoString)}
                         limitations={datoAvgrensinger ? parseAvgrensinger(datoAvgrensinger) : undefined}
                     />
                     {ariaDescriptionId && (
@@ -86,7 +84,7 @@ const DatoInput: React.FunctionComponent<Props> = ({
                 </div>
                 {postfix ? <div className={bem.element('postfix')}>{postfix}</div> : undefined}
             </div>
-        </SkjemaInputElement>
+        </SkjemaGruppe>
     );
 };
 export default DatoInput;

@@ -16,12 +16,28 @@ export const flattenErrors = (errors: FormikErrors<UferdigSøknad>, pathPrefix =
                 text: errors[key],
             });
         } else if (typeof errors[key] === 'object') {
-            flattened = flattened.concat(flattenErrors(errors[key], prefix));
+            if (errors[key].intlKey) {
+                const { intlKey, values } = errors[key];
+                flattened.push({
+                    name: prefix,
+                    text: {
+                        intlKey,
+                        values,
+                    },
+                });
+            } else {
+                flattened = flattened.concat(flattenErrors(errors[key], prefix));
+            }
         }
     }
 
     return flattened;
 };
 
-export const translateError = (intl: IntlShape, error?: any) =>
-    typeof error === 'string' ? getMessage(intl, `valideringsfeil.${error}`) : '';
+export const translateError = (intl: IntlShape, error?: any) => {
+    if (error && error.intlKey) {
+        return getMessage(intl, error.intlKey, error.values);
+    }
+
+    return typeof error === 'string' ? getMessage(intl, error) : '';
+};

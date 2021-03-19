@@ -27,12 +27,12 @@ import ArbeidsforholdOppsummering from './components/arbeidsforhold/Arbeidsforho
 import MedlemskapOppsummering from './components/medlemskap/MedlemskapOppsummering';
 import TerminOppsummering from './components/termin/TerminOppsummering';
 import SøknadDTO from '../../types/S\u00F8knad';
-
-import './oppsummering.less';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
-
 import { Språkkode } from 'common/types';
+import dayjs from 'dayjs';
+
+import './oppsummering.less';
 
 interface OwnProps {
     step: SøknadStep;
@@ -117,7 +117,10 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                     title={getMessage(intl, 'oppsummering.arbeidsforhold.tittel')}
                 >
                     <ArbeidsforholdOppsummering
-                        arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
+                        arbeidsforhold={getAktiveArbeidsforhold(
+                            arbeidsforhold,
+                            dayjs(formikProps.values.barn.termindato).toDate()
+                        )}
                         frilansInformasjon={values.søker.frilansInformasjon}
                         selvstendigInformasjon={values.søker.selvstendigNæringsdrivendeInformasjon}
                         søknadsgrunnlag={values.søknadsgrunnlag}
@@ -135,7 +138,10 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 >
                     <TilretteleggingOppsummering
                         tilrettelegging={values.tilrettelegging}
-                        arbeidsforhold={getAktiveArbeidsforhold(arbeidsforhold, formikProps.values.barn.termindato)}
+                        arbeidsforhold={getAktiveArbeidsforhold(
+                            arbeidsforhold,
+                            dayjs(formikProps.values.barn.termindato).toDate()
+                        )}
                     />
                 </Oppsummeringspunkt>
                 <Oppsummeringspunkt type="medlemskap" title={getMessage(intl, 'oppsummering.medlemskap.tittel')}>

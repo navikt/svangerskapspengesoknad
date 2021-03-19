@@ -31,7 +31,7 @@ const InputField: FunctionComponent<Props> = ({ name, ...inputProps }) => {
                         {...field}
                         {...inputProps}
                         value={field.value === undefined ? '' : field.value}
-                        feil={feil}
+                        feil={feil?.feilmelding}
                     />
                 );
             }}

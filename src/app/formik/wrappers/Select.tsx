@@ -19,12 +19,7 @@ const Select: FunctionComponent<Props> = (props) => {
             name={name}
             render={({ field, form }: FieldProps<any>) => {
                 const feilmelding = get(form.errors, name);
-                const feil =
-                    feilmelding && form.submitCount > 0
-                        ? {
-                              feilmelding: translateError(intl, feilmelding),
-                          }
-                        : undefined;
+                const feil = feilmelding && form.submitCount > 0 ? translateError(intl, feilmelding) : undefined;
 
                 return (
                     <NavSelect

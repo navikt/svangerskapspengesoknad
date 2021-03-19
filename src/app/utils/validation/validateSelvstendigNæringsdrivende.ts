@@ -10,14 +10,14 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
     const errors: SelvstendigNæringsdrivendeFeil = {};
 
     if (næring.navnPåNæringen && næring.navnPåNæringen.length > 100) {
-        errors.navnPåNæringen = Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN;
+        errors.navnPåNæringen = 'valideringsfeil.feltetKanVæreMax100Tegn';
     }
 
     if (næring.organisasjonsnummer && !erGyldigNorskOrgnummer(næring.organisasjonsnummer)) {
         errors.organisasjonsnummer =
             næring.organisasjonsnummer.length !== 9
-                ? Valideringsfeil.MÅ_BESTÅ_AV_9_SIFFER
-                : Valideringsfeil.UGYLDIG_ORGANISASJONSNUMMER;
+                ? 'valideringsfeil.måBeståAv9Siffer'
+                : 'valideringsfeil.ugyldigOrganisasjonsnummer';
     }
 
     if (
@@ -30,20 +30,20 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
     if (næring.revisor) {
         const revisor = næring.revisor;
         if (revisor.navn && revisor.navn.length > 100) {
-            set(errors, ['revisor', 'navn'], Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN);
+            set(errors, ['revisor', 'navn'], 'valideringsfeil.feltetKanVæreMax100Tegn');
         }
         if (revisor.navn && revisor.telefonnummer.length > 100) {
-            set(errors, ['revisor', 'telefonnummer'], Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN);
+            set(errors, ['revisor', 'telefonnummer'], 'valideringsfeil.feltetKanVæreMax100Tegn');
         }
     }
 
     if (næring.regnskapsfører) {
         const regnskapsfører = næring.regnskapsfører;
         if (regnskapsfører.navn && regnskapsfører.navn.length > 100) {
-            set(errors, ['regnskapsfører', 'navn'], Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN);
+            set(errors, ['regnskapsfører', 'navn'], 'valideringsfeil.feltetKanVæreMax100Tegn');
         }
         if (regnskapsfører.navn && regnskapsfører.telefonnummer.length > 100) {
-            set(errors, ['regnskapsfører', 'telefonnummer'], Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN);
+            set(errors, ['regnskapsfører', 'telefonnummer'], 'valideringsfeil.feltetKanVæreMax100Tegn');
         }
     }
 
@@ -55,7 +55,7 @@ const validateSelvstendigNæringsdrivende = () => (næring: Partial<Næring>): S
             set(
                 errors,
                 ['endringAvNæringsinntektInformasjon', 'forklaring'],
-                Valideringsfeil.FELTET_KAN_VÆRE_MAX_1000_TEGN
+                'valideringsfeil.feltetKanVæreMax1000Tegn'
             );
         }
 

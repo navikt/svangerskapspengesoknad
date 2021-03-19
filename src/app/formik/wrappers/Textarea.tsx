@@ -20,12 +20,7 @@ const Textarea: FunctionComponent<Props> = ({ name, ...textareaProps }) => {
             type="textarea"
             render={({ field, form }: FieldProps) => {
                 const feilmelding = get(form.errors, name);
-                const feil =
-                    feilmelding && form.submitCount > 0
-                        ? {
-                              feilmelding: translateError(intl, feilmelding),
-                          }
-                        : undefined;
+                const feil = feilmelding && form.submitCount > 0 ? translateError(intl, feilmelding) : undefined;
 
                 return (
                     <NavFrontendTextarea

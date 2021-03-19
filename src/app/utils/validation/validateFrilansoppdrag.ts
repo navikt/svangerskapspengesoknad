@@ -1,6 +1,5 @@
 import { FormikErrors } from 'formik';
 import { FrilansOppdrag } from 'app/types/FrilansInformasjon';
-import Valideringsfeil from 'app/types/Valideringsfeil';
 
 type FrilansoppdragFeil = FormikErrors<FrilansOppdrag>;
 
@@ -8,18 +7,18 @@ const validateFrilansoppdrag = () => (frilansOppdrag: Partial<FrilansOppdrag>): 
     const errors: FrilansoppdragFeil = {};
 
     if (frilansOppdrag.navnPåArbeidsgiver === undefined || frilansOppdrag.navnPåArbeidsgiver === '') {
-        errors.navnPåArbeidsgiver = Valideringsfeil.FELTET_ER_PÅKREVD;
+        errors.navnPåArbeidsgiver = 'valideringsfeil.feltetErPåkrevd';
     }
 
     if (frilansOppdrag.navnPåArbeidsgiver !== undefined && frilansOppdrag.navnPåArbeidsgiver.length > 100) {
-        errors.navnPåArbeidsgiver = Valideringsfeil.FELTET_KAN_VÆRE_MAX_100_TEGN;
+        errors.navnPåArbeidsgiver = 'valideringsfeil.feltetKanVæreMax100Tegn';
     }
 
     if (
         frilansOppdrag.tidsperiode === undefined ||
         (frilansOppdrag.tidsperiode !== undefined && frilansOppdrag.tidsperiode.fom === undefined)
     ) {
-        errors.tidsperiode = { fom: Valideringsfeil.FELTET_ER_PÅKREVD };
+        errors.tidsperiode = { fom: 'valideringsfeil.feltetErPåkrevd' };
     }
 
     return errors;
