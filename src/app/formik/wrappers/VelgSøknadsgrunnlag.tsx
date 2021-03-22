@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
+import { CheckboksPanelGruppe, CheckboksPanelGruppeProps } from 'nav-frontend-skjema';
 import { FieldArrayRenderProps, FieldArray } from 'formik';
-import CheckboksPanelGruppeResponsive from 'common/components/skjema/elements/checkbox-panel-gruppe-responsive/CheckboksPanelGruppeResponsive';
 import { Omit } from 'lodash';
 import { Søknadsgrunnlag } from 'app/types/Søknad';
 import { Arbeidsforholdstype } from 'app/types/Tilrettelegging';
@@ -21,19 +20,18 @@ interface OwnProps {
 type Props = OwnProps & Omit<CheckboksPanelGruppeProps, 'onChange' | 'checkboxes' | 'legend'>;
 
 const VelgSøknadsgrunnlag: FunctionComponent<Props> = (props) => {
-    const { name, label, options, ...checkboksPanelGruppeProps } = props;
+    const { name, label, options } = props;
 
     return (
         <FieldArray
             name={name}
             render={({ form, push, remove }: FieldArrayRenderProps) => {
                 return (
-                    <CheckboksPanelGruppeResponsive
-                        columns={1}
-                        {...checkboksPanelGruppeProps}
+                    <CheckboksPanelGruppe
                         legend={label}
                         checkboxes={options.map((option) => ({
-                            ...option,
+                            value: option.value,
+                            label: option.label,
                             checked: form.values[name].some((v: Søknadsgrunnlag) => v.id === option.value),
                         }))}
                         onChange={(_, value) => {
