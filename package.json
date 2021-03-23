@@ -93,7 +93,7 @@
         "date-holidays": "^1.7.0",
         "dayjs": "^1.10.4",
         "express": "^4.17.1",
-        "formik": "^1.5.1",
+        "formik": "^1.5.8",
         "history": "^4.7.2",
         "husky": "^4.3.0",
         "i18n-iso-countries": "^3.7.8",

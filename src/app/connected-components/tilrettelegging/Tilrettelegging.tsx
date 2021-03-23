@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
-import { FieldArray } from 'formik';
+import { FieldArray, FieldArrayRenderProps } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { AttachmentActionTypes } from 'app/redux/types/AttachmentAction';
@@ -82,7 +82,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
     const { values, setFieldValue } = formikProps;
 
-    const index = values.tilrettelegging.findIndex((t) => t.id === id);
+    const index = values.tilrettelegging.findIndex((t: any) => t.id === id);
     const tilrettelegging = values.tilrettelegging[index];
     const arbeidsgiversNavn = finnArbeidsforholdNavn(id, arbeidsforhold, intl);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
@@ -199,7 +199,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     >
                         <FieldArray
                             name={getInputName('vedlegg')}
-                            render={({ push, remove }) => (
+                            render={({ push, remove }: FieldArrayRenderProps) => (
                                 <AttachmentOverview
                                     attachmentType={AttachmentType.TILRETTELEGGING}
                                     skjemanummer={
@@ -316,9 +316,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('helTilrettelegging')}
-                            render={(arrayHelpers) =>
+                            render={(arrayHelpers: FieldArrayRenderProps) =>
                                 tilrettelegging.helTilrettelegging !== undefined &&
-                                tilrettelegging.helTilrettelegging.map((_helTil, ind, arr) => (
+                                tilrettelegging.helTilrettelegging.map((_helTil: any, ind: any, arr: any) => (
                                     <>
                                         <Block margin="xs">
                                             <AddTilrettelegging
@@ -363,9 +363,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('delvisTilrettelegging')}
-                            render={(arrayHelpers) =>
+                            render={(arrayHelpers: FieldArrayRenderProps) =>
                                 tilrettelegging.delvisTilrettelegging !== undefined &&
-                                tilrettelegging.delvisTilrettelegging.map((_delTil, ind, arr) => (
+                                tilrettelegging.delvisTilrettelegging.map((_delTil: any, ind: any, arr: any) => (
                                     <>
                                         <Block margin="xs">
                                             <AddTilrettelegging
@@ -422,9 +422,9 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                     <InfoBlock>
                         <FieldArray
                             name={getInputName('ingenTilrettelegging')}
-                            render={(arrayHelpers) =>
+                            render={(arrayHelpers: any) =>
                                 tilrettelegging.ingenTilrettelegging !== undefined &&
-                                tilrettelegging.ingenTilrettelegging.map((_ingenTil, ind, arr) => (
+                                tilrettelegging.ingenTilrettelegging.map((_ingenTil: any, ind: any, arr: any) => (
                                     <>
                                         <Block margin="xs">
                                             <AddTilrettelegging

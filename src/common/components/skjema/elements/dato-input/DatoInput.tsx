@@ -64,7 +64,7 @@ const DatoInput: React.FunctionComponent<Props> = ({
                 <div className={bem.element('datovelger')}>
                     <Datepicker
                         {...rest}
-                        allowInvalidDateSelection={true}
+                        allowInvalidDateSelection={false}
                         value={dato}
                         locale={intl.locale as any}
                         calendarSettings={calendarSettings}
