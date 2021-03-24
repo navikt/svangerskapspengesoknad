@@ -91,7 +91,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                         <Block>
                             <RadioPanelGruppe
                                 twoColumns={true}
-                                name={'type'}
+                                name="type"
                                 legend={getMessage(intl, 'arbeidsforhold.andreInntekter.inntektstype')}
                                 radios={[
                                     {

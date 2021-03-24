@@ -7,13 +7,13 @@ describe('andre inntekter modal', () => {
     const validator = validateAndreInntekter();
 
     it('type should be required', () => {
-        expect(validator(annenInntekt).type).toBe('valideringsfeil.feltetErPåkrevd');
+        expect(validator(annenInntekt).type).toBe('valideringsfeil.annenInntekt.inntektskilde.påkrevd');
     });
 
     it('arbeidsgiverLand and land is required if annen inntekt type is jobb i utlandet', () => {
         annenInntekt.type = AnnenInntektType.JOBB_I_UTLANDET;
         const result = validator(annenInntekt) as FormikErrors<JobbIUtlandetInntekt>;
-        expect(result.arbeidsgiverNavn).toBe('valideringsfeil.feltetErPåkrevd');
-        expect(result.land).toBe('valideringsfeil.feltetErPåkrevd');
+        expect(result.arbeidsgiverNavn).toBe('valideringsfeil.annenInntekt.arbeidsgiverNavn.påkrevd');
+        expect(result.land).toBe('valideringsfeil.annenInntekt.land.påkrevd');
     });
 });

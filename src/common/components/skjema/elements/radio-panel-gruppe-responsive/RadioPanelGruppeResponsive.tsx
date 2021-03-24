@@ -14,12 +14,19 @@ export type RadioPanelGruppeResponsiveProps = ResponsiveProps & RadioPanelGruppe
 
 class RadioPanelGruppeResponsive extends React.Component<RadioPanelGruppeResponsiveProps> {
     render() {
-        const { infoboksTekst, fieldsetClassname, legend, name, radios, checked, onChange } = this.props;
+        const { infoboksTekst, fieldsetClassname, legend, name, radios, checked, feil, onChange } = this.props;
 
         return (
             <div className="radioPanelGruppe">
                 {infoboksTekst && <Infoboks fieldsetClsName={fieldsetClassname} tekst={infoboksTekst} />}
-                <RadioPanelGruppe name={name} radios={radios} legend={legend} checked={checked} onChange={onChange} />
+                <RadioPanelGruppe
+                    feil={feil}
+                    name={name}
+                    radios={radios}
+                    legend={legend}
+                    checked={checked}
+                    onChange={onChange}
+                />
             </div>
         );
     }
