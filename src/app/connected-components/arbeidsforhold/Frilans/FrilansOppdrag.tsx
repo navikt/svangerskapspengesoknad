@@ -51,7 +51,6 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                             <InputField
                                 name="navnPåArbeidsgiver"
                                 label={getMessage(intl, 'arbeidsforhold.frilans.oppdrag.navnPåArbeidsgiver')}
-                                required={true}
                             />
                         </Block>
 
