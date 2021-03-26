@@ -8,6 +8,6 @@ module.exports = {
         'nav-(.*)-style': '<rootDir>/mockFile.js',
         '^app/(.*)': '<rootDir>/src/app/$1',
         '^uttaksplan/(.*)': '<rootDir>/src/uttaksplan/$1',
-        '^common/(.*)': '<rootDir>/src/common/$1'
-    }
+        '^common/(.*)': '<rootDir>/src/common/$1',
+    },
 };

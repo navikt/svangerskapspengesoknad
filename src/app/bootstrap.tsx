@@ -1,18 +1,11 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import countries from 'i18n-iso-countries';
 import Modal from 'nav-frontend-modal';
 import * as Sentry from '@sentry/browser';
-
-import store from './redux/store';
-import IntlProvider from './intl/IntlProvider';
-import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
-
-import './styles/global.less';
-import './styles/app.less';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from './components/ErrorBoundary';
+import AppContainer from './AppContainer';
 
 countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
@@ -28,13 +21,9 @@ Sentry.init({
 
 render(
     <ErrorBoundary>
-        <Provider store={store}>
-            <IntlProvider>
-                <Normaltekst tag="main">
-                    <Svangerskapspengesøknad />
-                </Normaltekst>
-            </IntlProvider>
-        </Provider>
+        <Normaltekst tag="main">
+            <AppContainer />
+        </Normaltekst>
     </ErrorBoundary>,
     rootElement
 );
