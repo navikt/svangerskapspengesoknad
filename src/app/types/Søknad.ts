@@ -1,6 +1,9 @@
-import InformasjonOmUtenlandsopphold, { InformasjonOmUtenlandsoppholdPartial } from './InformasjonOmUtenlandsopphold';
-import Barn, { UferdigBarn } from './Barn';
-import Søker, { Søkerrolle } from './Søker';
+import {
+    InformasjonOmUtenlandsoppholdDTO,
+    InformasjonOmUtenlandsoppholdPartial,
+} from './InformasjonOmUtenlandsopphold';
+import { BarnDTO, UferdigBarn } from './Barn';
+import Søker, { SøkerDTO, Søkerrolle } from './Søker';
 import { UferdigTilrettelegging, Arbeidsforholdstype } from './Tilrettelegging';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { FormikErrors } from 'formik';
@@ -13,11 +16,11 @@ export enum Søknadstype {
 interface SøknadDTO {
     type: Søknadstype;
     erEndringssøknad: boolean;
-    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    barn: Barn;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsoppholdDTO;
+    barn: BarnDTO;
     vedlegg?: Attachment[];
     tilrettelegging: TilretteleggingDTO[];
-    søker: Søker;
+    søker: SøkerDTO;
 }
 export interface UferdigSøknad {
     harGodkjentVilkår: boolean;

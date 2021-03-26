@@ -1,4 +1,4 @@
-import { TidsperiodeMedValgfriSluttdato } from 'common/types';
+import { TidsperiodeMedValgfriSluttdato, TidsperiodeMedValgfriSluttdatoDTO } from 'common/types';
 
 export enum Næringstype {
     'FISKER' = 'FISKE',
@@ -7,7 +7,7 @@ export enum Næringstype {
     'ANNET' = 'ANNEN',
 }
 
-export class Næring {
+export interface Næring {
     næringstyper: Næringstype[];
     tidsperiode: Partial<TidsperiodeMedValgfriSluttdato>;
     næringsinntekt: string;
@@ -28,14 +28,41 @@ export class Næring {
     kanInnhenteOpplsyningerFraRevisor?: boolean;
 }
 
-export class EndringAvNæringsinntektInformasjon {
-    dato: Date;
+export interface EndringAvNæringsinntektInformasjon {
+    dato: string;
     næringsinntektEtterEndring: string;
     forklaring: string;
 }
 
-export class Næringsrelasjon {
+export interface Næringsrelasjon {
     navn: string;
     telefonnummer: string;
     erNærVennEllerFamilie: boolean;
+}
+
+export interface NæringDTO {
+    næringstyper: Næringstype[];
+    tidsperiode: Partial<TidsperiodeMedValgfriSluttdatoDTO>;
+    næringsinntekt: string;
+    pågående: boolean;
+    navnPåNæringen: string;
+    organisasjonsnummer: string;
+    registrertINorge: boolean;
+    registrertILand?: string;
+    stillingsprosent?: string;
+    harBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene?: boolean;
+    oppstartsdato?: Date;
+    hattVarigEndringAvNæringsinntektSiste4Kalenderår?: boolean;
+    endringAvNæringsinntektInformasjon?: EndringAvNæringsinntektInformasjonDTO;
+    harRegnskapsfører: boolean;
+    regnskapsfører?: Næringsrelasjon;
+    harRevisor: boolean;
+    revisor?: Næringsrelasjon;
+    kanInnhenteOpplsyningerFraRevisor?: boolean;
+}
+
+export interface EndringAvNæringsinntektInformasjonDTO {
+    dato: Date;
+    næringsinntektEtterEndring: string;
+    forklaring: string;
 }

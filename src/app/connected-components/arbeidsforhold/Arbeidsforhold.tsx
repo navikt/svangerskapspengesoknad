@@ -58,7 +58,7 @@ type Props = OwnProps & StepProps & ConnectProps;
 const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const { step, formikProps, arbeidsforhold, history } = props;
     const { values, setFieldValue } = formikProps;
-    const { søker, søknadsgrunnlag } = values;
+    const { søker, søknadsgrunnlag, barn } = values;
     const intl = useIntl();
 
     const harValgtMinstEttGrunnlag: boolean = søknadsgrunnlag.length > 0;
@@ -74,7 +74,8 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
 
     const søknadsgrunnlagOptions = mapArbeidsforholdToSøknadsgrunnlagOptions(
         cleanupSøker(values.søker) as Søker,
-        arbeidsforhold
+        arbeidsforhold,
+        barn.termindato!
     );
 
     const harLagtTilFørstegangstjeneste = søker.andreInntekterSiste10Mnd

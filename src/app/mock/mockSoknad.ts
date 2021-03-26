@@ -55,7 +55,7 @@ const mockSøknad: UferdigSøknad = {
         andreInntekterSiste10Mnd: [],
         harJobbetSomFrilansSiste10Mnd: true,
         frilansInformasjon: {
-            oppstart: new Date('2019-04-21T00:00:00.000Z'),
+            oppstart: dagensDatoString,
             jobberFremdelesSomFrilans: true,
             harJobbetForNærVennEllerFamilieSiste10Mnd: false,
             driverFosterhjem: true,

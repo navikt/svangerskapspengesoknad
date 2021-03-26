@@ -54,9 +54,14 @@ export const mapArbeidsforhold = (arbeidsforhold: SøkerinfoDTOArbeidsforhold[] 
     return [];
 };
 
-export const getUnikeArbeidsforhold = (arbeidsforhold: Arbeidsforhold[] | undefined): Arbeidsforhold[] => {
+export const getUnikeArbeidsforhold = (
+    arbeidsforhold: Arbeidsforhold[] | undefined,
+    termindato: string
+): Arbeidsforhold[] => {
     if (arbeidsforhold !== undefined && arbeidsforhold.length > 0) {
-        return uniqBy(arbeidsforhold, getArbeidsgiverId).map((forhold) => ({
+        const aktiveArbeidsforhold = getAktiveArbeidsforhold(arbeidsforhold, new Date(termindato));
+
+        return uniqBy(aktiveArbeidsforhold, getArbeidsgiverId).map((forhold) => ({
             ...forhold,
             fom: new Date(forhold.fom),
             tom: forhold.tom !== undefined ? new Date(forhold.tom) : undefined,

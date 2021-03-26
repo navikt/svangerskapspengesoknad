@@ -10,4 +10,10 @@ export interface UferdigBarn {
     fødselsdato?: string;
 }
 
+export interface BarnDTO {
+    erBarnetFødt: boolean;
+    termindato: Date;
+    fødselsdatoer?: Date[];
+}
+
 export default Barn;

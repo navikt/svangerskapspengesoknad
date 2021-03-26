@@ -8,7 +8,8 @@ import { AnnenInntektType } from '../../../types/AnnenInntekt';
 
 export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
     søker: Partial<Søker>,
-    arbeidsforhold: Arbeidsforhold[]
+    arbeidsforhold: Arbeidsforhold[],
+    termindato: string
     //intl: intl
 ): SøknadsgrunnlagOption[] => {
     const intl = useIntl();
@@ -16,7 +17,7 @@ export const mapArbeidsforholdToSøknadsgrunnlagOptions = (
     const førstegangstjeneste = andreInntekterSiste10Mnd.find(
         (inntekt) => inntekt.type === AnnenInntektType.MILITÆRTJENESTE
     );
-    const unikeArbeidsforhold = getUnikeArbeidsforhold(arbeidsforhold);
+    const unikeArbeidsforhold = getUnikeArbeidsforhold(arbeidsforhold, termindato);
 
     return [
         ...unikeArbeidsforhold.map((forhold) => ({

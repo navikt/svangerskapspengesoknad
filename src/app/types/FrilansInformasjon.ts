@@ -1,4 +1,4 @@
-import { TidsperiodeMedValgfriSluttdato } from 'common/types';
+import { TidsperiodeMedValgfriSluttdato, TidsperiodeMedValgfriSluttdatoDTO } from 'common/types';
 
 export interface FrilansOppdrag {
     navnPåArbeidsgiver: string;
@@ -8,10 +8,25 @@ export interface FrilansOppdrag {
 
 export interface FrilansInformasjon {
     jobberFremdelesSomFrilans: boolean;
-    oppstart: Date;
+    oppstart: string;
     driverFosterhjem?: boolean;
     harJobbetForNærVennEllerFamilieSiste10Mnd: boolean;
     oppdragForNæreVennerEllerFamilieSiste10Mnd: FrilansOppdrag[];
 }
 
+export interface FrilansOppdragDTO {
+    navnPåArbeidsgiver: string;
+    tidsperiode: Partial<TidsperiodeMedValgfriSluttdatoDTO>;
+    pågående: boolean;
+}
+
+export interface FrilansInformasjonDTO {
+    jobberFremdelesSomFrilans: boolean;
+    oppstart: Date;
+    driverFosterhjem?: boolean;
+    harJobbetForNærVennEllerFamilieSiste10Mnd: boolean;
+    oppdragForNæreVennerEllerFamilieSiste10Mnd: FrilansOppdragDTO[];
+}
+
 export type FrilansInformasjonPartial = Partial<FrilansInformasjon>;
+export type FrilansInformasjonPartialDTO = Partial<FrilansInformasjonDTO>;
