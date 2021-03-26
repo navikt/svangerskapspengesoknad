@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { FrilansInformasjon } from 'app/types/FrilansInformasjon';
 import { DeepPartial } from 'redux';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
-import * as moment from 'moment';
+import moment from 'moment';
 import { AnnenInntekt, AnnenInntektType } from 'app/types/AnnenInntekt';
 
 export const cleanupFrilansinformasjon = (søker: Partial<Søker>): DeepPartial<FrilansInformasjon> => {

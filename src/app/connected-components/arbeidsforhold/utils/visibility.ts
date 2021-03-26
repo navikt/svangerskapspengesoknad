@@ -1,6 +1,6 @@
 import { Næring, Næringstype } from 'app/types/SelvstendigNæringsdrivende';
 import { cleanupNæring } from './cleanup';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring>) => {
     const normalisertNæring = cleanupNæring(næring);
