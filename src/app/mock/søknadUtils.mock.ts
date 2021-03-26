@@ -1,5 +1,8 @@
 import { Arbeidsforholdstype, Tilretteleggingstype, UferdigTilrettelegging } from '../types/Tilrettelegging';
 import { initialSøknad, UferdigSøknad } from '../types/Søknad';
+import { dateToISOFormattedDateString } from 'common/util/datoUtils';
+
+const dagensDatoString = dateToISOFormattedDateString(new Date())!;
 
 const selvstendigTilrettelegging: UferdigTilrettelegging = {
     id: 'sdgf',
@@ -8,22 +11,22 @@ const selvstendigTilrettelegging: UferdigTilrettelegging = {
         type: Arbeidsforholdstype.SELVSTENDIG,
     },
     risikoFaktorer: 'Selvstendig er skummelt i seg selv',
-    behovForTilretteleggingFom: new Date(),
+    behovForTilretteleggingFom: dagensDatoString,
     type: [Tilretteleggingstype.INGEN, Tilretteleggingstype.DELVIS, Tilretteleggingstype.HEL],
     ingenTilrettelegging: [
         {
-            slutteArbeidFom: new Date(),
+            slutteArbeidFom: dagensDatoString,
         },
     ],
     delvisTilrettelegging: [
         {
             stillingsprosent: 20,
-            tilrettelagtArbeidFom: new Date(),
+            tilrettelagtArbeidFom: dagensDatoString,
         },
     ],
     helTilrettelegging: [
         {
-            tilrettelagtArbeidFom: new Date(),
+            tilrettelagtArbeidFom: dagensDatoString,
         },
     ],
     tilretteleggingstiltak: 'sdfsdf',
@@ -36,22 +39,22 @@ const frilansTilrettelegging: UferdigTilrettelegging = {
         type: Arbeidsforholdstype.FRILANSER,
     },
     risikoFaktorer: 'sdfsdf',
-    behovForTilretteleggingFom: new Date(),
+    behovForTilretteleggingFom: dagensDatoString,
     type: [Tilretteleggingstype.INGEN, Tilretteleggingstype.DELVIS, Tilretteleggingstype.HEL],
     ingenTilrettelegging: [
         {
-            slutteArbeidFom: new Date(),
+            slutteArbeidFom: dagensDatoString,
         },
     ],
     delvisTilrettelegging: [
         {
-            tilrettelagtArbeidFom: new Date(),
+            tilrettelagtArbeidFom: dagensDatoString,
             stillingsprosent: 22,
         },
     ],
     helTilrettelegging: [
         {
-            tilrettelagtArbeidFom: new Date(),
+            tilrettelagtArbeidFom: dagensDatoString,
         },
     ],
     tilretteleggingstiltak: 'sdfsdf',
@@ -64,22 +67,22 @@ const virksomhetTilrettelegging: UferdigTilrettelegging = {
         id: '973861778',
         type: Arbeidsforholdstype.VIRKSOMHET,
     },
-    behovForTilretteleggingFom: new Date(),
+    behovForTilretteleggingFom: dagensDatoString,
     type: [Tilretteleggingstype.INGEN, Tilretteleggingstype.DELVIS, Tilretteleggingstype.HEL],
     ingenTilrettelegging: [
         {
-            slutteArbeidFom: new Date(),
+            slutteArbeidFom: dagensDatoString,
         },
     ],
     delvisTilrettelegging: [
         {
             stillingsprosent: 22,
-            tilrettelagtArbeidFom: new Date(),
+            tilrettelagtArbeidFom: dagensDatoString,
         },
     ],
     helTilrettelegging: [
         {
-            tilrettelagtArbeidFom: new Date(),
+            tilrettelagtArbeidFom: dagensDatoString,
         },
     ],
 };

@@ -1,6 +1,9 @@
 import { UferdigSøknad } from '../types/Søknad';
 import { Arbeidsforholdstype, Tilretteleggingstype } from '../types/Tilrettelegging';
 import { Søkerrolle } from '../types/Søker';
+import { dateToISOFormattedDateString } from 'common/util/datoUtils';
+
+const dagensDatoString = dateToISOFormattedDateString(new Date())!;
 
 const mockSøknad: UferdigSøknad = {
     harGodkjentVilkår: true,
@@ -13,7 +16,7 @@ const mockSøknad: UferdigSøknad = {
         {
             id: '973861778',
             vedlegg: ['V20660387026295873109468060050833209350'],
-            behovForTilretteleggingFom: new Date(),
+            behovForTilretteleggingFom: dagensDatoString,
             type: [Tilretteleggingstype.HEL],
             arbeidsforhold: {
                 id: '973861778',
@@ -23,7 +26,7 @@ const mockSøknad: UferdigSøknad = {
         {
             id: 'Frilans',
             vedlegg: [],
-            behovForTilretteleggingFom: new Date(),
+            behovForTilretteleggingFom: dagensDatoString,
             type: [Tilretteleggingstype.HEL],
             arbeidsforhold: {
                 type: Arbeidsforholdstype.FRILANSER,

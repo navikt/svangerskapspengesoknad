@@ -56,15 +56,19 @@ export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: n
 export const dateToISOFormattedDateString = (date?: Date) => (date ? moment.utc(date).format('YYYY-MM-DD') : undefined);
 
 export const halvannetÅrSiden = (dato: Date) => moment(dato).startOf('day').subtract(1, 'year').subtract(6, 'months');
-export const etÅrSiden = (dato: Date) => moment(dato).startOf('day').subtract(1, 'year').add(1, 'day');
-export const tiMånederSiden = (dato: string) => moment(dato).startOf('day').subtract(10, 'months').add(1, 'day');
+export const etÅrSiden = (dato: Date) =>
+    dateToISOFormattedDateString(moment(dato).startOf('day').subtract(1, 'year').add(1, 'day').toDate());
+export const tiMånederSiden = (dato: string) =>
+    dateToISOFormattedDateString(moment(dato).startOf('day').subtract(10, 'months').add(1, 'day').toDate());
 export const femMånederSiden = (dato: Date) => moment(dato).startOf('day').subtract(5, 'month');
 export const enMånedSiden = (dato: Date) => moment(dato).startOf('day').subtract(1, 'month');
-export const treUkerSiden = (dato: string) => moment(dato).startOf('day').subtract(3, 'weeks');
-export const dagenFør = (dato: string) => moment(dato).startOf('day');
+export const treUkerSiden = (dato: string) =>
+    dateToISOFormattedDateString(moment(dato).startOf('day').subtract(3, 'weeks').toDate());
+export const dagenFør = (dato: string) => dateToISOFormattedDateString(moment(dato).startOf('day').toDate());
 export const dagenEtter = (dato: Date) => moment(dato).startOf('day').add(1, 'day');
 export const enMånedFremiTid = (dato: Date) => moment(dato).startOf('day').add(1, 'month');
-export const niMånederFremITid = (dato: Date) => moment(dato).startOf('day').add(9, 'months');
+export const niMånederFremITid = (dato: Date) =>
+    dateToISOFormattedDateString(moment(dato).startOf('day').add(9, 'months').toDate());
 
 export const isInvalidDateString = (dateString: string | undefined) => {
     return dateString !== undefined && dateString !== '' && isISODateString(dateString) === false;

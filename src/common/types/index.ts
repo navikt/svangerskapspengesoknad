@@ -13,19 +13,19 @@ export interface NavnPåForeldre {
 }
 
 export interface Tidsperiode {
-    fom: Date;
-    tom: Date;
+    fom: string;
+    tom: string;
 }
 
 export interface Avgrensninger {
-    minDato?: Date;
-    maksDato?: Date;
+    minDato?: string;
+    maksDato?: string;
     ugyldigeTidsperioder?: Tidsperiode[];
     helgedagerIkkeTillatt?: boolean;
 }
 
 export interface TidsperiodeMedValgfriSluttdato {
-    fom: Date;
-    tom?: Date;
+    fom: string;
+    tom?: string;
     pågående?: boolean;
 }

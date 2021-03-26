@@ -9,7 +9,7 @@ interface Props {
     visUkedag?: boolean;
 }
 
-const FormatertDato: React.StatelessComponent<Props> = ({ dato, visUkedag = true }) => {
+const FormatertDato: React.FunctionComponent<Props> = ({ dato, visUkedag = true }) => {
     const d = moment.utc(dato);
     return (
         <span className="formatert-dato">

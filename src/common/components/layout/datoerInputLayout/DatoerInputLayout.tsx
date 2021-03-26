@@ -11,7 +11,7 @@ interface Props {
 
 const bem = BEMHelper('datoerInputLayout');
 
-const DatoerInputLayout: React.StatelessComponent<Props> = ({ fra, til, fullbredde }) => (
+const DatoerInputLayout: React.FunctionComponent<Props> = ({ fra, til, fullbredde }) => (
     <div className={bem.classNames(bem.block, bem.modifierConditional('fullbredde', fullbredde))}>
         <div className={bem.element('fraDato')}>{fra}</div>
         {til && <div className={bem.element('tilDato')}>{til}</div>}

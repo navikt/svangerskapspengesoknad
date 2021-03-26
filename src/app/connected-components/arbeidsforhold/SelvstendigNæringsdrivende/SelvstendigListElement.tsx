@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import { prettifyTidsperiode } from 'app/utils/formatDate';
 import InteractiveListElement from 'common/components/interactive-list-element/InteractiveListElement';
 
-const SelvstendigListElement: React.StatelessComponent<ModalSummaryProps<Næring>> = ({ element, ...rest }) => {
+const SelvstendigListElement: React.FunctionComponent<ModalSummaryProps<Næring>> = ({ element, ...rest }) => {
     const intl = useIntl();
     const title = element.organisasjonsnummer
         ? `${element.organisasjonsnummer} ${element.navnPåNæringen}`

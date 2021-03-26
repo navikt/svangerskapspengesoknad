@@ -4,16 +4,17 @@ import { Tidsperiode } from 'app/types/Tidsperiode';
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 import isEmpty from 'lodash/isEmpty';
 import { isISODateString } from 'nav-datovelger';
+import { dateToISOFormattedDateString } from 'common/util/datoUtils';
 
 type Oppholdsfeil = FormikErrors<Utenlandsopphold>;
 
-export const getDatoAvgrensninger = (type: Oppholdstype, fom: Date, tom: Date) => {
-    const today = new Date();
+export const getDatoAvgrensninger = (type: Oppholdstype, fom: string, tom: string) => {
+    const today = dateToISOFormattedDateString(new Date());
 
     return type === Oppholdstype.TIDLIGERE_OPPHOLD
         ? {
               fom: {
-                  maksDato: moment.min([moment(today), moment(tom)]).toDate(),
+                  maksDato: dateToISOFormattedDateString(moment.min([moment(today), moment(tom)]).toDate()),
               },
               tom: {
                   minDato: fom,
@@ -26,7 +27,7 @@ export const getDatoAvgrensninger = (type: Oppholdstype, fom: Date, tom: Date) =
                   maksDato: tom,
               },
               tom: {
-                  minDato: moment.max([moment(today), moment(fom)]).toDate(),
+                  minDato: dateToISOFormattedDateString(moment.max([moment(today), moment(fom)]).toDate()),
               },
           };
 };

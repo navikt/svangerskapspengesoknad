@@ -60,10 +60,10 @@ const mapHelTilrettelegging = (
     }
     return {
         type: Tilretteleggingstype.HEL,
-        behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
+        behovForTilretteleggingFom: new Date(tilrettelegging.behovForTilretteleggingFom),
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        tilrettelagtArbeidFom: helTilrettelegging.tilrettelagtArbeidFom,
+        tilrettelagtArbeidFom: new Date(helTilrettelegging.tilrettelagtArbeidFom),
     };
 };
 
@@ -77,10 +77,10 @@ const mapDelvisTilrettelegging = (
     }
     return {
         type: Tilretteleggingstype.DELVIS,
-        behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
+        behovForTilretteleggingFom: new Date(tilrettelegging.behovForTilretteleggingFom),
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        tilrettelagtArbeidFom: delvisTilrettelegging.tilrettelagtArbeidFom,
+        tilrettelagtArbeidFom: new Date(delvisTilrettelegging.tilrettelagtArbeidFom),
         stillingsprosent: delvisTilrettelegging.stillingsprosent,
     };
 };
@@ -95,10 +95,10 @@ const mapIngenTilrettelegging = (
     }
     return {
         type: Tilretteleggingstype.INGEN,
-        behovForTilretteleggingFom: tilrettelegging.behovForTilretteleggingFom,
+        behovForTilretteleggingFom: new Date(tilrettelegging.behovForTilretteleggingFom),
         arbeidsforhold,
         vedlegg: tilrettelegging.vedlegg,
-        slutteArbeidFom: ingenTilrettelegging.slutteArbeidFom,
+        slutteArbeidFom: new Date(ingenTilrettelegging.slutteArbeidFom),
     };
 };
 

@@ -25,7 +25,7 @@ export interface BlockProps {
 
 const cls = BEMHelper('block');
 
-const Block: React.StatelessComponent<BlockProps> = ({
+const Block: React.FunctionComponent<BlockProps> = ({
     visible,
     margin = 'm',
     header,

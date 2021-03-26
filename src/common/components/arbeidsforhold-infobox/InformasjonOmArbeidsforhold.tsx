@@ -8,13 +8,14 @@ import BEMHelper from 'common/util/bem';
 
 import { formatDate } from 'app/utils/formatDate';
 import './arbeidsforhold.less';
+import { dateToISOFormattedDateString } from 'common/util/datoUtils';
 
 interface InformasjonOmArbeidsforholdProps {
     arbeidsforhold: Arbeidsforhold;
 }
 
 type Props = InformasjonOmArbeidsforholdProps;
-const InformasjonOmArbeidsforhold: React.StatelessComponent<Props> = ({ arbeidsforhold }: Props) => {
+const InformasjonOmArbeidsforhold: React.FunctionComponent<Props> = ({ arbeidsforhold }: Props) => {
     const intl = useIntl();
     const cls = BEMHelper('arbeidsforholdInfoBox');
     return (
@@ -40,8 +41,10 @@ const InformasjonOmArbeidsforhold: React.StatelessComponent<Props> = ({ arbeidsf
             </Element>
             <Normaltekst>
                 {getMessage(intl, 'annenInntekt.arbeidsforhold.periode', {
-                    fom: formatDate(arbeidsforhold.fom),
-                    tom: arbeidsforhold.tom ? formatDate(arbeidsforhold.tom) : getMessage(intl, 'pågående'),
+                    fom: formatDate(dateToISOFormattedDateString(arbeidsforhold.fom)),
+                    tom: arbeidsforhold.tom
+                        ? formatDate(dateToISOFormattedDateString(arbeidsforhold.tom))
+                        : getMessage(intl, 'pågående'),
                 })}
             </Normaltekst>
         </div>

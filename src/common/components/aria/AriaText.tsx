@@ -8,7 +8,7 @@ export interface AriaTextProps {
     children?: React.ReactNode;
 }
 
-const AriaText: React.StatelessComponent<AriaTextProps> = (props) => {
+const AriaText: React.FunctionComponent<AriaTextProps> = (props) => {
     return (
         <span id={props.id} className="sr-only">
             {props.children}

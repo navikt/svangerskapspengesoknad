@@ -4,7 +4,6 @@ import AriaText from 'common/components/aria/AriaText';
 import { getAvgrensningerDescriptionForInput } from 'common/components/skjema/elements/dato-input/datoInputDescription';
 import { Avgrensninger, Tidsperiode } from 'common/types';
 import BEMHelper from 'common/util/bem';
-import { dateToISOFormattedDateString } from 'common/util/datoUtils';
 import { Datepicker, DatepickerLimitations } from 'nav-datovelger';
 import { DatepickerProps } from 'nav-datovelger/lib/Datepicker';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
@@ -27,14 +26,14 @@ export type Props = DatoInputProps;
 
 const parseAvgrensinger = (avgrensinger: Avgrensninger): DatepickerLimitations => {
     return {
-        maxDate: dateToISOFormattedDateString(avgrensinger.maksDato),
-        minDate: dateToISOFormattedDateString(avgrensinger.minDato),
+        maxDate: avgrensinger.maksDato,
+        minDate: avgrensinger.minDato,
         weekendsNotSelectable: avgrensinger.helgedagerIkkeTillatt,
         invalidDateRanges:
             avgrensinger.ugyldigeTidsperioder &&
             avgrensinger.ugyldigeTidsperioder.map((t: Tidsperiode) => ({
-                from: dateToISOFormattedDateString(t.fom)!,
-                to: dateToISOFormattedDateString(t.tom)!,
+                from: t.fom,
+                to: t.tom,
             })),
     };
 };

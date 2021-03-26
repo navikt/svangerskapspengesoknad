@@ -266,8 +266,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                     )
                                 }
                                 datoAvgrensinger={{
-                                    minDato: tiMånederSiden(values.barn.termindato!).toDate(),
-                                    maksDato: dagenFør(values.barn.termindato!).toDate(),
+                                    minDato: tiMånederSiden(values.barn.termindato!),
+                                    maksDato: dagenFør(values.barn.termindato!),
                                 }}
                             />
                         </Block>
@@ -324,7 +324,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: treUkerSiden(values.barn.termindato!).toDate(),
+                                                    maksDato: treUkerSiden(values.barn.termindato!),
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'helTilrettelegging'
@@ -371,7 +371,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: treUkerSiden(values.barn.termindato!).toDate(),
+                                                    maksDato: treUkerSiden(values.barn.termindato!),
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'delvisTilrettelegging'
@@ -430,7 +430,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             <AddTilrettelegging
                                                 datoAvgrensninger={{
                                                     minDato: tilrettelegging.behovForTilretteleggingFom,
-                                                    maksDato: treUkerSiden(values.barn.termindato!).toDate(),
+                                                    maksDato: treUkerSiden(values.barn.termindato!),
                                                 }}
                                                 datoInputName={`${getInputName(
                                                     'ingenTilrettelegging'

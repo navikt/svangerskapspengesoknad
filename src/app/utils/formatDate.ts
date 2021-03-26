@@ -3,7 +3,12 @@ import { Tidsperiode } from 'common/types';
 
 export const dateToHours = (date: Date) => moment(date).format('HH:mm');
 
-export const formatDate = (dato?: Date | string) => {
+type FormatDateOverloads = {
+    (dato: string): string;
+    (dato: string | undefined): string | undefined;
+};
+
+export const formatDate: FormatDateOverloads = (dato: string | undefined): any => {
     if (dato) {
         const parsetDato = moment(dato);
         return dato && parsetDato.isValid() ? parsetDato.format('DD.MM.YYYY') : '';

@@ -14,7 +14,7 @@ import { guid } from 'nav-frontend-js-utils';
 interface ArbeidsforholdInfoWrapperProps {
     arbeidsforhold: Arbeidsforhold[] | undefined;
 }
-const InformasjonOmArbeidsforholdWrapper: React.StatelessComponent<ArbeidsforholdInfoWrapperProps> = ({
+const InformasjonOmArbeidsforholdWrapper: React.FunctionComponent<ArbeidsforholdInfoWrapperProps> = ({
     arbeidsforhold,
 }) => {
     const intl = useIntl();

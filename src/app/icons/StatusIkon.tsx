@@ -27,7 +27,7 @@ const FeilSirkelFyll: React.FunctionComponent<Props> = (props) => {
     );
 };
 
-const InfoSirkelFyll: React.StatelessComponent<Props> = (props) => {
+const InfoSirkelFyll: React.FunctionComponent<Props> = (props) => {
     return (
         <svg role="presentation" focusable="false" viewBox="0 0 24 24" width={props.size} height={props.size}>
             {props.title && <title>{props.title}</title>}
@@ -44,7 +44,7 @@ const InfoSirkelFyll: React.StatelessComponent<Props> = (props) => {
     );
 };
 
-const OkSirkelFyll: React.StatelessComponent<Props> = (props) => {
+const OkSirkelFyll: React.FunctionComponent<Props> = (props) => {
     return (
         <svg role="presentation" focusable="false" viewBox="0 0 24 24" width={props.size} height={props.size}>
             <g fillRule="nonzero" fill="none">

@@ -18,21 +18,21 @@ export interface TilretteleggingArbeidsforhold {
 }
 
 export interface DelvisTilrettelegging {
-    tilrettelagtArbeidFom: Date;
+    tilrettelagtArbeidFom: string;
     stillingsprosent: number;
 }
 
 export interface HelTilrettelegging {
-    tilrettelagtArbeidFom: Date;
+    tilrettelagtArbeidFom: string;
 }
 
 export interface IngenTilrettelegging {
-    slutteArbeidFom: Date;
+    slutteArbeidFom: string;
 }
 
 export interface Tilrettelegging {
     id: string;
-    behovForTilretteleggingFom: Date;
+    behovForTilretteleggingFom: string;
     arbeidsforhold: TilretteleggingArbeidsforhold;
     vedlegg: string[];
     helTilrettelegging?: HelTilrettelegging[];
@@ -41,17 +41,17 @@ export interface Tilrettelegging {
 }
 
 export type UferdigTilrettelegging = Tilrettelegging & {
-    behovForTilretteleggingFom?: Date;
+    behovForTilretteleggingFom?: string;
     type: Tilretteleggingstype[];
     helTilrettelegging?: [
         {
-            tilrettelagtArbeidFom?: Date;
+            tilrettelagtArbeidFom?: string;
         }
     ];
     delvisTilrettelegging?: DelvisTilrettelegging[];
     ingenTilrettelegging?: [
         {
-            slutteArbeidFom?: Date;
+            slutteArbeidFom?: string;
         }
     ];
     risikoFaktorer?: string;

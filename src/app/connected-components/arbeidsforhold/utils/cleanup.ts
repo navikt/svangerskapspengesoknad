@@ -44,7 +44,7 @@ export const cleanupNæring = (næring: Partial<Næring>): DeepPartial<Næring> 
 
     næring.tidsperiode &&
     næring.tidsperiode.fom !== undefined &&
-    moment(næring.tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year'))
+    moment(næring.tidsperiode.fom).isBefore(moment().subtract(4, 'year'))
         ? relevanteFelter.push('endringAvNæringsinntektInformasjon')
         : relevanteFelter.push(
               'næringsinntekt',

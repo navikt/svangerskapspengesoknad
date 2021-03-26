@@ -11,7 +11,12 @@ import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
-import { etÅrSiden, niMånederFremITid, tiMånederSiden } from '../../../common/util/datoUtils';
+import {
+    dateToISOFormattedDateString,
+    etÅrSiden,
+    niMånederFremITid,
+    tiMånederSiden,
+} from '../../../common/util/datoUtils';
 
 interface OwnProps {
     step: SøknadStep;
@@ -46,8 +51,8 @@ const Termin: FunctionComponent<Props> = (props) => {
                         name="barn.termindato"
                         label={getMessage(intl, 'termin.termindato')}
                         datoAvgrensinger={{
-                            minDato: etÅrSiden(new Date()).toDate(),
-                            maksDato: niMånederFremITid(new Date()).toDate(),
+                            minDato: etÅrSiden(new Date()),
+                            maksDato: niMånederFremITid(new Date()),
                         }}
                     />
                 </Block>
@@ -59,8 +64,8 @@ const Termin: FunctionComponent<Props> = (props) => {
                         name="barn.fødselsdato"
                         label={getMessage(intl, 'termin.fødselsdato')}
                         datoAvgrensinger={{
-                            minDato: tiMånederSiden(values.barn.termindato!).toDate(),
-                            maksDato: new Date(),
+                            minDato: tiMånederSiden(values.barn.termindato!),
+                            maksDato: dateToISOFormattedDateString(new Date()),
                         }}
                     />
                 </Block>

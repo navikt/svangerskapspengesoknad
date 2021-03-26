@@ -14,7 +14,7 @@ interface OppholdListeElementProps extends InteractiveListElementProps {
 
 type Props = OppholdListeElementProps;
 
-const OppholdListElement: React.StatelessComponent<Props> = ({ opphold, ...rest }) => {
+const OppholdListElement: React.FunctionComponent<Props> = ({ opphold, ...rest }) => {
     const intl = useIntl();
 
     return (

@@ -37,7 +37,7 @@ export const visKomponentSelvstendigNæringsdrivende = (næring: Partial<Næring
         tidsperiode !== undefined &&
         tidsperiode.fom !== undefined &&
         tidsperiode.fom !== '' &&
-        moment(tidsperiode.fom as Date).isBefore(moment().subtract(4, 'year'));
+        moment(tidsperiode.fom).isBefore(moment().subtract(4, 'year'));
     const skalViseNæringsinntekt =
         skalViseTidsperiode && !skalVisevarigEndringAvNæringsinntektBolk && tidsperiode.fom !== undefined;
     const skalViseharBlittYrkesaktivILøpetAvDeTreSisteFerdigliknedeÅrene =

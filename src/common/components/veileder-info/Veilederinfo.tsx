@@ -25,7 +25,7 @@ const getAnsiktFromType = (type: Infotype): Ansiktstype => {
     }
 };
 
-const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
+const Veilederinfo: React.FunctionComponent<VeilederInfoProps> = ({
     visVeileder = true,
     stil = 'normal',
     type = 'info',
