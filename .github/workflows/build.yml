@@ -3,25 +3,25 @@ name: Deployment pipeline q1
 on:
   push:
     branches:
-      - master 
+      - master
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/svangerskapspengesoknad
-  
+  IMAGE_BASE: ghcr.io/${{ github.repository }}
+
 jobs:
   kompiler:
     runs-on: ubuntu-latest
     steps:
-     
+
       - name: Sjekk ut kode
         uses: actions/checkout@v2
-     
-      - name: Hent tag    
-        run: | 
+
+      - name: Hent tag
+        run: |
           echo 'TAG<<EOF' >> $GITHUB_ENV
           git log -1 --pretty=%ad --date=format:%Y%m%d%H%M%S-`echo $GITHUB_SHA | cut -c1-7`  >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV   
-                                
+          echo 'EOF' >> $GITHUB_ENV
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -31,17 +31,19 @@ jobs:
            ${{ runner.os }}-build-${{ env.cache-name }}-
            ${{ runner.os }}-build-
            ${{ runner.os }}-
-         
+
       - run:  npm install
       - run: |
           npm run build
           echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-                   
-      - name: Bygg, tag og push Docker image  
+
+      - name: Log into ghcr registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Bygg, tag og push Docker image
         run: |
-          docker build --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
-          echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
-          docker push ${IMAGE_BASE}:${TAG}
+          docker build --pull --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest .
+          docker push ${IMAGE_BASE} --all-tags
 
       - name: Lukk gamle bygg-issues
         uses: actions/github-script@v3
@@ -62,8 +64,8 @@ jobs:
                   state: 'closed'
                 });
               });
-            });     
-      
+            });
+
       - name: Opprett issue, trigg deploy til dev-fss og dev-gcp
         if: success()
         uses: actions/github-script@v3
