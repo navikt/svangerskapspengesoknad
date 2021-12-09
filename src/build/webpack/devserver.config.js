@@ -7,8 +7,13 @@ const configureDevServer = (decoratorFragments) => ({
         app.engine('html', mustacheExpress());
         app.set('views', `${__dirname}/../../../dist/dev`);
         app.set('view engine', 'mustache');
-        app.get('/dist/js/settings.js', (req, res) => {
-            res.sendFile(path.resolve(`${__dirname}/../../../dist/js/settings.js`));
+        app.get('/dist/settings.js', (req, res) => {
+            res.set('content-type', 'application/javascript');
+            res.send(`window.appSettings = {
+            REST_API_URL: '${process.env.FORELDREPENGESOKNAD_API_URL}',
+            LOGIN_URL: '${process.env.LOGINSERVICE_URL}',
+            LOG_VALIDATION: '${process.env.LOG_VALIDATION}',
+        };`);
         });
         app.get(/^\/(?!.*dist).*$/, (req, res) => {
             res.render('index.html', Object.assign(decoratorFragments));

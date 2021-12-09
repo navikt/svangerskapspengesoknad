@@ -3,8 +3,6 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('../webpack/webpack.config.dev');
 const configureDevServer = require('../webpack/devserver.config');
 
-require('./createEnvSettings');
-
 webpackConfig.entry = {
     reload: 'webpack-dev-server/client?http://localhost:8080/',
     ...webpackConfig.entry,

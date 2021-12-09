@@ -6,7 +6,6 @@ const path = require('path');
 const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
-const createEnvSettingsFile = require('./src/build/scripts/envSettings');
 var compression = require('compression');
 
 // Prometheus metrics
@@ -18,7 +17,7 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
     help: 'Duration of HTTP requests in ms',
     labelNames: ['route'],
     // buckets for response time from 0.1ms to 500ms
-    buckets: [0.1, 5, 15, 50, 100, 200, 300, 400, 500]
+    buckets: [0.1, 5, 15, 50, 100, 200, 300, 400, 500],
 });
 
 server.use(compression());
@@ -28,8 +27,6 @@ require('dotenv').config('./.env');
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
-
-createEnvSettingsFile(path.resolve(`${__dirname}/dist/js/settings.js`));
 
 server.use((req, res, next) => {
     res.removeHeader('X-Powered-By');
@@ -54,8 +51,13 @@ const startServer = (html) => {
     server.use('/dist/js', express.static(path.resolve(__dirname, 'dist/js')));
     server.use('/dist/css', express.static(path.resolve(__dirname, 'dist/css')));
 
-    server.get(['/dist/js/settings.js'], (req, res) => {
-        res.sendFile(path.resolve(`../../dist/js/settings.js`));
+    server.get(['/dist/settings.js'], (_req, res) => {
+        res.set('content-type', 'application/javascript');
+        res.send(`window.appSettings = {
+            REST_API_URL: '${process.env.FORELDREPENGESOKNAD_API_URL}',
+            LOGIN_URL: '${process.env.LOGINSERVICE_URL}',
+            LOG_VALIDATION: '${process.env.LOG_VALIDATION}',
+        };`);
     });
 
     server.get('/internal/metrics', (req, res) => {
