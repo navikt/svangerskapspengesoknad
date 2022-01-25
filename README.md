@@ -1,11 +1,9 @@
 # Selvbetjeningsløsning svangerskapspenger
 
-Kildekoden til frontend-appen for ny selvbetjeningsløsning for
-svangerskapspenger.
+Kildekoden til frontend-appen for ny selvbetjeningsløsning for svangerskapspenger.
 
 # Komme i gang
 
- 
 For å kjøre opp app-en i dev (med parcel og mock-API):
 
 1.  `npm install`
