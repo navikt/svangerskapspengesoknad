@@ -23,6 +23,7 @@ jobs:
           SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
         with:
           command: monitor
+          args: --org=teamforeldrepenger --severity-threshold=high
      
       - name: Cache node modules
         uses: actions/cache@v2.1.6
