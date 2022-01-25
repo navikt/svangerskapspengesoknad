@@ -1,10 +1,4 @@
 {
-    "gcp": "true",
-    "nav" : "www.dev.nav.no",
-    "loginservice" : "loginservice.dev.nav.no",
-    "api" : "foreldrepengesoknad-api.dev.nav.no",
-    "uttak": "fp-uttak-service.dev.nav.no",
-    "dekoratoren": "dekoratoren.dev.nav.no",
     "ingresses": ["https://svangerskapspengesoknad.dev.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://dekoratoren.dev.nav.no",
