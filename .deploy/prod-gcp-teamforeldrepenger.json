@@ -1,14 +1,8 @@
 {
-    "gcp": "true",
-    "nav" : "www.nav.no",
-    "loginservice" : "loginservice.nav.no",
-    "api" : "foreldrepengesoknad-api.intern.nav.no",
-    "uttak": "foreldrepengesoknad-api.intern.nav.no",
-    "dekoratoren" : "www.nav.no",
     "ingresses": ["https://svangerskapspengesoknad.nav.no","https://svangerskapspengesoknad.intern.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
-        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.intern.nav.no/rest",
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.nav.no/login"
     }
 }

@@ -26,11 +26,11 @@ Feltene i søknaden må wrappes rundt Formik sine `Field`-komponenter. Disse lig
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes mot nav.team.bris@nav.no.
+Spørsmål knyttet til koden eller prosjektet kan rettes mot nav.team.foreldrepenger@nav.no.
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #bris.
+Interne henvendelser kan sendes via Slack i kanalen #teamforeldrepenger.
 
 ### Icon License
 
