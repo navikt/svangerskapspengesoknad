@@ -10,6 +10,8 @@ const { JSDOM } = require('jsdom');
 const jsdom = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>');
 const { window } = jsdom;
 
-(global as any).window = window;
-(global as any).document = window.document;
-(global as any).appSettings = {};
+const globalAny: any = global;
+
+globalAny.window = window;
+globalAny.document = window.document;
+globalAny.appSettings = {};
