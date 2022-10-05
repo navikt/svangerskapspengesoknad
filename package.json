@@ -85,7 +85,7 @@
         "@types/react-collapse": "^4.0.2",
         "@types/react-document-title": "^2.0.4",
         "app": "^0.1.0",
-        "axios": "^0.20.0",
+        "axios": "^1.0.0",
         "babel-polyfill": "^6.26.0",
         "babel-runtime": "^6.26.0",
         "bytes": "^3.1.0",
