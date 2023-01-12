@@ -68,7 +68,7 @@ const Step: FunctionComponent<Props> = (props) => {
             aktiv: otherStep.step === currentStep.step && otherStep.subStep === currentStep.subStep,
             label:
                 otherStep.step === StepID.TILRETTELEGGING && otherStep.subStep
-                    ? finnArbeidsforholdNavn(otherStep.subStep, arbeidsforhold, intl)
+                    ? finnArbeidsforholdNavn(otherStep.subStep, arbeidsforhold)
                     : getMessage(intl, `stegtittel.${otherStep.step}`),
         };
     });
@@ -80,7 +80,7 @@ const Step: FunctionComponent<Props> = (props) => {
             </h1>
             {currentStep.subStep && (
                 <Undertittel className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
-                    {finnArbeidsforholdNavn(currentStep.subStep, arbeidsforhold, intl)}
+                    {finnArbeidsforholdNavn(currentStep.subStep, arbeidsforhold)}
                 </Undertittel>
             )}
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>

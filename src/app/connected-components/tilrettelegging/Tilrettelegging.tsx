@@ -84,7 +84,7 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
 
     const index = values.tilrettelegging.findIndex((t: any) => t.id === id);
     const tilrettelegging = values.tilrettelegging[index];
-    const arbeidsgiversNavn = finnArbeidsforholdNavn(id, arbeidsforhold, intl);
+    const arbeidsgiversNavn = finnArbeidsforholdNavn(id, arbeidsforhold);
     const attachments = vedlegg.filter((v: Attachment) => tilrettelegging.vedlegg.includes(v.id));
 
     const erFrilans = tilrettelegging.arbeidsforhold.type === Arbeidsforholdstype.FRILANSER;
