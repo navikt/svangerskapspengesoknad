@@ -7,15 +7,17 @@ const preposisjonerEng = ['ABOUT', 'ABOVE', 'AFTER', 'AGAINST', 'AMONG', 'AROUND
 const preposisjoner = [...preposisjonerNor, ...preposisjonerEng];
 const forkortelser = ['AS', 'ASA'];
 
-const normalizeWord = (isFirstWord: boolean) => (word: string): string => {
-    if (forkortelser.includes(word)) {
-        return word;
-    } else if (preposisjoner.includes(word) && !isFirstWord) {
-        return word.toLowerCase();
-    } else {
-        return word.slice(0, 1) + word.slice(1).toLowerCase();
-    }
-};
+const normalizeWord =
+    (isFirstWord: boolean) =>
+    (word: string): string => {
+        if (forkortelser.includes(word)) {
+            return word;
+        } else if (preposisjoner.includes(word) && !isFirstWord) {
+            return word.toLowerCase();
+        } else {
+            return word.slice(0, 1) + word.slice(1).toLowerCase();
+        }
+    };
 
 const SPACE = ' ';
 const COMMA = ',';

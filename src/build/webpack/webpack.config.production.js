@@ -16,9 +16,8 @@ webpackConfig.plugins.push(
 webpackConfig.optimization = {
     minimizer: [
         new TerserPlugin({
-            sourceMap: true,
             terserOptions: {
-                mangle: true,
+                mangle: true, // Note `mangle.properties` is `false` by default.
                 ie8: true,
                 keep_classnames: true,
                 keep_fnames: true,

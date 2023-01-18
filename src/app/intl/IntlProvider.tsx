@@ -15,7 +15,7 @@ interface StateProps {
 
 moment.locale('nb');
 
-class IntlProvider extends React.Component<StateProps> {
+class IntlProvider extends React.Component<any, StateProps> {
     constructor(props: StateProps) {
         super(props);
         //addLocaleData([...nb, ...nn]);

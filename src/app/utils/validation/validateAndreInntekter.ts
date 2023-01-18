@@ -4,39 +4,41 @@ import { isISODateString } from 'nav-datovelger';
 
 type AnnenInntektFeil = FormikErrors<AnnenInntekt>;
 
-const validateAndreInntekter = () => (annenInntekt: Partial<AnnenInntekt>): AnnenInntektFeil => {
-    const errors: AnnenInntektFeil = {};
+const validateAndreInntekter =
+    () =>
+    (annenInntekt: Partial<AnnenInntekt>): AnnenInntektFeil => {
+        const errors: AnnenInntektFeil = {};
 
-    if (annenInntekt.type === undefined || (annenInntekt.type && annenInntekt.type.length === 0)) {
-        errors.type = 'valideringsfeil.annenInntekt.inntektskilde.påkrevd';
-    }
-
-    if (annenInntekt.type === AnnenInntektType.JOBB_I_UTLANDET) {
-        if (!annenInntekt.land) {
-            (errors as FormikErrors<JobbIUtlandetInntekt>).land = 'valideringsfeil.annenInntekt.land.påkrevd';
+        if (annenInntekt.type === undefined || (annenInntekt.type && annenInntekt.type.length === 0)) {
+            errors.type = 'valideringsfeil.annenInntekt.inntektskilde.påkrevd';
         }
 
-        if (!annenInntekt.arbeidsgiverNavn) {
-            (errors as FormikErrors<JobbIUtlandetInntekt>).arbeidsgiverNavn =
-                'valideringsfeil.annenInntekt.arbeidsgiverNavn.påkrevd';
-        }
+        if (annenInntekt.type === AnnenInntektType.JOBB_I_UTLANDET) {
+            if (!annenInntekt.land) {
+                (errors as FormikErrors<JobbIUtlandetInntekt>).land = 'valideringsfeil.annenInntekt.land.påkrevd';
+            }
 
-        if (annenInntekt.arbeidsgiverNavn && annenInntekt.arbeidsgiverNavn.length > 100) {
-            (errors as FormikErrors<JobbIUtlandetInntekt>).arbeidsgiverNavn =
-                'valideringsfeil.annenInntekt.arbeidsgiverNavn.max100Tegn';
-        }
+            if (!annenInntekt.arbeidsgiverNavn) {
+                (errors as FormikErrors<JobbIUtlandetInntekt>).arbeidsgiverNavn =
+                    'valideringsfeil.annenInntekt.arbeidsgiverNavn.påkrevd';
+            }
 
-        if (
-            annenInntekt.tidsperiode === undefined ||
-            (annenInntekt.tidsperiode !== undefined && annenInntekt.tidsperiode.fom === undefined)
-        ) {
-            errors.tidsperiode = { fom: 'valideringsfeil.annenInntekt.fom.påkrevd' };
-        }
+            if (annenInntekt.arbeidsgiverNavn && annenInntekt.arbeidsgiverNavn.length > 100) {
+                (errors as FormikErrors<JobbIUtlandetInntekt>).arbeidsgiverNavn =
+                    'valideringsfeil.annenInntekt.arbeidsgiverNavn.max100Tegn';
+            }
 
-        if (annenInntekt.tidsperiode !== undefined && !isISODateString(annenInntekt.tidsperiode.fom)) {
-            errors.tidsperiode = { fom: 'valideringsfeil.annenInntekt.fom.ugyldigDato' };
+            if (
+                annenInntekt.tidsperiode === undefined ||
+                (annenInntekt.tidsperiode !== undefined && annenInntekt.tidsperiode.fom === undefined)
+            ) {
+                errors.tidsperiode = { fom: 'valideringsfeil.annenInntekt.fom.påkrevd' };
+            }
+
+            if (annenInntekt.tidsperiode !== undefined && !isISODateString(annenInntekt.tidsperiode.fom)) {
+                errors.tidsperiode = { fom: 'valideringsfeil.annenInntekt.fom.ugyldigDato' };
+            }
         }
-    }
-    return errors;
-};
+        return errors;
+    };
 export default validateAndreInntekter;

@@ -9,16 +9,16 @@ export interface AttachmentState {
     vedlegg: Attachment[];
 }
 
-const modifyAttachmentWithId = (compareId: string, newProperties: Partial<Attachment>) => (
-    existingAttachment: Attachment
-): Attachment => {
-    return existingAttachment.id !== compareId
-        ? existingAttachment
-        : {
-              ...existingAttachment,
-              ...newProperties,
-          };
-};
+const modifyAttachmentWithId =
+    (compareId: string, newProperties: Partial<Attachment>) =>
+    (existingAttachment: Attachment): Attachment => {
+        return existingAttachment.id !== compareId
+            ? existingAttachment
+            : {
+                  ...existingAttachment,
+                  ...newProperties,
+              };
+    };
 
 const attachmentReducer = (state = getDefaultAttachmentState(), action: AttachmentAction): AttachmentState => {
     switch (action.type) {

@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
     entry: {
-        bundle: ['@babel/polyfill', `${__dirname}/../../app/bootstrap.tsx`],
+        bundle: [`${__dirname}/../../app/bootstrap.tsx`],
     },
     output: {
         path: path.resolve(__dirname, './../../../dist'),
@@ -25,12 +25,8 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                include: [
-                    path.resolve(__dirname, './../../app'),
-                    path.resolve(__dirname, './../../common'),
-                    path.resolve(__dirname, './../../storage'),
-                ],
-                loader: require.resolve('awesome-typescript-loader'),
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 enforce: 'pre',
@@ -52,16 +48,15 @@ const webpackConfig = {
             },
             {
                 test: /\.svg$/,
-                use: 'svg-sprite-loader',
+                use: [{ loader: 'svg-sprite-loader', options: {} }],
             },
         ],
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css?[hash]-[chunkhash]-[name]',
-            disable: false,
-            allChunks: true,
+            filename: 'css/[name].css?[fullhash]-[chunkhash]-[contenthash]-[name]',
+            linkType: 'text/css',
         }),
         new SpriteLoaderPlugin({
             plainSprite: true,

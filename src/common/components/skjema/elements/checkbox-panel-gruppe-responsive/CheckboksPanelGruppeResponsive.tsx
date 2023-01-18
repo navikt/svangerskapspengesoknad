@@ -37,6 +37,7 @@ class CheckboksPanelGruppeResponsive extends React.Component<CheckboxPanelgruppe
                                         disabled={disabled || false}
                                         onChange={(event) => onChange(event, checkboks.value)}
                                         key={index}
+                                        feil={!!checkboks.feil}
                                     />
                                 </div>
                             );

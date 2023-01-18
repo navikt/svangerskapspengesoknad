@@ -10,7 +10,7 @@ import {
     DeleteAttachmentFailure,
 } from '../types/AttachmentAction';
 
-function* uploadAttachment(action: UploadAttachmentRequest) {
+function* uploadAttachment(action: UploadAttachmentRequest): any {
     const { attachment } = action.payload;
 
     try {

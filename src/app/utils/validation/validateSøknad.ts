@@ -6,18 +6,20 @@ import { SøknadRoute, AppRoute } from 'app/types/Routes';
 import validateTilrettelegging from './validateTilrettelegging';
 import validateOppsummering from './validateOppsummering';
 
-const validateSøknad = (route: SøknadRoute) => (values: UferdigSøknad): Søknadfeil => {
-    switch (route.path) {
-        case AppRoute.INTRO:
-            return validateIntro(values);
+const validateSøknad =
+    (route: SøknadRoute) =>
+    (values: UferdigSøknad): Søknadfeil => {
+        switch (route.path) {
+            case AppRoute.INTRO:
+                return validateIntro(values);
 
-        case AppRoute.SØKNAD:
-            return validateUntilStep(route.step, values, route.subStep);
+            case AppRoute.SØKNAD:
+                return validateUntilStep(route.step, values, route.subStep);
 
-        default:
-            return {};
-    }
-};
+            default:
+                return {};
+        }
+    };
 
 const validateUntilStep = (step: StepID = StepID.INGEN, values: UferdigSøknad, subStep?: string): Søknadfeil => {
     switch (step) {

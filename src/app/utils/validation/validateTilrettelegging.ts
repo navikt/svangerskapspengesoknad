@@ -170,7 +170,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                         // Browser konverterer ugyldig input for <input type="number" ... /> til tom streng
                         const isEmptyInputField =
                             delTil.stillingsprosent !== undefined &&
-                            ((delTil.stillingsprosent as unknown) as string).length === 0;
+                            (delTil.stillingsprosent as unknown as string).length === 0;
 
                         if (
                             delTil.stillingsprosent !== undefined &&

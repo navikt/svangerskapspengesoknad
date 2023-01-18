@@ -7,7 +7,7 @@ import normalizeName from 'app/utils/normalizeName';
 import { SøkerinfoDTOArbeidsforhold } from 'app/types/SøkerinfoArbeidsforholdDTO';
 import { mapArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 
-function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
+function* getSøkerInfoSaga(_: GetSøkerinfoRequest): any {
     try {
         const response = yield call(getSøkerinfo);
         const { søker } = response.data;
@@ -30,7 +30,7 @@ function* getSøkerInfoSaga(_: GetSøkerinfoRequest) {
     }
 }
 
-function* sendSøknadSaga(action: SendSøknadRequest) {
+function* sendSøknadSaga(action: SendSøknadRequest): any {
     try {
         const response = yield call(sendSøknad, action.payload.søknad);
         const kvittering: Kvittering = response.data;

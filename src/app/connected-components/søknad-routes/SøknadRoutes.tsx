@@ -96,7 +96,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
 
     const kvitteringRoute = (
         <Switch>
-            <Route path={AppRoute.SENDT} render={(routeProps) => <SøknadSendt {...routeProps} />} />
+            <Route path={AppRoute.SENDT} render={() => <SøknadSendt />} />
             <Redirect to={AppRoute.SENDT} key="redirect" />
         </Switch>
     );

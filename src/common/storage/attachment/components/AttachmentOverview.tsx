@@ -99,6 +99,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                                 lukknappProps={{
                                     hvit: true,
                                     type: 'button',
+                                    children: '',
                                 }}
                                 errorMessages={this.createErrorMessagesForFailedAttachments(
                                     this.props.attachments.filter(isAttachmentWithError)
