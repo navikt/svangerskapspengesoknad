@@ -99,7 +99,7 @@
         "fp-common": "^4.2.10",
         "history": "^4.7.2",
         "husky": "^4.3.0",
-        "i18n-iso-countries": "^3.7.8",
+        "i18n-iso-countries": "^7.5.0",
         "lodash": "^4.17.21",
         "lodash.throttle": "^4.1.1",
         "moment": "^2.29.4",
