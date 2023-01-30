@@ -12,7 +12,6 @@ import Kvittering from 'app/types/Kvittering';
 import Panel from 'nav-frontend-paneler';
 import './søknadSendt.less';
 import StatusBoks from './components/StatusBoks';
-import Lenke from 'nav-frontend-lenker';
 import KvitteringHeader from './components/KvitteringHeader';
 import { FormattedMessage } from 'react-intl';
 import KvitteringSuksess from './components/KvitteringSuksess';
@@ -56,9 +55,6 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
                             <Block margin="xs">
                                 <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />
                             </Block>
-                            <Lenke href="https://foreldrepengeplanlegger.nav.no/" target="_blank">
-                                <FormattedMessage id="søknadSendt.foreldrepenger.boks.lenke" />
-                            </Lenke>
                         </div>
                         <div className={cls.element('ikon')}>
                             <HvorLengeIkon />
