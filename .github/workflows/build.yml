@@ -16,7 +16,7 @@ jobs:
     name: Build
     uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-npm.yml@main
     with:
-      node-version: '17.8.0'
+      node-version: '16.19.0' # TODO: Bytt til samme versjon som DockerFile (16.19.0 ble brukt før i bygg)
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
     secrets: inherit
