@@ -147,7 +147,7 @@
         "react-day-picker": "^7.4.8",
         "react-document-title": "^2.0.3",
         "react-dom": "^16.13.1",
-        "react-intl": "^5.8.0",
+        "react-intl": "^6.2.8",
         "react-modal": "^3.16.1",
         "react-motion": "^0.5.2",
         "react-redux": "^7.2.1",
