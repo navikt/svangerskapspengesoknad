@@ -1,6 +1,5 @@
 import React, { ReactNode, FunctionComponent, useState, useEffect } from 'react';
 import { Formik } from 'formik';
-import { Location } from 'history';
 
 import { CustomFormikProps } from 'app/types/Formik';
 import { FormikBag } from 'app/types/FormikBag';
@@ -15,16 +14,16 @@ interface Props {
 }
 
 const FormikWrapper: FunctionComponent<Props> = ({ contentRenderer }) => {
-    const [currentPath, setPath] = useState(parsePathFromLocation(history.location));
-
-    const onRouteChange = (location: Location) => {
-        setPath(parsePathFromLocation(location));
-    };
+    const [state, setState] = useState({
+        action: history.action,
+        location: history.location,
+      });
 
     useEffect(() => {
-        setPath(parsePathFromLocation(history.location));
-        return history.listen(onRouteChange);
+        return history.listen(setState);
     }, []);
+
+    const currentPath = parsePathFromLocation(state.location);
 
     return (
         <Formik
@@ -36,6 +35,7 @@ const FormikWrapper: FunctionComponent<Props> = ({ contentRenderer }) => {
             }}
             onSubmit={(_søknad: UferdigSøknad, { setSubmitting, setFormikState, setTouched }: FormikBag) => {
                 setSubmitting(false);
+                /* @ts-ignore TS-feil-fiks */
                 setFormikState({ submitCount: 0 });
                 setTouched({});
             }}

@@ -1,6 +1,5 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { CustomFormikProps } from 'app/types/Formik';
-import { History } from 'history';
 import Step from '../step/Step';
 
 import SøknadStep from 'app/types/SøknadStep';
@@ -12,7 +11,7 @@ interface Props {
     onValidFormSubmit?: () => void;
     showNesteknapp: boolean;
     className?: string;
-    history: History;
+    children: ReactElement | ReactElement[];
 }
 
 const FormikStep: FunctionComponent<Props> = (props) => {

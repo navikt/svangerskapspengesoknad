@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { History } from 'history';
 import moment from 'moment';
 
 import { ApiActionTypes } from 'app/redux/types/ApiAction';
@@ -37,7 +36,6 @@ import './oppsummering.less';
 interface OwnProps {
     step: SøknadStep;
     formikProps: CustomFormikProps;
-    history: History;
     språkkode: Språkkode;
 }
 
@@ -52,7 +50,7 @@ type Props = OwnProps & StateProps;
 
 const Oppsummering: FunctionComponent<Props> = (props) => {
     const intl = useIntl();
-    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, history, språkkode } = props;
+    const { step, vedlegg, søkerinfo, arbeidsforhold, requestSendSøknad, formikProps, språkkode } = props;
     const { values } = formikProps;
 
     const visAdvarselOmManglendeDokumentasjon = values.tilrettelegging.some(
@@ -77,7 +75,6 @@ const Oppsummering: FunctionComponent<Props> = (props) => {
                 formikProps={formikProps}
                 showNesteknapp={true}
                 onValidFormSubmit={sendSøknad}
-                history={history}
             >
                 <Block>
                     <Veilederinfo visVeileder={true} stil="kompakt" type="info">

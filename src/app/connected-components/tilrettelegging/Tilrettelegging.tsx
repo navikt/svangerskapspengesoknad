@@ -9,7 +9,6 @@ import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
 import { finnArbeidsforholdNavn, getSøknadStepPath, getAllSteps, getAdjacentSteps } from 'app/utils/stepUtils';
-import { navigateTo } from 'app/utils/navigationUtils';
 import { Skjemanummer } from 'app/types/Skjemanummer';
 import { State } from 'app/redux/store';
 import { StepProps } from 'app/components/step/Step';
@@ -34,6 +33,7 @@ import AddTilrettelegging from './components/AddTilrettelegging';
 import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
 import UtvidetInformasjon from 'app/components/utvidet-informasjon/UtvidetInformasjon';
 import { tiMånederSiden, treUkerSiden, dagenFør } from '../../../common/util/datoUtils';
+import { useNavigate } from 'react-router-dom';
 
 interface OwnProps {
     id: string;
@@ -78,7 +78,7 @@ const initialValuesForTilrettelegginger = (tilrettelegging: UferdigTilretteleggi
 
 const Tilrettelegging: FunctionComponent<Props> = (props) => {
     const intl = useIntl();
-    const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment, history } = props;
+    const { id, step, formikProps, arbeidsforhold, vedlegg, uploadAttachment, deleteAttachment } = props;
 
     const { values, setFieldValue } = formikProps;
 
@@ -141,6 +141,8 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
         }
     };
 
+    const navigateTo = useNavigate();
+
     const navigate = () => {
         cleanupTilrettelegging();
         const allSteps = getAllSteps(values.søknadsgrunnlag);
@@ -156,7 +158,6 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                 formikProps={formikProps}
                 showNesteknapp={visNesteKnapp && vedlegg.filter((a) => !isAttachmentWithError(a)).length > 0}
                 onValidFormSubmit={navigate}
-                history={history}
             >
                 <Block visible={visFrilansEllerSelvstendig}>
                     <Block margin="xs">

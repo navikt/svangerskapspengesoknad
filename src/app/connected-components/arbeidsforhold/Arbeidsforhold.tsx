@@ -25,7 +25,6 @@ import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import { StepProps } from 'app/components/step/Step';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { navigateTo } from 'app/utils/navigationUtils';
 
 import SelvstendigListElement from './SelvstendigNæringsdrivende/SelvstendigListElement';
 import AndreInntekterListElement from './AndreInntekter/AnnenInntektListElement';
@@ -41,6 +40,7 @@ import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import InfoTilFiskere from 'app/components/info-til-fiskere/InfoTilFiskere';
 import Lenke from 'nav-frontend-lenker';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -56,7 +56,7 @@ interface ConnectProps {
 type Props = OwnProps & StepProps & ConnectProps;
 
 const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
-    const { step, formikProps, arbeidsforhold, history } = props;
+    const { step, formikProps, arbeidsforhold } = props;
     const { values, setFieldValue } = formikProps;
     const { søker, søknadsgrunnlag, barn } = values;
     const intl = useIntl();
@@ -134,11 +134,13 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
         setFieldValue('søker', cleanupSøker(søker));
     };
 
+    const navigateTo = useNavigate();
+
     const navigate = () => {
         cleanupArbeidsforhold();
         prepareTilrettelegging();
         const pathToFirstTilrettelegging = getSøknadStepPath(StepID.TILRETTELEGGING, tilrettelegging[0].id);
-        navigateTo(pathToFirstTilrettelegging, history);
+        navigateTo(pathToFirstTilrettelegging);
     };
 
     return (
@@ -149,7 +151,6 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                 formikProps={formikProps}
                 showNesteknapp={harValgtMinstEttGrunnlag}
                 onValidFormSubmit={navigate}
-                history={history}
             >
                 <Block
                     header={{

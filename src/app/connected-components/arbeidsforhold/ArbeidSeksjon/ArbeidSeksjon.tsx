@@ -1,4 +1,4 @@
-import React, { FunctionComponent, StatelessComponent, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
@@ -47,7 +47,7 @@ interface OwnProps<T> {
         title: string;
         info?: string;
     };
-    summaryListElementComponent: StatelessComponent<ModalSummaryProps<T>>;
+    summaryListElementComponent: FunctionComponent<ModalSummaryProps<T>>;
     renderForm: (props: ModalFormProps<T>) => React.ReactNode;
 }
 

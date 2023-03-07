@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Redirect, Route, Switch } from 'react-router';
-import { Router } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
 import { getSøknadStepPath, isNextStepAvailable } from 'app/utils/stepUtils';
 import { StepID } from 'app/types/SøknadStep';
 import Arbeidsforhold from '../arbeidsforhold/Arbeidsforhold';
-import history from 'app/utils/history';
 import Intro from '../intro/Intro';
 import Oppsummering from '../oppsummering/Oppsummering';
 import SøknadSendt from '../søknad-sendt/SøknadSendt';
@@ -35,22 +34,20 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
         return (
             <Route
                 path={getSøknadStepPath(søknadStep.step, søknadStep.subStep)}
-                exact={false}
                 key={`${StepID.TILRETTELEGGING}.${id}`}
-                render={(props) => <Tilrettelegging id={id} step={søknadStep} formikProps={formikProps} {...props} />}
+                element={<Tilrettelegging id={id} step={søknadStep} formikProps={formikProps} />}
             />
         );
     });
-
     const søknadRoutes = (
-        <Switch>
-            <Route path={AppRoute.INTRO} render={(routeProps) => <Intro formik={formikProps} {...routeProps} />} />
+        <Routes>
+            <Route path={AppRoute.INTRO} element={<Intro formik={formikProps} />} />
 
             {isSøknadAvailable && (
                 <Route
                     path={getSøknadStepPath(StepID.TERMIN)}
                     key={StepID.TERMIN}
-                    render={(props) => <Termin step={{ step: StepID.TERMIN }} formikProps={formikProps} {...props} />}
+                    element={<Termin step={{ step: StepID.TERMIN }} formikProps={formikProps} />}
                 />
             )}
 
@@ -58,9 +55,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
                 <Route
                     path={getSøknadStepPath(StepID.ARBEIDSFORHOLD)}
                     key={StepID.ARBEIDSFORHOLD}
-                    render={(props) => (
-                        <Arbeidsforhold step={{ step: StepID.ARBEIDSFORHOLD }} formikProps={formikProps} {...props} />
-                    )}
+                    element={<Arbeidsforhold step={{ step: StepID.ARBEIDSFORHOLD }} formikProps={formikProps} />}
                 />
             )}
 
@@ -70,13 +65,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
                 <Route
                     path={getSøknadStepPath(StepID.UTENLANDSOPPHOLD)}
                     key={StepID.UTENLANDSOPPHOLD}
-                    render={(props) => (
-                        <Utenlandsopphold
-                            step={{ step: StepID.UTENLANDSOPPHOLD }}
-                            formikProps={formikProps}
-                            {...props}
-                        />
-                    )}
+                    element={<Utenlandsopphold step={{ step: StepID.UTENLANDSOPPHOLD }} formikProps={formikProps} />}
                 />
             )}
 
@@ -84,24 +73,22 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
                 <Route
                     path={getSøknadStepPath(StepID.OPPSUMMERING)}
                     key={StepID.OPPSUMMERING}
-                    render={(props) => (
-                        <Oppsummering step={{ step: StepID.OPPSUMMERING }} formikProps={formikProps} {...props} />
-                    )}
+                    element={<Oppsummering step={{ step: StepID.OPPSUMMERING }} formikProps={formikProps} />}
                 />
             )}
 
-            <Redirect to={AppRoute.INTRO} key="redirect" />
-        </Switch>
+            <Route path="/" element={<Navigate to={AppRoute.INTRO} key="redirect" />} />
+        </Routes>
     );
 
     const kvitteringRoute = (
-        <Switch>
-            <Route path={AppRoute.SENDT} render={() => <SøknadSendt />} />
-            <Redirect to={AppRoute.SENDT} key="redirect" />
-        </Switch>
+        <Routes>
+            <Route path={AppRoute.SENDT} element={<SøknadSendt />} />
+            <Route path="/" element={<Navigate to={AppRoute.SENDT} key="redirect" />} />
+        </Routes>
     );
 
-    return <Router history={history}>{harSendtSøknad ? kvitteringRoute : søknadRoutes}</Router>;
+    return <BrowserRouter basename="/">{harSendtSøknad ? kvitteringRoute : søknadRoutes}</BrowserRouter>;
 };
 
 export default SøknadRoutes;

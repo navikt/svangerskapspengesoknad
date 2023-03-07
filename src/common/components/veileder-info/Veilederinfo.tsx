@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 
 import './veilederinfo.less';
@@ -12,6 +12,7 @@ export interface VeilederInfoProps {
     type?: Infotype;
     maxWidth?: '30' | '45';
     CustomIcon?: any;
+    children: ReactNode | ReactNode[];
 }
 
 const getAnsiktFromType = (type: Infotype): Ansiktstype => {

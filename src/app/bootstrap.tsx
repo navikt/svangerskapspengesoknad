@@ -1,7 +1,7 @@
 import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Provider } from 'react-redux';
-import { render } from 'react-dom';
 import countries from 'i18n-iso-countries';
 import Modal from 'nav-frontend-modal';
 import * as Sentry from '@sentry/browser';
@@ -18,7 +18,6 @@ countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
 
 Modal.setAppElement('#app');
-const rootElement = document.getElementById('app');
 
 Sentry.init({
     dsn: 'https://b28b752e32e846dd9818f2eb7a9fc013@sentry.gc.nav.no/7',
@@ -26,7 +25,10 @@ Sentry.init({
     integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })],
 });
 
-render(
+const container = document.getElementById('app');
+const root = createRoot(container!);
+
+root.render(
     <ErrorBoundary>
         <Provider store={store}>
             <IntlProvider>
@@ -36,5 +38,4 @@ render(
             </IntlProvider>
         </Provider>
     </ErrorBoundary>,
-    rootElement
 );

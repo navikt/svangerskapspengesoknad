@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { ReactElement, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { History } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import classnames from 'classnames';
@@ -10,7 +9,6 @@ import StegIndikator from 'nav-frontend-stegindikator';
 import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
 import { FetchStatus } from 'app/types/FetchState';
-import { navigateTo } from 'app/utils/navigationUtils';
 import {
     parsePathFromLocation,
     getAllSteps,
@@ -26,15 +24,16 @@ import getMessage from 'common/util/i18nUtils';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import ValidationErrorSummary from '../validation-error-summary/ValidationErrorSummary';
 import './step.less';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const cls = BEMHelper('step');
 
 export interface StepProps {
     step: SøknadStep;
-    history: History;
     formikProps: CustomFormikProps;
     className?: string;
     showNesteknapp?: boolean;
+    children?: ReactElement | ReactElement[];
 }
 
 interface StateProps {
@@ -45,10 +44,12 @@ type Props = StepProps & StateProps;
 
 const Step: FunctionComponent<Props> = (props) => {
     const intl = useIntl();
-    const { step, formikProps, history, className, showNesteknapp, arbeidsforhold } = props;
+    const { step, formikProps, className, showNesteknapp, arbeidsforhold } = props;
 
     const allSøknadSteps = getAllSteps(formikProps.values.søknadsgrunnlag);
     const [previousStep, nextStep] = getAdjacentSteps(step, allSøknadSteps);
+
+    const navigate = useNavigate();
 
     const config = {
         step,
@@ -57,11 +58,13 @@ const Step: FunctionComponent<Props> = (props) => {
         renderTilbakeknapp: previousStep.step !== StepID.INGEN,
         onRequestNavigateToPreviousStep: () => {
             const previousPath = getSøknadStepPath(previousStep.step, previousStep.subStep);
-            navigateTo(previousPath, history);
+            navigate(previousPath);
         },
     };
 
-    const currentStep = parsePathFromLocation(history.location);
+    const location = useLocation();
+
+    const currentStep = parsePathFromLocation(location);
     const stegForStegIndikator = allSøknadSteps.map((otherStep, index) => {
         return {
             index,
@@ -120,7 +123,7 @@ const Step: FunctionComponent<Props> = (props) => {
                     className={cls.classNames(cls.element('avbrytSøknad'), 'lenke')}
                     onClick={() => {
                         formikProps.handleReset();
-                        navigateTo(AppRoute.INTRO, history);
+                        navigate(AppRoute.INTRO);
                     }}
                 >
                     <FormattedMessage id="steg.avbrytSøknad" />

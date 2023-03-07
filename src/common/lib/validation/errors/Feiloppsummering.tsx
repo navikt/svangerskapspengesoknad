@@ -36,6 +36,7 @@ class Feiloppsummering extends React.Component<Props, unknown> {
                         href={link}
                         onClick={onErrorClick ? (evt) => onErrorClick(error, evt) : undefined}
                     >
+                        {/* @ts-ignore TS-feil-fiks */}
                         {error.text}
                     </a>
                 </li>

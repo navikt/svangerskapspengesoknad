@@ -4,7 +4,6 @@ import { Textarea as NavFrontendTextarea, TextareaProps } from 'nav-frontend-skj
 import { get } from 'lodash';
 import { useIntl } from 'react-intl';
 import { translateError } from 'app/utils/errorUtils';
-import { Omit } from 'react-redux';
 
 interface OwnProps {
     name: string;

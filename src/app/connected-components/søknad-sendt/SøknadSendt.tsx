@@ -62,7 +62,6 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
                     </Panel>
                 </Block>
             </div>
-            ;
         </Applikasjonsside>
     );
 };

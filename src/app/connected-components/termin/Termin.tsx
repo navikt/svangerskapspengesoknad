@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { CustomFormikProps } from 'app/types/Formik';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { HistoryProps } from 'app/redux/types/common';
 import { useIntl } from 'react-intl';
-import { navigateTo } from 'app/utils/navigationUtils';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Block from 'common/components/block/Block';
 import DatoInput from 'app/formik/wrappers/DatoInput';
@@ -17,22 +15,25 @@ import {
     niMånederFremITid,
     tiMånederSiden,
 } from '../../../common/util/datoUtils';
+import { useNavigate } from 'react-router-dom';
 
 interface OwnProps {
     step: SøknadStep;
     formikProps: CustomFormikProps;
 }
 
-type Props = OwnProps & HistoryProps;
+type Props = OwnProps;
 
 const Termin: FunctionComponent<Props> = (props) => {
-    const { step, formikProps, history } = props;
+    const { step, formikProps } = props;
     const { values } = formikProps;
 
     const intl = useIntl();
 
+    const navigateTo = useNavigate();
+
     const navigate = () => {
-        navigateTo(getSøknadStepPath(StepID.ARBEIDSFORHOLD), history);
+        navigateTo(getSøknadStepPath(StepID.ARBEIDSFORHOLD));
     };
 
     const showNesteknapp = values.barn.erBarnetFødt === false || values.barn.fødselsdato !== undefined;
@@ -44,7 +45,6 @@ const Termin: FunctionComponent<Props> = (props) => {
                 showNesteknapp={showNesteknapp}
                 formikProps={formikProps}
                 onValidFormSubmit={navigate}
-                history={history}
             >
                 <Block>
                     <DatoInput
