@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { Field, FieldProps } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
 import { SelectChangeEvent } from 'app/types/events';
@@ -9,6 +9,7 @@ import { useIntl } from 'react-intl';
 interface Props {
     name: string;
     label: string;
+    children: ReactNode | ReactNode[];
 }
 
 const Select: FunctionComponent<Props> = (props) => {

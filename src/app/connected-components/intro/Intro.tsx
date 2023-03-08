@@ -5,9 +5,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { CustomFormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { HistoryProps } from 'app/redux/types/common';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { navigateTo } from 'app/utils/navigationUtils';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import { StepID } from 'app/types/SøknadStep';
@@ -24,6 +22,7 @@ import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/V
 import './intro.less';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import DocumentIkon from 'app/icons/DocumentIkon';
+import { useNavigate } from 'react-router-dom';
 
 const cls = BEMHelper('intro');
 
@@ -32,15 +31,17 @@ interface OwnProps {
     formik: CustomFormikProps;
 }
 
-type Props = OwnProps & HistoryProps;
+type Props = OwnProps;
 
-const Intro: FunctionComponent<Props> = ({ søkerinfo, formik, history }) => {
+const Intro: FunctionComponent<Props> = ({ søkerinfo, formik }) => {
     const intl = useIntl();
     const søker = getData(søkerinfo, {}).søker;
     const { isSubmitting, isValid } = formik;
 
+    const navigate = useNavigate();
+
     useFormikSubmit(isSubmitting, isValid, () => {
-        navigateTo(getSøknadStepPath(StepID.TERMIN), history);
+        navigate(getSøknadStepPath(StepID.TERMIN));
     });
 
     const [dinePlikterIsOpen, toggleDinePlikter] = useState(false);

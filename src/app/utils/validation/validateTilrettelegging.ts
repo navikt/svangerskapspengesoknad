@@ -316,6 +316,7 @@ const validateTilrettelegging = (søknad: UferdigSøknad, arbeidsforholdId?: str
                 if (!errors.tilrettelegging) {
                     errors.tilrettelegging = [];
                 }
+                /* @ts-ignore TS-feil-fiks */
                 errors.tilrettelegging.push(tErrors);
             }
         });

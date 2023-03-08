@@ -1,12 +1,16 @@
-import * as React from 'react';
+import { ReactElement, Component } from 'react';
 import * as Sentry from '@sentry/browser';
+
+interface Props {
+    children: ReactElement;
+}
 
 interface State {
     eventId: string | null;
 }
 
-class ErrorBoundary extends React.Component<unknown, State> {
-    constructor(props: any) {
+class ErrorBoundary extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = { eventId: null };
     }

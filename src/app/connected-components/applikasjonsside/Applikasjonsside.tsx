@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { FormattedMessage } from 'react-intl';
@@ -13,6 +13,7 @@ import LanguageToggle from 'common/components/language-toggle/LanguageToggle';
 interface OwnProps {
     visSpråkvelger?: boolean;
     visTittel?: boolean;
+    children: ReactElement | ReactElement[];
 }
 
 interface StateProps {

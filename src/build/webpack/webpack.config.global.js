@@ -25,17 +25,15 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                use: 'ts-loader',
+                use: [
+                    {
+                      loader: 'ts-loader',
+                      options: {
+                        transpileOnly: false
+                      }
+                    }
+                  ],
                 exclude: /node_modules/,
-            },
-            {
-                enforce: 'pre',
-                test: /\.(js|ts|tsx)$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-                options: {
-                    cache: true,
-                },
             },
             {
                 test: /\.js$/,

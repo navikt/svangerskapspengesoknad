@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 
 import { CustomFormikProps } from 'app/types/Formik';
 import { getSøknadStepPath } from 'app/utils/stepUtils';
-import { navigateTo } from 'app/utils/navigationUtils';
 import { Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 import { StepProps } from 'app/components/step/Step';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
@@ -12,6 +11,7 @@ import FormikStep from 'app/components/formik-step/FormikStep';
 import getMessage from 'common/util/i18nUtils';
 import Oppholdsseksjon from './Oppholdsseksjon';
 import SøknadStep, { StepID } from 'app/types/SøknadStep';
+import { useNavigate } from 'react-router-dom';
 
 interface OwnProps {
     step: SøknadStep;
@@ -22,7 +22,7 @@ type Props = OwnProps & StepProps;
 
 const Utenlandsopphold: FunctionComponent<Props> = (props) => {
     const intl = useIntl();
-    const { step, formikProps, history } = props;
+    const { step, formikProps } = props;
     const { informasjonOmUtenlandsopphold: opphold } = formikProps.values;
 
     const visKomponent = {
@@ -32,8 +32,10 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
             opphold.iNorgeNeste12Mnd || (opphold.iNorgeNeste12Mnd === false && opphold.senereOpphold.length > 0),
     };
 
+    const navigateTo = useNavigate();
+
     const navigate = () => {
-        navigateTo(getSøknadStepPath(StepID.OPPSUMMERING), history);
+        navigateTo(getSøknadStepPath(StepID.OPPSUMMERING));
     };
 
     return (
@@ -43,7 +45,6 @@ const Utenlandsopphold: FunctionComponent<Props> = (props) => {
                 formikProps={formikProps}
                 showNesteknapp={visKomponent.nesteknapp}
                 onValidFormSubmit={navigate}
-                history={history}
             >
                 <Block>
                     <Oppholdsseksjon

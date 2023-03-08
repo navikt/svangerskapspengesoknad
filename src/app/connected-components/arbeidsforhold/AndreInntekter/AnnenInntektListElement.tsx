@@ -1,4 +1,4 @@
-import React, { StatelessComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { ModalSummaryProps } from '../ArbeidSeksjon/ArbeidSeksjon';
 import { useIntl } from 'react-intl';
 import { AnnenInntekt } from 'app/types/AnnenInntekt';
@@ -7,7 +7,7 @@ import { prettifyTidsperiode } from 'app/utils/formatDate';
 import getMessage from 'common/util/i18nUtils';
 import { getAnnenInntektElementTitle } from '../../../utils/arbeidsforholdUtils';
 
-const AnnenInntektListElement: StatelessComponent<ModalSummaryProps<AnnenInntekt>> = ({ element, ...rest }) => {
+const AnnenInntektListElement: FunctionComponent<ModalSummaryProps<AnnenInntekt>> = ({ element, ...rest }) => {
     const intl = useIntl();
     return (
         <InteractiveListElement

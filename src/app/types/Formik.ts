@@ -1,4 +1,4 @@
-import { FormikContext } from 'formik';
+import { FormikContext  } from 'formik';
 import { UferdigSøknad } from './Søknad';
 import { FormikProps as FormikActualProps } from 'formik';
 
