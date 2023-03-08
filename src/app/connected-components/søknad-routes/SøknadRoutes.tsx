@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
 
 import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
@@ -88,7 +87,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
         </Routes>
     );
 
-    return <BrowserRouter basename="/">{harSendtSøknad ? kvitteringRoute : søknadRoutes}</BrowserRouter>;
+    return harSendtSøknad ? kvitteringRoute : søknadRoutes;
 };
 
 export default SøknadRoutes;

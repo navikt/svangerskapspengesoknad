@@ -17,12 +17,13 @@ import DinePlikterModal from '../../components/dine-plikter-modal/DinePlikterMod
 import FetchState from 'app/types/FetchState';
 import getMessage from 'common/util/i18nUtils';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
-import useFormikSubmit from 'app/hooks/useFormikSubmit';
 import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './intro.less';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import DocumentIkon from 'app/icons/DocumentIkon';
 import { useNavigate } from 'react-router-dom';
+import { useIsValid } from '../formik-wrapper/FormikWrapper';
+import useFormikSubmit from 'app/hooks/useFormikSubmit';
 
 const cls = BEMHelper('intro');
 
@@ -36,9 +37,10 @@ type Props = OwnProps;
 const Intro: FunctionComponent<Props> = ({ søkerinfo, formik }) => {
     const intl = useIntl();
     const søker = getData(søkerinfo, {}).søker;
-    const { isSubmitting, isValid } = formik;
+    const { isSubmitting } = formik;
 
     const navigate = useNavigate();
+    const isValid = useIsValid(formik.values);
 
     useFormikSubmit(isSubmitting, isValid, () => {
         navigate(getSøknadStepPath(StepID.TERMIN));
