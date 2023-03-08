@@ -4,6 +4,7 @@ import Step from '../step/Step';
 
 import SøknadStep from 'app/types/SøknadStep';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
+import { useIsValid } from 'app/connected-components/formik-wrapper/FormikWrapper';
 
 interface Props {
     step: SøknadStep;
@@ -17,7 +18,9 @@ interface Props {
 const FormikStep: FunctionComponent<Props> = (props) => {
     const { formikProps, onValidFormSubmit } = props;
 
-    useFormikSubmit(formikProps.isSubmitting, formikProps.isValid, () => {
+    const isValid = useIsValid(formikProps.values);
+
+    useFormikSubmit(formikProps.isSubmitting, isValid, () => {
         if (onValidFormSubmit) {
             onValidFormSubmit();
         }
