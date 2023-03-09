@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import { Knapp } from 'nav-frontend-knapper';
@@ -51,6 +51,14 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
         toggleEndring(true);
         toggleModal(true);
     };
+
+    const attributter = name.split('.');
+    const verdi = formik.values[attributter[0]][attributter[1]];
+    useEffect(() => {
+        if (verdi === true) {
+            formik.setFieldValue(land, []);
+        }
+    }, [verdi]);
 
     return (
         <>
