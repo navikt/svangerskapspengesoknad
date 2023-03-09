@@ -83,7 +83,7 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
     const kvitteringRoute = (
         <Routes>
             <Route path={AppRoute.SENDT} element={<SøknadSendt />} />
-            <Route path="/" element={<Navigate to={AppRoute.SENDT} key="redirect" />} />
+            <Route path="*" element={<Navigate to={AppRoute.SENDT} key="redirect" />} />
         </Routes>
     );
 
