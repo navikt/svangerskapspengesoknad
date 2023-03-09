@@ -4,7 +4,7 @@ import Step from '../step/Step';
 
 import SøknadStep from 'app/types/SøknadStep';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
-import { useIsValid } from 'app/connected-components/formik-wrapper/FormikWrapper';
+import { useIsValid } from 'app/connectedComponents/formik-wrapper/FormikWrapper';
 
 interface Props {
     step: SøknadStep;

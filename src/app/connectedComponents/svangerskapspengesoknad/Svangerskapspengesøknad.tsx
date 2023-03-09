@@ -15,7 +15,6 @@ import getMessage from 'common/util/i18nUtils';
 import Kvittering from 'app/types/Kvittering';
 import Loading from 'app/components/loading/Loading';
 import SøknadRoutes from '../søknad-routes/SøknadRoutes';
-import { BrowserRouter } from 'react-router-dom';
 
 interface Props {
     søkerinfo: FetchState<Søkerinfo>;
@@ -89,16 +88,14 @@ const Svangerskapspengesøknad: React.FunctionComponent<Props> = (props) => {
         );
     } else {
         return (
-            <BrowserRouter basename="/">
-                <FormikWrapper
-                    contentRenderer={(formikProps) => (
-                        <SøknadRoutes
-                            formikProps={formikProps}
-                            harSendtSøknad={kvittering.status !== FetchStatus.UNFETCHED}
-                        />
-                    )}
-                />
-            </BrowserRouter>
+            <FormikWrapper
+                contentRenderer={(formikProps) => (
+                    <SøknadRoutes
+                        formikProps={formikProps}
+                        harSendtSøknad={kvittering.status !== FetchStatus.UNFETCHED}
+                    />
+                )}
+            />
         );
     }
 };
