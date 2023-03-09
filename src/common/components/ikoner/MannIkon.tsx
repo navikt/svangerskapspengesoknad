@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const MannIkon = (props: any) => (
+const MannIkon = () => (
     <svg
         width={40}
         height={40}

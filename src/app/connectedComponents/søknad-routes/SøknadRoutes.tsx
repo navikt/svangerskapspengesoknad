@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 
 import { AppRoute } from 'app/types/Routes';
 import { CustomFormikProps } from 'app/types/Formik';
@@ -24,8 +24,6 @@ const SøknadRoutes: FunctionComponent<Props> = ({ formikProps, harSendtSøknad 
     const isSøknadAvailable = isNextStepAvailable({ path: AppRoute.INTRO }, values);
     const isNextAvailable = (step: StepID) => isNextStepAvailable({ path: AppRoute.SØKNAD, step }, values);
 
-    const location = useLocation();
-    console.log(location);
     const tilretteleggingRoutes = values.tilrettelegging.map(({ id }) => {
         const søknadStep = {
             step: StepID.TILRETTELEGGING,

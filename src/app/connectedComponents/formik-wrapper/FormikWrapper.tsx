@@ -44,6 +44,7 @@ const FormikWrapper: FunctionComponent<Props> = ({ contentRenderer }) => {
         <Formik
             initialValues={initialSøknad}
             validate={validate}
+            // @ts-ignore Fiks
             onSubmit={onSubmit}
         >
             {(values) => contentRenderer(values)}

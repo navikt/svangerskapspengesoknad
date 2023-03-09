@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpackConfig = require('./webpack.config.global.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');

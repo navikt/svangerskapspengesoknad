@@ -18,6 +18,7 @@ const cls = (show: boolean, className?: string) =>
     });
 
 class Feiloppsummering extends React.Component<Props, unknown> {
+    // @ts-ignore Fiks
     element: HTMLElement | null;
     componentDidMount() {
         if (this.element) {

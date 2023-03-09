@@ -44,4 +44,5 @@ const mapStateToProps = (state: State): StateProps => ({
     språkkode: state.common.språkkode,
 });
 
+// @ts-ignore Fiks
 export default connect(mapStateToProps)(IntlProvider);

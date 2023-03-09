@@ -8,7 +8,10 @@ interface Props {
 }
 
 const KompleksFeltoppsummering: React.FunctionComponent<Props> = ({ ledetekst, children, className }) => (
-    <InnholdMedLedetekst className={`feltoppsummering ${className}`} ledetekst={ledetekst} children={children} />
+    <InnholdMedLedetekst className={`feltoppsummering ${className}`} ledetekst={ledetekst}>
+        {children}
+    </InnholdMedLedetekst>
+
 );
 
 export default KompleksFeltoppsummering;

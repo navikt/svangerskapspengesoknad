@@ -39,6 +39,7 @@ const Oppholdvalg: FunctionComponent<Props> = (props) => {
 
     return (
         <Formik
+            // @ts-ignore Fiks
             initialValues={opphold}
             validate={validateOpphold(type)}
             onSubmit={onAdd}

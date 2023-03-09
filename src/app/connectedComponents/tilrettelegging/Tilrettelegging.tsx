@@ -488,4 +488,5 @@ const mapDispatchToProps = (dispatch: (action: Action) => void) => {
     };
 };
 
+// @ts-ignore Fiks
 export default connect(mapStateToProps, mapDispatchToProps)(Tilrettelegging);

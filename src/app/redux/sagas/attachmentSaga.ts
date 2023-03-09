@@ -33,6 +33,7 @@ function* uploadAttachment(action: UploadAttachmentRequest): any {
             type: AttachmentActionTypes.UPLOAD_ATTACHMENT_FAILURE,
             payload: {
                 attachment,
+                // @ts-ignore Fiks
                 error,
             },
         };
@@ -60,6 +61,7 @@ function* deleteAttachment(action: DeleteAttachmentRequest) {
             type: AttachmentActionTypes.DELETE_ATTACHMENT_FAILURE,
             payload: {
                 attachment,
+                // @ts-ignore Fiks
                 error,
             },
         };

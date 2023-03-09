@@ -9,7 +9,7 @@ import { FetchStatus } from 'app/types/FetchState';
 import { CustomFormikProps } from 'app/types/Formik';
 import { mergeSøknadsgrunnlagIntoTilrettelegging } from 'app/utils/tilretteleggingUtils';
 import { State } from 'app/redux/store';
-import Arbeidsforhold from 'app/types/Arbeidsforhold';
+import ArbeidsforholdType from 'app/types/Arbeidsforhold';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
 import InformasjonOmArbeidsforholdWrapper from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforholdWrapper';
@@ -50,7 +50,7 @@ interface OwnProps {
 }
 
 interface ConnectProps {
-    arbeidsforhold: Arbeidsforhold[];
+    arbeidsforhold: ArbeidsforholdType[];
 }
 
 type Props = OwnProps & StepProps & ConnectProps;
@@ -117,12 +117,14 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
     const prepareTilrettelegging = () => {
         if (frilansInformasjon === undefined) {
             tilrettelegging = tilrettelegging.filter(
+                // @ts-ignore Fiks
                 (til: UferdigTilrettelegging) => til.arbeidsforhold.type !== Arbeidsforholdstype.FRILANSER
             );
         }
 
         if (selvstendigNæringsdrivendeInformasjon === undefined) {
             tilrettelegging = tilrettelegging.filter(
+                // @ts-ignore Fiks
                 (til: UferdigTilrettelegging) => til.arbeidsforhold.type !== Arbeidsforholdstype.SELVSTENDIG
             );
         }

@@ -4,18 +4,19 @@ import classnames from 'classnames';
 import { useIntl } from 'react-intl';
 import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 
-import './attachment.less';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Lenke from 'nav-frontend-lenker';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { Attachment as AttachmentType } from 'common/storage/attachment/types/Attachment';
 import { bytesString } from 'common/util/filesize';
 import BEMHelper from 'common/util/bem';
 import VedleggIkon from 'common/components/ikoner/VedleggIkon';
 
+import './attachment.less';
+
 interface Props {
-    attachment: Attachment;
+    attachment: AttachmentType;
     showFileSize?: boolean;
-    onDelete?: (file: Attachment) => void;
+    onDelete?: (file: AttachmentType) => void;
 }
 
 const Attachment: React.FunctionComponent<Props> = ({ attachment, showFileSize, onDelete }) => {

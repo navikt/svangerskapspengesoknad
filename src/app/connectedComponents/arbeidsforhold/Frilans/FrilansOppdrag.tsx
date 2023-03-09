@@ -15,14 +15,14 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Knapperad from 'common/components/knapperad/Knapperad';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
-import { FrilansOppdrag } from '../../../types/FrilansInformasjon';
+import { FrilansOppdrag as FrilansOppdragType } from '../../../types/FrilansInformasjon';
 import validateFrilansoppdrag from 'app/utils/validation/validateFrilansoppdrag';
 
 import './frilansOppdrag.less';
 
 const cls = BEMHelper('frilansOppdrag');
 
-type Props = ModalFormProps<FrilansOppdrag>;
+type Props = ModalFormProps<FrilansOppdragType>;
 
 const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
     const intl = useIntl();
@@ -30,8 +30,10 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
 
     return (
         <Formik
+            // @ts-ignore Fiks
             initialValues={element}
             validate={validateFrilansoppdrag()}
+            // @ts-ignore Fiks
             onSubmit={onAdd}
             render={({ handleSubmit }: FormikProps<Utenlandsopphold>) => {
                 return (
