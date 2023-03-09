@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import moment from 'moment';
 
@@ -38,9 +37,9 @@ import { AnnenInntektType } from '../../types/AnnenInntekt';
 import './arbeidsforhold.less';
 import { getAktiveArbeidsforhold } from 'app/utils/arbeidsforholdUtils';
 import InfoTilFiskere from 'app/components/info-til-fiskere/InfoTilFiskere';
-import Lenke from 'nav-frontend-lenker';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
+import { BodyShort, Link } from '@navikt/ds-react';
 
 const cls = BEMHelper('arbeidsforhold');
 
@@ -159,7 +158,7 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                         title: getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.label'),
                     }}
                 >
-                    <Normaltekst>{getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.text')}</Normaltekst>
+                    <BodyShort>{getMessage(intl, 'arbeidsforhold.utbetalingerFraNAV.text')}</BodyShort>
                 </Block>
 
                 <Block
@@ -210,12 +209,12 @@ const Arbeidsforhold: FunctionComponent<Props> = (props: Props) => {
                     />
                 </Block>
                 <Block visible={visHarJobbetSomSelvstendigNæringsdrivendeSiste10MndSeksjon} margin="xs">
-                    <Lenke
+                    <Link
                         target="_blank"
                         href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/er-jeg-selvstendig-naeringsdrivende-frilanser-eller-arbeidstaker"
                     >
                         <FormattedMessage id="arbeidsforhold.erJegNæringsdrivendeFrilansEllerArbeidstaker" />
-                    </Lenke>
+                    </Link>
                 </Block>
 
                 <Block visible={visharHattAnnenInntektSiste10MndSeksjon}>

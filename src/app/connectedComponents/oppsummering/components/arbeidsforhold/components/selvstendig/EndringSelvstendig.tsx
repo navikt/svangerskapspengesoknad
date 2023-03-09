@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { EndringAvNæringsinntektInformasjon } from 'app/types/SelvstendigNæringsdrivende';
-import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import './endringSelvstendig.less';
 import OppsummeringBeskrivelse from '../../../OppsummeringBeskrivelse';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 import getMessage from 'common/util/i18nUtils';
+import { Label } from '@navikt/ds-react';
 
 interface Props {
     endringAvNæringsinntektInformasjon: EndringAvNæringsinntektInformasjon;
@@ -20,9 +20,9 @@ const EndringSelvstendig: FunctionComponent<Props> = ({ endringAvNæringsinntekt
     return (
         <div className={cls.block}>
             <div>
-                <Element>
+                <Label>
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.endring" />
-                </Element>
+                </Label>
             </div>
             <Block margin="xxs">{moment(endringAvNæringsinntektInformasjon.dato).format('DD.MM.YYYY')}</Block>
             <Block margin="xxs">

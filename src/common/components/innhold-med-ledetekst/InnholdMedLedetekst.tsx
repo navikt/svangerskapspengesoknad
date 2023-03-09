@@ -1,6 +1,6 @@
 import React from 'react';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { guid } from 'nav-frontend-js-utils';
+import { BodyShort, Label } from '@navikt/ds-react';
 
 interface InnholdMedLedetekstProps {
     ledetekst: string;
@@ -13,12 +13,12 @@ const hasListOfChildren = (children: string | string[]): boolean => (Array.isArr
 const InnholdMedLedetekst: React.FunctionComponent<InnholdMedLedetekstProps> = ({ ledetekst, children, className }) => {
     return (
         <div className={className}>
-            <Normaltekst>{ledetekst}</Normaltekst>
+            <BodyShort>{ledetekst}</BodyShort>
             {!Array.isArray(children) && hasListOfChildren((children as JSX.Element).props.children)
                 ? (children as JSX.Element).props.children.map((child: string) => (
-                      <Element className="feltoppsummering__verdi" key={guid()}>
+                      <Label className="feltoppsummering__verdi" key={guid()}>
                           {child}
-                      </Element>
+                      </Label>
                   ))
                 : children}
         </div>

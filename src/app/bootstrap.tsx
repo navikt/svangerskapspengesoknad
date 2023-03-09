@@ -1,16 +1,16 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { Provider } from 'react-redux';
 import countries from 'i18n-iso-countries';
-import Modal from 'nav-frontend-modal';
 import * as Sentry from '@sentry/browser';
 import { BrowserRouter } from 'react-router-dom';
+import { BodyShort, Modal } from '@navikt/ds-react';
 
 import store from './redux/store';
 import IntlProvider from './intl/IntlProvider';
 import Svangerskapspengesøknad from './connectedComponents/svangerskapspengesoknad/Svangerskapspengesøknad';
 
+import '@navikt/ds-css';
 import './styles/global.less';
 import './styles/app.less';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
@@ -33,11 +33,11 @@ root.render(
     <ErrorBoundary>
         <Provider store={store}>
             <IntlProvider>
-                <Normaltekst tag="main">
+                <BodyShort>
                     <BrowserRouter basename="/">
                         <Svangerskapspengesøknad />
                     </BrowserRouter>
-                </Normaltekst>
+                </BodyShort>
             </IntlProvider>
         </Provider>
     </ErrorBoundary>,

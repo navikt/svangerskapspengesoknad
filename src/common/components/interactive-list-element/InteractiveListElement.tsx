@@ -1,12 +1,11 @@
 import * as React from 'react';
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import BEMHelper from 'common/util/bem';
-import { default as Etikett, EtikettBaseProps } from 'nav-frontend-etiketter';
 import { useIntl } from 'react-intl';
 
 import './interactiveListElement.less';
 import getMessage from 'common/util/i18nUtils';
 import Pencil from './Pencil';
+import { BodyShort } from '@navikt/ds-react';
 
 export interface InteractiveListElementProps {
     style?: 'gray' | 'grayWithBorder';
@@ -20,7 +19,6 @@ interface AllListElementProps extends InteractiveListElementProps {
     title: string;
     text: string;
     deleteLinkText: string;
-    etikettProps?: EtikettBaseProps;
 }
 
 const bem = BEMHelper('interactiveListElement');
@@ -29,7 +27,6 @@ const InteractiveListElement: React.FunctionComponent<AllListElementProps> = ({
     title,
     text,
     deleteLinkText,
-    etikettProps,
     style = 'gray',
     deleteButtonAriaText,
     editButtonAriaText,
@@ -40,7 +37,7 @@ const InteractiveListElement: React.FunctionComponent<AllListElementProps> = ({
     return (
         <li className={bem.classNames(bem.block, bem.modifier(style))}>
             <div className={bem.element('top')}>
-                <Normaltekst className="title">{title}</Normaltekst>
+                <BodyShort className="title">{title}</BodyShort>
                 <button
                     type="button"
                     className={bem.element('editButton')}
@@ -50,9 +47,8 @@ const InteractiveListElement: React.FunctionComponent<AllListElementProps> = ({
                     <Pencil />
                 </button>
             </div>
-            <Normaltekst className={bem.element('text')}>{text}</Normaltekst>
+            <BodyShort className={bem.element('text')}>{text}</BodyShort>
             <div className={bem.element('bottom')}>
-                {etikettProps !== undefined && <Etikett {...etikettProps} />}
                 <button
                     className={bem.element('deleteButton')}
                     onClick={onDelete}

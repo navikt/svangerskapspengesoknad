@@ -1,6 +1,4 @@
 @import '../../../../../node_modules/nav-frontend-core/less/_variabler';
-@import '../../../../../node_modules/nav-frontend-lenker-style/src/lenker-mixins';
-@import '../../../../../node_modules/nav-frontend-paneler-style/src/mixins';
 
 .feil-oppsummering-boks {
     background-color: @redErrorLighten20;
@@ -8,8 +6,6 @@
     color: @white;
     padding: 1.75rem;
     margin-bottom: 1rem;
-
-    .panel-focus-mixin();
 }
 
 .feil-oppsummering-boks--visible {
@@ -21,7 +17,6 @@
 }
 
 .feil-oppsummering-boks__lenke {
-    .lenke-mixin();
     color: white;
     font-style: italic;
     border-bottom: 1px solid @redErrorLighten60;

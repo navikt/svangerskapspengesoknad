@@ -4,10 +4,8 @@ import { connect as formConnect, FieldArray } from 'formik';
 import get from 'lodash/get';
 
 import { FormikProps } from 'app/types/Formik';
-import { Knapp } from 'nav-frontend-knapper';
 import Block from 'common/components/block/Block';
 import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
-import Modal from 'nav-frontend-modal';
 import getMessage from 'common/util/i18nUtils';
 import List from 'common/components/list/List';
 import { UferdigSøknad } from 'app/types/Søknad';
@@ -16,6 +14,7 @@ import BEMHelper from 'common/util/bem';
 import { AnnenInntekt } from 'app/types/AnnenInntekt';
 import { Næring } from 'app/types/SelvstendigNæringsdrivende';
 import './arbeidSeksjon.less';
+import { Button, Modal } from '@navikt/ds-react';
 
 export interface ModalFormProps<T> {
     element?: T;
@@ -118,31 +117,34 @@ const Arbeidsforholdseksjon: FunctionComponent<Props> = (props: Props) => {
                                 />
                             </Block>
                             <Block visible={visLeggTilKnapp} marginTop="s" margin="none">
-                                <Knapp
+                                <Button
+                                    variant="secondary"
                                     className={cls.element('leggTil')}
                                     onClick={openModalForAdding}
-                                    htmlType="button"
+                                    type="button"
                                 >
                                     {buttonLabel}
-                                </Knapp>
+                                </Button>
                             </Block>
 
                             <Modal
                                 closeButton={true}
-                                isOpen={modalIsOpen}
+                                open={modalIsOpen}
                                 shouldCloseOnOverlayClick={false}
-                                contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
-                                onRequestClose={() => toggleModal(false)}
+                                aria-label={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
+                                onClose={() => toggleModal(false)}
                             >
-                                {props.renderForm({
-                                    endre,
-                                    element: endre ? elementer[currentIndex] : undefined,
-                                    onCancel: () => toggleModal(false),
-                                    onAdd: (arbeidsforhold: Næring | AnnenInntekt) => {
-                                        endre ? replace(currentIndex, arbeidsforhold) : push(arbeidsforhold);
-                                        toggleModal(false);
-                                    },
-                                })}
+                                <Modal.Content>
+                                    {props.renderForm({
+                                        endre,
+                                        element: endre ? elementer[currentIndex] : undefined,
+                                        onCancel: () => toggleModal(false),
+                                        onAdd: (arbeidsforhold: Næring | AnnenInntekt) => {
+                                            endre ? replace(currentIndex, arbeidsforhold) : push(arbeidsforhold);
+                                            toggleModal(false);
+                                        },
+                                    })}
+                                </Modal.Content>
                             </Modal>
                         </div>
                     );

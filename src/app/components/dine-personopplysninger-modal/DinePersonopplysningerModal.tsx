@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Modal from 'nav-frontend-modal';
-import { Ingress, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import getMessage from 'common/util/i18nUtils';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 import BEMHelper from 'common/util/bem';
+import { BodyShort, Heading, Ingress, Modal } from '@navikt/ds-react';
 const bem = BEMHelper('dinePersonOpplysningerModal');
 
 interface DineRettigheterModalProps {
@@ -15,12 +14,12 @@ interface DineRettigheterModalProps {
 const Avsnitt: React.FunctionComponent<{ id: string }> = ({ id }) => {
     return (
         <Block margin="s">
-            <Ingress tag="h2">
+            <Ingress>
                 <FormattedMessage id={`intro.dinePersonopplysninger.avsnitt.${id}.tittel`} />
             </Ingress>
-            <Normaltekst className={bem.element('html')}>
+            <BodyShort className={bem.element('html')}>
                 <FormattedMessage id={`intro.dinePersonopplysninger.avsnitt.${id}.html`} />
-            </Normaltekst>
+            </BodyShort>
             <ul>
                 <FormattedMessage tagName="li" id="intro.dinePersonopplysninger.avsnitt.html.punkt1" />
                 <FormattedMessage tagName="li" id="intro.dinePersonopplysninger.avsnitt.html.punkt2" />
@@ -36,43 +35,45 @@ const DinePersonopplysningerModal = (props: Props) => {
     //const { intl } = props;
     return (
         <Modal
-            isOpen={props.isOpen}
-            onRequestClose={() => props.onRequestClose()}
+            open={props.isOpen}
+            onClose={() => props.onRequestClose()}
             shouldCloseOnOverlayClick={false}
             closeButton={true}
-            contentLabel={getMessage(intl, 'intro.dinePersonopplysninger.sectionheading')}
+            aria-label={getMessage(intl, 'intro.dinePersonopplysninger.sectionheading')}
         >
-            <article className="velkommenModalContent velkommenModalContent--50">
-                <Block margin="s">
-                    <Systemtittel tag="h1" className="velkommenModalContent__header">
+            <Modal.Content>
+                <article className="velkommenModalContent velkommenModalContent--50">
+                    <Block margin="s">
+                    <Heading size="medium" className="velkommenModalContent__header">
                         {getMessage(intl, 'intro.dinePersonopplysninger.sectionheading')}
-                    </Systemtittel>
-                </Block>
-                <Block margin="s">
-                    <Normaltekst>
-                        <FormattedMessage
-                            id="intro.dinePersonopplysninger.behandling.html"
-                            values={{
-                                p: (msg: any) => <p>{msg}</p>,
-                                a: (msg: any) => (
-                                    <a
-                                        className="lenke"
-                                        rel="noopener noreferrer"
-                                        href="https://www.nav.no/foreldrepenger"
-                                    >
-                                        {msg}
-                                    </a>
-                                ),
-                            }}
-                        />
-                    </Normaltekst>
-                </Block>
+                    </Heading>
+                    </Block>
+                    <Block margin="s">
+                        <BodyShort>
+                            <FormattedMessage
+                                id="intro.dinePersonopplysninger.behandling.html"
+                                values={{
+                                    p: (msg: any) => <p>{msg}</p>,
+                                    a: (msg: any) => (
+                                        <a
+                                            className="lenke"
+                                            rel="noopener noreferrer"
+                                            href="https://www.nav.no/foreldrepenger"
+                                        >
+                                            {msg}
+                                        </a>
+                                    ),
+                                }}
+                            />
+                        </BodyShort>
+                    </Block>
 
-                <Avsnitt id="innhenting" />
-                <Avsnitt id="automatiskBehandling" />
-                <Avsnitt id="svarPaSoknaden" />
-                <Avsnitt id="personvernerklaringen" />
-            </article>
+                    <Avsnitt id="innhenting" />
+                    <Avsnitt id="automatiskBehandling" />
+                    <Avsnitt id="svarPaSoknaden" />
+                    <Avsnitt id="personvernerklaringen" />
+                </article>
+            </Modal.Content>
         </Modal>
     );
 };

@@ -4,7 +4,7 @@ import Snakkeboble from '../snakkeboble/Snakkeboble';
 import BEMHelper from 'common/util/bem';
 
 import './personMedSnakkeboble.less';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 interface Props {
     personRenderer: () => React.ReactNode;
@@ -35,9 +35,9 @@ const PersonMedSnakkeboble: React.FunctionComponent<Props> = ({
             )}
         >
             {dialog && (
-                <Normaltekst tag="div" className={bem.element('snakkeboble')}>
+                <BodyShort className={bem.element('snakkeboble')}>
                     <Snakkeboble tittel={dialog.title} tekst={dialog.text} />
-                </Normaltekst>
+                </BodyShort>
             )}
             <div className={bem.element('person')}>{personRenderer()}</div>
         </div>

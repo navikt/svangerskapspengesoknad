@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
 const { NedChevron } = require('nav-frontend-chevron');
-import 'nav-frontend-lenker-style';
 
 import getMessage from 'common/util/i18nUtils';
 import UKFlagSVG from '../flags/UKFlagSVG';

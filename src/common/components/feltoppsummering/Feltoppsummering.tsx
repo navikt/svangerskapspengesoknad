@@ -1,8 +1,8 @@
 import React from 'react';
-import { Element } from 'nav-frontend-typografi';
 
 import './feltoppsummering.less';
 import InnholdMedLedetekst from 'common/components/innhold-med-ledetekst/InnholdMedLedetekst';
+import { Label } from '@navikt/ds-react';
 
 interface Props {
     feltnavn: string;
@@ -14,7 +14,7 @@ const Feltoppsummering: React.FunctionComponent<Props> = ({ feltnavn, verdi }) =
         className="feltoppsummering"
         ledetekst={feltnavn}
     >
-        <Element className="feltoppsummering__verdi">{verdi}</Element>
+        <Label className="feltoppsummering__verdi">{verdi}</Label>
     </InnholdMedLedetekst>
 );
 

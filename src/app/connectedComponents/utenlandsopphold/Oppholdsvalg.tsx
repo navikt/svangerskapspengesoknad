@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { Formik, FormikProps } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import { Undertittel } from 'nav-frontend-typografi';
 
 import { Utenlandsopphold, Oppholdstype } from 'app/types/InformasjonOmUtenlandsopphold';
 import BEMHelper from 'common/util/bem';
@@ -15,6 +13,7 @@ import validateOpphold, { getDatoAvgrensninger } from 'app/utils/validation/vali
 import './oppholdsvalg.less';
 import Knapperad from 'common/components/knapperad/Knapperad';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
+import { Button, Heading } from '@navikt/ds-react';
 
 const cls = BEMHelper('oppholdsvalg');
 
@@ -55,9 +54,9 @@ const Oppholdvalg: FunctionComponent<Props> = (props) => {
                 return (
                     <form onSubmit={onFormSubmit} className={cls.block}>
                         <Block>
-                            <Undertittel>
+                            <Heading size="small">
                                 {getMessage(intl, `utenlandsopphold.modal.tittel${endre ? '.endre' : ''}`)}
-                            </Undertittel>
+                            </Heading>
                         </Block>
                         <Block>
                             <Select name="land" label={getMessage(intl, `utenlandsopphold.${type}.land.label`)}>
@@ -93,14 +92,14 @@ const Oppholdvalg: FunctionComponent<Props> = (props) => {
                             />
                         </Block>
                         <Knapperad stil="mobile-50-50">
-                            <Knapp htmlType="button" onClick={onCancel}>
+                            <Button variant="secondary" type="button" onClick={onCancel}>
                                 <FormattedMessage id="utenlandsopphold.land.avbryt" />
-                            </Knapp>
-                            <Hovedknapp htmlType="submit">
+                            </Button>
+                            <Button variant="primary">
                                 <FormattedMessage
                                     id={endre ? 'utenlandsopphold.land.endre' : 'utenlandsopphold.land.leggTil'}
                                 />
-                            </Hovedknapp>
+                            </Button>
                         </Knapperad>
                     </form>
                 );

@@ -3,7 +3,6 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Formik, FormikProps, FieldArray } from 'formik';
 import { connect } from 'react-redux';
 import BEMHelper from 'common/util/bem';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { isValid } from 'i18n-iso-countries';
 import RadioPanelGruppe from 'app/formik/wrappers/RadioPanelGruppe';
 import Block from 'common/components/block/Block';
@@ -12,7 +11,6 @@ import getCountries from 'app/utils/getCountries';
 import InputField from 'app/formik/wrappers/InputField';
 import { AnnenInntektType, AnnenInntekt } from 'app/types/AnnenInntekt';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
-import { Undertittel } from 'nav-frontend-typografi';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
 import { AttachmentType } from 'common/storage/attachment/types/AttachmentType';
 import { Skjemanummer } from 'app/types/Skjemanummer';
@@ -27,6 +25,7 @@ import Select from 'app/formik/wrappers/Select';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import Knapperad from 'common/components/knapperad/Knapperad';
 import { cleanupAnnenInntekt } from '../utils/cleanup';
+import { Button, Heading } from '@navikt/ds-react';
 
 const cls = BEMHelper('andre-inntekter');
 
@@ -84,9 +83,9 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                         className={cls.block}
                     >
                         <Block>
-                            <Undertittel>
+                            <Heading size="small">
                                 <FormattedMessage id={`arbeidsforhold.andreInntekter.tittel${endre ? '.endre' : ''}`} />
-                            </Undertittel>
+                            </Heading>
                         </Block>
 
                         <Block>
@@ -204,15 +203,12 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
                             </Veilederinfo>
                         </Block>
                         <Knapperad stil="mobile-50-50">
-                            <Knapp htmlType="button" onClick={onCancel}>
+                            <Button variant="secondary"  onClick={onCancel} type='button'>
                                 <FormattedMessage id="avbryt" />
-                            </Knapp>
-                            <Hovedknapp
-                                disabled={!isValid || values.type === AnnenInntektType.MILITÆRTJENESTE}
-                                htmlType="submit"
-                            >
+                            </Button>
+                            <Button variant="primary"     disabled={!isValid || values.type === AnnenInntektType.MILITÆRTJENESTE}>
                                 <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
-                            </Hovedknapp>
+                            </Button>
                         </Knapperad>
                     </form>
                 );

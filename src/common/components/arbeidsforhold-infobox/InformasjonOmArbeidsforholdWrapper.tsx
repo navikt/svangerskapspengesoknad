@@ -1,8 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { Normaltekst } from 'nav-frontend-typografi';
-
 import Arbeidsforhold from '../../../app/types/Arbeidsforhold';
 
 import ArbeidsforholdInfoBox from 'common/components/arbeidsforhold-infobox/InformasjonOmArbeidsforhold';
@@ -10,6 +8,7 @@ import getMessage from 'common/util/i18nUtils';
 
 import './arbeidsforhold.less';
 import { guid } from 'nav-frontend-js-utils';
+import { BodyShort } from '@navikt/ds-react';
 
 interface ArbeidsforholdInfoWrapperProps {
     arbeidsforhold: Arbeidsforhold[] | undefined;
@@ -24,9 +23,9 @@ const InformasjonOmArbeidsforholdWrapper: React.FunctionComponent<Arbeidsforhold
         <React.Fragment>
             {!harArbeidsforhold && (
                 <div className="arbeidsforholdInfoBox">
-                    <Normaltekst>
+                    <BodyShort>
                         {getMessage(intl, 'annenInntekt.arbeidsforhold.ingenRegistrerteArbeidsforhold')}
-                    </Normaltekst>
+                    </BodyShort>
                 </div>
             )}
             {harArbeidsforhold && (

@@ -3,15 +3,14 @@ import { Person } from 'app/types/Søkerinfo';
 import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import SpotlightLetter from 'common/components/ikoner/SpotlightLetter';
-import { Sidetittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { dateToHours } from 'app/utils/formatDate';
 
-import Lenke from 'nav-frontend-lenker';
 import { openPdfPreview } from '../util/pdfUtils';
 
 import './kvitteringHeader.less';
+import { BodyShort, Heading, Link } from '@navikt/ds-react';
 
 interface Props {
     søker: Person;
@@ -29,18 +28,18 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, pdf }) => {
             </Block>
 
             <Block margin="s">
-                <Sidetittel tag="h4">
+                <Heading size="xlarge">
                     <FormattedMessage
                         id="søknadSendt.tittel"
                         values={{
                             name: `${søker.fornavn} ${søker.etternavn}`,
                         }}
                     />
-                </Sidetittel>
+                </Heading>
             </Block>
 
             <Block visible={pdf !== undefined}>
-                <Lenke
+                <Link
                     href={'#'}
                     onClick={(e) => {
                         e.preventDefault();
@@ -48,14 +47,14 @@ const KvitteringHeader: FunctionComponent<Props> = ({ søker, pdf }) => {
                     }}
                 >
                     <FormattedMessage id={'søknadSendt.pdf'} />
-                </Lenke>
+                </Link>
             </Block>
 
             <Block>
                 <div className={cls.element('sendtInnTid')}>
-                    <Normaltekst>
+                    <BodyShort>
                         <FormattedMessage id="søknadSendt.sendtInn" />
-                    </Normaltekst>
+                    </BodyShort>
                     <span style={{ width: '0.25rem' }} />
                     {moment().format('Do MMMM YYYY')}, kl. {dateToHours(moment().toDate())}
                 </div>

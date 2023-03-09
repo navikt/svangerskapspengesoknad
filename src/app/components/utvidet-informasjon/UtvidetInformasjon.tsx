@@ -3,9 +3,9 @@ import { guid } from 'nav-frontend-js-utils';
 import InfoToggler from './InfoToggler';
 import './utvidetInformasjon.less';
 import EkspanderbartInnhold from './EkspanderbartInnhold';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { useIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
+import { BodyShort } from '@navikt/ds-react';
 
 interface Props {
     children: React.ReactNode;
@@ -25,7 +25,7 @@ const UtvidetInformasjon: React.FunctionComponent<Props> = ({ children, apneLabe
         <div className="utvidetInformasjon">
             <div className="utvidetInformasjon__toggler no-print">
                 <InfoToggler onToggle={() => setApen(!apen)} apen={apen}>
-                    <Normaltekst tag="span">{apen ? lukkLabel : apneLabel}</Normaltekst>
+                    <BodyShort>{apen ? lukkLabel : apneLabel}</BodyShort>
                 </InfoToggler>
             </div>
             <div className="utvidetInformasjon__innhold" id={innholdId}>
