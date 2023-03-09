@@ -89,7 +89,12 @@ const Template: Story<any> = () => {
     const apiMock = new MockAdapter(getAxiosInstance());
     apiMock.onGet('/sokerinfo').reply(200,søkerinfo);
 
-    apiMock.onPost('/soknad');
+    apiMock.onPost('/soknad').reply(200, {
+        "mottattDato": "2019-02-20T20:39:42.757",
+        "referanseId": "bddfa0bb-e00c-4982-b0cc-4a09654803c2",
+        "leveranseStatus": "GOSYS",
+        "journalId": "439775108"
+    });
 
     return (
         <ErrorBoundary>
