@@ -73,7 +73,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
             </Block>
             <FieldArray
                 name={land}
-                render={({ push, replace, remove,  }) => {
+                render={({ push, replace, remove }) => {
                     return (
                         <>
                             <Block margin="xs" visible={alleOpphold.length > 0}>
