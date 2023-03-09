@@ -3,6 +3,7 @@ import { Story } from '@storybook/react';
 import MockAdapter from 'axios-mock-adapter';
 import ErrorBoundary from 'app/components/ErrorBoundary/ErrorBoundary';
 import { Provider } from 'react-redux';
+import countries from 'i18n-iso-countries';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import IntlProvider from 'app/intl/IntlProvider';
@@ -12,6 +13,9 @@ import Svangerskapspengesøknad from './Svangerskapspengesøknad';
 
 import '../../styles/global.less';
 import '../../styles/app.less';
+
+countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
+countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
 
 const søkerinfo = {
   "søker": {

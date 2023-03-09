@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
 import { Knapp } from 'nav-frontend-knapper';
@@ -52,6 +52,14 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
         toggleModal(true);
     };
 
+    const attributter = name.split('.');
+    const verdi = formik.values[attributter[0]][attributter[1]];
+    useEffect(() => {
+        if (verdi === true) {
+            formik.setFieldValue(land, []);
+        }
+    }, [verdi]);
+
     return (
         <>
             <Block margin="xs">
@@ -65,7 +73,7 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
             </Block>
             <FieldArray
                 name={land}
-                render={({ push, replace, remove }) => {
+                render={({ push, replace, remove,  }) => {
                     return (
                         <>
                             <Block margin="xs" visible={alleOpphold.length > 0}>
