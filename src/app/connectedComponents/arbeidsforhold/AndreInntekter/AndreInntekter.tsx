@@ -61,6 +61,7 @@ const AndreInntekter: FunctionComponent<Props> = (props) => {
 
     return (
         <Formik
+            // @ts-ignore Fiks
             initialValues={element}
             validate={validateAndreInntekter()}
             onSubmit={onSubmit}

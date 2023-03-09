@@ -1,28 +1,26 @@
 {
     "compilerOptions": {
         "outDir": "build/dist",
-        "module": "esnext",
-        "target": "es5",
-        "lib": ["es6", "dom", "es2017"],
+        "module": "ESNext",
+        "target": "ESNext",
         "sourceMap": true,
-        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "suppressImplicitAnyIndexErrors": true,
         "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
         "jsx": "react",
         "moduleResolution": "node",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": true,
-        "esModuleInterop": true,
-        "noImplicitThis": true,
         "noImplicitAny": true,
-        "strictNullChecks": true,
-        "skipLibCheck": true,
-        "suppressImplicitAnyIndexErrors": true,
+        "noImplicitReturns": false,
+        "noImplicitThis": true,
         "noUnusedLocals": true,
+        "resolveJsonModule": true,
         "baseUrl": "./src",
         "typeRoots": ["./node_modules/@types", "./src/@types"],
-        "resolveJsonModule": true,
         "paths": {
-            "common/*": ["./common/*"]
+            "common/*": ["./common/*"],
+            "app/*": ["./app/*"]
         }
     },
     "exclude": [

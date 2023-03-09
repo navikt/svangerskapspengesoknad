@@ -3,9 +3,9 @@ module.exports = {
     coverageReporters: ['text-summary'],
     moduleFileExtensions: ['js', 'json', 'ts', 'tsx', 'less', 'css'],
     moduleNameMapper: {
-        '\\.(css|jpg|png|svg|less)$': '<rootDir>/node_modules/jest-css-modules',
+        '\\.(svg)$': '<rootDir>/mocks/fileMock.js',
+        '\\.(less|css)$': 'identity-obj-proxy',
         '^app/(.*)': '<rootDir>/src/app/$1',
-        '^uttaksplan/(.*)': '<rootDir>/src/uttaksplan/$1',
         '^common/(.*)': '<rootDir>/src/common/$1',
     },
     rootDir: './',
@@ -15,6 +15,7 @@ module.exports = {
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
     transform: {
         '^.+\\.(ts|tsx|js)?$': 'babel-jest',
-    },
+        '^.+.(css|less)$': 'jest-transform-stub',
+      },
     transformIgnorePatterns: ['<rootDir>.*(node_modules)(?!.*nav.*).*$'],
 };

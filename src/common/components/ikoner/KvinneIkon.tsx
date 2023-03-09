@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const KvinneIkon = (props: any) => (
+const KvinneIkon = () => (
     <svg
         width={40}
         height={40}

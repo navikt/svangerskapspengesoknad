@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const mustacheExpress = require('mustache-express');
 
-const configureDevServer = (decoratorFragments, useVTP) => ({
+const configureDevServer = (decoratorFragments) => ({
     setupMiddlewares: (middlewares, devServer) => {
         devServer.app.engine('html', mustacheExpress());
         devServer.app.set('views', `${__dirname}/../../../dist/dev`);

@@ -39,6 +39,7 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
 
     return (
         <Formik
+            // @ts-ignore Fiks
             initialValues={element}
             validate={validateSelvstendigNæringsdrivende()}
             onSubmit={onSubmit}
