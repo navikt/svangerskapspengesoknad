@@ -5,10 +5,11 @@ import { Provider } from 'react-redux';
 import countries from 'i18n-iso-countries';
 import Modal from 'nav-frontend-modal';
 import * as Sentry from '@sentry/browser';
+import { BrowserRouter } from 'react-router-dom';
 
 import store from './redux/store';
 import IntlProvider from './intl/IntlProvider';
-import Svangerskapspengesøknad from './connected-components/svangerskapspengesøknad/Svangerskapspengesøknad';
+import Svangerskapspengesøknad from './connectedComponents/svangerskapspengesoknad/Svangerskapspengesøknad';
 
 import './styles/global.less';
 import './styles/app.less';
@@ -33,7 +34,9 @@ root.render(
         <Provider store={store}>
             <IntlProvider>
                 <Normaltekst tag="main">
-                    <Svangerskapspengesøknad />
+                    <BrowserRouter basename="/">
+                        <Svangerskapspengesøknad />
+                    </BrowserRouter>
                 </Normaltekst>
             </IntlProvider>
         </Provider>

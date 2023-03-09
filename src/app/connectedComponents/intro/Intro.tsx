@@ -9,7 +9,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import { StepID } from 'app/types/SøknadStep';
-import Applikasjonsside from 'app/connected-components/applikasjonsside/Applikasjonsside';
+import Applikasjonsside from 'app/connectedComponents/applikasjonsside/Applikasjonsside';
 import BekreftCheckboksPanel from 'app/formik/wrappers/BekreftCheckboksPanel';
 import BEMHelper from 'common/util/bem';
 import DinePersonopplysningerModal from '../../components/dine-personopplysninger-modal/DinePersonopplysningerModal';
