@@ -97,16 +97,18 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                                 shouldCloseOnOverlayClick={false}
                                 onClose={() => toggleModal(false)}
                             >
-                                <Oppholdsvalg
-                                    type={type}
-                                    endre={endreLand}
-                                    opphold={endreLand ? alleOpphold[currentIndex] : undefined}
-                                    onCancel={() => toggleModal(false)}
-                                    onAdd={(opphold: any) => {
-                                        endreLand ? replace(currentIndex, opphold) : push(opphold);
-                                        toggleModal(false);
-                                    }}
-                                />
+                                <Modal.Content>
+                                    <Oppholdsvalg
+                                        type={type}
+                                        endre={endreLand}
+                                        opphold={endreLand ? alleOpphold[currentIndex] : undefined}
+                                        onCancel={() => toggleModal(false)}
+                                        onAdd={(opphold: any) => {
+                                            endreLand ? replace(currentIndex, opphold) : push(opphold);
+                                            toggleModal(false);
+                                        }}
+                                    />
+                                </Modal.Content>
                             </Modal>
                         </>
                     );
