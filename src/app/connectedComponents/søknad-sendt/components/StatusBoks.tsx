@@ -3,8 +3,7 @@ import React, { FunctionComponent } from 'react';
 import './statusBoks.less';
 import BEMHelper from 'common/util/bem';
 import Lenkepanelbase from 'nav-frontend-lenkepanel';
-import { Undertittel, Normaltekst, Ingress, Systemtittel } from 'nav-frontend-typografi';
-import EtikettBase from 'nav-frontend-etiketter';
+import { BodyShort, Heading, Ingress, Tag } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import Block from 'common/components/block/Block';
 
@@ -18,9 +17,9 @@ const StatusBoks: FunctionComponent<Props> = ({ saksNr }) => {
     return (
         <Block>
             <Block margin="xs">
-                <Systemtittel>
+                <Heading size="medium">
                     <FormattedMessage id="søknadSendt.status.tittel" />
-                </Systemtittel>
+                </Heading>
             </Block>
             <Lenkepanelbase
                 href="https://foreldrepenger.nav.no"
@@ -31,18 +30,18 @@ const StatusBoks: FunctionComponent<Props> = ({ saksNr }) => {
                 <div className={cls.block}>
                     <div className={cls.element('left')}>
                         <Block margin="xs">
-                            <Undertittel>
+                            <Heading size="small">
                                 <FormattedMessage id="søknadSendt.status.undertittel" />
-                            </Undertittel>
+                            </Heading>
                         </Block>
-                        <EtikettBase type="fokus">
+                        <Tag variant="warning">
                             <FormattedMessage id="søknadSendt.status.status" />
-                        </EtikettBase>
+                        </Tag>
                     </div>
                     <div className={cls.element('right')}>
-                        <Normaltekst>
+                        <BodyShort>
                             <FormattedMessage id="søknadSendt.status.saksnummer" />
-                        </Normaltekst>
+                        </BodyShort>
                         <Ingress>{saksNr}</Ingress>
                     </div>
                 </div>

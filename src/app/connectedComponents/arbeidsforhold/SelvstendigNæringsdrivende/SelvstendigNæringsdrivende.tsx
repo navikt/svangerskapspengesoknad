@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
-import { Undertittel } from 'nav-frontend-typografi';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import _ from 'lodash';
 import { isValid } from 'i18n-iso-countries';
 
@@ -25,6 +23,9 @@ import { visKomponentSelvstendigNæringsdrivende } from '../utils/visibility';
 import { cleanupNæring } from '../utils/cleanup';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import Knapperad from 'common/components/knapperad/Knapperad';
+import { Button, Heading } from '@navikt/ds-react';
+
+import './selvstendigNæringsdrivende.less';
 
 const cls = BEMHelper('selvstendig-næringsdrivende');
 
@@ -54,9 +55,9 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
                             handleSubmit();
                         }}
                     >
-                        <Undertittel className="title">
+                        <Heading size="small" className="title">
                             {getMessage(intl, `arbeidsforhold.selvstendig.tittel${endre ? '.endre' : ''}`)}
-                        </Undertittel>
+                        </Heading>
 
                         <Block>
                             <CheckboksPanelGruppe
@@ -214,12 +215,12 @@ const SelvstendigNæringsdrivende: FunctionComponent<Props> = (props: Props) => 
 
                         <Block visible={visKomponent.skalViseformButtons}>
                             <Knapperad stil="mobile-50-50">
-                                <Knapp htmlType="button" onClick={onCancel}>
+                                <Button variant="secondary" type="button" onClick={onCancel}>
                                     <FormattedMessage id="avbryt" />
-                                </Knapp>
-                                <Hovedknapp disabled={!isValid} htmlType="submit">
+                                </Button>
+                                <Button variant="primary" disabled={!isValid} type="submit">
                                     <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
-                                </Hovedknapp>
+                                </Button>
                             </Knapperad>
                         </Block>
                     </form>

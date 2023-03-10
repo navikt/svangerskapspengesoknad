@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import BEMHelper from 'common/util/bem';
 
-import { Normaltekst } from 'nav-frontend-typografi';
 import { UferdigTilrettelegging, Tilretteleggingstype, Arbeidsforholdstype } from 'app/types/Tilrettelegging';
 import Arbeidsforhold from 'app/types/Arbeidsforhold';
 import { getArbeidsforholdNavnFromId } from 'app/utils/arbeidsforholdUtils';
@@ -12,6 +11,7 @@ import OppsummeringBeskrivelse from '../OppsummeringBeskrivelse';
 import Block from 'common/components/block/Block';
 
 import './tilretteleggingOppsummering.less';
+import { BodyShort } from '@navikt/ds-react';
 
 const cls = BEMHelper('tilretteleggingOppsummering');
 
@@ -25,9 +25,9 @@ const TilretteleggingOppsummering: FunctionComponent<Props> = ({ tilrettelegging
         <>
             {tilrettelegging.map((tilrett: UferdigTilrettelegging) => (
                 <div key={guid()} className={cls.element('container')}>
-                    <Normaltekst>
+                    <BodyShort>
                         {getArbeidsforholdNavnFromId(tilrett.arbeidsforhold.id, arbeidsforhold) || tilrett.id}
-                    </Normaltekst>
+                    </BodyShort>
                     <Block visible={tilrett.type.includes(Tilretteleggingstype.HEL)} margin="xxs">
                         {tilrett.helTilrettelegging &&
                             tilrett.helTilrettelegging.map((helTil) => (

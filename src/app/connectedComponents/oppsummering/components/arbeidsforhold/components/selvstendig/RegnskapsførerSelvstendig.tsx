@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Næringsrelasjon } from 'app/types/SelvstendigNæringsdrivende';
-import { Element } from 'nav-frontend-typografi';
 
 import './regnskapsførerSelvstendig.less';
 import BEMHelper from 'common/util/bem';
 import { FormattedMessage } from 'react-intl';
 import Block from 'common/components/block/Block';
+import { Label } from '@navikt/ds-react';
 
 const cls = BEMHelper('regnskapsførerSelvstendig.less');
 
@@ -17,9 +17,9 @@ const RegnskapsførerSelvstendig: FunctionComponent<Props> = ({ regnskapsfører 
     return (
         <div className={cls.block}>
             <div>
-                <Element>
+                <Label>
                     <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.regnskapsfører" />
-                </Element>
+                </Label>
             </div>
             <Block margin="xxs">
                 <FormattedMessage

@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from 'react';
+import { Heading, Panel } from '@navikt/ds-react';
 import { connect } from 'react-redux';
 
 import { getData } from 'app/utils/fromFetchState';
-import { Undertittel } from 'nav-frontend-typografi';
 import { Søkerinfo } from 'app/types/Søkerinfo';
 import { State } from 'app/redux/store';
 import Applikasjonsside from '../applikasjonsside/Applikasjonsside';
 import Block from 'common/components/block/Block';
 import FetchState from 'app/types/FetchState';
 import Kvittering from 'app/types/Kvittering';
-import Panel from 'nav-frontend-paneler';
 import './søknadSendt.less';
 import StatusBoks from './components/StatusBoks';
 import KvitteringHeader from './components/KvitteringHeader';
@@ -39,18 +38,18 @@ const SøknadSendt: FunctionComponent<Props> = ({ kvittering, søkerinfo }) => {
                 <StatusBoks saksNr={saksNr} />
 
                 <Block>
-                    <Undertittel className={cls.element('tittel')}>
+                    <Heading size="small" className={cls.element('tittel')}>
                         <FormattedMessage id="søknadSendt.foreldrepenger" />
-                    </Undertittel>
+                    </Heading>
                 </Block>
 
                 <Block>
                     <Panel className={cls.element('foreldrepengerPanel')}>
                         <div>
                             <Block margin="xxs">
-                                <Undertittel>
+                                <Heading size="small">
                                     <FormattedMessage id="søknadSendt.foreldrepenger.boks.tittel" />
-                                </Undertittel>
+                                </Heading>
                             </Block>
                             <Block margin="xs">
                                 <FormattedMessage id="søknadSendt.foreldrepenger.boks.innhold" />

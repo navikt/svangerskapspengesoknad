@@ -1,9 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 
 import './snakkeboble.less';
+import { Label } from '@navikt/ds-react';
 
 interface Props {
     tittel?: string;
@@ -17,7 +17,7 @@ const Snakkeboble: React.FunctionComponent<Props> = ({ tittel, tekst }) => (
         <div className={bem.element('innhold')}>
             {tittel && (
                 <div className={classnames(bem.element('tittel'), 'capitalizeName')}>
-                    <Element className="m_no-margin">{tittel}</Element>
+                    <Label className="m_no-margin">{tittel}</Label>
                 </div>
             )}
             <div className={bem.element('tekst')}>{tekst}</div>

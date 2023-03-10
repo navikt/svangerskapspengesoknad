@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect as formConnect, FieldArray } from 'formik';
-import { Knapp } from 'nav-frontend-knapper';
 import get from 'lodash/get';
-import Modal from 'nav-frontend-modal';
 
 import { FormikProps } from 'app/types/Formik';
 import { UferdigSøknad } from 'app/types/Søknad';
@@ -14,6 +12,7 @@ import JaNeiSpørsmål from 'app/formik/wrappers/JaNeiSpørsmål';
 import List from 'common/components/list/List';
 import OppholdListElement from './OppholdListElement';
 import Oppholdsvalg from './Oppholdsvalg';
+import { Button, Modal } from '@navikt/ds-react';
 
 interface OwnProps {
     name: string;
@@ -93,30 +92,32 @@ const Oppholdsspørsmål: FunctionComponent<Props> = (props) => {
                             </Block>
                             <Modal
                                 closeButton={true}
-                                isOpen={modalIsOpen}
-                                contentLabel={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
+                                open={modalIsOpen}
+                                aria-label={getMessage(intl, `utenlandsopphold.modal.ariaLabel`)}
                                 shouldCloseOnOverlayClick={false}
-                                onRequestClose={() => toggleModal(false)}
+                                onClose={() => toggleModal(false)}
                             >
-                                <Oppholdsvalg
-                                    type={type}
-                                    endre={endreLand}
-                                    opphold={endreLand ? alleOpphold[currentIndex] : undefined}
-                                    onCancel={() => toggleModal(false)}
-                                    onAdd={(opphold: any) => {
-                                        endreLand ? replace(currentIndex, opphold) : push(opphold);
-                                        toggleModal(false);
-                                    }}
-                                />
+                                <Modal.Content>
+                                    <Oppholdsvalg
+                                        type={type}
+                                        endre={endreLand}
+                                        opphold={endreLand ? alleOpphold[currentIndex] : undefined}
+                                        onCancel={() => toggleModal(false)}
+                                        onAdd={(opphold: any) => {
+                                            endreLand ? replace(currentIndex, opphold) : push(opphold);
+                                            toggleModal(false);
+                                        }}
+                                    />
+                                </Modal.Content>
                             </Modal>
                         </>
                     );
                 }}
             />
             <Block visible={visLandvelger}>
-                <Knapp onClick={openModalForAdding} htmlType="button">
+                <Button variant="secondary" onClick={openModalForAdding} type="button">
                     <FormattedMessage id="utenlandsopphold.leggTilLand" />
-                </Knapp>
+                </Button>
             </Block>
         </>
     );

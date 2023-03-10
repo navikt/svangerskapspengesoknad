@@ -1,9 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import getMessage from 'common/util/i18nUtils';
 import { SubmitEvent } from '../../../app/types/events';
 import './fortsettKnapp.less';
+import { Button } from '@navikt/ds-react';
 
 interface FortsettKnappProps {
     location?: string;
@@ -16,9 +16,9 @@ const FortsettKnapp = (props: FortsettKnappProps) => {
     const { children, onClick } = props;
 
     return (
-        <Hovedknapp className="fortsettKnapp" htmlType="submit" onClick={onClick}>
+        <Button variant="primary" className="fortsettKnapp" onClick={onClick}>
             {children || getMessage(intl, 'fortsettknapp.label')}
-        </Hovedknapp>
+        </Button>
     );
 };
 

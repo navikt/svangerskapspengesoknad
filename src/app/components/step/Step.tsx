@@ -1,8 +1,6 @@
 import React, { ReactElement, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Undertittel } from 'nav-frontend-typografi';
 import classnames from 'classnames';
 import StegIndikator from 'nav-frontend-stegindikator';
 
@@ -25,6 +23,7 @@ import SøknadStep, { StepID } from 'app/types/SøknadStep';
 import ValidationErrorSummary from '../validation-error-summary/ValidationErrorSummary';
 import './step.less';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, Heading } from '@navikt/ds-react';
 
 const cls = BEMHelper('step');
 
@@ -82,9 +81,9 @@ const Step: FunctionComponent<Props> = (props) => {
                 <FormattedMessage id={`stegtittel.${step.step}`} />
             </h1>
             {currentStep.subStep && (
-                <Undertittel className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
+                <Heading size="small" className={cls.classNames(cls.element('subHeader'), 'blokk-s')}>
                     {finnArbeidsforholdNavn(currentStep.subStep, arbeidsforhold)}
-                </Undertittel>
+                </Heading>
             )}
             <div className={cls.classNames(cls.element('navigation'), 'blokk-l')}>
                 <div>
@@ -105,14 +104,14 @@ const Step: FunctionComponent<Props> = (props) => {
                 <div className={cls.classNames(cls.element('steginnhold'))}>{props.children}</div>
                 <div className={cls.classNames(cls.element('stegkontroller'), 'blokk-m')}>
                     {config.renderNesteknapp && (
-                        <Hovedknapp htmlType="submit">
+                        <Button variant="primary">
                             <FormattedMessage id="steg.nesteknapp" />
-                        </Hovedknapp>
+                        </Button>
                     )}
                     {config.renderSendeknapp && (
-                        <Hovedknapp htmlType="submit">
+                        <Button variant="primary">
                             <FormattedMessage id="oppsummering.sendSøknad" />
-                        </Hovedknapp>
+                        </Button>
                     )}
                 </div>
             </form>

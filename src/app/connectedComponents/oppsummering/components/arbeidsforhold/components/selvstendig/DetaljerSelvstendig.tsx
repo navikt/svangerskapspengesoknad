@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 
 import { TidsperiodeMedValgfriSluttdato } from 'common/types';
@@ -10,6 +9,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Block from 'common/components/block/Block';
 
 import './detaljerSelvstendig.less';
+import { BodyShort, Label } from '@navikt/ds-react';
 
 interface Props {
     orgnr: string;
@@ -34,10 +34,10 @@ const DetaljerSelvstendig: FunctionComponent<Props> = ({
 
     return (
         <div className={cls.block}>
-            <Normaltekst>
+            <BodyShort>
                 <FormattedMessage id="oppsummering.arbeidsforhold.svar.selvstendig.orgnr" /> {orgnr}
-            </Normaltekst>
-            <Element>{navnPåNæringen.toUpperCase()}</Element>
+            </BodyShort>
+            <Label>{navnPåNæringen.toUpperCase()}</Label>
             <Block margin="xxs">
                 <em>{typer.map((type) => getMessage(intl, `næringstype.${type.toLocaleLowerCase()}`))}</em>
             </Block>

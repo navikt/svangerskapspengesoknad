@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import Block from 'common/components/block/Block';
 import { AnnenInntekt } from 'app/types/AnnenInntekt';
-import { Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
+import { Label } from '@navikt/ds-react';
 
 interface Props {
     annenInntekt: AnnenInntekt;
@@ -14,7 +14,7 @@ const InformasjonOmAndreInntekter: FunctionComponent<Props> = ({ annenInntekt })
         <Block margin="xxs">
             <div className="grayInfoBox">
                 <Block margin="xxs">
-                    <Element>{annenInntekt.type}</Element>
+                    <Label>{annenInntekt.type}</Label>
                 </Block>
                 <div>
                     {moment(annenInntekt.tidsperiode.fom).format('DD.MM.YYYY')} -{' '}

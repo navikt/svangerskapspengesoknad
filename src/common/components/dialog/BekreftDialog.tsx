@@ -1,20 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import classnames from 'classnames';
-import Modal, { ModalProps } from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import Knapperad from 'common/components/knapperad/Knapperad';
-import { Systemtittel } from 'nav-frontend-typografi';
 import BEMHelper from 'common/util/bem';
 import { useIntl } from 'react-intl';
 
 import './bekreftDialog.less';
+import { Button, Heading, Modal } from '@navikt/ds-react';
 
-export interface Props extends ModalProps {
+export interface Props {
     tittel?: string;
     /** Kalles når bruker klikker bekreft-knapp  */
     onBekreft: () => void;
-    /** Kalles når bruker klikker avbryt. Dersom denne ikke settes, brukes onRequestClose fra nav-frontend-modal */
+    /** Kalles når bruker klikker avbryt. Dersom denne ikke settes, brukes onRequestClose */
     onAvbryt?: () => void;
     /** Label for bekreft-knapp. Default hentes fra intl: komponent.bekreftDialog.bekreftLabel */
     bekreftLabel?: string;
@@ -22,6 +20,9 @@ export interface Props extends ModalProps {
     avbrytLabel?: string;
     /** Maks bredde */
     størrelse?: undefined | '30';
+    children: ReactNode;
+    isOpen: boolean;
+    onRequestClose: () => void;
 }
 
 const bem = BEMHelper('bekreftDialog');
@@ -34,39 +35,43 @@ const BekreftDialog: FunctionComponent<Props> = ({
     bekreftLabel,
     children,
     størrelse,
-    ...modalProps
+    isOpen,
+    onRequestClose,
 }) => {
     const intl = useIntl();
 
     return (
         <Modal
             shouldCloseOnOverlayClick={false}
-            {...modalProps}
+            open={isOpen}
             className={classnames(bem.block, størrelse ? bem.modifier(`size-${størrelse}`) : undefined)}
+            onClose={onRequestClose}
         >
-            {modalProps.isOpen && (
-                <>
-                    {tittel && <Systemtittel className="blokk-s">{tittel}</Systemtittel>}
-                    <div className="blokk-m">{children}</div>
-                    <Knapperad>
-                        <Hovedknapp onClick={() => onBekreft()} className="bekreftDialog__bekreftKnapp">
-                            {bekreftLabel ||
-                                intl.formatMessage({
-                                    id: 'komponent.bekreftDialog.bekreftLabel',
-                                })}
-                        </Hovedknapp>
-                        <Knapp
-                            onClick={() => (onAvbryt ? onAvbryt() : modalProps.onRequestClose())}
-                            className="bekreftDialog__avbrytKnapp"
-                        >
-                            {avbrytLabel ||
-                                intl.formatMessage({
-                                    id: 'komponent.bekreftDialog.avbrytLabel',
-                                })}
-                        </Knapp>
-                    </Knapperad>
-                </>
-            )}
+            <Modal.Content>
+                {isOpen && (
+                    <>
+                        {tittel && <Heading size="medium" className="blokk-s">{tittel}</Heading>}
+                        <div className="blokk-m">{children}</div>
+                        <Knapperad>
+                            <Button variant="primary" onClick={() => onBekreft()} className="bekreftDialog__bekreftKnapp">
+                                {bekreftLabel ||
+                                    intl.formatMessage({
+                                        id: 'komponent.bekreftDialog.bekreftLabel',
+                                    })}
+                            </Button>
+                            <Button variant="secondary"
+                                onClick={() => (onAvbryt ? onAvbryt() : onRequestClose())}
+                                className="bekreftDialog__avbrytKnapp"
+                            >
+                                {avbrytLabel ||
+                                    intl.formatMessage({
+                                        id: 'komponent.bekreftDialog.avbrytLabel',
+                                    })}
+                            </Button>
+                        </Knapperad>
+                    </>
+                )}
+            </Modal.Content>
         </Modal>
     );
 };

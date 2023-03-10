@@ -96,11 +96,6 @@ class AttachmentOverview extends React.Component<Props, State> {
                     <>
                         <Block margin="xs" visible={showErrorMessage} animated={false}>
                             <AlertstripeWithCloseButton
-                                lukknappProps={{
-                                    hvit: true,
-                                    type: 'button',
-                                    children: '',
-                                }}
                                 errorMessages={this.createErrorMessagesForFailedAttachments(
                                     this.props.attachments.filter(isAttachmentWithError)
                                 )}

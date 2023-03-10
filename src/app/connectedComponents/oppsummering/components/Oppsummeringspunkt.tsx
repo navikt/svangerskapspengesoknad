@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
 
 import BEMHelper from 'common/util/bem';
 import Block from 'common/components/block/Block';
 import OppsummeringIkon from './OppsummeringIkon';
 import { OppsummeringIkonType } from 'app/types/OppsummeringIkonType';
+import { Heading } from '@navikt/ds-react';
 
 const cls = BEMHelper('oppsummering');
 
@@ -21,9 +21,9 @@ const Oppsummeringspunkt: FunctionComponent<Props> = ({ title, type, children })
                 <div className={cls.element('ikon')}>
                     <OppsummeringIkon type={type} />
                 </div>
-                <Undertittel className={cls.element('tittel')} tag="h2">
+                <Heading size="small" className={cls.element('tittel')}>
                     {title}
-                </Undertittel>
+                </Heading>
             </div>
             {children}
         </Block>

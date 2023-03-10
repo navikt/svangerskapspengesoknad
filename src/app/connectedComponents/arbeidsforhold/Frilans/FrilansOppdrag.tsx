@@ -5,13 +5,11 @@ import { Formik, FormikProps } from 'formik';
 import { Utenlandsopphold } from 'app/types/InformasjonOmUtenlandsopphold';
 
 import BEMHelper from 'common/util/bem';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import Block from 'common/components/block/Block';
 import { isValid } from 'i18n-iso-countries';
 import getMessage from 'common/util/i18nUtils';
 import InputField from 'app/formik/wrappers/InputField';
 import DatoInput from 'app/formik/wrappers/DatoInput';
-import { Undertittel } from 'nav-frontend-typografi';
 import Knapperad from 'common/components/knapperad/Knapperad';
 import DatoerInputLayout from 'common/components/layout/datoerInputLayout/DatoerInputLayout';
 import { ModalFormProps } from '../ArbeidSeksjon/ArbeidSeksjon';
@@ -19,6 +17,7 @@ import { FrilansOppdrag as FrilansOppdragType } from '../../../types/FrilansInfo
 import validateFrilansoppdrag from 'app/utils/validation/validateFrilansoppdrag';
 
 import './frilansOppdrag.less';
+import { Button, Heading } from '@navikt/ds-react';
 
 const cls = BEMHelper('frilansOppdrag');
 
@@ -46,7 +45,7 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                         className={cls.block}
                     >
                         <Block>
-                            <Undertittel>{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Undertittel>
+                            <Heading size="small">{getMessage(intl, 'arbeidsforhold.frilans.oppdrag.tittel')}</Heading>
                         </Block>
 
                         <Block>
@@ -76,12 +75,12 @@ const FrilansOppdrag: FunctionComponent<Props> = (props: Props) => {
                         </Block>
 
                         <Knapperad align="center">
-                            <Knapp htmlType="button" onClick={onCancel}>
+                            <Button variant="secondary" type="button" onClick={onCancel}>
                                 <FormattedMessage id="avbryt" />
-                            </Knapp>
-                            <Hovedknapp disabled={!isValid} htmlType="submit">
+                            </Button>
+                            <Button variant="primary" disabled={!isValid}>
                                 <FormattedMessage id={endre ? 'endre' : 'leggtil'} />
-                            </Hovedknapp>
+                            </Button>
                         </Knapperad>
                     </form>
                 );

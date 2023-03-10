@@ -28,12 +28,12 @@ import InfoBlock from 'common/components/info-block/InfoBlock';
 import Textarea from '../../formik/wrappers/Textarea';
 import LabelMedInfobox from 'common/components/label-med-infobox/LabelMedInfobox';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
-import { Knapp } from 'nav-frontend-knapper';
 import AddTilrettelegging from './components/AddTilrettelegging';
 import PictureScanningGuide from 'app/components/picture-scanning-guide/PictureScanningGuide';
 import UtvidetInformasjon from 'app/components/utvidet-informasjon/UtvidetInformasjon';
 import { tiMånederSiden, treUkerSiden, dagenFør } from '../../../common/util/datoUtils';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@navikt/ds-react';
 
 interface OwnProps {
     id: string;
@@ -340,13 +340,13 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             />
                                         </Block>
                                         <Block margin="xs" visible={arr.length - 1 === ind}>
-                                            <Knapp
+                                            <Button variant="secondary"
                                                 onClick={() => arrayHelpers.push({ tilrettelagtArbeidFom: undefined })}
-                                                htmlType="button"
-                                                mini={true}
+                                                type="button"
+                                                size="small"
                                             >
                                                 {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
-                                            </Knapp>
+                                            </Button>
                                         </Block>
                                     </>
                                 ))
@@ -394,18 +394,18 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             />
                                         </Block>
                                         <Block margin="xs" visible={arr.length - 1 === ind}>
-                                            <Knapp
+                                            <Button variant="secondary"
                                                 onClick={() =>
                                                     arrayHelpers.push({
                                                         stillingsprosent: undefined,
                                                         tilrettelagtArbeidFom: undefined,
                                                     })
                                                 }
-                                                htmlType="button"
-                                                mini={true}
+                                                type="button"
+                                                size="small"
                                             >
                                                 {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
-                                            </Knapp>
+                                            </Button>
                                         </Block>
                                     </>
                                 ))
@@ -446,13 +446,13 @@ const Tilrettelegging: FunctionComponent<Props> = (props) => {
                                             />
                                         </Block>
                                         <Block margin="xs" visible={arr.length - 1 === ind}>
-                                            <Knapp
+                                            <Button variant="secondary"
                                                 onClick={() => arrayHelpers.push({ slutteArbeidFom: undefined })}
-                                                htmlType="button"
-                                                mini={true}
+                                                type="button"
+                                                size="small"
                                             >
                                                 {getMessage(intl, 'tilrettelegging.leggTilPeriode')}
-                                            </Knapp>
+                                            </Button>
                                         </Block>
                                     </>
                                 ))

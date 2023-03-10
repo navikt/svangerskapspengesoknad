@@ -1,8 +1,8 @@
 import React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
 import Block from 'common/components/block/Block';
 import { FormattedMessage } from 'react-intl';
 import UtvidetInformasjon from '../utvidet-informasjon/UtvidetInformasjon';
+import { Heading } from '@navikt/ds-react';
 
 const InfoTilFiskere = () => {
     return (
@@ -11,9 +11,9 @@ const InfoTilFiskere = () => {
                 <Block margin="xs">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del1" />
                 </Block>
-                <Undertittel>
+                <Heading size="small">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.hyre" />
-                </Undertittel>
+                </Heading>
                 <Block margin="xs">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del2" />
                 </Block>
@@ -34,9 +34,9 @@ const InfoTilFiskere = () => {
                         }}
                     />
                 </Block>
-                <Undertittel>
+                <Heading size="small">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.lott" />
-                </Undertittel>
+                </Heading>
                 <Block margin="xs">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del4" />
                 </Block>
@@ -57,15 +57,15 @@ const InfoTilFiskere = () => {
                         }}
                     />
                 </Block>
-                <Undertittel>
+                <Heading size="small">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.egenBåt" />
-                </Undertittel>
+                </Heading>
                 <Block margin="xs">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del6" />
                 </Block>
-                <Undertittel>
+                <Heading size="small">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.lottOgHyre" />
-                </Undertittel>
+                </Heading>
                 <Block margin="xs">
                     <FormattedMessage id="andreInntekter.infoTilFiskere.del7" />
                 </Block>

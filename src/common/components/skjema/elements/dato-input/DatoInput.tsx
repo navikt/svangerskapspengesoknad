@@ -7,9 +7,9 @@ import BEMHelper from 'common/util/bem';
 import { Datepicker, DatepickerLimitations } from 'nav-datovelger';
 import { DatepickerProps } from 'nav-datovelger/lib/Datepicker';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { Element } from 'nav-frontend-typografi';
 
 import './datoInput.less';
+import { Label } from '@navikt/ds-react';
 
 export interface DatoInputProps extends Omit<DatepickerProps, 'onChange' | 'input'> {
     id: string;
@@ -58,7 +58,7 @@ const DatoInput: React.FunctionComponent<Props> = ({
     const ariaDescriptionId = avgrensningerTekst ? `${id}_ariaDesc` : undefined;
 
     return (
-        <SkjemaGruppe id={id} feil={feil} legend={label ? <Element tag="div">{label}</Element> : undefined}>
+        <SkjemaGruppe id={id} feil={feil} legend={label ? <Label>{label}</Label> : undefined}>
             <div className={bem.block}>
                 <div className={bem.element('datovelger')}>
                     <Datepicker

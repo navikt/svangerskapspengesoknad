@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
-import Spinner from 'nav-frontend-spinner';
 
 import BEMHelper from 'common/util/bem';
 import './loading.less';
+import { Loader } from '@navikt/ds-react';
 
 const cls = BEMHelper('loading');
 
 const Loading: FunctionComponent = () => {
     return (
         <div className={cls.block}>
-            <Spinner type="XXL" />
+            <Loader size="2xlarge" />
         </div>
     );
 };

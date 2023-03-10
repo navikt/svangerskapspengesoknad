@@ -4,15 +4,17 @@ import MockAdapter from 'axios-mock-adapter';
 import ErrorBoundary from 'app/components/ErrorBoundary/ErrorBoundary';
 import { Provider } from 'react-redux';
 import countries from 'i18n-iso-countries';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import IntlProvider from 'app/intl/IntlProvider';
 import { getAxiosInstance } from 'app/api/api';
 import store from 'app/redux/store';
 import Svangerskapspengesøknad from './Svangerskapspengesøknad';
 
+import '@navikt/ds-css';
+
 import '../../styles/global.less';
 import '../../styles/app.less';
+import { BodyShort } from '@navikt/ds-react';
 
 countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
@@ -100,9 +102,9 @@ const Template: Story<any> = () => {
         <ErrorBoundary>
             <Provider store={store}>
                 <IntlProvider>
-                    <Normaltekst tag="main">
+                    <BodyShort>
                         <Svangerskapspengesøknad />
-                    </Normaltekst>
+                    </BodyShort>
                 </IntlProvider>
             </Provider>
         </ErrorBoundary>

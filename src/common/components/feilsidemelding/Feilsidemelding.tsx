@@ -1,10 +1,9 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { VeilederProps } from '../veileder/Veileder';
 import VeilederMedSnakkeboble from '../veileder-med-snakkeboble/VeilederMedSnakkeboble';
 import './feilsidemelding.less';
 import { FormattedMessage } from 'react-intl';
+import { Heading, Ingress, Link } from '@navikt/ds-react';
 
 export interface Props {
     containerId?: string;
@@ -37,9 +36,9 @@ const Feilsidemelding: React.FunctionComponent<Props> = ({ containerId, illustra
                                 <div>{illustrasjon.tekst}</div>
 
                                 {illustrasjon.lenke && (
-                                    <Lenke className="intro-snakkelenke" href={illustrasjon.lenke.url}>
+                                    <Link className="intro-snakkelenke" href={illustrasjon.lenke.url}>
                                         {illustrasjon.lenke.tekst}
-                                    </Lenke>
+                                    </Link>
                                 )}
                             </div>
                         ),
@@ -48,7 +47,7 @@ const Feilsidemelding: React.FunctionComponent<Props> = ({ containerId, illustra
             )}
             <div className="responsiveContainer">
                 <div className="blokk-s">
-                    <Innholdstittel>{tittel}</Innholdstittel>
+                    <Heading size="large">{tittel}</Heading>
                 </div>
                 <div className="blokk-l">
                     <Ingress>{ingress}</Ingress>
