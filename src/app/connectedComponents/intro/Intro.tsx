@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
+import { BodyShort, Button, GuidePanel, Heading } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CustomFormikProps } from 'app/types/Formik';
 import { getData } from 'app/utils/fromFetchState';
@@ -14,14 +15,14 @@ import DinePersonopplysningerModal from '../../components/dine-personopplysninge
 import DinePlikterModal from '../../components/dine-plikter-modal/DinePlikterModal';
 import FetchState from 'app/types/FetchState';
 import getMessage from 'common/util/i18nUtils';
-import VeilederMedSnakkeboble from 'common/components/veileder-med-snakkeboble/VeilederMedSnakkeboble';
-import './intro.less';
 import Veilederinfo from 'common/components/veileder-info/Veilederinfo';
 import DocumentIkon from 'app/icons/DocumentIkon';
 import { useNavigate } from 'react-router-dom';
 import { useIsValid } from '../formik-wrapper/FormikWrapper';
 import useFormikSubmit from 'app/hooks/useFormikSubmit';
-import { BodyShort, Button, Heading } from '@navikt/ds-react';
+
+import './intro.less';
+import Block from 'common/components/block/Block';
 
 const cls = BEMHelper('intro');
 
@@ -49,14 +50,16 @@ const Intro: FunctionComponent<Props> = ({ søkerinfo, formik }) => {
 
     return (
         <Applikasjonsside visSpråkvelger={true}>
-            <VeilederMedSnakkeboble
-                dialog={{
-                    title: getMessage(intl, 'intro.bobletittel', {
-                        name: søker.fornavn,
-                    }),
-                    text: getMessage(intl, 'intro.bobletekst'),
-                }}
-            />
+            <Block marginTop="xs">
+                <GuidePanel poster className={cls.block}>
+                    <Heading size="small">
+                        {getMessage(intl, 'intro.bobletittel', { name: søker.fornavn })}
+                    </Heading>
+                    <BodyShort>
+                        {getMessage(intl, 'intro.bobletekst')}
+                    </BodyShort>
+                </GuidePanel>
+            </Block>
             <form className={cls.block} onSubmit={formik.handleSubmit}>
                 <Heading size="large" className="blokk-xs">
                     <FormattedMessage id="intro.tittel" />
