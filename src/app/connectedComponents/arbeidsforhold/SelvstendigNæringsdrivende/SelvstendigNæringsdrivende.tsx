@@ -25,6 +25,8 @@ import DatoerInputLayout from 'common/components/layout/datoerInputLayout/Datoer
 import Knapperad from 'common/components/knapperad/Knapperad';
 import { Button, Heading } from '@navikt/ds-react';
 
+import './selvstendigNæringsdrivende.less';
+
 const cls = BEMHelper('selvstendig-næringsdrivende');
 
 type Props = ModalFormProps<Næring>;
