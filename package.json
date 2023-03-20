@@ -155,7 +155,7 @@
         "react-scroll": "^1.8.9",
         "react-transition-group": "^4.4.5",
         "redux": "^4.2.1",
-        "redux-saga": "^1.2.2",
+        "redux-saga": "^1.2.3",
         "src": "^1.1.2",
         "svg-sprite-loader": "^6.0.11"
     },
