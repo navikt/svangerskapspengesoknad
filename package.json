@@ -136,7 +136,7 @@
         "nav-frontend-stegindikator-style": "^2.0.2",
         "nav-frontend-typografi": "^4.0.2",
         "nav-frontend-typografi-style": "^2.0.2",
-        "prettier": "^2.8.4",
+        "prettier": "^2.8.6",
         "pretty-quick": "3.1.3",
         "prom-client": "^12.0.0",
         "prop-types": "^15.8.1",
