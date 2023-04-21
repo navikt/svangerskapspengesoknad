@@ -1,3 +1,5 @@
+Kodebasen er flyttet til et monorepo https://github.com/navikt/foreldrepengesoknad.
+
 # Selvbetjeningsløsning svangerskapspenger
 
 Kildekoden til frontend-appen for ny selvbetjeningsløsning for
